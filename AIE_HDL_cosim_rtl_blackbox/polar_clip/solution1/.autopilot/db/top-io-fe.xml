@@ -1,0 +1,9 @@
+<root versionMajor = "1" versionMinor = "5">
+  <kernel src_name="polar_clip" language="c" hwCtrl="ap_ctrl_none" mem_layout="fpga64-xilinx-none">
+    <args>
+      <arg id="0" access_type="r" src_name="in_sample" src_type="stream&lt;ap_axis&lt;32, 0, 0, 0&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="64" src_size_or_depth="1" hw_interface="AXI-Stream" hw_name="in_sample" hw_bitwidth="64" hw_size_or_depth="1"/>
+      <arg id="1" access_type="w" src_name="out_sample" src_type="stream&lt;ap_axis&lt;32, 0, 0, 0&gt;, 0&gt;&amp;" src_isptr="1" src_bitwidth="64" src_size_or_depth="1" hw_interface="AXI-Stream" hw_name="out_sample" hw_bitwidth="64" hw_size_or_depth="1"/>
+    </args>
+    <return src_type="void" src_bitwidth="0" hw_interface="" hw_name="" hw_bitwidth="0" offset="0x0"/>
+  </kernel>
+</root>
