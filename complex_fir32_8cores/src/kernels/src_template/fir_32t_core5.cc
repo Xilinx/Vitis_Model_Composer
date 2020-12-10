@@ -44,7 +44,7 @@
     THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
     PART OF THIS FILE AT ALL TIMES.                       */
 
-#include <cardano.h>
+#include <adf.h>
 #include "utils.h"
 #include "fir_32t_8cores_const.h"
 #include "fir_32t_core5.h"
