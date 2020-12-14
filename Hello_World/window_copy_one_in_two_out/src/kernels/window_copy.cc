@@ -61,7 +61,7 @@ void window_copy_1in_2out(
     
     for ( unsigned l=0; l<LSIZE; ++l )
         chess_prepare_for_pipelining
-        chess_loop_range(4,)
+        chess_loop_range(2,)
         chess_unroll_loop(2)
     {
         inp = window_readincr_v8(cb_in);
