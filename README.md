@@ -2,7 +2,7 @@
 
 Starting from the 2020.2 version, we are storing and managing a subset of the product examples in GitHub. This way, users will always have access to the latest and most up-to-date examples. You can get the examples from this repository or directly from the tool.
 
-** To see the examples in GitHub, switch to the branch corresponding to your version of Model Composer. **
+**To see the examples in GitHub, switch to the branch corresponding to your version of Model Composer.**
 
 
 ## Directly download the examples from Model Composer
