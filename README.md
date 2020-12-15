@@ -4,6 +4,7 @@ Starting from the 2020.2 version, we are storing and managing a subset of the pr
 
 
 ## Directly download the examples from Model Composer
+This is the recommended way to get the latest examples for Model Composer. You will automatically get the right version of the examples for your version of Model Composer. 
 ![](images/download_from_model_composer.PNG)
 
 ## Clone this repository locally
