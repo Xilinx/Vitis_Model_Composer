@@ -12,6 +12,6 @@ After you clone this repository, switch the branch to the version of the Model C
 git checkout 2020.2
 ```
 
-## Download a zipped version directly from github
-First switch to the branch corresponding to the version of Model Commposer you have.
+## Download a zipped version directly from GitHub
+First switch to the branch corresponding to the version of Model Composer you have.
 ![](images/download_zip_from_github.PNG)
