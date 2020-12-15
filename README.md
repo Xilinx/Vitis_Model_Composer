@@ -13,5 +13,5 @@ git checkout 2020.2
 ```
 
 ## Download a zipped version directly from github
-Make sure you first switch to the branch to the version corresponding to the version of the Model Commposer you have
+First switch to the branch corresponding to the version of Model Commposer you have.
 ![](images/download_zip_from_github.PNG)
