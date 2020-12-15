@@ -4,6 +4,14 @@ Starting from the 2020.2 version, we are storing and managing a subset of the pr
 
 
 ## Directly download the examples from Model Composer
+![](images/download_from_model_composer.PNG)
 
+## Clone this repository locally
+After you clone this repository, switch the branch to the version of the Model Composer version you have. For example:
+```
+git checkout 2020.2
+```
 
-**If you are using this repository to get the examples, make sure you first switch to the branch corresponding to your version of the product.**
+## Download a zipped version directly from github
+Make sure you first switch to the branch to the version corresponding to the version of the Model Commposer you have
+![](images/download_zip_from_github.PNG)
