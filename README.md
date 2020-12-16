@@ -1,7 +1,10 @@
-# Model_Composer and System_Generator Examples
+# Model Composer and System Generator Examples
 
-Starting from the 2020.2 version, we are storing and managing a subset of the product examples in GitHub. This way, users will always have access to the latest and most up-to-date examples. You can get the examples from this repository or directly from the tool. 
+Starting from the 2020.2 version, we are storing and managing a subset of the product examples in GitHub. This way, users will always have access to the latest and most up-to-date examples. You can get the examples from this repository or directly from the tool.
 
+:warning:**To see the examples in GitHub, switch to the branch corresponding to your version of Model Composer.**
+
+To get the examples and explore them in Model Composer, use one of the three methods below:
 
 ## Directly download the examples from Model Composer
 This is the recommended way to get the latest examples for Model Composer. You will automatically get the right version of the examples.
