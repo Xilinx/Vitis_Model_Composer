@@ -2,7 +2,9 @@
 
 Starting from the 2020.2 version, we are storing and managing a subset of the product examples in GitHub. This way, users will always have access to the latest and most up-to-date examples. You can get the examples from this repository or directly from the tool.
 
-:warning:**To see the examples in GitHub, switch to the branch corresponding to your version of Model Composer.**
+:warning:**To see the examples in GitHub, switch to the branch corresponding to your version of Model Composer by clicking 'main' above**
+
+![Click 'main' to change branch](images/change_branch.PNG)
 
 To get the examples and explore them in Model Composer, use one of the three methods below:
 
@@ -19,3 +21,19 @@ git checkout 2020.2
 ## Download a zipped version directly from GitHub
 First switch to the branch corresponding to the version of Model Composer you have. Then click "Download ZIP".
 ![](images/download_zip_from_github.PNG)
+
+
+--------------
+Copyright 2020 Xilinx
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
