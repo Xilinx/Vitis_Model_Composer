@@ -65,7 +65,10 @@
   * Run cycle accurate system C simulation
   * Generate test benches
   
-![](images/versal.PNG)
+  
+<p align="center">
+<img src="images/model_composer_image.PNG">
+</p>
   
 --------------
 Copyright 2020 Xilinx
