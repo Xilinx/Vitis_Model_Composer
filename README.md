@@ -51,6 +51,10 @@
  </table>
 
 ## What's new in 2020.2?
+### Model Composer and System Generator are unified and you can have blocks from both in the same design
+  * Cosimulate AI Engines blocks and System Generator HDL based blocks.
+  * Import VHDL and Verilog code using System Generator black box and cosimulate with AI Engine blocks.
+  
 ### Support for [Versal](https://www.xilinx.com/products/silicon-devices/acap/versal.html) AI Engines
 * Developing algorithms for AI Engines is now much simpler with Model Composer. Here is a subset of new features that were added:
   * Design AI Engine based algorithms by importing AI Engine kernels into Model Composer as blocks
@@ -63,9 +67,6 @@
   
 ![](images/versal.PNG)
   
-### Model Composer and System Generator are unified and you can have blocks from both in the same design
-  * Cosimulate AI Engines blocks and System Generator HDL based blocks.
-  * Import VHDL and Verilog code using System Generator black box and cosimulate with AI Engine blocks.
 --------------
 Copyright 2020 Xilinx
 
