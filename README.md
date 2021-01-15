@@ -1,3 +1,5 @@
+![](images/model_composer_title.gif)
+
 # Model Composer and System Generator Examples - 2020.2
 
 ## AI Engine Examples - Overview
