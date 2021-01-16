@@ -5,7 +5,7 @@ In Model Composer, you can simulate a design containing both AI Engine blocks an
 ![](images/screen_shot.PNG)
 
 ## Knoweldge nuggets
- :bulb: While simualtion of AI Engine block is bit accurate and untimed, HLD block simulation is both bit accurate and timed, hence the need for the *interfaces* blocks. 
+ :bulb: While simualtion of AI Engine block is bit accurate and untimed, HDL block simulation is both bit accurate and timed, hence the need for the *interfaces* blocks. 
  
  :bulb: The HDL desgin must have an AXI4 stream connections (tdata, tvalid, and tready signals) to be able to connect to the interface blocks. The connection between the AI Engine and FPGA fabric in hardware is also a stream connection.
 
