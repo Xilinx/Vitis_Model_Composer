@@ -1,4 +1,4 @@
-# Variabel Size Signals
+# Variable Size Signals
 ## Introduction
 A Simulink variable-size signal is a signal whose size (the number of elements in a dimension), in addition to its values, can change during a model simulation. Look at the video below that showcases a variable size signal.
 
