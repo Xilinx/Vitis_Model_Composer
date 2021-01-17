@@ -2,7 +2,9 @@
 ## Introduction
 A Simulink variable-size signal is a signal whose size (the number of elements in a dimension), in addition to its values, can change during a model simulation. Look at the video below that showcases a variable size signal.
 
-![](VariableSizeSignalIntro.gif)
+<p align="center">
+<img src="VariableSizeSignalIntro.gif">
+</p>
 
 ## Knowledge nuggets
 
@@ -16,7 +18,9 @@ A Simulink variable-size signal is a signal whose size (the number of elements i
 
 You can view variable size signals with a display block or a scope block. Note if the variable size signal is not full, the scope shows empty spaces.
 
-![](VariableSizeSignalScope.gif)
+<p align="center">
+<img src="VariableSizeSignalScope.gif">
+</p>
 
 ### Knowledge nuggets
 
@@ -26,11 +30,15 @@ You can view variable size signals with a display block or a scope block. Note i
 
 At times you need to convert variable size signals to fixed size signals. This is necessary if you need to use a block that does not support variable size signals. In such cases you can use the *ToFixed Size* block. However, this block will introduce zeros for the missing elements if the variable size signal is not full. Usage of this block is mostly for when the variable size signal is always full. You can check that during the simulaiton by monitoring the status port of the block.
 
-![](VariableSizeSignalToFixedSize.gif)
+<p align="center">
+<img src="VariableSizeSignalToFixedSize.gif">
+</p>
 
 ## Write a variable size signal to MATLAB workspace
 
 You can write a variable size signal to MATLAB workspace using *Variable Size Signal to Workspace* block. From there, you can post process the data. Note that the data will be concatenated and unlike the "To Fixed Size" block, no zeros are introduced.
 
-![](toWorkspace.PNG)
+<p align="center">
+<img src="toWorkspace.PNG">
+</p>
 
