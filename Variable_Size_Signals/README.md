@@ -1,6 +1,6 @@
 # Variable Size Signals
 ## Introduction
-A Simulink variable-size signal is a signal whose size (the number of elements in a dimension), in addition to its values, can change during a model simulation. Look at the video below that showcases a variable size signal.
+At every invocation of an AI Engine kernel, the number of output samples may depend on different factors such as the input signal or a Run Time Parameter (RTP) trigger. For example, if a kernel with a synchronized window input does not receive enough input samples (equal to the size of the widow size set for the kernel), it will produce no output. In Model Composer, this behavior is modeled as a variable size signal. A Simulink variable-size signal is a signal whose size (the number of elements in a dimension), in addition to its values, can change during a model simulation. All AI engine blocks can consume and produce variable size signals. Look at the video below that showcases a variable size signal:
 
 <p align="center">
 <img src="VariableSizeSignalIntro.gif">
