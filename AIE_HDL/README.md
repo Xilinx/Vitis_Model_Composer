@@ -11,7 +11,7 @@ In Model Composer, you can simulate a design containing both AI Engine blocks an
 
 ## Examples
 - [Design with HDL(System Generator) and AI Engine blocks](AIE_HDL_cosim)
-- [Design with imported RTL and AI Engine blocks](AIE_HDL_cosim_rt_lblackbox)
+- [Design with imported RTL and AI Engine blocks](AIE_HDL_cosim_rtl_blackbox)
 ------------
 Copyright 2020 Xilinx
 
