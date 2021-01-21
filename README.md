@@ -45,7 +45,7 @@
  <td align="left">
    <a href="./Variable_Size_Signals/README.md">What are Variable-Size Signals?</a>
  </td>
- <td>All you need to know about Variable Size Signals in Simulink.
+ <td>All you need to know about Variable-Size Signals in Simulink.
  </td>
  </tr>
  </table>
