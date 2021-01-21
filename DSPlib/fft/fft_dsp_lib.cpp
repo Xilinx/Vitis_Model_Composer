@@ -16,12 +16,6 @@
 
 #include "fft_ifft_dit_1ch_graph.hpp"
 
-// Mapping inputs to PLIO
-adf::PLIO in1("In", adf::plio_32_bits, "In1.txt");
-
-// Mapping outputs to PLIO
-adf::PLIO out1("Out", adf::plio_32_bits, "Out1.txt");
-
 //////////////////////////////////////////////////////////
 // Modifly the line below to change the FFT specificaiton
 // instantiate cardano dataflow graph
@@ -32,7 +26,7 @@ xf::dsp::aie::fft::dit_1ch::fft_ifft_dit_1ch_graph<cint16, cint16, 512, 1> mygra
 // connect dataflow graph to simulation platform
 // To generate input and expected_output data files,
 // select 'Create and execute testbench' option on the Model Composer Hub block.
-adf::simulation::platform<1,1> platform(&in1, &out1);
+adf::simulation::platform<1,1> platform("~", "~");
 adf::connect<> net1(platform.src[0], mygraph.in);
 adf::connect<> net2(mygraph.out, platform.sink[0]);
 
