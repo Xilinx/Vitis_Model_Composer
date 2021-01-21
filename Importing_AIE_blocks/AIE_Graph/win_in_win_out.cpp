@@ -16,18 +16,11 @@
 
 #include "win_in_win_out.h"
 
-// Mapping inputs to PLIO
-adf::PLIO in1("In1", adf::plio_32_bits, "In1.txt");
-adf::PLIO in2("In2", adf::plio_32_bits, "In2.txt");
-
-// Mapping outputs to PLIO
-adf::PLIO out1("Out1", adf::plio_32_bits, "Out1.txt");
-
 // instantiate cardano dataflow graph
 Win_in_win_out mygraph;
 
 // connect dataflow graph to simulation platform
-adf::simulation::platform<2,1> platform(&in1, &in2, &out1);
+adf::simulation::platform<2,1> platform("~", "~", "~");
 adf::connect<> net1(platform.src[0], mygraph.In1);
 adf::connect<> net2(platform.src[1], mygraph.In2);
 adf::connect<> net3(mygraph.Out1, platform.sink[0]);
