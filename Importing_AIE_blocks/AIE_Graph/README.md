@@ -9,7 +9,7 @@ examples of importing a graph into Model Compsoer, including when the you have a
 
 :bulb: Note the usage of the *Graph Search Paths* to specify the search paths.
 
-:bulb: Note how you specify the platform in the .cpp file with this line *adf::simulation::platform<2,1> platform("\~", "\~", "~");*.
+:bulb: Note how you specify the platform in the .cpp file with this line *adf::simulation::platform<2,1> platform("\~", "\~", "~");*. The number of "~"s is equal to the total number of inputs and outputs.
 
 
 ![](images/model_screen_shot.PNG)
