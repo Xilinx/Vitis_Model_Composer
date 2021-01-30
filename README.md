@@ -49,6 +49,30 @@
  </td>
  </tr>
  </table>
+ 
+ ## Mini Tutorials
+ 
+ <table style="width:100%">
+ <tr>
+ <td width="35%" align="center"><b>Topic</b>
+ <td width="65%" align="center"><b>Description</b>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./Variable_Size_Signals/README.md">What are Variable-Size Signals?</a>
+ </td>
+ <td>All you need to know about Variable-Size Signals in Simulink.
+ </td>
+ </tr>
+ 
+ <tr>
+ <td align="left">
+   <a href="./Setting_Signal_Size/README.md">How to properly set the Signal Size property on AI Engine kernel blocks?</a>
+ </td>
+ <td>Setting the signal size property for AI Engine kernels with stream and cascade outputs.
+ </td>
+ </tr>
+ </table>
 
 ## What's new in 2020.2?
 ### Model Composer and System Generator are unified and you can have blocks from both in the same design
