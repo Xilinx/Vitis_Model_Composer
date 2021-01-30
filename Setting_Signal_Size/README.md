@@ -29,3 +29,10 @@ This will reduce the overhead of calling a block many times and will increase th
 For example if you feed the kernel with 16 samples, you would want to set the output signal size to also 16 to both have a full variable-size signal 
 (in case you want to view the signal on a scope) and also avoid memory overflows. 
 
+# Conclusions
+:bulb: Inspect the AI Engine kernel code to decide on the size of the "Signal Size" property.
+
+:bulb: If possible avoid having a variable-size signal that is not full.
+
+:bulb: If you set the "Signal Size" parameter to smaller than what it should be, you may encounter buffer overflow. 
+
