@@ -4,12 +4,12 @@ This short tutorial goes over how to optimally set the signal size for AI Engine
 
 # What is "Signal Size"?
 
-Signal Size is a field in the imported AI Engine block mask when the kernel has a stream or cascade output. 
+Signal Size is a block mask property assocaited with each stream or cascade output of an imported AI Engine block. 
 This value is always set as samples and not bytes. Here is an example of  block mask for a kernel with a stream output.
 
 ![](images/mask.png)
 
-The stream output of this block will be a variable-size signal with a maximum size of 4 samples as shown below:
+In the case above, the stream output of this block will be a variable-size signal with a maximum size of 4 samples as shown below:
 
 ![](images/block_with_output_stream.png)
 
