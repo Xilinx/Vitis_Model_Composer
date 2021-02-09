@@ -60,7 +60,7 @@
  
  <tr>
  <td align="left">
-   <a href="./Setting_Signal_Size/README.md">How to properly set the Signal Size property on AI Engine kernel blocks?</a>
+   <a href="./Setting_Signal_Size/README.md">How to properly set the Signal Size property on AI Engine kernel blocks with stream or cascade outputs?</a>
  </td>
  <td>Setting the signal size property for AI Engine kernels with stream and cascade outputs.
  </td>
