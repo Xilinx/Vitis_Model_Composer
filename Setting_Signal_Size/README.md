@@ -1,4 +1,4 @@
-# How to properly set the Signal Size property on AI Engine kernel blocks?
+# How to properly set the Signal Size property on AI Engine kernel blocks with stream or cascade output?
 
 This short tutorial goes over how to optimally set the signal size for AI Engine kernels with stream input and output. 
 
