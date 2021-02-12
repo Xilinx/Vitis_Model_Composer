@@ -43,7 +43,23 @@
  </tr>
  </table>
  
- ## Mini Tutorials
+ ## Design Examples
+ 
+ <table style="width:100%">
+ <tr>
+ <td width="35%" align="center"><b>Topic</b>
+ <td width="65%" align="center"><b>Description</b>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./Setting_Signal_Size/README.md">Super Sample Rate FIR filter</a>
+ </td>
+ <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we also compare the output of our AI Engine subsystem with the output of a Simulink FIR block (our golden refernece) both in time and in frequency. 
+ </td>
+ </tr>
+ </table>
+ 
+  ## Mini Tutorials
  
  <table style="width:100%">
  <tr>
