@@ -2,7 +2,7 @@
 
 # Model Composer and System Generator Examples - 2020.2
 
-## AI Engine Examples - Overview
+## AI Engine Examples
 
 <table style="width:100%">
  <tr>
