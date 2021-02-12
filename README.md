@@ -52,7 +52,7 @@
  </tr>
  <tr>
  <td align="left">
-   <a href="./Setting_Signal_Size/README.md">Super Sample Rate FIR filter</a>
+   <a href="./Designs/SingleStreamSSR_FIR">Super Sample Rate FIR filter</a>
  </td>
  <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we also compare the output of our AI Engine subsystem with the output of a Simulink FIR block (our golden refernece) both in time and in frequency. 
  </td>
