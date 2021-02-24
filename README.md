@@ -57,8 +57,18 @@
  <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we also compare the output of our AI Engine subsystem with the output of a Simulink FIR block (our golden refernece) both in time and in frequency. 
  </td>
  </tr>
- </table>
  
+  <tr>
+ <td align="left">
+   <a href="./Designs/TxChain200MHz">Tx Chain 200 MHz</a>
+ </td>
+ <td>
+  This design models the 200 MHz TX Chain in Model Composer with code generation and cosimulation with HLS Kernels.
+
+ </td>
+ </tr>
+ </table>
+
   ## Mini Tutorials
  
  <table style="width:100%">
