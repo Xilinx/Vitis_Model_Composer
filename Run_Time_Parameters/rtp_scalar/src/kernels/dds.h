@@ -14,6 +14,8 @@
 // limitations under the License.
 ///////////////////////////////////////////////////////////////////////////
 
+#ifndef __DDS_H
+#define __DDS_H
 #include "stdlib.h"
 #include <stdio.h>
 #include <adf.h>
@@ -33,3 +35,4 @@ public:
      REGISTER_FUNCTION(dds::sine);   
     }   
 };
+#endif __DDS_H
