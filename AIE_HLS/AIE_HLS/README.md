@@ -14,6 +14,8 @@ This example showcases a design containing both AI Engine blocks and Programmabl
 
 ![](images/screen_shot.png)
 
+-----------
+
 ![](images/screen_shot_std_complex.png)
 
 ------------
