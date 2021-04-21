@@ -12,6 +12,8 @@ This example showcases a design containing both AI Engine blocks and Programmabl
 
 :bulb: If the input and output data types of the AIE engine blocks match the data type of the interface to the HLS kernel block, there is no need to use the interface blocks. [aie_hls_std_complex.slx](./aie_hls_std_complex.slx) demonstrates an example. In essence, the interface blocks work as data type converters.
 
+:warning: Note the need for *extern "C"* in the hls kernel function definition. 
+
 ![](images/screen_shot.png)
 
 -----------
