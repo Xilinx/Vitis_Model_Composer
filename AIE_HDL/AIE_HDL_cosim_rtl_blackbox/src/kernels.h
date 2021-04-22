@@ -18,8 +18,8 @@
 #ifndef __KERNELS_H__
 #define __KERNELS_H__
 
-#include <cardano/window/types.h>
-#include <cardano/stream/types.h>
+#include <adf/window/types.h>
+#include <adf/stream/types.h>
 
   void classifier(input_stream_cint16 * input, 
 		output_window_int32 * output) ;
