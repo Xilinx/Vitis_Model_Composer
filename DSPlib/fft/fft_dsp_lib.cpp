@@ -18,7 +18,7 @@
 
 //////////////////////////////////////////////////////////
 // Modifly the line below to change the FFT specificaiton
-// instantiate cardano dataflow graph
+// instantiate adf dataflow graph
 //////////////////////////////////////////////////////////
 
 xf::dsp::aie::fft::dit_1ch::fft_ifft_dit_1ch_graph<cint16, cint16, 512, 1> mygraph;

@@ -19,7 +19,7 @@
 #define MYSQUARE_MODULE_H
 
 
-#include <cardano.h>
+#include <adf.h>
 
 void mysquare(input_window_int32 *, output_window_int32 *);
 
