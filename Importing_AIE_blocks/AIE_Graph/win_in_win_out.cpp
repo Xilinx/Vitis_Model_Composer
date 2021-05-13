@@ -16,7 +16,7 @@
 
 #include "win_in_win_out.h"
 
-// instantiate cardano dataflow graph
+// instantiate adf  dataflow graph
 Win_in_win_out mygraph;
 
 // connect dataflow graph to simulation platform

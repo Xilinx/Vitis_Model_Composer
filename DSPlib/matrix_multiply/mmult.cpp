@@ -1,6 +1,6 @@
 #include "matrix_mult_graph.hpp"
 
-// instantiate cardano dataflow graph
+// instantiate adf dataflow graph
 xf::dsp::aie::blas::matrix_mult::matrix_mult_graph<cint16, cint16, 8, 16, 24, 0, 0, ROW_MAJOR, COL_MAJOR, ROW_MAJOR> mygraph;
 
 // connect dataflow graph to simulation platform
