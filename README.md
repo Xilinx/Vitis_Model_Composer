@@ -1,12 +1,13 @@
 # Vitis Model Composer
 
-<details>
-  <summary>How to access the content of this repository!</summary>
-
+## How to access the content of this repository
     
 Starting from the 2020.2 version, we are storing and managing a subset of the product examples in GitHub. This way, users will always have access to the latest and most up-to-date examples. You can get the examples from this repository or directly from the tool.
 
-:warning:**To see the examples for older versions of the tool in GitHub, switch to the branch corresponding to your version of Model Composer by clicking 'main' above**
+<details>
+  <summary>Click here to learn more!</summary>
+  
+<br/>:warning:**To see the examples for older versions of the tool in GitHub, switch to the branch corresponding to your version of Model Composer by clicking 'main' above**
 
 ![Click 'main' to change branch](images/change_branch.PNG)
 
