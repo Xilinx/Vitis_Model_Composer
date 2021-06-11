@@ -6,30 +6,7 @@
     
 Starting from the 2020.2 version, we are storing and managing a subset of the product examples in GitHub. This way, users will always have access to the latest and most up-to-date examples. You can get the examples from this repository or directly from the tool.
 
-<details>
-  <summary>Click here to learn more!</summary>
-  
-<br/>:warning:**To see the examples for older versions of the tool in GitHub, switch to the branch corresponding to your version of Model Composer by clicking 'main' above**
-
-![Click 'main' to change branch](images/change_branch.PNG)
-
-To get the examples and explore them in Model Composer, use one of the three methods below:
-
-## Directly download the examples from Model Composer
-This is the recommended way to get the latest examples for Model Composer. Type 'doc' in the MALTAB command window. In the 'Supplemental Software' section, click on 'Xilinx Model Composer', and then click on 'Model Composer Examples'. This method will automatically get you the right version of the examples.
-![](images/download_from_model_composer.PNG)
-
-## Clone this repository
-You can directly use git locally to clone this repository or use [MATALB git integration](https://www.mathworks.com/help/simulink/ug/clone-git-repository.html). After you clone this repository, switch the branch to the version of the Model Composer version you have. For example:
-```
-git checkout 2020.2
-```
-
-## Download a zipped version directly from GitHub
-First switch to the branch corresponding to the version of Model Composer you have. Then click "Download ZIP".
-![](images/download_zip_from_github.PNG)
-
-</details>
+Click [here](example_access.md) to learn how to access the examples in GitHub.
 
 ## AI Engine Examples
 
