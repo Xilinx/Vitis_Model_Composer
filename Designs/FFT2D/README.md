@@ -3,12 +3,13 @@ In this section we showcase two 2D FFT examples using both AI Engines and Progra
 Two 1D FFTs are running on AI Engiens and a transpose operation is running on the programmable logic.
 In one example, the transpose operation is implemented using the HLS Kernel and in another example the transpose operation is implemted using HDL blocks.
 
-This model showcases a single stream super sample rate FIR filter to process a 4 GSPS stream built with 16 AI Engine kernels. In addition, we compare the output of the AI Engine design with a Simulink FIR filter block that we consider as our golden reference.
+## Examples
 
-For more detials on the design of the FIR kernels click [here](https://github.com/Xilinx/Vitis-Tutorials/blob/master/AI_Engine_Development/Design_Tutorials/02-super_sampling_rate_fir/SingleStreamSSR/README.md). 
+- [2D FFT design using AI Engines and HLS Kernel block](rtp_scalar)
+- [2D FFT design using AI Engines and HDL blocks](rtp_vector)
 
-
-![](images/SingleStreamSSR.PNG)
+## Knowledge nuggets
+:bulb: An RTP input can be a scalar or a vector.
 
 ------------
 Copyright 2020 Xilinx
