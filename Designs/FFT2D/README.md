@@ -1,7 +1,7 @@
 # 2D FFT using both AI Engines and Programmable Logic
 In this section we showcase two 2D FFT examples using both AI Engines and Programmable Logic. 
 Two 1D FFTs are running on AI Engiens and a transpose operation is running on the programmable logic.
-In one example, the transpose logic is implemented using the HLS Kenrle and in another example the transpose operation is implemted using HDL blocks in Vitis Model Composer.
+In one example, the transpose operation is implemented using the HLS Kernel and in another example the transpose operation is implemted using HDL blocks.
 
 This model showcases a single stream super sample rate FIR filter to process a 4 GSPS stream built with 16 AI Engine kernels. In addition, we compare the output of the AI Engine design with a Simulink FIR filter block that we consider as our golden reference.
 
