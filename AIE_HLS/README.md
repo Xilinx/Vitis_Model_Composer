@@ -6,7 +6,7 @@ In Model Composer you can simulate designs with both AI Engine blocks and HLS Ke
 ## Knowledge nuggets
 :bulb: In Model Composer, you can cosimulate HLS kernels and AI Engine blocks.
 
-:bulb: The HLS kernel code should have stream interfaces. 
+:bulb: The HLS kernel code should have stream interfaces. they also support Run-time Parameters (RTPs). 
 
 ![](images/screen_shot.png)
 
