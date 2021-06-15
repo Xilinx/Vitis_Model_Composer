@@ -10,7 +10,7 @@ In Model Composer, you can simulate a design containing both AI Engine blocks an
  :bulb: The HDL desgin must have an AXI4 stream connections (tdata, tvalid, and tready signals) to be able to connect to the interface blocks. The connection between the AI Engine and FPGA fabric in hardware is also a stream connection.
 
 ## Examples
-- [Design with HDL(System Generator) and AI Engine blocks](AIE_HDL_cosim)
+- [Design with HDL and AI Engine blocks](AIE_HDL_cosim)
 - [Design with imported RTL and AI Engine blocks](AIE_HDL_cosim_rtl_blackbox)
 ------------
 Copyright 2020 Xilinx
