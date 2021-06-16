@@ -12,7 +12,7 @@ Here you see examples for FIR,FFT and Matrix Multiply functions.
 
 :bulb: For FIR and FFT examples, we are using the blocks available in AIEngine/DSPlib library directly. However, for matrix multiply example, we are importing the function as a graph from the  DSPlib [Git hub location].
 
-:bulb: When importing the graph, you can either use the graph header file from 'dsplib/L2/include' or you can write a .cpp file to instantiate the graph and use that file to import the function.
+:bulb: When importing the graph, you can either use the graph header file from 'dsplib/L2/include' or you can write a .cpp file to instantiate the graph and use that file to import the function. While the former is the recommended approach, the latter can handle any complexity.
 
 ## Examples
 - [Using the AI Engine FIR block from the library browser](fir)
