@@ -5,7 +5,7 @@ this library at the *Versal AI Engines Secure Site* at https://www.xilinx.com/me
 
 Here we demonstrate how you can use these functions in Model Composer.
 
-Model Composer provides different DSPlib functions within the Xilinx Toolbox/AIEngine library. You can conveniently drag and drop it into your model from SImulink Library browser and configure it for your application. 
+Model Composer provides different DSPlib functions within the Xilinx Toolbox/AIEngine library. You can conveniently drag and drop block into your model from Simulink Library browser based on the configuration. 
 
 ![image](https://user-images.githubusercontent.com/35684639/122170671-79495080-ce9c-11eb-9ed9-bd83a9d5f47f.png)
 
@@ -13,7 +13,7 @@ Here you see examples for FIR,FFT and Matrix Multiply functions.
 
 ## Knowledge nuggets
 
-:bulb: For FIR and FFT examples, we are using the block available in AIEngine/DSPlib library directly. For matrix multiply example, we are importing the function as a graph from the  DSPlib [Git hub location].
+:bulb: For FIR and FFT examples, we are using the block available in AIEngine/DSPlib library directly. However, for matrix multiply example, we are importing the function as a graph from the  DSPlib [Git hub location].
 
 :bulb: When importing the graph, you can either use the graph header file from 'dsplib/L2/include' or you can write a .cpp file to instantiate the graph and use that file to import as a block.
 
