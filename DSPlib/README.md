@@ -7,7 +7,7 @@ Here we demonstrate how you can use these functions in Model Composer.
 
 Model Composer provides different DSPlib functions within the Xilinx Toolbox/AI Engine library. You can conveniently drag and drop block into your model from Simulink Library browser based on the configuration. 
 
-![image](https://user-images.githubusercontent.com/35684639/122170671-79495080-ce9c-11eb-9ed9-bd83a9d5f47f.png)
+![](image/screen_shot.png)
 
 Here you see examples for FIR,FFT and Matrix Multiply functions.
 
