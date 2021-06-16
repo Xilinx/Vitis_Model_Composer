@@ -1,11 +1,8 @@
 # Using AI Engine functions from DSPlib
 
-DSPlib is a library of commonly used DSP functions optimized for AI Engines. In 2020.2 release, you can find 
-this library at the *Versal AI Engines Secure Site* at https://www.xilinx.com/member/versal_ai_engines.html as a zip file.
+DSPlib is a library of commonly used DSP functions optimized for AI Engines. To facilitate the use of these functions in a design, Vitis Model Composer provides different DSPlib functions as blocks within the Xilinx Toolbox/AI Engine library. You can conveniently drag and drop a block into your model from the Simulink Library browser and configure the block.
 
-Here we demonstrate how you can use these functions in Model Composer.
-
-Model Composer provides different DSPlib functions within the Xilinx Toolbox/AI Engine library. You can conveniently drag and drop block into your model from Simulink Library browser based on the configuration. 
+Here we demonstrate how you can use these functions in Vitis Model Composer.
 
 ![](image/screen_shot.png)
 
