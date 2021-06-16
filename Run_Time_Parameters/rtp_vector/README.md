@@ -4,6 +4,8 @@ This is an example of an AIE Kernel that is controlled by a syncronous RTP input
 ## Knowledge nuggets
 :bulb: An RTP input can be a scaler or a vector.
 
+:bulb: Note the usage of 'RTP Source' block which can be used as a source of the RTP input of an AI Engine block.
+
 
 ![](images/screen_shot.PNG)
 
