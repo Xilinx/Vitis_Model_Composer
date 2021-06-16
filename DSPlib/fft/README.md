@@ -1,4 +1,4 @@
-# Using DSPLib AI Engine FIR directly from the library browser
+# Using DSPLib AI Engine FFT directly from the library browser
 
 This example demonestrates using the AI Engine FFT block in Model Composer and comparing the results to the Simulink FFT block. 
 
