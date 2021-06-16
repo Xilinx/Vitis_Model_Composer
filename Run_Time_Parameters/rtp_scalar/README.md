@@ -8,6 +8,8 @@ It is best to run this model step by step in Simulink and observe the RTP input 
 
 :bulb: For its functionality, this kernel needs persistent variables. Note how this is coded in the 'dds' class as class parameters. 
 
+:buld: Note the usage of 'RTP Source' block which can be used as a source of the RTP input of an AI Engine block.
+
 ![](images/screen_shot.PNG)
 
 ![](images/output.PNG)
