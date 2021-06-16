@@ -1,21 +1,22 @@
 # Using AI Engine functions from DSPlib
 
-DSPlib is a library of commonly used DSP functions optimized for AI Engines. In 2020.2 release, you can find 
-this library at the *Versal AI Engines Secure Site* at https://www.xilinx.com/member/versal_ai_engines.html as a zip file.
+DSPlib is a library of commonly used DSP functions optimized for AI Engines. To facilitate the use of these functions in a design, Vitis Model Composer provides different DSPlib functions as blocks within the Xilinx Toolbox/AI Engine library. You can conveniently drag and drop one of these blocks into your model from the Simulink Library browser and configure the block.
 
-Here we demonstrate how you can use these functions in Model Composer.
+Here we demonstrate how you can use these functions in Vitis Model Composer.
 
-In 2020.2, the AI Engine FIR function is part of the Simulink library browser. You can conveniently drag and drop it into your model and configure it for your application. The other two functions, FFT and Matrix Multiply, can be imported as a block. Here you see examples for all these functions.
+![](image/screen_shot.png)
+
+Here you see examples for FIR,FFT and Matrix Multiply functions.
 
 ## Knowledge nuggets
 
-:bulb: Except for the FIR example, we are importing the functions as a graph from the L2 directory of DSPlib.
+:bulb: For FIR and FFT examples, we are using the blocks available in AIEngine/DSPlib library directly. However, for matrix multiply example, we are importing the function as a graph from the  DSPlib [Git hub location].
 
-:bulb: When importing the graph, the only file we need to write, in addition to the files provided in the DSPlib, is a .cpp file to instantiate the graph.
+:bulb: When importing the graph, you can either use the graph header file from 'dsplib/L2/include' or you can write a .cpp file to instantiate the graph and use that file to import the function. While the former is the recommended approach, the latter can handle any complexity.
 
 ## Examples
 - [Using the AI Engine FIR block from the library browser](fir)
-- [Importing FFT from DSPLib as a block](fft)
+- [Usign the AI Engine FFT block from the library browser](fft)
 - [Importing Matrix Multiply from DSPLib as a block](matrix_multiply)
 
 --------------
