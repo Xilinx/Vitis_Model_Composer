@@ -1,6 +1,6 @@
 # Using DSPLib AI Engine FIR directly from the library browser
 
-This example demonstrates using the AI Engine FIR block in Model Composer and comparing the results to the Simulink FIR block.
+This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in Model Composer and comparing the results to the Simulink FIR block.
 
 ## Knowledge nuggets
 
@@ -10,7 +10,7 @@ This example demonstrates using the AI Engine FIR block in Model Composer and co
 
 :warning: If the number of samples in the variable size signal is not equal to the maximum number of samples of the variable size signal, directly attaching the variable size signal to the spectrum analyzer will result in a misleading output (zeros will be inserted to fill the missing samples). For cases where the variable size signal is not full, use the *Variable Size Signal to Workspace* block to move the data to the workspace and then post process the data. 
 
-:bulb: Note how you can design the filter using the *Filter Design and Analysis tool* and directly pass the resulting taps to the AI Engine FIR block. 
+:bulb: Note how you can design the filter using the *Filter Design and Analysis tool* and directly pass the resulting taps to the AI Engine 'FIR Asymmetric Filter' block. 
 
 ![](images/screen_shot.PNG)
 
