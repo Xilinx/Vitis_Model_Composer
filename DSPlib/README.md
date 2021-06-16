@@ -4,7 +4,7 @@ DSPlib is a library of commonly used DSP functions optimized for AI Engines. To 
 
 Here we demonstrate how you can use these functions in Vitis Model Composer.
 
-![](image/screen_shot.png)
+![](images/screen_shot.PNG)
 
 Here you see examples for FIR,FFT and Matrix Multiply functions.
 
