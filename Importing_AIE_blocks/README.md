@@ -12,7 +12,7 @@ Here we provide few examples on how to use these blocks to import AIE Kernels or
 
 ## Knowledge nuggets
 
-:bulb: The Graph import example shown here uses the *.h(header file)* flow. The [matrix_multiply](Vitis_Model_Composer/DSPlib/matrix_multiply/README.m) example in DSPlib/ directory shows how to import the graph using *.cpp(source file)* flow.
+:bulb: The Graph import example shown here uses the *.h(header file)* flow. The [matrix_multiply](Vitis_Model_Composer/DSPlib/matrix_multiply/README.m) example shows how to import the graph using *.cpp(source file)* flow.
 
 --------------
 Copyright 2020 Xilinx
