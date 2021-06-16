@@ -1,6 +1,6 @@
-# Importing AI Engine FFT from DSPLib as a block into Model Composer
+# Using DSPLib AI Engine FIR directly from the library browser
 
-This example demonestrates importing FFT as a block into Model Composer and comparing the results to the Simulink FFT block. In this example, we use the import graph block to import the FFT function.
+This example demonestrates using the AI Engine FFT block in Model Composer and comparing the results to the Simulink FFT block. 
 
 ## Knowledge nuggets
 
