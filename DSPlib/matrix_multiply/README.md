@@ -8,7 +8,7 @@ This example demonstrates importing a matrix multiply function as a block into M
 
 :bulb: Note we are importing matrix multiply as a graph. To do so, you can either use the graph header file from 'dsplib/L2/include' or you can write a .cpp file to instantiate the graph and use that file to import as a block. This example is demonstrated using the header file flow.
 
-![](images/screen_shot1.PNG)
+![](images/screen_shot.PNG)
 
 ------------
 Copyright 2020 Xilinx
