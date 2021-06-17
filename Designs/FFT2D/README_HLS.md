@@ -3,7 +3,9 @@ In this section we showcase a 2D-FFT design using both AI Engines and Programmab
 Two 1D FFTs are implemented on AI Engiens and a transpose operation is implemented on the programmable logic using the HLS Kernel block.
 
 ## Knowledge nuggets
-:bulb: You can seamlessly connect AI Engine blocks to HLS kernel blocks or HDL blocks and run co-simulation in Vitis Model Composer.
+:bulb: You can seamlessly connect AI Engine blocks to HLS kernel blocks.
+
+:bulb: _AIE to HLS_ blocks may be needed for connectivity if there is a need to change the data type. 
 
 <p align="center">
 <img src="images/fft_2d_AIE_HLS_screen_shot.png">
