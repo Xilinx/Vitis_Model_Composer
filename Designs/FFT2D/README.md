@@ -12,6 +12,11 @@ In one example, the transpose operation is implemented using the HLS Kernel and 
 :bulb: You can seamlessly connect AI Engine blocks to HLS kernel blocks or HDL blocks and run co-simulation in Vitis Model Composer.
 
 
+
+<p align="center">
+<img src="images/fft_2d_in_out.png">
+</p>
+
 ------------
 Copyright 2020 Xilinx
 
