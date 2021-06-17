@@ -5,7 +5,7 @@ Two 1D FFTs are implemented on AI Engiens and a transpose operation is implement
 ## Knowledge nuggets
 :bulb: You can seamlessly connect AI Engine blocks to HLS kernel blocks.
 
-:bulb: _AIE to HDL_ blocks may are needed for connectivity between AIE blocks and HDL blocks. 
+:bulb: _AIE to HDL_ blocks may be needed for connectivity between AIE blocks and HDL blocks. 
 
 <p align="center">
 <img src="images/fft_2d_AIE_HDL_screen_shot.png">
