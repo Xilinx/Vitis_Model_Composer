@@ -1,6 +1,6 @@
 # 2D FFT using both AI Engines and Programmable Logic
-In this section we showcase two 2D FFT examples using both AI Engines and Programmable Logic. 
-Two 1D FFTs are running on AI Engiens and a transpose operation is running on the programmable logic.
+In this section we showcase two 2D-FFT designs using both AI Engines and Programmable Logic. 
+Two 1D FFTs are implemented on AI Engiens and a transpose operation is implemented on the programmable logic.
 In one example, the transpose operation is implemented using the HLS Kernel and in another example the transpose operation is implemted using HDL blocks.
 
 ## Examples
@@ -9,7 +9,8 @@ In one example, the transpose operation is implemented using the HLS Kernel and 
 - [2D FFT design using AI Engines and HDL blocks](rtp_vector)
 
 ## Knowledge nuggets
-:bulb: An RTP input can be a scalar or a vector.
+:bulb: You can seamlessly connect AI Engine blocks to HLS kernel blocks or HDL blocks and run co-simulation in Vitis Model Composer.
+
 
 ------------
 Copyright 2020 Xilinx
