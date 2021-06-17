@@ -61,8 +61,16 @@ Click [here](example_access.md) to learn how to access the examples in GitHub.
    <a href="./Designs/SingleStreamSSR_FIR">Super Sample Rate FIR filter</a>
  </td>
  <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we also compare the output of our AI Engine subsystem with the output of a Simulink FIR block (our golden refernece) both in time and in frequency. 
- </td>
+ </td> 
  </tr>
+    
+ <tr>
+ <td align="left">
+ <a href="./Designs/FFT2D">2D FFT (AI Engines + HDL/HLS) </a>
+ </td>
+ <td> The designs here showcase 2D-FFTs that are implemented both in AI Engines and Programmable Logic(PL). In one example the PL is implemented using HLS and in another example the PL is implemented using HDL blocks in Vitis Model Composer.</td>
+ </tr>
+    
  </table>
 
   ## Mini Tutorials
