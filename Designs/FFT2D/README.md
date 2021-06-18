@@ -5,8 +5,8 @@ In one example, the transpose operation is implemented using the HLS Kernel and 
 
 ## Examples
 
-- [2D FFT design using AI Engines and HLS Kernel block](rtp_scalar)
-- [2D FFT design using AI Engines and HDL blocks](rtp_vector)
+- [2D FFT design using AI Engines and HLS Kernel block](README_HLS.md)
+- [2D FFT design using AI Engines and HDL blocks](README_HDL.md)
 
 ## Knowledge nuggets
 :bulb: You can seamlessly connect AI Engine blocks to HLS kernel blocks or HDL blocks and run co-simulation in Vitis Model Composer.
