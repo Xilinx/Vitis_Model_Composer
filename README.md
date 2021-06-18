@@ -1,6 +1,6 @@
 # Vitis Model Composer
 
-![](images/model_composer_title.gif)
+![](images/model_composer_title2.png)
 
 ## How to access the content of this repository?
     
