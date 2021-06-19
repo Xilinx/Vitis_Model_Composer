@@ -31,7 +31,7 @@ Click [here](example_access.md) to learn how to access the examples in GitHub.
  <td align="left">
    <a href="./DSPlib/README.md">DSP Functions</a>
  </td>
- <td>AI Engine FIR filters, importing FFT and Matrix Multiply as a graph into Model Composer.</td>
+ <td>AI Engine FIR filters and FFT. Importing Matrix Multiply as a graph into Vitis Model Composer.</td>
  </tr>
  <tr>
  <td align="left">
