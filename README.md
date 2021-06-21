@@ -111,7 +111,7 @@ Vitis Model Composer now contains the functionality of Xilinx System Generator f
 * Through the Hub block, users can relaunch Vitis Analyzer at any time after running AIE Simulation. 
 * Users can now plot cycle approximate outputs and see estimated throughput for each output using Simulink Data Inspector. 
 * Enhanced usability to import a graph as a block using only the graph header file. 
-* Revamping of the progress bar with cancel button
+* Revamping of the progress bar with cancel button.
 * Usability improvement during importing an AI Engine kernel or simulation of a design when MATLAB working directory and model directory are not the same. 
 * Profiling during AIE Simulation is now disabled by default. It can be optionally enabled from the Model Composer Hub block.
 * New TX Chain 200MHz example. 
