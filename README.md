@@ -97,21 +97,32 @@ Click [here](example_access.md) to learn how to access the examples in GitHub.
  </tr>
  </table>
 
-## What's new in 2020.2?
-### Model Composer and System Generator are unified and you can have blocks from both in the same design
-  * Cosimulate AI Engines blocks and System Generator HDL based blocks.
-  * Import VHDL and Verilog code using System Generator black box and cosimulate with AI Engine blocks.
-  
-### Support for [Versal](https://www.xilinx.com/products/silicon-devices/acap/versal.html) AI Engines
-* Developing algorithms for AI Engines is now much simpler with Model Composer. Here is a subset of new features that were added:
-  * Design AI Engine based algorithms by importing AI Engine kernels into Model Composer as blocks
-  * Use optimized AI Engine blocks such as FIR filters directly from the library browser
-  * Run functional simulation
-  * Use MATLAB and Simulink powerful visualization tools to view signals between AI Engine blocks and analyze them in MATLAB workspace
-  * Generate graph code
-  * Run cycle accurate system C simulation
-  * Generate test benches
-  
+## What's new in 2021.1?
+Vitis Model Composer now contains the functionality of Xilinx System Generator for DSP.  Users who have been using Xilinx System Generator for DSP can continue development using Vitis Model Composer.
+
+### AI Engines 
+* A comprehensive constraint editor enables users to specify any constraint for AI Engine kernels in Vitis Model Composer. The generated ADF graph will contain these constraints.
+* Addition of AI Engine FFT and IFFT blocks to the library browser. 
+* Users now have access to many variations of AI Engine FIR blocks in the library browser. 
+* Ability to specify filter coefficients using input ports for FIR filters. 
+* Addition of two new utility blocks "RTP Source" and "To Variable Size".
+* Enhanced AIE Kernel import block now also supports importing templatized AI Engine functions. 
+* Ability to specify Xilinx platforms for AI Engine designs in the Hub block.
+* Through the Hub block, users can relaunch Vitis Analyzer at any time after running AIE Simulation. 
+* Users can now plot cycle approximate outputs and see estimated throughput for each output using Simulink Data Inspector. 
+* Enhanced usability to import a graph as a block using only the graph header file. 
+* Revamping of the progress bar with cancel button.
+* Usability improvement during importing an AI Engine kernel or simulation of a design when MATLAB working directory and model directory are not the same. 
+* Profiling during AIE Simulation is now disabled by default. It can be optionally enabled from the Model Composer Hub block.
+* New TX Chain 200MHz example. 
+* New 2d FFT examples showcasing designs with HLS, HDL, and AI Engine blocks.
+### HDL
+* Simulation speed enhancement for SSR FIR (more than 10x improvement), and SSR FFT.
+* Simulation speed enhancement for memory blocks like RAMs, and FIFOs
+* Questa Simulator updated with VHDL 2008 in the Black-box import flow
+### General
+* Vitis Model Composer now contains the functionality of Xilinx System Generator for DSP.  Users who have been using Xilinx System Generator for DSP can continue development using Vitis Model Composer.
+* MATLAB Support - R2020a, R2020b, and R2021a
   
 <p align="center">
 <img src="images/model_composer_image.PNG">
