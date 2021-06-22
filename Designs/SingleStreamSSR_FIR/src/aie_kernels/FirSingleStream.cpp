@@ -1,17 +1,26 @@
-#include <adf.h>
-
+/*
+ * (c) Copyright 2020 Xilinx, Inc. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+ #include <adf.h>
 
 #include "FirSingleStream.h"
 
-template <int NSamples,int ShiftAcc,int Delay>
-void SingleStream::FIR_MultiKernel_cout<NSamples,ShiftAcc,Delay>::filter(input_stream_cint16* sin,output_stream_cacc48* cout)
+template <int NSamples,int ShiftAcc>
+void SingleStream::FIR_MultiKernel_cout<NSamples,ShiftAcc>::filter(input_stream_cint16* sin,output_stream_cacc48* cout)
 {
-    if(InitCall)
-    {
-        InitCall = false;
-        SingleStream::FIRinit<Delay>();
-    }
-    
 	v8cint16 taps =  *(v8cint16*) weights;
 	v16cint16 *ptr_delay_line = (v16cint16 *)delay_line;
 	v16cint16 data = *ptr_delay_line;
@@ -61,15 +70,9 @@ void SingleStream::FIR_MultiKernel_cout<NSamples,ShiftAcc,Delay>::filter(input_s
 
 
 
-template <int NSamples,int ShiftAcc,int Delay>
-void SingleStream::FIR_MultiKernel_cincout<NSamples,ShiftAcc,Delay>::filter(input_stream_cint16* sin,input_stream_cacc48* cin,output_stream_cacc48* cout)
+template <int NSamples,int ShiftAcc>
+void SingleStream::FIR_MultiKernel_cincout<NSamples,ShiftAcc>::filter(input_stream_cint16* sin,input_stream_cacc48* cin,output_stream_cacc48* cout)
 {
-
-    if(InitCall)
-    {
-        InitCall = false;
-        SingleStream::FIRinit<Delay>();
-    }
 
 	v8cint16 taps =  *(v8cint16*) weights;
 	v16cint16 *ptr_delay_line = (v16cint16 *)delay_line;
@@ -121,16 +124,9 @@ void SingleStream::FIR_MultiKernel_cincout<NSamples,ShiftAcc,Delay>::filter(inpu
 }
 
 
-template <int NSamples,int ShiftAcc,int Delay>
-void SingleStream::FIR_MultiKernel_cin<NSamples,ShiftAcc,Delay>::filter(input_stream_cint16* sin,input_stream_cacc48* cin,output_stream_cint16* sout)
+template <int NSamples,int ShiftAcc>
+void SingleStream::FIR_MultiKernel_cin<NSamples,ShiftAcc>::filter(input_stream_cint16* sin,input_stream_cacc48* cin,output_stream_cint16* sout)
 {
-
-    if(InitCall)
-    {
-        InitCall = false;
-        SingleStream::FIRinit<Delay>();
-    }
-
 
 	v8cint16 taps =  *(v8cint16*) weights;
 	v16cint16 *ptr_delay_line = (v16cint16 *)delay_line;
@@ -182,13 +178,10 @@ void SingleStream::FIR_MultiKernel_cin<NSamples,ShiftAcc,Delay>::filter(input_st
 }
 
 
-
-template<int Delay>
-void SingleStream::FIRinit()
+void SingleStream::FIRinit(const int Delay)
 {
     for (int i = 0; i < Delay; ++i)
     {
         get_ss(0);
     }
 }
-

@@ -18,6 +18,8 @@
 
 DISPLAY = 0;
 
+setenv('SRC','../src');
+
 % N is frame size.
 N = 4;
 
@@ -38,7 +40,7 @@ Lspec = 2048;
 freqz(Taps/(Norm/Lspec),Lspec,'whole');
 end
 
-SaveTaps(Taps,'src/FilterTaps.txt');
+SaveTaps(Taps,fullfile(getenv('SRC'),'FilterTaps.txt'));
 
 
 SHIFT_ACC = 15;

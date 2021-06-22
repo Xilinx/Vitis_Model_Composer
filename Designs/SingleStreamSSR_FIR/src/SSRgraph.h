@@ -1,15 +1,49 @@
-#pragma once
+/*
+ * (c) Copyright 2020 Xilinx, Inc. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+ #pragma once
 
 #include <adf.h>
 #include "system_settings.h"
 #include "aie_kernels.h"
 
+    std::vector<cint16> taps = std::vector<cint16>({
+    	 {   -82,  -253},{     0,  -204},{    11,   -35},{  -198,   273},
+	     {  -642,   467},{ -1026,   333},{  -927,     0},{  -226,   -73},
+	     {   643,   467},{   984,  1355},{   550,  1691},{     0,   647},
+	     {   538, -1656},{  2860, -3936},{  6313, -4587},{  9113, -2961},
+	     {  9582,     0},{  7421,  2411},{  3936,  2860},{  1023,  1409},
+	     {  -200,  -615},{     0, -1778},{   517, -1592},{   467,  -643},
+	     {  -192,   140},{  -882,   287},{ -1079,     0},{  -755,  -245},
+	     {  -273,  -198},{    22,    30},{    63,   194},{     0,   266}
+    });
 
+    std::vector<cint16> taps_aie(taps.rbegin(),taps.rend());
 
 #define GetPhase(Start,Step) {\
-	taps[Start+7*Step],taps[Start+6*Step],taps[Start+5*Step],taps[Start+4*Step],\
-	taps[Start+3*Step],taps[Start+2*Step],taps[Start+Step],taps[Start]}
+	taps_aie[Start],taps_aie[Start+Step],taps_aie[Start+2*Step],taps_aie[Start+3*Step],\
+	taps_aie[Start+4*Step],taps_aie[Start+5*Step],taps_aie[Start+6*Step],taps_aie[Start+7*Step]}
 
+std::vector<cint16> taps4_p0 = std::vector<cint16>(GetPhase(0,4));
+
+std::vector<cint16> taps4_p1 = std::vector<cint16>(GetPhase(1,4));
+
+std::vector<cint16> taps4_p2 = std::vector<cint16>(GetPhase(2,4));
+
+std::vector<cint16> taps4_p3 = std::vector<cint16>(GetPhase(3,4));
 
 
 
@@ -24,19 +58,6 @@ class FIRGraph_SSR4: public adf::graph
 {
 private:
 	kernel k[4][4];
-    
-    std::vector<cint16> taps = std::vector<cint16>({
-    #include "FilterTaps.txt"
-    });
-    
-    std::vector<cint16> taps4_p3 = std::vector<cint16>(GetPhase(0,4));
-
-	std::vector<cint16> taps4_p2 = std::vector<cint16>(GetPhase(1,4));
-
-	std::vector<cint16> taps4_p1 = std::vector<cint16>(GetPhase(2,4));
-
-	std::vector<cint16> taps4_p0 = std::vector<cint16>(GetPhase(3,4));
-    
 
 
 public:
@@ -52,32 +73,31 @@ public:
 		//  --> 2,0   2,1   2,2   2,3
 		//      1,3   1,2   1,1   1,0 <--
 		//  --> 0,0   0,1   0,2   0,3
-        
-        // The Upper-Left triangle must discard a sample (diagonal not included)
-		//      3,3   3,2   3,1   3,0 <--
-		//  --> 2,0   2,1   2,2   2,3
-		//      1,3   1,2   1,1   1,0 <--
-		//  --> 0,0   0,1   0,2   0,3
+		// The Upper-Left triangle must discard a sample (diagonal not included)
+		//      (1)   (1)   (1)   (0) <--
+		//  --> (1)   (1)   (0)   (0)
+		//      (1)   (0)   (0)   (0) <--
+		//  --> (0)   (0)   (0)   (0)
 
-		k[0][0] = kernel::create_object<SingleStream::FIR_MultiKernel_cout<NUM_SAMPLES,SHIFT,0>>(taps4_p0);
-		k[0][1] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT,0>>(taps4_p1);
-		k[0][2] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT,0>>(taps4_p2);
-		k[0][3] = kernel::create_object<SingleStream::FIR_MultiKernel_cin<NUM_SAMPLES,SHIFT,0>>(taps4_p3);
+		k[0][0] = kernel::create_object<SingleStream::FIR_MultiKernel_cout<NUM_SAMPLES,SHIFT>>(taps4_p0     ,0);
+		k[0][1] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT>>(taps4_p1  ,0);
+		k[0][2] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT>>(taps4_p2  ,0);
+		k[0][3] = kernel::create_object<SingleStream::FIR_MultiKernel_cin<NUM_SAMPLES,SHIFT>>(taps4_p3      ,0);
 
-		k[1][0] = kernel::create_object<SingleStream::FIR_MultiKernel_cout<NUM_SAMPLES,SHIFT,0>>(taps4_p2);
-		k[1][1] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT,0>>(taps4_p1);
-		k[1][2] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT,0>>(taps4_p0);
-		k[1][3] = kernel::create_object<SingleStream::FIR_MultiKernel_cin<NUM_SAMPLES,SHIFT,1>>(taps4_p3);
+		k[1][0] = kernel::create_object<SingleStream::FIR_MultiKernel_cout<NUM_SAMPLES,SHIFT>>(taps4_p2     ,0);
+		k[1][1] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT>>(taps4_p1  ,0);
+		k[1][2] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT>>(taps4_p0  ,0);
+		k[1][3] = kernel::create_object<SingleStream::FIR_MultiKernel_cin<NUM_SAMPLES,SHIFT>>(taps4_p3      ,1);
 
-		k[2][0] = kernel::create_object<SingleStream::FIR_MultiKernel_cout<NUM_SAMPLES,SHIFT,1>>(taps4_p2);
-		k[2][1] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT,1>>(taps4_p3);
-		k[2][2] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT,0>>(taps4_p0);
-		k[2][3] = kernel::create_object<SingleStream::FIR_MultiKernel_cin<NUM_SAMPLES,SHIFT,0>>(taps4_p1);
+		k[2][0] = kernel::create_object<SingleStream::FIR_MultiKernel_cout<NUM_SAMPLES,SHIFT>>(taps4_p2     ,1);
+		k[2][1] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT>>(taps4_p3  ,1);
+		k[2][2] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT>>(taps4_p0  ,0);
+		k[2][3] = kernel::create_object<SingleStream::FIR_MultiKernel_cin<NUM_SAMPLES,SHIFT>>(taps4_p1      ,0);
 
-		k[3][0] = kernel::create_object<SingleStream::FIR_MultiKernel_cout<NUM_SAMPLES,SHIFT,0>>(taps4_p0);
-		k[3][1] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT,1>>(taps4_p3);
-		k[3][2] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT,1>>(taps4_p2);
-		k[3][3] = kernel::create_object<SingleStream::FIR_MultiKernel_cin<NUM_SAMPLES,SHIFT,1>>(taps4_p1);
+		k[3][0] = kernel::create_object<SingleStream::FIR_MultiKernel_cout<NUM_SAMPLES,SHIFT>>(taps4_p0     ,0);
+		k[3][1] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT>>(taps4_p3  ,1);
+		k[3][2] = kernel::create_object<SingleStream::FIR_MultiKernel_cincout<NUM_SAMPLES,SHIFT>>(taps4_p2  ,1);
+		k[3][3] = kernel::create_object<SingleStream::FIR_MultiKernel_cin<NUM_SAMPLES,SHIFT>>(taps4_p1      ,1);
 
 		const int NPhases = 4;
 
@@ -85,8 +105,8 @@ public:
 			for(int j=0;j<NPhases;j++)
 			{
 				runtime<ratio>(k[i][j]) = 0.9;
-				source(k[i][j]) = "./src/aie_kernels/FirSingleStream.cpp";
-				headers(k[i][j]) = {"./src/aie_kernels/FirSingleStream.h"};
+				source(k[i][j]) = "aie_kernels/FirSingleStream.cpp";
+				headers(k[i][j]) = {"aie_kernels/FirSingleStream.h"};
 			}
 
 		// Constraints: location of the first kernel in the cascade
@@ -95,7 +115,6 @@ public:
 			int j = (i%2?28:25); // 25 on even rows and 28 on odd rows
 			location<kernel>(k[i][0]) = tile(j,i);
 		}
-
 
 
 		// Cascade Connections
@@ -123,8 +142,8 @@ class TopGraph: public adf::graph
 public:
 	FIRGraph_SSR4 G1;
 
-	port<input> in[8];
-	port<output> out[4];
+	input_port in[8];
+	output_port out[4];
 
 	TopGraph()
 	{
