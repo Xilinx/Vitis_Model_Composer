@@ -13,7 +13,7 @@ In the case above, the stream output of this block will be a variable-size signa
 
 ![](images/block_with_output_stream.png)
 
-# How to set "Sample Size"?
+# How to set "Signal Size"?
 
 Let's look at the kernel function for a kernel we are importing:
 
