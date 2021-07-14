@@ -7,7 +7,7 @@ For more information on commslib library and download the example, visit the [Ve
 ![](Images/tx_chain_200Mhz.PNG)
 
 ------------
-Copyright 2020 Xilinx
+Copyright 2021 Xilinx
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
