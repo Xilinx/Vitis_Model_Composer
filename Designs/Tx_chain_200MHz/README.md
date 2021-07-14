@@ -1,8 +1,7 @@
 # Tx Chain 200MHz
-Tx Chain 200MHz design is commslib example which is part of Communications Library Early Access. You can explore and analyze this design
-using the Vitis Model Composer flow.
+The Tx Chain 200 MHz design is a commslib example which is part of the Communications Library Early Access program. You can explore and analyze this design using the Vitis Model Composer flow.
 
-For more information on commslib library and download the example, visit the [Versal AI Engine Communication Library Early Access Site](https://www.xilinx.com/member/versal_ai_engine_commslib_ea.html). 
+For more information on accessing the commslib library and downloading the example, visit the [Versal AI Engine Communication Library Early Access Site](https://www.xilinx.com/member/versal_ai_engine_commslib_ea.html). 
 
 ![](Images/tx_chain_200Mhz.PNG)
 
