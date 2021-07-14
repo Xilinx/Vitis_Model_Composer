@@ -2,7 +2,7 @@
 This model demonstrates the Tx Chain 200MHz design, which is part of Communications Library Early Access.  
 For more information on commslib library and download the example, visit the [Versal AI Engine Communication Library Early Access Site](https://www.xilinx.com/member/versal_ai_engine_commslib_ea.html). 
 
-![](images/tx_chain_200Mhz.PNG)
+![](Images/tx_chain_200Mhz.PNG)
 
 ------------
 Copyright 2020 Xilinx
