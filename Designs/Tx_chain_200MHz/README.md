@@ -4,7 +4,7 @@ using the Vitis Model Composer flow.
 
 For more information on commslib library and download the example, visit the [Versal AI Engine Communication Library Early Access Site](https://www.xilinx.com/member/versal_ai_engine_commslib_ea.html). 
 
-![](Images/tx_chain_200Mhz.PNG),m 
+![](Images/tx_chain_200Mhz.PNG)
 
 ------------
 Copyright 2020 Xilinx
