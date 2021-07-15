@@ -71,6 +71,13 @@ Click [here](example_access.md) to learn how to access the examples in GitHub.
  <td> The designs here showcase 2D-FFTs that are implemented both in AI Engines and Programmable Logic(PL). In one example the PL is implemented using HLS and in another example the PL is implemented using HDL blocks in Vitis Model Composer.</td>
  </tr>
     
+ <tr>
+ <td align="left">
+ <a href="./Designs/Tx_chain_200MHz">TX Chain 200MHz </a>
+ </td>
+ <td> This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHZ, which is part of the communications Library Early access program.</td>
+ </tr>
+    
  </table>
 
   ## Mini Tutorials
