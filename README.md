@@ -1,6 +1,6 @@
 # Vitis Model Composer
 
-![](images/model_composer_title3.png)
+![](Images/model_composer_title3.png)
 
 ## How to access the content of this repository?
     
@@ -8,7 +8,13 @@ Starting from the 2020.2 version, we are storing and managing a subset of the pr
 
 Click [here](example_access.md) to learn how to access the examples in GitHub.
 
-## AI Engine Examples
+## Rapid design exploration using Vitis Model Composer
+
+Vitis Model Composer provides a library of performance-optimized blocks for design and implemenation of algorithms on Xilinx devices. The Vitis Model Composer AI Engine, HLS and HDL libraries within the Simulink environment, enables the rapid design exploration of an algorithm and accelerates the path to production.
+
+# [AI Engine Examples](./AI_Engine_Library/Examples)
+
+### General Examples
 
 <table style="width:100%">
  <tr>
@@ -49,7 +55,7 @@ Click [here](example_access.md) to learn how to access the examples in GitHub.
  </tr>
  </table>
  
- ## Design Examples
+ ### Design Examples
  
  <table style="width:100%">
  <tr>
@@ -80,7 +86,7 @@ Click [here](example_access.md) to learn how to access the examples in GitHub.
     
  </table>
 
-  ## Mini Tutorials
+  ### Mini Tutorials
  
  <table style="width:100%">
  <tr>
@@ -103,9 +109,49 @@ Click [here](example_access.md) to learn how to access the examples in GitHub.
  </td>
  </tr>
  </table>
+ 
+ # [HLS Examples](./HLS_Library/Examples)
 
-## What's new in 2021.1?
-Vitis Model Composer now contains the functionality of Xilinx System Generator for DSP.  Users who have been using Xilinx System Generator for DSP can continue development using Vitis Model Composer.
+<table style="width:100%">
+ <tr>
+ <td width="35%" align="center"><b>Topic</b>
+ <td width="65%" align="center"><b>Description</b>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./color_detection/README.md">Color Detection</a>
+ </td>
+ <td>This example demonstrates color detection on an input video. </td>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./fir_import/README.md">Importing FIR Filter into Model Composer</a>
+ </td>
+ <td>This example demonstrates a 103 tap symmetric FIR filter </td>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./optical_flow/README.md">Optical Flow</a>
+ </td>
+ <td>This example demonstrates an implementation of dense optical flow in Model Composer.</td>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./sobel_edge_detection/README.md">Sobel Edge Detection</a>
+ </td>
+ <td>This example demonestrates an implemntation of sobel edge detection algorithm in Model Composer
+ </td>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./video_frame_roation/README.md">Video Frame Rotation</a>
+ </td>
+ <td>This example demonstrates rotating video frames by a certain angle in Model Composer.
+ </td>
+ </tr>
+ </table>
+
+## What's new in 2021.2?
 
 ### AI Engines 
 * A comprehensive constraint editor enables users to specify any constraint for AI Engine kernels in Vitis Model Composer. The generated ADF graph will contain these constraints.
@@ -128,8 +174,8 @@ Vitis Model Composer now contains the functionality of Xilinx System Generator f
 * Simulation speed enhancement for memory blocks like RAMs, and FIFOs
 * Questa Simulator updated with VHDL 2008 in the Black-box import flow
 ### General
-* Vitis Model Composer now contains the functionality of Xilinx System Generator for DSP.  Users who have been using Xilinx System Generator for DSP can continue development using Vitis Model Composer.
-* MATLAB Support - R2020a, R2020b, and R2021a
+* Starting from 2021.1, Vitis Model Composer contains the functionality of Xilinx System Generator for DSP.  Users who have been using Xilinx System Generator for DSP can continue development using Vitis Model Composer.
+* MATLAB Support - R2020b, R2021a, and R2021b
   
 <p align="center">
 <img src="images/model_composer_image.PNG">
