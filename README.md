@@ -4,7 +4,7 @@
 
 ## How to access the content of this repository?
     
-Starting from the 2020.2 version, we are storing and managing a subset of the product examples in GitHub. This way, users will have access to the most up-to-date examples. You can get the examples from this repository or directly from the tool.
+Starting from the 2020.2 version, we are storing and managing a subset of the Vitis Model Composer examples(AI Engine & HLS Library) in GitHub. This way, users will have access to the most up-to-date examples. You can get the examples from this repository or directly from the tool.
 
 Click [here](example_access.md) to learn how to access the examples in GitHub.
 
@@ -12,7 +12,7 @@ Click [here](example_access.md) to learn how to access the examples in GitHub.
 
 Vitis Model Composer provides a library of performance-optimized blocks for design and implemenation of algorithms on Xilinx devices. The Vitis Model Composer AI Engine, HLS and HDL libraries within the Simulink environment, enables the rapid design exploration of an algorithm and accelerates the path to production.
 
-# [AI Engine Examples](./AI_Engine_Library/Examples)
+# [AI Engine Examples](./AIEngine_Library/Examples)
 
 ### General Examples
 
@@ -23,32 +23,32 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </tr>
  <tr>
  <td align="left">
-   <a href="./Importing_AIE_blocks/README.md">Importing Kernels and Graphs into Model Composer</a>
+   <a href="./AIEngine_Library/Examples/Importing_AIE_blocks/README.md">Importing Kernels and Graphs into Model Composer</a>
  </td>
  <td>Examples on importing Kernels and Graphs into Model Composer as blocks. This include importing templatized class based kernels, templatized AI Engine functions, and graphs. </td>
  </tr>
  <tr>
  <td align="left">
-   <a href="./Run_Time_Parameters/README.md">Run time parameters (RTP)</a>
+   <a href="./AIEngine_Library/Examples/Run_Time_Parameters/README.md">Run time parameters (RTP)</a>
  </td>
  <td>Examples of kernels with RTP input. RTP inputs can be sync or async. </td>
  </tr>
  <tr>
  <td align="left">
-   <a href="./DSPlib/README.md">DSP Functions</a>
+   <a href="./AIEngine_Library/Examples/DSPlib/README.md">DSP Functions</a>
  </td>
  <td>AI Engine FIR filters and FFT. Importing Matrix Multiply as a graph into Vitis Model Composer.</td>
  </tr>
  <tr>
  <td align="left">
-   <a href="./AIE_HDL/README.md">Designs with both AI Engine and RTL blocks</a>
+   <a href="./AIEngine_Library/Examples/AIE_HDL/README.md">Designs with both AI Engine and RTL blocks</a>
  </td>
  <td>Examples of designs with both AI Engine kernels and RTL functions. Here you can see examples of importing RTL code into Model Composer and co-simulation with AI Engine   blocks at high speeds.
  </td>
  </tr>
  <tr>
  <td align="left">
-   <a href="./AIE_HLS/README.md">Design with both AI Engines and HLS kernels</a>
+   <a href="./AIEngine_Library/Examples/AIE_HLS/README.md">Design with both AI Engines and HLS kernels</a>
  </td>
  <td>Example of a design with both AI Engine kernels and an HLS kernel.
  </td>
@@ -64,7 +64,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </tr>
  <tr>
  <td align="left">
-   <a href="./Designs/SingleStreamSSR_FIR">Super Sample Rate FIR filter</a>
+   <a href="./AIEngine_Library/Examples/Designs/SingleStreamSSR_FIR">Super Sample Rate FIR filter</a>
  </td>
  <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we also compare the output of our AI Engine subsystem with the output of a Simulink FIR block (our golden refernece) both in time and in frequency. 
  </td> 
@@ -72,14 +72,14 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
     
  <tr>
  <td align="left">
- <a href="./Designs/FFT2D">2D FFT (AI Engines + HDL/HLS) </a>
+ <a href="./AIEngine_Library/Examples/Designs/FFT2D">2D FFT (AI Engines + HDL/HLS) </a>
  </td>
  <td> The designs here showcase 2D-FFTs that are implemented both in AI Engines and Programmable Logic(PL). In one example the PL is implemented using HLS and in another example the PL is implemented using HDL blocks in Vitis Model Composer.</td>
  </tr>
     
  <tr>
  <td align="left">
- <a href="./Designs/Tx_chain_200MHz">TX Chain 200MHz </a>
+ <a href="./AIEngine_Library/Examples/Designs/Tx_chain_200MHz">TX Chain 200MHz </a>
  </td>
  <td> This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHZ, which is part of the communications Library Early access program.</td>
  </tr>
@@ -95,7 +95,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </tr>
  <tr>
  <td align="left">
-   <a href="./Variable_Size_Signals/README.md">What are Variable-Size Signals?</a>
+   <a href="./AIEngine_Library/Examples/Variable_Size_Signals/README.md">What are Variable-Size Signals?</a>
  </td>
  <td>All you need to know about Variable-Size Signals in Simulink.
  </td>
@@ -103,7 +103,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  
  <tr>
  <td align="left">
-   <a href="./Setting_Signal_Size/README.md">How to properly set the Signal Size property on AI Engine kernel blocks with stream or cascade outputs?</a>
+   <a href="./AIEngine_Library/Examples/Setting_Signal_Size/README.md">How to properly set the Signal Size property on AI Engine kernel blocks with stream or cascade outputs?</a>
  </td>
  <td>Setting the signal size property for AI Engine kernels with stream and cascade outputs.
  </td>
@@ -119,32 +119,32 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </tr>
  <tr>
  <td align="left">
-   <a href="./color_detection/README.md">Color Detection</a>
+   <a href="./HLS_Library/Examples/color_detection/README.md">Color Detection</a>
  </td>
  <td>This example demonstrates color detection on an input video. </td>
  </tr>
  <tr>
  <td align="left">
-   <a href="./fir_import/README.md">Importing FIR Filter into Model Composer</a>
+   <a href="./HLS_Library/Examples/fir_import/README.md">Importing FIR Filter into Model Composer</a>
  </td>
  <td>This example demonstrates a 103 tap symmetric FIR filter </td>
  </tr>
  <tr>
  <td align="left">
-   <a href="./optical_flow/README.md">Optical Flow</a>
+   <a href="./HLS_Library/Examples/optical_flow/README.md">Optical Flow</a>
  </td>
  <td>This example demonstrates an implementation of dense optical flow in Model Composer.</td>
  </tr>
  <tr>
  <td align="left">
-   <a href="./sobel_edge_detection/README.md">Sobel Edge Detection</a>
+   <a href="./HLS_Library/Examples/sobel_edge_detection/README.md">Sobel Edge Detection</a>
  </td>
  <td>This example demonestrates an implemntation of sobel edge detection algorithm in Model Composer
  </td>
  </tr>
  <tr>
  <td align="left">
-   <a href="./video_frame_roation/README.md">Video Frame Rotation</a>
+   <a href="./HLS_Library/Examples/video_frame_roation/README.md">Video Frame Rotation</a>
  </td>
  <td>This example demonstrates rotating video frames by a certain angle in Model Composer.
  </td>
