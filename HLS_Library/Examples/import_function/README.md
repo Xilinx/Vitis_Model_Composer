@@ -7,7 +7,7 @@ Model Composer lets you import C or C++ code to create new blocks that can be ad
 
 ## How to use this example?
 
-When you click on the "Open Example" button above, you will find four categories of simple examples. Each category is designed to help you quickly familiarize yourself with the different aspects of importing C/C++ functions into Model Composer. The categories are:
+When you open the design file, you will find four categories of simple examples. Each category is designed to help you quickly familiarize yourself with the different aspects of importing C/C++ functions into Model Composer. The categories are:
 
 * Basics
 * Parametrization
