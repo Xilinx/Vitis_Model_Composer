@@ -1,16 +1,22 @@
-# Color Detection
-This example demonstrates color detection on an input video.
+# Import Function feature examples
+This is a set of simple examples to demonstrate importing C/C++ functions into Model Composer as a blocks..
 
-## Knowledge nuggets
-:bulb: This example uses the following Mathrowks toolboxes.
-       [MATLAB Computer Vision System Toolbox](https://www.mathworks.com/products/computer-vision.html)
-       [DSP System Toolbox](https://www.mathworks.com/products/dsp-system.html)
+## Importing C/C++ code as custom blocks
 
-:bulb: _AIE to HDL_ blocks are needed for connectivity between AIE blocks and HDL blocks. 
+Model Composer lets you import C or C++ code to create new blocks that can be added to a library for use in models along side other Xilinx Model Composer blocks. This feature lets you build custom block libraries for use in Model Composer. Xilinx Model Composer provides the xmcImportFunction command, for use from the MATLAB command line, to let you specify functions defined in source and header files to import into Model Composer and create Model Composer blocks or block library
 
-<p align="center">
-<img src="images/fft_2d_AIE_HDL_screen_shot.png">
-</p>
+## How to use this example?
+
+When you click on the "Open Example" button above, you will find four categories of simple examples. Each category is designed to help you quickly familiarize yourself with the different aspects of importing C/C++ functions into Model Composer. The categories are:
+
+* Basics
+* Parametrization
+* Using templates
+* Fixed-point and Complex signals
+
+Each category has multiple simple examples to help you quickly familiarize yourself with the capabilities of the C/C++ Function Import feature. For each example, you can view the source code associated with the blocks and an import_function.m script that shows the corresponding xmcImportFunction syntax used to create the block.
+
+![](Images/import_function.png)
 
 ------------
 Copyright 2020 Xilinx
