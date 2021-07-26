@@ -48,7 +48,7 @@ Morphological operations apply a structuring element to an image, creating an ou
 * Morphological opening – It consists of Erosion followed by Dilation. The effect of this operation is the structured removal of image region boundary pixels
 * Morphological closing – It consists of Dilation followed by Erosion. The effect of this operation is structured filling in the image region boundary pixels.
 
-*Note*: For Color Threshold and Morphological operations also, we use C/C++ import functionality of Model composer.
+**Note**: For Color Threshold and Morphological operations also, we use C/C++ import functionality of Model composer.
 
 ## Sample input and output frames
 
