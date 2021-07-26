@@ -14,7 +14,7 @@ To create a block from C/C++, use the command xmcImportFunction at the MATLAB Co
 
 Open the model in this example. This model is a test harness for the FIR filter we are importing to Model Composer.
 
-![](Images/model.png)
+![](Images/model.PNG)
 
 To create a block out of the C++ code we use the 'xmcImportFunction' command. Use the following command to see the help for xmcImportFunction.
 
