@@ -1,16 +1,15 @@
-# Color Detection
-This example demonstrates color detection on an input video.
+# Sobel Edge Detection
+This example demonestrates an implemntation of sobel edge detection algorithm in Xilinx Model Composer.
 
-## Knowledge nuggets
-:bulb: This example uses the following Mathrowks toolboxes.
-       [MATLAB Computer Vision System Toolbox](https://www.mathworks.com/products/computer-vision.html)
-       [DSP System Toolbox](https://www.mathworks.com/products/dsp-system.html)
+This example uses the following Mathworks toolboxes.  
+* [MATLAB Computer Vision System Toolbox](https://www.mathworks.com/products/computer-vision.html)  
+* [DSP System Toolbox](https://www.mathworks.com/products/dsp-system.html)
 
-:bulb: _AIE to HDL_ blocks are needed for connectivity between AIE blocks and HDL blocks. 
+Sobel Edge Detection algorithm calculates the gradient of the image intensity in the x and y directions by convolving the image with a separable filter in each direction.
 
-<p align="center">
-<img src="images/fft_2d_AIE_HDL_screen_shot.png">
-</p>
+![](Images/sobel_edge_detection.PNG)
+
+
 
 ------------
 Copyright 2020 Xilinx
