@@ -131,6 +131,12 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </tr>
  <tr>
  <td align="left">
+   <a href="./HLS_Library/Examples/import_function/README.md">Import Function feature examples</a>
+ </td>
+ <td>This is a set of simple examples to demonstrate importing C/C++ functions into Model Composer as a blocks.</td>
+ </tr>
+ <tr>
+ <td align="left">
    <a href="./HLS_Library/Examples/optical_flow/README.md">Optical Flow</a>
  </td>
  <td>This example demonstrates an implementation of dense optical flow in Model Composer.</td>

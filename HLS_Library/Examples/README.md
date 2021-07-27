@@ -17,6 +17,12 @@
  </td>
  <td>This example demonstrates a 103 tap symmetric FIR filter </td>
  </tr>
+  <tr>
+ <td align="left">
+   <a href="./import_function/README.md">Import Function feature examples</a>
+ </td>
+ <td>This is a set of simple examples to demonstrate importing C/C++ functions into Model Composer as a blocks.</td>
+ </tr>
  <tr>
  <td align="left">
    <a href="./optical_flow/README.md">Optical Flow</a>
