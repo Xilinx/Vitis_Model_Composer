@@ -1,49 +1,40 @@
 # HLS Examples
 
-<table style="width:100%">
- <tr>
- <td width="35%" align="center"><b>Topic</b>
- <td width="65%" align="center"><b>Description</b>
- </tr>
- <tr>
- <td align="left">
-   <a href="./color_detection/README.md">Color Detection</a>
- </td>
- <td>This example demonstrates color detection on an input video. </td>
- </tr>
- <tr>
- <td align="left">
-   <a href="./fir_import/README.md">Importing FIR Filter into Model Composer</a>
- </td>
- <td>This example demonstrates a 103 tap symmetric FIR filter </td>
- </tr>
-  <tr>
- <td align="left">
-   <a href="./import_function/README.md">Import Function feature examples</a>
- </td>
- <td>This is a set of simple examples to demonstrate importing C/C++ functions into Model Composer as a blocks.</td>
- </tr>
- <tr>
- <td align="left">
-   <a href="./optical_flow/README.md">Optical Flow</a>
- </td>
- <td>This example demonstrates an implementation of dense optical flow in Model Composer.</td>
- </tr>
- <tr>
- <td align="left">
-   <a href="./sobel_edge_detection/README.md">Sobel Edge Detection</a>
- </td>
- <td>This example demonestrates an implemntation of sobel edge detection algorithm in Model Composer
- </td>
- </tr>
- <tr>
- <td align="left">
-   <a href="./video_frame_roation/README.md">Video Frame Rotation</a>
- </td>
- <td>This example demonstrates rotating video frames by a certain angle in Model Composer.
- </td>
- </tr>
- </table>
+## [Color Detection](./color_detection/README.md)
+
+This example demonstrates color detection on an input video.
+
+![](./color_detection/Images/color_detection.png)
+
+## [Importing an FIR Filter](./fir_import/README.md)
+
+This example demonstrates porting an FIR filter written in C++ into Model Composer.
+
+![](./fir_import/Images/fir_import.PNG)
+
+## [Examples for importing C/C++ functions](./import_function/README.md)
+
+A set of simple examples demonstrating importing C/C++ functions as custom blocks into Model Composer.
+
+![](./import_function/Images/import_function.png)
+
+## [Optical_flow](./optical_flow/README.md)
+
+This example demonstrates dense optical flow in Model Composer.
+
+![](./optical_flow/Images/optical_flow.PNG)
+
+## [Sobel edge detection](./sobel_edge_detection/README.md)
+
+This example demonstrates Sobel edge detection in Model Composer.
+
+![](./sobel_edge_detection/Images/sobel_edge_detection.PNG)
+
+## [Video frame rotation](./video_frame_rotation/README.md)
+
+This example demonstrates rotation of video frames in Model Composer.
+
+![](./video_frame_rotation/Images/video_frame_rotation.PNG)
  
  --------------
 Copyright 2020 Xilinx
