@@ -184,7 +184,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
 * MATLAB Support - R2020b, R2021a, and R2021b
   
 <p align="center">
-<img src="images/model_composer_image.PNG">
+<img src="Images/model_composer_image.PNG">
 </p>
 
 --------------
