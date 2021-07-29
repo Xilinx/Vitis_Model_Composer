@@ -24,7 +24,7 @@ In each iteration of this for loop, we consume 16 samples and produce 16 samples
 ## Feeding four samples at a time to the block
 
 ### Setting the "Signal Size" property to 4
-If you feed four samples to this block, upon invocation of the block, the block produces four samples and the AI Engine kernel stalls on the second "readincr_v4" until the block gets invoked with another four samples. In this case you would normally set the output sample size to 4. And the block will produce a variable-size signal of maximum size four that will carry four samples at all time. (the variable-size signal is full). 
+If you feed four samples to this block, upon invocation of the block, the block produces four samples and the AI Engine kernel stalls on the second "readincr_v4" until the block gets invoked with another four samples. In this case, you would set the output sample size to 4. And the block will produce a variable-size signal of maximum size (four) that will carry four samples at all times. (the variable-size signal is full). 
 
 ### Setting the "Signal Size" property to larger than 4
 If you set the signal size to a value larger than 4, for example 8, the output will be a variable size signal with maximum size of 8 samples that carries only 4 samples. While numerically these values will be the same as when you set the signal size to 4, displaying the signal say on a scope will not be ideal as the scope will plot the four samples and leave empty spaces for the other void samples. 
