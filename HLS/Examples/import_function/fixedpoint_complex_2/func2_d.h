@@ -1,4 +1,3 @@
-// 67d7842dbbe25473c3c32b93c0da8047785f30d78e8a024de1b57352245f9689
 // You can also define a function template that uses a fixed-point data type
 // of variable word length and integer length using function templates.
 // The word length and integer length will be inherited from the input

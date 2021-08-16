@@ -1,4 +1,3 @@
-// 67d7842dbbe25473c3c32b93c0da8047785f30d78e8a024de1b57352245f9689
 // This example shows how model composer supports overloading of function
 // with same number of input/output arguments. The following defines two 
 // forms of a function.
