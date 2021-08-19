@@ -10,7 +10,8 @@ The default is 10ns, meaning that your design will be clocked at 100MHz. On the 
 These two numbers define the scaling factor between time in a Simulink simulation, and time in the actual hardware implementation. 
 To learn more about these two parameters, refer to [UG1483](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2021_1/ug1483-model-composer-sys-gen-user-guide.pdf). 
 In this writeup, we assume your HDL design is a single rate design. The sample time for the HDL blocks in your design should be set to the “Simulink system period”. See Step 3.
-![GitHub Logo](images/system_generator.png)
+
+![System Generator](images/system_generator.png)
 
 ## Step 2 Know the initiation interval(ii) of your HDL design
 A factor in setting the Output Sample Time in the AIE to HDL block is the initiation interval of the HDL subsystem. 
@@ -23,6 +24,8 @@ Set the output sample time to the “Simulink System Period” set in the System
 The output data type parameter is limited to 32, 64, and 128 bits wide. This reflects the permissible data bit-width between AI Engine array and PL. 
 There are more constraints in place. For example, if the input signal is of type int64, the output data type can only be of type int64, and uint128. 
 (Note that the block will pack the incoming 64bit data into 128 bits)
+
+![AIE_to_HDL](images/AIE_to_HDL.png)
 
 ## Step 4 Set the input sample rate into the AIE to HDL block
 Set the sample period of the signal entering the AIE to HDL block to
@@ -43,7 +46,9 @@ The input rate is (Input Size)/(Input Period) and the output rate is 1/(Output S
 ## Step 1 Set the Output Data Type
 The Output Data Type should be set to the data type that the consuming AI Engine block accepts. 
 Note that the size you set for the PLIO should match the input bitwidth to the HDL to AIE 
-block while the output data type of the AIE to HDL block should match the input data type of the consuming AIE block. See Figure 1. 
+block while the output data type of the AIE to HDL block should match the input data type of the consuming AIE block. See Figure 1.
+
+![GDL_to_AIE](images/HDL_to_AIE.png)
 
 ## Step 2 Set the Output frame size
 Let’s assume the consuming AIE block has a window input size of P, or it has a 
@@ -55,6 +60,9 @@ output sample time= input sample time*(output bit width)/(input bit width)
 
 ## Step 4 Set the Tready Sample Time
 tready Sample Time should be the same as the HDL design sample time.
+
+![highlevel](images/high_level.png)
+
 
 --------------
 Copyright 2020 Xilinx
