@@ -97,7 +97,7 @@ Click [here](example_access.md) to learn how to access the examples in GitHub.
  </tr>
  <tr>
  <td align="left">
-   <a href="./Connecting AIE to HDL/README.md">How to properly set the parameters for the AIE to HDL and HDL to AIE blocks?</a>
+   <a href="./Connecting AIE_to_HDL/README.md">How to properly set the parameters for the AIE to HDL and HDL to AIE blocks?</a>
  </td>
  <td> Setting the properties of the AIE to HDL and HDL to AIE blocks could be tricky. This tutorial explains how to set these parameters. 
  </td>
