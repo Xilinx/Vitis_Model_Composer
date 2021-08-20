@@ -46,7 +46,7 @@ The input rate is *(Input Size)/(Input Period)* and the output rate is *1/(Outpu
 ## Step 1 Set the Output Data Type
 The Output Data Type should be set to the data type that the consuming AI Engine block accepts. 
 Note that the size you set for the PLIO should match the input bitwidth to the HDL to AIE 
-block while the output data type of the AIE to HDL block should match the input data type of the consuming AIE block. See Figure 1.
+block while the output data type of the AIE to HDL block should match the input data type of the consuming AIE block. See the figure at the buttom of this page.
 
 ![GDL_to_AIE](images/HDL_to_AIE.png)
 
@@ -64,6 +64,11 @@ tready Sample Time should be the same as the HDL design sample time.
 
 ![highlevel](images/high_level.png)
 
+#Examples
+In this GitHub repository, you can find several examples in which the AIE to HDL and HDL to AIE blocks are being used:
+
+* <a href="../../Designs/FFT2D">2D FFT (AI Engines + HDL/HLS) </a>
+* <a href="../../AIE_HDL/README.md">Designs with both AI Engine and RTL blocks</a>
 
 --------------
 Copyright 2020 Xilinx
