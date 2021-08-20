@@ -64,7 +64,7 @@ tready Sample Time should be the same as the HDL design sample time.
 
 ![highlevel](images/high_level.png)
 
-#Examples
+# Examples
 In this GitHub repository, you can find several examples in which the AIE to HDL and HDL to AIE blocks are being used:
 
 * <a href="../../Designs/FFT2D">2D FFT (AI Engines + HDL/HLS) </a>
