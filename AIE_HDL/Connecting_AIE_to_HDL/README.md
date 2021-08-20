@@ -56,7 +56,8 @@ stream input that needs to read P samples to unblock (for example a readincr_v4 
 
 ## Step 3 Set the Output Sample Time
 Set the Output Sample Time to:
-output sample time= input sample time*(output bit width)/(input bit width)
+
+*output sample time= input sample time*(output bit width)/(input bit width)*
 
 ## Step 4 Set the tready Sample Time
 tready Sample Time should be the same as the HDL design sample time.
