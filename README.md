@@ -95,6 +95,13 @@ Click [here](example_access.md) to learn how to access the examples in GitHub.
  <td>Setting the signal size property for AI Engine kernels with stream and cascade outputs.
  </td>
  </tr>
+ <tr>
+ <td align="left">
+   <a href="./Connecting_AIE_to_HDL/README.md">How to properly set the parameters for the AIE to HDL and HDL to AIE blocks?</a>
+ </td>
+ <td> Setting the properties of the AIE to HDL and HDL to AIE blocks could be tricky. This tutorial explains how to set these parameters. 
+ </td>
+ </tr>
  </table>
 
 ## What's new in 2021.1?
