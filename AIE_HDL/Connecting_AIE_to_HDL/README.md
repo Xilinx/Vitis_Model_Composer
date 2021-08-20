@@ -23,7 +23,7 @@ For example, if an HDL design accepts a new sample every 10th cycles, the design
 Set the output sample time to the “Simulink System Period” set in the System Generator block. 
 The output data type parameter is limited to 32, 64, and 128 bits wide. This reflects the permissible data bit-width between AI Engine array and PL. 
 There are more constraints in place. For example, if the input signal is of type int64, the output data type can only be of type int64, and uint128. 
-(Note that the block will pack the incoming 64bit data into 128 bits)
+(Note that the block will pack the incoming 64bit data into 128 bits). If the input is of type int16(c), then the output should be uint32, uint64, or uint128.  
 
 ![AIE_to_HDL](images/AIE_to_HDL.png)
 
