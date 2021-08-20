@@ -30,16 +30,16 @@ There are more constraints in place. For example, if the input signal is of type
 ## Step 4 Set the input sample rate into the AIE to HDL block
 Set the sample period of the signal entering the AIE to HDL block to
 
-Output Sample Time * Input Size * ii
+*Output Sample Time x Input Size x ii*
 
 To set the input sample period to the AIE to HDL blocks, you should set the input sample time of the source blocks that ultimately lead into the AIE to HDL block.
 Let’s understand the reason for this formula. 
-For the moment, assume ii is one (tready is set always to one). 
-If the input to the “AIE to HDL block” is a variable size signal of size Input Size, and the period is 
-Input Period (you can determine the sample period by opening the [Timing Legend](https://www.mathworks.com/help/simulink/ug/how-to-view-sample-time-information.html) in Simulink),
+For the moment, assume ii is one (tready is always set to one). 
+If the input to the “AIE to HDL block” is a variable size signal of size *Input Size*, and the period is 
+*Input Period* (you can determine the sample period by opening the [Timing Legend](https://www.mathworks.com/help/simulink/ug/how-to-view-sample-time-information.html) in Simulink),
 this means in the time period *Input Period* we are feeding *Input Size* samples into the block. 
 To prevent the internal buffer of the block to overflow, the output rate from the AIE to HDL block should be the same as its input. 
-The input rate is (Input Size)/(Input Period) and the output rate is 1/(Output Sample Time). When ii is larger than one, the output rate is reduced to 1/(Output Sample Time)/ii. 
+The input rate is *(Input Size)/(Input Period)* and the output rate is *1/(Output Sample Time)*. When ii is larger than one, the output rate is reduced to *1/(Output Sample Time)/ii*. 
 
 # Setting the HDL to AIE block 
 
