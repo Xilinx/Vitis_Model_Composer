@@ -17,7 +17,7 @@ In this writeup, we assume your HDL design is a single rate design. The sample t
 A factor in setting the Output Sample Time in the AIE to HDL block is the initiation interval of the HDL subsystem. 
 As mentioned earlier, simulation in HDL domain is cycle accurate. 
 An HDL design may not be ready to accept a new data at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). 
-For example, if an HDL design accepts a new sample every 10th cycles, the design is said to have an initialization interval (or ii) of 10.
+For example, if an HDL design accepts a new sample every 10th cycles, the design would have an initiation interval (or ii) of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.
 
 ## Step 3 Set the parameters of the AIE to HDL block
 Set the output sample time to the “Simulink System Period” set in the System Generator block. 
@@ -58,7 +58,7 @@ stream input that needs to read P samples to unblock (for example a readincr_v4 
 Set the Output Sample Time to:
 output sample time= input sample time*(output bit width)/(input bit width)
 
-## Step 4 Set the Tready Sample Time
+## Step 4 Set the tready Sample Time
 tready Sample Time should be the same as the HDL design sample time.
 
 ![highlevel](images/high_level.png)
