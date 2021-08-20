@@ -17,36 +17,36 @@ In this writeup, we assume your HDL design is a single rate design. The sample t
 A factor in setting the Output Sample Time in the AIE to HDL block is the initiation interval of the HDL subsystem. 
 As mentioned earlier, simulation in HDL domain is cycle accurate. 
 An HDL design may not be ready to accept a new data at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). 
-For example, if an HDL design accepts a new sample every 10th cycles, the design is said to have an initialization interval (or ii) of 10.
+For example, if an HDL design accepts a new sample every 10th cycles, the design would have an initiation interval (or ii) of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.
 
 ## Step 3 Set the parameters of the AIE to HDL block
 Set the output sample time to the “Simulink System Period” set in the System Generator block. 
 The output data type parameter is limited to 32, 64, and 128 bits wide. This reflects the permissible data bit-width between AI Engine array and PL. 
-There are more constraints in place. For example, if the input signal is of type int64, the output data type can only be of type int64, and uint128. 
-(Note that the block will pack the incoming 64bit data into 128 bits)
+There are more constraints in place. For example, if the input signal is of type int64, the output data type can only be of type int64. 
+(Note that the block will pack the incoming 64bit data into 128 bits). If the input is of type int16(c), then the output should be uint32. Note that if you are using an AIE Siganl Spec block to specify the PLIO width (for optimization purposes), then the Output Data Type should have the same number of bits as the PLIO width specified. In the absense of the AIE Singal Spec block, the generated code will have a PLIO width equal to the bitwidth of the signal leaving the AI Engine subsytem.  
 
 ![AIE_to_HDL](images/AIE_to_HDL.png)
 
 ## Step 4 Set the input sample rate into the AIE to HDL block
 Set the sample period of the signal entering the AIE to HDL block to
 
-Output Sample Time * Input Size * ii
+*Output Sample Time x Input Size x ii*
 
 To set the input sample period to the AIE to HDL blocks, you should set the input sample time of the source blocks that ultimately lead into the AIE to HDL block.
 Let’s understand the reason for this formula. 
-For the moment, assume ii is one (tready is set always to one). 
-If the input to the “AIE to HDL block” is a variable size signal of size Input Size, and the period is 
-Input Period (you can determine the sample period by opening the [Timing Legend](https://www.mathworks.com/help/simulink/ug/how-to-view-sample-time-information.html) in Simulink),
+For the moment, assume ii is one (tready is always set to one). 
+If the input to the “AIE to HDL block” is a variable size signal of size *Input Size*, and the period is 
+*Input Period* (you can determine the sample period by opening the [Timing Legend](https://www.mathworks.com/help/simulink/ug/how-to-view-sample-time-information.html) in Simulink),
 this means in the time period *Input Period* we are feeding *Input Size* samples into the block. 
 To prevent the internal buffer of the block to overflow, the output rate from the AIE to HDL block should be the same as its input. 
-The input rate is (Input Size)/(Input Period) and the output rate is 1/(Output Sample Time). When ii is larger than one, the output rate is reduced to 1/(Output Sample Time)/ii. 
+The input rate is *(Input Size)/(Input Period)* and the output rate is *1/(Output Sample Time)*. When ii is larger than one, the output rate is reduced to *1/(Output Sample Time)/ii*. 
 
 # Setting the HDL to AIE block 
 
 ## Step 1 Set the Output Data Type
 The Output Data Type should be set to the data type that the consuming AI Engine block accepts. 
 Note that the size you set for the PLIO should match the input bitwidth to the HDL to AIE 
-block while the output data type of the AIE to HDL block should match the input data type of the consuming AIE block. See Figure 1.
+block while the output data type of the AIE to HDL block should match the input data type of the consuming AIE block. See the figure at the buttom of this page.
 
 ![GDL_to_AIE](images/HDL_to_AIE.png)
 
@@ -56,13 +56,19 @@ stream input that needs to read P samples to unblock (for example a readincr_v4 
 
 ## Step 3 Set the Output Sample Time
 Set the Output Sample Time to:
+
 output sample time= input sample time*(output bit width)/(input bit width)
 
-## Step 4 Set the Tready Sample Time
+## Step 4 Set the tready Sample Time
 tready Sample Time should be the same as the HDL design sample time.
 
 ![highlevel](images/high_level.png)
 
+# Examples
+In this GitHub repository, you can find several examples in which the AIE to HDL and HDL to AIE blocks are being used:
+
+* <a href="../../Designs/FFT2D">2D FFT (AI Engines + HDL/HLS) </a>
+* <a href="../../AIE_HDL/README.md">Designs with both AI Engine and RTL blocks</a>
 
 --------------
 Copyright 2020 Xilinx
