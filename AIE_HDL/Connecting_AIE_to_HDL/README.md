@@ -23,7 +23,7 @@ For example, if an HDL design accepts a new sample every 10th cycles, the design
 Set the output sample time to the “Simulink System Period” set in the System Generator block. 
 The output data type parameter is limited to 32, 64, and 128 bits wide. This reflects the permissible data bit-width between AI Engine array and PL. 
 There are more constraints in place. For example, if the input signal is of type int64, the output data type can only be of type int64. 
-(Note that the block will pack the incoming 64bit data into 128 bits). If the input is of type int16(c), then the output should be uint32. Note that if you are using an AIE Siganl Spec block to specify the PLIO width (for optimization purposes), then the Output Data Type should have the same number of bits as the PLIO width specified. In the absense of the AIE Singal Spec block, the generated code will have a PLIO width equal to the bitwidth of the signal leaving the AI Engine subsytem.  
+(Note that the block will pack the incoming 64bit data into 128 bits). If the input is of type int16(c), then the output should be uint32. Note that if you are using an AIE Siganl Spec block to specify the PLIO width (for optimization purposes), then the Output Data Type should have the same number of bits as the PLIO width specified. In the absense of the AIE Singal Spec block, the generated code will have a PLIO width equal to the bitwidth of the signal leaving the AI Engine subsytem. See the image at the end of this section.   
 
 ![AIE_to_HDL](images/AIE_to_HDL.png)
 
@@ -40,6 +40,9 @@ If the input to the “AIE to HDL block” is a variable size signal of size *In
 this means in the time period *Input Period* we are feeding *Input Size* samples into the block. 
 To prevent the internal buffer of the block to overflow, the output rate from the AIE to HDL block should be the same as its input. 
 The input rate is *(Input Size)/(Input Period)* and the output rate is *1/(Output Sample Time)*. When ii is larger than one, the output rate is reduced to *1/(Output Sample Time)/ii*. 
+
+![High Level AIE to HDL](images/high_level2.png)
+
 
 # Setting the HDL to AIE block 
 
