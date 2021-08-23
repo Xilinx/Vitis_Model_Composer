@@ -22,10 +22,20 @@ For example, if an HDL design accepts a new sample every 10th cycles, the design
 ## Step 3 Set the parameters of the AIE to HDL block
 Set the output sample time to the “Simulink System Period” set in the System Generator block. 
 The output data type parameter is limited to 32, 64, and 128 bits wide. This reflects the permissible data bit-width between AI Engine array and PL. 
-There are more constraints in place. For example, if the input signal is of type int64, the output data type can only be of type int64. 
-(Note that the block will pack the incoming 64bit data into 128 bits). If the input is of type int16(c), then the output should be uint32. Note that if you are using an AIE Siganl Spec block to specify the PLIO width (for optimization purposes), then the Output Data Type should have the same number of bits as the PLIO width specified. In the absense of the AIE Singal Spec block, the generated code will have a PLIO width equal to the bitwidth of the signal leaving the AI Engine subsytem. See the image at the end of this section.   
+There are more constraints in place. For example, if the input signal is of type int64, the output data type can only be of type int64.  
+If the input is of type int16(c), then the output should be uint32. Note that if you are using an AIE Siganl Spec block to specify the PLIO width (for optimization purposes), then the Output Data Type should have the same number of bits as the PLIO width specified. In the absense of the AIE Singal Spec block, the generated code will have a PLIO width equal to the bitwidth of the signal leaving the AI Engine subsytem or 32 bits, whichever is larger. See the image at the end of this section and the examples in the table.  
 
 ![AIE_to_HDL](images/AIE_to_HDL.png)
+
+Here are some examples:
+
+| Data type into the block | PLIO     | Output Data Type |
+|--------------------------|----------|------------------|
+| int16                    | 64 bits  | uint64           |
+| int16(c)                 | Not set  | uint32           |
+| int32                    | 128 bits | ufix128          |
+| int8                     | Not set  | uint32           |
+
 
 ## Step 4 Set the input sample rate into the AIE to HDL block
 Set the sample period of the signal entering the AIE to HDL block to
