@@ -14,7 +14,7 @@ In this writeup, we assume your HDL design is a single rate design. The sample t
 ![System Generator](images/system_generator.png)
 
 ## Step 2 Know the initiation interval(ii) of your HDL design
-A factor in setting the Output Sample Time in the AIE to HDL block is the initiation interval of the HDL subsystem. 
+A factor in setting the parameters of the AIE to HDL block is the initiation interval of the HDL subsystem. 
 As mentioned earlier, simulation in HDL domain is cycle accurate. 
 An HDL design may not be ready to accept a new data at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). 
 For example, if an HDL design accepts a new sample every 10th cycles, the design would have an initiation interval (or ii) of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.
@@ -47,7 +47,7 @@ Let’s understand the reason for this formula.
 For the moment, assume ii is one (tready is always set to one). 
 If the input to the “AIE to HDL block” is a variable size signal of size *Input Size*, and the period is 
 *Input Period* (you can determine the sample period by opening the [Timing Legend](https://www.mathworks.com/help/simulink/ug/how-to-view-sample-time-information.html) in Simulink),
-this means in the time period *Input Period* we are feeding *Input Size* samples into the block. 
+this means in the time period *Input Period*, we are feeding *Input Size* samples into the block. 
 To prevent the internal buffer of the block to overflow, the output rate from the AIE to HDL block should be the same as its input. 
 The input rate is *(Input Size)/(Input Period)* and the output rate is *1/(Output Sample Time)*. When ii is larger than one, the output rate is reduced to *1/(Output Sample Time)/ii*. 
 
