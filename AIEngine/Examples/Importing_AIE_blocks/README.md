@@ -7,8 +7,8 @@ browser under Xilinx Toolbox/AI Engine/User-Defined Functions.
 ## Examples
 Here we provide few examples on how to use these blocks to import AIE Kernels or graphs into Model Composer.
 
-- [Importing a kernel class as a block](AIE_Class_Kernel_FIR)
-- [Importing a graph as a block](AIE_Graph)
+- [Importing a kernel class as a block](AIE_Class_Kernel_FIR/README.md)
+- [Importing a graph as a block](AIE_Graph/README.md)
 
 ## Knowledge nuggets
 
