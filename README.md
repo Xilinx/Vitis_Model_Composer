@@ -12,7 +12,7 @@ Click [here](example_access.md) to learn how to access the examples in GitHub.
 
 Vitis Model Composer provides a library of performance-optimized blocks for design and implemenation of algorithms on Xilinx devices. The Vitis Model Composer AI Engine, HLS and HDL libraries within the Simulink environment, enables the rapid design exploration of an algorithm and accelerates the path to production.
 
-# [AI Engine Examples](./AIEngine/Examples)
+# [AI Engine Examples](./AIEngine/Examples/README.md)
 
 ### General Examples
 
@@ -110,7 +110,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </tr>
  </table>
  
- # [HLS Examples](./HLS/Examples)
+ # [HLS Examples](./HLS/Examples/README.md)
 
 <table style="width:100%">
  <tr>
