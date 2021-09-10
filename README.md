@@ -64,7 +64,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </tr>
  <tr>
  <td align="left">
-   <a href="./AIEngine/Examples/Designs/SingleStreamSSR_FIR">Super Sample Rate FIR filter</a>
+   <a href="./AIEngine/Examples/Designs/SingleStreamSSR_FIR/README.md">Super Sample Rate FIR filter</a>
  </td>
  <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we also compare the output of our AI Engine subsystem with the output of a Simulink FIR block (our golden refernece) both in time and in frequency. 
  </td> 
@@ -72,14 +72,14 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
     
  <tr>
  <td align="left">
- <a href="./AIEngine/Examples/Designs/FFT2D">2D FFT (AI Engines + HDL/HLS) </a>
+ <a href="./AIEngine/Examples/Designs/FFT2D/README.md">2D FFT (AI Engines + HDL/HLS) </a>
  </td>
  <td> The designs here showcase 2D-FFTs that are implemented both in AI Engines and Programmable Logic(PL). In one example the PL is implemented using HLS and in another example the PL is implemented using HDL blocks in Vitis Model Composer.</td>
  </tr>
     
  <tr>
  <td align="left">
- <a href="./AIEngine/Examples/Designs/Tx_chain_200MHz">TX Chain 200MHz </a>
+ <a href="./AIEngine/Examples/Designs/Tx_chain_200MHz/README.md">TX Chain 200MHz </a>
  </td>
  <td> This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHZ, which is part of the communications Library Early access program.</td>
  </tr>
