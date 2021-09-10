@@ -7,8 +7,8 @@ state of the execution and modify the Run-Time Parameters of the graph. This is 
 ## Examples
 Here we demonstrate two exmaples:
 
-- [A design with a scalar RTP input](rtp_scalar)
-- [A design with a vector RTP input](rtp_vector)
+- [A design with a scalar RTP input](rtp_scalar/README.md)
+- [A design with a vector RTP input](rtp_vector/README.md)
 
  
 
