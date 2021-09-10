@@ -10,7 +10,7 @@ This example showcases a design containing both AI Engine blocks and Programmabl
 
 :bulb: To import an HLS kernel, you should write a separate [header file](./src/hls_kernels.h) to declare function signatures and to specify hls::stream directions for HLS functions. In this special header file, the function signature is declared the same as in the HLS function definition, except that the input or output direction of a hls::stream data type is qualified using adf::dir::in<T> and adf::dir::out<T>, respectively.
     
-:bulb: In this example, the datatypes of the AIE kernel blocks do not match with the HLS kernel block and hence, note the usage of the interface block.
+:bulb: In this example, the datatypes of the AIE kernel blocks do not match with the HLS kernel block and hence, note the usage of the interface block. In essence, the interface blocks work as data type converters.
 
 :warning: Note the need for *extern "C"* in the hls kernel function definition. 
 
