@@ -11,7 +11,8 @@ In Model Composer you can simulate designs with both AI Engine blocks and HLS Ke
 ![](images/screen_shot.png)
 
 ## Examples
-- [A desgin with both AI Engine and HLS Kernel blocks](AIE_HLS)
+- [A desgin with both AI Engine and HLS Kernel blocks connected to interface blocks ](AIE_HLS_with_interface)
+- [A desgin with both AI Engine and HLS Kernel blocks connected directly ](AIE_HLS_without_interface)
 - [2D FFT desgin with both AI Engine and HLS Kernel blocks](../Designs/FFT2D/README_HLS.md)
 
 
