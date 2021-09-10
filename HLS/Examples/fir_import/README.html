@@ -1,0 +1,255 @@
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
+              
+</html>
+    <html>
+      <head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+      <body>
+        <div id='content'>
+    <h1 id="importing-fir-filter-into-model-composer">Importing FIR Filter into Model Composer</h1>
+<p>Model Composer allows users to import C/C++ code as a block. You can simulate the imported block along with other blocks in your design and also export it to one of the target types. In this example, we import a symmetric FIR filter developed in C++ into Model Composer as a block.</p>
+<p>This example also uses the following MathWorks toolbox:</p>
+<ul>
+<li><a href="https://www.mathworks.com/products/dsp-system.html">DSP System Toolbox</a></li>
+</ul>
+<h2 id="finite-impulse-response-fir-filter">Finite Impulse Response (FIR) filter</h2>
+<p>The FIR filter we are importing is a 103 tap symmetric FIR filter. The filter accepts a vector of size 100 and data type x<em>sfix17</em>En14 (signed, 17 bit wide, 14 bit fractional) as input.</p>
+<h2 id="creating-a-block-from-cc">Creating a block from C/C++</h2>
+<p>To create a block from C/C++, use the command xmcImportFunction at the MATLAB Command Window. Upon execution of this command, a library gets created that has one or more blocks inside it. After saving this library, you can drag the blocks from the library to your model. In case of this example, you only create one block out of your C++ code.</p>
+<p>Open the model in this example. This model is a test harness for the FIR filter we are importing to Model Composer.</p>
+<p><img src="Images/model.PNG" alt="" /></p>
+<p>To create a block out of the C++ code we use the 'xmcImportFunction' command. Use the following command to see the help for xmcImportFunction.</p>
+<pre><code>   help xmcImportFunction
+</code></pre>
+<p>import_function.m is a one line script that shows the usage of xmcImportFunction.</p>
+<pre><code>   open import_function.m
+</code></pre>
+<p>Here is the content of import_function.m for ease of reference</p>
+<pre><code>   xmcImportFunction('fir_c_import',{'fir_sym'},'fir_sym.h',{'fir.h','fir_sym.cpp','coef_halfof103.inc'},{})
+</code></pre>
+<p>The first argument is the name of the library that would get created upon the execution of this command. Note that the library has been already created and saved in the example directory. The second argument is the name of the C++ function we are importing. This function is declared in the header file that is the third argument in the function call. The function header in fir_sym.h is shown below:</p>
+<pre><code>   #pragma XMC INPORT din
+   #pragma XMC OUTPORT dout
+   #pragma XMC SUPPORTS_STREAMING
+   void fir_sym (ap_fixed&lt;17,3,AP_TRN,AP_WRAP&gt; din[100], ap_fixed&lt;17,3,AP_TRN, AP_WRAP&gt; dout[100]);
+</code></pre>
+<p>Note the three pragmas right before the declaration of the function. This is the only modification to the original C++ code to import it to Model Composer. Here we specify which parameter is the input to the block and which parameter is the output of the block. The third pragma indicates the fir_sym function is a steaming function. This means the function processes the input as they come in and does not require random access to the input data. This will result in a more efficient hardware implementation on the device. Please refer to the Vitis Model Composer user guide (UG1483) for more details. As you explore the FIR code, you would notice that there are other pragmas in the code. These pragmas are inserted by the developer of the C++ code to optimize the implementation of this algorithm on Xilinx devices. Model Composer will take advantage of these pragmas but will not modify or add to them.</p>
+<p>ap_fixed is High Level Synthesis (HLS) notation to specify a fixed point number. To learn more about HLS, refer to Vitis HLS reference manual (UG1399).</p>
+<p>The fourth argument is a cell array listing all the needed files to compile the function and the fifth argument is another cell array that specifies the include files.</p>
+<hr />
+<p>Copyright 2020 Xilinx</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+
+        </div>
+        <style type='text/css'>body {
+  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #111;
+  background-color: #fdfdfd;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 5px;
+  }
+
+  body > #content {
+    padding: 0px 20px 20px 20px !important;
+  }
+}
+
+body > #content {
+  margin: 0px;
+  max-width: 900px;
+  border: 1px solid #e1e4e8;
+  padding: 10px 40px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr {
+  color: #bbb;
+  background-color: #bbb;
+  height: 1px;
+  flex: 0 1 auto;
+  margin: 1em 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+ * Links
+ */
+a {
+  color: #0366d6;
+  text-decoration: none; }
+  a:visited {
+    color: #0366d6; }
+  a:hover {
+    color: #0366d6;
+    text-decoration: underline; }
+
+pre {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+/**
+  * Code blocks
+  */
+
+code {
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  word-wrap: break-word;
+  padding: .2em .4em;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+  background-color: transparent;
+  border: 0;
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  word-wrap: normal;
+  font-size: 100%;
+}
+
+
+/**
+ * Blockquotes
+ */
+blockquote {
+  margin-left: 30px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  border-left-width: 3px;
+  padding: 0 1em;
+  color: #828282;
+  border-left: 4px solid #e8e8e8;
+  padding-left: 15px;
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+blockquote * {
+  font-style: normal !important;
+  letter-spacing: 0;
+  color: #6a737d !important;
+}
+
+/**
+ * Tables
+ */
+table {
+  border-spacing: 2px;
+  display: block;
+  font-size: 14px;
+  overflow: auto;
+  width: 100%;
+  margin-bottom: 16px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+th {
+  font-weight: 600;
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+/**
+ * Others
+ */
+
+img {
+  max-width: 100%;
+}
+
+p {
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #24292e; }
+
+ul {
+  margin-top: 0; }
+
+li {
+  color: #24292e;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5; }
+
+li + li {
+  margin-top: 0.25em; }
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #24292e; }
+
+a:visited {
+  color: #0366d6; }
+
+h1, h2, h3 {
+  border-bottom: 1px solid #eaecef;
+  color: #111;
+  /* Darker */ }</style>
+      </body>
+    </html>
