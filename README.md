@@ -110,7 +110,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </tr>
  </table>
  
- # [HLS Examples](./HLS_Library/Examples)
+ # [HLS Examples](./HLS/Examples)
 
 <table style="width:100%">
  <tr>
