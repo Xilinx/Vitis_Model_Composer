@@ -8,8 +8,6 @@ In Model Composer you can simulate designs with both AI Engine blocks and HLS Ke
 
 :bulb: The HLS kernel code should have stream interfaces. Run-time Parameters (RTPs) are also supported. 
 
-![](images/screen_shot.png)
-
 ## Examples
 - [A desgin with both AI Engine and HLS Kernel blocks connected through interface blocks ](AIE_HLS_with_interface/README.md)
 - [A desgin with both AI Engine and HLS Kernel blocks connected directly ](AIE_HLS_without_interface/README.md)

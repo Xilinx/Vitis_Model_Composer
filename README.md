@@ -55,7 +55,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </tr>
  </table>
  
- ### Design Examples
+### Design Examples
  
  <table style="width:100%">
  <tr>
@@ -86,7 +86,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
     
  </table>
 
-  ### Mini Tutorials
+ ### Mini Tutorials
  
  <table style="width:100%">
  <tr>
