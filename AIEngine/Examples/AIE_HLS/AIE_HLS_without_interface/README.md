@@ -1,5 +1,5 @@
 # Cosimulation of AI Engine and Programmable Logic (HLS)
-This example showcases a design containing both AI Engine blocks and Programmable Logic (HLS) cccccccccccccccccccccccccccccccccc. We are using the *HLS Kernel* block to import an HLS kernel into Model Composer as a block. To connect the AI Engine blocks to the HLS kernel block, we use the *AIE to HLS* and *HLS to AIE* interface blocks if there is a data type mismatch, otherwise, we can connect the blocks directly. 
+This example showcases a design containing both AI Engine blocks and Programmable Logic (HLS) which are connected directly, as there is no datatype mismatch. Otherwise, we need to use *AIE-HLS* and *HLS-AIE* interface(Refer to the example [AIE_HLS_with_interface](../AIE_HLS_with_interface)).
 
 ![](images/interface_blocks.PNG)
 
@@ -10,8 +10,8 @@ This example showcases a design containing both AI Engine blocks and Programmabl
 
 :bulb: To import an HLS kernel, you should write a separate [header file](./src/hls_kernels.h) to declare function signatures and to specify hls::stream directions for HLS functions. In this special header file, the function signature is declared the same as in the HLS function definition, except that the input or output direction of a hls::stream data type is qualified using adf::dir::in<T> and adf::dir::out<T>, respectively.
 
-:bulb: If the input and output data types of the AIE engine blocks match the data type of the interface to the HLS kernel block, there is no need to use the interface blocks. [aie_hls_std_complex.slx](./aie_hls_std_complex.slx) demonstrates an example. In essence, the interface blocks work as data type converters.
-
+:bulb: Unlike the other example [AIE_HLS_with_interface](../AIE_HLS_without_interface), here the input and output data types of the AIE engine blocks match the data type of the interface to the HLS kernel block, there is no need to use the interface blocks. 
+    
 :warning: Note the need for *extern "C"* in the hls kernel function definition. 
 
 ![](images/screen_shot.png)
