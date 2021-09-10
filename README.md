@@ -12,7 +12,7 @@ Click [here](example_access.md) to learn how to access the examples in GitHub.
 
 Vitis Model Composer provides a library of performance-optimized blocks for design and implemenation of algorithms on Xilinx devices. The Vitis Model Composer AI Engine, HLS and HDL libraries within the Simulink environment, enables the rapid design exploration of an algorithm and accelerates the path to production.
 
-# [AI Engine Examples](./AIEngine/Examples/README.md)
+# AI Engine Examples
 
 ### General Examples
 
@@ -86,7 +86,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
     
  </table>
 
- ### Mini Tutorials
+### Mini Tutorials
  
  <table style="width:100%">
  <tr>
@@ -109,8 +109,9 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </td>
  </tr>
  </table>
- 
- # [HLS Examples](./HLS/Examples/README.md)
+
+
+# HLS Examples
 
 <table style="width:100%">
  <tr>
@@ -119,38 +120,38 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </tr>
  <tr>
  <td align="left">
-   <a href="./HLS_Library/Examples/color_detection/README.md">Color Detection</a>
+   <a href="./HLS/Examples/color_detection/README.md">Color Detection</a>
  </td>
  <td>This example demonstrates color detection on an input video. </td>
  </tr>
  <tr>
  <td align="left">
-   <a href="./HLS_Library/Examples/fir_import/README.md">Importing FIR Filter into Model Composer</a>
+   <a href="./HLS/Examples/fir_import/README.md">Importing FIR Filter into Model Composer</a>
  </td>
  <td>This example demonstrates a 103 tap symmetric FIR filter </td>
  </tr>
  <tr>
  <td align="left">
-   <a href="./HLS_Library/Examples/import_function/README.md">Import Function feature examples</a>
+   <a href="./HLS/Examples/import_function/README.md">Import Function feature examples</a>
  </td>
  <td>This is a set of simple examples to demonstrate importing C/C++ functions into Model Composer as a blocks.</td>
  </tr>
  <tr>
  <td align="left">
-   <a href="./HLS_Library/Examples/optical_flow/README.md">Optical Flow</a>
+   <a href="./HLS/Examples/optical_flow/README.md">Optical Flow</a>
  </td>
  <td>This example demonstrates an implementation of dense optical flow in Model Composer.</td>
  </tr>
  <tr>
  <td align="left">
-   <a href="./HLS_Library/Examples/sobel_edge_detection/README.md">Sobel Edge Detection</a>
+   <a href="./HLS/Examples/sobel_edge_detection/README.md">Sobel Edge Detection</a>
  </td>
  <td>This example demonestrates an implemntation of sobel edge detection algorithm in Model Composer
  </td>
  </tr>
  <tr>
  <td align="left">
-   <a href="./HLS_Library/Examples/video_frame_roation/README.md">Video Frame Rotation</a>
+   <a href="./HLS/Examples/video_frame_rotation/README.md">Video Frame Rotation</a>
  </td>
  <td>This example demonstrates rotating video frames by a certain angle in Model Composer.
  </td>
