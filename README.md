@@ -41,9 +41,9 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </tr>
  <tr>
  <td align="left">
-   <a href="./AIEngine/Examples/AIE_HDL/README.md">Designs with both AI Engine and RTL blocks</a>
+   <a href="./AIEngine/Examples/AIE_HDL/README.md">Designs with both AI Engine and HDL blocks</a>
  </td>
- <td>Examples of designs with both AI Engine kernels and RTL functions. Here you can see examples of importing RTL code into Model Composer and co-simulation with AI Engine   blocks at high speeds.
+ <td>Examples of designs with both AI Engine kernels and HDL blocks. Here you can see examples of importing HDL code into Model Composer and co-simulation with AI Engine   blocks at high speeds.
  </td>
  </tr>
  <tr>
