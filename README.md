@@ -108,6 +108,15 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  <td>Setting the signal size property for AI Engine kernels with stream and cascade outputs.
  </td>
  </tr>
+    
+ <tr>
+ <td align="left">
+   <a href="./AIEngine/Examples/AIE_HDL/Connecting_AIE_to_HDL/README.md">How to properly set the Signal Size property on AI Engine kernel blocks with stream or cascade outputs?</a>
+ </td>
+ <td>Setting the properties of the AIE to HDL and HDL to AIE blocks could be tricky. This tutorial explains how to set these parameters.
+ </td>
+ </tr>
+    
  </table>
 
 
