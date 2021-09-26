@@ -5,7 +5,14 @@ Two 1D FFTs are implemented on AI Engiens and a transpose operation is implement
 ## Knowledge nuggets
 :bulb: You can seamlessly connect AI Engine blocks to HLS kernel blocks.
 
-:bulb: _AIE to HLS_ blocks may be needed for connectivity if there is a need to change the data type. 
+:bulb: _AIE to HLS_ blocks may be needed for connectivity if there is a need to change the data type.
+
+:bulb: Note the interface specificaiton in the HLS code. These are all needed for HW flow to work.
+  
+>*#pragma HLS INTERFACE ap_ctrl_none port=return*  
+>*#pragma HLS interface axis port=in*  
+>*#pragma HLS interface axis port=out*
+
 
 <p align="center">
 <img src="images/fft_2d_AIE_HLS_screen_shot.png">
