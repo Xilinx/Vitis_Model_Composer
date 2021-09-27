@@ -81,7 +81,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  <td align="left">
  <a href="./AIEngine/Examples/Designs/Tx_chain_200MHz/README.md">TX Chain 200MHz </a>
  </td>
- <td> This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHZ, which is part of the communications Library Early access program.</td>
+ <td> This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHz, which is part of the communications Library Early access program.</td>
  </tr>
     
  </table>
