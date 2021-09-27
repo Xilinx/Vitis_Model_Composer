@@ -81,7 +81,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  <td align="left">
  <a href="./AIEngine/Examples/Designs/Tx_chain_200MHz/README.md">TX Chain 200MHz </a>
  </td>
- <td> This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHZ, which is part of the communications Library Early access program.</td>
+ <td> This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHz, which is part of the communications Library Early access program.</td>
  </tr>
     
  </table>
@@ -111,9 +111,9 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
     
  <tr>
  <td align="left">
-   <a href="./AIEngine/Examples/AIE_HDL/Connecting_AIE_to_HDL/README.md">How to properly set the Signal Size property on AI Engine kernel blocks with stream or cascade outputs?</a>
+   <a href="./AIEngine/Examples/AIE_HDL/Connecting_AIE_to_HDL/README.md">Connecting AI Engine blocks with HDL blocks</a>
  </td>
- <td>Setting the properties of the AIE to HDL and HDL to AIE blocks could be tricky. This tutorial explains how to set these parameters.
+ <td>Setting the properties of the AIE to HDL and HDL to AIE blocks can be tricky. This tutorial explains how to set these parameters.
  </td>
  </tr>
     
