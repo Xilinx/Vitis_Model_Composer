@@ -198,7 +198,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
 </p>
 
 --------------
-Copyright 2021 Xilinx
+Copyright 2020 Xilinx
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
