@@ -2,17 +2,24 @@
 
 ![](Images/model_composer_title3.png)
 
-## How to access the examples and mini tutorials?
+# Table of Contents
+1. [How to access the examples and mini tutorials?](#access)
+2. [Rapid design exploration using Vitis Model Composer](#introduction)
+3. [AI Engine Examples](#aie_examples)
+4. [HLS Examples](#hls_examples)
+5. [Quick Guides](#quick_guides)
+
+## How to access the examples and mini tutorials?<a name="access"></a>
     
 We are storing and managing a subset of the Vitis Model Composer examples (AI Engine and HLS Library) in GitHub. This way, users will have access to the most up-to-date examples. You can get the examples from GitHub or preferably directly from Vitis Model Composer.
 
 Click [here](example_access.md) to learn how to access Vitis Model Composer examples.
 
-## Rapid design exploration using Vitis Model Composer
+## Rapid design exploration using Vitis Model Composer<a name="introduction"></a>
 
 Vitis Model Composer provides a library of performance-optimized blocks for design and implementation of algorithms on Xilinx devices. The Vitis Model Composer AI Engine, HLS and HDL libraries within the Simulink environment, enables the rapid design exploration of an algorithm and accelerates the path to production.
 
-# AI Engine Examples
+# AI Engine Examples<a name="aie_examples"></a>
 
 ### General Examples
 
@@ -86,41 +93,8 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
     
  </table>
 
-### Mini Tutorials
- 
- <table style="width:100%">
- <tr>
- <td width="35%" align="center"><b>Topic</b>
- <td width="65%" align="center"><b>Description</b>
- </tr>
- <tr>
- <td align="left">
-   <a href="./AIEngine/Examples/Variable_Size_Signals/README.md">What are Variable-Size Signals?</a>
- </td>
- <td>All you need to know about Variable-Size Signals in Simulink.
- </td>
- </tr>
- 
- <tr>
- <td align="left">
-   <a href="./AIEngine/Examples/Setting_Signal_Size/README.md">How to properly set the Signal Size property on AI Engine kernel blocks with stream or cascade outputs?</a>
- </td>
- <td>Setting the signal size property for AI Engine kernels with stream and cascade outputs.
- </td>
- </tr>
-    
- <tr>
- <td align="left">
-   <a href="./AIEngine/Examples/AIE_HDL/Connecting_AIE_to_HDL/README.md">Connecting AI Engine blocks with HDL blocks</a>
- </td>
- <td>Setting the properties of the AIE to HDL and HDL to AIE blocks can be tricky. This tutorial explains how to set these parameters.
- </td>
- </tr>
-    
- </table>
 
-
-# HLS Examples
+# HLS Examples<a name="hls_examples"></a>
 
 <table style="width:100%">
  <tr>
@@ -166,6 +140,40 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </td>
  </tr>
  </table>
+
+# Quick Guides<a name="quick_guides"></a>
+ 
+ <table style="width:100%">
+ <tr>
+ <td width="35%" align="center"><b>Topic</b>
+ <td width="65%" align="center"><b>Description</b>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./QuickGuides/Variable_Size_Signals/README.md">What are Variable-Size Signals?</a>
+ </td>
+ <td>All you need to know about Variable-Size Signals in Simulink.
+ </td>
+ </tr>
+ 
+ <tr>
+ <td align="left">
+   <a href="./QuickGuides/Setting_Signal_Size/README.md">How to properly set the Signal Size property on AI Engine kernel blocks with stream or cascade outputs?</a>
+ </td>
+ <td>Setting the signal size property for AI Engine kernels with stream and cascade outputs.
+ </td>
+ </tr>
+    
+ <tr>
+ <td align="left">
+   <a href="./QuickGuides/Connecting_AIE_to_HDL/README.md">Connecting AI Engine blocks with HDL blocks</a>
+ </td>
+ <td>Setting the properties of the AIE to HDL and HDL to AIE blocks can be tricky. This tutorial explains how to set these parameters.
+ </td>
+ </tr>
+    
+ </table>
+ 
 
 ## What's new in 2021.2?
 
