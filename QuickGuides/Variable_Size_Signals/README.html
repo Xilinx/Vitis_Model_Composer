@@ -22,28 +22,33 @@ document.location=commandURI
       </head>
       <body>
         <div id='content'>
-    <h1 id="using-dsplib-ai-engine-fir-directly-from-the-library-browser">Using DSPLib AI Engine FIR directly from the library browser</h1>
-<p>This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in Model Composer and comparing the results to the Simulink FIR block.</p>
+    <h1 id="variable-size-signals">Variable-Size Signals</h1>
+<h2 id="introduction">Introduction</h2>
+<p>At every invocation of an AI Engine kernel, the number of output samples may depend on different factors such as the input signal or a Run Time Parameter (RTP) trigger. For example, if a kernel with a synchronized window input does not receive enough input samples (equal to the size of the window size set for the kernel), it will produce no output. In Model Composer, this behavior is modeled as a variable-size signal. A Simulink variable-size signal is a signal whose size (the number of elements in a dimension), in addition to its values, can change during a model simulation. All AI engine blocks can consume and produce variable-size signals. Look at the video below that showcases a variable-size signal:</p>
+<p align="center">
+<img src="VariableSizeSignalIntro.gif">
+</p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
-<p>:bulb: Note that the Spectrum Analyzer block accepts a Variable Size Signal as input. Likewise, Simulink <em>Scope</em> block and <em>Display</em> block also accept variable size signals as inputs. </p>
-<p>:bulb: In this example, the output variable size signal is always full, i.e. the number of samples in the signal is equal to the maximum size of the variable size signal (in this case 256). We can monitor this using Simulink <em>width</em> block and a scope. Note that the number shown on the <em>width</em> block is the maximum size of the input signal while the output of the block is the number of samples in the variable size signal. </p>
-<p>:warning: If the number of samples in the variable size signal is not equal to the maximum number of samples of the variable size signal, directly attaching the variable size signal to the spectrum analyzer will result in a misleading output (zeros will be inserted to fill the missing samples). For cases where the variable size signal is not full, use the <em>Variable Size Signal to Workspace</em> block to move the data to the workspace and then post process the data. </p>
-<p>:bulb: Note how you can design the filter using the <em>Filter Design and Analysis tool</em> and directly pass the resulting taps to the AI Engine 'FIR Asymmetric Filter' block. </p>
-<p><img src="images/screen_shot.PNG" alt="" /></p>
-<p>The image below depicts the output of DSPlib AI Engine FIR in comparison with the Simulink FIR block.</p>
-<p><img src="images/output.PNG" alt="" /></p>
-<hr />
-<p>Copyright 2020 Xilinx</p>
-<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
-you may not use this file except in compliance with the License.<br />
-You may obtain a copy of the License at</p>
-<pre><code>http://www.apache.org/licenses/LICENSE-2.0
-</code></pre>
-<p>Unless required by applicable law or agreed to in writing, software<br />
-distributed under the License is distributed on an "AS IS" BASIS,<br />
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
-See the License for the specific language governing permissions and<br />
-limitations under the License.</p>
+<p>:bulb: Use the Simulink <em>Width</em> block to see the number of elements in the variable-size signal.</p>
+<p>:bulb: All AI Engine blocks can consume variable-size signals and also produce variable-size signals.</p>
+<p>:bulb: Note how a varrable signal looks different than a fixed size signal in Simulink.</p>
+<h2 id="viewing-variable-size-signals">Viewing variable-size signals</h2>
+<p>You can view variable-size signals with a display block or a scope block. Note if the variable-size signal is not full, the scope shows empty spaces.</p>
+<p align="center">
+<img src="VariableSizeSignalScope.gif">
+</p>
+<h3 id="knowledge-nuggets-1">Knowledge nuggets</h3>
+<p>:bulb: You can view variable-size signals using a display block, a scope block, or write them into the MATLAB workspace. </p>
+<h2 id="converting-variable-size-signals-to-fixed-size-signals">Converting variable-size signals to fixed size signals</h2>
+<p>At times you need to convert a variable-size signal to a fixed size signal. This is necessary if you need to use a block that does not support variable-size signals. In such cases, you can use the <em>To Fixed Size</em> block. However, this block will introduce zeros for the missing elements if the variable-size signal is not full (see the image below). Usage of this block is mostly for cases when the variable-size signal is full. The "status" output of the To Fixed Size block indicates if the input variable-size signal is full or not. You can monitor this output during simulation by say connecting it to a scope block. The status output is an optional output that you can enable or disable on the mask.</p>
+<p align="center">
+<img src="VariableSizeSignalToFixedSize.gif">
+</p>
+<h2 id="write-a-variable-size-signal-to-matlab-workspace">Write a variable-size signal to MATLAB workspace</h2>
+<p>You can write a variable-size signal to MATLAB workspace using <em>Variable-Size Signal to Workspace</em> block. From there, you can post process the data. Note that the data will be concatenated and unlike the "To Fixed Size" block, no zeros are introduced.</p>
+<p align="center">
+<img src="toWorkspace.PNG">
+</p>
 
         </div>
         <style type='text/css'>body {
