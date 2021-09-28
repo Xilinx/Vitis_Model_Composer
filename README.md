@@ -3,13 +3,13 @@
 ![](Images/model_composer_title3.png)
 
 # Table of Contents
-1. [How to access the examples and mini tutorials?](#access)
+1. [How to access the examples and quick guides?](#access)
 2. [Rapid design exploration using Vitis Model Composer](#introduction)
 3. [AI Engine Examples](#aie_examples)
 4. [HLS Examples](#hls_examples)
 5. [Quick Guides](#quick_guides)
 
-## How to access the examples and mini tutorials?<a name="access"></a>
+## How to access the examples and quick guides?<a name="access"></a>
     
 We are storing and managing a subset of the Vitis Model Composer examples (AI Engine and HLS Library) in GitHub. This way, users will have access to the most up-to-date examples. You can get the examples from GitHub or preferably directly from Vitis Model Composer.
 
