@@ -35,8 +35,8 @@ for i=1:num_slices
 end
 
 [c_image_rows, c_image_cols] = size(mriBrainSlices(:,:,1));
-h = imagesc(log2(fftshift(abs(mriBrainSlices(:,:,50)))));
-set(get(get(h,'parent'),'parent'),'name','Input K-space Data');
+%h = imagesc(log2(fftshift(abs(mriBrainSlices(:,:,50)))));
+%set(get(get(h,'parent'),'parent'),'name','Input K-space Data');
 c_swathe_size = 1;
 c_block_size = 64;
 c_num_fstores = 16;
