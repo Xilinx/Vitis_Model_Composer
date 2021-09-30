@@ -8,18 +8,18 @@ This mini tutorial explains how to manage the board settings, make cable connect
 2. Connect a USB Micro cable between the host machine and USB JTAG connector on the target board. This cable is used for USB to serial transfer.
 3. Ensure that the SW1 switch is set to the JTAG boot mode and power on the VCK190 board using the power switch as shown in the following figure.
 
-!(images/board.png)
+![](images/board.png)
 
 Once your board is set up, program the device as follows.
 
 4. In Windows 10, click the search box on the taskbar and type Device Manager , then select from the Menu.
 5. When the board is powered ON and connected to your machine through the USB interface, determine the COM ports that are between the VCK190 board and your computer from Windows Device Manager.
 
-!(images/device_manager.png)
+![](images/device_manager.png)
 
 6. Use a Terminal application (Teraterm or Putty) to open up COM port interfaces on these ports (COM4, COM5 and COM6 in the above case at 115200 baud rate).
 
-!(images/putty.png)
+![](images/putty.png)
 
 Note: Ensure the Connection type is set to Serial.
 
@@ -33,12 +33,12 @@ Note: Ensure the Connection type is set to Serial.
       ```
     b. From the XSDB prompt, run the following commands:
 
-      ```
-      connect
-      ta
-      ta 1
+       ```
+       connect
+       ta
+       ta 1
       
-      ```
+       ```
     c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is in ```<code-generation-directory>/run_hw/ src_ps/BOOT.BIN ```.
 
        ```
@@ -53,7 +53,7 @@ Note: Ensure the Connection type is set to Serial.
       ```
       You will see following message in the XSDB prompt if the device program is successful.
     
-      !(images/xsdb_prompt.png)
+         ![](images/xsdb_prompt.png)
 
     b. This will run the design on the board and you should see the log similar to the following. Here, the hardware results are compared with the golden results.
 
