@@ -32,13 +32,14 @@ Note: Ensure the Connection type is set to Serial.
       <Xilinx Install Directory>\Vivado\<Version>\bin\xsdb.bat
       ```
     b. From the XSDB prompt, run the following commands:
+    
        ```
        connect
        ta
        ta 1
        ```
     c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is in ```<code-generation-directory>/run_hw/ src_ps/BOOT.BIN ```.
-
+    
        ```
        cd <code-generation-directory>/run_hw/src_ps/BOOT.BIN
        ```
@@ -60,6 +61,7 @@ Note: Ensure the Connection type is set to Serial.
        ```
        
     c. To re-run the results, run following commands:
+    
         ```
         rst -system
         device program BOOT.BIN
