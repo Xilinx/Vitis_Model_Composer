@@ -46,6 +46,7 @@ Note: Ensure the Connection type is set to Serial.
     ```
        
 8. Program the device and run:
+
    a. From the XSDB prompt, run the following command:
       ```
       device program BOOT.BIN
