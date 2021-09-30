@@ -33,16 +33,18 @@ Note: Ensure the Connection type is set to Serial.
       ```
     b. From the XSDB prompt, run the following commands:
     
-       ```
+       ~~~
        connect
        ta
        ta 1
-       ```
+       ~~~
+       
     c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is in ```<code-generation-directory>/run_hw/ src_ps/BOOT.BIN ```.
     
        ```
        cd <code-generation-directory>/run_hw/src_ps/BOOT.BIN
        ```
+       
 8. Program the device and run:
    a. From the XSDB prompt, run the following command:
       ```
