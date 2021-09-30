@@ -52,14 +52,12 @@ Note: Ensure the Connection type is set to Serial.
       ![](images/xsdb_prompt.png)
 
     b. This will run the design on the board and you should see the log similar to the following. Here, the hardware results are compared with the golden results.
-
        ```
        ******************************** Test Results ********************************
        ****** Model Composer and Hardware outputs match for all 40944 samples for output signal Out1 *******
        ****** Test passed ********
        ```
     c. To re-run the results, run following commands:
-
         ```
         rst -system
         device program BOOT.BIN
