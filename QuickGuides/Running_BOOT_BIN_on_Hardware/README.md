@@ -32,7 +32,6 @@ Note: Ensure the Connection type is set to Serial.
       <Xilinx Install Directory>\Vivado\<Version>\bin\xsdb.bat
       ```
     b. From the XSDB prompt, run the following commands:
-
        ```
        connect
        ta
@@ -58,14 +57,12 @@ Note: Ensure the Connection type is set to Serial.
        ******************************** Test Results ********************************
        ****** Model Composer and Hardware outputs match for all 40944 samples for output signal Out1 *******
        ****** Test passed ********
-    
        ```
     c. To re-run the results, run following commands:
 
         ```
         rst -system
         device program BOOT.BIN
-
         ```
 
 --------------
