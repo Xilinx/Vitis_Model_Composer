@@ -1,8 +1,8 @@
-# How to run Boot.Bin on Hardware
-Hardware validation flow for AI Engines in Vitis Model Composer provides a methodology to verify AI Engine based applications on Xilinx Hardware(Versal). It also provides the option to generate a hardware image (BOOT.BIN), targeting a
-specific platform for the Simulink model. This hardware image can then be run on a board to verify whether the results from hardware match with the simulation outputs.
+# How to run BOOT.BIN on Hardware
+Hardware validation flow in Vitis Model Composer provides a methodology to verify AI Engine based applications on Hardware. It also provides the option to generate a hardware image (BOOT.BIN), targeting a
+specific platform. This hardware image can then be run on a board to verify whether the results from hardware match with the simulation outputs.
 
-This mini tutorial explains how to manage the board settings, make cable connections, connect the board through your system, and program the BOOT.BIN on a Versal device.
+This quick guide explains how to manage the board settings, make cable connections, connect the board through your system, and program the BOOT.BIN on a VCK190 Versal board.
 
 1. Connect the power cable to the board.
 2. Connect a USB Micro cable between the host machine and USB JTAG connector on the target board. This cable is used for USB to serial transfer.
