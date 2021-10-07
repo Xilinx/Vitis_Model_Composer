@@ -10,7 +10,7 @@ This quick guide explains how to manage the board settings, make cable connectio
 
 ![](images/board.png)
 
-Once your board is set up, program the device as follows.
+Once your board is set up, program the device as follows:
 
 4. In Windows 10, click the search box on the taskbar and type Device Manager , then select from the Menu.
 5. When the board is powered ON and connected to your machine through the USB interface, determine the COM ports that are between the VCK190 board and your computer from Windows Device Manager.
