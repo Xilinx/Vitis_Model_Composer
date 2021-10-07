@@ -6,17 +6,17 @@
       </head>
       <body>
         <div id='content'>
-    <h1 id="how-to-run-bootbin-on-hardware">How to run Boot.Bin on Hardware</h1>
-<p>Hardware validation flow for AI Engines in Vitis Model Composer provides a methodology to verify AI Engine based applications on Xilinx Hardware(Versal). It also provides the option to generate a hardware image (BOOT.BIN), targeting a<br />
-specific platform for the Simulink model. This hardware image can then be run on a board to verify whether the results from hardware match with the simulation outputs.</p>
-<p>This mini tutorial explains how to manage the board settings, make cable connections, connect the board through your system, and program the BOOT.BIN on a Versal device.</p>
+    <h1 id="how-to-run-bootbin-on-hardware">How to run BOOT.BIN on Hardware</h1>
+<p>Hardware validation flow in Vitis Model Composer provides a methodology to verify AI Engine based applications on Hardware. It also provides the option to generate a hardware image (BOOT.BIN), targeting a<br />
+specific platform. This hardware image can then be run on a board to verify whether the results from hardware match with the simulation outputs.</p>
+<p>This quick guide explains how to manage the board settings, make cable connections, connect the board through your system, and program the BOOT.BIN on a VCK190 Versal board.</p>
 <ol>
 <li>Connect the power cable to the board.</li>
 <li>Connect a USB Micro cable between the host machine and USB JTAG connector on the target board. This cable is used for USB to serial transfer.</li>
 <li>Ensure that the SW1 switch is set to the JTAG boot mode and power on the VCK190 board using the power switch as shown in the following figure.</li>
 </ol>
 <p><img src="images/board.png" alt="" /></p>
-<p>Once your board is set up, program the device as follows.</p>
+<p>Once your board is set up, program the device as follows:</p>
 <ol start="4">
 <li>In Windows 10, click the search box on the taskbar and type Device Manager , then select from the Menu.</li>
 <li>When the board is powered ON and connected to your machine through the USB interface, determine the COM ports that are between the VCK190 board and your computer from Windows Device Manager.</li>
