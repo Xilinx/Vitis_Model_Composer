@@ -175,7 +175,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </table>
  
 
-## What's new in 2021.2?
+## What's new in 2021.1?
 
 ### AI Engines 
 * A comprehensive constraint editor enables users to specify any constraint for AI Engine kernels in Vitis Model Composer. The generated ADF graph will contain these constraints.
