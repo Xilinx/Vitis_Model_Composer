@@ -1,5 +1,3 @@
-# Vitis Model Composer
-
 ![](Images/github_banner.png)
 
 # Table of Contents
