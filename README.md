@@ -175,31 +175,31 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </table>
  
 
-## What's new in 2021.1?
+## What's new in 2021.2?
 
 ### AI Engines 
-* A comprehensive constraint editor enables users to specify any constraint for AI Engine kernels in Vitis Model Composer. The generated ADF graph will contain these constraints.
-* Addition of AI Engine FFT and IFFT blocks to the library browser. 
-* Users now have access to many variations of AI Engine FIR blocks in the library browser. 
-* Ability to specify filter coefficients using input ports for FIR filters. 
-* Addition of two new utility blocks "RTP Source" and "To Variable Size".
-* Enhanced AIE Kernel import block now also supports importing templatized AI Engine functions. 
-* Ability to specify Xilinx platforms for AI Engine designs in the Hub block.
-* Through the Hub block, users can relaunch Vitis Analyzer at any time after running AIE Simulation. 
-* Users can now plot cycle approximate outputs and see estimated throughput for each output using Simulink Data Inspector. 
-* Enhanced usability to import a graph as a block using only the graph header file. 
-* Revamping of the progress bar with cancel button.
-* Usability improvement during importing an AI Engine kernel or simulation of a design when MATLAB working directory and model directory are not the same. 
-* Profiling during AIE Simulation is now disabled by default. It can be optionally enabled from the Model Composer Hub block.
-* New TX Chain 200MHz example. 
-* New 2d FFT examples showcasing designs with HLS, HDL, and AI Engine blocks.
+* With a click of a button,  run a design with AI Engines and PL (HLS, HDL) blocks into a Versal AI Core hardware. 
+* Significant speed up in Simulink simulation by parallel compilation of AIE blocks.
+* Enhancements to AI Engine constraint editor
+* Addition of DDS and Mixer blocks in the AIE DSP library.
+* Enhancements to "to fixed size" and "to variable size" blocks. 
+* Support of int64 and uint64 data types.
+* Support for accfloat and caccfloat
+* Enhancement to GitHub examples and incorporation of HLS examples in GitHub
+* Generated data flow graph code now includes PLIO specification
+* Enhanced usability to download and browse examples from GitHub.
+* Support for AIE source blocks.
+* xmcVitisRead and xmcVitisWrite utilities to read/write data files for AIE Simulator and/or x86Simulator
+* Systematize GUI parameters of AIE dsplib blocks
+* New 64x32 Pseudo Inverse design.
+* New Dual-Stream SSR Filter example with 64 AI Engine kernels and upto 16 GSPS throughput.  
 ### HDL
-* Simulation speed enhancement for SSR FIR (more than 10x improvement), and SSR FFT.
-* Simulation speed enhancement for memory blocks like RAMs, and FIFOs
-* Questa Simulator updated with VHDL 2008 in the Black-box import flow
+* Support of Asymmetric read/write data widths for FIFO block
+### HLS
+* Supports simulation and implementation of HLS based C code that utilizes the Xilinx FIR, FFT, DDS Logicores
 ### General
-* Starting from 2021.1, Vitis Model Composer contains the functionality of Xilinx System Generator for DSP.  Users who have been using Xilinx System Generator for DSP can continue development using Vitis Model Composer.
-* MATLAB Support - R2020b, R2021a, and R2021b
+* MATLAB Support - R2020a, R2020b, and R2021a
+* Newly added support for Ubuntu 20.04
   
 <p align="center">
 <img src="Images/model_composer_image.PNG">
