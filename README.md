@@ -1,6 +1,6 @@
 # Vitis Model Composer
 
-![](Images/model_composer_title3.png)
+![](Images/github_banner.png)
 
 # Table of Contents
 1. [How to access the examples and quick guides?](#access)
