@@ -6,6 +6,7 @@
 3. [AI Engine Examples](#aie_examples)
 4. [HLS Examples](#hls_examples)
 5. [Quick Guides](#quick_guides)
+6. [What is new?](#what_is_new)
 
 ## How to access the examples and quick guides?<a name="access"></a>
     
@@ -181,7 +182,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  </table>
  
 
-## What's new in 2021.2?
+## What's new in 2021.2?<a name="what_is_new"></a>
 <img src="Images/one_click_2021_2.png" alt="drawing" width="500"/>
 
 ### AI Engines 
