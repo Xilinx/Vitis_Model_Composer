@@ -15,7 +15,7 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
 
 ## Rapid design exploration using Vitis Model Composer<a name="introduction"></a>
 
-Vitis Model Composer provides a library of performance-optimized blocks for design and implementation of algorithms on Xilinx devices. The Vitis Model Composer AI Engine, HLS and HDL libraries within the Simulink environment, enables the rapid design exploration of an algorithm and accelerates the path to production.
+Vitis Model Composer provides a library of performance-optimized blocks for design and implementation of DSP algorithms on Xilinx devices. The Vitis Model Composer AI Engine, HLS and HDL libraries within the Simulink environment, enable the rapid design exploration of an algorithm and accelerates the path to production.
 
 # AI Engine Examples<a name="aie_examples"></a>
 
@@ -197,7 +197,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
 * Support for AIE source blocks.
 * xmcVitisRead and xmcVitisWrite utilities to read/write data files for AIE Simulator and/or x86Simulator
 * Systematize GUI parameters of AIE dsplib blocks
-* New 64x32 Pseudo Inverse design.
+* New 64x32 Pseudo Inverse design example.
 * New Dual-Stream SSR Filter example with 64 AI Engine kernels and upto 16 GSPS throughput.  
 ### HDL
 * Support of Asymmetric read/write data widths for FIFO block
