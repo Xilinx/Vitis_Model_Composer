@@ -7,10 +7,16 @@
       <body>
         <div id='content'>
     <h1 id="dual-stream-ssr-fir">Dual Stream SSR FIR</h1>
-<p>This model showcases a Double stream super sample rate FIR filter to process a 16 GSPS stream built with 64 AI Engine kernels. In addition, we compare the output of the AI Engine design with a Simulink FIR filter block that we consider as our golden reference.</p>
+<p>This model showcases a dual stream Super Sample Rate (SSR)<br />
+FIR filter to process a 16 GSPS stream built with 64 AI Engine kernels. In addition, we compare the output of the AI Engine design with a Simulink FIR filter block that we consider as our golden reference.</p>
+<p>For more details on how to build this design and some of the theoretical aspect of it click <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2021.1/AI_Engine_Development/Design_Tutorials/02-super_sampling_rate_fir/DualStreamSSR">here</a>.</p>
+<h2 id="knowledge-nuggets">Knowledge nuggets</h2>
+<p>:bulb: In the Model Composer Hub block select <em>"Plot AIE Simulation output and estimate throughput"</em> to see the throughput for each output signal after running aiesimulation. <br />
+<br/><br/><br />
+<br/><br/></p>
 <p><img src="Images/DualStreamSSR.PNG" alt="" /></p>
 <hr />
-<p>Copyright 2020 Xilinx</p>
+<p>Copyright 2021 Xilinx</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

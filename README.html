@@ -19,7 +19,7 @@
 <p>We are storing and managing a subset of the Vitis Model Composer examples (AI Engine and HLS Library) in GitHub. This way, users will have access to the most up-to-date examples. You can get the examples from GitHub or preferably directly from Vitis Model Composer.</p>
 <p>Click <a href="./QuickGuides/Get_Examples/README.html">here</a> to learn how to access Vitis Model Composer examples.</p>
 <h2 id="rapid-design-exploration-using-vitis-model-composera-nameintroductiona">Rapid design exploration using Vitis Model Composer<a name="introduction"></a></h2>
-<p>Vitis Model Composer provides a library of performance-optimized blocks for design and implementation of algorithms on Xilinx devices. The Vitis Model Composer AI Engine, HLS and HDL libraries within the Simulink environment, enables the rapid design exploration of an algorithm and accelerates the path to production.</p>
+<p>Vitis Model Composer provides a library of performance-optimized blocks for design and implementation of DSP algorithms on Xilinx devices. The Vitis Model Composer AI Engine, HLS and HDL libraries within the Simulink environment, enable the rapid design exploration of an algorithm and accelerates the path to production.</p>
 <h1 id="ai-engine-examplesa-nameaie_examplesa">AI Engine Examples<a name="aie_examples"></a></h1>
 <h3 id="general-examples">General Examples</h3>
 <table style="width:100%">
@@ -76,9 +76,9 @@
 
  <tr>
  <td align="left">
-   <a href="./Designs/DualStreamSSR_FIR/README.html">Dual Stream Super Sample Rate FIR filter</a>
+   <a href="./AIEngine/Examples/Designs/DualStreamSSR_FIR/README.html">Dual Stream Super Sample Rate FIR filter</a>
  </td>
- <td> This design showcases a Dual Stream Super Sample Rate FIR filter to process a 16GSPS input stream. In this design we also compare the output of our AI Engine subsystem with the output of a Simulink FIR block (our golden reference). 
+ <td> This design showcases a Dual Stream Super Sample Rate FIR filter to process a 16GSPS input stream. In this design we also compare the output of the AI Engine subsystem with the output of a Simulink FIR block (the golden reference). 
  </td> 
  </tr>
 
@@ -174,6 +174,7 @@
 
  </table>
 <h2 id="whats-new-in-20212">What's new in 2021.2?</h2>
+<p><img src="Images/one_click_2021_2.png" alt="drawing" width="500"/></p>
 <h3 id="ai-engines">AI Engines</h3>
 <ul>
 <li>With a click of a button,  run a design with AI Engines and PL (HLS, HDL) blocks into a Versal AI Core hardware. </li>
@@ -189,7 +190,7 @@
 <li>Support for AIE source blocks.</li>
 <li>xmcVitisRead and xmcVitisWrite utilities to read/write data files for AIE Simulator and/or x86Simulator</li>
 <li>Systematize GUI parameters of AIE dsplib blocks</li>
-<li>New 64x32 Pseudo Inverse design.</li>
+<li>New 64x32 Pseudo Inverse design example.</li>
 <li>New Dual-Stream SSR Filter example with 64 AI Engine kernels and upto 16 GSPS throughput.  </li>
 </ul>
 <h3 id="hdl">HDL</h3>
