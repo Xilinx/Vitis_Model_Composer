@@ -57,12 +57,6 @@ phi_2 = fliplr(Taps(6:8:end));
 phi_1 = fliplr(Taps(7:8:end));
 phi_0 = fliplr(Taps(8:8:end));
 
-%Specifying Location Constraints
-% LOCATION_0_0 = [25,0];
-% LOCATION_1_0 = [28,1];
-% LOCATION_2_0 = [25,2];
-% LOCATION_3_0 = [28,3];
-
 %PLIO Parameters
 
 PLIO_FREQ = 500;
