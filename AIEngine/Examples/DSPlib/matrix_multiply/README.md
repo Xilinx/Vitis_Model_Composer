@@ -6,7 +6,7 @@ This example demonstrates importing a matrix multiply function as a block into M
 
 :bulb: Note the usage of the [environment variable](https://www.mathworks.com/help/matlab/ref/setenv.html) in MATLAB to more easily set the paths in the AIE Graph block mask.
 
-:blub: Note this example is using the AI Engine DSP library that is shipping with Vitis Model Composer. We are using the command *setenv("DSPLIB_ROOT",xmcLibraryPath('get','dsplib'))* to set the DSPLIB_ROOT environmental variable.
+:bulb: Note this example is using the AI Engine DSP library that is shipping with Vitis Model Composer. We are using the command *setenv("DSPLIB_ROOT",xmcLibraryPath('get','dsplib'))* to set the DSPLIB_ROOT environmental variable.
 
 :bulb: Note we are importing matrix multiply as a graph. To do so, you can either use the graph header file from 'dsplib/L2/include' or you can write a .cpp file to instantiate the graph and use that file to import as a block. This example demonstrats the header file flow.
 
