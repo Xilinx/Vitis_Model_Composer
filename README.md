@@ -77,7 +77,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
 
  <tr>
  <td align="left">
-   <a href="./Designs/DualStreamSSR_FIR/README.md">Dual Stream Super Sample Rate FIR filter</a>
+   <a href="./AIEngine/Examples/Designs/DualStreamSSR_FIR/README.md">Dual Stream Super Sample Rate FIR filter</a>
  </td>
  <td> This design showcases a Dual Stream Super Sample Rate FIR filter to process a 16GSPS input stream. In this design we also compare the output of the AI Engine subsystem with the output of a Simulink FIR block (the golden reference). 
  </td> 
