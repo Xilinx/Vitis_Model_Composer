@@ -182,6 +182,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
  
 
 ## What's new in 2021.2?
+<img src="Images/one_click_2021_2.png" alt="drawing" width="500"/>
 
 ### AI Engines 
 * With a click of a button,  run a design with AI Engines and PL (HLS, HDL) blocks into a Versal AI Core hardware. 
