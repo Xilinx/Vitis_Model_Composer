@@ -26,7 +26,7 @@ document.location=commandURI
 <p>This example demonstrates importing a matrix multiply function as a block into Model Composer and comparing the results to Simulink matrix multiply. In this example, we use the import graph block to import the matrix multiply function.</p>
 <h2 id="knowledeg-nuggets">Knowledeg nuggets</h2>
 <p>:bulb: Note the usage of the <a href="https://www.mathworks.com/help/matlab/ref/setenv.html">environment variable</a> in MATLAB to more easily set the paths in the AIE Graph block mask.</p>
-<p>:blub: Note this example is using the AI Engine DSP library that is shipping with Vitis Model Composer. We are using the command <em>setenv("DSPLIB<em>ROOT",xmcLibraryPath('get','dsplib'))</em> to set the DSPLIB</em>ROOT environmental variable.</p>
+<p>:bulb: Note this example is using the AI Engine DSP library that is shipping with Vitis Model Composer. We are using the command <em>setenv("DSPLIB<em>ROOT",xmcLibraryPath('get','dsplib'))</em> to set the DSPLIB</em>ROOT environmental variable.</p>
 <p>:bulb: Note we are importing matrix multiply as a graph. To do so, you can either use the graph header file from 'dsplib/L2/include' or you can write a .cpp file to instantiate the graph and use that file to import as a block. This example demonstrats the header file flow.</p>
 <p><img src="images/screen_shot1.PNG" alt="" /></p>
 <hr />
