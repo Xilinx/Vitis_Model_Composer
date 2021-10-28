@@ -6,8 +6,7 @@
       </head>
       <body>
         <div id='content'>
-    <h1 id="vitis-model-composer">Vitis Model Composer</h1>
-<p><img src="Images/model_composer_title3.png" alt="" /></p>
+    <p><img src="Images/github_banner.png" alt="" /></p>
 <h1 id="table-of-contents">Table of Contents</h1>
 <ol>
 <li><a href="#access">How to access the examples and quick guides?</a></li>
@@ -15,12 +14,13 @@
 <li><a href="#aie_examples">AI Engine Examples</a></li>
 <li><a href="#hls_examples">HLS Examples</a></li>
 <li><a href="#quick_guides">Quick Guides</a></li>
+<li><a href="#what_is_new">What is new?</a></li>
 </ol>
 <h2 id="how-to-access-the-examples-and-quick-guidesa-nameaccessa">How to access the examples and quick guides?<a name="access"></a></h2>
 <p>We are storing and managing a subset of the Vitis Model Composer examples (AI Engine and HLS Library) in GitHub. This way, users will have access to the most up-to-date examples. You can get the examples from GitHub or preferably directly from Vitis Model Composer.</p>
 <p>Click <a href="./QuickGuides/Get_Examples/README.html">here</a> to learn how to access Vitis Model Composer examples.</p>
 <h2 id="rapid-design-exploration-using-vitis-model-composera-nameintroductiona">Rapid design exploration using Vitis Model Composer<a name="introduction"></a></h2>
-<p>Vitis Model Composer provides a library of performance-optimized blocks for design and implementation of algorithms on Xilinx devices. The Vitis Model Composer AI Engine, HLS and HDL libraries within the Simulink environment, enables the rapid design exploration of an algorithm and accelerates the path to production.</p>
+<p>Vitis Model Composer provides a library of performance-optimized blocks for design and implementation of DSP algorithms on Xilinx devices. The Vitis Model Composer AI Engine, HLS and HDL libraries within the Simulink environment, enable the rapid design exploration of an algorithm and accelerates the path to production.</p>
 <h1 id="ai-engine-examplesa-nameaie_examplesa">AI Engine Examples<a name="aie_examples"></a></h1>
 <h3 id="general-examples">General Examples</h3>
 <table style="width:100%">
@@ -71,7 +71,15 @@
  <td align="left">
    <a href="./AIEngine/Examples/Designs/SingleStreamSSR_FIR/README.html">Super Sample Rate FIR filter</a>
  </td>
- <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we also compare the output of our AI Engine subsystem with the output of a Simulink FIR block (our golden refernece) both in time and in frequency. 
+ <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we also compare the output of our AI Engine subsystem with the output of a Simulink FIR block (our golden reference) both in time and in frequency. 
+ </td> 
+ </tr>
+
+ <tr>
+ <td align="left">
+   <a href="./AIEngine/Examples/Designs/DualStreamSSR_FIR/README.html">Dual Stream Super Sample Rate FIR filter</a>
+ </td>
+ <td> This design showcases a Dual Stream Super Sample Rate FIR filter to process a 16GSPS input stream. In this design we also compare the output of the AI Engine subsystem with the output of a Simulink FIR block (the golden reference). 
  </td> 
  </tr>
 
@@ -166,35 +174,38 @@
  </tr>
 
  </table>
-<h2 id="whats-new-in-20211">What's new in 2021.1?</h2>
+<h2 id="whats-new-in-20212a-namewhat_is_newa">What's new in 2021.2?<a name="what_is_new"></a></h2>
+<p><img src="Images/one_click_2021_2.png" alt="drawing" width="500"/></p>
 <h3 id="ai-engines">AI Engines</h3>
 <ul>
-<li>A comprehensive constraint editor enables users to specify any constraint for AI Engine kernels in Vitis Model Composer. The generated ADF graph will contain these constraints.</li>
-<li>Addition of AI Engine FFT and IFFT blocks to the library browser. </li>
-<li>Users now have access to many variations of AI Engine FIR blocks in the library browser. </li>
-<li>Ability to specify filter coefficients using input ports for FIR filters. </li>
-<li>Addition of two new utility blocks "RTP Source" and "To Variable Size".</li>
-<li>Enhanced AIE Kernel import block now also supports importing templatized AI Engine functions. </li>
-<li>Ability to specify Xilinx platforms for AI Engine designs in the Hub block.</li>
-<li>Through the Hub block, users can relaunch Vitis Analyzer at any time after running AIE Simulation. </li>
-<li>Users can now plot cycle approximate outputs and see estimated throughput for each output using Simulink Data Inspector. </li>
-<li>Enhanced usability to import a graph as a block using only the graph header file. </li>
-<li>Revamping of the progress bar with cancel button.</li>
-<li>Usability improvement during importing an AI Engine kernel or simulation of a design when MATLAB working directory and model directory are not the same. </li>
-<li>Profiling during AIE Simulation is now disabled by default. It can be optionally enabled from the Model Composer Hub block.</li>
-<li>New TX Chain 200MHz example. </li>
-<li>New 2d FFT examples showcasing designs with HLS, HDL, and AI Engine blocks.</li>
+<li>With a click of a button,  run a design with AI Engines and PL (HLS, HDL) blocks into a Versal AI Core hardware. </li>
+<li>Significant speed up in Simulink simulation by parallel compilation of AIE blocks.</li>
+<li>Enhancements to AI Engine constraint editor</li>
+<li>Addition of DDS and Mixer blocks in the AIE DSP library.</li>
+<li>Enhancements to "to fixed size" and "to variable size" blocks. </li>
+<li>Support of int64 and uint64 data types.</li>
+<li>Support for accfloat and caccfloat</li>
+<li>Enhancement to GitHub examples and incorporation of HLS examples in GitHub</li>
+<li>Generated data flow graph code now includes PLIO specification</li>
+<li>Enhanced usability to download and browse examples from GitHub.</li>
+<li>Support for AIE source blocks.</li>
+<li>xmcVitisRead and xmcVitisWrite utilities to read/write data files for AIE Simulator and/or x86Simulator</li>
+<li>Systematize GUI parameters of AIE dsplib blocks</li>
+<li>New 64x32 Pseudo Inverse design example.</li>
+<li>New Dual-Stream SSR Filter example with 64 AI Engine kernels and upto 16 GSPS throughput.  </li>
 </ul>
 <h3 id="hdl">HDL</h3>
 <ul>
-<li>Simulation speed enhancement for SSR FIR (more than 10x improvement), and SSR FFT.</li>
-<li>Simulation speed enhancement for memory blocks like RAMs, and FIFOs</li>
-<li>Questa Simulator updated with VHDL 2008 in the Black-box import flow</li>
+<li>Support of Asymmetric read/write data widths for FIFO block</li>
+</ul>
+<h3 id="hls">HLS</h3>
+<ul>
+<li>Supports simulation and implementation of HLS based C code that utilizes the Xilinx FIR, FFT, DDS Logicores</li>
 </ul>
 <h3 id="general">General</h3>
 <ul>
-<li>Starting from 2021.1, Vitis Model Composer contains the functionality of Xilinx System Generator for DSP.  Users who have been using Xilinx System Generator for DSP can continue development using Vitis Model Composer.</li>
-<li>MATLAB Support - R2020b, R2021a, and R2021b</li>
+<li>MATLAB Support - R2020a, R2020b, and R2021a</li>
+<li>Newly added support for Ubuntu 20.04</li>
 </ul>
 <p align="center">
 <img src="Images/model_composer_image.PNG">
