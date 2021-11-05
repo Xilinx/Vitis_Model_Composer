@@ -3,10 +3,11 @@
 # Table of Contents
 1. [Rapid design exploration using Vitis Model Composer](#introduction)
 2. [How to access the examples and quick guides?](#access)
-3. [AI Engine Examples](#aie_examples)
-4. [HLS Examples](#hls_examples)
-5. [Quick Guides](#quick_guides)
-6. [What is new?](#what_is_new)
+3. [Videos](#videos)
+4. [AI Engine Examples](#aie_examples)
+5. [HLS Examples](#hls_examples)
+6. [Quick Guides](#quick_guides)
+7. [What is new?](#what_is_new)
 
 ## Rapid design exploration using Vitis Model Composer<a name="introduction"></a>
 
@@ -17,6 +18,16 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
 We are storing and managing a subset of the Vitis Model Composer examples (AI Engine and HLS Library) in GitHub. This way, users will have access to the most up-to-date examples. You can get the examples from GitHub or preferably directly from Vitis Model Composer.
 
 Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis Model Composer examples.
+
+# Videos<a name="videos"></a>
+<table style="width:100%">
+<tr>
+    <td width="100%" align="center"><b>Design for Versal AI Engines (20 minutes)</b>
+</tr>  
+<tr>
+<td width="100%" align="center"><a href="https://www.mathworks.com/videos/designing-ai-engines-of-xilinx-versal-acap-using-simulink-and-vitis-model-composer-1635957693985.html?s_tid=srchtitle_versal%20AI%20engine_1"><img src="Images/webinar_screen_shot.png" alt="drawing" width="200"/></a>
+</tr>
+</table>
 
 # AI Engine Examples<a name="aie_examples"></a>
 
