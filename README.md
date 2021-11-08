@@ -25,7 +25,7 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
     <td width="100%" align="center"><b>Design for Versal AI Engines (20 minutes)</b>
 </tr>  
 <tr>
-<td width="100%" align="center"><a href="https://www.mathworks.com/videos/designing-ai-engines-of-xilinx-versal-acap-using-simulink-and-vitis-model-composer-1635957693985.html?s_tid=srchtitle_versal%20AI%20engine_1"><img src="Images/webinar_screen_shot.png" alt="drawing" width="200"/></a>
+<td width="100%" align="center"><a href="https://www.mathworks.com/videos/designing-ai-engines-of-xilinx-versal-acap-using-simulink-and-vitis-model-composer-1635957693985.html?s_tid=srchtitle_versal%20AI%20engine_1"><img src="Images/webinar_screen_shot.png" alt="drawing" width="300"/></a>
 </tr>
 </table>
 
