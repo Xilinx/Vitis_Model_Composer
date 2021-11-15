@@ -22,10 +22,10 @@ document.location=commandURI
       </head>
       <body>
         <div id='content'>
-    <h1 id="single-stream-ssr-fir">Single Stream SSR FIR</h1>
-<p>This model showcases a single stream super sample rate FIR filter to process a 4 GSPS stream built with 16 AI Engine kernels. In addition, we compare the output of the AI Engine design with a Simulink FIR filter block that we consider as our golden reference.</p>
+    <h1 id="single-stream-ssr-fir-with-pl">Single Stream SSR FIR with PL</h1>
+<p>This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we consider latencies within the kernels, which are implemented into the FIFO's included in AXI-Stream Interconnect(PL).</p>
 <p>For more detials on the design of the FIR kernels click <a href="https://github.com/Xilinx/Vitis-Tutorials/blob/master/AI_Engine_Development/Design_Tutorials/02-super_sampling_rate_fir/SingleStreamSSR">here</a>. </p>
-<p><img src="images/SingleStreamSSR.PNG" alt="" /></p>
+<p><img src="images/SingleStreamSSR_withPL.PNG" alt="" /></p>
 <hr />
 <p>Copyright 2020 Xilinx</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
