@@ -18,7 +18,7 @@
 
 DISPLAY = 0;
 
-setenv('SRC','../aie');
+setenv('SRC','./aie');
 
 % N is frame size.
 N = 8;
