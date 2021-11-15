@@ -1,20 +1,4 @@
-<html>    
-<script>
-function myFunction() {
 
-var path = document.location.pathname;
-var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-
-commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
-
-document.location=commandURI
-}
-</script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
     <html>
       <head>
         <title></title>
@@ -22,13 +6,10 @@ document.location=commandURI
       </head>
       <body>
         <div id='content'>
-    <h1 id="importing-ai-engine-matrix-multiply-from-dsplib-as-a-block-into-model-composer">Importing AI Engine matrix multiply from DSPLib as a block into Model Composer</h1>
-<p>This example demonstrates importing a matrix multiply function as a block into Model Composer and comparing the results to Simulink matrix multiply. In this example, we use the import graph block to import the matrix multiply function.</p>
-<h2 id="knowledeg-nuggets">Knowledeg nuggets</h2>
-<p>:bulb: Note the usage of the <a href="https://www.mathworks.com/help/matlab/ref/setenv.html">environment variable</a> in MATLAB to more easily set the paths in the AIE Graph block mask.</p>
-<p>:bulb: Note this example is using the AI Engine DSP library that is shipping with Vitis Model Composer. We are using the command <em>setenv("DSPLIB<em>ROOT",xmcLibraryPath('get','dsplib'))</em> to set the DSPLIB</em>ROOT environmental variable.</p>
-<p>:bulb: Note we are importing matrix multiply as a graph. To do so, you can either use the graph header file from 'dsplib/L2/include' or you can write a .cpp file to instantiate the graph and use that file to import as a block. This example demonstrats the header file flow.</p>
-<p><img src="images/screen_shot1.PNG" alt="" /></p>
+    <h1 id="pseudo-inverse-64x32">Pseudo Inverse 64x32</h1>
+<p>The Pseudo Inverse 64x32 design is a commslib example which is part of the Communications Library Early Access program. You can explore and analyze this design using the Vitis Model Composer flow.</p>
+<p>For more information on accessing the commslib library and downloading the example, visit the <a href="https://www.xilinx.com/member/versal_ai_engine_commslib_ea.html">Versal AI Engine Communication Library Early Access Site</a>. </p>
+<p><img src="Images/pinv_64x32.PNG" alt="" /></p>
 <hr />
 <p>Copyright 2021 Xilinx</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
