@@ -89,6 +89,14 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
 
  <tr>
  <td align="left">
+   <a href="./Designs/SingleStreamSSR_FIR_PL/README.md">Super Sample Rate FIR filter with PL</a>
+ </td>
+ <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we consider latencies within the kernels, which are implemented into the FIFO's included in AXI-Stream Interconnect(PL). 
+ </td> 
+ </tr>
+
+ <tr>
+ <td align="left">
    <a href="./AIEngine/Examples/Designs/DualStreamSSR_FIR/README.md">Dual Stream Super Sample Rate FIR filter</a>
  </td>
  <td> This design showcases a Dual Stream Super Sample Rate FIR filter to process a 16GSPS input stream. In this design we also compare the output of the AI Engine subsystem with the output of a Simulink FIR block (the golden reference). 
@@ -107,6 +115,13 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
  <a href="./AIEngine/Examples/Designs/Tx_chain_200MHz/README.md">TX Chain 200MHz </a>
  </td>
  <td> This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHz, which is part of the communications Library Early access program.</td>
+ </tr>
+
+ <tr>
+ <td align="left">
+ <a href="./AIEngine/Examples/Designs/Pseudo_Inverse_64x32/README.md">Pseudo Inverse 64x32 </a>
+ </td>
+ <td> This design showcases the Vitis Model Composer implementation of the commslib example, Pseudo Inverse 64x32, which is part of the communications Library Early access program.</td>
  </tr>
     
  </table>
