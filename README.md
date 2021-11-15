@@ -89,7 +89,7 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
 
  <tr>
  <td align="left">
-   <a href="./Designs/SingleStreamSSR_FIR_withPL/README.md">Super Sample Rate FIR filter with PL</a>
+   <a href="./AIEngine/Examples/Designs/SingleStreamSSR_FIR_withPL/README.md">Super Sample Rate FIR filter with PL</a>
  </td>
  <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we consider latencies within the kernels, which are implemented into the FIFO's included in AXI-Stream Interconnect(PL). 
  </td> 
