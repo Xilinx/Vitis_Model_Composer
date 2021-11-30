@@ -64,10 +64,10 @@ The image below depicts the components that are needed to connect an HDL design 
 Knowing the five design criteria above we can set the parameters of the blocks accordingly as described below:
 
 
-## Step 1 Set the PLIO bitwidth in the PLIO block
-Set the PLIO bitwidth to W.
+## Step 1 Set the PLIO bit width in the PLIO block
+Set the PLIO bit width to **W**.
 
-## Step 2 Set parameters to of the HDL to AIE block
+## Step 2 Set parameters of the HDL to AIE block
 
 * Set Output Data Type to **DT**.
 * Set Output frame size to **S**.
