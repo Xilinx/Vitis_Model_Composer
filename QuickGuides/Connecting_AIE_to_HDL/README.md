@@ -59,7 +59,7 @@ The image below depicts the components that are needed to connect an HDL design 
 1. Input size to the AI Engine kernel block (**S**). For an AI Engine kernel with a window input type, this is typically the size of the input window. For an AI Engine kernel with a stream input, this is typically the number of samples the AI Engine kernel consumes at every invocation.
 1. The period of all the input and output signals going into or out of the AI Engine subsystem (**P**). All the input and output signals of the AI Engine subsystem must have the same period.
 
-![System Generator](images/high_level_AIE_HDL.png)
+![](images/high_level_AIE_HDL.png)
 
 Knowing the five design criteria above we can set the parameters of the blocks accordingly as described below:
 
@@ -71,7 +71,7 @@ Set the PLIO bit width to **W**.
 
 * Set Output Data Type to **DT**.
 * Set Output frame size to **S**.
-* Set Output Sample Time to **T** x (bit width of **DT**)/(**W**)
+* Set Output Sample Time to **T** x (bit width of **DT**)/(**W**) if this input is driving the AI Engine Subsystem period or to **P**/**S** if the period of the AI Engine subsystem (**P**) is determined by another input.
 * Set tready Sample Time to **T**
 
 # Examples
