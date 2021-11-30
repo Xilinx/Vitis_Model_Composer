@@ -1,14 +1,14 @@
 # Connecting AI Engine blocks with HDL blocks
 In Vitis Model Composer, simulation of the AI Engine blocks is untimed while the simulation of HDL blocks is timed (cycle accurate). 
 If you are simulating a heterogeneous system with both PL (modeled with HDL blocks) and AI Engine, you need to use “AIE to HDL” and “HDL to AIE” blocks to properly 
-manage the sampling times across the two domains. This mini tutorial explains how to set these two blocks properly and what to be aware of.
+manage the sampling times across the two domains. This Quick Guide explains how to set these two blocks properly and what to be aware of.
 
 # Setting the AIE to HDL block
 ## Step 1 Know the initiation interval(ii) of your HDL design
 A factor in setting the parameters of the AIE to HDL block is the initiation interval of the HDL subsystem. 
 As mentioned earlier, simulation in HDL domain is cycle accurate. 
-An HDL design may not be ready to accept a new data at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). 
-For example, if an HDL design accepts a new sample every 10th cycles, the design would have an initiation interval (or ii) of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.
+An HDL design may not be ready to accept a new sample at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). 
+For example, if an HDL design accepts a new sample every 10 cycles, the design would have an initiation interval (or ii) of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.
 
 ## Step 2 Set the parameter Output Data Type of the AIE to HDL block
 The *Output Data Type* parameter is limited to 32, 64, and 128 bits wide. This reflects the permissible data bit-width between AI Engine array and PL. 
