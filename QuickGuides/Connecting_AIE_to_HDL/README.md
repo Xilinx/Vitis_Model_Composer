@@ -59,32 +59,20 @@ The image below depicts the components that are needed to connect an HDL design 
 1. Input size to the AI Engine kernel block (**S**). For an AI Engine kernel with a window input type, this is typically the size of the input window. For an AI Engine kernel with a stream input, this is typically the number of samples the AI Engine kernel consumes at every invocation.
 1. The period of all the input and output signals going into or out of the AI Engine subsystem (**P**). All the input and output signals of the AI Engine subsystem must have the same period.
 
+![System Generator](images/high_level_AIE_HDL.png)
+
 Knowing the five design criteria above we can set the parameters of the blocks accordingly as described below:
 
 
 ## Step 1 Set the PLIO bitwidth in the PLIO block
 Set the PLIO bitwidth to W.
 
-## Step 2 Set the Output Data Type
-The Output Data Type should be set to the data type that the consuming AI Engine block accepts. 
-Note that the size you set for the PLIO should match the input bitwidth to the HDL to AIE 
-block while the output data type of the HDL to AIE block should match the input data type of the consuming AIE block. See the figure at the buttom of this page.
+## Step 2 Set parameters to of the HDL to AIE block
 
-![GDL_to_AIE](images/HDL_to_AIE.png)
-
-## Step 2 Set the Output frame size
-Let’s assume the consuming AIE block has a window input size of P, or it has a 
-stream input that needs to read P samples to unblock (for example a readincr_v4 requires 4 input samples to unblock). Set samples per output frame to P.
-
-## Step 3 Set the Output Sample Time
-Set the Output Sample Time to:
-
-output sample time= input sample time*(output bit width)/(input bit width)
-
-## Step 4 Set the tready Sample Time
-tready Sample Time should be the same as the HDL design sample time.
-
-![highlevel](images/high_level.png)
+* Set Output Data Type to **DT**.
+* Set Output frame size to **S**.
+* Set Output Sample Time to **T** x (bit width of **DT**)/(**W**)
+* Set tready Sample Time to **T**
 
 # Examples
 In this GitHub repository, you can find several examples in which the AIE to HDL and HDL to AIE blocks are being used:
