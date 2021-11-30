@@ -49,9 +49,23 @@ Open the Clocking tab in the System Generator block.There are two parameters the
 ![High Level AIE to HDL](images/high_level2.png)
 
 
-# Setting the HDL to AIE block 
+# Setting the HDL to AIE block
 
-## Step 1 Set the Output Data Type
+The image below depicts the components that are needed to connect an HDL design to an AI Engine subsystem. In setting this connection, we should keep few design criteria in mind and set the parameters of the blocks accordingly. These design criteria are:
+
+1. The bit width of the tdata signal line (**W**). This is the bit width of the data in programmable logic.
+1. HDL design sample time (**T**). This sample time determines the clock rate for which the HDL design will be synthesized.
+1. Input data type to the AI Engine kernel block (**DT**). This is determined by the AI Engine kernel.
+1. Input size to the AI Engine kernel block (**S**). For an AI Engine kernel with a window input type, this is typically the size of the input window. For an AI Engine kernel with a stream input, this is typically the number of samples the AI Engine kernel consumes at every invocation.
+1. The period of all the input and output signals going into or out of the AI Engine subsystem (**P**). All the input and output signals of the AI Engine subsystem must have the same period.
+
+Knowing the five design criteria above we can set the parameters of the blocks accordingly as described below:
+
+
+## Step 1 Set the PLIO bitwidth in the PLIO block
+Set the PLIO bitwidth to W.
+
+## Step 2 Set the Output Data Type
 The Output Data Type should be set to the data type that the consuming AI Engine block accepts. 
 Note that the size you set for the PLIO should match the input bitwidth to the HDL to AIE 
 block while the output data type of the HDL to AIE block should match the input data type of the consuming AIE block. See the figure at the buttom of this page.
