@@ -121,7 +121,7 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
  <td align="left">
  <a href="./AIEngine/Examples/Designs/Pseudo_Inverse_64x32/README.md">Pseudo Inverse 64x32 </a>
  </td>
- <td> This design showcases the Vitis Model Composer implementation of the commslib example, Pseudo Inverse 64x32, which is part of the communications Library Early access program.</td>
+ <td> This design showcases an AI Engine implementation of a 64x32 Pseudo Inverse in Vitis Model Composer. The AI Engine output is compared with the output of the pseudo inverse block in Simulink which is used as a reference.</td>
  </tr>
     
  </table>
