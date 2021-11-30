@@ -54,7 +54,7 @@ Open the Clocking tab in the System Generator block.There are two parameters the
 ## Step 1 Set the Output Data Type
 The Output Data Type should be set to the data type that the consuming AI Engine block accepts. 
 Note that the size you set for the PLIO should match the input bitwidth to the HDL to AIE 
-block while the output data type of the AIE to HDL block should match the input data type of the consuming AIE block. See the figure at the buttom of this page.
+block while the output data type of the HDL to AIE block should match the input data type of the consuming AIE block. See the figure at the buttom of this page.
 
 ![GDL_to_AIE](images/HDL_to_AIE.png)
 
