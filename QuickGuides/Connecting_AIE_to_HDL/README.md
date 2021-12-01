@@ -35,11 +35,11 @@ and the output bit rate of the block is
 
 For the internal buffers of the block not to overflow, the input rate should be less than or equal to the output rate. However, the HDL design has an initialization interval of **ii**. As such,
 
-<img src="https://render.githubusercontent.com/render/math?math=\text{input rate} \leq \text{output rate} \times ii"> 
+<img src="https://render.githubusercontent.com/render/math?math=\text{input rate} \leq \frac{\text{output rate}}{ii}"> 
 
 or
 
-<img src="https://render.githubusercontent.com/render/math?math=P \geq  \frac{S\times T\times \text{input bit width}}{W\times ii}">
+<img src="https://render.githubusercontent.com/render/math?math=P \geq  \frac{S\times T\times ii \times \text{input bit width}}{W}">
 
 
 # Setting the HDL to AIE block
