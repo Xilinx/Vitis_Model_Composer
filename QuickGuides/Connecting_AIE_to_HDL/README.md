@@ -10,11 +10,13 @@ The image below depicts the components that are needed to connect an AI Engine s
 1. In the HDL design, the bit width of the tdata signal line (**W**). This is the bit width of the data in the programmable logic.
 1. HDL design sample time (**T**). This sample time determines the target clock rate for which the HDL design will be synthesized.
 1. The initilization interval of the HDL design. As mentioned earlier, simulation in HDL domain is cycle accurate. An HDL design may not be ready to accept a new sample at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). For example, if an HDL design accepts a new sample every 10 cycles, the design would have an initiation interval (or ii) of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.
+1. The output size of the AI Engine kernel (**S**).
+1. Output data type of the AI Engine kernel (**DT**).
 1. The period of all the input and output signals going into or out of the AI Engine subsystem (**P**). All the input and output signals of the AI Engine subsystem must have the same period.
 
 ![](images/high_level_AIE_HDL.png)
 
-Knowing the four design criteria above we can set the parameters of the blocks accordingly as described below:
+Keeping the above six design criteria in mind, we can set the parameters of the blocks accordingly as described below:
 
 ## Step 1 Set the PLIO bit width in the PLIO block
 Set the PLIO bit width to **W**.
