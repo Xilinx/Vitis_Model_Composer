@@ -12,22 +12,25 @@ The image below depicts the components that are needed to connect an AI Engine s
 1. The initilization interval of the HDL design. As mentioned earlier, simulation in HDL domain is cycle accurate. An HDL design may not be ready to accept a new sample at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). For example, if an HDL design accepts a new sample every 10 cycles, the design would have an initiation interval (or ii) of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.
 1. Number of samples in the output of the AI Engine kernel (**S**).
 1. Output data type of the AI Engine kernel (**DT**).
-1. The period of all the input and output signals going into or out of the AI Engine subsystem (**P**). All the input and output signals of the AI Engine subsystem must have the same period.
+
+Let's set **P** to be the period of the AI Engine subsystem. Note that all the input and output signals of the AI Engine subsystem must have the same period. Later we will determine a lower limit to **P**.
+
+Also note that the PLIO block is a pass through block and only impacts code generation. 
 
 ![](images/high_level_AIE_HDL2.png)
 
-Keeping the above six design criteria in mind, we can set the parameters of the blocks accordingly as described below:
+Keeping the above five design criteria in mind, we can set the parameters of the blocks accordingly as described below:
 
 ## Step 1 Set the PLIO bit width in the PLIO block
 Set the PLIO bit width to **W**.
 
 ## Step 2 Set parameters of the HDL to AIE block
 #### Output Data Type
-Set the _Output Data Type_ such that the output bit width is **W**. If **W** is laregr than the bit width of the input, the output should be unsigned, or else the output should have the same signedness of the input. Note that the input bit width cannot be larger than **W**. 
+Set the _Output Data Type_ such that the output bit width is **W**. If **W** is larger than the bit width of the input, the output should be unsigned, or else the output should have the same signedness of the input. Note that the input bit width cannot be larger than **W**. 
 #### Output Sample Time
 Set the _Ouptut Sample Time_ to **T**. Note that the bit rate into the block is
 
-<img src="https://render.githubusercontent.com/render/math?math=\frac{S\times \text{(input bit width)}}{P}">
+<img src="https://render.githubusercontent.com/render/math?math=\frac{S\times \text{(DT bit width)}}{P}">
 
 and the output bit rate of the block is 
 
@@ -39,7 +42,7 @@ For the internal buffers of the block not to overflow, the input rate should be 
 
 or
 
-<img src="https://render.githubusercontent.com/render/math?math=P \geq  \frac{S\times T\times ii \times \text{input bit width}}{W}">
+<img src="https://render.githubusercontent.com/render/math?math=P \geq  \frac{S\times T\times ii \times \text{(DT bit width)}}{W}">
 
 
 # Setting the HDL to AIE block
