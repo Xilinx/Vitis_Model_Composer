@@ -8,7 +8,7 @@ Image below depicts the output of 4K point size FFT for a complex sinusoidal inp
 
 ![](Images/dsplib_output.PNG)
 
-As shown below, the complete FFT operation maps to a single AI Engine tile(24,1). You can visualize this by running AIE Simulation with 'Collect data for Vitis Analyzer' option in Model Composer Hub block.
+As shown below, the complete FFT operation is mapped to a single AI Engine tile(24,1). You can visualize this by running the AIE Simulation with 'Collect data for Vitis Analyzer' option in Model Composer Hub block.
 
 ![](Images/Tile_info.PNG)
 
