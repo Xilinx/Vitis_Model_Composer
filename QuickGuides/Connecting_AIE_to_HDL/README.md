@@ -40,7 +40,7 @@ For the internal buffers of the block not to overflow, the input rate should be 
 
 or
 
-<img src="https://render.githubusercontent.com/render/math?math=P \geq  \frac{S\times T\times ii \times \text{DT bit width}}{W}">
+<img src="https://render.githubusercontent.com/render/math?math=P \geq  \frac{S\times T\times ii \times \text{(DT bit width)}}{W}">
 
 
 # Setting the HDL to AIE block
