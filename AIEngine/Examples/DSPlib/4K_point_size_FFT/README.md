@@ -2,7 +2,7 @@
 
 The FFT block within the AI Engine library supports the point size of 2^N, where N is in the range 4 to 11 inclusive. However, for cint16 datatype, the FFT size can be 2^12(4096), provided the FFT receives and outputs data to/from kernels on the same processor. This example demonestrates the usage of 'stream to window' and 'window to stream' widgets which helps in mapping the complete FFT operation to single AI Engine processor as shown below. 
 
-![](Images/screenshot.PNG)
+![](Images/4k_fft.PNG)
 
 Image below depicts the output of DSPlib AI Engine FFT for a complex sinusoidal input:
 
