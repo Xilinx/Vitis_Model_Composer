@@ -25,9 +25,22 @@ Set the PLIO bit width to **W**.
 #### Output Data Type
 Set the _Output Data Type_ such that the output bit width is **W**. If **W** is laregr than the bit width of the input, the output should be unsigned, or else the output should have the same signedness of the input. Note that the input bit width cannot be larger than **W**. 
 #### Output Sample Time
-Set the _Ouptut Sample Time_ to **T**. Note that the bit rate into the block is **P**x**S**x(Input bit width) and the output bit rate of the block is **T**x**W**. For the internal buffers of the block not to overflow, the input rate should be less than or equal to the output rate. However, the HDL design has an initialization interval of **ii**. As such, _input rate_ <= _output rate_ x ii or
+Set the _Ouptut Sample Time_ to **T**. Note that the bit rate into the block is
 
-<img src="https://render.githubusercontent.com/render/math?math=P \leq  \frac{T\times W\times ii}{S\times \text{(input bit width)}}">
+<img src="https://render.githubusercontent.com/render/math?math=\frac{S\times \text{(input bit width)}}{P}">
+
+and the output bit rate of the block is 
+
+<img src="https://render.githubusercontent.com/render/math?math=\frac{W}{T}"> 
+
+For the internal buffers of the block not to overflow, the input rate should be less than or equal to the output rate. However, the HDL design has an initialization interval of **ii**. As such,
+
+<img src="https://render.githubusercontent.com/render/math?math=\text{input rate} \leq \text{output rate} \times ii"> 
+_input rate_ <= _output rate_ x ii
+
+or
+
+<img src="https://render.githubusercontent.com/render/math?math=P \geq  \frac{S\times T\times \text{input bit width}}{W\times ii}">
 
 
 # Setting the HDL to AIE block
