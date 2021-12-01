@@ -14,7 +14,7 @@ The image below depicts the components that are needed to connect an AI Engine s
 1. Output data type of the AI Engine kernel (**DT**).
 1. The period of all the input and output signals going into or out of the AI Engine subsystem (**P**). All the input and output signals of the AI Engine subsystem must have the same period.
 
-![](images/high_level_AIE_HDL.png)
+![](images/high_level_AIE_HDL2.png)
 
 Keeping the above six design criteria in mind, we can set the parameters of the blocks accordingly as described below:
 
@@ -22,7 +22,7 @@ Keeping the above six design criteria in mind, we can set the parameters of the 
 Set the PLIO bit width to **W**.
 
 ## Step 2 Set parameters of the HDL to AIE block
-* Set the _Output Data Type_ such that the output bit width is **W**. If **W** is laregr than the bit width of the input, the output should be unsigned, or else the output should have the same signedness of the input. The input bit width cannot be larger than **W**. 
+* Set the _Output Data Type_ such that the output bit width is **W**. If **W** is laregr than the bit width of the input, the output should be unsigned, or else the output should have the same signedness of the input. Note that the input bit width cannot be larger than **W**. 
 * Set the _Ouptut Sample Time_ to **T**. Note that the bit rate into the block is **P**x**S**x(Input bit width) and the output bit rate of the block is **T**x**W**. For the internal buffers of the block not to overflow, the input rate should be less than or equal to the output rate. However, the HDL design has an initialization interval of **ii**. As such, _input rate_ <= _output rate_ x ii. In other words, **P** < **T**x**W**x**ii** / (**S** x (input bit width). 
 
 # Setting the HDL to AIE block
