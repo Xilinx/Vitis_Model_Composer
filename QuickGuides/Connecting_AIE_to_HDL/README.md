@@ -10,7 +10,7 @@ The image below depicts the components that are needed to connect an AI Engine s
 1. In the HDL design, the bit width of the tdata signal line (**W**). This is the bit width of the data in the programmable logic.
 1. HDL design sample time (**T**). This sample time determines the target clock rate for which the HDL design will be synthesized.
 1. The initilization interval of the HDL design. As mentioned earlier, simulation in HDL domain is cycle accurate. An HDL design may not be ready to accept a new sample at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). For example, if an HDL design accepts a new sample every 10 cycles, the design would have an initiation interval (or ii) of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.
-1. The output size of the AI Engine kernel (**S**).
+1. Number of samples in the output of the AI Engine kernel (**S**).
 1. Output data type of the AI Engine kernel (**DT**).
 1. The period of all the input and output signals going into or out of the AI Engine subsystem (**P**). All the input and output signals of the AI Engine subsystem must have the same period.
 
@@ -32,7 +32,7 @@ The image below depicts the components that are needed to connect an HDL design 
 1. The bit width of the tdata signal line (**W**). This is the bit width of the data in programmable logic.
 1. HDL design sample time (**T**). This sample time determines the target clock rate for which the HDL design will be synthesized.
 1. Input data type to the AI Engine kernel block (**DT**). This is determined by the AI Engine kernel.
-1. Input size to the AI Engine kernel block (**S**). For an AI Engine kernel with a window input type, this is typically the size of the input window. For an AI Engine kernel with a stream input, this is typically the number of samples the AI Engine kernel consumes at every invocation.
+1. Number of samples in the input to the AI Engine kernel block (**S**). For an AI Engine kernel with a window input type, this is typically the size of the input window. For an AI Engine kernel with a stream input, this is typically the number of samples the AI Engine kernel consumes at every invocation.
 1. The period of all the input and output signals going into or out of the AI Engine subsystem (**P**). All the input and output signals of the AI Engine subsystem must have the same period.
 
 ![](images/high_level_AIE_HDL.png)
