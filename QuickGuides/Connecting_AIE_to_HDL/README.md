@@ -36,7 +36,6 @@ and the output bit rate of the block is
 For the internal buffers of the block not to overflow, the input rate should be less than or equal to the output rate. However, the HDL design has an initialization interval of **ii**. As such,
 
 <img src="https://render.githubusercontent.com/render/math?math=\text{input rate} \leq \text{output rate} \times ii"> 
-_input rate_ <= _output rate_ x ii
 
 or
 
