@@ -15,6 +15,8 @@ The image below depicts the components that are needed to connect an AI Engine s
 
 Let's set **P** to be the period of the AI Engine subsystem. Note that all the input and output signals of the AI Engine subsystem must have the same period. Later we will determine a lower limit to **P**.
 
+Also note that the PLIO block is a pass through block and only impacts code generation. 
+
 ![](images/high_level_AIE_HDL2.png)
 
 Keeping the above five design criteria in mind, we can set the parameters of the blocks accordingly as described below:
