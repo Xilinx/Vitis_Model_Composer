@@ -13,7 +13,7 @@ The image below depicts the components that are needed to connect an AI Engine s
 1. Number of samples in the output of the AI Engine kernel (**S**).
 1. Output data type of the AI Engine kernel (**DT**).
 
-Let's set **P** to be the period of the AI Engine subsystem (**P**). Note that all the input and output signals of the AI Engine subsystem must have the same period. Later we will determine a lower limit to **P**.
+Let's set **P** to be the period of the AI Engine subsystem. Note that all the input and output signals of the AI Engine subsystem must have the same period. Later we will determine a lower limit to **P**.
 
 ![](images/high_level_AIE_HDL2.png)
 
