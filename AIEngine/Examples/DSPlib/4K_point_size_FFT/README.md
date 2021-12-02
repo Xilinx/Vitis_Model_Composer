@@ -8,6 +8,8 @@ Image below depicts the output of 4K point size FFT for a complex sinusoidal inp
 
 ![](Images/dsplib_output.PNG)
 
+For an input frequency of 200Hz, sampling frequency of 1000Hz and FFT length of 4096, you can observe the peak at 819th bin. The output frequency corresponding to the 819th bin is (1000/4096)* 819 ~= 200Hz. 
+
 As shown below, the complete FFT operation is mapped to a single AI Engine tile(24,1). You can visualize this by running the AIE Simulation with 'Collect data for Vitis Analyzer' option in Model Composer Hub block.
 
 ![](Images/Tile_info.PNG)
