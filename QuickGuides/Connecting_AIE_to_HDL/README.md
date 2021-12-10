@@ -5,21 +5,21 @@ manage the sampling times across the two domains. This Quick Guide explains how 
 
 # Setting the AIE to HDL block
 
-The image below depicts the components that are needed to connect an AI Engine subsystem to an HDL desgin. In setting this connection, we should keep few design criteria in mind and set the parameters of the blocks accordingly. These design criteria are:
+The image below depicts the components that are needed to connect an AI Engine subsystem to an HDL desgin. In setting this connection, we should keep few input design criteria in mind and set the parameters of the blocks accordingly. These input design criteria are:
 
 1. In the HDL design, the bit width of the tdata signal line (**W**). This is the bit width of the data in the programmable logic.
 1. HDL design sample time (**T**). This sample time determines the target clock rate for which the HDL design will be synthesized.
-1. The initilization interval of the HDL design. As mentioned earlier, simulation in HDL domain is cycle accurate. An HDL design may not be ready to accept a new sample at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). For example, if an HDL design accepts a new sample every 10 cycles, the design would have an initiation interval (or ii) of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.
+1. The initilization interval (**ii**) of the HDL design. As mentioned earlier, simulation in HDL domain is cycle accurate. An HDL design may not be ready to accept a new sample at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). For example, if an HDL design accepts a new sample every 10 cycles, the design would have an initiation interval of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.
 1. Number of samples in the output of the AI Engine kernel (**S**).
 1. Output data type of the AI Engine kernel (**DT**).
 
-Let's set **P** to be the period of the AI Engine subsystem. Note that all the input and output signals of the AI Engine subsystem must have the same period. Later we will determine a lower limit to **P**.
+Let's set **P** to be the period of the AI Engine subsystem. Note that all the inputs and outputs signals of the AI Engine subsystem must have the same period. Later we will determine a lower limit to **P**.
 
 Also note that the PLIO block is a pass through block and only impacts code generation. 
 
 ![](images/high_level_AIE_HDL2.png)
 
-Keeping the above five design criteria in mind, we can set the parameters of the blocks accordingly as described below:
+Keeping the above five input design criteria in mind, we can set the parameters of the blocks accordingly as described below:
 
 ## Step 1 Set the PLIO bit width in the PLIO block
 Set the PLIO bit width to **W**.
@@ -47,7 +47,7 @@ or
 
 # Setting the HDL to AIE block
 
-The image below depicts the components that are needed to connect an HDL design to an AI Engine subsystem. In setting this connection, we should keep few design criteria in mind and set the parameters of the blocks accordingly. These design criteria are:
+The image below depicts the components that are needed to connect an HDL design to an AI Engine subsystem. In setting this connection, we should keep few input design criteria in mind and set the parameters of the blocks accordingly. These input design criteria are:
 
 1. The bit width of the tdata signal line (**W**). This is the bit width of the data in programmable logic.
 1. HDL design sample time (**T**). This sample time determines the target clock rate for which the HDL design will be synthesized.
