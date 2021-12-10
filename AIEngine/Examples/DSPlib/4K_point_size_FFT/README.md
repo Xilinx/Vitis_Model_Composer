@@ -1,6 +1,6 @@
 # 4K point size FFT
 
-The FFT block within the AI Engine library supports the point size of 2^N, where N is in the range 4 to 11 inclusive. However, for cint16 datatype, the FFT size can be 2^12(4096), provided the FFT receives and outputs data to/from kernels on the same processor. This example demonestrates the usage of 'stream to window' and 'window to stream' widgets which helps in mapping the complete FFT operation to a single AI Engine processor as shown below. 
+The FFT block within the AI Engine library supports the point size of 2^N, where N is in the range 4 to 11 inclusive. However, for cint16 datatype, the FFT size can be 2^12(4096), provided the FFT receives and outputs data to/from kernels on the same processor. This example demonestrates the usage of 'stream to window' and 'window to stream' widgets which help in mapping the complete FFT operation to a single AI Engine processor as shown below. 
 
 ![](Images/4k_fft.PNG)
 
@@ -10,7 +10,7 @@ Image below depicts the output of 4K point size FFT for a complex sinusoidal inp
 
 For an input frequency of 200Hz, sampling frequency of 1000Hz and FFT length of 4096, you can observe the peak at 819th bin. The output frequency corresponding to the 819th bin is (1000/4096)* 819 ~= 200Hz. 
 
-As shown below, the complete FFT operation is mapped to a single AI Engine tile(24,1). You can visualize this by running the AIE Simulation with 'Collect data for Vitis Analyzer' option in Model Composer Hub block.
+As shown below, the complete FFT operation is mapped to a single AI Engine tile(24,1). You can visualize this in Vitis Analyzer by running the AIE Simulation with 'Collect data for Vitis Analyzer' option in Model Composer Hub block.
 
 ![](Images/Tile_info.PNG)
 
