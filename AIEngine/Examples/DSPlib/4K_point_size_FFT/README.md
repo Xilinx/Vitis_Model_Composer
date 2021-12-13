@@ -1,6 +1,6 @@
 # 4K point size FFT
 
-The FFT block within the AI Engine library supports the point size of 2^N, where N is in the range 4 to 11 inclusive. However, for cint16 datatype, the FFT size can be 2^12(4096), provided the FFT receives and outputs data to/from kernels on the same processor. This example demonestrates the usage of 'stream to window' and 'window to stream' widgets which help in mapping the complete FFT operation to a single AI Engine processor as shown below. 
+The FFT block within the AI Engine library supports the point size of 2^N, where N is in the range 4 to 11 inclusive. However, for cint16 datatype, the FFT size can be 2^12(4096), provided the FFT receives and outputs data to/from kernels on the same processor. This example demonestrates the usage of 'stream to window' and 'window to stream' widgets which helps in achieving the 4K point size FFT implementation.  
 
 ![](Images/4k_fft.PNG)
 
