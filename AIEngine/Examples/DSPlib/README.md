@@ -18,7 +18,6 @@ Here you see examples for FIR,FFT and Matrix Multiply functions.
 - [Using the AI Engine FIR block from the library browser](fir/README.md)
 - [Usign the AI Engine FFT block from the library browser](fft/README.md)
 - [Importing Matrix Multiply from DSPLib as a block](matrix_multiply/README.md)
-- [Implementation of 4K point size FFT](4K_point_size_FFT/README.md)
 
 --------------
 Copyright 2020 Xilinx
