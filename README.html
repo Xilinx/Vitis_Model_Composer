@@ -28,7 +28,7 @@
     <td width="100%" align="center"><b>Design for Versal AI Engines (20 minutes)</b>
 </tr>  
 <tr>
-<td width="100%" align="center"><a href="https://www.mathworks.com/videos/designing-ai-engines-of-xilinx-versal-acap-using-simulink-and-vitis-model-composer-1635957693985.html?s_tid=srchtitle_versal%20AI%20engine_1"><img src="Images/webinar_screen_shot.png" alt="drawing" width="200"/></a>
+<td width="100%" align="center"><a href="https://www.mathworks.com/videos/designing-ai-engines-of-xilinx-versal-acap-using-simulink-and-vitis-model-composer-1635957693985.html?s_tid=srchtitle_versal%20AI%20engine_1"><img src="Images/webinar_screen_shot.png" alt="drawing" width="300"/></a>
 </tr>
 </table>
 <h1 id="ai-engine-examplesa-nameaie_examplesa">AI Engine Examples<a name="aie_examples"></a></h1>
@@ -87,6 +87,14 @@
 
  <tr>
  <td align="left">
+   <a href="./AIEngine/Examples/Designs/SingleStreamSSR_FIR_withPL/README.html">Super Sample Rate FIR filter with PL</a>
+ </td>
+ <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we consider latencies within the kernels, which are implemented into the FIFO's included in AXI-Stream Interconnect(PL). 
+ </td> 
+ </tr>
+
+ <tr>
+ <td align="left">
    <a href="./AIEngine/Examples/Designs/DualStreamSSR_FIR/README.html">Dual Stream Super Sample Rate FIR filter</a>
  </td>
  <td> This design showcases a Dual Stream Super Sample Rate FIR filter to process a 16GSPS input stream. In this design we also compare the output of the AI Engine subsystem with the output of a Simulink FIR block (the golden reference). 
@@ -105,6 +113,13 @@
  <a href="./AIEngine/Examples/Designs/Tx_chain_200MHz/README.html">TX Chain 200MHz </a>
  </td>
  <td> This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHz, which is part of the communications Library Early access program.</td>
+ </tr>
+
+ <tr>
+ <td align="left">
+ <a href="./AIEngine/Examples/Designs/Pseudo_Inverse_64x32/README.html">Pseudo Inverse 64x32 </a>
+ </td>
+ <td> This design showcases an AI Engine implementation of a 64x32 Pseudo Inverse in Vitis Model Composer. The AI Engine output is compared with the output of the pseudo inverse block in Simulink which is used as a reference.</td>
  </tr>
 
  </table>

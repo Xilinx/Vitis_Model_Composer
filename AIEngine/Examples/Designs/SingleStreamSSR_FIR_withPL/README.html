@@ -22,15 +22,12 @@ document.location=commandURI
       </head>
       <body>
         <div id='content'>
-    <h1 id="importing-ai-engine-matrix-multiply-from-dsplib-as-a-block-into-model-composer">Importing AI Engine matrix multiply from DSPLib as a block into Model Composer</h1>
-<p>This example demonstrates importing a matrix multiply function as a block into Model Composer and comparing the results to Simulink matrix multiply. In this example, we use the import graph block to import the matrix multiply function.</p>
-<h2 id="knowledeg-nuggets">Knowledeg nuggets</h2>
-<p>:bulb: Note the usage of the <a href="https://www.mathworks.com/help/matlab/ref/setenv.html">environment variable</a> in MATLAB to more easily set the paths in the AIE Graph block mask.</p>
-<p>:bulb: Note this example is using the AI Engine DSP library that is shipping with Vitis Model Composer. We are using the command <em>setenv("DSPLIB<em>ROOT",xmcLibraryPath('get','dsplib'))</em> to set the DSPLIB</em>ROOT environmental variable.</p>
-<p>:bulb: Note we are importing matrix multiply as a graph. To do so, you can either use the graph header file from 'dsplib/L2/include' or you can write a .cpp file to instantiate the graph and use that file to import as a block. This example demonstrats the header file flow.</p>
-<p><img src="images/screen_shot1.PNG" alt="" /></p>
+    <h1 id="single-stream-ssr-fir-with-pl">Single Stream SSR FIR with PL</h1>
+<p>This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we consider latencies within the kernels, which are implemented into the FIFO's included in AXI-Stream Interconnect(PL).</p>
+<p>For more detials on the design of the FIR kernels click <a href="https://github.com/Xilinx/Vitis-Tutorials/blob/master/AI_Engine_Development/Design_Tutorials/02-super_sampling_rate_fir/SingleStreamSSR">here</a>. </p>
+<p><img src="images/SingleStreamSSR_withPL.PNG" alt="" /></p>
 <hr />
-<p>Copyright 2021 Xilinx</p>
+<p>Copyright 2020 Xilinx</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>
