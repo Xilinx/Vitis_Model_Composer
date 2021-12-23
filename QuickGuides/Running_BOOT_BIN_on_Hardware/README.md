@@ -55,7 +55,7 @@ Once your board is set up, program the device as follows:
       ```
        cd <code-generation-directory>/run_hw/src_ps/BOOT.BIN
       ```       
-10. Program the device and run:
+9. Program the device and run:
 
    a. From the XSDB prompt, run the following command:
       ```
