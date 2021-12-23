@@ -10,7 +10,7 @@ This quick guide explains how to manage the board settings, make cable connectio
 2. Connect a USB Micro cable between the host machine and USB JTAG connector on the target board. This cable is used for USB to serial transfer.
 3. Ensure that the SW1 switch is set to the JTAG boot mode and power on the VCK190 board using the power switch as shown in the following figure.
 
-![](images/board.png)
+   ![](images/board.png)
 
 Once your board is set up, program the device as follows:
 
