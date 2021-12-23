@@ -4,7 +4,7 @@ specific platform. This hardware image can then be run on a board to verify whet
 
 This quick guide explains how to manage the board settings, make cable connections, connect the board through your system, and program the BOOT.BIN on a VCK190 Versal board.
 
-> Here we are assuming the board is physically connected to a Wondows machine but generating the BOOT.BIN using Vitis Model Composer is done on a Linux machine.
+> Here we are assuming the board is physically connected to a Windows machine and the BOOT.BIN is generated using Vitis Model Composer on a Linux machine.
 
 1. Connect the power cable to the board.
 2. Connect a USB Micro cable between the host machine and USB JTAG connector on the target board. This cable is used for USB to serial transfer.
