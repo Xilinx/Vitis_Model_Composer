@@ -2,6 +2,8 @@
 Hardware validation flow in Vitis Model Composer provides a methodology to verify AI Engine based applications on Hardware. It also provides the option to generate a hardware image (BOOT.BIN), targeting a
 specific platform. This hardware image can then be run on a board to verify whether the results from hardware match with the simulation outputs.
 
+Note : It is assumed that the board is connected to a Windows machine and the hardware validation flow using Vitis Model Composer is being performed in Linux enviornment. We run the hw_server on the machine that connects to the board and create a target connection to the host running the hw_server.
+
 This quick guide explains how to manage the board settings, make cable connections, connect the board through your system, and program the BOOT.BIN on a VCK190 Versal board.
 
 1. Connect the power cable to the board.
@@ -23,21 +25,29 @@ Once your board is set up, program the device as follows:
 
 Note: Ensure the Connection type is set to Serial.
 
-7. Set up board with XSDB:
+7. Open windows command prompt and run 'hw_server' from Vitis installation area as shown below.
+
+   ```
+   <Xilinx Install Directory>\Vitis\<Version>\bin\hw_server
+   ```  
+   ![](images/hw_server.png)
+
+8. Now, in the Linux environment, open a new terminal to create a target connection to the host running the hw_server.
+
+9. Set up board with XSDB:
     
-    a. Launch XSDB using the ```xsdb.bat``` file from the Vitis installation directory as shown.
+    a. Launch XSDB using the ```xsdb``` file from the Vitis installation directory as shown.
 
       ```
-      <Xilinx Install Directory>\Vitis\<Version>\bin\xsdb.bat
-      or
-      <Xilinx Install Directory>\Vivado\<Version>\bin\xsdb.bat
+      <Xilinx Install Directory>/Vitis/<Version>/bin/xsdb
       ```
     b. From the XSDB prompt, run the following commands:
     
       ```
-       connect
-       ta 1
+       connect -url tcp:<Hostname>:<Port_num>
+       ta
       ```
+      Note : You should use the hostname and port number as highlighted in step-7.
        
     c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is in ```<code-generation-directory>/run_hw/ src_ps/BOOT.BIN ```.
     
@@ -45,7 +55,7 @@ Note: Ensure the Connection type is set to Serial.
        cd <code-generation-directory>/run_hw/src_ps/BOOT.BIN
     ```
        
-8. Program the device and run:
+10. Program the device and run:
 
    a. From the XSDB prompt, run the following command:
       ```
