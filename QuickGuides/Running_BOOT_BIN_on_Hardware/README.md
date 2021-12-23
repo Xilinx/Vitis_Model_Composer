@@ -43,7 +43,7 @@ Once your board is set up, program the device as follows:
       ```
       Note : You should use the hostname and port number as highlighted in step-7. Do not prepend the hostname with 'TCP:'.
        
-    c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is in ```<code-generation-directory>/run_hw/ src_ps/BOOT.BIN ```.
+    c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is in ```<code-generation-directory>/run_hw/src_ps/BOOT.BIN ```.
     
       ```
        cd <code-generation-directory>/run_hw/src_ps/BOOT.BIN
