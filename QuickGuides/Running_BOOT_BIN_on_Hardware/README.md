@@ -4,6 +4,8 @@ specific platform. This hardware image can then be run on a board to verify whet
 
 This quick guide explains how to manage the board settings, make cable connections, connect the board through your system, and program the BOOT.BIN on a VCK190 Versal board.
 
+> Here we are assuming the board is physically connected to a Wondows machine but generating the BOOT.BIN using Vitis Model Composer is done on a Linux machine.
+
 1. Connect the power cable to the board.
 2. Connect a USB Micro cable between the host machine and USB JTAG connector on the target board. This cable is used for USB to serial transfer.
 3. Ensure that the SW1 switch is set to the JTAG boot mode and power on the VCK190 board using the power switch as shown in the following figure.
@@ -23,21 +25,12 @@ Once your board is set up, program the device as follows:
 
    Note: Ensure the Connection type is set to Serial.
 
-7. Open windows command prompt and run 'hw_server' from Vitis installation area as shown below.
+7. Run Hardware Server on Windows. (Learn how to install Hardware Server here)
 
-   ```
-   <Xilinx Install Directory>\Vitis\<Version>\bin\hw_server
-   ```  
    ![](images/hw_server.png)
-8. Setup board with XSDB and create a target connection to the host running the hw_server. 
-   a. In Windows environment, open command prompt and launch XSDB using the ```xsdb.bat``` file from the vitis installation directory as shown. 
    
-      ```
-      <Xilinx Install Directory>\Vitis\<Version>\bin\xsdb.bat
-      ```
-      or 
-   
-      In Linux environment, open a new terminal and launch XSDB using the ```xsdb``` file from the Vitis installation directory as shown.
+8. Setup the board with XSDB and create a target connection to the host running the hw_server. 
+   a. In Linux environment, open a new terminal and launch XSDB using the ```xsdb``` file from the Vitis installation directory as shown.
 
       ```
       <Xilinx Install Directory>/Vitis/<Version>/bin/xsdb
@@ -45,10 +38,10 @@ Once your board is set up, program the device as follows:
     b. From the XSDB prompt, run the following commands:
     
       ```
-       connect -url tcp:<Hostname>:<Port_num>
+       connect -url <Hostname>:<Port_num>
        ta
       ```
-      Note : You should use the hostname and port number as highlighted in step-7.
+      Note : You should use the hostname and port number as highlighted in step-7. Do not prepend the hostname with 'TCP:'.
        
     c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is in ```<code-generation-directory>/run_hw/ src_ps/BOOT.BIN ```.
     
