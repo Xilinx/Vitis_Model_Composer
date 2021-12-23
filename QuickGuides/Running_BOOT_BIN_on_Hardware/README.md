@@ -17,13 +17,13 @@ Once your board is set up, program the device as follows:
 4. In Windows 10, click the search box on the taskbar and type Device Manager , then select from the Menu.
 5. When the board is powered ON and connected to your machine through the USB interface, determine the COM ports that are between the VCK190 board and your computer from Windows Device Manager.
 
-![](images/device_manager.png)
+   ![](images/device_manager.png)
 
 6. Use a Terminal application (Teraterm or Putty) to open up COM port interfaces on these ports (COM4, COM5 and COM6 in the above case at 115200 baud rate).
 
-![](images/putty.png)
+   ![](images/putty.png)
 
-Note: Ensure the Connection type is set to Serial.
+   Note: Ensure the Connection type is set to Serial.
 
 7. Open windows command prompt and run 'hw_server' from Vitis installation area as shown below.
 
@@ -31,7 +31,6 @@ Note: Ensure the Connection type is set to Serial.
    <Xilinx Install Directory>\Vitis\<Version>\bin\hw_server
    ```  
    ![](images/hw_server.png)
-
 8. Now, in the Linux environment, open a new terminal to create a target connection to the host running the hw_server.
 
 9. Set up board with XSDB:
