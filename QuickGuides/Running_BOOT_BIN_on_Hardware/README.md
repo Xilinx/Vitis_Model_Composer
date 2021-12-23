@@ -29,7 +29,8 @@ Once your board is set up, program the device as follows:
 
    ![](images/hw_server.png)
    
-8. Setup the board with XSDB and create a target connection to the host running the hw_server. 
+8. Setup the board with XSDB and create a target connection to the host running the hw_server.
+
    a. In Linux environment, open a new terminal and launch XSDB using the ```xsdb``` file from the Vitis installation directory as shown.
 
       ```
