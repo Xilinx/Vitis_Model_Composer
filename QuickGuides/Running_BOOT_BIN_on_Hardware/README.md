@@ -24,6 +24,7 @@ Once your board is set up, program the device as follows:
 Note: Ensure the Connection type is set to Serial.
 
 7. Set up board with XSDB:
+    
     a. Launch XSDB using the ```xsdb.bat``` file from the Vitis installation directory as shown.
 
       ```
