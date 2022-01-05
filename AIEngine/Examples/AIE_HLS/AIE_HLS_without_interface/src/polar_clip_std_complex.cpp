@@ -130,7 +130,7 @@ void cos_sin_mag (
 }
 
 
-extern "C" void polar_clip(hls::stream<std::complex<short>> &in_sample, hls::stream<std::complex<short>> &out_sample) {
+void polar_clip(hls::stream<std::complex<short>> &in_sample, hls::stream<std::complex<short>> &out_sample) {
 //#pragma HLS PIPELINE II=1
 #pragma HLS INTERFACE ap_ctrl_none port=return
 #pragma HLS INTERFACE axis port=out_sample
