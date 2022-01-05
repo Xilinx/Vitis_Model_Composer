@@ -25,7 +25,9 @@ Once your board is set up, program the device as follows:
 
    Note: Ensure the Connection type is set to Serial.
 
-7. Run Hardware Server on Windows. (Learn how to install Hardware Server here)
+7. Run Hardware Server on Windows.
+
+   Note : This step assumes that you have Hardware Server installed in you Windows machine as part of Vitis or Vivado Installation. If you don't have Hardware Server installed,           you can refer to the section 'how to install Hardware Server' and follow the steps. 
 
    ![](images/hw_server.png)
    
@@ -73,6 +75,14 @@ Once your board is set up, program the device as follows:
         rst -system
         device program BOOT.BIN
     ```
+    
+# How to Install Hardware Server
+
+Xilinx Unified installer allows you to install multiple Xilinx tools using the single installer. Follow the steps below to install Hardware server in windows machine. 
+1. Once you download the Xilinx Unified installer package, run the xsetup.exe file.
+2. In the Installer window, select 'Hardware Server' from the list of products and click 'Next' as shown below.
+   ![](images/installer.png)
+   
 
 --------------
 Copyright 2020 Xilinx
