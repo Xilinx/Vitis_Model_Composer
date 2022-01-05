@@ -29,7 +29,7 @@ Once your board is set up, program the device as follows:
 
    > Note : This step assumes that you have Hardware Server installed in you Windows machine as part of Vitis or Vivado Installation. If you don't have Hardware Server  installed, you can refer to the section [How to Install Hardware Server](#How-to-Install-Hardware-Server) and follow the steps. 
    
-   Open Windows command prompt and provide complete path to ```hw_server``` application and hit ```Enter```. You can see the TCP:<Hostname>:<Port_num> as highlighted below.
+   Open Windows command prompt and provide complete path to ```hw_server``` application and hit ```Enter```. You can see the hostname and port number as highlighted below.
    
    ![](images/hw_server.png)
    
