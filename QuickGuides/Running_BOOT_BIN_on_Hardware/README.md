@@ -27,7 +27,7 @@ Once your board is set up, program the device as follows:
 
 7. Run Hardware Server on Windows.
 
-   > Note : This step assumes that you have Hardware Server installed in you Windows machine as part of Vitis or Vivado Installation. If you don't have Hardware Server  installed, you can refer to the section [How to Install Hardware Server](#How-to-Install-Hardware-Server) and follow the steps. 
+   > Note : This step assumes that you have Hardware Server installed on you Windows machine as part of Vitis or Vivado Installation. If you do not have Hardware Server  installed, please refer to the section [How to Install Hardware Server](#How-to-Install-Hardware-Server). 
    
    Open Windows command prompt and provide complete path to ```hw_server``` application and hit ```Enter```. You can see the hostname and port number as highlighted below.
    
