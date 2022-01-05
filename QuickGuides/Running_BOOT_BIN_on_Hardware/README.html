@@ -10,37 +10,48 @@
 <p>Hardware validation flow in Vitis Model Composer provides a methodology to verify AI Engine based applications on Hardware. It also provides the option to generate a hardware image (BOOT.BIN), targeting a<br />
 specific platform. This hardware image can then be run on a board to verify whether the results from hardware match with the simulation outputs.</p>
 <p>This quick guide explains how to manage the board settings, make cable connections, connect the board through your system, and program the BOOT.BIN on a VCK190 Versal board.</p>
+<blockquote>
+  <p>Note: Here we are assuming the board is physically connected to a Windows machine and the BOOT.BIN is generated using Vitis Model Composer on a Linux machine.</p>
+</blockquote>
 <ol>
-<li>Connect the power cable to the board.</li>
-<li>Connect a USB Micro cable between the host machine and USB JTAG connector on the target board. This cable is used for USB to serial transfer.</li>
-<li>Ensure that the SW1 switch is set to the JTAG boot mode and power on the VCK190 board using the power switch as shown in the following figure.</li>
+<li><p>Connect the power cable to the board.</p></li>
+<li><p>Connect a USB Micro cable between the host machine and USB JTAG connector on the target board. This cable is used for USB to serial transfer.</p></li>
+<li><p>Ensure that the SW1 switch is set to the JTAG boot mode and power on the VCK190 board using the power switch as shown in the following figure.</p>
+<p><img src="images/board.png" alt="" /></p></li>
 </ol>
-<p><img src="images/board.png" alt="" /></p>
 <p>Once your board is set up, program the device as follows:</p>
 <ol start="4">
-<li>In Windows 10, click the search box on the taskbar and type Device Manager , then select from the Menu.</li>
-<li>When the board is powered ON and connected to your machine through the USB interface, determine the COM ports that are between the VCK190 board and your computer from Windows Device Manager.</li>
+<li><p>In Windows 10, click the search box on the taskbar and type Device Manager , then select from the Menu.</p></li>
+<li><p>When the board is powered ON and connected to your machine through the USB interface, determine the COM ports that are between the VCK190 board and your computer from Windows Device Manager.</p>
+<p><img src="images/device_manager.png" alt="" /></p></li>
+<li><p>Use a Terminal application (Teraterm or Putty) to open up COM port interfaces on these ports (COM4, COM5 and COM6 in the above case at 115200 baud rate).</p>
+<p><img src="images/putty.png" alt="" /></p></li>
 </ol>
-<p><img src="images/device_manager.png" alt="" /></p>
-<ol start="6">
-<li>Use a Terminal application (Teraterm or Putty) to open up COM port interfaces on these ports (COM4, COM5 and COM6 in the above case at 115200 baud rate).</li>
-</ol>
-<p><img src="images/putty.png" alt="" /></p>
-<p>Note: Ensure the Connection type is set to Serial.</p>
+<blockquote>
+  <p>Note: Ensure the Connection type is set to Serial.</p>
+</blockquote>
 <ol start="7">
-<li><p>Set up board with XSDB:<br />
-a. Launch XSDB using the <code>xsdb.batch</code> file from the Vitis installation directory as shown.</p>
-<pre><code>  &lt;Xilinx Install Directory&gt;\Vitis\&lt;Version&gt;\bin\xsdb.bat
-  or
-  &lt;Xilinx Install Directory&gt;\Vivado\&lt;Version&gt;\bin\xsdb.bat
+<li>Run Hardware Server on Windows.</li>
+</ol>
+<blockquote>
+  <p>Note : This step assumes that you have Hardware Server installed on you Windows machine as part of Vitis or Vivado Installation. If you do not have Hardware Server  installed, please refer to the section <a href="#How-to-Install-Hardware-Server">How to Install Hardware Server</a>. </p>
+</blockquote>
+<p>Open Windows command prompt and provide complete path to <code>hw_server</code> application and hit <code>Enter</code>. You can see the hostname and port number as highlighted below.</p>
+<p><img src="images/hw_server.png" alt="" /></p>
+<ol start="8">
+<li><p>Launch XSDB and create a target connection to the host running the hw_server.</p>
+<p>a. In Linux environment, open a new terminal and launch XSDB using the <code>xsdb</code> file from the Vitis installation directory as shown.</p>
+<pre><code>  &lt;Xilinx Install Directory&gt;/Vitis/&lt;Version&gt;/bin/xsdb
 </code></pre>
 <p>b. From the XSDB prompt, run the following commands:</p>
-<pre><code>   connect
+<pre><code>   connect -url &lt;Hostname&gt;:&lt;Port_num&gt;
    ta
-   ta 1
 </code></pre>
-<p>c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is in <code>&lt;code-generation-directory&gt;/run_hw/ src_ps/BOOT.BIN</code>.</p>
+<p>Note : You should use the hostname and port number as highlighted in step-7. Do not prepend the hostname with 'TCP:'.</p>
+<p>c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is in <code>&lt;code-generation-directory&gt;/run_hw/src_ps/BOOT.BIN</code>.</p>
 <pre><code>   cd &lt;code-generation-directory&gt;/run_hw/src_ps/BOOT.BIN
+</code></pre>
+<pre><code>   
 </code></pre></li>
 <li><p>Program the device and run:</p>
 <p>a. From the XSDB prompt, run the following command:</p>
@@ -57,6 +68,14 @@ a. Launch XSDB using the <code>xsdb.batch</code> file from the Vitis installatio
 <pre><code>    rst -system
     device program BOOT.BIN
 </code></pre></li>
+</ol>
+<h1 id="how-to-install-hardware-server">How to Install Hardware Server</h1>
+<p>Xilinx Unified installer allows you to install multiple Xilinx tools using the single installer. Follow the steps below to install Hardware server in windows machine. </p>
+<ol>
+<li><p>Download the Xilinx Unified installer package and run the <code>xsetup.exe</code> file.</p></li>
+<li><p>In the Installer window, select 'Hardware Server' from the list of products.</p>
+<p><img src="images/installer.PNG" alt="" /></p></li>
+<li><p>Click <code>Next</code> and continue rest of the installation process to complete. </p></li>
 </ol>
 <hr />
 <p>Copyright 2020 Xilinx</p>
