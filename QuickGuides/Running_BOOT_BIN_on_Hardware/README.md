@@ -80,8 +80,10 @@ Once your board is set up, program the device as follows:
 
 Xilinx Unified installer allows you to install multiple Xilinx tools using the single installer. Follow the steps below to install Hardware server in windows machine. 
 1. Once you download the Xilinx Unified installer package, run the xsetup.exe file.
-2. In the Installer window, select 'Hardware Server' from the list of products and click 'Next' as shown below.
+2. In the Installer window, select 'Hardware Server' from the list of products.
+
    ![](images/installer.PNG)
+   
 3. Click 'Next' and continue rest of the installation process to complete. 
    
 
