@@ -28,7 +28,8 @@ Once your board is set up, program the device as follows:
 7. Run Hardware Server on Windows.
 
    Note : This step assumes that you have Hardware Server installed in you Windows machine as part of Vitis or Vivado Installation. If you don't have Hardware Server installed,           you can refer to the section [How to Install Hardware Server](#How-to-Install-Hardware-Server) and follow the steps. 
-
+   
+   Open Windows command prompt and provide complete path to ```hw_server``` application and hit ```Enter```. You can see the TCP:<Hostname>:<Port_num> as highlighted below.
    ![](images/hw_server.png)
    
 8. Setup the board with XSDB and create a target connection to the host running the hw_server.
