@@ -82,6 +82,7 @@ Xilinx Unified installer allows you to install multiple Xilinx tools using the s
 1. Once you download the Xilinx Unified installer package, run the xsetup.exe file.
 2. In the Installer window, select 'Hardware Server' from the list of products and click 'Next' as shown below.
    ![](images/installer.png)
+3. Click 'Next' and continue rest of the installation process to complete. 
    
 
 --------------
