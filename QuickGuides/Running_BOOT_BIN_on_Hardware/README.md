@@ -4,7 +4,7 @@ specific platform. This hardware image can then be run on a board to verify whet
 
 This quick guide explains how to manage the board settings, make cable connections, connect the board through your system, and program the BOOT.BIN on a VCK190 Versal board.
 
-> Here we are assuming the board is physically connected to a Windows machine and the BOOT.BIN is generated using Vitis Model Composer on a Linux machine.
+> Note: Here we are assuming the board is physically connected to a Windows machine and the BOOT.BIN is generated using Vitis Model Composer on a Linux machine.
 
 1. Connect the power cable to the board.
 2. Connect a USB Micro cable between the host machine and USB JTAG connector on the target board. This cable is used for USB to serial transfer.
@@ -23,13 +23,14 @@ Once your board is set up, program the device as follows:
 
    ![](images/putty.png)
 
-   Note: Ensure the Connection type is set to Serial.
+   > Note: Ensure the Connection type is set to Serial.
 
 7. Run Hardware Server on Windows.
 
-   Note : This step assumes that you have Hardware Server installed in you Windows machine as part of Vitis or Vivado Installation. If you don't have Hardware Server installed,           you can refer to the section [How to Install Hardware Server](#How-to-Install-Hardware-Server) and follow the steps. 
+   > Note : This step assumes that you have Hardware Server installed in you Windows machine as part of Vitis or Vivado Installation. If you don't have Hardware Server  installed, you can refer to the section [How to Install Hardware Server](#How-to-Install-Hardware-Server) and follow the steps. 
    
    Open Windows command prompt and provide complete path to ```hw_server``` application and hit ```Enter```. You can see the TCP:<Hostname>:<Port_num> as highlighted below.
+   
    ![](images/hw_server.png)
    
 8. Setup the board with XSDB and create a target connection to the host running the hw_server.
