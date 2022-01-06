@@ -18,9 +18,8 @@
 #define HLS_KERNELS_H
 
 #include "hls_stream.h"
-#include <adf.h>
 
 ////// This header file is for adf only. HLS cpp does NOT include this header. //////
 
-void cturn2(adf::dir::in<hls::stream<std::complex<short> >&> vin, adf::dir::out<hls::stream<std::complex<short> >&> vout);
+void cturn2(hls::stream<std::complex<short> >& vin, hls::stream<std::complex<short> >& vout);
 #endif

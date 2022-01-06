@@ -40,7 +40,7 @@ typedef ap_int<16>                 ap_int16;
 typedef ap_int<64>                 ap_int64;
 
 
-extern "C" void cturn2(hls::stream<std::complex<short>> &vin, hls::stream<std::complex<short>> &vout) {
+void cturn2(hls::stream<std::complex<short>> &vin, hls::stream<std::complex<short>> &vout) {
 //#pragma HLS PIPELINE II=1
 #pragma HLS INTERFACE ap_ctrl_none port=return
 #pragma HLS INTERFACE axis port=vout
@@ -87,4 +87,3 @@ extern "C" void cturn2(hls::stream<std::complex<short>> &vin, hls::stream<std::c
   } // end of vout_tmp_cpy
 
 };
-//}
