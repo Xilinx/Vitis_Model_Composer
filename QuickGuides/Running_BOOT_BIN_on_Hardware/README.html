@@ -24,7 +24,7 @@ specific platform. This hardware image can then be run on a board to verify whet
 <li><p>In Windows 10, click the search box on the taskbar and type Device Manager , then select from the Menu.</p></li>
 <li><p>When the board is powered ON and connected to your machine through the USB interface, determine the COM ports that are between the VCK190 board and your computer from Windows Device Manager.</p>
 <p><img src="images/device_manager.png" alt="" /></p></li>
-<li><p>Use a Terminal application (Teraterm or Putty) to open up COM port interfaces on these ports (COM4, COM5 and COM6 in the above case at 115200 baud rate).</p>
+<li><p>Use a Terminal application (Teraterm or Putty) to open up COM port interfaces on these ports (COM4, COM5 and COM6 in the above case at 115200 baud rate). Note that only one of these terminals will print the output. </p>
 <p><img src="images/putty.png" alt="" /></p></li>
 </ol>
 <blockquote>
@@ -45,7 +45,7 @@ specific platform. This hardware image can then be run on a board to verify whet
 </code></pre>
 <p>b. From the XSDB prompt, run the following commands:</p>
 <pre><code>   connect -url &lt;Hostname&gt;:&lt;Port_num&gt;
-   ta
+   ta 1
 </code></pre>
 <p>Note : You should use the hostname and port number as highlighted in step-7. Do not prepend the hostname with 'TCP:'.</p>
 <p>c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is in <code>&lt;code-generation-directory&gt;/run_hw/src_ps/BOOT.BIN</code>.</p>
