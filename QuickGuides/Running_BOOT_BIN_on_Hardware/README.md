@@ -19,7 +19,7 @@ Once your board is set up, program the device as follows:
 
    ![](images/device_manager.png)
 
-6. Use a Terminal application (Teraterm or Putty) to open up COM port interfaces on these ports (COM4, COM5 and COM6 in the above case at 115200 baud rate).
+6. Use a Terminal application (Teraterm or Putty) to open up COM port interfaces on these ports (COM4, COM5 and COM6 in the above case at 115200 baud rate). Note that only one of these terminals will print the output. 
 
    ![](images/putty.png)
 
@@ -44,7 +44,7 @@ Once your board is set up, program the device as follows:
     
       ```
        connect -url <Hostname>:<Port_num>
-       ta
+       ta 1
       ```
       Note : You should use the hostname and port number as highlighted in step-7. Do not prepend the hostname with 'TCP:'.
        
