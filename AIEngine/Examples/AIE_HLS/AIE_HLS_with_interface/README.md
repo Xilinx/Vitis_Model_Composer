@@ -5,18 +5,14 @@ This example showcases a design containing both AI Engine blocks and Programmabl
 ## Knowledge nuggets
 :bulb: In Model Composer, you can cosimulate HLS kernels and AI Engine blocks.
 
-:bulb: The HLS kernel code should have stream, or scalar or vector run-time parameter interfaces. 
+:bulb: The argument type for the HLS kernel should be hls::stream. The arguments can also be scalar or vector to model run-time parameter interfaces. 
 
-:bulb: To import an HLS kernel, you should write a separate [header file](./src/hls_kernels.h) to declare function signatures and to specify hls::stream directions for HLS functions. In this special header file, the function signature is declared the same as in the HLS function definition, except that the input or output direction of a hls::stream data type is qualified using adf::dir::in<T> and adf::dir::out<T>, respectively.
-    
-:bulb: In this example, the datatypes of the AIE kernel blocks do not match with the HLS kernel block and hence, note the usage of the interface block. In essence, the interface blocks work as data type converters.
-
-:warning: Note the need for *extern "C"* in the hls kernel function definition. 
+:bulb: To import an HLS kernel, you need a [header file](./src/hls_kernels.h) to declare the function.
 
 ![](images/screen_shot.png)
 
 ------------
-Copyright 2020 Xilinx
+Copyright 2022 Xilinx
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
