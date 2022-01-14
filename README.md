@@ -240,7 +240,7 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
 </p>
 
 --------------
-Copyright 2021 Xilinx
+Copyright 2022 Xilinx
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
