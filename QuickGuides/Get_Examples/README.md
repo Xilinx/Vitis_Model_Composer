@@ -13,7 +13,7 @@ To get the examples and explore them in Vitis Model Composer, use one of the thr
 This is the recommended way to get the latest examples for Vitis Model Composer. Type 'doc' in the MALTAB command window. In the 'Supplemental Software' section, click on 'Xilinx Model Composer', and then click on 'Model Composer Examples'. This method will automatically get you the right version of the examples.
 
 
-![](Images/download_from_model_composer.PNG)
+<img src= Images/download_from_model_composer.PNG width="600">
 
 ## Clone this repository
 You can directly use git locally to clone this repository or use [MATALB git integration](https://www.mathworks.com/help/simulink/ug/clone-git-repository.html). After you clone this repository, switch the branch to the version of the Vitis Model Composer version you have. For example:
