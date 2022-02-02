@@ -11,6 +11,8 @@ To get the examples and explore them in Vitis Model Composer, use one of the thr
 
 ## Directly download the examples from Vitis Model Composer
 This is the recommended way to get the latest examples for Vitis Model Composer. Type 'doc' in the MALTAB command window. In the 'Supplemental Software' section, click on 'Xilinx Model Composer', and then click on 'Model Composer Examples'. This method will automatically get you the right version of the examples.
+
+
 ![](Images/download_from_model_composer.PNG)
 
 ## Clone this repository
