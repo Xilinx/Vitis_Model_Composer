@@ -1,9 +1,9 @@
 # How to access the examples?
 
-The GitHub repository contains the examples for the latest release of Vitis Model Composer. Examples for the older versions of the product 
-are on branches with the same name as the version of the product.
+The GitHub repository contains the examples for the latest release of Vitis Model Composer. Examples for older versions of the product 
+are on git branches with the same name as the product version.
 
-<br/>:warning:**To see the examples for older versions of the tool in GitHub, switch to the branch corresponding to your version of Vitis Model Composer**
+<br/>:warning:**To see examples for older versions of the tool in GitHub, switch to the branch corresponding to your version of Vitis Model Composer**
 
 ![Click 'main' to change branch](Images/change_branch.PNG)
 
