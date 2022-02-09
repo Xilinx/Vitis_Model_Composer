@@ -3,11 +3,13 @@
 # Table of Contents
 1. [Rapid design exploration using Vitis Model Composer](#introduction)
 2. [How to access the examples and quick guides?](#access)
-3. [Videos](#videos)
+3. [Heterogeneous (PL + AI Engine) design Examples](#heterogeneous)
 4. [AI Engine Examples](#aie_examples)
 5. [HLS Examples](#hls_examples)
-6. [Quick Guides](#quick_guides)
-7. [What is new?](#what_is_new)
+6. [HDL Examples](#hdl_examples)
+7. [Quick Guides](#quick_guides)
+8. [Videos](#videos)
+9. [What is new?](#what_is_new)
 
 ## Rapid design exploration using Vitis Model Composer<a name="introduction"></a>
 
@@ -19,15 +21,10 @@ We are storing and managing a subset of the Vitis Model Composer examples (AI En
 
 Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis Model Composer examples.
 
-# Videos<a name="videos"></a>
-<table style="width:100%">
-<tr>
-    <td width="100%" align="center"><b>Design for Versal AI Engines (20 minutes)</b>
-</tr>  
-<tr>
-<td width="100%" align="center"><a href="https://www.mathworks.com/videos/designing-ai-engines-of-xilinx-versal-acap-using-simulink-and-vitis-model-composer-1635957693985.html?s_tid=srchtitle_versal%20AI%20engine_1"><img src="Images/webinar_screen_shot.png" alt="drawing" width="300"/></a>
-</tr>
-</table>
+# Heterogeneous (PL + AI Engine) design Examples <a name="heterogeneous"></a>
+Versal AI Core devices are highly integrated, multicore compute platform that can adapt with evolving and diverse algorithms. These devices include both Programmable Logic (PL) and an AI Engine array. Vitis Model Composer provides a design environment, based on industry standard MATLAB and Simulink tools, to model and simulate designs with both PL and AI Engine components.
+
+:zap: Click [here](./REAME.md) to explore Heterogeneous desgin examples in Vitis Model Composer.
 
 # AI Engine Examples<a name="aie_examples"></a>
 
@@ -206,7 +203,16 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
  </tr>
     
  </table>
- 
+
+# Videos<a name="videos"></a>
+<table style="width:100%">
+<tr>
+    <td width="100%" align="center"><b>Design for Versal AI Engines (20 minutes)</b>
+</tr>  
+<tr>
+<td width="100%" align="center"><a href="https://www.mathworks.com/videos/designing-ai-engines-of-xilinx-versal-acap-using-simulink-and-vitis-model-composer-1635957693985.html?s_tid=srchtitle_versal%20AI%20engine_1"><img src="Images/webinar_screen_shot.png" alt="drawing" width="300"/></a>
+</tr>
+</table>
 
 ## What's new in 2021.2?<a name="what_is_new"></a>
 <img src="Images/one_click_2021_2.png" alt="drawing" width="500"/>
