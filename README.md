@@ -21,6 +21,16 @@ We are storing and managing a subset of the Vitis Model Composer examples (AI En
 
 Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis Model Composer examples.
 
+# Explore Vitis Model Composer
+<table style="width:100%">
+ <tr>
+ <td width="35%" align="center"><p align="center">
+<img src="Images/model_composer_image.PNG">
+</p>
+ <td width="65%" align="center"><b>Description</b>
+ </tr>
+</table>
+    
 # Heterogeneous (PL + AI Engine) design Examples <a name="heterogeneous"></a>
 Versal AI Core devices are highly integrated, multicore compute platform that can adapt with evolving and diverse algorithms. These devices include both Programmable Logic (PL) and an AI Engine array. Vitis Model Composer provides a design environment, based on industry standard MATLAB and Simulink tools, to model and simulate designs with both PL and AI Engine components.
 
