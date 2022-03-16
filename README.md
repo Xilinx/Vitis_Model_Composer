@@ -23,10 +23,10 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
  </tr>
  <tr>
  <td align="center"><p align="center">
-<img src="Images/hls.png">
+     <a href="./hls/README.md"><img src="Images/hls.png"></a>
 </p>
  <td align="center"> <td align="center"><p align="center">
-<img src="Images/hdl.png">
+     <a href="./hdl/README.md"><img src="Images/hdl.png"></a>
 </p>
  </tr>
 </table>
