@@ -75,37 +75,6 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
 </tr>
 </table>
 
-## What's new in 2021.2?<a name="what_is_new"></a>
-<img src="Images/one_click_2021_2.png" alt="drawing" width="500"/>
-
-### AI Engines 
-* With a click of a button,  run a design with AI Engines and PL (HLS, HDL) blocks into a Versal AI Core hardware. 
-* Significant speed up in Simulink simulation by parallel compilation of AIE blocks.
-* Enhancements to AI Engine constraint editor
-* Addition of DDS and Mixer blocks in the AIE DSP library.
-* Enhancements to "to fixed size" and "to variable size" blocks. 
-* Support of int64 and uint64 data types.
-* Support for accfloat and caccfloat
-* Enhancement to GitHub examples and incorporation of HLS examples in GitHub
-* Generated data flow graph code now includes PLIO specification
-* Enhanced usability to download and browse examples from GitHub.
-* Support for AIE source blocks.
-* xmcVitisRead and xmcVitisWrite utilities to read/write data files for AIE Simulator and/or x86Simulator
-* Systematize GUI parameters of AIE dsplib blocks
-* New 64x32 Pseudo Inverse design example.
-* New Dual-Stream SSR Filter example with 64 AI Engine kernels and upto 16 GSPS throughput.  
-### HDL
-* Support of Asymmetric read/write data widths for FIFO block
-### HLS
-* Supports simulation and implementation of HLS based C code that utilizes the Xilinx FIR, FFT, DDS Logicores
-### General
-* MATLAB Support - R2020a, R2020b, and R2021a
-* Newly added support for Ubuntu 20.04
-  
-<p align="center">
-<img src="Images/model_composer_image.PNG">
-</p>
-
 --------------
 Copyright 2022 Xilinx
 
