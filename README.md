@@ -22,12 +22,13 @@ We are storing and managing a subset of the Vitis Model Composer examples (AI En
 Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis Model Composer examples.
 
 # Explore Vitis Model Composer
-<table style="width:100%">
+
+<table style="width:100%"; border: none>
  <tr>
- <td width="35%" align="center"><p align="center">
-<img src="Images/model_composer_image.PNG">
+ <td align="center"><p align="center">
+<img src="Images/heterogenous.png">
 </p>
- <td width="65%" align="center"><b>Description</b>
+ <td align="center"><b>Description</b>
  </tr>
 </table>
     
