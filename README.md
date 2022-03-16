@@ -3,13 +3,8 @@
 # Table of Contents
 1. [Rapid design exploration using Vitis Model Composer](#introduction)
 2. [How to access the examples and quick guides?](#access)
-3. [Heterogeneous (PL + AI Engine) design Examples](#heterogeneous)
-4. [AI Engine Examples](#aie_examples)
-5. [HLS Examples](#hls_examples)
-6. [HDL Examples](#hdl_examples)
-7. [Quick Guides](#quick_guides)
-8. [Videos](#videos)
-9. [What is new?](#what_is_new)
+3. [Videos](#videos)
+4. [What is new?](#what_is_new)
 
 ## Rapid design exploration using Vitis Model Composer<a name="introduction"></a>
 
@@ -28,7 +23,17 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
  <td align="center"><p align="center">
 <img src="Images/heterogenous.png">
 </p>
- <td align="center"><b>Description</b>
+ <td align="center"> <td align="center"><p align="center">
+<img src="Images/aiengine.png">
+</p>
+ </tr>
+ <tr>
+ <td align="center"><p align="center">
+<img src="Images/hls.png">
+</p>
+ <td align="center"> <td align="center"><p align="center">
+<img src="Images/hdl.png">
+</p>
  </tr>
 </table>
     
