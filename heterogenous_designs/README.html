@@ -6,22 +6,52 @@
       </head>
       <body>
         <div id='content'>
-    <h1 id="how-to-access-the-examples">How to access the examples?</h1>
-<p>The GitHub repository contains the examples for the latest release of Vitis Model Composer. Examples for older versions of the product <br />
-are on git branches with the same name as the product version.</p>
-<p><br/>:warning:<strong>To see examples for older versions of the tool in GitHub, switch to the branch corresponding to your version of Vitis Model Composer</strong></p>
-<p><img src="Images/change_branch.PNG" alt="Click 'main' to change branch" /></p>
-<p>To get the examples and explore them in Vitis Model Composer, use one of the three methods below:</p>
-<h2 id="directly-download-the-examples-from-vitis-model-composer">Directly download the examples from Vitis Model Composer</h2>
-<p>This is the recommended way to get the latest examples for Vitis Model Composer. Type 'doc' in the MALTAB command window. In the 'Supplemental Software' section, click on 'Xilinx Model Composer', and then click on 'Model Composer Examples'. This method will automatically get you the right version of the examples.</p>
-<p><img src= Images/download_from_model_composer.PNG width="600"></p>
-<h2 id="clone-this-repository">Clone this repository</h2>
-<p>You can directly use git locally to clone this repository or use <a href="https://www.mathworks.com/help/simulink/ug/clone-git-repository.html">MATALB git integration</a>. After you clone this repository, switch the branch to the version of the Vitis Model Composer version you have. For example:</p>
-<pre><code>git checkout 2021.2
-</code></pre>
-<h2 id="download-a-zipped-version-directly-from-github">Download a zipped version directly from GitHub</h2>
-<p>First switch to the branch corresponding to the version of Vitis Model Composer you have. Then click "Download ZIP".<br />
-<img src="Images/download_zip_from_github.PNG" alt="" /></p>
+    <h1 id="heterogeneous-pl--ai-engine-design-examples-a-nameheterogeneousa">Heterogeneous (PL + AI Engine) design Examples <a name="heterogeneous"></a></h1>
+<p>Versal AI Core devices are highly integrated, multicore compute platform that can adapt with evolving and diverse algorithms. These devices include both Programmable Logic (PL) and an AI Engine array. Vitis Model Composer provides a design environment, based on industry standard MATLAB and Simulink tools, to model and simulate designs with both PL and AI Engine components.</p>
+<h1 id="examples">Examples</h1>
+<table style="width:100%">
+ <tr>
+ <td width="35%" align="center"><b>Topic</b>
+ <td width="65%" align="center"><b>Description</b>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./AIE_HDL/README.html">Designs with both AI Engine and HDL blocks</a>
+ </td>
+ <td>Examples of designs with both AI Engine kernels and HDL blocks. Here you can see examples of importing Verliog code into Model Composer and co-simulation with AI Engine   blocks at high speeds.
+ </td>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./AIE_HLS/README.html">Design with both AI Engines and HLS kernels</a>
+ </td>
+ <td>Example of a design with both AI Engine kernels and an HLS kernel.
+ </td>
+ </tr>
+
+   <tr>
+ <td align="left">
+ <a href="./FFT2D/README.html">2D FFT (AI Engines + HDL/HLS) </a>
+ </td>
+ <td> The designs here showcase 2D-FFTs that are implemented both in AI Engines and Programmable Logic(PL). In one example the PL is implemented using HLS and in another example the PL is implemented using HDL blocks in Vitis Model Composer.</td>
+ </tr>
+
+   <tr>
+ <td align="left">
+   <a href="./SingleStreamSSR_FIR_withPL/README.html">Super Sample Rate FIR filter with PL</a>
+ </td>
+ <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we consider latencies within the kernels, which are implemented into the FIFO's included in AXI-Stream Interconnect(PL). 
+ </td> 
+ </tr>
+
+   <tr>
+ <td align="left">
+ <a href="./Tx_chain_200MHz/README.html">TX Chain 200MHz </a>
+ </td>
+ <td> This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHz, which is part of the communications Library Early access program.</td>
+ </tr>
+
+ </table>
 
         </div>
         <style type='text/css'>body {

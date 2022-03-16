@@ -6,22 +6,54 @@
       </head>
       <body>
         <div id='content'>
-    <h1 id="how-to-access-the-examples">How to access the examples?</h1>
-<p>The GitHub repository contains the examples for the latest release of Vitis Model Composer. Examples for older versions of the product <br />
-are on git branches with the same name as the product version.</p>
-<p><br/>:warning:<strong>To see examples for older versions of the tool in GitHub, switch to the branch corresponding to your version of Vitis Model Composer</strong></p>
-<p><img src="Images/change_branch.PNG" alt="Click 'main' to change branch" /></p>
-<p>To get the examples and explore them in Vitis Model Composer, use one of the three methods below:</p>
-<h2 id="directly-download-the-examples-from-vitis-model-composer">Directly download the examples from Vitis Model Composer</h2>
-<p>This is the recommended way to get the latest examples for Vitis Model Composer. Type 'doc' in the MALTAB command window. In the 'Supplemental Software' section, click on 'Xilinx Model Composer', and then click on 'Model Composer Examples'. This method will automatically get you the right version of the examples.</p>
-<p><img src= Images/download_from_model_composer.PNG width="600"></p>
-<h2 id="clone-this-repository">Clone this repository</h2>
-<p>You can directly use git locally to clone this repository or use <a href="https://www.mathworks.com/help/simulink/ug/clone-git-repository.html">MATALB git integration</a>. After you clone this repository, switch the branch to the version of the Vitis Model Composer version you have. For example:</p>
-<pre><code>git checkout 2021.2
-</code></pre>
-<h2 id="download-a-zipped-version-directly-from-github">Download a zipped version directly from GitHub</h2>
-<p>First switch to the branch corresponding to the version of Vitis Model Composer you have. Then click "Download ZIP".<br />
-<img src="Images/download_zip_from_github.PNG" alt="" /></p>
+    <table style="width:100%">
+ <tr>
+ <td width="35%" align="center"><b>Topic</b>
+ <td width="65%" align="center"><b>Description</b>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./Importing_AIE_blocks/README.html">Importing Kernels and Graphs into Model Composer</a>
+ </td>
+ <td>Examples on importing Kernels and Graphs into Model Composer as blocks. This include importing templatized class based kernels, templatized AI Engine functions, and graphs. </td>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./Run_Time_Parameters/README.html">Run time parameters (RTP)</a>
+ </td>
+ <td>Examples of kernels with RTP input. RTP inputs can be sync or async. </td>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./DSPlib/README.html">DSP Functions</a>
+ </td>
+ <td>AI Engine FIR filters and FFT. Importing Matrix Multiply as a graph into Vitis Model Composer.</td>
+ </tr>
+
+ <tr>
+ <td align="left">
+   <a href="./SingleStreamSSR_FIR/README.html">Super Sample Rate FIR filter</a>
+ </td>
+ <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we also compare the output of our AI Engine subsystem with the output of a Simulink FIR block (our golden reference) both in time and in frequency. 
+ </td> 
+ </tr>
+
+ <tr>
+ <td align="left">
+   <a href="./DualStreamSSR_FIR/README.html">Dual Stream Super Sample Rate FIR filter</a>
+ </td>
+ <td> This design showcases a Dual Stream Super Sample Rate FIR filter to process a 16GSPS input stream. In this design we also compare the output of the AI Engine subsystem with the output of a Simulink FIR block (the golden reference). 
+ </td> 
+ </tr>
+
+  <tr>
+ <td align="left">
+ <a href="./Pseudo_Inverse_64x32/README.html">Pseudo Inverse 64x32 </a>
+ </td>
+ <td> This design showcases an AI Engine implementation of a 64x32 Pseudo Inverse in Vitis Model Composer. The AI Engine output is compared with the output of the pseudo inverse block in Simulink which is used as a reference.</td>
+ </tr>
+
+ </table>
 
         </div>
         <style type='text/css'>body {
