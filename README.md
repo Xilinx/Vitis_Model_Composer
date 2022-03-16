@@ -12,7 +12,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
 
 ## How to access the examples and quick guides?<a name="access"></a>
     
-We are storing and managing a subset of the Vitis Model Composer examples (AI Engine and HLS Library) in GitHub. This way, users will have access to the most up-to-date examples. You can get the examples from GitHub or preferably directly from Vitis Model Composer.
+We are storing and managing Vitis Model Composer examples in GitHub. This way, users will have access to the most up-to-date examples. You can get the examples from GitHub. However we recommend you get them directly from Vitis Model Composer.
 
 Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis Model Composer examples.
 
