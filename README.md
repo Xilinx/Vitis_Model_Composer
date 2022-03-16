@@ -15,8 +15,8 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
 <table style="width:100%"; border: none>
  <tr>
  <td align="center"><p align="center">
-<img src="Images/heterogenous.png">
-</p>
+     <a href="./heterogenous_desgins/README.md"><img src="Images/heterogenous.png"></a>
+ </p>
  <td align="center"> <td align="center"><p align="center">
 <img src="Images/aiengine.png">
 </p>
