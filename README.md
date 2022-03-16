@@ -18,7 +18,7 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
      <a href="./heterogenous_designs/README.md"><img src="Images/heterogenous.png"></a>
  </p>
  <td align="center"> <td align="center"><p align="center">
-<img src="Images/aiengine.png">
+<a href="./aiengine/README.md"> <img src="Images/aiengine.png"></a>
 </p>
  </tr>
  <tr>
