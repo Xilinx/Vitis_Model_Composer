@@ -15,18 +15,18 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
 <table style="width:100%"; border: none>
  <tr>
  <td align="center"><p align="center">
-     <a href="./heterogenous_designs/README.md"><img src="Images/heterogenous.png" width=50% height=50%></a>
+     <a href="./heterogenous_designs/README.md"><img src="Images/heterogenous.png" width=80% height=80%></a>
  </p>
  <td align="center"> <td align="center"><p align="center">
-<a href="./aiengine/README.md"> <img src="Images/aiengine.png" width=50% height=50%></a>
+<a href="./aiengine/README.md"> <img src="Images/aiengine.png" width=80% height=80%></a>
 </p>
  </tr>
  <tr>
  <td align="center"><p align="center">
-     <a href="./hls/README.md"><img src="Images/hls.png" width=50% height=50%></a>
+     <a href="./hls/README.md"><img src="Images/hls.png" width=80% height=80%></a>
 </p>
  <td align="center"> <td align="center"><p align="center">
-     <a href="./hdl/README.md"><img src="Images/hdl.png" width=50% height=50%></a>
+     <a href="./hdl/README.md"><img src="Images/hdl.png" width=80% height=80%></a>
 </p>
  </tr>
 </table>
