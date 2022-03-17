@@ -1,6 +1,6 @@
 # Examples with AI Engine and HDL blocks
 
-In Model Composer, you can simulate a design containing both AI Engine blocks and HDL blocks (placed on the FPGA). To connect these two domains, we use the "AIE to HDL" and "HDL to AIE" blocks.
+In Model Composer, you can simulate a design containing both AI Engine blocks and HDL blocks (targetted to the FPGA fabric). To connect these two domains, we use the "AIE to HDL" and "HDL to AIE" blocks.
 
 ![](images/screen_shot.PNG)
 
