@@ -8,7 +8,7 @@ block is a vector of size 8 with and a period of 8 (i.e. one sample per second).
 :bulb: The inputs to the HDL domain and the outputs of the HDL domain are always scaler signals. 
 
 :bulb: When the output of the AI Engine block is a vector, the HDL domain must be sampled at a higher sampling rate or else the internal memory of the AIE to HDL block will overflow.
-In this example, the HDL domain is sampled at 8 times higher than the AI Engine domain. The sampling time of the HDL domain is set at the Gateway In blocks that should also match the *Output Sample Time* field of the *AIE to HDL block* block. 
+In this example, the HDL domain is sampled at 8 times higher than the AI Engine domain. The sampling time of the HDL domain is set at the *Gateway In* blocks. Note that the *Output Sample Time* field of the *AIE to HDL* block is set to --Inherit from tready--. 
 
 ![](images/screen_shot.PNG)
 
