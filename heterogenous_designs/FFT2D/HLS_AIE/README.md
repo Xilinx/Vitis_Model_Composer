@@ -7,7 +7,7 @@ Two 1D FFTs are implemented on AI Engiens and a transpose operation is implement
 
 :bulb: _AIE to HLS_ blocks may be needed for connectivity if there is a need to change the data type.
 
-:bulb: Note the interface specificaiton in the HLS code. These are all needed for HW flow to work:
+:bulb: Note the interface specificaiton in the HLS code. These instruct the Vitis HLS compiler to infer an AXI stream interface for the IP. This interface will be used for the Hardware Validaiton flow in Vitis Model Composer:
   
 >*#pragma HLS INTERFACE ap_ctrl_none port=return*  
 >*#pragma HLS interface axis port=in*  
