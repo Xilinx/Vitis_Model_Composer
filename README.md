@@ -13,10 +13,10 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
 # Explore Vitis Model Composer Examples
 
 <p align="center">
-  <a href="./heterogenous_designs/README.md"><img src="Images/hetero.jpg" width="322"></a>  
-  <a href="./aiengine/README.md"> <img src="Images/aiengines.jpg" width="322"></a>
-  <a href="./hls/README.md"><img src="Images/hls.jpg" width="322"></a>
-  <a href="./hdl/README.md"><img src="Images/hdl.jpg" width="322"></a>
+  <a href="./heterogenous_designs/README.md"><img src="Images/hetero.jpg" width="350"></a>  
+  <a href="./aiengine/README.md"> <img src="Images/aiengines.jpg" width="350"></a>
+  <a href="./hls/README.md"><img src="Images/hls.jpg" width="350"></a>
+  <a href="./hdl/README.md"><img src="Images/hdl.jpg" width="350"></a>
 </p>
 
     
