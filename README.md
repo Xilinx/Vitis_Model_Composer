@@ -32,7 +32,15 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
 </table>
     
 # Quick Guides<a name="quick_guides"></a>
-<a href="./quick_guides/README.md"><img src="Images/quick_guides.png"></a>
+
+<table style="width:100%"; border: none>
+ <tr>
+ <td align="center"><p align="center">
+     <a href="./quick_guides/README.md"><img src="Images/quick_guides.png" width=50% height=50% ></a>
+ </p>
+ </tr>
+ </table>
+
 
 
 # Videos<a name="videos"></a>
