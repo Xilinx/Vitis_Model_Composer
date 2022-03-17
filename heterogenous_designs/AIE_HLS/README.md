@@ -1,5 +1,5 @@
 # AI Engine and HLS design
-In Model Composer you can simulate designs with both AI Engine blocks and HLS Kernel blocks. We use the *HLS Kernel* block to import an HLS kernel into Model Composer as a block. To connect the AI Engine blocks to the HLS kernel block, in case the data types do not match, we use the *AIE to HLS* and *HLS to AIE* interface blocks.
+In Model Composer you can simulate designs with both AI Engine blocks and HLS Kernel blocks. We use the *HLS Kernel* block to import an HLS kernel into Model Composer as a block. When connecting the AI Engine blocks to the HLS kernel block, in case the data types do not match, we use the *AIE to HLS* and *HLS to AIE* interface blocks.
 
 ![](images/interface_blocks.PNG)
 
@@ -11,7 +11,7 @@ In Model Composer you can simulate designs with both AI Engine blocks and HLS Ke
 ## Examples
 - [A desgin with both AI Engine and HLS Kernel blocks connected through interface blocks ](AIE_HLS_with_interface/README.md)
 - [A desgin with both AI Engine and HLS Kernel blocks connected directly ](AIE_HLS_without_interface/README.md)
-- [2D FFT desgin with both AI Engine and HLS Kernel blocks](../Designs/FFT2D/HLS_AIE/README.md)
+- [2D FFT desgin with both AI Engine and HLS Kernel blocks](../FFT2D/HLS_AIE/README.md)
 
 
 
