@@ -12,34 +12,20 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
 
 # Explore Vitis Model Composer Examples
 
-<table style="width:100%"; border: none>
- <tr>
- <td align="center"><p align="center">
-     <a href="./heterogenous_designs/README.md"><img src="Images/heterogenous.png" width=80% height=80%></a>
- </p>
- <td align="center"> <td align="center"><p align="center">
-<a href="./aiengine/README.md"> <img src="Images/aiengine.png" width=80% height=80%></a>
+<p align="center">
+  <a href="./heterogenous_designs/README.md"><img src="Images/heterogenous.png" width="350"></a>
+  <a href="./aiengine/README.md"> <img src="Images/aiengine.png" width="350"></a>
 </p>
- </tr>
- <tr>
- <td align="center"><p align="center">
-     <a href="./hls/README.md"><img src="Images/hls.png" width=80% height=80%></a>
+<p align="center">
+  <a href="./hls/README.md"><img src="Images/hls.png" width="350"></a>
+  <a href="./hdl/README.md"><img src="Images/hdl.png" width="350"></a>
 </p>
- <td align="center"> <td align="center"><p align="center">
-     <a href="./hdl/README.md"><img src="Images/hdl.png" width=80% height=80%></a>
-</p>
- </tr>
-</table>
     
 # Quick Guides<a name="quick_guides"></a>
+<p align="center">
+   <a href="./quick_guides/README.md"><img src="Images/quick_guides.png" width=50% height=50% ></a>
+</p>
 
-<table style="width:100%"; border: none>
- <tr>
- <td align="center"><p align="center">
-     <a href="./quick_guides/README.md"><img src="Images/quick_guides.png" width=50% height=50% ></a>
- </p>
- </tr>
- </table>
 
 
 
