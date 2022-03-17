@@ -12,7 +12,7 @@ In Model Composer, you can simulate a design containing both AI Engine blocks an
 ## Examples
 - [Design with HDL and AI Engine blocks](AIE_HDL_cosim/README.md)
 - [Design with imported RTL and AI Engine blocks](AIE_HDL_cosim_rtl_blackbox/README.md)
-- [2D FFT desgin with both AI Engine and HDL blocks](../Designs/FFT2D/HDL_AIE/README.md)
+- [2D FFT desgin with both AI Engine and HDL blocks](../FFT2D/HDL_AIE/README.md)
 
 ------------
 Copyright 2020 Xilinx
