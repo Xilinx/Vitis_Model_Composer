@@ -1,10 +1,11 @@
 # PL + AI Engine design Examples <a name="heterogeneous"></a>
-Versal AI Core devices are highly integrated, multicore compute platform that can adapt with evolving and diverse algorithms. These devices include both Programmable Logic (PL) and an AI Engine array. Vitis Model Composer provides a design environment, based on industry standard MATLAB and Simulink tools, to model and simulate designs with both PL and AI Engine components.
 
-<p align="center">
-  <img src="Images/aie_plus_pl.png" width="600">
-</p>
-
+<table style="width:100%">
+ <tr>
+ <td width="35%" align="left"><b>Versal AI Core devices are highly integrated, multicore compute platform that can adapt with evolving and diverse algorithms. These devices include both Programmable Logic (PL) and an AI Engine array. Vitis Model Composer provides a design environment, based on industry standard MATLAB and Simulink tools, to model and simulate designs with both PL and AI Engine components.</b>
+ <td width="65%" align="center"><b><img src="Images/aie_plus_pl.png" width="600"></b>
+ </tr>
+<table>
 
 # Examples
 
