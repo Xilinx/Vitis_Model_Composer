@@ -1,4 +1,4 @@
-# Heterogeneous (PL + AI Engine) design Examples <a name="heterogeneous"></a>
+# PL + AI Engine design Examples <a name="heterogeneous"></a>
 Versal AI Core devices are highly integrated, multicore compute platform that can adapt with evolving and diverse algorithms. These devices include both Programmable Logic (PL) and an AI Engine array. Vitis Model Composer provides a design environment, based on industry standard MATLAB and Simulink tools, to model and simulate designs with both PL and AI Engine components.
 
 # Examples
