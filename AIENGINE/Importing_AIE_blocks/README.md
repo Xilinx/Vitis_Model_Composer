@@ -1,7 +1,11 @@
 # Importing AIE kernels or graphs into Vitis Model Composer
 You can import AIE Kernels or graphs into Model Composer as blocks. To do that you can use the blocks in the Simulink library browser under Xilinx Toolbox/AI Engine/User-Defined Functions.
 
-![](images/user_defined_functions.PNG)
+ <p align="center">
+  <img width="484" alt="image" src="images/user_defined_functions.PNG">
+</p>
+
+
 
 ## Examples
 Here we provide few examples on how to use these blocks to import AIE Kernels or graphs into Model Composer.
