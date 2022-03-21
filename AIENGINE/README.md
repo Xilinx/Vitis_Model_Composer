@@ -17,6 +17,10 @@
  <tr>
  <td align="left">
    <a href="./Run_Time_Parameters/README.md">Run time parameters (RTP)</a>
+    <ul>
+  <li><a href="./Run_Time_Parameters/rtp_scalar/README.md">A design with a scalar RTP input</a></li>
+  <li><a href="./Run_Time_Parameters/rtp_vector/README.md">A design with a vector RTP input</a></li>
+</ul> 
  </td>
  <td>Examples of kernels with RTP input. RTP inputs can be sync or async. </td>
  </tr>
