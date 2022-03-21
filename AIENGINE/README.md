@@ -7,6 +7,10 @@
  <tr>
  <td align="left">
    <a href="./Importing_AIE_blocks/README.md">Importing Kernels and Graphs into Model Composer</a>
+  <ul>
+  <li><a href="./Importing_AIE_blocks/AIE_Class_Kernel_FIR/README.md">Importing a kernel class as a block</a></li>
+  <li><a href="./Importing_AIE_blocks/AIE_Graph/README.md">Importing a graph as a block</a></li>
+</ul> 
  </td>
  <td>Examples on importing Kernels and Graphs into Model Composer as blocks. This include importing templatized class based kernels, templatized AI Engine functions, and graphs. </td>
  </tr>
