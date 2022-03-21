@@ -30,7 +30,7 @@
  </tr>
  </table>
  
- ### Digital Communications Examples
+### Digital Communications Examples
 
 <table style="width:100%">
  <tr>
@@ -52,7 +52,7 @@
  </tr>
  </table>
 
- ### Digital Filtering Examples
+### Digital Filtering Examples
 
 <table style="width:100%">
  <tr>
@@ -93,7 +93,7 @@
  </tr>
  </table>
  
- ### Floating Point Examples
+### Floating Point Examples
 
 <table style="width:100%">
  <tr>
@@ -110,7 +110,7 @@
  </table>
 
  
- ### General Examples
+### General Examples
 
 <table style="width:100%">
  <tr>
@@ -139,7 +139,7 @@
  </tr>
  </table>
  
- ### MATH Examples
+### MATH Examples
 
 <table style="width:100%">
  <tr>
@@ -162,7 +162,7 @@
  </tr>
  </table>
  
- ### RFSoC Examples
+### RFSoC Examples
 
 <table style="width:100%">
  <tr>
