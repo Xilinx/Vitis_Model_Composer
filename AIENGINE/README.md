@@ -27,6 +27,11 @@
  <tr>
  <td align="left">
    <a href="./DSPlib/README.md">DSP Functions</a>
+      <ul>
+  <li><a href="./DSPlib/fir/README.md">Using the AI Engine FIR block from the library browser</a></li>
+  <li><a href="./DSPlib/fft/README.md">Usign the AI Engine FFT block from the library browser</a></li>
+  <li><a href="./DSPlib/matrix_multiply/README.md">Importing Matrix Multiply from DSPLib as a block</a></li>     
+</ul> 
  </td>
  <td>AI Engine FIR filters and FFT. Importing Matrix Multiply as a graph into Vitis Model Composer.</td>
  </tr>
