@@ -1,5 +1,7 @@
 # AI Engine Examples
 
+Vitis Model Composer allows you to create AI Engine designs and generate code for them. The visualization and analysis capabilities of MATLAB and Simulink presents an excellent environment to debug any design and make sure the design functionally performs as expected.
+
 <table style="width:100%">
  <tr>
  <td width="35%" align="center"><b>Topic</b>
