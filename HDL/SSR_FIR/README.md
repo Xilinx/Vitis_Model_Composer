@@ -8,6 +8,6 @@ This reference design can be used as a starting design point when efficient impl
 -	The Vitis Model Composer design includes a top level Simulink self-checking testbench, which compares the fixed point HDL Black Box based implementation to a golden reference floating point model
 -	This is a very high speed design, clock frequencies up to the maximum data sheet values of 741/891/1150 MHz in the fastest speed grade 7-Series/UltraScale+/Versal FPGAs are possible
 -	The design also shows a technique to avoid the Versal 795/824/872 MHz fMAX limitation due to SRL16 minimum pulse width spec
--	The VHDL code inside the Model Composer HDL Black Box can be instantiated stand alone in a Vivado RTL project, MATLAB and Vitis Model Composer are not essential and are used here to illustrate the flow and make functional verification easier.
--	
+-	The VHDL code inside the Model Composer HDL Black Box can be instantiated stand alone in a Vivado RTL project. MATLAB and Vitis Model Composer are used here to illustrate the flow and make functional verification easier.
+
 This design only works in Vivado 2022.1 or later.
