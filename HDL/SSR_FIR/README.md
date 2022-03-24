@@ -1,12 +1,13 @@
 # High Speed SSR FIR
 
 This reference design can be used as a starting design point when efficient implementations of very high data rate (over 1 Gsps) Single Rate FIRs are required. This PL based design can be used in any modern Xilinx device - 7-Series/UltraScale/UltraScale+/Versal. 
+<br/><br/>
 
  <p align="center">
   <img src="Images/SSR_FIR_screen_shot.PNG" align ="center" width = 90%>
 </p>
  
-
+<br/><br/>
 This Single Rate SSR FIR reference design illustrates a number of advanced Vitis Model Composer design techniques: 
 
 -	This is a fully parameterizable design - you can control the filter order N, the number of clocks per sample SSR, the filter type (non/even/odd-symmetric), the input, output and coefficient fixed point quantization; you can set SSR and TAPS in Model Settings/Model Properties/Callbacks/InitFcnall the rest of the SSR FIR parameters can be set in the Model Composer block dialog
