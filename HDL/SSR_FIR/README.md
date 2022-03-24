@@ -11,3 +11,8 @@ This reference design can be used as a starting design point when efficient impl
 -	The VHDL code inside the Model Composer HDL Black Box can be instantiated stand alone in a Vivado RTL project. MATLAB and Vitis Model Composer are used here to illustrate the flow and make functional verification easier.
 
 This design only works in Vivado 2022.1 or later.
+
+ <p align="center">
+  <img src="Images/SSR_FIR_screen_shot.PNG" align ="center" width = 70%>
+</p>
+ 
