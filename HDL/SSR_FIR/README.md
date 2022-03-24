@@ -13,6 +13,6 @@ This reference design can be used as a starting design point when efficient impl
 This design only works in Vivado 2022.1 or later.
 
  <p align="center">
-  <img src="Images/SSR_FIR_screen_shot.PNG" align ="center" width = 70%>
+  <img src="Images/SSR_FIR_screen_shot.PNG" align ="center" width = 90%>
 </p>
  
