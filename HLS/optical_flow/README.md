@@ -1,9 +1,11 @@
 # Optical flow
 This example demonstrates an implementation of dense optical flow in Model Composer.
 
-This example uses the following Mathworks toolboxes.  
+This example uses the following Mathworks toolboxes:  
 * [MATLAB Computer Vision System Toolbox](https://www.mathworks.com/products/computer-vision.html)  
 * [DSP System Toolbox](https://www.mathworks.com/products/dsp-system.html)
+
+You also need to have a Vitis Model Composer license to simulate this example.
 
 ## What is dense optical flow?
 
