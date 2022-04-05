@@ -82,7 +82,7 @@ This example showcases a desgin that inlcudes a AI Engine kernel with a vector i
 <a href="./DSPlib/matrix_multiply/README.md">Importing Matrix Multiply from DSPLib as a block</a>
 </td>
 <td>
-This example showcases a desgin that inlcudes a AI Engine kernel with a vector input RTP.
+This example showcases how you can import a DSPLib function as a block.
 </td>
 </tr>
 </table>
