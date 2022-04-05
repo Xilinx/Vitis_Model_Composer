@@ -3,41 +3,98 @@
 Vitis Model Composer allows you to create AI Engine designs and generate code for them. The visualization and analysis capabilities of MATLAB and Simulink presents an excellent environment to debug any design and make sure the design functionally performs as expected.
 
 <table style="width:100%">
- <tr>
- <td width="35%" align="center"><b>Topic</b>
- <td width="65%" align="center"><b>Description</b>
- </tr>
- <tr>
- <td align="left">
-   <a href="./Importing_AIE_blocks/README.md">Importing Kernels and Graphs into Model Composer</a>
-  <ul>
-  <li><a href="./Importing_AIE_blocks/AIE_Class_Kernel_FIR/README.md">Importing a kernel class as a block</a></li>
-  <li><a href="./Importing_AIE_blocks/AIE_Graph/README.md">Importing a graph as a block</a></li>
-</ul> 
- </td>
- <td>Examples on importing Kernels and Graphs into Model Composer as blocks. This include importing templatized class based kernels, templatized AI Engine functions, and graphs. </td>
- </tr>
- <tr>
- <td align="left">
-   <a href="./Run_Time_Parameters/README.md">Run time parameters (RTP)</a>
-    <ul>
-  <li><a href="./Run_Time_Parameters/rtp_scalar/README.md">A design with a scalar RTP input</a></li>
-  <li><a href="./Run_Time_Parameters/rtp_vector/README.md">A design with a vector RTP input</a></li>
-</ul> 
- </td>
- <td>Examples of kernels with RTP input. RTP inputs can be sync or async. </td>
- </tr>
- <tr>
- <td align="left">
-   <a href="./DSPlib/README.md">DSP Functions</a>
-      <ul>
-  <li><a href="./DSPlib/fir/README.md">Using the AI Engine FIR block from the library browser</a></li>
-  <li><a href="./DSPlib/fft/README.md">Usign the AI Engine FFT block from the library browser</a></li>
-  <li><a href="./DSPlib/matrix_multiply/README.md">Importing Matrix Multiply from DSPLib as a block</a></li>     
-</ul> 
- </td>
- <td>AI Engine FIR filters and FFT. Importing Matrix Multiply as a graph into Vitis Model Composer.</td>
- </tr>
+<tr>
+  <td align="center" colspan="2" style="bold" ><b><a href="./Importing_AIE_blocks/README.md">Importing Kernels and Graphs into Model Composer</a></b>
+</tr>
+
+<tr>
+<td>
+<a href="./Importing_AIE_blocks/AIE_Class_Kernel_FIR/README.md">Importing a kernel class as a block                      </a>
+</td>
+<td>
+In this example we import an AI Engine class kernel into Vitis Model Compsoer as a block.
+</td>
+</tr> 
+ 
+<tr>
+<td>
+<a href="./Importing_AIE_blocks/AIE_Graph/README.md">Importing a graph as a block</a>
+</td>
+<td>
+In this example we import an AI Engine graph into Vitis Model Compsoer as a block.
+</td>
+</tr> 
+</table>
+<br/>
+
+ 
+ 
+<table style="width:100%">
+<tr>
+  <td align="center" colspan="2" style="bold" ><b>  <a href="./Run_Time_Parameters/README.md">Run time parameters (RTP)</a></b>
+</tr>
+
+<tr>
+<td>
+<a href="./Run_Time_Parameters/rtp_scalar/README.md">A design with a scalar RTP input</a>
+</td>
+<td>
+This example showcases a desgin that inlcudes a AI Engine kernel with a scalar input RTP.
+</td>
+</tr> 
+ 
+<tr>
+<td>
+<a href="./Run_Time_Parameters/rtp_scalar/README.md">A design with a scalar RTP input</a>
+</td>
+<td>
+This example showcases a desgin that inlcudes a AI Engine kernel with a vector input RTP.
+</td>
+</tr> 
+</table>
+<br/>
+ 
+<table style="width:100%">
+<tr>
+  <td align="center" colspan="2" style="bold" ><b><a href="./DSPlib/README.md">DSP Functions</a></b>
+</tr>
+
+<tr>
+<td>
+<a href="./DSPlib/fft/README.md">Usign the AI Engine FFT block from the library browser</a>
+</td>
+<td>
+This example showcases a desgin that inlcudes a AI Engine kernel with a scalar input RTP.
+</td>
+</tr> 
+ 
+<tr>
+<td>
+<a href="./DSPlib/fft/README.md">Usign the AI Engine FFT block from the library browser</a>
+</td>
+<td>
+This example showcases a desgin that inlcudes a AI Engine kernel with a vector input RTP.
+</td>
+</tr>
+ 
+<tr>
+<td>
+<a href="./DSPlib/matrix_multiply/README.md">Importing Matrix Multiply from DSPLib as a block</a>
+</td>
+<td>
+This example showcases a desgin that inlcudes a AI Engine kernel with a vector input RTP.
+</td>
+</tr>
+</table>
+<br/>
+
+
+
+
+<table style="width:100%">
+<tr>
+  <td align="center" colspan="2" style="bold" ><b>Other examples</b>
+</tr>
  
  <tr>
  <td align="left">
