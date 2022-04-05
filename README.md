@@ -10,6 +10,7 @@ We are storing and managing Vitis Model Composer examples in GitHub. This way, u
 
 Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis Model Composer examples.
 
+
 # Explore Vitis Model Composer Examples
 
 <p align="center">
