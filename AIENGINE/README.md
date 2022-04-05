@@ -64,16 +64,16 @@ This example showcases a desgin that inlcudes a AI Engine kernel with a vector i
 <a href="./DSPlib/fft/README.md">Usign the AI Engine FFT block from the library browser</a>
 </td>
 <td>
-This example showcases a desgin that inlcudes a AI Engine kernel with a scalar input RTP.
+This example showcases a desgin that uses an AI Engine FFT block from the library browser.
 </td>
 </tr> 
  
 <tr>
 <td>
-<a href="./DSPlib/fft/README.md">Usign the AI Engine FFT block from the library browser</a>
+<a href="./DSPlib/fir/README.md">Usign the AI Engine FIR block from the library browser</a>
 </td>
 <td>
-This example showcases a desgin that inlcudes a AI Engine kernel with a vector input RTP.
+This example showcases a desgin that uses an AI Engine FIR block from the library browser.
 </td>
 </tr>
  
