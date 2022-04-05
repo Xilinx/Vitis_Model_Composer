@@ -1,0 +1,27 @@
+{
+    "graphSourceFile": "DDS_87966edb.cpp",
+    "graphName": "DDS_87966edb",
+    "graphHeaderFile": "DDS_87966edb.h",
+    "graphSearchPath": [
+        "L2/include/aie",
+        "L1/include/aie",
+        "L1/src/aie",
+        "L1/tests/aie/inc"
+    ],
+    "graphPreProcOptions": [],
+    "ports": [
+        {
+            "name": "out",
+            "portkind": "window",
+            "direction": "out",
+            "basictype": "int16",
+            "windowsize": 128,
+            "margin": 0,
+            "synchronicity": "sync",
+            "isArray": false,
+            "numElements": 1,
+            "isComplex": true,
+            "isStdComplex": false
+        }
+    ]
+}

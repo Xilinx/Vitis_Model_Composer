@@ -1,0 +1,11 @@
+{
+    "spec": "meta_data_hl_dds.json",
+    "outdir": "./xmc_aie_lib/DDS_87966edb",
+    "parameters": {
+        "data_type": "cint16",
+        "output_window_size": 32,
+        "phase_increment": 33554432,
+        "output_sampling_rate": 200
+    },
+    "updated_parameter": ""
+}
