@@ -28,7 +28,7 @@ You can view variable-size signals with a display block or a scope block. Note i
 
 ## Converting variable-size signals to fixed size signals
 
-At times you need to convert a variable-size signal to a fixed size signal. This is necessary if you need to use a block that does not support variable-size signals. In such cases, you can use the *To Fixed Size* block. However, this block will introduce zeros for the missing elements if the variable-size signal is not full (see the image below). Usage of this block is mostly for cases when the variable-size signal is full. The "status" output of the To Fixed Size block indicates if the input variable-size signal is full or not. You can monitor this output during simulation by say connecting it to a scope block. The status output is an optional output that you can enable or disable on the mask.
+At times you need to convert a variable-size signal to a fixed size signal. This is necessary if you need to use a block that does not support variable-size signals. In such cases, you can use the *To Fixed Size* block. The input to this block will be buffered till the number of samples reaches the *Output Size* parameter set on the mask. The buffered samples will then be transferred to the out port, and the valid port is set to true. When there are not enough samples buffered, the out port will be a vector of zeros, and the valid port is set to false.
 
 <p align="center">
 <img src="VariableSizeSignalToFixedSize.gif">
