@@ -13,6 +13,35 @@ Versal AI Core devices are highly integrated, multicore compute platform that ca
 
 # Examples
 ### AI Egnine + HLS Kernel
+
+<table style="width:100%">
+<tr>
+  <td align="center" colspan="2" style="bold" ><b><a href="./Importing_AIE_blocks/README.md">Importing Kernels and Graphs into Model Composer</a></b>
+</tr>
+
+<tr>
+<td>
+<a href="./Importing_AIE_blocks/AIE_Class_Kernel_FIR/README.md">Importing a kernel class as a block                      </a>
+</td>
+<td>
+In this example we import an AI Engine class kernel into Vitis Model Compsoer as a block.
+</td>
+</tr> 
+ 
+<tr>
+<td>
+<a href="./Importing_AIE_blocks/AIE_Graph/README.md">Importing a graph as a block</a>
+</td>
+<td>
+In this example we import an AI Engine graph into Vitis Model Compsoer as a block.
+</td>
+</tr> 
+</table>
+<br/>
+
+</table>
+
+
 <table style="width:100%">
  <tr>
  <td width="35%" align="center"><b>Topic</b>
