@@ -74,7 +74,7 @@ Design with HDL and AI Engine blocks
  
 <tr>
 <td>
-<a href="./AIE_HDL/AIE_HDL_cosim_rtl_blackbox/README.mdd">Design with imported RTL and AI Engine blocks</a>
+<a href="./AIE_HDL/AIE_HDL_cosim_rtl_blackbox/README.md">Design with imported RTL and AI Engine blocks</a>
 </td>
 <td>
 Design with imported RTL and AI Engine blocks.
