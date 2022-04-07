@@ -12,34 +12,49 @@ Versal AI Core devices are highly integrated, multicore compute platform that ca
  
 
 # Examples
-### AI Egnine + HLS Kernel
 
 <table style="width:100%">
 <tr>
-  <td align="center" colspan="2" style="bold" ><b><a href="./Importing_AIE_blocks/README.md">Importing Kernels and Graphs into Model Composer</a></b>
+  <td align="center" colspan="2" style="bold" ><b><a href="./AIE_HLS/README.md">Design with both AI Engines and HLS kernels</a></b>
 </tr>
 
 <tr>
 <td>
-<a href="./Importing_AIE_blocks/AIE_Class_Kernel_FIR/README.md">Importing a kernel class as a block                      </a>
+<a href="./Tx_chain_200MHz/README.md">TX Chain 200MHz </a>
 </td>
 <td>
-In this example we import an AI Engine class kernel into Vitis Model Compsoer as a block.
+This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHz, which is part of the communications Library Early access program.
 </td>
 </tr> 
  
 <tr>
 <td>
-<a href="./Importing_AIE_blocks/AIE_Graph/README.md">Importing a graph as a block</a>
+<a href="./AIE_HLS/AIE_HLS_with_interface/README.md">AI Engines and HLS Kernel with interface blocks</a>
 </td>
 <td>
-In this example we import an AI Engine graph into Vitis Model Compsoer as a block.
+A desgin with both AI Engine and HLS Kernel blocks connected through interface blocks.
 </td>
 </tr> 
+ 
+<tr>
+<td>
+<a href="./AIE_HLS/AIE_HLS_without_interface/README.md">AI Engines and HLS Kernel connected directly</a>
+</td>
+<td>
+A desgin with both AI Engine and HLS Kernel blocks connected directly.
+</td>
+</tr>
+ 
+<td>
+<a href="./FFT2D/HLS_AIE/README.md">2D FFT</a>
+</td>
+<td>
+A 2D FFT desgin with both AI Engine and HLS Kernel.
+</td>
+</tr>
+ 
 </table>
-<br/>
 
-</table>
 
 
 <table style="width:100%">
@@ -77,11 +92,5 @@ In this example we import an AI Engine graph into Vitis Model Compsoer as a bloc
  </td> 
  </tr>
   
-   <tr>
- <td align="left">
- <a href="./Tx_chain_200MHz/README.md">TX Chain 200MHz </a>
- </td>
- <td> This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHz, which is part of the communications Library Early access program.</td>
- </tr>
   
  </table>
