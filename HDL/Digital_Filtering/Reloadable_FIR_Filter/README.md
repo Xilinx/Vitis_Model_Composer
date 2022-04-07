@@ -2,6 +2,7 @@
 
 This example shows how to reload the 5-tap symmetric FIR with the coefficient values of 7 8 9 8 7.
 
+![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
 
