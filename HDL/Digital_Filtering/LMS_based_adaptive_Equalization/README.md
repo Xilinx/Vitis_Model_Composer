@@ -4,6 +4,8 @@ This design shows a T/2 adaptive Fractionally Space Equalizer (FSE) operating on
 
 The DHAT scope provides an X-Y plot of the I and Q filter outputs from within the FSE. As the simulation progresses, these symbols will converge as the error is reduced. The magnitude of the filter coefficients is shown in a vector scope as well. Increasing the simulation duration will allow better visualization of the adaptive FSE effects on the filter output.
 
+![](images/screen_shot.PNG)
+
 For additional information on FSE:
 
 J.R. Treichler, I. Fijalkow, and C.R. Johnson, Jr. "Fractionally Spaced Equalizers" IEEE Signal Processing Magazine, May 1996, pp. 65-81.
