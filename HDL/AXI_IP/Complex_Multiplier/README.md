@@ -2,7 +2,7 @@
 
 This example shows how to use Complex Multiplier. Particular attention is paid towards configuring the output width of complex multiplier.
 
-
+![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
 
