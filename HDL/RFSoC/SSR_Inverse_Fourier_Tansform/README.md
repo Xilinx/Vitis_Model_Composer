@@ -6,6 +6,7 @@ By swapping the real and imaginary parts of the output of FFT and normalizing (d
 
 Finally, the output from Vector FFT is compared with the Simulink IFFT block and plotted accordingly.
 
+![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
 
