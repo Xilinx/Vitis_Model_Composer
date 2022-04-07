@@ -4,6 +4,7 @@ This design is a logic and cores implementation of a Fibonacci number generator.
 
 This design should be compared to sysgenFIBONACCI_synth which implements the same computation in a more software-centric way. The two designs are functionally equivalent, and use the same amount of FPGA resources.
 
+![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
 
