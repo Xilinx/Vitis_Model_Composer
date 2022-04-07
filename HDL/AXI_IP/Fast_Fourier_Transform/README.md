@@ -2,6 +2,7 @@
 
 This example shows how to use Fast Fourier Transform by performing FFT and IFFT.
 
+![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
 
