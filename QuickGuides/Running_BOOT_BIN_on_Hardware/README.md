@@ -1,6 +1,6 @@
 # Running on Hardware
 
-## Bare metal
+## Baremetal
 
 
 ## Linux
