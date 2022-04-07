@@ -4,6 +4,7 @@ This design fills the gap of configuring FIR compiler blocks for symmetric inter
 
 In this design, we try to decompose the interpolation symmetric FIR into eight single-rate sub-filters that normal FIR Compiler can handle. The symmetry (even, odd and even anti-symmetric) is achieved by re-arranging the coefficients as implemented in design.
 
+![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
 
