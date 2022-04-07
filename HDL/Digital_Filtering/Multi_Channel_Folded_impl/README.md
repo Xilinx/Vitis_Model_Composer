@@ -9,6 +9,7 @@ the biquad is time-multiplexed among four cascade stages for each channel
 the biquad is implemented using two multipliers and a single adder instead of the straightforward 5 multipliers and 4 adders (a biquad output is calculated in every 5 system clock cycles).
 The maximum clock frequency for the top-level design is device dependent. The speed for each channel (4-cascade-stage IIR filter) is maximum clock frequency for the FPGA( MHz) / (15 channels*4 biquads/channel*5 clks/biquad).
 
+![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
 
