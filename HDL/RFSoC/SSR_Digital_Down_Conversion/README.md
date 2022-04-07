@@ -8,6 +8,7 @@ The second step is to down sample the data by configuring the FIR (Vector) block
 
 In this case the SSR parameter is set to 3. This lets 3 data samples to process per PL clock cycle. 
 
+![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
 
