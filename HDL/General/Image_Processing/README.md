@@ -4,6 +4,7 @@ The test bench for this wavelet design consists of a processor and behavioral mo
 
 A full color version of the design would easily fit in the same part as only the DWT datapath would require replication (the memory control could remain unchanged).
 
+![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
 
