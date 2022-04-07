@@ -2,6 +2,8 @@
 
 This design implements R-G-B to Y-Pr-Pb color space conversion.
 
+![](images/screen_shot.PNG)
+
 ------------
 Copyright 2020 Xilinx
 
