@@ -26,6 +26,7 @@ If you have a local vck190 evaluation board connected to your Windows machine, t
 # Board Setup
 This is a onetime setup and the board should have been delivered to you with this default switch settings, but it is good to double check for the first time when you get the board. Also, make the connection from board to laptop and power cable connection to the board.
 
+![](./images/vck190_board_connections.PNG)
 
 * Remove J326 (7-8) jumper(ref. 1 in above picture)
 * Make sure you have the SYSCTRL uSD card inserted in the slot and card has the SYSCTRL image. (ref. 2 in above picture)
@@ -36,29 +37,34 @@ This is a onetime setup and the board should have been delivered to you with thi
 * Connect the power brick to an AC outlet and the DC output to J16 on the VCK190 board (ref. 8 in above picture)
 
 # Run Design
-Open a terminal emulator like Tera Term on the Windows10 machine and establish a connection to a serial device by selecting “Serial”.
+* Open a terminal emulator like Tera Term on the Windows10 machine and establish a connection to a serial device by selecting “Serial”.
 
+![](./images/rob_9.PNG)
 
-* There should be at least 3 COM ports available (depending on the PC). Note: the VCK190 board does not need to be powered on at this time. Note that the COM port numbers may be different from that shown above. The 3 COM ports may be verified by viewing “Ports (COM & LPT)” in Device Manager. Note: when the USB cable is not connected, “Ports (COM & LPT)” may not be shown in Device Manager.
+There should be at least 3 COM ports available (depending on the PC). Note: the VCK190 board does not need to be powered on at this time. Note that the COM port numbers may be different from that shown above. The 3 COM ports may be verified by viewing “Ports (COM & LPT)” in Device Manager. Note: when the USB cable is not connected, “Ports (COM & LPT)” may not be shown in Device Manager.
 
-
+![](./images/rob_10.PNG)
 
 In TeraTerm, select the low COM number (Versal UART0, COM4 in this example) and click OK
 
 * From TeraTerm, select  Setup → Serial port and then specify the speed to 115200 bps
 
+![](./images/rob_11.PNG)
 
-
+![](./images/rob_12.PNG)
 
 * Turn on board power by switching SW13 on and observe the terminal emulator. If everything goes well, boot messages should be displayed
-
+* 
+![](./images/rob_13.PNG)
 
 * After linux has booted, from TeraTerm terminal emulator window, type 'cd /run/media/mmcblk0p1' and hit Enter. Within this directory do an 'ls' to check the contents: it should have the BOOT.BIN, a.xclbin, data directory containing the data files among others.
 
+![](./images/rob_15.PNG)
 
 * From the terminal emulator, run './host.exe a.xclbin'.
 
+![](./images/rob_16.PNG)
 
 * The application will run and at the end of the test, you should see similar messages as highlighted below.
 
-
+![](./images/rob_17.PNG)
