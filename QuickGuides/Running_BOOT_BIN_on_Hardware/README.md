@@ -2,7 +2,7 @@
 
 ## Baremetal
 
-[programming_board_bare_metal.md]
+ <a href="./README.md"> Progamming VCK190 for with BOOT.BIN</a>
 
 ## Linux
 
