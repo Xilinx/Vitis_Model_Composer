@@ -10,6 +10,7 @@ Multiple display blocks allow the user to visualize the Spectrum and Transfer fu
 
 All the variables such as data width, coefficient width, Sample period, and coefficient values are initialized in the IIR_PreLoadFcn.m file. The default setting use 12 bit data and coefficients
 
+![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
 
