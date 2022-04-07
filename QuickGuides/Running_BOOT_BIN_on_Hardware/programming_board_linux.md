@@ -16,7 +16,7 @@ If you have a local vck190 evaluation board connected to your Windows machine, t
 * Under 'Image File', browse to the location where sd_card.img has been generated
 * Choose the correct SD card reader drive letter under 'Device'
 * Click 'Write' button
-
+![](./images/Rob4.PNG)
 
 * After writing the uSD card, you should be able to see its content from Windows File Explorer within the drive corresponding to the uSD card
 
