@@ -21,6 +21,7 @@ If you have a local vck190 evaluation board connected to your Windows machine, t
 
 * After writing the uSD card, you should be able to see its content from Windows File Explorer within the drive corresponding to the uSD card
 
+![](./images/rob_8.PNG)
 
 # Board Setup
 This is a onetime setup and the board should have been delivered to you with this default switch settings, but it is good to double check for the first time when you get the board. Also, make the connection from board to laptop and power cable connection to the board.
