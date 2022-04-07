@@ -45,7 +45,7 @@ This example showcases a desgin that inlcudes a AI Engine kernel with a scalar i
  
 <tr>
 <td>
-<a href="./Run_Time_Parameters/rtp_scalar/README.md">A design with a scalar RTP input</a>
+<a href="./Run_Time_Parameters/rtp_vector/README.md">A design with a vector RTP input</a>
 </td>
 <td>
 This example showcases a desgin that inlcudes a AI Engine kernel with a vector input RTP.
