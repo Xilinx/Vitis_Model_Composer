@@ -2,6 +2,7 @@
 
 This example shows how to use DDS Compiler. Particular attention is paid towards configuring the DDS Compiler to generate a sinusoid with a certain time period.
 
+![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
 
