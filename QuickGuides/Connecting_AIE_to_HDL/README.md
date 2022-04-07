@@ -24,7 +24,7 @@ Keeping the above five input design criteria in mind, we can set the parameters 
 ## Step 1 Set the PLIO bit width in the PLIO block
 Set the PLIO bit width to **W**.
 
-## Step 2 Set parameters of the HDL to AIE block
+## Step 2 Set parameters of the AIE to HDL block
 #### Output Data Type
 Set the _Output Data Type_ such that the output bit width is **W**. If **W** is larger than the bit width of the input, the output should be unsigned, or else the output should have the same signedness of the input. Note that the input bit width cannot be larger than **W**. 
 #### Output Sample Time
