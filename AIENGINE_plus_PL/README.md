@@ -12,7 +12,6 @@ Versal AI Core devices are highly integrated, multicore compute platform that ca
  
 
 # Examples
-
 <table style="width:100%">
 <tr>
   <td align="center" colspan="2" style="bold" ><b><a href="./AIE_HLS/README.md">Design with both AI Engines and HLS kernels</a></b>
@@ -44,53 +43,60 @@ A desgin with both AI Engine and HLS Kernel blocks connected through interface b
 A desgin with both AI Engine and HLS Kernel blocks connected directly.
 </td>
 </tr>
- 
+
+<tr> 
 <td>
 <a href="./FFT2D/HLS_AIE/README.md">2D FFT</a>
 </td>
 <td>
 A 2D FFT desgin with both AI Engine and HLS Kernel.
 </td>
-</tr>
- 
+ </tr>
 </table>
 
 
 
+
+<br/>
 <table style="width:100%">
- <tr>
- <td width="35%" align="center"><b>Topic</b>
- <td width="65%" align="center"><b>Description</b>
- </tr>
- <tr>
- <td align="left">
-   <a href="./AIE_HDL/README.md">Designs with both AI Engine and HDL blocks</a>
- </td>
- <td>Examples of designs with both AI Engine kernels and HDL blocks. Here you can see examples of importing Verliog code into Model Composer and co-simulation with AI Engine   blocks at high speeds.
- </td>
- </tr>
- <tr>
- <td align="left">
-   <a href="./AIE_HLS/README.md">Design with both AI Engines and HLS kernels</a>
- </td>
- <td>Example of a design with both AI Engine kernels and an HLS kernel.
- </td>
- </tr>
-  
-   <tr>
- <td align="left">
- <a href="./FFT2D/README.md">2D FFT (AI Engines + HDL/HLS) </a>
- </td>
- <td> The designs here showcase 2D-FFTs that are implemented both in AI Engines and Programmable Logic(PL). In one example the PL is implemented using HLS and in another example the PL is implemented using HDL blocks in Vitis Model Composer.</td>
- </tr>
-  
-   <tr>
- <td align="left">
-   <a href="./SingleStreamSSR_FIR_withPL/README.md">Super Sample Rate FIR filter with PL</a>
- </td>
- <td> This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we consider latencies within the kernels, which are implemented into the FIFO's included in AXI-Stream Interconnect(PL). 
- </td> 
- </tr>
-  
-  
- </table>
+<tr>
+  <td align="center" colspan="2" style="bold" ><b><a href="./AIE_HDL/README.md">Designs with both AI Engine and HDL blocks</a></b>
+</tr>
+
+<tr>
+<td>
+<a href="./AIE_HDL/AIE_HDL_cosim/README.md">Design with HDL and AI Engine blocks</a>
+</td>
+<td>
+Design with HDL and AI Engine blocks
+</td>
+</tr> 
+ 
+<tr>
+<td>
+<a href="./AIE_HDL/AIE_HDL_cosim_rtl_blackbox/README.mdd">Design with imported RTL and AI Engine blocks</a>
+</td>
+<td>
+Design with imported RTL and AI Engine blocks.
+</td>
+</tr>
+ 
+<td>
+<a href="./FFT2D/HDL_AIE/README.md">2D FFT</a>
+</td>
+<td>
+A 2D FFT desgin with both AI Engine and HDL Kernel.
+</td>
+</tr>
+
+<tr> 
+<td>
+<a href="./SingleStreamSSR_FIR_withPL/README.md">Super Sample Rate FIR filter with PL</a>
+</td>
+<td>
+This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we consider latencies within the kernels, which are implemented into the FIFO's included in AXI-Stream Interconnect(PL).
+</td>
+</tr>
+ 
+</table>
+
