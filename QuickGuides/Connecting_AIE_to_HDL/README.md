@@ -58,7 +58,7 @@ The image below depicts the components that are needed to connect an HDL design 
 1. Number of samples in the input to the AI Engine kernel block (**S**). For an AI Engine kernel with a window input type, this is typically the size of the input window. For an AI Engine kernel with a stream input, this is typically the number of samples the AI Engine kernel consumes at every invocation.
 1. The period of all the input and output signals going into or out of the AI Engine subsystem (**P**). All the input and output signals of the AI Engine subsystem must have the same period.
 
-![](images/high_level_AIE_HDL.png)
+![](images/high_level_HDL_AIE.png)
 
 Knowing the five design criteria above we can set the parameters of the blocks accordingly as described below:
 
