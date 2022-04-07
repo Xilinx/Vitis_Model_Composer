@@ -71,7 +71,9 @@ Set the PLIO bit width to **W**.
 * Set Output Data Type to **DT**.
 * Set Output frame size to **S**.
 * Set Output Sample Time to **T** x (bit width of **DT**)/(**W**) if this input is driving the AI Engine Subsystem period or to **P**/**S** if the period of the AI Engine subsystem (**P**) is determined by another input to AI Engine subsystem.
-* Set tready Sample Time to **T**
+
+## Step 3 Set the Gateway Out AXIS block
+Set the Sample Period parameter to the same value as in the corresponding "Gateway In, AXI Stream" block. 
 
 # Examples
 In this GitHub repository, you can find several examples in which the AIE to HDL and HDL to AIE blocks are being used:
