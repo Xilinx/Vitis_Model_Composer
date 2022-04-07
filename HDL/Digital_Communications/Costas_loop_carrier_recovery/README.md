@@ -2,6 +2,7 @@
 
 The DDS block with Sine and Cosine outputs is implemented using discrete Model Composer HDL blocksets. The pll_loop_filter employs a proportional plus integral loop filter formed by a scaled digital integrator and a scaled direct path. The error signal is generated using a subtractors. Two multipliers weight the error signal by the adaption rate constant.
 
+![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
 
