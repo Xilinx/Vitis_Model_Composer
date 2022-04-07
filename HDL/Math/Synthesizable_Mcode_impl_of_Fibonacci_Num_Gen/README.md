@@ -8,6 +8,7 @@ The two designs are functionally equivalent, and use the same amount of FPGA res
 
 For correctness of the design in practice, all the I/O gateways should be double buffered. This design does not do this for simplicity. The comparison of the logic design and the MCode design is simpler without the double buffering.
 
+![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
 
