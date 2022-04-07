@@ -2,10 +2,11 @@
 
 ## Baremetal
 
- <a href="./programming_board_bare_metal.md"> Progamming VCK190 for with BOOT.BIN</a>
+ <a href="./programming_board_bare_metal.md"> Progamming VCK190 for BOOT.BIN</a>
 
 ## Linux
 
+ <a href="./programming_board_linux.md"> Progamming VCK190 for Linux</a>
 --------------
 Copyright 2020 Xilinx
 
