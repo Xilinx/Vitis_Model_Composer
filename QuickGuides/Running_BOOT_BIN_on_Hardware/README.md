@@ -2,6 +2,7 @@
 
 ## Baremetal
 
+[programming_board_bare_metal.md]
 
 ## Linux
 
