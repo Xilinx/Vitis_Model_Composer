@@ -8,7 +8,7 @@ If you have a local vck190 evaluation board connected to your Windows machine, t
   * VCK190 SD card : may already be available with the board. This is the card, where you will write the sd_card.img file generated for your design
 * Terminal emulator, for example
   * Windows: teraterm (https://osdn.net/projects/ttssh2)
-  * Windows: Win32 Disk Imager utility (https://sourceforge.net/projects/win32diskimager)
+* Windows: Win32 Disk Imager utility (https://sourceforge.net/projects/win32diskimager)
 
 # Write sd_card.img On Micro SD Card
 * Connect uSD card to your laptop. If your laptop does not come with a uSD card reader slot, an USB-to-uSD card-reader may be used, assuming laptop has a USB port
