@@ -26,7 +26,7 @@ document.location=commandURI
 <p>This model computes the Inverse FFT using an FFT block. Here we swap the real and imaginary part of the input. </p>
 <p>By swapping the real and imaginary parts of the output of FFT and normalizing (divide by N), this system is equivalent to an inverse FFT. The Vector FFT block used in this design has one extra configuration parameter, 'SSR', to define the parallelism in computation. In this case, SSR=4 and N=1024. The Output of IFFT is computed 4 times faster.</p>
 <p>Finally, the output from Vector FFT is compared with the Simulink IFFT block and plotted accordingly.</p>
-<hr />
+<h2 id="imagesscreen_shotpng"><img src="images/screen_shot.PNG" alt="" /></h2>
 <p>Copyright 2020 Xilinx</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />

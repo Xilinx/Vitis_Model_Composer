@@ -25,6 +25,7 @@ document.location=commandURI
 </html>
 <p>This design shows how to use the MCode block to create fully synthesizable register transfer level (RTL) designs in Model Composer. The design was derived directly from the sysgenFSE.mdl demonstration design, replacing non-RTL blocks by MCode block equivalents. RTL targets are particularly useful when single source must target different FPGA families. This design shows a T/2 adaptive Fractionally Spaced Equalizer (FSE) operating on a 16-QAM data source with noise and filtering introduced in the channel model. Virtex-II dedicated multipliers are used in the complex multipliers blocks in order to provide high speed and resource utilization of the FPGA device.</p>
 <p>The DHAT scope provides an X-Y plot of the I and Q filter outputs from within the FSE. As the simulation progresses, these symbols will converge as the error is reduced. The magnitude of the filter coefficients is shown in a vector scope as well. Increasing the simulation duration will allow better visualization of the adaptive FSE effects on the filter output.</p>
+<p><img src="images/screen_shot.PNG" alt="" /></p>
 <p>For additional information on FSE:</p>
 <p>J.R. Treichler, I. Fijalkow, and C.R. Johnson, Jr. "Fractionally Spaced Equalizers" IEEE Signal Processing Magazine, May 1996, pp. 65-81.</p>
 <p>Chris H. Dick, "Design and implementation of high-performance FPGA signal processing datapaths for software-defined radios" VMEbus Systems, August 2001.</p>

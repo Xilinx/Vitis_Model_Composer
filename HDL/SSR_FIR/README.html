@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<h1 id="example-design-showing-how-to-use-axi-complex-multiplier">Example design showing how to use AXI Complex Multiplier</h1>
+<h1 id="high-speed-ssr-fir">High Speed SSR FIR</h1>
 <html>    
 <script>
 function myFunction() {
@@ -23,19 +23,23 @@ document.location=commandURI
 <button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
               
 </html>
-<p>This example shows how to use Complex Multiplier. Particular attention is paid towards configuring the output width of complex multiplier.</p>
-<h2 id="imagesscreen_shotpng"><img src="images/screen_shot.PNG" alt="" /></h2>
-<p>Copyright 2020 Xilinx</p>
-<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
-you may not use this file except in compliance with the License.<br />
-You may obtain a copy of the License at</p>
-<pre><code>http://www.apache.org/licenses/LICENSE-2.0
-</code></pre>
-<p>Unless required by applicable law or agreed to in writing, software<br />
-distributed under the License is distributed on an "AS IS" BASIS,<br />
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
-See the License for the specific language governing permissions and<br />
-limitations under the License.</p>
+<p>This reference design can be used as a starting design point when efficient implementations of very high data rate (over 1 Gsps) Single Rate FIRs are required. This PL based design can be used in any modern Xilinx device - 7-Series/UltraScale/UltraScale+/Versal. <br />
+<br/><br/></p>
+<p align="center">
+<img src="Images/SSR_FIR_screen_shot.PNG" align ="center" width = 90%>
+</p>
+<p><br/><br/><br />
+This Single Rate SSR FIR reference design illustrates a number of advanced Vitis Model Composer design techniques: </p>
+<ul>
+<li>This is a fully parameterizable design - you can control the filter order N, the number of clocks per sample SSR, the filter type (non/even/odd-symmetric), the input, output and coefficient fixed point quantization; you can set SSR and TAPS in Model Settings/Model Properties/Callbacks/InitFcnall the rest of the SSR FIR parameters can be set in the Model Composer block dialog</li>
+<li>If desired, you can floorplan the DSP blocks directly from Vitis Model Composer</li>
+<li>This is achieved through the use of Model Composer HDL Black Box flow, all these features are implemented in the underlying VHDL-2008 code; the reference design shows how to pass ports and parameters with generic sizes between Model Composer and VHDL code; the underlying VHDL-2008 code shows how to use arbitrary precision fixed point types, recursive component instantiations, how to instantiate DSP primitives independent of FPGA family (7-Series/UltraScale+/Versal) and floorplan them from VHDL code</li>
+<li>The Vitis Model Composer design includes a top level Simulink self-checking testbench, which compares the fixed point HDL Black Box based implementation to a golden reference floating point model</li>
+<li>This is a very high speed design, clock frequencies up to the maximum data sheet values of 741/891/1150 MHz in the fastest speed grade 7-Series/UltraScale+/Versal devices are possible</li>
+<li>The design also shows a technique to avoid the Versal 795/824/872 MHz fMAX limitation due to SRL16 minimum pulse width spec</li>
+<li>The VHDL code inside the Model Composer HDL Black Box can be instantiated stand alone in a Vivado RTL project. MATLAB and Vitis Model Composer are used here to illustrate the flow and make functional verification easier.</li>
+</ul>
+<p>This design only works in Vivado 2022.1 or later.</p>
 
 </div>
 <style type='text/css'>body {
