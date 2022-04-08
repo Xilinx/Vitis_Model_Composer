@@ -3,12 +3,12 @@
 ## Baremetal
 In Vitis Model Composer, you can create a baremetal application from your design and run in on a hardware board. The file that you need to run on hardware is BOOT.BIN. Follow the instructions in the link below to learn how to move the generated BOOT.BIN into the hardware and run the application.
 
-<a href="./programming_board_bare_metal.md"> Progamming VCK190 for baremetal</a>
+<a href="./baremetal/README.md"> Progamming VCK190 for baremetal</a>
 
 ## Linux
 In Vitis Model Composer, you can also create a linux application from your design and run in on a hardware board. Follow the instructions in the link below to learn how to move the generated sd_card.img into the hardware and run the application.
 
-<a href="./programming_board_linux.md"> Progamming VCK190 for Linux</a>
+<a href="./linux/README.md"> Progamming VCK190 for Linux</a>
 
 
 
