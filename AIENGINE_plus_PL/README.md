@@ -19,7 +19,7 @@ Versal AI Core devices are highly integrated, multicore compute platform that ca
 
 <tr>
 <td>
-<a href="./Tx_chain_200MHz/README.md">TX Chain 200MHz </a>
+<a href="./AIE_HLS/Tx_chain_200MHz/README.md">TX Chain 200MHz </a>
 </td>
 <td>
 This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHz, which is part of the communications Library Early access program.
@@ -92,7 +92,7 @@ A 2D FFT desgin with both AI Engine and HDL Kernel.
 
 <tr> 
 <td>
-<a href="./SingleStreamSSR_FIR_withPL/README.md">Super Sample Rate FIR filter with PL</a>
+<a href="./AIE_HDL/SingleStreamSSR_FIR_withPL/README.md">Super Sample Rate FIR filter with PL</a>
 </td>
 <td>
 This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we consider latencies within the kernels, which are implemented into the FIFO's included in AXI-Stream Interconnect(PL).
