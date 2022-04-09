@@ -5,7 +5,7 @@ Versal AI Core devices are highly integrated, multicore compute platform that ca
 
 
  <p align="center">
-  <img src="Images/aie_plus_pl.png" align ="center" width = 70%>
+  <img src="images/aie_plus_pl.png" align ="center" width = 70%>
 </p>
  
 
@@ -46,7 +46,7 @@ A desgin with both AI Engine and HLS Kernel blocks connected directly.
 
 <tr> 
 <td>
-<a href="./FFT2D/HLS_AIE/README.md">2D FFT</a>
+<a href="./AIE_HLS/FFT2D/README.md">2D FFT</a>
 </td>
 <td>
 A 2D FFT desgin with both AI Engine and HLS Kernel.
@@ -83,7 +83,7 @@ Design with imported RTL and AI Engine blocks.
 </tr>
  
 <td>
-<a href="./FFT2D/HDL_AIE/README.md">2D FFT</a>
+<a href="./AIE_HDL/FFT2D/README.md">2D FFT</a>
 </td>
 <td>
 A 2D FFT desgin with both AI Engine and HDL Kernel.
