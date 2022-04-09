@@ -19,7 +19,7 @@ Versal AI Core devices are highly integrated, multicore compute platform that ca
 
 <tr>
 <td>
-<a href="./Tx_chain_200MHz/README.md">TX Chain 200MHz </a>
+<a href="./AIE_HLS/Tx_chain_200MHz/README.md">TX Chain 200MHz </a>
 </td>
 <td>
 This design showcases the Vitis Model Composer implementation of the commslib example, TX chain 200MHz, which is part of the communications Library Early access program.
