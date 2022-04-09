@@ -44,7 +44,7 @@ or
 
 <img src="https://render.githubusercontent.com/render/math?math=P \geq  \frac{S\times T\times ii \times \text{(DT bit width)}}{W}">
 
-## Step 3 Set parameters of the Gateway In, AXIS bloack
+## Step 3 Set parameters of the Gateway In, AXIS block
 * Set *Output data type* to **W**.
 * Set *Sample Time* to **T**.
 
