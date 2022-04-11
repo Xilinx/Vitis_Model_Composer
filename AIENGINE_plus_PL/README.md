@@ -54,10 +54,6 @@ A 2D FFT desgin with both AI Engine and HLS Kernel.
  </tr>
 </table>
 
-
-
-
-<br/>
 <br/>
 <table style="width:100%">
 <tr>
