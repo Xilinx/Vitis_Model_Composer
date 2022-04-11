@@ -1,9 +1,0 @@
-{
-	"version": "1.0",
-	"modules": {
-		"polar_clip": {
-			"proto_instances": {
-			}
-		}
-	}
-}
