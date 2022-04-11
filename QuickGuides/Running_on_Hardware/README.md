@@ -1,3 +1,12 @@
+2022.1
+
+
+
+2021.2
+
+https://github.com/Xilinx/Vitis_Model_Composer/blob/2021.2/QuickGuides/Running_BOOT_BIN_on_Hardware/README.md
+
+
 # How to run BOOT.BIN on Hardware
 Hardware validation flow in Vitis Model Composer provides a methodology to verify AI Engine based applications on Hardware. It also provides the option to generate a hardware image (BOOT.BIN), targeting a
 specific platform. This hardware image can then be run on a board to verify whether the results from hardware match with the simulation outputs.
