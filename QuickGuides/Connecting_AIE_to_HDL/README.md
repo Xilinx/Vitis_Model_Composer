@@ -8,8 +8,8 @@ manage the sampling times across the two domains. This Quick Guide explains how 
 The image below depicts the components that are needed to connect an AI Engine subsystem to an HDL desgin. In setting this connection, we should keep few input design criteria in mind and set the parameters of the blocks accordingly. These input design criteria are:
 
 1. In the HDL design, the bit width of the tdata signal line (**W**). This is the bit width of the data in the programmable logic.
-1. HDL design sample time (**T**). This sample time determines the target clock rate for which the HDL design will be clocked in hardware.
-1. The initilization interval (**ii**) of the HDL design. As mentioned earlier, simulation in HDL domain is cycle accurate. An HDL design may not be ready to accept a new sample at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). For example, if an HDL design accepts a new sample every 10 cycles, the design would have an initiation interval of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.
+1. HDL design sample time (**T**). This sample time determines the target clock rate for which the HDL design will be clocked in hardware. For single clock designs, this will be the sample time set in the _Gateway In AXIS_ block. 
+1. As mentioned earlier, simulation in HDL domain is cycle accurate. An HDL design may not be ready to accept a new sample at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). This is referred as the initilization interval (**ii**) of the HDL design. For example, if an HDL design accepts a new sample every 10 cycles, the design would have an initiation interval of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.
 1. Number of samples in the output of the AI Engine kernel (**S**).
 1. Output data type of the AI Engine kernel (**DT**).
 
