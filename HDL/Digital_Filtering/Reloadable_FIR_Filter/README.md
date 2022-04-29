@@ -1,10 +1,13 @@
 # Reloadable FIR Filter
 
-This example shows how to reload the 5-tap symmetric FIR with the coefficient values of 7 8 9 8 7.
+This example shows how to reload a 5-tap symmetric FIR.
 
-:bulb: The reloadbale filter must be of the same specification and size of the intial filter. For example, if the initial filter is symetric, (for example specified as [1 2 3 2 1] in the filter mask), then the reloadable input to the filter should be [-1 2 -3], for a relaodable filter of [-1 2 -3 2 -1].
+:bulb: The reloadable filter must be of the same specification and size of the initial filter. For example, if the initial filter is symmetric, (for example specified as [1 2 3 2 1] in the filter mask), then the reloadable input to the filter should be [-1 2 -3], for a reloadable filter of [-1 2 -3 2 -1].
+
+:bulb: Note that the reloadable input to the filter must be unsigned. In this example, the gateway block is set to produce unsinged output and the *Overflow mode* is set to *wrap*. 
 
 ![](images/screen_shot.PNG)
+
 ------------
 Copyright 2020 Xilinx
 
