@@ -2,6 +2,8 @@
 
 This example shows how to reload the 5-tap symmetric FIR with the coefficient values of 7 8 9 8 7.
 
+:bulb: Note the reloadbale filter must be of the same specification and size of the intial filter. For example, if the initial filter is symetric, (for example specified as [1 2 3 2 1] in the filter mask), then the reloadable coffeicients should be [-1 2 -3], if the relaodable filter needs to be [-1 2 -3 2 -1].
+
 ![](images/screen_shot.PNG)
 ------------
 Copyright 2020 Xilinx
