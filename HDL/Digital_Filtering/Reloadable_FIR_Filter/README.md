@@ -27,7 +27,7 @@ This set of coefficients is pre-loaded in the core.
     * reload_tvalid has input [zeros(1,20) 1 1 1]  = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1]. 
 	      The format zeros(1,N) returns 1-by-N vectors of zeros. This is “zero padding”, an interpolation method
 		which interprets time-domain samples as extending from 0 to N-1.
-    * reload_tlast has input [zeros(1,20) 0 0 1]. reload_tlast goes high at the 20th simulation time for 1 sample 
+    * reload_tlast has input [zeros(1,20) 0 0 1]. reload_tlast goes high at the 23rd simulation time for 1 sample 
 		period to indicate the last coefficient data.   
     * Similarly, reload_tdata_data has input as [zeros(1,20) -1 2 -3].
 
