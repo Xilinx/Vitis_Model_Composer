@@ -13,31 +13,33 @@ This set of coefficients is pre-loaded in the core.
 
 * The set of inputs connected to the FIR Compiler block (reload_tvalid, reload_tlast, and 
       reload_tdata_data) perform the following on the FIR Compiler 7.2 block:
-    * reload_tdata_data and reload_tvalid: After the initial set of coefficients specified  by the core [1 2 3 2 1]
-            is compiled, the new set of coefficients ([-1 2 -3]) is loaded via the reload_tdata_data input port.
-            The reload _tvalid control signal must be high during this reload period. In this case reload _tvalid must
+    * *reload_tdata_data* and *reload_tvalid*: After the initial set of coefficients specified  by the core [1 2 3 2 1]
+            is compiled, the new set of coefficients ([-1 2 -3]) is loaded via the *reload_tdata_data* input port.
+            The *reload _tvalid* control signal must be high during this reload period. In this case *reload _tvalid* must
             be high for 3 clock cycles.
-            In the Scope block, the reload_tdata_data signal appears as coef_din, and the reload _tvalid signal 
-            appears as coef_we.
-    * reload_tlast: This signal must be high on the last coefficient data to indicate that the last data has been
-            loaded. In the Scope block, the reload_tlast signal appears as coef_ld.
+            In the Scope block, the *reload_tdata_data* signal appears as *coef_din*, and the *reload _tvalid* signal 
+            appears as *coef_we*.
+    * *reload_tlast*: This signal must be high on the last coefficient data to indicate that the last data has been
+            loaded. In the Scope block, the *reload_tlast* signal appears as *coef_ld*.
 
-* The inputs that are connected to the three reload_* signals are vectors in this format:
+* The inputs that are connected to the three *reload_** signals are vectors in this format:
 
-    * reload_tvalid has input [zeros(1,20) 1 1 1]  = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1]. 
+    * *reload_tvalid* has input [zeros(1,20) 1 1 1]  = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1]. 
 	      The format zeros(1,N) returns 1-by-N vectors of zeros. This is “zero padding”, an interpolation method
 		which interprets time-domain samples as extending from 0 to N-1.
-    * reload_tlast has input [zeros(1,20) 0 0 1]. reload_tlast goes high at the 23rd simulation time for 1 sample 
+    * *reload_tlast* has input [zeros(1,20) 0 0 1]. *reload_tlast* goes high at the 23rd simulation time for 1 sample 
 		period to indicate the last coefficient data.   
-    * Similarly, reload_tdata_data has input as [zeros(1,20) -1 2 -3].
+    * Similarly, *reload_tdata_data* has input as [zeros(1,20) -1 2 -3]  (see below for more details).
+
+* Once the coefficinets are lodaed, to use the new coefficinets, the *config_tvalid* input should be set to one for one cycle.
 
 * Now, Double-click the Scope block and observe the following:
 
-    * The reload _tvalid control signal (coef_we in the Scope display) goes high during the reload period, 
-		when the new set of coefficients is loaded via the reload_tdata_data input port (coef_din in the Scope 
+    * The *reload _tvalid* control signal (*coef_we* in the Scope display) goes high during the reload period, 
+		when the new set of coefficients is loaded via the *reload_tdata_data* input port (*coef_din* in the Scope 
             display).
-            coef_we goes high after the 20th simulation time for 3 clock cycles.
-    * reload_tlast (coef_ld in the Scope display) goes high at the 20th simulation time for 1 sample period, 
+            *coef_we* goes high after the 20th simulation time for 3 clock cycles.
+    * *reload_tlast* (*coef_ld* in the Scope display) goes high at the 20th simulation time for 1 sample period, 
 		to indicate the last coefficient data.
 
 
