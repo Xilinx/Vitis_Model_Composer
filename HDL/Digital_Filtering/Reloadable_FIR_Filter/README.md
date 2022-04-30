@@ -48,9 +48,9 @@ Coefficients can be symmetric or asymmetric.
 
 Use the function
 
-reOrderedCoeffs = **xlGetReOrderedCoeff**(new_coeff_set, returnType, block_handle)
+outCoeff = **xlGetReOrderedCoeff**(new_coeff_set, returnType, block_handle)
 
-to get the reordered coeff based on the settings and coefficinets specified in the core. 
+to get the reordered coefficients based on the settings and coefficinets specified in the core. You will use the output of this funciton as part of the *reload_tdata_data* input signal. 
 
 * new_coeff_set   =  New coefficient set to be loaded
 * returnType      =  'Coeff' or 'Index'
