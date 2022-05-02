@@ -2,8 +2,44 @@
 
 
 This design example shows how the FIR Compiler block can be configured as a reloadable coefficient FIR filter. 
-The first set of coefficients is specified and loaded by the core, and the second set is loaded from an external
-source. 
+In this example, the first set of coefficients is specified and loaded by the core, and the second set is loaded from an external
+source. The first set of coefficients specifies a symmetric filter, [1 2 3 2 1]. Note the filter structure is *inferred* from the coefficients provided to the block per the setting depicted in the image below.
+
+![](images/infer.PNG)
+
+The reloadable filter must be of the same specification and size of the initial filter loaded by the core. In this example, the reloadable filter should also be symetric. Here we have chosen [-1 2 -3 2 -1] as the relodable filter. However, we need to process this filter by the **xlGetReOrderedCoeff** function and provide the output of this function to the *reload_tdata_data* input signal of the core. 
+
+
+Use the function
+
+outCoeff = **xlGetReOrderedCoeff**(new_coeff_set, returnType, block_handle)
+
+to get the reordered coefficients based on the settings and coefficients specified in the core.
+
+* new_coeff_set   =  New coefficient set to be loaded
+* returnType      =  'Coeff' or 'Index'
+* block_handle    =  FIR Compiler block handle in the design which can be specified as 'gcbh'
+
+Example :
+
+1.	In the Simulink model, select the FIR Compiler 7.2 block.
+
+2.	In the MATLAB Command Window, enter the following commands: 
+
+		>new_coeff = [-1 2 -3 2 -1] 
+
+		 new_coeff =
+
+		     -1 2 -3 2 -1
+
+		>xlGetReOrderedCoeff(new_coeff,'coeff',gcbh)
+
+		ans =
+
+		     -1
+ 		      2
+		     -3
+
 
 To understand the use the FIR Compiler 7.2 design for a reloadable filter, 
 observe the following:
@@ -14,7 +50,7 @@ This set of coefficients is pre-loaded in the core.
 * The set of inputs connected to the FIR Compiler block (reload_tvalid, reload_tlast, and 
       reload_tdata_data) perform the following on the FIR Compiler 7.2 block:
     * *reload_tdata_data* and *reload_tvalid*: After the initial set of coefficients specified  by the core [1 2 3 2 1]
-            is compiled, the new set of coefficients ([-1 2 -3]) is loaded via the *reload_tdata_data* input port.
+            is compiled, the new set of coefficients ([-1 2 -3], output of **xlGetReOrderedCoeff** function) is loaded via the *reload_tdata_data* input port.
             The *reload _tvalid* control signal must be high during this reload period. In this case *reload _tvalid* must
             be high for 3 clock cycles.
             In the Scope block, the *reload_tdata_data* signal appears as *coef_din*, and the *reload _tvalid* signal 
@@ -44,40 +80,6 @@ This set of coefficients is pre-loaded in the core.
 
 
 Coefficients can be symmetric or asymmetric. 
-
-
-:bulb: The reloadable filter must be of the same specification and size of the initial filter. For example, if the initial filter is symmetric, (for example specified as [1 2 3 2 1] in the filter mask), then the reloadable input to the filter should be [-1 2 -3], for a reloadable filter of [-1 2 -3 2 -1]. 
-
-Use the function
-
-outCoeff = **xlGetReOrderedCoeff**(new_coeff_set, returnType, block_handle)
-
-to get the reordered coefficients based on the settings and coefficinets specified in the core. You will use the output of this funciton as part of the *reload_tdata_data* input signal. 
-
-* new_coeff_set   =  New coefficient set to be loaded
-* returnType      =  'Coeff' or 'Index'
-* block_handle    =  FIR Compiler block handle in the design which can be specified as 'gcbh'
-
-Example :
-
-1.	In the Simulink model, select the FIR Compiler 7.2 block.
-
-2.	In the MATLAB Command Window, enter the following commands: 
-
-		>new_coeff = [-1 2 -3 2 -1] 
-
-		 new_coeff =
-
-		     -1 2 -3 2 -1
-
-		>xlGetReOrderedCoeff(new_coeff,'coeff',gcbh)
-
-		ans =
-
-		     -1
- 		      2
-		     -3
-
 
 :bulb: Note that the reloadable input to the filter must be unsigned. In this example, the gateway block is set to produce unsinged output and the *Overflow mode* is set to *wrap*. 
 
