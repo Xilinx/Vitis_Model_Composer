@@ -9,9 +9,6 @@ source. The first set of coefficients specifies a symmetric filter, [1 2 3 2 1].
 
 The reloadable filter must be of the same specification and size of the initial filter loaded by the core. In this example, the reloadable filter should also be symetric. Here we have chosen [-1 2 -3 2 -1] as the relodable filter. However, we need to process this filter by the **xlGetReOrderedCoeff** function and provide the output of this function to the *reload_tdata_data* input signal of the core. 
 
-
-Use the function
-
 outCoeff = **xlGetReOrderedCoeff**(new_coeff_set, returnType, block_handle)
 
 to get the reordered coefficients based on the settings and coefficients specified in the core.
