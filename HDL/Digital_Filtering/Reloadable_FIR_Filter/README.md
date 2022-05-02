@@ -71,12 +71,12 @@ This set of coefficients is pre-loaded in the core.
 
 * Now, Double-click the Scope block and observe the following:
 
-    * The *reload _tvalid* control signal (*coef_we* in the Scope display) goes high during the reload period, 
-		when the new set of coefficients is loaded via the *reload_tdata_data* input port (*coef_din* in the Scope 
-            display).
-            *coef_we* goes high after the 20th simulation time for 3 clock cycles.
-    * *reload_tlast* (*coef_ld* in the Scope display) goes high at the 20th simulation time for 1 sample period, 
+    * The *reload _tvalid* control signal goes high during the reload period, 
+		when the new set of coefficients is loaded via the *reload_tdata_data* input port.		
+          
+    * *reload_tlast*  goes high at the 20th simulation time for 1 sample period, 
 		to indicate the last coefficient data.
+    * New filter will take effect after the *config_tvalid* signal is set for a clock cycle.
 
 
 Coefficients can be symmetric or asymmetric. 
