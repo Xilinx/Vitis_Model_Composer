@@ -57,14 +57,13 @@ This set of coefficients is pre-loaded in the core.
 
 * The inputs that are connected to the three *reload_** signals are vectors in this format:
 
-    * *reload_tvalid* has input [zeros(1,20) 1 1 1]  = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1]. 
-	      The format zeros(1,N) returns 1-by-N vectors of zeros. This is “zero padding”, an interpolation method
-		which interprets time-domain samples as extending from 0 to N-1.
+    * *reload_tvalid* has input [zeros(1,20) 1 1 1]. 
+	      The format zeros(1,N) returns 1-by-N vectors of zeros.
     * *reload_tlast* has input [zeros(1,20) 0 0 1]. *reload_tlast* goes high at the 23rd simulation time for 1 sample 
 		period to indicate the last coefficient data.   
     * Similarly, *reload_tdata_data* has input as [zeros(1,20) -1 2 -3]  (see below for more details).
 
-* Once the coefficinets are lodaed, to use the new coefficinets, the *config_tvalid* input should be set to one for one cycle.
+* Once the coefficients are lodaed, to use the new coefficinets, the *config_tvalid* input should be set to one for one cycle.
 
 * Now, Double-click the Scope block and observe the following:
 
@@ -78,7 +77,7 @@ This set of coefficients is pre-loaded in the core.
 
 Coefficients can be symmetric or asymmetric. 
 
-:bulb: Note that the reloadable input to the filter must be unsigned. In this example, the gateway block is set to produce unsinged output and the *Overflow mode* is set to *wrap*. 
+:bulb: Note that the reloadable input to the filter must be unsigned. In this example, the gateway block is set to produce unsigned output and the *Overflow mode* is set to *wrap*. 
 
 ![](images/screen_shot.PNG)
 
