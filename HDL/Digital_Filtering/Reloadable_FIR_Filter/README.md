@@ -5,7 +5,7 @@ This design example shows how the FIR Compiler block can be configured as a relo
 In this example, the first set of coefficients is specified and loaded by the core, and the second set is loaded from an external
 source. The first set of coefficients specifies a symmetric filter, [1 2 3 2 1]. Note the filter structure is *inferred* from the coefficients provided to the block per the setting depicted in the image below.
 
-![](images/infer.PNG)
+![](images/infer.png)
 
 The reloadable filter must be of the same specification and size of the initial filter loaded by the core. In this example, the reloadable filter should also be symetric. Here we have chosen [-1 2 -3 2 -1] as the relodable filter. However, we need to process this filter by the **xlGetReOrderedCoeff** function and provide the output of this function to the *reload_tdata_data* input signal of the core. 
 
