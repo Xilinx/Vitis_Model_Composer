@@ -1,0 +1,8 @@
+polar_clip_mul_mul_16s_16s_32_4_1
+polar_clip_mac_muladd_16s_16s_32s_32_4_1
+polar_clip_mul_mul_10ns_25s_25_4_1
+polar_clip_mul_mul_16s_16s_16_4_1
+polar_clip_rotation_sin_lut
+polar_clip_rotation_cos_lut
+regslice_core
+polar_clip
