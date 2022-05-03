@@ -9,9 +9,6 @@ source. The first set of coefficients specifies a symmetric filter, [1 2 3 2 1].
 
 The reloadable filter must be of the same specification and size of the initial filter loaded by the core. In this example, the reloadable filter should also be symetric. Here we have chosen [-1 2 -3 2 -1] as the relodable filter. However, we need to process this filter by the **xlGetReOrderedCoeff** function and provide the output of this function to the *reload_tdata_data* input signal of the core. 
 
-
-Use the function
-
 outCoeff = **xlGetReOrderedCoeff**(new_coeff_set, returnType, block_handle)
 
 to get the reordered coefficients based on the settings and coefficients specified in the core.
@@ -60,28 +57,27 @@ This set of coefficients is pre-loaded in the core.
 
 * The inputs that are connected to the three *reload_** signals are vectors in this format:
 
-    * *reload_tvalid* has input [zeros(1,20) 1 1 1]  = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1]. 
-	      The format zeros(1,N) returns 1-by-N vectors of zeros. This is “zero padding”, an interpolation method
-		which interprets time-domain samples as extending from 0 to N-1.
+    * *reload_tvalid* has input [zeros(1,20) 1 1 1]. 
+	      The format zeros(1,N) returns 1-by-N vectors of zeros.
     * *reload_tlast* has input [zeros(1,20) 0 0 1]. *reload_tlast* goes high at the 23rd simulation time for 1 sample 
 		period to indicate the last coefficient data.   
     * Similarly, *reload_tdata_data* has input as [zeros(1,20) -1 2 -3]  (see below for more details).
 
-* Once the coefficinets are lodaed, to use the new coefficinets, the *config_tvalid* input should be set to one for one cycle.
+* Once the coefficients are lodaed, to use the new coefficinets, the *config_tvalid* input should be set to one for one cycle.
 
 * Now, Double-click the Scope block and observe the following:
 
-    * The *reload _tvalid* control signal (*coef_we* in the Scope display) goes high during the reload period, 
-		when the new set of coefficients is loaded via the *reload_tdata_data* input port (*coef_din* in the Scope 
-            display).
-            *coef_we* goes high after the 20th simulation time for 3 clock cycles.
-    * *reload_tlast* (*coef_ld* in the Scope display) goes high at the 20th simulation time for 1 sample period, 
+    * The *reload _tvalid* control signal goes high during the reload period, 
+		when the new set of coefficients is loaded via the *reload_tdata_data* input port.		
+          
+    * *reload_tlast*  goes high at the 20th simulation time for 1 sample period, 
 		to indicate the last coefficient data.
+    * New filter will take effect after the *config_tvalid* signal is set for a clock cycle.
 
 
 Coefficients can be symmetric or asymmetric. 
 
-:bulb: Note that the reloadable input to the filter must be unsigned. In this example, the gateway block is set to produce unsinged output and the *Overflow mode* is set to *wrap*. 
+:bulb: Note that the reloadable input to the filter must be unsigned. In this example, the gateway block is set to produce unsigned output and the *Overflow mode* is set to *wrap*. 
 
 ![](images/screen_shot.PNG)
 
