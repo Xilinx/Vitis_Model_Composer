@@ -9,6 +9,12 @@ In this example we use the stream based FFT block to create a design that can pr
 :bulb: To achieve the 2GSPS rate, we use PLIO blocks with 64 bit width and a frequency of 500 MHz
 
 <img src="images/plio.png" width="400">
+
+:bulb: To verify the data rates, set the Hub block (see below). Simulink Data Inspector will open after code generation and you can see the data rates for each stream output there. 
+
+<img src="images/hub.png" width="600">
+
+<img src="images/data_inspector.png" width="600">
 --------------
 Copyright 2022 Xilinx
 
