@@ -8,6 +8,7 @@ In this example we use the stream based FFT block to create a design that can pr
 
 :bulb: To achieve the 2GSPS rate, we use PLIO blocks with 64 bit width and a frequency of 500 MHz
 
+![](images/plio.png)
 
 --------------
 Copyright 2022 Xilinx
