@@ -15,7 +15,7 @@ In this example we use the stream based FFT block to create a design that can pr
 
 <img src="images/plio.png" width="400">
 
-:blub: Note that we have explicitly set the number of cascade stages for the FFT stream block (in the Advanced tab) to one. 
+:bulb: Note that we have explicitly set the number of cascade stages for the FFT stream block (in the Advanced tab) to one. 
 
 :bulb: To verify the data rates, set the Hub block (see below). Simulink Data Inspector will open after code generation and you can see the data rates for each stream output there. 
 
