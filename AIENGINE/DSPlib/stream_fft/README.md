@@ -4,6 +4,11 @@ In this example we use the stream based FFT block to create a design that can pr
 
 ![](images/screen_shot.png)
 
+
+&nbsp;&nbsp;&nbsp;
+#### AI Engine Subsystem (FFT_Stream)
+<img src="images/aie.png" width="500">
+
 ## Knowledge nuggets
 
 :bulb: To achieve the 2GSPS rate, we use PLIO blocks with 64 bit width and a frequency of 500 MHz
