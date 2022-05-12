@@ -76,6 +76,15 @@ This example showcases a desgin that uses an AI Engine FFT block from the librar
 This example showcases a desgin that uses an AI Engine FIR block from the library browser.
 </td>
 </tr>
+
+<tr>
+<td>
+<a href="./DSPlib/stream_fft/README.md">Usign the AI Engine FFT Stream block from the library browser</a>
+</td>
+<td>
+This example showcases a desgin that uses an AI Engine Stream FFT block with SSR of 2 from the library browser.
+</td>
+</tr> 
  
 <tr>
 <td>
