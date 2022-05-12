@@ -23,7 +23,7 @@ document.location=commandURI
 <button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
               
 </html>
-<p>In this example we use the stream based FFT block to create a design that can process data at up to 2 GSPS. Each stream input into the block has a rate of 1 GSPS. With SSR of two, you can have up to 4096 point FFT.</p>
+<p>In this example we use the stream based FFT block to create a design that can process data at up to 2 GSPS. Each stream input into the block has a rate of 1 GSPS. With SSR of two, you can have up to 4096 point FFT. For FFT larger than 4096, you should increase the SSR. For example, for SSR of 4, the block will have four input streams and four output streams and can process data at 4 GSPS.</p>
 <p><img src="images/screen_shot.png" alt="" /></p>
 <p>&nbsp;&nbsp;&nbsp;</p>
 <h4 id="ai-engine-subsystem-fft_stream">AI Engine Subsystem (FFT_Stream)</h4>
@@ -31,6 +31,7 @@ document.location=commandURI
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
 <p>:bulb: To achieve the 2GSPS rate, we use PLIO blocks with 64 bit width and a frequency of 500 MHz</p>
 <p><img src="images/plio.png" width="400"></p>
+<p>:blub: Note that we have explicitly set the number of cascade stages for the FFT stream block (in the Advanced tab) to one. </p>
 <p>:bulb: To verify the data rates, set the Hub block (see below). Simulink Data Inspector will open after code generation and you can see the data rates for each stream output there. </p>
 <p><img src="images/hub.png" width="600"></p>
 <p><img src="images/data_inspector.png" width="600"></p>

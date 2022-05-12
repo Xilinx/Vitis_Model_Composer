@@ -1,6 +1,6 @@
 # Stream based FFT with Super Sample Rate of 2 running at 2 GSPS
 
-In this example we use the stream based FFT block to create a design that can process data at up to 2 GSPS. Each stream input into the block has a rate of 1 GSPS. With SSR of two, you can have up to 4096 point FFT.
+In this example we use the stream based FFT block to create a design that can process data at up to 2 GSPS. Each stream input into the block has a rate of 1 GSPS. With SSR of two, you can have up to 4096 point FFT. For FFT larger than 4096, you should increase the SSR. For example, for SSR of 4, the block will have four input streams and four output streams and can process data at 4 GSPS.
 
 ![](images/screen_shot.png)
 
@@ -14,6 +14,8 @@ In this example we use the stream based FFT block to create a design that can pr
 :bulb: To achieve the 2GSPS rate, we use PLIO blocks with 64 bit width and a frequency of 500 MHz
 
 <img src="images/plio.png" width="400">
+
+:blub: Note that we have explicitly set the number of cascade stages for the FFT stream block (in the Advanced tab) to one. 
 
 :bulb: To verify the data rates, set the Hub block (see below). Simulink Data Inspector will open after code generation and you can see the data rates for each stream output there. 
 
