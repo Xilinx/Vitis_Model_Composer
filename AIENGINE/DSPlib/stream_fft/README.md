@@ -15,6 +15,7 @@ In this example we use the stream based FFT block to create a design that can pr
 <img src="images/hub.png" width="600">
 
 <img src="images/data_inspector.png" width="600">
+
 --------------
 Copyright 2022 Xilinx
 
