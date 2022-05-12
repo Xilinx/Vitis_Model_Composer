@@ -1,6 +1,6 @@
 # Stream based FFT with Super Sample Rate of 2 running at 2 GSPS
 
-In this example we use the stream based FFT block to create a design that can process data at up to 2 GSPS. Each stream input into the block has a rate of 1 GSPS. 
+In this example we use the stream based FFT block to create a design that can process data at up to 2 GSPS. Each stream input into the block has a rate of 1 GSPS. With SSR of two, you can have up to 4096 point FFT.
 
 ![](images/screen_shot.png)
 
