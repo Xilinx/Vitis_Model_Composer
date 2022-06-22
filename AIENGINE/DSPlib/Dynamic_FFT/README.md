@@ -1,27 +1,13 @@
 # AI Engine Dynamic Point FFT
 
-In this example we use the stream based FFT block to create a design that can process data at up to 2 GSPS. Each stream input into the block has a rate of 1 GSPS. With SSR of two, you can have up to 4096 point FFT. For FFT larger than 4096, you should increase the SSR. For example, for SSR of 4, the block will have four input streams and four output streams and can process data at 4 GSPS.
-
-![](images/screen_shot.png)
-
-
-&nbsp;&nbsp;&nbsp;
-#### AI Engine Subsystem (FFT_Stream)
-<img src="images/aie.png" width="500">
+The AI Engine Dynamic Point FFT block in Vitis Model Composer allows taking FFT of different sizes (up to a maximum FFT size) of the input frame. The FFT size is determined by a header that is appended to every input frame. This example showcases the use of this block. 
 
 ## Knowledge nuggets
 
-:bulb: To achieve the 2GSPS rate, we use PLIO blocks with 64 bit width and a frequency of 500 MHz
+:bulb: Every input frame must be appended by a header. 
+:bulb: If the FFT size (N) is smaller than the frame size, the block takes the N point FFT of the first N samples in the input frame, and discards the rest of the samples in the frame.   
+:bulb: If the frame size is a multiple (M) of max FFT size, multiple FFT iterations will be performed on a given input frame, resulting in multiple iterations of output samples, reducing the numer of times the kernel needs to be triggered to process a given number of input data samples. As a result, the overheads inferred during kernel triggering are reduced and overall performance is increased.
 
-<img src="images/plio.png" width="400">
-
-:bulb: Note that we have explicitly set the number of cascade stages for the FFT stream block (in the Advanced tab) to one. 
-
-:bulb: To verify the data rates, set the Hub block (see below). Simulink Data Inspector will open after code generation and you can see the data rates for each stream output there. 
-
-<img src="images/hub.png" width="600">
-
-<img src="images/data_inspector.png" width="600">
 
 --------------
 Copyright 2022 Xilinx
