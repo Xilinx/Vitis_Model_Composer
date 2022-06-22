@@ -4,8 +4,10 @@ The AI Engine Dynamic Point FFT block in Vitis Model Composer allows taking FFT 
 
 ## Knowledge nuggets
 
-:bulb: Every input frame must be appended by a header. 
-:bulb: If the FFT size (N) is smaller than the frame size, the block takes the N point FFT of the first N samples in the input frame, and discards the rest of the samples in the frame.   
+:bulb: Every input frame must be appended by a header.
+
+:bulb: If the FFT size (N) is smaller than the frame size, the block takes the N point FFT of the first N samples in the input frame, and discards the rest of the samples in the frame.
+
 :bulb: If the frame size is a multiple (M) of max FFT size, multiple FFT iterations will be performed on a given input frame, resulting in multiple iterations of output samples, reducing the numer of times the kernel needs to be triggered to process a given number of input data samples. As a result, the overheads inferred during kernel triggering are reduced and overall performance is increased.
 
 
