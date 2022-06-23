@@ -1,6 +1,8 @@
 # AI Engine Dynamic Point FFT
 
-The AI Engine Dynamic Point FFT block in Vitis Model Composer allows taking FFT of different sizes (up to a maximum FFT size) of the input frame. The FFT size is determined by a header that is appended to every input frame. This example showcases the use of this block. 
+The AI Engine Dynamic Point FFT block in Vitis Model Composer allows taking FFT of different sizes (up to a maximum FFT size) of the input frame. The FFT size is determined by a header that is appended to every input frame. This example showcases the use of this block.
+
+![](images/screen_shot.png)
 
 ## Knowledge nuggets
 
