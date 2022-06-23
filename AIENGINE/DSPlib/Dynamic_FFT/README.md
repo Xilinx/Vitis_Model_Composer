@@ -12,6 +12,7 @@ The AI Engine Dynamic Point FFT block in Vitis Model Composer allows taking FFT 
 
 :bulb: If the frame size is a multiple (M) of max FFT size, multiple FFT iterations will be performed on a given input frame, resulting in multiple iterations of output samples, reducing the numer of times the kernel needs to be triggered to process a given number of input data samples. As a result, the overheads inferred during kernel triggering are reduced and overall performance is increased.
 
+![](images/output.png)
 
 --------------
 Copyright 2022 Xilinx
