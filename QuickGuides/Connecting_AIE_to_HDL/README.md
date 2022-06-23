@@ -78,8 +78,9 @@ Set the Sample Period parameter to the same value as in the corresponding "Gatew
 # Examples
 In this GitHub repository, you can find several examples in which the AIE to HDL and HDL to AIE blocks are being used:
 
-* <a href="../../Designs/FFT2D/README.md">2D FFT (AI Engines + HDL/HLS) </a>
-* <a href="../../AIE_HDL/README.md">Designs with both AI Engine and RTL blocks</a>
+* <a href="../../AIENGINE_plus_PL/AIE_HDL/FFT2D/README.md">2D FFT (AI Engines + HDL/HLS) </a>
+* <a href="../../AIENGINE_plus_PL/AIE_HDL/README.md">Designs with both AI Engine and RTL blocks</a>
+
 
 --------------
 Copyright 2020 Xilinx

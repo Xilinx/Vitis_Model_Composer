@@ -61,7 +61,7 @@ This example showcases a desgin that inlcudes a AI Engine kernel with a vector i
 
 <tr>
 <td>
-<a href="./DSPlib/fft/README.md">Usign the AI Engine FFT block from the library browser</a>
+<a href="./DSPlib/fft/README.md">Using the AI Engine FFT block from the library browser</a>
 </td>
 <td>
 This example showcases a desgin that uses an AI Engine FFT block from the library browser.
@@ -70,7 +70,7 @@ This example showcases a desgin that uses an AI Engine FFT block from the librar
  
 <tr>
 <td>
-<a href="./DSPlib/fir/README.md">Usign the AI Engine FIR block from the library browser</a>
+<a href="./DSPlib/fir/README.md">Using the AI Engine FIR block from the library browser</a>
 </td>
 <td>
 This example showcases a desgin that uses an AI Engine FIR block from the library browser.
@@ -79,7 +79,7 @@ This example showcases a desgin that uses an AI Engine FIR block from the librar
 
 <tr>
 <td>
-<a href="./DSPlib/stream_fft/README.md">Usign the AI Engine FFT Stream block from the library browser</a>
+<a href="./DSPlib/stream_fft/README.md">Using the AI Engine FFT Stream block from the library browser</a>
 </td>
 <td>
 This example showcases a desgin that uses an AI Engine Stream FFT block with SSR of 2 from the library browser.
@@ -94,6 +94,16 @@ This example showcases a desgin that uses an AI Engine Stream FFT block with SSR
 This example showcases how you can import a DSPLib function as a block.
 </td>
 </tr>
+
+<tr>
+<td>
+<a href="./DSPlib/Dynamic_FFT/README.md">Using the AI Engine Dynamic Point FFT</a>
+</td>
+<td>
+This example showcases the use of the AI Engine Dynamic Point FFT block. 
+</td>
+</tr> 
+  
 </table>
 <br/>
 
