@@ -25,10 +25,10 @@ document.location=commandURI
 </html>
 <p>This is an example of an AIE Kernel that is controlled by a syncronous RTP input. The value of the RTP input changes between a wide filter and a narrow filter.</p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
-<p>:bulb: An RTP input can be a scaler or a vector.</p>
-<p>:bulb: Note the usage of 'RTP Source' block. This block allows you to convinienetly set the RTP input source to an AI Engine block.</p>
-<p>:bulb: In this example, the RTP input is a <em>sync</em> input. For the kernel to run, a write to the input parameter needs to take place for every invocation of the kernel or else the kernel will not run. For this reason, in the RTP source block we use MATALB <em>repmat</em> command to set the RTP value to <em>[repmat(narrow</em>filter,1, 512), repmat(wide<em>filter,1, 512)]</em>. As such, for the first 512 invocations, we pass the narrow filter to the kernel, and for the next 512 invocations, we pass the wide filter to the kernel.</p>
-<p>:bulb: In the RTP source block, we set the <em>"Form output after final data"</em> parameter to <em>Cycle repetition</em> so that the switch between the narrow filter and wide filter described above will continue until the end of the simulation. </p>
+<p><img width="18" height="18" src="../../../Images/bulb.png"> An RTP input can be a scaler or a vector.</p>
+<p><img width="18" height="18" src="../../../Images/bulb.png"> Note the usage of 'RTP Source' block. This block allows you to convinienetly set the RTP input source to an AI Engine block.</p>
+<p><img width="18" height="18" src="../../../Images/bulb.png"> In this example, the RTP input is a <em>sync</em> input. For the kernel to run, a write to the input parameter needs to take place for every invocation of the kernel or else the kernel will not run. For this reason, in the RTP source block we use MATALB <em>repmat</em> command to set the RTP value to <em>[repmat(narrow</em>filter,1, 512), repmat(wide<em>filter,1, 512)]</em>. As such, for the first 512 invocations, we pass the narrow filter to the kernel, and for the next 512 invocations, we pass the wide filter to the kernel.</p>
+<p><img width="18" height="18" src="../../../Images/bulb.png"> In the RTP source block, we set the <em>"Form output after final data"</em> parameter to <em>Cycle repetition</em> so that the switch between the narrow filter and wide filter described above will continue until the end of the simulation. </p>
 <p><img src="images/screen_shot.PNG" alt="" /></p>
 <p><img src="images/out_narrow.PNG" alt="" /></p>
 <p><img src="images/out_wide.PNG" alt="" /></p>
