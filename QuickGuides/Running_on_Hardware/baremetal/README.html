@@ -48,8 +48,8 @@ specific platform. This hardware image can then be run on a board to verify whet
    ta 1
 </code></pre>
 <p>Note : You should use the hostname and port number as highlighted in step-7. Do not prepend the hostname with 'TCP:'.</p>
-<p>c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is in <code>&lt;code-generation-directory&gt;/run_hw/src_ps/BOOT.BIN</code>.</p>
-<pre><code>   cd &lt;code-generation-directory&gt;/run_hw/src_ps/BOOT.BIN
+<p>c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is at <code>&lt;code-generation-directory&gt;/run_hw/src_ps/BOOT.BIN</code>.</p>
+<pre><code>   cd &lt;code-generation-directory&gt;/run_hw/src_ps
 </code></pre>
 <pre><code>   
 </code></pre></li>
@@ -59,7 +59,7 @@ specific platform. This hardware image can then be run on a board to verify whet
 </code></pre>
 <p>You will see following message in the XSDB prompt if the device program is successful.</p>
 <p><img src="images/xsdb_prompt.png" alt="" /></p>
-<p>b. This will run the design on the board and you should see the log similar to the following. Here, the hardware results are compared with the golden results.</p>
+<p>b. This will run the design on the board. In the Terminal application, you should see the log similar to the following. Here, the hardware results are compared with the golden results.</p>
 <pre><code>   ******************************** Test Results ********************************
    ****** Model Composer and Hardware outputs match for all 40944 samples for output signal Out1 *******
    ****** Test passed ********
