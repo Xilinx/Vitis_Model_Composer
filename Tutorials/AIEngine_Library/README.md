@@ -8,7 +8,7 @@ Vitis Model Composer provides a set of AI Engine library blocks for use within t
  * Blocks that support connection between the AI Engine and the Xilinx HDL blockset.
  * Configurable AI Engine functions such as FIR, FFT, IFFT etc.
 
-> ❗❗ **Important**: The AI Engine Lab can be done only in a Linux environment.
+ :warning: The AI Engine Lab can be done only in a Linux environment.
 
 
 <br>**Figure: Simulink Library Browser: AI Engine**
