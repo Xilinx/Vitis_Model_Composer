@@ -18,12 +18,12 @@ In this step you will import graph code (generated using the design in Lab 1) us
 2. Double-click <samp> import_graph.slx </samp> to open the model. This is a model with a source and a sink and you will fill the design in-between.
 
 3. From the Library Browser, select the AIE Graph block from the AI Engine library. Drag the block into the <samp> import_graph.slx </samp> file.
-<br><br><img src="../Images/AIEngine/Lab2/Step1/Step3-1.png">
+<br><br><img src="Images/Step1/Step3-1.png">
 <br><br> You can also click on the canvas and start typing `AIE Graph`.
-<br><br><img src="../Images/AIEngine/Lab2/Step1/Step3-2.png">
+<br><br><img src="Images/Step1/Step3-2.png">
 
 4. Double-click the block and select **Source file (\*.cpp)** from the Graph file parameter as shown.
-<br><br><img src="../Images/AIEngine/Lab2/Step1/Step4.png">
+<br><br><img src="Images/Step1/Step4.png">
 
 > 📝 **Note**: Here, the \*.cpp flow is used to import the graph. Alternatively, you can use the\ *.h flow (in which case the following steps will differ slightly).
 
@@ -33,23 +33,23 @@ In this step you will import graph code (generated using the design in Lab 1) us
 <br><br> **Preprocessor options**: Leave empty
 
 6. Click **Import**. You will see the Progress window as shown in the following figure. Once complete, the AIE Graph block GUI interface will get updated.
-<br><br><img src="../Images/AIEngine/Lab2/Step1/Step6-1.png">
-<br><br><img src="../Images/AIEngine/Lab2/Step1/Step6-2.png">
+<br><br><img src="Images/Step1/Step6-1.png">
+<br><br><img src="Images/Step1/Step6-2.png">
 
 7. Observe the Function tab in the AIE graph block parameters as shown.
-<br><br><img src="../Images/AIEngine/Lab2/Step1/Step7.png">
+<br><br><img src="Images/Step1/Step7.png">
 
 8. Click **OK** and connect the AIE Graph block as shown in the following figure.
 
 ## Step 2: Simulate the Design
 
 1. Click **Simulate**. You will get similar results as those in Lab 1 (Import AIE Kernel).
-<br><br><img src="../Images/AIEngine/Lab2/Step2/Step1.png">
+<br><br><img src="Images/Step2/Step1.png">
 
 ## Step 3: Code Generation and AI Engine SystemC Simulation
 
 1. Create a subsystem for the graph block.
-<br><br><img src="../Images/AIEngine/Lab2/Step3/Step1.png">
+<br><br><img src="Images/Step3/Step1.png">
 
 > 📝 **Note**: In this particular design scenario only one graph code is imported. But in a case where we have multiple graphs imported and connected, Vitis Model Composer automatically generates the top module which includes interconnections of all blocks.
 
@@ -57,18 +57,18 @@ In this step you will import graph code (generated using the design in Lab 1) us
 2. Assign the subsystem name as `graph_sub`.
 
 3. Drag the Vitis Model Composer Hub block from the library browser or simply click on the canvas and start typing `Model Composer Hub`.
-<br><br><img src="../Images/AIEngine/Lab2/Step3/Step3.png">
+<br><br><img src="Images/Step3/Step3.png">
 
 4. Double-click the Vitis Model Composer Hub block and make changes as follows (Similar to those in Lab 1 - Import AIE kernel).
-<br><br><img src="../Images/AIEngine/Lab2/Step3/Step4.png">
+<br><br><img src="Images/Step3/Step4.png">
 
 5. Click **Apply**, then click **Generate** and **Run**.
 
 6. The Simulation procedure is similar to that of Lab 1 (Import AIE Kernel). It also generates the Target directory (<samp> ./code </samp> in this case) under which you can see the top level graph code under <samp> code/src_aie </samp> directory and the code/data directory which contains the data logged from the Simulink design along with output from the AIE simulation.
-<br><br><img src="../Images/AIEngine/Lab2/Step3/Step6.png">
+<br><br><img src="Images/Step3/Step6.png">
  
  7. Notice the log in the Progress window after completion. Click **OK**.
-<br><br><img src="../Images/AIEngine/Lab2/Step3/Step6.png">
+<br><br><img src="Images/Step3/Step6.png">
 
 ### Conclusion
 
