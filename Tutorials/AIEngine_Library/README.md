@@ -12,7 +12,7 @@ Vitis Model Composer provides a set of AI Engine library blocks for use within t
 
 
 <br>**Figure: Simulink Library Browser: AI Engine**
-<br><br><img src="../Images/AIEngine/README/Figure1.png">
+<br><br><img src="Images/Figure1.png">
 
 This tutorial includes the following labs which introduce AI Engine support in Vitis Model Composer.
 
