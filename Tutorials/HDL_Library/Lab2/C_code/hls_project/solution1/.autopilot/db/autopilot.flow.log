@@ -1,0 +1,627 @@
+INFO-FLOW: Workspace C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1 opened at Fri Jun 11 22:45:06 +0530 2021
+Execute     ap_set_clock -name default -period 10 -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+Execute     set_part xcvu11p-flga2577-1-e 
+Execute       create_platform xcvu11p-flga2577-1-e -board  
+DBG:HLSDevice: Trying to load device library: C:/Xilinx/Vitis_HLS/2021.1\lib\win64.o\librdi_hlsvwrap.dll
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: C:/Xilinx/Vivado/2021.1/data/parts/arch.xml
+DBG:HLSDevice: init success
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.hlp 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/virtexuplus_dsp48e2.hlp 
+INFO: [HLS 200-1611] Setting target device to 'xcvu11p-flga2577-1-e'
+Command       create_platform done; 5.499 sec.
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute           source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute           source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Command         ap_source done; 0.118 sec.
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command       ap_source done; 0.38 sec.
+Execute       ap_part_info -name xcvu11p-flga2577-1-e -data info 
+Execute       config_compile -quiet -complex-mul-dsp=0 
+Command     set_part done; 5.943 sec.
+Execute     send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute     get_config_interface -m_axi_latency 
+Execute     get_config_interface -m_axi_alignment_byte_size 
+Execute     get_config_interface -m_axi_max_widen_bitwidth 
+Execute     get_config_interface -default_interface 
+Execute     get_config_interface -m_axi_offset 
+Execute     get_config_rtl -register_reset_num 
+Command   open_solution done; 6.036 sec.
+Execute   set_part xcvu11p-flga2577-1-e 
+INFO: [HLS 200-1510] Running: set_part xcvu11p-flga2577-1-e 
+Execute     create_platform xcvu11p-flga2577-1-e -board  
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.hlp 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/virtexuplus_dsp48e2.hlp 
+Execute     source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Command       ap_source done; 0.112 sec.
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command     ap_source done; 0.169 sec.
+Execute     ap_part_info -name xcvu11p-flga2577-1-e -data info 
+Execute     config_compile -quiet -complex-mul-dsp=0 
+Command   set_part done; 0.266 sec.
+Execute   create_clock -period 10 -name default 
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+Execute     ap_set_clock -name default -period 10 -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+Execute   csynth_design 
+INFO: [HLS 200-1510] Running: csynth_design 
+Execute     get_config_compile -effort 
+Execute     get_config_compile -enable_clang39 
+Execute     get_config_compile -g 
+Execute     get_config_compile -hw_syn 
+Execute     get_config_compile -ng 
+Execute     get_config_compile -opt_fp 
+Execute     get_config_compile -skip_cdt 
+Execute     get_config_compile -skip_syncheck 
+Execute     get_config_compile -skip_transform 
+Execute     get_config_compile -pre_tcl 
+Execute     get_config_compile -keep_printf 
+Execute     elaborate -effort=medium -skip_syncheck=0 -keep_printf=0 -skip_cdt=0 -skip_transform=0 -ng=0 -g=0 -opt_fp=0 -from_csynth_design=1 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.236 seconds; current allocated memory: 233.136 MB.
+INFO: [HLS 200-10] Analyzing design file 'MedianFilter.cpp' ... 
+INFO-FLOW: Compiling one TU...
+Execute       get_config_compile -pragma_strict_mode 
+INFO-FLOW: Handling MedianFilter.cpp as C++
+Execute       ap_part_info -name xcvu11p-flga2577-1-e -data info 
+INFO-FLOW: Running: GCC PP 39
+INFO-FLOW: Source preprocessing
+Execute       ap_eval exec -ignorestderr C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang MedianFilter.cpp -foptimization-record-file=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang.MedianFilter.cpp.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fno-limit-debug-info --sysroot C:/Xilinx/Vitis_HLS/2021.1/tps/mingw/6.2.0/win64.o/nt -fhls -fno-exceptions -E -fno-math-errno -c -emit-llvm -mllvm -disable-llvm-optzns -Werror=implicit-function-declaration -Werror=implicit-hls-streams -Werror=return-type -Wpragmas -Wunused-parameter -fno-threadsafe-statics -fno-use-cxa-atexit -std=gnu++14 -target fpga64-xilinx-mingw32 -fno-threadsafe-statics -fno-use-cxa-atexit -I C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/39 -D__VITIS_HLS__ -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot -I C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/ap_sysc -include etc/autopilot_ssdm_op.h -D__DSP48E2__ -I /usr/include/x86_64-linux-gnu -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.pp.0.cpp -hls-platform-db-name=C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=virtexuplus_slow > C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang.MedianFilter.cpp.out.log 2> C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang.MedianFilter.cpp.err.log 
+Command       ap_eval done; 1.68 sec.
+INFO-FLOW: Done: GCC PP 39 time: 1.7 seconds per iteration
+Execute       set_directive_top MedianFilter -name=MedianFilter 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/yaml/huddle.tcl 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/yaml/json2huddle.tcl 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/try/try.tcl 
+Execute       list_core -type functional_unit 
+Execute       ap_eval exec -ignorestderr C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fsyntax-only -fhls -target fpga64-xilinx-linux-gnu C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.pp.0.cpp -hls-platform-db-name=C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=virtexuplus_slow > C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang.out.log 2> C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang.err.log 
+Command       ap_eval done; 0.684 sec.
+Execute       clang_tidy xilinx-systemc-detector C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.pp.0.cpp std=gnu++14 -target fpga  -directive=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/.systemc_flag 
+INFO-FLOW: exec C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-systemc-detector -import-directive=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/.systemc_flag -fix-errors C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 1.051 sec.
+INFO-FLOW: Running: clang-tidy CDT preprocess 39
+Execute       clang_tidy xilinx-directive2pragma C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.pp.0.cpp std=gnu++14 -target fpga  -directive=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/all.directive.json 
+INFO-FLOW: exec C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-directive2pragma -import-directive=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/all.directive.json -fix-errors C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 0.388 sec.
+Execute       clang_tidy xilinx-constantarray-param,xilinx-remove-assert C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.pp.0.cpp std=gnu++14 -target fpga  
+INFO-FLOW: exec C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-constantarray-param,xilinx-remove-assert -fix-errors C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 0.349 sec.
+INFO-FLOW: Done: clang-tidy CDT preprocess 39 time: 0.7 seconds per iteration
+INFO-FLOW: Calling xilinx-label-all-loops ... 
+INFO-FLOW: Calling xilinx-aggregate-on-hls-vector ... 
+Execute       clang_tidy -errorcheck xilinx-label-all-loops,xilinx-aggregate-on-hls-vector,,xilinx-warn-mayneed-no-ctor-attribute C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.pp.0.cpp std=gnu++14 -target fpga  
+Execute         ap_eval exec -ignorestderr C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang-tidy -export-fixes=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang-tidy.MedianFilter.pp.0.cpp.diag.yml -header-filter=.* --checks=-*,xilinx-label-all-loops,xilinx-aggregate-on-hls-vector,,xilinx-warn-mayneed-no-ctor-attribute -fix-errors C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0 > C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang-tidy.MedianFilter.pp.0.cpp.out.log 2> C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang-tidy.MedianFilter.pp.0.cpp.err.log 
+Command         ap_eval done; 0.42 sec.
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/yaml/yaml.tcl 
+Command       clang_tidy done; 0.49 sec.
+Execute       get_config_dataflow -strict_mode 
+Execute       ap_eval exec -ignorestderr C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/xilinx-dataflow-lawyer -export-fixes=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/xilinx-dataflow-lawyer.MedianFilter.pp.0.cpp.diag.yml C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0 -fstrict-dataflow > C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/xilinx-dataflow-lawyer.MedianFilter.pp.0.cpp.out.log 2> C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/xilinx-dataflow-lawyer.MedianFilter.pp.0.cpp.err.log 
+Command       ap_eval done; 0.855 sec.
+Execute       ap_part_info -name xcvu11p-flga2577-1-e -data info 
+INFO-FLOW: compiling source code to llvm bc
+Execute       ap_eval exec -ignorestderr C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang.MedianFilter.pp.0.cpp.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fno-limit-debug-info -fhls -flto -fno-exceptions -Wno-error=c++11-narrowing C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.pp.0.cpp -fno-math-errno -c -emit-llvm -mllvm -disable-llvm-optzns -Werror=implicit-function-declaration -Werror=implicit-hls-streams -Werror=return-type -Wpragmas -Wunused-parameter -fno-threadsafe-statics -fno-use-cxa-atexit -std=gnu++14 -target fpga64-xilinx-linux-gnu -D__VITIS_HLS__ -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot -I C:/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/ap_sysc -include etc/autopilot_ssdm_op.h -D__DSP48E2__ -g -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.bc -hls-platform-db-name=C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=virtexuplus_slow > C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang.MedianFilter.pp.0.cpp.out.log 2> C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang.MedianFilter.pp.0.cpp.err.log 
+Command       ap_eval done; 1.122 sec.
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 1 seconds. CPU system time: 4 seconds. Elapsed time: 7.135 seconds; current allocated memory: 234.656 MB.
+INFO-FLOW: Linking Debug ...
+INFO-FLOW: Linking dut bc code.
+Execute       run_link_or_opt -out C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.0.bc -args  "C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.g.bc"  
+Execute         ap_eval exec -ignorestderr C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/llvm-link C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.g.bc -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.0.bc > C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/llvm-link.a.g.ld.0.bc.out.log 2> C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/llvm-link.a.g.ld.0.bc.err.log 
+Command         ap_eval done; 0.482 sec.
+INFO-FLOW: 
+Command       run_link_or_opt done; 0.488 sec.
+Execute       run_link_or_opt -opt -out C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.1.lower.bc -args C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.0.bc -reflow-lower-math-intrinsics 
+Execute         ap_eval exec -ignorestderr C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/opt -pass-remarks-missed=reflow|pasta|unroll -pass-remarks=reflow|pasta|unroll|inline -pass-remarks-output=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/opt.a.g.ld.1.lower.bc.diag.yml C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.0.bc -reflow-lower-math-intrinsics -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.1.lower.bc > C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/opt.a.g.ld.1.lower.bc.out.log 2> C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/opt.a.g.ld.1.lower.bc.err.log 
+Command         ap_eval done; 0.923 sec.
+INFO-FLOW: 
+Command       run_link_or_opt done; 0.939 sec.
+INFO-FLOW: Linking math bc lib
+Execute       run_link_or_opt -out C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.2.m1.bc -args C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.1.lower.bc -only-needed C:/Xilinx/Vitis_HLS/2021.1/win64/lib/libhlsm_39.bc C:/Xilinx/Vitis_HLS/2021.1/win64/lib/libhlsmc++_39.bc 
+Execute         ap_eval exec -ignorestderr C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/llvm-link C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.1.lower.bc -only-needed C:/Xilinx/Vitis_HLS/2021.1/win64/lib/libhlsm_39.bc C:/Xilinx/Vitis_HLS/2021.1/win64/lib/libhlsmc++_39.bc -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.2.m1.bc > C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/llvm-link.a.g.ld.2.m1.bc.out.log 2> C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/llvm-link.a.g.ld.2.m1.bc.err.log 
+Command         ap_eval done; 4.196 sec.
+INFO-FLOW: 
+Command       run_link_or_opt done; 4.211 sec.
+Execute       run_link_or_opt -opt -out C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.3.fpc.bc -args C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.2.m1.bc -reflow-globaldce -hls-top-function-name=MedianFilter -reflow-float-conversion 
+Execute         ap_eval exec -ignorestderr C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/opt -pass-remarks-missed=reflow|pasta|unroll -pass-remarks=reflow|pasta|unroll|inline -pass-remarks-output=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/opt.a.g.ld.3.fpc.bc.diag.yml C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.2.m1.bc -reflow-globaldce -hls-top-function-name=MedianFilter -reflow-float-conversion -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.3.fpc.bc > C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/opt.a.g.ld.3.fpc.bc.out.log 2> C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/opt.a.g.ld.3.fpc.bc.err.log 
+Command         ap_eval done; 1.752 sec.
+INFO-FLOW: 
+Command       run_link_or_opt done; 1.767 sec.
+Execute       run_link_or_opt -out C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.4.m2.bc -args C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.3.fpc.bc -only-needed C:/Xilinx/Vitis_HLS/2021.1/win64/lib/libfloatconversion_39.bc 
+Execute         ap_eval exec -ignorestderr C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/llvm-link C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.3.fpc.bc -only-needed C:/Xilinx/Vitis_HLS/2021.1/win64/lib/libfloatconversion_39.bc -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.4.m2.bc > C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/llvm-link.a.g.ld.4.m2.bc.out.log 2> C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/llvm-link.a.g.ld.4.m2.bc.err.log 
+Command         ap_eval done; 0.378 sec.
+INFO-FLOW: 
+Command       run_link_or_opt done; 0.385 sec.
+Execute       run_link_or_opt -opt -out C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.5.gdce.bc -args C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.4.m2.bc -reflow-globaldce -hls-top-function-name=MedianFilter 
+Execute         ap_eval exec -ignorestderr C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/opt -pass-remarks-missed=reflow|pasta|unroll -pass-remarks=reflow|pasta|unroll|inline -pass-remarks-output=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/opt.a.g.ld.5.gdce.bc.diag.yml C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.4.m2.bc -reflow-globaldce -hls-top-function-name=MedianFilter -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.5.gdce.bc > C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/opt.a.g.ld.5.gdce.bc.out.log 2> C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/opt.a.g.ld.5.gdce.bc.err.log 
+Command         ap_eval done; 0.313 sec.
+INFO-FLOW: 
+Command       run_link_or_opt done; 0.329 sec.
+Execute       get_solution -flow_target 
+Execute       get_config_export -xo 
+Execute       get_config_export -format 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_interface -default_slave_interface 
+Execute       get_solution -flow_target 
+Execute       get_config_export -xo 
+Execute       get_config_export -format 
+Execute       get_config_interface -m_axi_offset 
+Execute       get_config_interface -m_axi_latency 
+Execute       get_config_interface -m_axi_alignment_byte_size 
+Execute       get_config_interface -m_axi_min_bitwidth 
+Execute       get_config_interface -m_axi_max_bitwidth 
+Execute       get_config_interface -m_axi_max_widen_bitwidth 
+Execute       get_config_interface -m_axi_num_read_outstanding 
+Execute       get_config_interface -m_axi_num_write_outstanding 
+Execute       get_config_interface -m_axi_max_read_burst_length 
+Execute       get_config_interface -m_axi_max_write_burst_length 
+Execute       get_config_interface -m_axi_min_bitwidth 
+Execute       get_config_interface -m_axi_max_bitwidth 
+Execute       get_config_interface -m_axi_latency 
+Execute       get_config_interface -m_axi_min_bitwidth 
+Execute       get_config_interface -m_axi_max_bitwidth 
+Execute       get_config_interface -m_axi_max_widen_bitwidth 
+Execute       get_config_interface -m_axi_auto_max_ports 
+Execute       get_config_interface -m_axi_num_read_outstanding 
+Execute       get_config_interface -m_axi_num_write_outstanding 
+Execute       get_config_interface -m_axi_max_read_burst_length 
+Execute       get_config_interface -m_axi_max_write_burst_length 
+Execute       get_config_interface -s_axilite_data64 
+Execute       get_config_compile -instruction_warning_threshold 
+Execute       get_config_interface -m_axi_alignment_byte_size 
+Execute       get_config_compile -pragma_strict_mode 
+Execute       get_config_compile -pipeline_style 
+Execute       get_config_array_partition -throughput_driven 
+Execute       send_msg_by_id INFO @200-777@%s Vivado 
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+Execute       is_m_axi_addr64 
+INFO-FLOW: Doing LTO.
+Execute       ap_eval exec -ignorestderr C:/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang.a.g.ld.0.bc.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fhls -mllvm -hls-top-function-name=MedianFilter -mllvm -hls-db-dir -mllvm C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db -emit-llvm -c -target fpga64-xilinx-none -mllvm -xcl-xmlinfo=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/kernel.internal.xml -mllvm -top-io-mapping-info=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/top-io-fe.xml -mllvm -hls-bitcode-version=3.1 -mllvm -reflow-enable-slave-interface-default-setting=true -mllvm -gen-kernel-xml=false -mllvm -default-maxi-offset=off -mllvm -maxi-latency=0 -mllvm -hls-maxi-data-size-in-bits=8 -mllvm -hls-maxi-max-data-size-in-bits=1024 -mllvm -hls-max-widen-size-in-bits=0 -mllvm -xcl-kernel-max-mem-ports=0 -mllvm -maxi-read-trans=16 -mllvm -maxi-write-trans=16 -mllvm -maxi-read-burst-len=16 -mllvm -maxi-write-burst-len=16 -mllvm -reflow-enable-saxi-64bits=0 -mllvm -reflow-basic-block-instr-threshhold=200000 -mllvm -assume-maxi-align=0 -mllvm -no-unaligned-maxi-accesses -mllvm -reflow-pipeline-style-llvm-setting=0 -mllvm -reflow-auto-array-partition-mode=default -mllvm -reflow-enable-auto-array-partition=true -mllvm -reflow-aggregate-bitwidth-threshold=4096 -mllvm -reflow-disaggregate-bitwidth-threshold=4096 -mllvm -hls -mllvm -disable-inlined-alloca-merging=true -x ir C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.ld.5.gdce.bc -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.lto.bc -hls-platform-db-name=C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=virtexuplus_slow > C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang.a.g.ld.0.bc.out.log 2> C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/clang.a.g.ld.0.bc.err.log 
+Command       ap_eval done; 0.928 sec.
+INFO: [HLS 214-279] Initial Interval estimation mode is set into default.
+INFO: [HLS 214-284] Auto array partition mode is set into default.
+INFO: [HLS 214-270] Starting automatic array partition analysis...
+INFO: [HLS 214-270] Inferring complete partitioning for array 'MedianFilter(unsigned char, unsigned char, unsigned char, unsigned char*)::pixelWindowBuffer' on dimension 1 (MedianFilter.cpp:49:0)
+INFO: [HLS 214-270] Inferring complete partitioning for array 'sortBuffer' on dimension 1 (MedianFilter.cpp:51:12)
+INFO-FLOW: DBG:PUTS: copy_raw_kernel_xml ap_link_39: kernel.xml not generated: C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/kernel.internal.xml
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 2 seconds. CPU system time: 8 seconds. Elapsed time: 10.12 seconds; current allocated memory: 236.863 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.143 seconds; current allocated memory: 236.863 MB.
+Execute       opt_and_import_c a -opt_level=2 -skip_syncheck=0 -ng=0 -keep_printf=0 
+Execute         cleanup_all_models 
+INFO: [HLS 200-10] Starting code transformations ...
+INFO-FLOW: Running Standard Transforms...
+Execute         transform -hls -share-std-xform -demangle-name -inline-byval-memcpy -always-inline -promote-dbg-pointer -interface-preproc -mem2reg -scalarrepl -mem2reg -keep-read-access -instcombine -dce -promote-dbg-pointer -bitop-raise -loop-simplify -indvarspre -indvars -loop-simplify -xunroll -constprop -instcombine -simplifycfg -indvars -simplifycfg -dce -globaldce -basicaa -simplifycfg -mem2reg -globalopt -global-constprop -deadargelim -instcombine -simplifycfg -scalarrepl -instcombine -reassociate -licm -simplifycfg -loop-simplify -indvars -instcombine -simplifycfg -mem2reg -loop-simplify -indvars -instcombine -gvn -gvn -instcombine -adce -break-crit-edges -simplifycfg -loop-delete -global-array-opt -dce -dse -adce -find-syn-modules -top MedianFilter -deadargelim -mem2reg -instcombine -dce -presyn-prepare -auto-rom-infer -interface-preproc -syn-check -check-rec-only -find-region -simplifycfg -func-extr -function-inline -globaldce -mem2reg -instcombine -dce -gvn -globaldce -adce -adse -constprop -instcombine -bit-constprop -instcombine -dce -simplifycfg -bitop-raise -simplifycfg -dce -loop-delete -reassociate -globalopt -global-privatize -mem2reg -dce -global-constprop -pointer-simplify -constprop -dce -func-inst -deadargelim -auto-shift-reg-idiom -promote-dbg-pointer -norm-name C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.0.bc -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.1.bc -f -phase std-opt 
+Command         transform done; 0.105 sec.
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.278 seconds; current allocated memory: 238.100 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO-FLOW: Checking Synthesizability 1/2..
+Execute         transform -hls -syn-check -check-rec-only -scalarrepl -norm-name -dce -mem2reg -instcombine -function-uniquify -directive-preproc -mem2reg -dse -dce -auto-rom-infer -dce -pag -array-normalize -instcombine -dce -array-seg-normalize -instcombine -dce -data-pack -instcombine -dce -inst-simplify -array-flatten -instcombine -dce -array-burst -dce -deadargelim -promote-global-argument -simplifycfg -mem2reg -globaldce -dce -deadargelim -dce -instcombine -function-inline -globaldce -dce -doublePtrSimplify -doublePtrElim -dce -doublePtrSimplify -promote-dbg-pointer -dce -scalarrepl -dse -adse -instcombine -ptrLegalization -simplifycfg -dce -instcombine -pointer-simplify -ptrArgReplace -dce -instcombine -resolve-double-ptr -scalarrepl -norm-name -dce -mem2reg -instcombine -ptrLegalization -simplifycfg -deadargelim -instcombine -dce -inst-simplify -function-uniquify -directive-preproc -mem2reg -dse -dce -globaldce -check-dspbuiltin C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.1.bc -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.2.prechk.bc -f 
+INFO-FLOW: Checking Synthesizability 2/2..
+Execute         transform -syn-check C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.2.prechk.bc -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.2.bc -f -phase syn-check 
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 1 seconds. Elapsed time: 0.249 seconds; current allocated memory: 237.593 MB.
+INFO-FLOW: Compiler optimizing ...
+INFO-FLOW: Share syncheck's 1.bc for syn flow: copy C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.g.1.bc to C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.o.1.bc
+INFO-FLOW: Presyn 1...
+Execute         transform -hls -tmp C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db -interface-port-rename -function-uniquify -directive-preproc -mem2reg -dse -dce -scalarrepl -norm-name -deadargelim -mem2reg -instcombine -dce -simplifycfg -auto-rom-infer -dce -function-uniquify -resource-proc -clib-intrinsic-prepare -dce -func-buffer -dce -pag -array-normalize -func-legal -instcombine -gvn -constprop -dce -simplifycfg -mem2reg -globaldce -resolve-double-ptr -dce -deadargelim -dce -instcombine -ptrArgReplace -mem2reg -dce -array-seg-normalize -deadargelim -instcombine -dce -function-uniquify -directive-preproc -mem2reg -dse -dce -pointer-simplify -dce -port-alignment -dce -interface-preproc -data-pack -instcombine -dce -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce -loop-simplify -indvars -instcombine -gvn -loop-simplify -mem2reg -dce -find-region -instcombine -auto-loop-pipeline -inst-simplify -interface-preproc -cfgopt -instcombine -indvars -auto-loop-unroll -loop-simplify -loop-bound -xunroll -constprop -instcombine -simplifycfg -indvars -simplifycfg -dce -globaldce -clean-region -attach-range -gvn -inst-simplify -constprop -simplifycfg -dce -pointer-simplify -dce -globalopt -constprop -dce -array-promote -constprop -dce -ptrArgReplace -mem2reg -simplifycfg -dce -instcombine -dce -array-transform-check -array-reshape -instcombine -simplifycfg -dce -ptrArgReplace -deadargelim -mem2reg -instcombine -simplifycfg -dce -indvars -loop-simplify -loop-bound -xunroll -constprop -instcombine -simplifycfg -indvars -simplifycfg -dce -globaldce -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -duplicate-dataflow-processes -globaldce -instcombine -array-partition -instcombine -simplifycfg -dce -ptrArgReplace -global-constprop -deadargelim -mem2reg -func-legal -dce -global-constprop -deadargelim -mem2reg -simplifycfg -dce -merge-param -deadargelim -globalopt -constprop -dce -array-promote -constprop -dce -ptrArgReplace -mem2reg -simplifycfg -dce -mem-intrinsic-preproc -dce -global-internalize -global-privatize -mem2reg -globaldce -promote-global-argument -ptrArgReplace -mem2reg -dce -globalopt -mergereturn -simplify-global-access -mem2reg -dce -pointer-simplify -dce -functionattrs -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce -dce -norm-name -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -accesses-merge -function-inline -complex-op-raise -inst-simplify -globaldce -func-inst -constprop -instcombine -simplifycfg -dce -func-legal -dce -loop-bound -arraycheck -bitwidthmin2 -bitwidthmin2 -on-by-dataflow -loop-delete -instcombine -simplifycfg -globaldce -dce -gvn -deadargelim -dce -loop-simplify -clean-region -simplifycfg -propagate-stable-arguments -loop-stream -instcombine -simplifycfg -dce -globaldce -duplicate-dataflow-processes -stream-intrinsic-preproc -dce -check-ap-stream -loop-simplify -eliminate-keepreads -extract-dataflow-in-loop -loop-simplify -dce -gvn -deadargelim -dse -duplicate-dataflow-processes -check-dataflow-syntax -legalize-stream-variable -legalize-global -extract-subproc -dce -dead-channel-elimination -canonicalize-gep -globaldce -dce -gvn -hls-dead-arg-elim -deadargelim -directive-preproc -annotate-dataflow-channels -scalar-preprocessing -scalar-propagation2 -deadargelim -globaldce -mem2reg -check-dataflow-channels -function-stream -dce -globaldce -prop-fifo-spec -internal-stream-gen -canonicalize-gep -globaldce -dce -gvn -deadargelim -mergereturn -indvars -loop-simplify -instcombine -array-stream -array-seg-normalize -array-partition -func-legal -instcombine -simplifycfg -dce -bundle-memfifo-ops -deadargelim -function-uniquify -directive-preproc -mem2reg -dse -dce -group-axi-access -licm -simplifycfg -dce -loop-delete -hls-display -norm-name C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.o.1.bc -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.o.1.tmp.bc -f 
+INFO: [XFORM 203-502] Unrolling all loops for pipelining in function 'MedianFilter' (MedianFilter.cpp:43).
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_56_1' (MedianFilter.cpp:56) in function 'MedianFilter' completely with a factor of 3.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_57_2' (MedianFilter.cpp:57) in function 'MedianFilter' completely with a factor of 2.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_69_3' (MedianFilter.cpp:69) in function 'MedianFilter' completely with a factor of 9.
+INFO: [XFORM 203-101] Partitioning array 'pixelWindowBuffer'  in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'sortBuffer' (MedianFilter.cpp:51) in dimension 1 completely.
+Command         transform done; 0.125 sec.
+INFO-FLOW: Presyn 2...
+Execute         transform -hls -keep-callgraph -scalarrepl -mem2reg -port-alignment -attach-range -dce -pipe-mux-gen -indvars -loop-bound -inst-simplify -instcombine -dce -merge-array-access -mem2reg -dce -clean-region -mergereturn -if-conv -instcombine -dce -constprop -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce -scalarrepl -mem2reg -global-constprop -deadargelim -deadargelim -instcombine -dce -simplifycfg -ptrArgReplace -mem2reg -function-inline -globaldce -mem2reg -instcombine -dce -expr-balance -instcombine -dce -bitwidthmin2 -bitwidthmin2 -interface-preproc -directive-preproc -inst-rectify -instcombine -dce -functionattrs -constprop -instcombine -bit-constprop -simplify-global-access -globalopt -globaldce -inst-simplify -instcombine -elimdeaddata -dce -loop-delete -simplifycfg -loop-simplify -auto-burst -barrier -norm-name C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.o.1.tmp.bc -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.o.2.bc -f -phase presyn 
+INFO: [XFORM 203-602] Inlining function 'OptMedian9' into 'MedianFilter' (MedianFilter.cpp:73) automatically.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.343 seconds; current allocated memory: 257.740 MB.
+Execute         get_config_compile -enable_auto_rewind 
+Execute         get_config_compile -enable_loop_extract 
+INFO-FLOW: Building ssdm...
+Execute         transform -hls -function-uniquify -auto-function-inline -globaldce -ptrArgReplace -mem2reg -dce -reset-lda -loop-simplify -indvars -aggr-aa -licm -loop-dep -loop-bound -licm -loop-simplify -flattenloopnest -array-flatten -gvn -instcombine -dce -array-map -dce -func-legal -gvn -adce -instcombine -cfgopt -simplifycfg -loop-simplify -array-burst -promote-global-argument -dce -array-seg-normalize -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -gvn -gvn -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -dse -adse -adce -licm -inst-simplify -dce -globaldce -instcombine -array-stream -eliminate-keepreads -instcombine -dce -deadargelim -doublePtrSimplify -doublePtrElim -dce -doublePtrSimplify -promote-dbg-pointer -dce -scalarrepl -mem2reg -norm-name -mem2reg -instcombine -dse -adse -adce -ptrLegalization -dce -auto-rom-infer -array-flatten -dce -instcombine -check-doubleptr -loop-rot -constprop -cfgopt -simplifycfg -loop-simplify -indvars -pointer-simplify -dce -loop-bound -loop-simplify -loop-preproc -constprop -global-constprop -gvn -mem2reg -instcombine -dce -loop-bound -loop-merge -dce -deadargelim -dce -canonicalize-dataflow -dce -scalar-propagation2 -deadargelim -globaldce -mem2reg -load-elim -read-loop-dep -loop-simplify -loop-extract-inner -directive-preproc -bitwidthmin2 -bitwidthmin2 -read-loop-dep -interface-preproc -directive-preproc -interface-gen -bram-byte-enable -deadargelim -inst-simplify -dce -gvn -mem2reg -instcombine -dce -adse -loop-bound -instcombine -cfgopt -simplifycfg -loop-simplify -clean-region -io-protocol -find-region -mem2reg -bitop-raise -complex-op-raise -inst-simplify -inst-rectify -instcombine -adce -deadargelim -float-op-raise -loop-simplify -phi-opt -bitop-raise -cfgopt -simplifycfg -strip-dead-prototypes -interface-lower -bitop-lower -intrinsic-lower -auto-function-inline -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -inst-simplify -simplifycfg -loop-simplify -mergereturn -inst-simplify -inst-rectify -dce -load-elim -bitop-lower -float-op-raise -fma-raise -loop-rewind -pointer-simplify -dce -cfgopt -dce -loop-bound -loop-dep -read-loop-dep -dce -dyn-mem-reuse -dce -recurrence-min -dce -check-stream -norm-name -legalize -validate-dataflow -inst-clarity -bitwidth -dump-loop-dep-to-ir -check-all-ssdm -cdfg-build C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.o.2.bc -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/a.o.3.bc -f -phase build-ssdm 
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.199 seconds; current allocated memory: 249.814 MB.
+INFO-FLOW: Finish building internal data model.
+Command       opt_and_import_c done; 1.088 sec.
+Command     elaborate done; 18.691 sec.
+Execute     ap_eval exec zip -j C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/dut.hcp $dbDir/a.o.3.bc $dbDir/${topname}.rtl_wrap.cfg.tcl $dbDir/apatb_${topname}.cpp $dbDir/apatb_${topname}_util.cpp $dbDir/apatb_${topname}_ir.ll $dbDir/mapper_${topname}.cpp $dbDir/top-io-fe.xml $dbDir/kernel.internal.xml $workdir/../hls.app 
+Command     ap_eval done; 0.733 sec.
+Execute     autosyn -from_csynth_design=1 
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO-FLOW: Synthesizing C/C++ design ...
+INFO: [HLS 200-10] Synthesizing 'MedianFilter' ...
+Execute       ap_set_top_model MedianFilter 
+Execute       get_model_list MedianFilter -filter all-wo-channel -topdown 
+Execute       preproc_iomode -model MedianFilter 
+Execute       get_model_list MedianFilter -filter all-wo-channel 
+INFO-FLOW: Model list for configure: MedianFilter
+INFO-FLOW: Configuring Module : MedianFilter ...
+Execute       set_default_model MedianFilter 
+Execute       apply_spec_resource_limit MedianFilter 
+INFO-FLOW: Model list for preprocess: MedianFilter
+INFO-FLOW: Preprocessing Module: MedianFilter ...
+Execute       set_default_model MedianFilter 
+Execute       cdfg_preprocess -model MedianFilter 
+Execute       rtl_gen_preprocess MedianFilter 
+INFO-FLOW: Model list for synthesis: MedianFilter
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'MedianFilter' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model MedianFilter 
+Execute       schedule -model MedianFilter 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'MedianFilter'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, function 'MedianFilter'
+INFO: [SCHED 204-11] Finished scheduling.
+Command       schedule done; 0.11 sec.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 2 seconds. Elapsed time: 1.036 seconds; current allocated memory: 250.151 MB.
+Execute       syn_report -verbosereport -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.sched.adb -f 
+INFO-FLOW: Finish scheduling MedianFilter.
+Execute       set_default_model MedianFilter 
+Execute       bind -model MedianFilter 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.335 seconds; current allocated memory: 250.421 MB.
+Execute       syn_report -verbosereport -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.183 sec.
+Execute       db_write -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.bind.adb -f 
+INFO-FLOW: Finish binding MedianFilter.
+Execute       get_model_list MedianFilter -filter all-wo-channel 
+INFO-FLOW: Preprocessing for RTLGen ...
+Execute       rtl_gen_preprocess MedianFilter 
+INFO-FLOW: Model list for RTL generation: MedianFilter
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'MedianFilter' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model MedianFilter -top_prefix  -sub_prefix MedianFilter_ -mg_file C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.compgen.tcl 
+INFO: [RTGEN 206-500] Setting interface mode on port 'MedianFilter/row1' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'MedianFilter/row2' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'MedianFilter/row3' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'MedianFilter/V' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'MedianFilter' to 'ap_ctrl_hs'.
+WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_1' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_0' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_4' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_3' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_7' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_6' is power-on initialization.
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'MedianFilter' pipeline 'MedianFilter' pipeline type 'function pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'MedianFilter'.
+Command       create_rtl_model done; 0.106 sec.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 0.801 seconds; current allocated memory: 251.091 MB.
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.rtl_wrap.cfg.tcl 
+Execute       gen_rtl MedianFilter -istop -style xilinx -f -lang vhdl -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/syn/vhdl/MedianFilter 
+Command       gen_rtl done; 0.193 sec.
+Execute       gen_rtl MedianFilter -istop -style xilinx -f -lang vlog -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/syn/verilog/MedianFilter 
+Execute       syn_report -csynth -model MedianFilter -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/syn/report/MedianFilter_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       syn_report -rtlxml -model MedianFilter -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/syn/report/MedianFilter_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.129 sec.
+Execute       syn_report -verbosereport -model MedianFilter -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.343 sec.
+Execute       db_write -model MedianFilter -f -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.adb 
+Command       db_write done; 0.107 sec.
+Execute       db_write -model MedianFilter -bindview -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info MedianFilter -p C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter 
+Execute       export_constraint_db -f -tool general -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.constraint.tcl 
+Execute       syn_report -designview -model MedianFilter -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.design.xml 
+Command       syn_report done; 0.175 sec.
+Execute       syn_report -csynthDesign -model MedianFilter -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/syn/report/csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       get_config_rtl -disable_wave_debug 
+Execute       syn_report -wcfg -model MedianFilter -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter_dataflow_ana.wcfg 
+Execute       syn_report -protoinst -model MedianFilter -o C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.protoinst 
+Execute       get_config_debug -directory 
+Execute       sc_get_clocks MedianFilter 
+Execute       get_config_export -vivado_clock 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       sc_get_portdomain MedianFilter 
+INFO-FLOW: Model list for RTL component generation: MedianFilter
+INFO-FLOW: Handling components in module [MedianFilter] ... 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.compgen.tcl 
+INFO-FLOW: Append model MedianFilter
+INFO-FLOW: Generating RTL model list ...
+INFO-FLOW: All models in this session: MedianFilter
+INFO-FLOW: Generating C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/autopilot.rtl.models.txt file...
+INFO-FLOW: To file: write model MedianFilter
+INFO-FLOW: Generating C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/autopilot.rtl.models.tcl file...
+INFO-FLOW: Finished generating RTL model list.
+
+
+INFO-FLOW: RTL Generation done.
+INFO-FLOW: CAS Generation done.
+INFO-FLOW: CBC Generation done.
+INFO-FLOW: DBG:PROC: ::AESL_AUTOMG::auto_generate_csynth_design
+Execute       get_top 
+Execute       get_config_export -ipname 
+Execute       get_config_export -xo 
+Execute       get_config_export -format 
+Execute       get_config_rtl -module_auto_prefix 
+INFO-FLOW: DBG:PUTS: read_platform_lib C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/global.setting.tcl
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/common.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/APCoreGen.gen 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op.gen 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op_simcore.gen 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/interface.gen 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/global.setting.tcl 
+Execute       source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute           source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute           source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute         source C:/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command       ap_source done; 0.147 sec.
+INFO-FLOW: DBG:PUTS:   using AESL_AUTOCG::g_clock_period=10.000 (was NA)
+INFO-FLOW: DBG:PROC: ::AESL_AUTOMG::generate_ip_cores gen_sim_model='1' gen_fp_models='0' gen_for_export='0' dstSCDir='' dstVhdlDir='C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/vhdl' dstVlogDir='C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/vlog' tclDir='C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db' modelList='MedianFilter
+' expOnly='0'
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/global.setting.tcl 
+Execute       ap_part_info -name xcvu11p-flga2577-1-e -data names -quiet 
+Execute       ap_part_info -name xcvu11p-flga2577-1-e -data info -quiet 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/global.setting.tcl 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/global.setting.tcl 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.compgen.tcl 
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 2 seconds. CPU system time: 5 seconds. Elapsed time: 2.65 seconds; current allocated memory: 253.611 MB.
+INFO-FLOW: DBG:PROC: ::AP::create_csynth_xml outfile=''
+INFO-FLOW: Running: create_csynth_xml read xml data
+INFO-FLOW: Done: create_csynth_xml read xml data time: 0 seconds per iteration
+INFO-FLOW: Running: create_csynth_xml bind info
+INFO-FLOW: No bind nodes found for module_name MedianFilter
+INFO-FLOW: Done: create_csynth_xml bind info time: 0 seconds per iteration
+INFO-FLOW: Running: create_csynth_xml config info
+Execute       get_config_op mul -impl 
+Execute       get_config_op mul -latency 
+Execute       get_config_op mul -precision 
+Execute       get_config_op add -impl 
+Execute       get_config_op add -latency 
+Execute       get_config_op add -precision 
+Execute       get_config_op sub -impl 
+Execute       get_config_op sub -latency 
+Execute       get_config_op sub -precision 
+Execute       get_config_op fadd -impl 
+Execute       get_config_op fadd -latency 
+Execute       get_config_op fadd -precision 
+Execute       get_config_op fsub -impl 
+Execute       get_config_op fsub -latency 
+Execute       get_config_op fsub -precision 
+Execute       get_config_op fdiv -impl 
+Execute       get_config_op fdiv -latency 
+Execute       get_config_op fdiv -precision 
+Execute       get_config_op fexp -impl 
+Execute       get_config_op fexp -latency 
+Execute       get_config_op fexp -precision 
+Execute       get_config_op flog -impl 
+Execute       get_config_op flog -latency 
+Execute       get_config_op flog -precision 
+Execute       get_config_op fmul -impl 
+Execute       get_config_op fmul -latency 
+Execute       get_config_op fmul -precision 
+Execute       get_config_op frsqrt -impl 
+Execute       get_config_op frsqrt -latency 
+Execute       get_config_op frsqrt -precision 
+Execute       get_config_op frecip -impl 
+Execute       get_config_op frecip -latency 
+Execute       get_config_op frecip -precision 
+Execute       get_config_op fsqrt -impl 
+Execute       get_config_op fsqrt -latency 
+Execute       get_config_op fsqrt -precision 
+Execute       get_config_op dadd -impl 
+Execute       get_config_op dadd -latency 
+Execute       get_config_op dadd -precision 
+Execute       get_config_op dsub -impl 
+Execute       get_config_op dsub -latency 
+Execute       get_config_op dsub -precision 
+Execute       get_config_op ddiv -impl 
+Execute       get_config_op ddiv -latency 
+Execute       get_config_op ddiv -precision 
+Execute       get_config_op dexp -impl 
+Execute       get_config_op dexp -latency 
+Execute       get_config_op dexp -precision 
+Execute       get_config_op dlog -impl 
+Execute       get_config_op dlog -latency 
+Execute       get_config_op dlog -precision 
+Execute       get_config_op dmul -impl 
+Execute       get_config_op dmul -latency 
+Execute       get_config_op dmul -precision 
+Execute       get_config_op drsqrt -impl 
+Execute       get_config_op drsqrt -latency 
+Execute       get_config_op drsqrt -precision 
+Execute       get_config_op drecip -impl 
+Execute       get_config_op drecip -latency 
+Execute       get_config_op drecip -precision 
+Execute       get_config_op dsqrt -impl 
+Execute       get_config_op dsqrt -latency 
+Execute       get_config_op dsqrt -precision 
+Execute       get_config_op hadd -impl 
+Execute       get_config_op hadd -latency 
+Execute       get_config_op hadd -precision 
+Execute       get_config_op hsub -impl 
+Execute       get_config_op hsub -latency 
+Execute       get_config_op hsub -precision 
+Execute       get_config_op hdiv -impl 
+Execute       get_config_op hdiv -latency 
+Execute       get_config_op hdiv -precision 
+Execute       get_config_op hmul -impl 
+Execute       get_config_op hmul -latency 
+Execute       get_config_op hmul -precision 
+Execute       get_config_op hsqrt -impl 
+Execute       get_config_op hsqrt -latency 
+Execute       get_config_op hsqrt -precision 
+Execute       get_config_op facc -impl 
+Execute       get_config_op facc -latency 
+Execute       get_config_op facc -precision 
+Execute       get_config_op fmacc -impl 
+Execute       get_config_op fmacc -latency 
+Execute       get_config_op fmacc -precision 
+Execute       get_config_op fmadd -impl 
+Execute       get_config_op fmadd -latency 
+Execute       get_config_op fmadd -precision 
+Execute       get_config_storage fifo -auto_srl_max_bits 
+Execute       get_config_storage fifo -auto_srl_max_depth 
+Execute       get_config_storage fifo -impl 
+Execute       get_solution -flow_target 
+Execute       get_config_array_partition -complete_threshold 
+Execute       get_config_array_partition -throughput_driven 
+Execute       get_config_compile -enable_auto_rewind 
+Execute       get_config_compile -name_max_length 
+Execute       get_config_compile -no_signed_zeros 
+Execute       get_config_compile -pipeline_loops 
+Execute       get_config_compile -pipeline_style 
+Execute       get_config_compile -pragma_strict_mode 
+Execute       get_config_compile -pre_tcl 
+Execute       get_config_compile -unsafe_math_optimizations 
+Execute       get_config_dataflow -default_channel 
+Execute       get_config_dataflow -disable_fifo_sizing_opt 
+Execute       get_config_dataflow -fifo_depth 
+Execute       get_config_dataflow -override_user_fifo_depth 
+Execute       get_config_dataflow -scalar_fifo_depth 
+Execute       get_config_dataflow -start_fifo_depth 
+Execute       get_config_dataflow -strict_mode 
+Execute       get_config_dataflow -strict_stable_sync 
+Execute       get_config_dataflow -task_level_fifo_depth 
+Execute       get_config_debug -directory 
+Execute       get_config_debug -enable 
+Execute       get_config_export -description 
+Execute       get_config_export -disable_deadlock_detection 
+Execute       get_config_export -display_name 
+Execute       get_config_export -format 
+Execute       get_config_export -ip_xdc_file 
+Execute       get_config_export -ip_xdc_ooc_file 
+Execute       get_config_export -ipname 
+Execute       get_config_export -library 
+Execute       get_config_export -output 
+Execute       get_config_export -rtl 
+Execute       get_config_export -taxonomy 
+Execute       get_config_export -vendor 
+Execute       get_config_export -version 
+Execute       get_config_export -vivado_clock 
+Execute       get_config_export -vivado_impl_strategy 
+Execute       get_config_export -vivado_max_timing_paths 
+Execute       get_config_export -vivado_optimization_level 
+Execute       get_config_export -vivado_pblock 
+Execute       get_config_export -vivado_phys_opt 
+Execute       get_config_export -vivado_report_level 
+Execute       get_config_export -vivado_synth_design_args 
+Execute       get_config_export -vivado_synth_strategy 
+Execute       get_config_interface -clock_enable 
+Execute       get_config_interface -default_slave_interface 
+Execute       get_config_interface -m_axi_addr64 
+Execute       get_config_interface -m_axi_alignment_byte_size 
+Execute       get_config_interface -m_axi_auto_max_ports 
+Execute       get_config_interface -m_axi_buffer_impl 
+Execute       get_config_interface -m_axi_conservative_mode 
+Execute       get_config_interface -m_axi_flush_mode 
+Execute       get_config_interface -m_axi_latency 
+Execute       get_config_interface -m_axi_max_bitwidth 
+Execute       get_config_interface -m_axi_max_read_burst_length 
+Execute       get_config_interface -m_axi_max_widen_bitwidth 
+Execute       get_config_interface -m_axi_max_write_burst_length 
+Execute       get_config_interface -m_axi_min_bitwidth 
+Execute       get_config_interface -m_axi_num_read_outstanding 
+Execute       get_config_interface -m_axi_num_write_outstanding 
+Execute       get_config_interface -m_axi_offset 
+Execute       get_config_interface -register_io 
+Execute       get_config_interface -s_axilite_data64 
+Execute       get_config_interface -s_axilite_mailbox 
+Execute       get_config_interface -s_axilite_status_regs 
+Execute       get_config_interface -s_axilite_sw_reset 
+Execute       get_config_rtl -header 
+Execute       get_config_rtl -kernel_profile 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -mult_keep_attribute 
+Execute       get_config_rtl -register_all_io 
+Execute       get_config_rtl -register_reset_num 
+Execute       get_config_rtl -reset 
+Execute       get_config_rtl -reset_async 
+Execute       get_config_rtl -reset_level 
+Execute       get_config_schedule -enable_dsp_full_reg 
+Execute       get_config_unroll -tripcount_threshold 
+INFO-FLOW: Done: create_csynth_xml config info time: 0.7 seconds per iteration
+INFO-FLOW: Running: create_csynth_xml write xml
+INFO-FLOW: Done: create_csynth_xml write xml time: 0 seconds per iteration
+INFO-FLOW: DBG:PUTS:       create_csynth_xml wrote csynth_xml=C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/syn/report/csynth.xml
+INFO-FLOW: DBG:PROC: ::AP::DESIGN_DATA::generate_json generate_bd_files='0' generate_xo_files='0' modelList='MedianFilter
+' rtl_lang='both' bootstrap_tcl='false' outdir='' outfilename=''
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/global.setting.tcl 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/global.setting.tcl 
+Execute       get_solution -flow_target 
+Execute       get_config_export -xo 
+Execute       get_config_export -format 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/top-io-be.tcl 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.tbgen.tcl 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.rtl_wrap.cfg.tcl 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.compgen.dataonly.tcl 
+Execute       get_config_export -format 
+Execute       ap_part_info -name xcvu11p-flga2577-1-e -data names -quiet 
+Execute       ap_part_info -name xcvu11p-flga2577-1-e -data info -quiet 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.tbgen.tcl 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/global.setting.tcl 
+Execute       ap_part_info -name xcvu11p-flga2577-1-e -data names -quiet 
+Execute       ap_part_info -name xcvu11p-flga2577-1-e -data info -quiet 
+Execute       get_solution -flow_target 
+Execute       get_config_rtl -kernel_profile 
+Execute       get_config_rtl -kernel_profile 
+Execute       get_config_rtl -stall_sig_gen 
+Execute       get_config_rtl -profile 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/MedianFilter.constraint.tcl 
+Execute       sc_get_clocks MedianFilter 
+Execute       source C:/Users/viswanad/Documents/Model_Composer/2021.1/tutorial/ug1498-vitis-model-composer-tutorial/HDL_Library/Lab2/C_code/hls_project/solution1/.autopilot/db/global.setting.tcl 
+Execute       get_config_export -ip_xdc_file 
+Execute       get_config_export -ip_xdc_ooc_file 
+Execute       get_config_debug -directory 
+INFO-FLOW: DBG:PROC: ::AP::add_csynth_report_sections
+INFO-FLOW: DBG:PUTS:       update_csynth_reports json2reportxml
+INFO-FLOW: DBG:PUTS:       update_csynth_reports wrote xml
+INFO-FLOW: DBG:PUTS:       update_csynth_reports appended to csynth rpt file
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 0 seconds. CPU system time: 2 seconds. Elapsed time: 1.275 seconds; current allocated memory: 256.685 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for MedianFilter.
+INFO: [VLOG 209-307] Generating Verilog RTL for MedianFilter.
+Execute       syn_report -model MedianFilter -printsummary 
+INFO: [HLS 200-789] **** Estimated Fmax: 150.29 MHz
+Command     autosyn done; 5.39 sec.
+Command   csynth_design done; 24.855 sec.
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 10 seconds. CPU system time: 24 seconds. Elapsed time: 25.038 seconds; current allocated memory: 256.679 MB.
+Command ap_source done; 31.438 sec.
+Execute cleanup_all 

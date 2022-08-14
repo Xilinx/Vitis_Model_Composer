@@ -1,0 +1,209 @@
+
+
+================================================================
+== Vitis HLS Report for 'MedianFilter'
+================================================================
+* Date:           Mon Nov  9 16:00:12 2020
+
+* Version:        2020.2 (Build 3056071 on Thu Nov  5 18:07:33 MST 2020)
+* Project:        hls_project
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcvu11p-flga2577-1-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  6.654 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max    | min | max |   Type  |
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |        1|        1|  10.000 ns|  10.000 ns|    1|    1|      yes|
+    +---------+---------+-----------+-----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 1
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 2
+HasVarLatency: 0
+IsPipeline: 1
+IsRtlPipelined: 1
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 2
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 2
+* Pipeline : 1
+  Pipeline-0 : II = 1, D = 2, States = { 1 2 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 6.65>
+ST_1 : Operation 3 [1/1] (0.00ns)   --->   "%row3_read = read i8 @_ssdm_op_Read.ap_auto.i8, i8 %row3" [MedianFilter.cpp:43]   --->   Operation 3 'read' 'row3_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 4 [1/1] (0.00ns)   --->   "%row2_read = read i8 @_ssdm_op_Read.ap_auto.i8, i8 %row2" [MedianFilter.cpp:43]   --->   Operation 4 'read' 'row2_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 5 [1/1] (0.00ns)   --->   "%row1_read = read i8 @_ssdm_op_Read.ap_auto.i8, i8 %row1" [MedianFilter.cpp:43]   --->   Operation 5 'read' 'row1_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 6 [1/1] (0.00ns)   --->   "%sortBuffer_2 = load i8 %pixelWindowBuffer_1" [MedianFilter.cpp:58]   --->   Operation 6 'load' 'sortBuffer_2' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%sortBuffer_1 = load i8 %pixelWindowBuffer_0" [MedianFilter.cpp:58]   --->   Operation 7 'load' 'sortBuffer_1' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "%store_ln58 = store i8 %sortBuffer_1, i8 %pixelWindowBuffer_1" [MedianFilter.cpp:58]   --->   Operation 8 'store' 'store_ln58' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "%sortBuffer_5 = load i8 %pixelWindowBuffer_4" [MedianFilter.cpp:58]   --->   Operation 9 'load' 'sortBuffer_5' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%sortBuffer_4 = load i8 %pixelWindowBuffer_3" [MedianFilter.cpp:58]   --->   Operation 10 'load' 'sortBuffer_4' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%store_ln58 = store i8 %sortBuffer_4, i8 %pixelWindowBuffer_4" [MedianFilter.cpp:58]   --->   Operation 11 'store' 'store_ln58' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%sortBuffer_8 = load i8 %pixelWindowBuffer_7" [MedianFilter.cpp:58]   --->   Operation 12 'load' 'sortBuffer_8' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%sortBuffer_7 = load i8 %pixelWindowBuffer_6" [MedianFilter.cpp:58]   --->   Operation 13 'load' 'sortBuffer_7' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 14 [1/1] (0.00ns)   --->   "%store_ln58 = store i8 %sortBuffer_7, i8 %pixelWindowBuffer_7" [MedianFilter.cpp:58]   --->   Operation 14 'store' 'store_ln58' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 15 [1/1] (0.00ns)   --->   "%store_ln65 = store i8 %row1_read, i8 %pixelWindowBuffer_0" [MedianFilter.cpp:65]   --->   Operation 15 'store' 'store_ln65' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 16 [1/1] (0.00ns)   --->   "%store_ln66 = store i8 %row2_read, i8 %pixelWindowBuffer_3" [MedianFilter.cpp:66]   --->   Operation 16 'store' 'store_ln66' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 17 [1/1] (0.00ns)   --->   "%store_ln67 = store i8 %row3_read, i8 %pixelWindowBuffer_6" [MedianFilter.cpp:67]   --->   Operation 17 'store' 'store_ln67' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 18 [1/1] (0.70ns)   --->   "%icmp_ln10 = icmp_ugt  i8 %sortBuffer_1, i8 %sortBuffer_2" [MedianFilter.cpp:10->MedianFilter.cpp:73]   --->   Operation 18 'icmp' 'icmp_ln10' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 19 [1/1] (0.40ns)   --->   "%select_ln10 = select i1 %icmp_ln10, i8 %sortBuffer_1, i8 %sortBuffer_2" [MedianFilter.cpp:10->MedianFilter.cpp:73]   --->   Operation 19 'select' 'select_ln10' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 20 [1/1] (0.40ns)   --->   "%select_ln10_1 = select i1 %icmp_ln10, i8 %sortBuffer_2, i8 %sortBuffer_1" [MedianFilter.cpp:10->MedianFilter.cpp:73]   --->   Operation 20 'select' 'select_ln10_1' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 21 [1/1] (0.70ns)   --->   "%icmp_ln10_1 = icmp_ugt  i8 %sortBuffer_4, i8 %sortBuffer_5" [MedianFilter.cpp:10->MedianFilter.cpp:73]   --->   Operation 21 'icmp' 'icmp_ln10_1' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 22 [1/1] (0.40ns)   --->   "%select_ln10_2 = select i1 %icmp_ln10_1, i8 %sortBuffer_4, i8 %sortBuffer_5" [MedianFilter.cpp:10->MedianFilter.cpp:73]   --->   Operation 22 'select' 'select_ln10_2' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 23 [1/1] (0.40ns)   --->   "%select_ln10_3 = select i1 %icmp_ln10_1, i8 %sortBuffer_5, i8 %sortBuffer_4" [MedianFilter.cpp:10->MedianFilter.cpp:73]   --->   Operation 23 'select' 'select_ln10_3' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 24 [1/1] (0.70ns)   --->   "%icmp_ln10_2 = icmp_ugt  i8 %sortBuffer_7, i8 %sortBuffer_8" [MedianFilter.cpp:10->MedianFilter.cpp:73]   --->   Operation 24 'icmp' 'icmp_ln10_2' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 25 [1/1] (0.40ns)   --->   "%select_ln10_4 = select i1 %icmp_ln10_2, i8 %sortBuffer_7, i8 %sortBuffer_8" [MedianFilter.cpp:10->MedianFilter.cpp:73]   --->   Operation 25 'select' 'select_ln10_4' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 26 [1/1] (0.40ns)   --->   "%select_ln10_5 = select i1 %icmp_ln10_2, i8 %sortBuffer_8, i8 %sortBuffer_7" [MedianFilter.cpp:10->MedianFilter.cpp:73]   --->   Operation 26 'select' 'select_ln10_5' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 27 [1/1] (0.70ns)   --->   "%icmp_ln11 = icmp_ult  i8 %select_ln10_1, i8 %row1_read" [MedianFilter.cpp:11->MedianFilter.cpp:73]   --->   Operation 27 'icmp' 'icmp_ln11' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 28 [1/1] (0.40ns)   --->   "%temp_1 = select i1 %icmp_ln11, i8 %select_ln10_1, i8 %row1_read" [MedianFilter.cpp:11->MedianFilter.cpp:73]   --->   Operation 28 'select' 'temp_1' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 29 [1/1] (0.40ns)   --->   "%temp_2 = select i1 %icmp_ln11, i8 %row1_read, i8 %select_ln10_1" [MedianFilter.cpp:11->MedianFilter.cpp:73]   --->   Operation 29 'select' 'temp_2' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 30 [1/1] (0.70ns)   --->   "%icmp_ln11_1 = icmp_ult  i8 %select_ln10_3, i8 %row2_read" [MedianFilter.cpp:11->MedianFilter.cpp:73]   --->   Operation 30 'icmp' 'icmp_ln11_1' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 31 [1/1] (0.40ns)   --->   "%select_ln11 = select i1 %icmp_ln11_1, i8 %select_ln10_3, i8 %row2_read" [MedianFilter.cpp:11->MedianFilter.cpp:73]   --->   Operation 31 'select' 'select_ln11' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 32 [1/1] (0.40ns)   --->   "%temp_3 = select i1 %icmp_ln11_1, i8 %row2_read, i8 %select_ln10_3" [MedianFilter.cpp:11->MedianFilter.cpp:73]   --->   Operation 32 'select' 'temp_3' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 33 [1/1] (0.70ns)   --->   "%icmp_ln11_2 = icmp_ult  i8 %select_ln10_5, i8 %row3_read" [MedianFilter.cpp:11->MedianFilter.cpp:73]   --->   Operation 33 'icmp' 'icmp_ln11_2' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 34 [1/1] (0.40ns)   --->   "%select_ln11_3 = select i1 %icmp_ln11_2, i8 %select_ln10_5, i8 %row3_read" [MedianFilter.cpp:11->MedianFilter.cpp:73]   --->   Operation 34 'select' 'select_ln11_3' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 35 [1/1] (0.40ns)   --->   "%temp_4 = select i1 %icmp_ln11_2, i8 %row3_read, i8 %select_ln10_5" [MedianFilter.cpp:11->MedianFilter.cpp:73]   --->   Operation 35 'select' 'temp_4' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 36 [1/1] (0.70ns)   --->   "%icmp_ln12 = icmp_ugt  i8 %temp_2, i8 %select_ln10" [MedianFilter.cpp:12->MedianFilter.cpp:73]   --->   Operation 36 'icmp' 'icmp_ln12' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 37 [1/1] (0.40ns)   --->   "%temp_5 = select i1 %icmp_ln12, i8 %temp_2, i8 %select_ln10" [MedianFilter.cpp:12->MedianFilter.cpp:73]   --->   Operation 37 'select' 'temp_5' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 38 [1/1] (0.40ns)   --->   "%temp_6 = select i1 %icmp_ln12, i8 %select_ln10, i8 %temp_2" [MedianFilter.cpp:12->MedianFilter.cpp:73]   --->   Operation 38 'select' 'temp_6' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 39 [1/1] (0.70ns)   --->   "%icmp_ln12_1 = icmp_ugt  i8 %temp_3, i8 %select_ln10_2" [MedianFilter.cpp:12->MedianFilter.cpp:73]   --->   Operation 39 'icmp' 'icmp_ln12_1' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 40 [1/1] (0.40ns)   --->   "%temp_7 = select i1 %icmp_ln12_1, i8 %select_ln10_2, i8 %temp_3" [MedianFilter.cpp:12->MedianFilter.cpp:73]   --->   Operation 40 'select' 'temp_7' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 41 [1/1] (0.40ns)   --->   "%temp_8 = select i1 %icmp_ln12_1, i8 %temp_3, i8 %select_ln10_2" [MedianFilter.cpp:12->MedianFilter.cpp:73]   --->   Operation 41 'select' 'temp_8' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 42 [1/1] (0.70ns)   --->   "%icmp_ln12_2 = icmp_ugt  i8 %temp_4, i8 %select_ln10_4" [MedianFilter.cpp:12->MedianFilter.cpp:73]   --->   Operation 42 'icmp' 'icmp_ln12_2' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 43 [1/1] (0.40ns)   --->   "%select_ln12 = select i1 %icmp_ln12_2, i8 %select_ln10_4, i8 %temp_4" [MedianFilter.cpp:12->MedianFilter.cpp:73]   --->   Operation 43 'select' 'select_ln12' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 44 [1/1] (0.40ns)   --->   "%select_ln12_2 = select i1 %icmp_ln12_2, i8 %temp_4, i8 %select_ln10_4" [MedianFilter.cpp:12->MedianFilter.cpp:73]   --->   Operation 44 'select' 'select_ln12_2' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 45 [1/1] (0.70ns)   --->   "%icmp_ln13 = icmp_ugt  i8 %temp_1, i8 %select_ln11" [MedianFilter.cpp:13->MedianFilter.cpp:73]   --->   Operation 45 'icmp' 'icmp_ln13' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 46 [1/1] (0.40ns)   --->   "%temp_9 = select i1 %icmp_ln13, i8 %temp_1, i8 %select_ln11" [MedianFilter.cpp:13->MedianFilter.cpp:73]   --->   Operation 46 'select' 'temp_9' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 47 [1/1] (0.70ns)   --->   "%icmp_ln13_1 = icmp_ugt  i8 %temp_8, i8 %select_ln12_2" [MedianFilter.cpp:13->MedianFilter.cpp:73]   --->   Operation 47 'icmp' 'icmp_ln13_1' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 48 [1/1] (0.40ns)   --->   "%select_ln13 = select i1 %icmp_ln13_1, i8 %select_ln12_2, i8 %temp_8" [MedianFilter.cpp:13->MedianFilter.cpp:73]   --->   Operation 48 'select' 'select_ln13' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 49 [1/1] (0.70ns)   --->   "%icmp_ln13_2 = icmp_ugt  i8 %temp_7, i8 %select_ln12" [MedianFilter.cpp:13->MedianFilter.cpp:73]   --->   Operation 49 'icmp' 'icmp_ln13_2' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 50 [1/1] (0.40ns)   --->   "%select_ln13_1 = select i1 %icmp_ln13_2, i8 %temp_7, i8 %select_ln12" [MedianFilter.cpp:13->MedianFilter.cpp:73]   --->   Operation 50 'select' 'select_ln13_1' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 51 [1/1] (0.40ns)   --->   "%select_ln13_2 = select i1 %icmp_ln13_2, i8 %select_ln12, i8 %temp_7" [MedianFilter.cpp:13->MedianFilter.cpp:73]   --->   Operation 51 'select' 'select_ln13_2' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 52 [1/1] (0.70ns)   --->   "%icmp_ln14 = icmp_ugt  i8 %temp_9, i8 %select_ln11_3" [MedianFilter.cpp:14->MedianFilter.cpp:73]   --->   Operation 52 'icmp' 'icmp_ln14' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 53 [1/1] (0.40ns)   --->   "%temp_10 = select i1 %icmp_ln14, i8 %temp_9, i8 %select_ln11_3" [MedianFilter.cpp:14->MedianFilter.cpp:73]   --->   Operation 53 'select' 'temp_10' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 54 [1/1] (0.70ns)   --->   "%icmp_ln14_1 = icmp_ugt  i8 %temp_6, i8 %select_ln13_2" [MedianFilter.cpp:14->MedianFilter.cpp:73]   --->   Operation 54 'icmp' 'icmp_ln14_1' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 55 [1/1] (0.40ns)   --->   "%temp_11 = select i1 %icmp_ln14_1, i8 %temp_6, i8 %select_ln13_2" [MedianFilter.cpp:14->MedianFilter.cpp:73]   --->   Operation 55 'select' 'temp_11' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 56 [1/1] (0.70ns)   --->   "%icmp_ln14_2 = icmp_ugt  i8 %temp_5, i8 %select_ln13" [MedianFilter.cpp:14->MedianFilter.cpp:73]   --->   Operation 56 'icmp' 'icmp_ln14_2' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 57 [1/1] (0.40ns)   --->   "%select_ln14 = select i1 %icmp_ln14_2, i8 %select_ln13, i8 %temp_5" [MedianFilter.cpp:14->MedianFilter.cpp:73]   --->   Operation 57 'select' 'select_ln14' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_1 : Operation 58 [1/1] (0.70ns)   --->   "%icmp_ln15 = icmp_ugt  i8 %temp_11, i8 %select_ln13_1" [MedianFilter.cpp:15->MedianFilter.cpp:73]   --->   Operation 58 'icmp' 'icmp_ln15' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 59 [1/1] (0.40ns)   --->   "%temp_12 = select i1 %icmp_ln15, i8 %select_ln13_1, i8 %temp_11" [MedianFilter.cpp:15->MedianFilter.cpp:73]   --->   Operation 59 'select' 'temp_12' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+
+State 2 <SV = 1> <Delay = 3.32>
+ST_2 : Operation 60 [1/1] (0.00ns)   --->   "%specpipeline_ln0 = specpipeline void @_ssdm_op_SpecPipeline, i32 1, i32 0, i32 0, i32 0, void @empty_0"   --->   Operation 60 'specpipeline' 'specpipeline_ln0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 61 [1/1] (0.00ns)   --->   "%spectopmodule_ln0 = spectopmodule void @_ssdm_op_SpecTopModule, void @empty_1"   --->   Operation 61 'spectopmodule' 'spectopmodule_ln0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 62 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i8 %row1"   --->   Operation 62 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 63 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i8 %row1, void @empty, i32 0, i32 0, void @empty_0, i32 0, i32 0, void @empty_0, void @empty_0, void @empty_0, i32 0, i32 0, i32 0, i32 0, void @empty_0, void @empty_0"   --->   Operation 63 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 64 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i8 %row2"   --->   Operation 64 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 65 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i8 %row2, void @empty, i32 0, i32 0, void @empty_0, i32 0, i32 0, void @empty_0, void @empty_0, void @empty_0, i32 0, i32 0, i32 0, i32 0, void @empty_0, void @empty_0"   --->   Operation 65 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 66 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i8 %row3"   --->   Operation 66 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 67 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i8 %row3, void @empty, i32 0, i32 0, void @empty_0, i32 0, i32 0, void @empty_0, void @empty_0, void @empty_0, i32 0, i32 0, i32 0, i32 0, void @empty_0, void @empty_0"   --->   Operation 67 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 68 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i8 %V"   --->   Operation 68 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 69 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i8 %V, void @empty, i32 0, i32 0, void @empty_0, i32 0, i32 0, void @empty_0, void @empty_0, void @empty_0, i32 0, i32 0, i32 0, i32 0, void @empty_0, void @empty_0"   --->   Operation 69 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 70 [1/1] (0.70ns)   --->   "%icmp_ln15_1 = icmp_ugt  i8 %temp_12, i8 %select_ln14" [MedianFilter.cpp:15->MedianFilter.cpp:73]   --->   Operation 70 'icmp' 'icmp_ln15_1' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 71 [1/1] (0.40ns)   --->   "%select_ln15 = select i1 %icmp_ln15_1, i8 %temp_12, i8 %select_ln14" [MedianFilter.cpp:15->MedianFilter.cpp:73]   --->   Operation 71 'select' 'select_ln15' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_2 : Operation 72 [1/1] (0.40ns)   --->   "%select_ln15_1 = select i1 %icmp_ln15_1, i8 %select_ln14, i8 %temp_12" [MedianFilter.cpp:15->MedianFilter.cpp:73]   --->   Operation 72 'select' 'select_ln15_1' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_2 : Operation 73 [1/1] (0.70ns)   --->   "%icmp_ln15_2 = icmp_ugt  i8 %temp_10, i8 %select_ln15_1" [MedianFilter.cpp:15->MedianFilter.cpp:73]   --->   Operation 73 'icmp' 'icmp_ln15_2' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 74 [1/1] (0.40ns)   --->   "%temp_13 = select i1 %icmp_ln15_2, i8 %temp_10, i8 %select_ln15_1" [MedianFilter.cpp:15->MedianFilter.cpp:73]   --->   Operation 74 'select' 'temp_13' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_2 : Operation 75 [1/1] (0.70ns)   --->   "%icmp_ln16 = icmp_ugt  i8 %temp_13, i8 %select_ln15" [MedianFilter.cpp:16->MedianFilter.cpp:73]   --->   Operation 75 'icmp' 'icmp_ln16' <Predicate = true> <Delay = 0.70> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.70> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 76 [1/1] (0.40ns)   --->   "%select_ln16 = select i1 %icmp_ln16, i8 %select_ln15, i8 %temp_13" [MedianFilter.cpp:16->MedianFilter.cpp:73]   --->   Operation 76 'select' 'select_ln16' <Predicate = true> <Delay = 0.40> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.40> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_2 : Operation 77 [1/1] (0.00ns)   --->   "%write_ln73 = write void @_ssdm_op_Write.ap_auto.i8P0A, i8 %V, i8 %select_ln16" [MedianFilter.cpp:73]   --->   Operation 77 'write' 'write_ln73' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 78 [1/1] (0.00ns)   --->   "%ret_ln74 = ret" [MedianFilter.cpp:74]   --->   Operation 78 'ret' 'ret_ln74' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 2.7ns.
+
+ <State 1>: 6.65ns
+The critical path consists of the following:
+	'load' operation ('sortBuffer[5]', MedianFilter.cpp:58) on static variable 'pixelWindowBuffer_4' [28]  (0 ns)
+	'icmp' operation ('icmp_ln10_1', MedianFilter.cpp:10->MedianFilter.cpp:73) [40]  (0.709 ns)
+	'select' operation ('p[5]', MedianFilter.cpp:10->MedianFilter.cpp:73) [42]  (0.4 ns)
+	'icmp' operation ('icmp_ln11_1', MedianFilter.cpp:11->MedianFilter.cpp:73) [49]  (0.709 ns)
+	'select' operation ('temp', MedianFilter.cpp:11->MedianFilter.cpp:73) [51]  (0.4 ns)
+	'icmp' operation ('icmp_ln12_1', MedianFilter.cpp:12->MedianFilter.cpp:73) [58]  (0.709 ns)
+	'select' operation ('temp', MedianFilter.cpp:12->MedianFilter.cpp:73) [59]  (0.4 ns)
+	'icmp' operation ('icmp_ln13_2', MedianFilter.cpp:13->MedianFilter.cpp:73) [68]  (0.709 ns)
+	'select' operation ('select_ln13_2', MedianFilter.cpp:13->MedianFilter.cpp:73) [70]  (0.4 ns)
+	'icmp' operation ('icmp_ln14_1', MedianFilter.cpp:14->MedianFilter.cpp:73) [73]  (0.709 ns)
+	'select' operation ('temp', MedianFilter.cpp:14->MedianFilter.cpp:73) [74]  (0.4 ns)
+	'icmp' operation ('icmp_ln15', MedianFilter.cpp:15->MedianFilter.cpp:73) [77]  (0.709 ns)
+	'select' operation ('temp', MedianFilter.cpp:15->MedianFilter.cpp:73) [78]  (0.4 ns)
+
+ <State 2>: 3.33ns
+The critical path consists of the following:
+	'icmp' operation ('icmp_ln15_1', MedianFilter.cpp:15->MedianFilter.cpp:73) [79]  (0.709 ns)
+	'select' operation ('select_ln15_1', MedianFilter.cpp:15->MedianFilter.cpp:73) [81]  (0.4 ns)
+	'icmp' operation ('icmp_ln15_2', MedianFilter.cpp:15->MedianFilter.cpp:73) [82]  (0.709 ns)
+	'select' operation ('temp', MedianFilter.cpp:15->MedianFilter.cpp:73) [83]  (0.4 ns)
+	'icmp' operation ('icmp_ln16', MedianFilter.cpp:16->MedianFilter.cpp:73) [84]  (0.709 ns)
+	'select' operation ('select_ln16', MedianFilter.cpp:16->MedianFilter.cpp:73) [85]  (0.4 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

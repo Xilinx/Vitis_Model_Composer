@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="MedianFilter.cpp" path="C:\Users\viswanad\Documents\Model_Composer\2020_2\Tutorial\UG1500_unified_tutorial_test\System_Generator\Lab2\C_code\solution\MedianFilter.cpp"/>
+  </source>
+  <testbench>
+    <originFiles name="TestMedianFilter.cpp" path="C:\Users\viswanad\Documents\Model_Composer\2020_2\Tutorial\UG1500_unified_tutorial_test\System_Generator\Lab2\C_code\solution\TestMedianFilter.cpp"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>
