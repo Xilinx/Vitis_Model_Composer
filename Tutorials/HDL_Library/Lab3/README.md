@@ -25,7 +25,7 @@ This lab has two primary parts:
     - At the MATLAB command prompt, type open `Lab3.slx`
     - Double-click Lab3.slx in the Current Folder browser.
 <br><br> The Lab3 design opens, as shown in the following figure.
-<br><br><img src="../Images/HDL/Lab3/Step1/Part1/Step3.png">
+<br><br><img src="Images/Step1/Part1/Step3.png">
 
 4. From your Simulink project worksheet, select Simulation > Run or click the Run simulation button to simulate the design.
 > 📝 **Note**:  In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.
@@ -35,7 +35,7 @@ This lab has two primary parts:
 6. Select the **Clocking** tab.
 
 7. From the Perform analysis menu, select **Post Synthesis** and from Analyzer type menu select **Timing** as shown in the following figure.
-<br><br><img src="../Images/HDL/Lab3/Step1/Part1/Step7.png">
+<br><br><img src="Images/Step1/Part1/Step7.png">
 
 8. In the System Generator token dialog box, click Generate.
 <br><br>When you generate, the following occurs:
@@ -43,7 +43,7 @@ This lab has two primary parts:
     - Depending on your selection for Perform Analysis (Post Synthesis or Post Implementation), the design runs in Vivado through synthesis or through implementation.
     - After the Vivado tools run is completed, timing paths information is collected and saved in a specific file format from the Vivado timing database.
     - Vitis Model Composer processes the timing information and displays a Timing Analyzer table with timing paths information as shown in the following figure.
-<br><br><img src="../Images/HDL/Lab3/Step1/Part1/Step8.png">
+<br><br><img src="Images/Step1/Part1/Step8.png">
 
 9. In the timing analyzer table:
     - Paths with lowest slack values display, with the worst slack showing at the top and increasing toward the bottom.
@@ -54,12 +54,12 @@ This lab has two primary parts:
 11. When you cross probe, you see the corresponding path as shown in the following figure.
 
 12. Blocks with timing violations are highlighted in red.
-<br><br><img src="../Images/HDL/Lab3/Step1/Part1/Step12.png">
+<br><br><img src="Images/Step1/Part1/Step12.png">
 
 13. Double-click the second path in the Timing Analyzer table and cross-probe, the corresponding highlighted path in green which indicates no timing violation.
-<br><br><img src="../Images/HDL/Lab3/Step1/Part1/Step13-1.png">
+<br><br><img src="Images/Step1/Part1/Step13-1.png">
 <br><br> If you close the Timing Analyzer sometime later you might want to relaunch the Timing Analyzer table using the existing timing analyzer results for the model. A Launch button is provided under the Clocking tab of the System Generator token dialog box. This will only work if you already ran timing analysis on the Simulink model.
-<br><br><img src="../Images/HDL/Lab3/Step1/Part1/Step13-2.png">
+<br><br><img src="Images/Step1/Part1/Step13-2.png">
 
 > 📝 **Note**: If you relaunch the Timing Analyzer window, make sure that the Analyzer type field is set to Timing. The table that opens will display the results stored in the Target directory specified in the System Generator token dialog box, regardless of the option selected for Perform analysis (Post Synthesis or Post Implementation).
 
@@ -68,17 +68,17 @@ This lab has two primary parts:
 Inserting some registers in the combinational path might give better timing results and might help overcome timing violations if any. This can be done by changing latency of the combinational blocks as explained in the following.
 
 1. Click the violated path from the Timing Analyzer window which opens the violated path as shown in the following figure.
-<br><br><img src="../Images/HDL/Lab3/Step1/Part2/Step1.png">
+<br><br><img src="Images/Step1/Part2/Step1.png">
 
 2. Double-click the Mult block to open the Multiplier block parameters window as shown in the following figure.
-<br><br><img src="../Images/HDL/Lab3/Step1/Part2/Step2.png">
+<br><br><img src="Images/Step1/Part2/Step2.png">
 
 3. Under Basic tab, change the latency from 1 to 2 and click **OK**.
 
 4. Double-click the **System Generator** token, and ensure that the Analyzer Type is Timing and click **Generate**.
 
 5. After the generation completes, it opens the timing Analyzer table as shown in the following figure. Observe the status pass at the top-right corner. It indicates there are no timing violated paths in the design.
-<br><br><img src="../Images/HDL/Lab3/Step1/Part2/Step5.png">
+<br><br><img src="Images/Step1/Part2/Step5.png">
 
 > 📝 **Note**: <br>
 > a. For quicker timing analysis iterations, post-synthesis analysis is preferred over post-implementation analysis. <br>
@@ -100,21 +100,21 @@ In this step we use same design, <samp>Lab3.slx</samp>, used for Step 1 but we a
 > 📝 **Note**: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.
 
 2. In the Clocking tab, set the Perform Analysis field to **Post Synthesis** and Analyzer type field to **Resource**.
-<br><br><img src="../Images/HDL/Lab3/Step2/Step2.png">
+<br><br><img src="Images/Step2/Step2.png">
 
 3. In the System Generator token dialog box, click **Generate**
 <br><br>Model Comoser processes the resource utilization data and displays a Resource Analyzer window with resource utilization information.
-<br><br><img src="../Images/HDL/Lab3/Step2/Step3.png">
+<br><br><img src="Images/Step2/Step3.png">
 <br><br>Each column heading (for example, BRAMs, DSPs, or LUTs) in the window shows the total number of each type of resources available in the Xilinx device for which you are targeting your design. The rest of the window displays a hierarchical listing of each subsystem and block in the design, with the count of these resource types.
 
 4. You can cross probe from the Resource Analyzer window to the Simulink model by clicking a block or subsystem name in the Resource Analyzer window, which highlights the corresponding Vitis Model Composer HDL block or subsystem in the model.
 <br><br>Cross probing is useful to identify blocks and subsystems that are implemented using a particular type of resource.
 
 5. The block you have selected in the window will be highlighted yellow and outlined in red.
-<br><br><img src="../Images/HDL/Lab3/Step2/Step5.png">
+<br><br><img src="Images/Step2/Step5.png">
 
 6. If the block or subsystem you have selected in the window is within an upper-level subsystem, then the parent subsystem is highlighted in red in addition to the underlying block as shown in the following figure.
-<br><br><img src="../Images/HDL/Lab3/Step2/Step6.png">
+<br><br><img src="Images/Step2/Step6.png">
 
 > ❗❗ **Important**: If the Resource Analyzer window or the Timing Analyzer window opens and no information is displayed in the window (table cells are empty), double-click the System Generator token and set the Target directory to a new directory, that is, a directory that has not been used before. Then run the analysis again.
 
