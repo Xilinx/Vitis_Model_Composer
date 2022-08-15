@@ -27,7 +27,7 @@ In this step you review how AXI interfaces are defined and created.
 
 2. Type `open Lab5_1.slx` in the Command Window.
 <br><br>This opens the design shown in the following figure.
-<br><br><img src="../Images/HDL/Lab5/Step1/Step2.png">
+<br><br><img src="Images/Step1/Step2.png">
 <br><br>This design uses a number of AXI interfaces. You will review these shortly.
     - Using AXI interfaces allows a design exported to the Vivado IP catalog to be efficiently integrated into a larger system using IP integrator.
     - It is not a requirement for designs exported to the IP catalog to use AXI interfaces.
@@ -69,14 +69,14 @@ In this step you create a Vivado project which you will use to create your hardw
 9. Enter <samp> \HDL_Library\Lab5\IPI_Project </samp> for the Project Location
 > ⭐ **Tip:** You will have to manually type `/IPI_Project` in the Project location box to create the IPI_Project directory.
 
-<ul><img src= "../Images/HDL/Lab5/Step2/Step9.png"></ul>
+<ul><img src= "Images/Step2/Step9.png"></ul>
 
 10. Click **Next**.
 
 11. Select both **RTL Project** and **Do not specify sources** at this time and click **Next**.
 
 12. Select **Boards** and **ZYNQ-7 ZC702 Evaluation Board** as shown in the next figure.
-<br><br><img src= "../Images/HDL/Lab5/Step2/Step12.png">
+<br><br><img src= "Images/Step2/Step12.png">
 
 13. Click **Next**.
 
@@ -89,13 +89,13 @@ You have now created a Vivado project based on the ZC702 evaluation board.
 In this step you will create a design using the Vitis Model Composer IP.
 
 1. Click **Create Block Design** in the Flow Navigator pane.
-<br><br><img src= "../Images/HDL/Lab5/Step3/Step1.png">
+<br><br><img src= "Images/Step3/Step1.png">
 
 2. In the Create Block Design dialog box, click **OK** to accept the default name.
 <br><br>You will first create an IP repository for the Vitis Model Composer IP, and add the IP to the repository.
 
 3. In the Settings dialog box, select **IP > Repository** under Project Settings and click the **Add Repository** button <img width="18" height="18" src="../Images/Buttons/addRepository.png"> to add a repository.
-<br><br><img src= "../Images/HDL/Lab5/Step3/Step3.png">
+<br><br><img src= "Images/Step3/Step3.png">
 
 4. In the IP Repositories dialog box, navigate to the following directory:
 ```
@@ -103,7 +103,7 @@ In this step you will create a design using the Vitis Model Composer IP.
 ```
 
 5. With folder ip selected, click **Select** to create the new repository as shown in the following figure.
-<br><br><img src= "../Images/HDL/Lab5/Step3/Step5.png">
+<br><br><img src= "Images/Step3/Step5.png">
 
 6. Click **OK** to exit the Add Repository dialog box.
 
@@ -114,15 +114,15 @@ In this step you will create a design using the Vitis Model Composer IP.
 9. Type `zynq` in the Search field.
 
 10. Double-click **ZYNQ7 Processing System** to add the CPU.
-<br><br><img src= "../Images/HDL/Lab5/Step3/Step10.png">
+<br><br><img src= "Images/Step3/Step10.png">
 
 11. Click **Run Block Automation** as shown in the following figure.
-<br><br><img src= "../Images/HDL/Lab5/Step3/Step11.png">
+<br><br><img src= "Images/Step3/Step11.png">
 
 12. Leave Apply Board Preset selected and click **OK**. This will ensure the design is automatically configured to operate on the ZC702 evaluation board.
 
 13. Right-click anywhere in the block diagram and select **Add IP**.
-<br><br><img src= "../Images/HDL/Lab5/Step3/Step13.png">
+<br><br><img src= "Images/Step3/Step13.png">
 
 14. Type `lab5` in the Search dialog box.
 
@@ -139,12 +139,12 @@ In this step you will create a design using the Vitis Model Composer IP.
 
 20. Expand the HP Slave AXI Interface and select the **S AXI HP0** interface.
 <br><br> Make sure to check the box next to S AXI HP0 interface.
-<br><br><img src= "../Images/HDL/Lab5/Step3/Step20.png">
+<br><br><img src= "Images/Step3/Step20.png">
 
 21. Click **OK** to add this port to the Zynq Processing System.
 
 22. On the Model Composer IP lab5_1 block, click the AXI4-Stream input interface port `s_axis_source` and drag the mouse. Possible valid connections are shown with green check marks as the pencil cursor approaches them. Drag the mouse to the `S_AXI_HP0` port on the Zynq Processing System to complete the connection.
-<br><br><img src= "../Images/HDL/Lab5/Step3/Step22.png">
+<br><br><img src= "Images/Step3/Step22.png">
 
 23. Click **OK** in the Make Connection dialog box.
 
@@ -153,7 +153,7 @@ In this step you will create a design using the Vitis Model Composer IP.
 25. Click **OK** to accept the default.
 
 26. Use the Validate Design toolbar button to confirm the design has no errors.
-<br><br><img src= "../Images/HDL/Lab5/Step3/Step26.png">
+<br><br><img src= "Images/Step3/Step26.png">
 
 27. Click OK to close the Validate Design message.
 <br><br>The design from Vitis Model Composer has now been successfully incorporated into an IP integrator design. The IP in the repository can be used within any Vivado project, by simply adding the repository to the project.
@@ -169,7 +169,7 @@ In this step, you will implement the IP integrator design and generate a bitstea
 2. In the Sources browser in the main workspace pane, a Block Diagram object called `design_1` is at the top of the Design Sources tree view.
 
 3. Right-click this object and select **Generate Output Products**.
-<br><br><img src= "../Images/HDL/Lab5/Step4/Step3.png">
+<br><br><img src= "Images/Step4/Step3.png">
 
 4. In the Generate Output Products dialog box, click **Generate** to start the process of generating the necessary source files.
 
