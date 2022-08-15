@@ -31,11 +31,11 @@ In this step you will review a design in which different parts of the design ope
     - The output section gain-controls the output for subsequent blocks which will use the data.
     - The gain is controlled from the POWER_SCALE input.
     
-<img src="../Images/HDL/Lab4/Step1/Step3.png">
+<img src="Images/Step1/Step3.png">
 
 4. Click the Run simulation button to simulate the design.
 In the following figure Sample Time Display is enabled with colors (right-click in the canvas, **Sample Time Display > Colors**), and shows clearly that the design is running at multiple data rates.
-<img src="../Images/HDL/Lab4/Step1/Step4.png">
+<img src="Images/Step1/Step4.png">
 
 5. The Vitis Model Composer environment automatically propagates the different data rates through the design.
 <br><br>When a multi-rate design such as this is implemented in hardware, the most optimal implementation is to use a clock at the same frequency as the data; however, the clock is abstracted away in this environment. The following methodology demonstrates how to create this ideal implementation in the most efficient manner.
@@ -51,13 +51,13 @@ In the following figure Sample Time Display is enabled with colors (right-click 
 8. Select all the blocks in the filter chain – all those to be in the same clock domain, including the FDATool instances - as shown in the following figure.
 
 9. Select Create Subsystem, also as shown in the following figure, to create a new subsystem.
-<img src="../Images/HDL/Lab4/Step1/Step9.png">
+<img src="Images/Step1/Step9.png">
 
 10. Select the instance name subsystem and change this to DDC to obtain the design shown.
-<img src="../Images/HDL/Lab4/Step1/Step10.png">
+<img src="Images/Step1/Step10.png">
 
 11. Select the components in the output path and create a subsystem named Gain Control.
-<img src="../Images/HDL/Lab4/Step1/Step11.png">
+<img src="Images/Step1/Step11.png">
      
 12. Finally, select the Gateway In instance **POWER_SCALE** and **Constant** to create a new subsystem called CTRL. The final grouped design is shown in the following figure.
      
@@ -88,7 +88,7 @@ There are two data paths in the design where FIFOs are required:
     - Connect `DDC/Out2` to `FIFO1/din`.
     - Connect `FIFO1/dout` to `Gain Control/In3`.
 <br><br>You have now connected the data between the different domains and have the design shown in the following figure.
-<img src="../Images/HDL/Lab4/Step2/Step6.png">
+<img src="Images/Step2/Step6.png">
 <br><br>You will now connect up the control logic signals to ensure the data is safely passed between domains.
     - From the CTRL block a write enable is required. This is not currently present and needs to be created.
     - From the DDC block a write enable is required. The data_tvalid from the final FIR stage can be used for this.
@@ -108,7 +108,7 @@ There are two data paths in the design where FIFOs are required:
 11. Use the Comparison drop-down menu to select **a!=b** and click **OK**.
 
 12. Connect the blocks as shown in the following figure.
-<br><br><img src="../Images/HDL/Lab4/Step2/Step12.png">
+<br><br><img src="Images/Step2/Step12.png">
 <br><br>This will create an output strobe on Out2 which will be active for one cycle when the input changes, and be used as the write-enable from CTRL to the Gain Control (the FIFO block at the top level).
 
 13. Click the Up to Parent toolbar button <img width="18" height="18" src="../Images/Buttons/upToParent.png"> to return to the top level.
@@ -130,14 +130,14 @@ There are two data paths in the design where FIFOs are required:
     - Rename In4 to `CTRL_Empty`
 
 19. Connect the blocks as shown in the following figure
-<br><br><img src="../Images/HDL/Lab4/Step2/Step19.png"><br><br>
+<br><br><img src="Images/Step2/Step19.png"><br><br>
     - The FIFO empty signal from the top-level Gain Control FIFO (FIFO) block is simply an inverter block used to create a read-enable for the top-level DDC FIFO (FIFO1). If the FIFO is not empty, the data will be read.
     - Similarly, the FIFO empty signal from the top-level DDC FIFO (FIFO1) is inverted to create a FIFO read-enable.
     - This same signal will be used as the new `data_tvalid` (which was In2). However, because the FIFO has a latency of 1, this signal must be delayed to ensure this control signal is correctly aligned with the data (which is now delayed by 1 through the FIFO).
 
 20. Use the Up to Parent toolbar button <img width="18" height="18" src="../Images/Buttons/upToParent.png"> to return to the top level.
 <br><br>This shows the control signals are now present at the top level.
-<br><br><img src="../Images/HDL/Lab4/Step2/Step20.png">
+<br><br><img src="Images/Step2/Step20.png">
 <br><br>You will now complete the final connections.
 
 21. Connect the control path through instance FIFO. Delete any existing connections to complete this task.
@@ -149,7 +149,7 @@ There are two data paths in the design where FIFOs are required:
     - Connect `DDC/Out1` to `FIFO1/we`.
     - Connect `FIFO1/empty` to `Gain Control/In2`.
     - Connect` Gain Control/DDC_Read` to `FIFO1/re`.
-<br><br><img src="../Images/HDL/Lab4/Step2/Step22.png">
+<br><br><img src="Images/Step2/Step22.png">
 
 23. Click the Run simulation button to simulate the design and confirm the correct operation – you will see the same results as Step 1 action 4.
 
@@ -167,7 +167,7 @@ In this step you will specify a different clock domain for each subsystem.
 
 > 📝 **Note**: The FPGA clock period and the Simulink system period are now greyed out. This option informs Vitis Model Composer that clock rate will be specified separately for each hierarchy. It is therefore important the top level contains only subsystems and FIFOs; no other logic should be present at the top level in a multi-rate design.
 
-<ul><img src="../Images/HDL/Lab4/Step3/Step3.jfif"></ul>
+<ul><img src="Images/Step3/Step3.jfif"></ul>
 
 4. Click **OK** to close the Properties Editor.
 <br><br>You will now specify a new clock rate for the CTRL block. The CTRL block will be driven from a CPU which executes at 100 MHz.
@@ -190,7 +190,7 @@ In this step you will specify a different clock domain for each subsystem.
 12. Change the FPGA clock period to 1e9/100e6.
 
 13. Change the Simulink system period to 1/100e6.
-<br><br><img src="../Images/HDL/Lab4/Step3/Step13.png">
+<br><br><img src="Images/Step3/Step13.png">
 
 14. Click **OK** to close the Properties Editor.
 
@@ -217,7 +217,7 @@ In this step you will specify a different clock domain for each subsystem.
 24. Change the FPGA clock period to 1e9/61.44e6.
 
 25. Change the Simulink system period to 1/61.44e6.
-<br><br><img src="../Images/HDL/Lab4/Step3/Step25.png">
+<br><br><img src="Images/Step3/Step25.png">
 
 26. Click **OK** to close the Properties Editor.
 <br><br>Note that the output signals are prefixed with `M_AXI_DATA_`. This will ensure that each port will be implemented as an AXI4 interface, because the suffix for both signals is a valid AXI4 signal name (`tvalid` and `tdata`).
@@ -236,7 +236,7 @@ In this step you will specify a different clock domain for each subsystem.
 32. Select the **Clocking** tab.
 
 33. Deselect **Enable multiple clocks**. The FPGA clock period and Simulink system period are now set to represent 491 MHz.
-<br><br><img src="../Images/HDL/Lab4/Step3/Step33.png">
+<br><br><img src="Images/Step3/Step33.png">
 
 34. Click **OK** to close the Properties Editor.
 
