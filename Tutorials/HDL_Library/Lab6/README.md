@@ -23,7 +23,7 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 1. Invoke Vitis Model Composer and use the **Current Folder** browser to change the directory to: <samp> \HDL_Library\Lab6. </samp>
 
 2. At the command prompt, type open Lab6_1.slx. This opens the design as shown in the following figure.
-<br><br><img src="../Images/HDL/Lab6/Step1/Step2.jfif">
+<br><br><img src="Images/Step1/Step2.jfif">
 <br><br>This design uses a number of AXI interfaces. These interfaces were reviewed in Lab 5: Using AXI Interfaces and IP Integrator and the review is repeated here with additional details on the AXI4-Lite register addressing.
     - Using AXI interfaces allows a design exported to the Vivado IP Catalog to be efficiently integrated into a larger system using IP integrator.
     - It is not a requirement for designs exported to the IP Catalog to use AXI interfaces. The design uses the following AXI interfaces:
@@ -47,13 +47,13 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 
 10. In the file system, navigate to the directory <samp> \HDL_Library\Lab6\sys_gen_ip\ip\drivers\lab6_1_v1_2\src </samp> and view the driver files.
 <br><br>The driver files for the AXI4-Lite interface are automatically created by Vitis Model Composer when it saves a design in IP Catalog format.
-<br><br><img src="../Images/HDL/Lab6/Step1/Step10.jfif">
+<br><br><img src="Images/Step1/Step10.jfif">
 
 11. Open file <samp> lab6_1_hw.h </samp> to review which addresses the ports in the AXI4-Lite interface were automatically assigned.
-<br><br><img src="../Images/HDL/Lab6/Step1/Step11.png">
+<br><br><img src="Images/Step1/Step11.png">
 
 12. Open file <samp> lab6_1.c </samp> to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown in the following figure.
-<br><br><img src="../Images/HDL/Lab6/Step1/Step12.png">
+<br><br><img src="Images/Step1/Step12.png">
 <br><br>The driver files are automatically included when the Vitis Model Composer design is added to the IP Catalog. The procedure for adding a Vitis Model Composer design to the IP Catalog is detailed in Lab 5: Using AXI Interfaces and IP Integrator. In the next step, you will implement the design.
 
 ## Step 2: Developing Software and Running it on the Zynq-7000 System
@@ -68,17 +68,17 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 
 > 📝 Note: If you have copied the tutorials to a different directory or changed the file names, you should update the Tcl file accordingly.
 
-<ul><img src="../Images/HDL/Lab6/Step2/Step2.jfif"></ul>
+<ul><img src="Images/Step2/Step2.jfif"></ul>
 
 3. Click **Open Implemented Design** in the Flow Navigator pane.
 
 4. From the Vivado IDE main menu select **File > Export > Export Hardware**.
 
 5. Click **Next** in the Export Hardware Platform page.
-<br><br><img src="../Images/HDL/Lab6/Step2/Step5.png">
+<br><br><img src="Images/Step2/Step5.png">
 
 6. Select the **Include Bitstream** option in the Output page and click Next.
-<br><br><img src="../Images/HDL/Lab6/Step2/Step6.png">
+<br><br><img src="Images/Step2/Step6.png">
 
 7. Leave the **XSA file name** and the **Export to** fields at the default setting and click **Next**.
 
@@ -98,12 +98,12 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 14. Navigate to **Lab6 > IPI_Project > project_1**, select **design_1_wrapper.xsa** and click **Open**
 
 15. Click **Next**.
-<br><br><img src="../Images/HDL/Lab6/Step2/Step15.png">
+<br><br><img src="Images/Step2/Step15.png">
 
 16. Enter the application project name `Des_Test` in the Application project name field.
 
 17. In the Target processor section, select the processor **ps7_cortexa9_0** and click **Next**.
-<br><br><img src="../Images/HDL/Lab6/Step2/Step17.png">
+<br><br><img src="Images/Step2/Step17.png">
 
 18. Click **Next**.
 
@@ -112,7 +112,7 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 20. Select the **Hello World** template and click **Finish**.
 
 21. Expand the **design_1_wrapper** container as shown to confirm the AXI4-Lite driver code is included in the project.
-<br><br><img src="../Images/HDL/Lab6/Step2/Step21.png">
+<br><br><img src="Images/Step2/Step21.png">
 
 22. Power up the ZC702 board to program the FPGA.
 
@@ -120,10 +120,10 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 <br><br> The Done LED (DS3) goes ON, on the FPGA board.
 
 24. Click **Window > Show View** and in the Show view window, type `Vitis`, select Vitis Serial Terminal and click **Open**.
-<br><br><img src="../Images/HDL/Lab6/Step2/Step24.png">
+<br><br><img src="Images/Step2/Step24.png">
 
 25. To set up the terminal in the Vitis Serial Terminal view, click the + icon and perform the following:
-<br><br><img src="../Images/HDL/Lab6/Step2/Step25.png">
+<br><br><img src="Images/Step2/Step25.png">
     - Select the COM port to which the USB UART cable is connected. On Windows, if you are unsure, open the **Device Manager** and identify the port with the "Silicon Labs" driver under Ports (COM & LPT).
     - Change the Baud Rate to 115200.
     - Click **OK** to exit the Terminal Settings dialog box.
@@ -152,7 +152,7 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 > 📝 Note: If a window opens displaying the text “Run Session is already active”, click OK in that window.
 
 35. Review the results in the Vitis Serial Terminal tab (shown in the following figure).
-<br><br><img src="../Images/HDL/Lab6/Step2/Step35.jfif">
+<br><br><img src="Images/Step2/Step35.jfif">
 
 ### Summary 
 
