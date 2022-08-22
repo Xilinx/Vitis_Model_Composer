@@ -66,7 +66,7 @@ Save this Simulink library model. </ul>
 
 5. Double-click the **basic_array** block, and look at the generated interface.
 <br><br> The following figure shows the Block Parameters dialog box for <samp> basic_array </samp>
-<br><br> <img src="../Images/HLS/Lab2/Step1/Step5.png">
+<br><br> <img src="Images/Step1/Step5.png">
 
 6. Open the <samp> test_array.slx </samp> model, which is just a skeleton to test the generated block.
 
@@ -84,24 +84,24 @@ In this step we will walk through an example to do the following:
 1. Navigate to the <samp> HLS_Library/Lab2/Section2 </samp> folder and open **design.slx**.
 
 2. Double-click the **template_design.h** file to view the source code in the MATLAB Editor. There are two functions: Demux and Mux. These two functions are a demultiplexing and multiplexing of inputs as shown in the following figure.
-<br><br><img src="../Images/HLS/Lab2/Step2/Step2.png">
+<br><br><img src="Images/Step2/Step2.png">
 
 3. In the piece of code, note the `#pragma XMC INPORT vector_in`. This is a way to manually specify port directions using pragmas. Here, we are specifying the function argument `vector_in` as the input port. Similarly, we can define `XMC OUTPORT` also.
 
 > 📝 **Note**: For additional information about specifying ports, see Vitis Model Composer User Guide ([UG1483](https://docs.xilinx.com/access/sources/dita/map?Doc_Version=2022.1%20English&url=ug1483-model-composer-sys-gen-user-guide)).
 
 4. Notice the use of template before the function declaration. To support the inputs of different sizes, `NUMOFELEMENTS` is declared as a parameter and used the same while defining an array `vector_in` as shown in the following figure. This allows you to connect signals of different sizes to the input port of the block.
-<br><br><img src="../Images/HLS/Lab2/Step2/Step4.png">
+<br><br><img src="Images/Step2/Step4.png">
 
 5. Notice the template parameters `W` and `I` which are declared to accept signals with different word lengths and integer lengths.
-<br><br><img src="../Images/HLS/Lab2/Step2/Step5.png">
+<br><br><img src="Images/Step2/Step5.png">
 
 6. Observe the arithmetic operations performed using template variables as shown below, indicating the output signal length is half of the input signal length.
 
 7. Similar explanation follows for Mux function.
-<br><br><img src="../Images/HLS/Lab2/Step2/Step7-1.png">
+<br><br><img src="Images/Step2/Step7-1.png">
 <br><br>Now create the library blocks for Mux and Demux functions using the `xmcImportFunction` command and complete the design below with custom blocks.
-<br><br><img src="../Images/HLS/Lab2/Step2/Step7-2.png">
+<br><br><img src="Images/Step2/Step7-2.png">
 
 8. Double-click the **import_function.m** script file in the MATLAB command window and observe the following commands that generate library blocks to embed into your actual design.
 ```
@@ -117,31 +117,31 @@ In this step we will walk through an example to do the following:
 ```
 
 10. Observe the generated library blocks in the <samp> design_lib.slx </samp> library model file and save it to working directory.
-<br><br><img src="../Images/HLS/Lab2/Step2/Step10.png">
+<br><br><img src="Images/Step2/Step10.png">
 
 11. Copy the Demux and Mux blocks and paste them in the <samp> design.slx </samp> file and connect them as shown in the following figure.
-<br><br><img src="../Images/HLS/Lab2/Step2/Step11.png">
+<br><br><img src="Images/Step2/Step11.png">
 
 12. Note the following after embedding the custom blocks:
     - Double-click the Constant block and observe the vector input of type double. SSR is a workspace variable, initially set to 8 from the initFcn model callback.
     - Using the Data Type Conversion (DTC) block, double type is converted to fixed type with 16-bit word length and 8-bit fractional length. <br> Input is configurable to any word length since the design is templatized.
-    - Double-click the Demux block and observe the Template parameters section and Dimension column in the Interface section of the function tab.<br><br><img src="../Images/HLS/Lab2/Step2/Step12.png">
+    - Double-click the Demux block and observe the Template parameters section and Dimension column in the Interface section of the function tab.<br><br><img src="Images/Step2/Step12.png">
     - Next, double-click the Mux block and observe the Template parameters and Dimension.
 
 13. Add a Display block at the input and output as shown in the following figure and simulate the model to observe the results.
-<br><br><img src="../Images/HLS/Lab2/Step2/Step13.png">
+<br><br><img src="Images/Step2/Step13.png">
 
 14. To understand how templatized inputs add advantage and flexibility to your design, perform the following:
     - Double-click the **DTC** block.
     - In the Block Parameters dialog box, change the Word length from 16 to 32.
-    - Change the Fractional length from 8 to 16. <br><br><img src="../Images/HLS/Lab2/Step2/Step14-1.png">
-    - Click **OK** and press **Ctrl+D**. Observe the signal dimensions in the design. <br><br><img src="../Images/HLS/Lab2/Step2/Step14-2.png">
+    - Change the Fractional length from 8 to 16. <br><br><img src="Images/Step2/Step14-1.png">
+    - Click **OK** and press **Ctrl+D**. Observe the signal dimensions in the design. <br><br><img src="Images/Step2/Step14-2.png">
  <br><br>To make sure the output is correct, run the simulation and observe that the same block can still be used in a generic way for different values of Word length and Fractional length. This is possible only because we have templatized the W and I values in our C design.
 
 15. For an additional understanding of template parameters, perform the following:
     - Right-click the canvas and select **Model Configuration Parameters** to open the Model Properties window.
-    - In the Model Properties window, click the **Callbacks** tab and select **initFcn** and edit the SSR value from 8 to 16 as shown in the following figure. <br><br><img src="../Images/HLS/Lab2/Step2/Step15-1.png">
-    - Click **OK** and press **Ctrl+D** to observe the change in the number of elements in the Constant block output vector. The bitwidth changes when we change the datatype on the input DTC. This is possible only because of the template parameter `NUMOFELEMENTS`. <br><br><img src="../Images/HLS/Lab2/Step2/Step15-2.png">
+    - In the Model Properties window, click the **Callbacks** tab and select **initFcn** and edit the SSR value from 8 to 16 as shown in the following figure. <br><br><img src="Images/Step2/Step15-1.png">
+    - Click **OK** and press **Ctrl+D** to observe the change in the number of elements in the Constant block output vector. The bitwidth changes when we change the datatype on the input DTC. This is possible only because of the template parameter `NUMOFELEMENTS`. <br><br><img src="Images/Step2/Step15-2.png">
     - Run the simulation and validate the output according to the input values.
 
 ### Conclusion
