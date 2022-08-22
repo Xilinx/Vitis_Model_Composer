@@ -11,7 +11,7 @@ We are storing and managing Vitis Model Composer examples in GitHub. This way, u
 Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis Model Composer examples.
 
 
-# Explore Vitis Model Composer Examples
+# Examples
 
 <p align="center">
   <a href="./Examples/AIENGINE_plus_PL/README.md"><img src="Images/hetero.jpg" width="350"></a>  
@@ -19,6 +19,8 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
   <a href="./Examples/HLS/README.md"><img src="Images/hls.jpg" width="350"></a>
   <a href="./Examples/HDL/README.md"><img src="Images/hdl.jpg" width="350"></a>
 </p>
+
+# Tutorials
 
     
 # Quick Guides<a name="quick_guides"></a>
