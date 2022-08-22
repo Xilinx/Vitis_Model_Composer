@@ -21,7 +21,9 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
 </p>
 
 # Tutorials
-
+<p align="center">
+   <a href="./Tutorials/README.md"><img src="Images/tutorials.jpg" width="350" ></a>
+</p>
     
 # Quick Guides<a name="quick_guides"></a>
 <p align="center">
