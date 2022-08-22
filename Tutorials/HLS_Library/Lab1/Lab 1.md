@@ -22,7 +22,7 @@ Vitis Model Composer provides an HLS Library for use within the Simulink environ
     - At the command prompt, type: `slLibraryBrowser`
 
 2. In the browser, navigate to the HLS library in the Xilinx Toolbox .
-<img src="Images/HLS/Lab1/Step1/Step2.png">
+<img src="./Images/Step1/Step2.png">
 The HLS blocks are organized into subcategories based on functionality. Spend a few minutes navigating through the sub-libraries and familiarizing yourself with the available blocks.
 
 ## Step 2: Step 2: Build Designs with HLS Blocks
@@ -34,7 +34,7 @@ In this step, you build a simple design using the existing HLS blocks.
 Sobel edge detection is a classical algorithm in the field of image and video processing for the extraction of object edges. Edge detection using Sobel operators works on the premise of computing an estimate of the first derivative of an image to extract edge information.
 
 <b> Sobel Edge Detection </b>
-<img src="Images/HLS/Lab1/Step2/Part1/SobelEdgeDetection.png">
+<img src="Images/Step2/Part1/SobelEdgeDetection.png">
 
 ### Implementing Algorithms in Vitis Model Composer
 
@@ -51,16 +51,16 @@ Sobel edge detection is a classical algorithm in the field of image and video pr
 
 > 📝 Note: The blocks SobelFilter_XMC and GradientMag_XMC have been generated using the `xmcImportFunction` feature.
 
-<ul> <img src="Images/HLS/Lab1/Step2/Part2/Step5.png"> </ul>
+<ul> <img src="Images/Step2/Part2/Step5.png"> </ul>
 
 6. Select the **Simulation > Run** command or click the <img width="18" height="20" src="Images/Buttons/runemoji.png"> button to simulate the model and view the results of the Sobel Edge Detection algorithm.
-<br><br><img src="Images/HLS/Lab1/Step2/Part2/Step6.png">
+<br><br><img src="Images/Step2/Part2/Step6.png">
 <br><br> One way to assess the simulation performance of the algorithm is to check the video frame rate of the simulation. To do this:
 
 7. Add the Frame Rate Display block from the Simulink Computer Vision System Toolbox (under the Sinks category) and connect it to the output of the algorithm as shown in the following figure.
 
 8. Simulate the model again to see the number of video frames processed per second.
-<br><br><img src="Images/HLS/Lab1/Step2/Part2/Step8.png">
+<br><br><img src="Images/Step2/Part2/Step8.png">
 
 9. Try changing the input video through the From Multimedia File block by double-clicking the block and changing the File Name field to select a different video. Notice that changing the video resolution in the Source block does not require any structural modifications to the algorithm itself.
 
@@ -96,8 +96,8 @@ To convert the previous design to use Xilinx Fixed Point types:
 2. Open the **HLS** library in the Simulink Library Browser.
 
 3. Navigate to the Signal Attributes sub-library, select the **Data Type Conversio**n block, and drag it into the empty slots in the designs, before and after the RGB to YCbCr subsystem.
-<br><br><img src="Images/HLS/Lab1/Step3/Part1/Step3-1.png">
-<br><br><img src="Images/HLS/Lab1/Step3/Part1/Step3-2.jfif">
+<br><br><img src="Images/Step3/Part1/Step3-1.png">
+<br><br><img src="Images/Step3/Part1/Step3-2.jfif">
 
 4. Open the Data Type Conversion blocks at the inputs of the RGB to YCbCr Subsystem, and do the following:
     - Change the **Output data type** parameter to **fixed**.
@@ -105,10 +105,10 @@ To convert the previous design to use Xilinx Fixed Point types:
     - Set the **Word length** to **8**.
     - Set **Fractional length** to **7**.
     - Click **Apply**, and close the dialog box.
-<br><br><img src="Images/HLS/Lab1/Step3/Part1/Step3-2.jfif">
+<br><br><img src="Images/Step3/Part1/Step3-2.jfif">
 
 5. Add the Data Type Conversion blocks at the output of the RGB to YCbCr Subsystem and set the **Output data type** parameter to **single**. This will enable connecting the output signals to the Video Viewer blocks for visualization.
-<br><br><img src="Images/HLS/Lab1/Step3/Part1/Step5.png">
+<br><br><img src="Images/Step3/Part1/Step5.png">
 
 6. Double-click the **RGB** to **YCbCr** subsystem to descend the hierarchy and open the model. Within the RGB to YCbCr subsystem, there are subsystems to calculate Y, Cb, and Cr components using Gain and Constant blocks.
 <br><br> You can control the fixed point types for the gain parameter in the Gain blocks and the value in the Constant blocks. You can do this by opening up the **Calculate_Y**, **Calculate_Cb**, and **Calculate_Cr** blocks and setting the data types as follows.
@@ -119,7 +119,7 @@ To convert the previous design to use Xilinx Fixed Point types:
 > ⭐ **Tip**: You can use the **View > Property Inspector** command to open the Property Inspector window. When you select the different Gain or Constant blocks, you can see and modify the properties on the selected block.
 <ul>
 <br><br>Ensure you do this for all the Constant and Gain blocks in the design. Update the model (Ctrl+D) and observe the fixed point data types being propagated along with automatic bit growth in gain blocks and adder trees in the design as shown in the following figure:
-<br><br><img src="Images/HLS/Lab1/Step3/Part1/Step6.jfif">
+<br><br><img src="Images/Step3/Part1/Step6.jfif">
 <br><br>T he general format used to display the Xilinx fixed point data types is as follows:
 <br><br> <samp> x_[u/s]fix[wl]_En[fl] </samp>
 <br><br> <b>u</b>: Unsigned
@@ -138,7 +138,7 @@ Vitis Model Composer supports Data Type Expressions that make it easier to chang
 1. Double-click **Colorspace_Conversion_expression.slx** in the Current Folder to open the design.
 
 2. Notice that the Data Type Conversion blocks at the Input of the RGB to YCbCr Subsystem, the Gain blocks and Constant blocks within the Subsystem have Output data type and Gain data type set to data type expression.
-<br><br><img src="Images/HLS/Lab1/Step3/Part2/Step2.png">
+<br><br><img src="Images/Step3/Part2/Step2.png">
 <br><br> This enables HLS blocks to control the data types in the design using workspace variables, in this case `InputDataType` and `FDataType` that you can easily change from the MATLAB command prompt.
 
 3. Update the model (**Ctrl+D**) and observe the fixed-point data types propagated through the blocks.
