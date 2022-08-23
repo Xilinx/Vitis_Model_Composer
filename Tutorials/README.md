@@ -97,4 +97,27 @@ Automatic Code Generation
 </td>
 </tr>
 
+<tr>
+  <td align="center" colspan="2" style="bold" ><b>HLS Library</a></b>
+</tr>
+
+<tr>
+<td>
+<a href="./AIEngine_Library/Lab1/README.md">Lab 1</a>
+</td>
+<td>
+Importing AI Engine Kernels
+</td>
+</tr> 
+ 
+<tr>
+<td>
+<a href="./AIEngine_Library/Lab2/README.md">Lab 2</a>
+</td>
+<td>
+Importing AI Engine Graphs
+</td>
+</tr> 
+
+
 </table>
