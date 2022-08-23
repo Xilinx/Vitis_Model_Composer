@@ -1,4 +1,4 @@
-# Lab 4
+# Lab 4: Working with Multi-Rate Systems
 
 In this lab exercise, you will learn how to efficiently implement designs with multiple data rates using multiple clock domains.
 

@@ -1,4 +1,4 @@
-# Lab 1
+# Lab 1: Introduction to Vitis Model Composer HDL Library
 
 In this lab, you will learn how to use the Vitis Model Composer HDL library to specify a design in Simulink® and synthesize the design into an FPGA. This tutorial uses a standard FIR filter and demonstrates how Vitis Model Composer provides you the design options that allow you to control the fidelity of the final FPGA hardware.
 
