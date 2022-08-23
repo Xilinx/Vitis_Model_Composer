@@ -56,4 +56,45 @@ Using AXI Interfaces and IP Integrator
 Using a Vitis Model Composer HDL Design with a Zynq-7000 SoC
 </td>
  </tr>
+ 
+<tr>
+  <td align="center" colspan="2" style="bold" ><b>HLS Library</a></b>
+</tr>
+
+<tr>
+<td>
+<a href="./HLS_Library/Lab1/README.md">Lab 1</a>
+</td>
+<td>
+Introduction to Model Composer HLS Library
+</td>
+</tr> 
+ 
+<tr>
+<td>
+<a href="./HLS_Library/Lab2/README.md">Lab 2</a>
+</td>
+<td>
+Importing Code into Vitis Model Composer
+</td>
+</tr> 
+ 
+<tr>
+<td>
+<a href="./HLS_Library/Lab3/README.md">Lab 3</a>
+</td>
+<td>
+Debugging Imported C/C++-Code Using GDB Debugger
+</td>
+</tr>
+
+<tr> 
+<td>
+<a href="./HLS_Library/Lab4/README.md">Lab 4</a>
+</td>
+<td>
+Automatic Code Generation
+</td>
+</tr>
+
 </table>
