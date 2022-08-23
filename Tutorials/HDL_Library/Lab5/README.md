@@ -1,4 +1,4 @@
-# Lab 2: Using AXI Interfaces and IP Integrator
+# Lab 5: Using AXI Interfaces and IP Integrator
 
 In this lab, you will learn how AXI interfaces are implemented using Vitis Model Composer. 
 You will save the design in IP catalog format and use the resulting IP in the Vivado® IP integrator environment. 
