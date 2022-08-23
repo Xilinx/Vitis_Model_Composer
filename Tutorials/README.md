@@ -1,24 +1,61 @@
-# Revision History 
+<table style="width:100%">
+<tr>
+  <td align="center" colspan="2" style="bold" ><b><a href="./AIE_HLS/README.md">HDL Library</a></b>
+</tr>
 
-| Date | Section | Revision History |
-| --- | --- | --- |
-| 11/29/2021 | General updates | Updated for release 2021.2 |
-| 07/16/2021 | Document Title and Revision Summary | Title changed to ''Vitis Model Composer Tutorial'' |
-| | General updates | Updated for release 2021.1 |
+<tr>
+<td>
+<a href="./HDL_Library/Lab1/README.md">Lab 1</a>
+</td>
+<td>
+Introduction to Vitis Model Composer HDL Library
+</td>
+</tr> 
+ 
+<tr>
+<td>
+<a href="./HDL_Library/Lab2/README.md">Lab 2</a>
+</td>
+<td>
+Importing Code into a Vitis Model Composer HDL Design
+</td>
+</tr> 
+ 
+<tr>
+<td>
+<a href="./HDL_Library/Lab3/README.md">Lab 3</a>
+</td>
+<td>
+Timing and Resource Analysis.
+</td>
+</tr>
 
-# Locating the Tutorial Design Files
+<tr> 
+<td>
+<a href="./HDL_Library/Lab4/README.md">Lab 4</a>
+</td>
+<td>
+Working with Multi-Rate Systems
+</td>
+ </tr>
 
-There are separate project files and sources for each of the labs in this tutorial. 
-Download the [reference design files](https://www.xilinx.com/cgi-bin/docs/ctdoc?cid=54db4b74-c3f6-4c3b-ab2f-8e310c17abeb;d=ug1498-vitis-model-composer-tutorial.zip)
-for this tutorial from the [Xilinx](https://www.xilinx.com/) website. Navigate to <samp>ug1498-model-composer-sys-gen-tutorial\ </samp>
-to locate the labs corresponding to the various libraries (HDL, HLS, and AI Engine) then extract the zip file contents 
-into any write-accessible location on your hard drive or network location.
 
-> 📝 **Recommended**:
-> 
-> 1. It is recommended to check the supported MATLAB and OS versions for a particular release before starting this tutorial. 
-> For more information, please refer to *Vitis Model Composer User Guide* [(UG1483)](https://www.xilinx.com/cgi-bin/docs/rdoc?v=2021.2;d=ug1483-model-composer-sys-gen-user-guide.pdf)
-> 
-> 2. You will modify the tutorial design data while working through this tutorial. 
-> You should use a new copy of the directory extracted from <samp> ug1498-model-composer-sys-gen-tutorial.zip </samp> each time you start this tutorial.
+<tr> 
+<td>
+<a href="./HDL_Library/Lab5/README.md">Lab 5</a>
+</td>
+<td>
+Using AXI Interfaces and IP Integrator
+</td>
+ </tr>
 
+
+<tr> 
+<td>
+<a href="./HDL_Library/Lab6/README.md">Lab 6</a>
+</td>
+<td>
+Using a Vitis Model Composer HDL Design with a Zynq-7000 SoC
+</td>
+ </tr>
+</table>
