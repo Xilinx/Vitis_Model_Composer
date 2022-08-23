@@ -1,6 +1,6 @@
 <table style="width:100%">
 <tr>
-  <td align="center" colspan="2" style="bold" ><b><a href="./AIE_HLS/README.md">HDL Library</a></b>
+  <td align="center" colspan="2" style="bold" ><b>HDL Library</a></b>
 </tr>
 
 <tr>
