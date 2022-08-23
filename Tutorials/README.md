@@ -37,8 +37,7 @@ Timing and Resource Analysis.
 <td>
 Working with Multi-Rate Systems
 </td>
- </tr>
-
+</tr>
 
 <tr> 
 <td>
@@ -47,8 +46,7 @@ Working with Multi-Rate Systems
 <td>
 Using AXI Interfaces and IP Integrator
 </td>
- </tr>
-
+</tr>
 
 <tr> 
 <td>
