@@ -87,7 +87,7 @@ In this step, you learn the basic operation of Vitis Model Composer and how to s
 
 10. Similarly, from the same menu, add a Gateway Out block to the design.
 
-11. From the Tools menu, under the HDL menu, add the System Generator token used to define the FPGA technology.
+11. From the Utilites menu, under the Code Generation menu, add the Vitis Model Composer Hub token used to define the FPGA technology.
 
 12. Finally, make a copy of one of the existing Spectrum Analyzer blocks, and rename the instance to Spectrum Analyzer HDL by clicking the instance name label and editing the text.
 
