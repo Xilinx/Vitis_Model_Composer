@@ -50,7 +50,7 @@ In this step, you learn the basic operation of Vitis Model Composer and how to s
   >
 </p>
 	
-4.  From your Simulink project worksheet, select **Simulation > Run** or click the **Run** simulation button.
+4.  Click the **Run** simulation button.
 
 <ul>
   <img src="Images/Step1/Creating_a_Design_in_FPGA/Step4-1.png"> <br><br>
