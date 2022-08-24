@@ -63,7 +63,7 @@ In this step, you learn the basic operation of Vitis Model Composer and how to s
 
 <ul><img src="Images/Step1/Creating_a_Design_in_FPGA/Step5.png"></ul>
 
-6. Expand the **Xilinx Toolbox > HDL** menu, select **DSP**, then select **Digital FIR Filter.**
+6. Expand the **Xilinx Toolbox > HDL** menu, select **DSP**, **AXI-S** then select **Digital FIR Filter.**
 
 7. Right-click the **Digital FIR Filter** block and select **Add block to model Lab1_1**
 
