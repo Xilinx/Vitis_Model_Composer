@@ -67,7 +67,8 @@ In this step, you learn the basic operation of Vitis Model Composer and how to s
 
 7. Right-click the **Digital FIR Filter** block and select **Add block to model Lab1_1**
 
-<ul> <img src="Images/Step1/Creating_a_Design_in_FPGA/Step7.png"> <br><br>
+<ul> <img src="Images/Step1/Creating_a_Design_in_FPGA/Step7.png"  width=400px; height=auto> <br><br>
+	
   You can define the filter coefficients for the Digital FIR Filter block by accessing the block attributes–double-click the <b>Digital FIR Filter</b> block to view these–or, as in this case, they can be defined using the FDATool.
 </ul>
 
@@ -130,7 +131,7 @@ The first task is to define the coefficients of the new filter. For this task yo
 
 7. In the Filter Parameters section, replace the existing coefficients (Coefficient Vector) with ```xlfda_numerator('FDATool')``` to use the coefficients defined by the FDATool instance.
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step7.png"></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step7.png" width=400px; height=auto></ul>
 
 8. Click **OK** to exit the Digital FIR Filter Properties Editor.
 <br>In an FPGA, the design operates at a specific clock rate and using a specific number of bits to represent the data values.
@@ -146,14 +147,14 @@ The first task is to define the coefficients of the new filter. For this task yo
 
 11. For now, leave the bit width as the default fixed-point 2’s complement 16-bits with 14-bits representing the data below the binary point. This allows us to express a range of -2.0 to 1.999, which exceeds the range required for the summation of the sine waves (both of amplitude 1).
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11.png"></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11.png" width=400px; height=auto></ul>
 
 12. Click **OK** to close the Gateway In Properties Editor.
 <br>This now allows us to use accurate sample rate and bit-widths to accurately verify the hardware.
 
 13. Create a subsystem that inlcudes the Gateway blocks and the Digital FIR Filter. Call the subsystem, HDL_filter. 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-1.png"></ul>
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-2.png"></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-1.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-2.png" width=400px; height=auto></ul>
 
 14. Double-click the **Vitis Model Composer Hub** token to open the Properties Editor.
 <br>Because the input port is sampled at 20 MHz to adequately represent the data, you must define the clock rate of the FPGA and the Simulink sample period to be at least 20 MHz.
