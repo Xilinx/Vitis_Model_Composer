@@ -151,7 +151,11 @@ The first task is to define the coefficients of the new filter. For this task yo
 12. Click **OK** to close the Gateway In Properties Editor.
 <br>This now allows us to use accurate sample rate and bit-widths to accurately verify the hardware.
 
-13. Double-click the **System Generator** token to open the Properties Editor.
+13. Create a subsystem that inlcudes the Gateway blocks and the Digital FIR Filter. Call the subsystem, HDL_filter. 
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-1.png"></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-2.png"></ul>
+
+14. Double-click the **Vitis Model Composer Hub** token to open the Properties Editor.
 <br>Because the input port is sampled at 20 MHz to adequately represent the data, you must define the clock rate of the FPGA and the Simulink sample period to be at least 20 MHz.
 
 14. Select the Clocking tab.
