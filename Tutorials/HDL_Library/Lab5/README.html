@@ -1,0 +1,349 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="lab-5-using-axi-interfaces-and-ip-integrator">Lab 5: Using AXI Interfaces and IP Integrator</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
+              
+</html>
+<p>In this lab, you will learn how AXI interfaces are implemented using Vitis Model Composer. <br />
+You will save the design in IP catalog format and use the resulting IP in the Vivado® IP integrator environment. <br />
+Then you will see how IP integrator enhances your productively by supplying connection assistance when you use AXI interfaces.</p>
+<h3 id="objectives">Objectives</h3>
+<p>After completing this lab, you will be able to:</p>
+<ul>
+<li>Implement AXI interfaces in your designs.</li>
+<li>Add your design as IP in the Vivado IP catalog.</li>
+<li>Connect your design in IP integrator.</li>
+</ul>
+<h3 id="procedure">Procedure</h3>
+<p>This lab has four primary parts:</p>
+<ul>
+<li>In Step 1, you will review how AXI interfaces are implemented using Vitis Model Composer.</li>
+<li>In Step 2, you will create a Vivado project for your Vitis Model Composer IP.</li>
+<li>In Step 3, you will create a design in IP integrator using the Vitis Model Composer IP.</li>
+<li>In Step 4, you will implement the design and generate an FPGA bitstream (the file used to program the FPGA).</li>
+</ul>
+<h2 id="step-1-review-the-axi-interfaces">Step 1: Review the AXI Interfaces</h2>
+<p>In this step you review how AXI interfaces are defined and created.</p>
+<ol>
+<li><p>Invoke Vitis Model Composer and use the Current Folder browser to change the directory to <samp> \HDL_Library\Lab5. </samp></p></li>
+<li><p>Type <code>open Lab5_1.slx</code> in the Command Window.<br />
+<br><br>This opens the design shown in the following figure.<br />
+<br><br><img src="Images/Step1/Step2.png"><br />
+<br><br>This design uses a number of AXI interfaces. You will review these shortly.</p>
+<ul>
+<li>Using AXI interfaces allows a design exported to the Vivado IP catalog to be efficiently integrated into a larger system using IP integrator.</li>
+<li>It is not a requirement for designs exported to the IP catalog to use AXI interfaces.<br />
+<br><br>This design uses the following AXI interfaces:</li>
+<li>An AXI4-Stream interface is used for ports <code>s_axis_source_*</code>. All Gateway In and Out signals are prefixed with the same name (<code>s_axis_source_</code>), ensuring they are grouped into the same interface. The suffixes for all ports are valid AXI4-Stream interface signal names (<code>tready</code>, <code>tvalid</code>, <code>tlast</code> and <code>tdata</code>).</li>
+<li>An AXI4-Stream interface is used for ports <code>m_axis_dout_*</code>.</li>
+<li>An AXI4-Lite interface is used for the remaining ports. You can confirm this using the following steps:</li></ul></li>
+<li><p>Double-click Gateway In instance <strong>decrypt</strong> (or any of <strong>reset</strong>, <strong>Keys[63:32]</strong>, <strong>Keys[31:0]</strong>, or <strong>parity_err</strong>).</p></li>
+<li><p>In the Properties Editor select the <strong>Implementation</strong> tab.</p></li>
+<li><p>Confirm the Interface is specified as AXI4-Lite in the Interface options.</p></li>
+<li><p>Click <strong>OK</strong> to exit the Properties Editor.<br />
+<br><br> Details on simulating the design are provided in the canvas notes. For this exercise, you will concentrate on exporting the design to the Vivado IP catalog and use the IP in an existing design.</p></li>
+</ol>
+<h2 id="step-2-create-a-vivado-project-using-vitis-model-composer-hdl-ip">Step 2: Create a Vivado Project using Vitis Model Composer HDL IP</h2>
+<p>In this step you create a Vivado project which you will use to create your hardware design.</p>
+<ol>
+<li><p>Double-click the <strong>System Generator</strong> token to open the Properties Editor.</p></li>
+<li><p>In the Properties Editor, make sure IP catalog is selected for the Compilation type.</p></li>
+<li><p>Click <strong>Generate</strong> to generate a design in IP catalog format.</p></li>
+<li><p>Click <strong>OK</strong> to dismiss the Compilation status dialog box.</p></li>
+<li><p>Click <strong>OK</strong> to dismiss the System Generator token.<br />
+<br><br> The design has been written in IP catalog format to the directory <samp> ./IPI_Project. </samp> You will now import this IP into the Vivado IP catalog and use the IP in an existing example project.</p></li>
+<li><p>Open the Vivado IDE using <strong>Windows > Xilinx Design Tools > Vivado 2021.2.</strong></p></li>
+<li><p>Click <strong>Create Project</strong>.</p></li>
+<li><p>Click <strong>Next</strong>.</p></li>
+<li><p>Enter <samp> \HDL<em>Library\Lab5\IPI</em>Project </samp> for the Project Location</p></li>
+</ol>
+<blockquote>
+<p>⭐ <strong>Tip:</strong> You will have to manually type <code>/IPI_Project</code> in the Project location box to create the IPI_Project directory.</p>
+</blockquote>
+<ul><img src= "Images/Step2/Step9.png"></ul>
+<ol start="10">
+<li><p>Click <strong>Next</strong>.</p></li>
+<li><p>Select both <strong>RTL Project</strong> and <strong>Do not specify sources</strong> at this time and click <strong>Next</strong>.</p></li>
+<li><p>Select <strong>Boards</strong> and <strong>ZYNQ-7 ZC702 Evaluation Board</strong> as shown in the next figure.<br />
+<br><br><img src= "Images/Step2/Step12.png"></p></li>
+<li><p>Click <strong>Next</strong>.</p></li>
+<li><p>Click <strong>Finish</strong>.</p></li>
+</ol>
+<p>You have now created a Vivado project based on the ZC702 evaluation board.</p>
+<h2 id="step-3-create-a-design-in-ip-integrator">Step 3: Create a Design in IP Integrator</h2>
+<p>In this step you will create a design using the Vitis Model Composer IP.</p>
+<ol>
+<li><p>Click <strong>Create Block Design</strong> in the Flow Navigator pane.<br />
+<br><br><img src= "Images/Step3/Step1.png"></p></li>
+<li><p>In the Create Block Design dialog box, click <strong>OK</strong> to accept the default name.<br />
+<br><br>You will first create an IP repository for the Vitis Model Composer IP, and add the IP to the repository.</p></li>
+<li><p>In the Settings dialog box, select <strong>IP > Repository</strong> under Project Settings and click the <strong>Add Repository</strong> button <img width="18" height="18" src="../Images/Buttons/addRepository.png"> to add a repository.<br />
+<br><br><img src= "Images/Step3/Step3.png"></p></li>
+<li><p>In the IP Repositories dialog box, navigate to the following directory:</p></li>
+</ol>
+<pre><code>\HDL_Library\Lab5\IPI_Project\ip
+</code></pre>
+<ol start="5">
+<li><p>With folder ip selected, click <strong>Select</strong> to create the new repository as shown in the following figure.<br />
+<br><br><img src= "Images/Step3/Step5.png"></p></li>
+<li><p>Click <strong>OK</strong> to exit the Add Repository dialog box.</p></li>
+<li><p>Click <strong>OK</strong> to exit the Settings dialog box.</p></li>
+<li><p>Click the <strong>Add IP</strong> button in the center of the canvas.</p></li>
+<li><p>Type <code>zynq</code> in the Search field.</p></li>
+<li><p>Double-click <strong>ZYNQ7 Processing System</strong> to add the CPU.<br />
+<br><br><img src= "Images/Step3/Step10.png"></p></li>
+<li><p>Click <strong>Run Block Automation</strong> as shown in the following figure.<br />
+<br><br><img src= "Images/Step3/Step11.png"></p></li>
+<li><p>Leave Apply Board Preset selected and click <strong>OK</strong>. This will ensure the design is automatically configured to operate on the ZC702 evaluation board.</p></li>
+<li><p>Right-click anywhere in the block diagram and select <strong>Add IP</strong>.<br />
+<br><br><img src= "Images/Step3/Step13.png"></p></li>
+<li><p>Type <code>lab5</code> in the Search dialog box.</p></li>
+<li><p>Double-click <strong>lab5_1</strong> to add the IP to the design.<br />
+<br><br> You will now connect the IP to the rest of the design. Vivado IP integrator provides automated assistance when the design uses AXI interfaces.</p></li>
+<li><p>Click <strong>Run Connection Automation</strong> (at the top of the design canvas).</p></li>
+<li><p>Click <strong>OK</strong> to accept the default options ( <samp> lab5<em>1</em>0/lab5<em>1</em>s<em>axi </samp> to <samp> processing</em>system7<em>0/M</em>AXI_GP0 </samp>) and connect the AXI4-Lite interface to the Zynq®-7000 IP SoC.</p></li>
+<li><p>Double-click the <strong>ZYNQ7 Processing System</strong> to customize the IP.</p></li>
+<li><p>Click the <strong>PS-PL Configuration</strong> as shown in the following figure.</p></li>
+<li><p>Expand the HP Slave AXI Interface and select the <strong>S AXI HP0</strong> interface.<br />
+<br><br> Make sure to check the box next to S AXI HP0 interface.<br />
+<br><br><img src= "Images/Step3/Step20.png"></p></li>
+<li><p>Click <strong>OK</strong> to add this port to the Zynq Processing System.</p></li>
+<li><p>On the Model Composer IP lab5_1 block, click the AXI4-Stream input interface port <code>s_axis_source</code> and drag the mouse. Possible valid connections are shown with green check marks as the pencil cursor approaches them. Drag the mouse to the <code>S_AXI_HP0</code> port on the Zynq Processing System to complete the connection.<br />
+<br><br><img src= "Images/Step3/Step22.png"></p></li>
+<li><p>Click <strong>OK</strong> in the Make Connection dialog box.</p></li>
+<li><p>Click <strong>Run Connection Automation</strong> to connect the AXI4-Lite interface on the AXI DMA to the processor.</p></li>
+<li><p>Click <strong>OK</strong> to accept the default.</p></li>
+<li><p>Use the Validate Design toolbar button to confirm the design has no errors.<br />
+<br><br><img src= "Images/Step3/Step26.png"></p></li>
+<li><p>Click OK to close the Validate Design message.<br />
+<br><br>The design from Vitis Model Composer has now been successfully incorporated into an IP integrator design. The IP in the repository can be used within any Vivado project, by simply adding the repository to the project.</p></li>
+</ol>
+<p>You will now process the design through to bitstream.</p>
+<h2 id="step-4-implement-the-design">Step 4: Implement the Design</h2>
+<p>In this step, you will implement the IP integrator design and generate a bitsteam.</p>
+<ol>
+<li><p>In the Flow Navigator, click <strong>Project Manager</strong> to return to the Project Manager view.</p></li>
+<li><p>In the Sources browser in the main workspace pane, a Block Diagram object called <code>design_1</code> is at the top of the Design Sources tree view.</p></li>
+<li><p>Right-click this object and select <strong>Generate Output Products</strong>.<br />
+<br><br><img src= "Images/Step4/Step3.png"></p></li>
+<li><p>In the Generate Output Products dialog box, click <strong>Generate</strong> to start the process of generating the necessary source files.</p></li>
+<li><p>When the generation completes, right-click the <code>design_1</code> object again, select <strong>Create HDL Wrapper</strong>, and click <strong>OK</strong> (and let Vivado manage the wrapper) to exit the resulting dialog box.<br />
+<br><br>The top level of the Design Sources tree becomes the <samp> design<em>1</em>wrapper.v </samp> file. The design is now ready to be synthesized, implemented, and have an FPGA programming bitstream generated.</p></li>
+<li><p>In the Flow Navigator, click <strong>Generate Bitstream</strong> to initiate the remainder of the flow.</p></li>
+<li><p>Click <strong>Yes</strong>, and from the launch runs window click <strong>OK</strong> to generate the synthesis and implementation files.</p></li>
+<li><p>fIn the dialog that appears after bitstream generation has completed, select <strong>Open Implemented Design</strong> and click <strong>OK</strong>.</p></li>
+<li><p>After you view your implemented design, exit the Vivado IDE.</p></li>
+</ol>
+<h3 id="summary">Summary</h3>
+<p>In this lab, you learned how AXI interfaces are added to a Vitis Model Composer design and how a Vitis Model Composer design is saved in the IP catalog format, incorporated into the Vivado IP catalog, and used in a larger design. You also saw how the IP integrator can substantially increase productivity with connection automation and hints when AXI interfaces are used in your design.</p>
+<p>The following <samp> solution </samp> directory contains the final Vitis Model Composer (<samp> *.slx </samp>) files for this lab. The solution directory does not contain the IP output from Vitis Model Composer or the files and directories generated by Vivado.</p>
+<pre><code>\HDL_Library\Lab5\solution
+</code></pre>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h1, h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>

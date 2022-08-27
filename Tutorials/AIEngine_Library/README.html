@@ -6,48 +6,33 @@
       </head>
       <body>
         <div id='content'>
-    <p><img src="Images/github_banner.png" alt="" /></p>
-<h1 id="rapid-design-exploration-using-vitis-model-composera-nameintroductiona">Rapid design exploration using Vitis Model Composer<a name="introduction"></a></h1>
-<p>Vitis Model Composer provides a library of performance-optimized blocks for design and implementation of DSP algorithms on Xilinx devices. The Vitis Model Composer AI Engine, HLS and HDL libraries within the Simulink environment, enable the rapid design exploration of an algorithm and accelerates the path to production.</p>
-<h1 id="how-to-access-the-examples-and-quick-guidesa-nameaccessa">How to access the examples and quick guides?<a name="access"></a></h1>
-<p>We are storing and managing Vitis Model Composer examples in GitHub. This way, users will have access to the most up-to-date examples. You can get the examples from GitHub. However we recommend you get them directly from Vitis Model Composer.</p>
-<p>Click <a href="./QuickGuides/Get_Examples/README.html">here</a> to learn how to access Vitis Model Composer examples.</p>
-<h1 id="examples">Examples</h1>
-<p align="center">
-  <a href="./Examples/AIENGINE_plus_PL/README.html"><img src="Images/hetero.jpg" width="350"></a>  
-  <a href="./Examples/AIENGINE/README.html"> <img src="Images/aiengines.jpg" width="350"></a>
-  <a href="./Examples/HLS/README.html"><img src="Images/hls.jpg" width="350"></a>
-  <a href="./Examples/HDL/README.html"><img src="Images/hdl.jpg" width="350"></a>
-</p>
-<h1 id="tutorials">Tutorials</h1>
-<p align="center">
-   <a href="./Tutorials/README.html"><img src="Images/tutorials.jpg" width="350" ></a>
-</p>
-<h1 id="quick-guidesa-namequick_guidesa">Quick Guides<a name="quick_guides"></a></h1>
-<p align="center">
-   <a href="./QuickGuides/README.html"><img src="Images/QuickGuides.jpg" width="350" ></a>
-</p>
-<h1 id="videosa-namevideosa">Videos<a name="videos"></a></h1>
-<table style="width:100%">
-<tr>
-    <td width="100%" align="center"><b>Design for Versal AI Engines (20 minutes)</b>
-</tr>  
-<tr>
-<td width="100%" align="center"><a href="https://www.mathworks.com/videos/designing-ai-engines-of-xilinx-versal-acap-using-simulink-and-vitis-model-composer-1635957693985.html?s_tid=srchtitle_versal%20AI%20engine_1"><img src="Images/webinar_screen_shot.png" alt="drawing" width="300"/></a>
-</tr>
-</table>
-<hr />
-<p>Copyright 2022 Xilinx</p>
-<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
-you may not use this file except in compliance with the License.<br />
-You may obtain a copy of the License at</p>
-<pre><code>http://www.apache.org/licenses/LICENSE-2.0
-</code></pre>
-<p>Unless required by applicable law or agreed to in writing, software<br />
-distributed under the License is distributed on an "AS IS" BASIS,<br />
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
-See the License for the specific language governing permissions and<br />
-limitations under the License.</p>
+    <h1 id="vitis-model-composer-for-ai-engine-lab-overview">Vitis Model Composer for AI Engine Lab Overview</h1>
+<p>Vitis Model Composer enables the rapid simulation, exploration, and code generation of algorithms targeted for AI Engines from within the Simulink® environment. You can achieve this by importing AI Engine kernels and data-flow graphs into Vitis Model Composer as blocks and controlling the behavior of the kernels and graphs by configuring the block GUI parameters. Simulation results can be visualized by seamlessly connecting Simulink source and sink blocks with Vitis Model Composer AI Engine blocks.</p>
+<p>Vitis Model Composer provides a set of AI Engine library blocks for use within the Simulink environment. These include:</p>
+<ul>
+<li><p>Blocks to import kernels and graphs which can be targeted to the AI Engine portion of Versal® devices.</p></li>
+<li><p>Block to import HLS kernels which can be targeted to the PL portion of Versal devices.</p></li>
+<li><p>Blocks that support connection between the AI Engine and the Xilinx HDL blockset.</p></li>
+<li><p>Configurable AI Engine functions such as FIR, FFT, IFFT etc.</p>
+<p>:warning: The AI Engine Lab can be done only in a Linux environment.</p></li>
+</ul>
+<p><br><strong>Figure: Simulink Library Browser: AI Engine</strong><br />
+<br><br><img src="Images/Figure1.png"></p>
+<p>This tutorial includes the following labs which introduce AI Engine support in Vitis Model Composer.</p>
+<h3 id="lab-1">Lab 1</h3>
+<p>Import AI Engine Kernels</p>
+<ul>
+<li>Import AI Engine kernels using the AIE Kernel block from AI Engine library</li>
+<li>Generate graph code</li>
+<li>Simulate the design using the AI Engine SystemC Simulator.</li>
+</ul>
+<h3 id="lab-2">Lab 2</h3>
+<p>Import an AI Engine Graph</p>
+<ul>
+<li>Import an AI Engine sub-graph using the AIE Graph block</li>
+<li>Generate a top-level graph</li>
+<li>Simulate the design using the AI Engine SystemC Simulator.</li>
+</ul>
 
         </div>
         <style type='text/css'>body {
