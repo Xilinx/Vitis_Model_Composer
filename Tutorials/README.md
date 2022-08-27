@@ -1,3 +1,7 @@
+# Vitis Model Composer Tutorials
+
+These tutorials take users through the design methodology and programming model for developing algorithms in Vitis Model Composer for AMD/Xilinx devices including Versal devices and the AI Engines.
+
 <table style="width:100%">
 <tr>
   <td align="center" colspan="2" style="bold" ><b>HDL Library</a></b>
@@ -98,7 +102,7 @@ Automatic Code Generation
 </tr>
 
 <tr>
-  <td align="center" colspan="2" style="bold" ><b>HLS Library</a></b>
+  <td align="center" colspan="2" style="bold" ><b>AI Engine Library</a></b>
 </tr>
 
 <tr>
