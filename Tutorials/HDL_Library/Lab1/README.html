@@ -1,12 +1,28 @@
 
-    <html>
-      <head>
-        <title></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-      </head>
-      <body>
-        <div id='content'>
-    <h1 id="lab-1-introduction-to-vitis-model-composer-hdl-library">Lab 1: Introduction to Vitis Model Composer HDL Library</h1>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="lab-1-introduction-to-vitis-model-composer-hdl-library">Lab 1: Introduction to Vitis Model Composer HDL Library</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:chdir('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
 <p>In this lab, you will learn how to use the Vitis Model Composer HDL library to specify a design in Simulink® and synthesize the design into an FPGA. This tutorial uses a standard FIR filter and demonstrates how Vitis Model Composer provides you the design options that allow you to control the fidelity of the final FPGA hardware.</p>
 <h4 id="objectives">Objectives</h4>
 <p>After completing this lab, you will be able to:</p>
@@ -45,20 +61,20 @@
 </ul>
 <ul>The Lab1_1 design opens, showing two sine wave sources being added together and passed separately through two low-pass filters. This design highlights that a low-pass filter can be implemented using the Simulink FDATool or Lowpass Filter blocks. </ul>
 <p align="center">
-  <img 
-    width="812"
-    height="554"
-    src="Images/Step1/Creating_a_Design_in_FPGA/Step3.png"
-  >
+<img 
+width="812"
+height="554"
+src="Images/Step1/Creating_a_Design_in_FPGA/Step3.png"
+>
 </p>
 <ol start="4">
 <li>Click the <strong>Run</strong> simulation button.</li>
 </ol>
 <ul>
-  <img src="Images/Step1/Creating_a_Design_in_FPGA/Step4-1.png"> <br><br>
-  When simulation completes you can see the spectrum for the initial summed waveforms, showing a 1 MHz and 9 MHz component, and the results of both filters showing the       attenuation of the 9 MHz signals. <br><br>
-  <img src="Images/Step1/Creating_a_Design_in_FPGA/Step4-2.png"> <br><br>
-  You will now create a version of this same filter using HDL blocks for implementation in an FPGA.
+<img src="Images/Step1/Creating_a_Design_in_FPGA/Step4-1.png"> <br><br>
+When simulation completes you can see the spectrum for the initial summed waveforms, showing a 1 MHz and 9 MHz component, and the results of both filters showing the       attenuation of the 9 MHz signals. <br><br>
+<img src="Images/Step1/Creating_a_Design_in_FPGA/Step4-2.png"> <br><br>
+You will now create a version of this same filter using HDL blocks for implementation in an FPGA.
 </ul>
 <ol start="5">
 <li>Click the <strong>Library Browser</strong> button in the Simulink toolbar to open the Simulink Library Browser. </li>
@@ -70,7 +86,7 @@
 </ol>
 <ul> <img src="Images/Step1/Creating_a_Design_in_FPGA/Step7.png"  width=400px; height=auto> <br><br>
 
-  You can define the filter coefficients for the Digital FIR Filter block by accessing the block attributes–double-click the <b>Digital FIR Filter</b> block to view these–or, as in this case, they can be defined using the FDATool.
+You can define the filter coefficients for the Digital FIR Filter block by accessing the block attributes–double-click the <b>Digital FIR Filter</b> block to view these–or, as in this case, they can be defined using the FDATool.
 </ul>
 <ol start="8">
 <li>From Xilinx Toolbox &gt; HDL &gt; Tools, select FDATool and add it to the Lab1_1 design.<br />
@@ -83,7 +99,7 @@
 </ul>
 <ul>The next three steps show how each of these attributes is added to your Simulink design.</ul>
 <blockquote>
-  <p><strong>Important: If you fail to correctly add these components to your design, it cannot be implemented in an FPGA. Subsequent labs will review in detail how these blocks are configured; however, they must be present in all Vitis Model Composer HDL designs.</strong></p>
+<p><strong>Important: If you fail to correctly add these components to your design, it cannot be implemented in an FPGA. Subsequent labs will review in detail how these blocks are configured; however, they must be present in all Vitis Model Composer HDL designs.</strong></p>
 </blockquote>
 <ol start="9">
 <li>In the Interfaces menu, select <strong>Gateway In</strong>, and add it to the design.</li>
@@ -195,12 +211,12 @@
 <br><ul> This contains the RTL design description written in the industry standard VHDL format. This is provided for users experienced in hardware design who wish to view the detailed results. </ul></p>
 <p><samp>ip</samp><br />
 <br><ul> This directory contains the design IP, captured in Xilinx IP catalog format, which is used to transfer the design into the Xilinx Vivado. <em>Lab 5: Using AXI Interfaces and IP Integrator</em>, presented later in this document, explains in detail how to transfer your design IP into the Vivado for implementation in an FPGA
- </ul></p>
+</ul></p>
 <p><samp>ip_catalog</samp><br />
 <br><ul> This contains the RTL design description written in the industry standard VHDL format. This is provided for users experienced in hardware design who wish to view the detailed results. </ul></p>
 <p>The previous Resource Analyzer: Lab1<em>1 figure shows the summary of resources used after the design is synthesized. You can also review the results in hardware by using the example Vivado project in the ip</em>catalog directory.</p>
 <blockquote>
-  <p><strong>Important: The Vivado project provided in the ip_catalog directory does not contain top-level I/O buffers. The results of synthesis provide a very good estimate of the final design results; however, the results from this project cannot be used to create the final FPGA.</strong></p>
+<p><strong>Important: The Vivado project provided in the ip_catalog directory does not contain top-level I/O buffers. The results of synthesis provide a very good estimate of the final design results; however, the results from this project cannot be used to create the final FPGA.</strong></p>
 </blockquote>
 <p>When you have reviewed the results, exit the <code>Lab1_1.slx</code> Simulink worksheet.</p>
 <h2 id="step-2-creating-an-optimized-design-in-an-fpga">Step 2: Creating an Optimized Design in an FPGA</h2>
@@ -211,8 +227,8 @@
 <li><p>Double-click the System Generator token to open the Properties Editor.</p></li>
 </ol>
 <ul> As noted in Step 1, the design requires a minimum sample frequency of 18 MHz and it is currently set to 20 MHz (a 50 ns FPGA clock period). <br>
-  <br><img src="Images/Step2/Step3.png"> <br>
-  <br>The frequency at which an FPGA device can be clocked easily exceeds 20 MHz. Running the FPGA at a much higher clock frequency will allow Vitis Model Composer to use the same hardware resources to compute multiple intermediate results.
+<br><img src="Images/Step2/Step3.png"> <br>
+<br>The frequency at which an FPGA device can be clocked easily exceeds 20 MHz. Running the FPGA at a much higher clock frequency will allow Vitis Model Composer to use the same hardware resources to compute multiple intermediate results.
 </ul>
 <ol start="4">
 <li><p>Double-click the <strong>FDATool</strong> instance to open the Properties Editor.</p></li>
@@ -245,7 +261,7 @@
 <li>From the Perform analysis menu, select <b>Post Synthesis</b> and from Analyzer type menu, select <b>Resource</b> as shown in the following figure. This option gives the resource utilization details after completion. </li></ul></li>
 </ol>
 <blockquote>
-  <p>📝 Note:  In order to see accurate results from the Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.</p>
+<p> Note:  In order to see accurate results from the Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.</p>
 </blockquote>
 <ul><img src="Images/Step2/Step11.png"></ul>
 <ol start="12">
@@ -335,7 +351,7 @@ The final step is to compile the design into a hardware description and synthesi
 <li><p>From the Clocking tab, under Perform analysis select <strong>Post Synthesis</strong> and for Analyzer type select <strong>Resource</strong>. This option gives the resource utilization details after completion.</p></li>
 </ol>
 <blockquote>
-  <p>🖊️ Note: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.</p>
+<p>️ Note: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.</p>
 </blockquote>
 <ol start="14">
 <li><p>Click Generate to compile the design into a hardware description. After generation finishes, it displays the resource utilization in the Resource Analyzer window.<br />
@@ -437,7 +453,7 @@ Taking into account the positive and negative values of the coefficients the max
 <li><p>Double-click the Scope to examine the signals.</p></li>
 </ol>
 <blockquote>
-  <p>⭐ <strong>Tip</strong>: You might need to zoom in and adjust the scale in View &gt; Configuration Properties to view the signals in detail.</p>
+<p>⭐ <strong>Tip</strong>: You might need to zoom in and adjust the scale in View &gt; Configuration Properties to view the signals in detail.</p>
 </blockquote>
 <ul><img src = "Images/Step4/Part2/Step16.png"><br><br>
 The Reinterpret and Convert blocks have not been configured at this point and so all three signals are identical.
@@ -456,7 +472,7 @@ The Reinterpret and Convert blocks have not been configured at this point and so
 <li><p>Double-click the Scope to examine the signals.</p></li>
 </ol>
 <blockquote>
-  <p>⭐ <strong>Tip</strong>:  You might need to zoom in and adjust the scale in View &gt; Configuration Properties to view the signals in detail..</p>
+<p>⭐ <strong>Tip</strong>:  You might need to zoom in and adjust the scale in View &gt; Configuration Properties to view the signals in detail..</p>
 </blockquote>
 <ul>In the following figure you can see the output from the filter (Growth) has values between plus and minus 1. The output from the Reinterpret block moves the data values to between plus and minus 2.
 <br><br>In this detailed view of the waveform, the final output (Convert) shows no difference in fidelity, when compared to the reinterpret results, but uses only 16 bits.
@@ -468,7 +484,7 @@ The final step is to synthesize this design into hardware.</ul>
 <li><p>On the Clocking tab, under Perform analysis select <strong>Post Synthesis</strong> and from Analyzer type menu select Resource. This option gives the resource utilization details after completion.</p></li>
 </ol>
 <blockquote>
-  <p>🖊️ Note: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.</p>
+<p>️ Note: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.</p>
 </blockquote>
 <ol start="28">
 <li><p>Click <strong>Generate</strong> to compile the design into a hardware description. After completion, it generates the resource utilization in Resource Analyzer window as shown in the following figure.<br />
@@ -490,197 +506,197 @@ However, this design contains both the original floating-point filter and the ne
 <p>The Reinterpret and Convert blocks are powerful tools which allow you to optimize your design without needing to perform detailed bit-level optimizations. You can simply use these blocks to convert between different data types and quickly analyze the results.</p>
 <p>Finally, you learned how you can take total control of the hardware implementation by using discrete primitives.</p>
 <blockquote>
-  <p>🖊️ Note: In this tutorial you learned how to add Vitis Model Composer HDL blocks to the design and then configure them. A useful productivity technique is to add and configure the System Generator token first. If the target device is set at the start, some complex IP blocks will be automatically configured for the device when they are added to the design.</p>
+<p>️ Note: In this tutorial you learned how to add Vitis Model Composer HDL blocks to the design and then configure them. A useful productivity technique is to add and configure the System Generator token first. If the target device is set at the start, some complex IP blocks will be automatically configured for the device when they are added to the design.</p>
 </blockquote>
 <p>The following solution directory contains the final Vitis Model Composer (<code>*.slx</code>) files for this lab.</p>
 <pre><code>/HDL_Library/Lab1/solution
 </code></pre>
 
-        </div>
-        <style type='text/css'>body {
-  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #111;
-  background-color: #fdfdfd;
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-feature-settings: "kern" 1;
-  -moz-font-feature-settings: "kern" 1;
-  -o-font-feature-settings: "kern" 1;
-  font-feature-settings: "kern" 1;
-  font-kerning: normal;
-  padding: 30px;
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
 }
 
 @media only screen and (max-width: 600px) {
-  body {
-    padding: 5px;
-  }
-
-  body > #content {
-    padding: 0px 20px 20px 20px !important;
-  }
+body {
+padding: 5px;
 }
 
 body > #content {
-  margin: 0px;
-  max-width: 900px;
-  border: 1px solid #e1e4e8;
-  padding: 10px 40px;
-  padding-bottom: 20px;
-  border-radius: 2px;
-  margin-left: auto;
-  margin-right: auto;
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
 }
 
 hr {
-  color: #bbb;
-  background-color: #bbb;
-  height: 1px;
-  flex: 0 1 auto;
-  margin: 1em 0;
-  padding: 0;
-  border: none;
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
 }
 
 /**
- * Links
- */
+* Links
+*/
 a {
-  color: #0366d6;
-  text-decoration: none; }
-  a:visited {
-    color: #0366d6; }
-  a:hover {
-    color: #0366d6;
-    text-decoration: underline; }
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
 
 pre {
-  background-color: #f6f8fa;
-  border-radius: 3px;
-  font-size: 85%;
-  line-height: 1.45;
-  overflow: auto;
-  padding: 16px;
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
 }
 
 /**
-  * Code blocks
-  */
+* Code blocks
+*/
 
 code {
-  background-color: rgba(27,31,35,.05);
-  border-radius: 3px;
-  font-size: 85%;
-  margin: 0;
-  word-wrap: break-word;
-  padding: .2em .4em;
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
 }
 
 pre > code {
-  background-color: transparent;
-  border: 0;
-  display: inline;
-  line-height: inherit;
-  margin: 0;
-  overflow: visible;
-  padding: 0;
-  word-wrap: normal;
-  font-size: 100%;
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
 }
 
 
 /**
- * Blockquotes
- */
+* Blockquotes
+*/
 blockquote {
-  margin-left: 30px;
-  margin-top: 0px;
-  margin-bottom: 16px;
-  border-left-width: 3px;
-  padding: 0 1em;
-  color: #828282;
-  border-left: 4px solid #e8e8e8;
-  padding-left: 15px;
-  font-size: 18px;
-  letter-spacing: -1px;
-  font-style: italic;
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
 }
 blockquote * {
-  font-style: normal !important;
-  letter-spacing: 0;
-  color: #6a737d !important;
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
 }
 
 /**
- * Tables
- */
+* Tables
+*/
 table {
-  border-spacing: 2px;
-  display: block;
-  font-size: 14px;
-  overflow: auto;
-  width: 100%;
-  margin-bottom: 16px;
-  border-spacing: 0;
-  border-collapse: collapse;
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
 }
 
 td {
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
 }
 
 th {
-  font-weight: 600;
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
 }
 
 tr {
-  background-color: #fff;
-  border-top: 1px solid #c6cbd1;
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
 }
 
 table tr:nth-child(2n) {
-  background-color: #f6f8fa;
+background-color: #f6f8fa;
 }
 
 /**
- * Others
- */
+* Others
+*/
 
 img {
-  max-width: 100%;
+max-width: 100%;
 }
 
 p {
-  line-height: 24px;
-  font-weight: 400;
-  font-size: 16px;
-  color: #24292e; }
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
 
 ul {
-  margin-top: 0; }
+margin-top: 0; }
 
 li {
-  color: #24292e;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5; }
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
 
 li + li {
-  margin-top: 0.25em; }
+margin-top: 0.25em; }
 
 * {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  color: #24292e; }
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
 
 a:visited {
-  color: #0366d6; }
+color: #0366d6; }
 
 h1, h2, h3 {
-  border-bottom: 1px solid #eaecef;
-  color: #111;
-  /* Darker */ }</style>
-      </body>
-    </html>
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>

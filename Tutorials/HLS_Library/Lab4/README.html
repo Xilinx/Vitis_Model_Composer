@@ -1,12 +1,28 @@
 
-    <html>
-      <head>
-        <title></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-      </head>
-      <body>
-        <div id='content'>
-    <h1 id="lab-4-automatic-code-generation">Lab 4: Automatic Code Generation</h1>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="lab-4-automatic-code-generation">Lab 4: Automatic Code Generation</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:chdir('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
 <p>In this lab, you look at the flow for generating output from your Vitis Model Composer model and moving it into downstream tools like Vitis™ HLS for RTL synthesis, or into System Generator, or the Vivado® Design Suite for implementation into a Xilinx device.</p>
 <h3 id="procedure">Procedure</h3>
 <p>This lab has five steps:</p>
@@ -26,8 +42,8 @@
 <li><p>Right-click the <strong>Edge Detection</strong> area, and select <strong>Create Subsystem from Area.</strong></p></li>
 </ol>
 <blockquote>
-  <p>📝 <strong>Note</strong>: For code generation to work, all the blocks within the enclosed subsystem should only be from the Vitis Model Composer HLS library, with the exception of the Simulink blocks noted below. Subsystems with unsupported blocks will generate errors during code generation. The Simulink diagnostic viewer will contain error messages and links to the unsupported blocks in the subsystem.</p>
-  <p>📝 <strong>Note</strong>: In addition to the base Vitis Model Composer HLS blocks, a subset of native Simulink blocks such as From, Goto, Bus Creator, Bus Selector, If, and others, are supported. The supported Simulink blocks appear within the HLS libraries as well.</p>
+<p> <strong>Note</strong>: For code generation to work, all the blocks within the enclosed subsystem should only be from the Vitis Model Composer HLS library, with the exception of the Simulink blocks noted below. Subsystems with unsupported blocks will generate errors during code generation. The Simulink diagnostic viewer will contain error messages and links to the unsupported blocks in the subsystem.</p>
+<p> <strong>Note</strong>: In addition to the base Vitis Model Composer HLS blocks, a subset of native Simulink blocks such as From, Goto, Bus Creator, Bus Selector, If, and others, are supported. The supported Simulink blocks appear within the HLS libraries as well.</p>
 </blockquote>
 <ul> Next, you add the Model Composer Hub block at the top level of your design. </ul>
 <ol start="4">
@@ -46,7 +62,7 @@
 <li>System Generator.</li></ul></li>
 </ol>
 <blockquote>
-  <p>📝 <strong>Note</strong>: The AI Engines (default) target is not applicable for the HLS block library.</p>
+<p> <strong>Note</strong>: The AI Engines (default) target is not applicable for the HLS block library.</p>
 </blockquote>
 <ol start="8">
 <li><p>On the Hardware tab, you can specify the target FPGA clock frequency in MHz. The default value is 200 MHz.</p></li>
@@ -96,7 +112,7 @@
 <br><br> You can also see a summary of the generated RTL ports and their associated protocols at the bottom of the report.</p></li>
 </ol>
 <blockquote>
-  <p>📝 <strong>Note</strong>: The actual timing and resource utilization estimates may deviate from above mentioned values, based on the Vitis HLS build you choose.</p>
+<p> <strong>Note</strong>: The actual timing and resource utilization estimates may deviate from above mentioned values, based on the Vitis HLS build you choose.</p>
 </blockquote>
 <ul><br><br><img src="Images/Step3/Step4-4.png">
 <br><br><img src="Images/Step3/Step4-5.png"> </ul>
@@ -131,11 +147,11 @@ When you create the Vivado RTL project, specify the Board as <strong>Kintex-7 KC
 <br><br><img src="Images/Step4/Step4.png"></p></li>
 </ol>
 <blockquote>
-  <p>📝 <strong>Note:</strong></p>
-  <ul>
-  <li>Edge_Detection.cpp is the main file generated for the subsystem.</li>
-  <li>run_hls.tcl is the Tcl file needed to create the Vitis HLS project and synthesize the design.</li>
-  </ul>
+<p> <strong>Note:</strong></p>
+<ul>
+<li>Edge_Detection.cpp is the main file generated for the subsystem.</li>
+<li>run_hls.tcl is the Tcl file needed to create the Vitis HLS project and synthesize the design.</li>
+</ul>
 </blockquote>
 <ol start="5">
 <li><p>Navigate back to the directory where the Simulink file is present, open the Model Composer Hub block dialog box and modify the block settings as shown in the following figure.</p>
@@ -184,10 +200,10 @@ xmcGenerate('HLS_design');
 
 i = 1;
 while hasFrame(v)
-    frame = rgb2gray(readFrame(v));
-    a = reshape(frame',[],1);
-    stream_in(i:i+length(a)-1) = a;
-    i = i + length(a);
+frame = rgb2gray(readFrame(v));
+a = reshape(frame',[],1);
+stream_in(i:i+length(a)-1) = a;
+i = i + length(a);
 end
 
 save stream_in stream_in
@@ -219,8 +235,8 @@ open(outputVideo)
 %The output is boolean. This is why we multiply the img by 255 so that
 %implay shows the image. 
 for i = 1:length(stream_out)/v.Height/v.Width
-   img = reshape(stream_out((i-1)*v.Height*v.Width+1:i*v.Height*v.Width),v.Width,v.Height);
-   writeVideo(outputVideo,255*img')
+img = reshape(stream_out((i-1)*v.Height*v.Width+1:i*v.Height*v.Width),v.Width,v.Height);
+writeVideo(outputVideo,255*img')
 end
 close(outputVideo);
 </code></pre>
@@ -234,7 +250,7 @@ close(outputVideo);
 <br><br> As you examine the Vitis Model Composer HDL model in Section 4, pay attention to the labels on blocks for each signal to help you understand how the model is designed. For example, whenever the IP can no longer accept input, the <code>READY</code> signal (top right of the Vitis HLS block) puts pressure on the master side of the input AXI FIFO by resetting the <code>READY</code> signal. Likewise, the input AXI FIFO pressures the input stream by resetting its <code>READY</code> signal.</li>
 </ol>
 <blockquote>
-  <p>📝 <strong>Note:</strong> In Simulink all the inputs to a block are to one side of the block, and all the outputs are on the opposite side. As such, all the slave or master signals are not bundled together on one side of the block as you might expect.</p>
+<p> <strong>Note:</strong> In Simulink all the inputs to a block are to one side of the block, and all the outputs are on the opposite side. As such, all the slave or master signals are not bundled together on one side of the block as you might expect.</p>
 </blockquote>
 <ul><img src="Images/Step5/Step4.png"></ul>
 <h3 id="conclusion">Conclusion</h3>
@@ -258,191 +274,191 @@ close(outputVideo);
 <p>The following solution directory contains the final Vitis Model Composer (<code>*.slx</code>) files for this lab.<br />
 <samp> \HLS_Library\Lab4\solution </samp></p>
 
-        </div>
-        <style type='text/css'>body {
-  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #111;
-  background-color: #fdfdfd;
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-feature-settings: "kern" 1;
-  -moz-font-feature-settings: "kern" 1;
-  -o-font-feature-settings: "kern" 1;
-  font-feature-settings: "kern" 1;
-  font-kerning: normal;
-  padding: 30px;
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
 }
 
 @media only screen and (max-width: 600px) {
-  body {
-    padding: 5px;
-  }
-
-  body > #content {
-    padding: 0px 20px 20px 20px !important;
-  }
+body {
+padding: 5px;
 }
 
 body > #content {
-  margin: 0px;
-  max-width: 900px;
-  border: 1px solid #e1e4e8;
-  padding: 10px 40px;
-  padding-bottom: 20px;
-  border-radius: 2px;
-  margin-left: auto;
-  margin-right: auto;
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
 }
 
 hr {
-  color: #bbb;
-  background-color: #bbb;
-  height: 1px;
-  flex: 0 1 auto;
-  margin: 1em 0;
-  padding: 0;
-  border: none;
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
 }
 
 /**
- * Links
- */
+* Links
+*/
 a {
-  color: #0366d6;
-  text-decoration: none; }
-  a:visited {
-    color: #0366d6; }
-  a:hover {
-    color: #0366d6;
-    text-decoration: underline; }
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
 
 pre {
-  background-color: #f6f8fa;
-  border-radius: 3px;
-  font-size: 85%;
-  line-height: 1.45;
-  overflow: auto;
-  padding: 16px;
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
 }
 
 /**
-  * Code blocks
-  */
+* Code blocks
+*/
 
 code {
-  background-color: rgba(27,31,35,.05);
-  border-radius: 3px;
-  font-size: 85%;
-  margin: 0;
-  word-wrap: break-word;
-  padding: .2em .4em;
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
 }
 
 pre > code {
-  background-color: transparent;
-  border: 0;
-  display: inline;
-  line-height: inherit;
-  margin: 0;
-  overflow: visible;
-  padding: 0;
-  word-wrap: normal;
-  font-size: 100%;
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
 }
 
 
 /**
- * Blockquotes
- */
+* Blockquotes
+*/
 blockquote {
-  margin-left: 30px;
-  margin-top: 0px;
-  margin-bottom: 16px;
-  border-left-width: 3px;
-  padding: 0 1em;
-  color: #828282;
-  border-left: 4px solid #e8e8e8;
-  padding-left: 15px;
-  font-size: 18px;
-  letter-spacing: -1px;
-  font-style: italic;
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
 }
 blockquote * {
-  font-style: normal !important;
-  letter-spacing: 0;
-  color: #6a737d !important;
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
 }
 
 /**
- * Tables
- */
+* Tables
+*/
 table {
-  border-spacing: 2px;
-  display: block;
-  font-size: 14px;
-  overflow: auto;
-  width: 100%;
-  margin-bottom: 16px;
-  border-spacing: 0;
-  border-collapse: collapse;
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
 }
 
 td {
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
 }
 
 th {
-  font-weight: 600;
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
 }
 
 tr {
-  background-color: #fff;
-  border-top: 1px solid #c6cbd1;
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
 }
 
 table tr:nth-child(2n) {
-  background-color: #f6f8fa;
+background-color: #f6f8fa;
 }
 
 /**
- * Others
- */
+* Others
+*/
 
 img {
-  max-width: 100%;
+max-width: 100%;
 }
 
 p {
-  line-height: 24px;
-  font-weight: 400;
-  font-size: 16px;
-  color: #24292e; }
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
 
 ul {
-  margin-top: 0; }
+margin-top: 0; }
 
 li {
-  color: #24292e;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5; }
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
 
 li + li {
-  margin-top: 0.25em; }
+margin-top: 0.25em; }
 
 * {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  color: #24292e; }
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
 
 a:visited {
-  color: #0366d6; }
+color: #0366d6; }
 
 h1, h2, h3 {
-  border-bottom: 1px solid #eaecef;
-  color: #111;
-  /* Darker */ }</style>
-      </body>
-    </html>
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>

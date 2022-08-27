@@ -1,12 +1,28 @@
 
-    <html>
-      <head>
-        <title></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-      </head>
-      <body>
-        <div id='content'>
-    <h1 id="lab-1-introduction-to-model-composer-hls-library">Lab 1: Introduction to Model Composer HLS Library</h1>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="lab-1-introduction-to-model-composer-hls-library">Lab 1: Introduction to Model Composer HLS Library</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:chdir('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
 <p>This tutorial shows how you can use the Vitis™ Model Composer HLS Library for rapid algorithm design and simulation in the Simulink® environment.</p>
 <h3 id="procedure">Procedure</h3>
 <p>This lab has the following steps:</p>
@@ -44,7 +60,7 @@ The HLS blocks are organized into subcategories based on functionality. Spend a 
 <li><p>Connect the rest of the blocks to complete the algorithm as shown in the following figure.</p></li>
 </ol>
 <blockquote>
-  <p>📝 Note: The blocks SobelFilter<em>XMC and GradientMag</em>XMC have been generated using the <code>xmcImportFunction</code> feature.</p>
+<p> Note: The blocks SobelFilter<em>XMC and GradientMag</em>XMC have been generated using the <code>xmcImportFunction</code> feature.</p>
 </blockquote>
 <ul> <img src="Images/Step2/Part2/Step5.png"> </ul>
 <ol start="6">
@@ -57,7 +73,7 @@ The HLS blocks are organized into subcategories based on functionality. Spend a 
 <li><p>Try changing the input video through the From Multimedia File block by double-clicking the block and changing the File Name field to select a different video. Notice that changing the video resolution in the Source block does not require any structural modifications to the algorithm itself.</p></li>
 </ol>
 <blockquote>
-  <p>📝 <strong>Note:</strong> You must stop simulation before you can change the input file. Also, the .mp4 files in the MATLAB vision data tool box directory are not supported.</p>
+<p> <strong>Note:</strong> You must stop simulation before you can change the input file. Also, the .mp4 files in the MATLAB vision data tool box directory are not supported.</p>
 </blockquote>
 <h2 id="step-3-work-with-data-types">Step 3: Work with Data Types</h2>
 <p>In this step, you become familiar with the supported Data Types for Vitis Model Composer and conversion from floating to fixed-point types.</p>
@@ -77,7 +93,7 @@ The HLS blocks are organized into subcategories based on functionality. Spend a 
 <h3 id="convert-data-types">Convert Data Types</h3>
 <p>To convert the previous design to use Xilinx Fixed Point types:</p>
 <blockquote>
-  <p>📝 <strong>Note:</strong> Fixed point representation helps to achieve optimal resource usage and performance for a usually acceptable trade-off in precision, depending on the dataset/algorithm.</p>
+<p> <strong>Note:</strong> Fixed point representation helps to achieve optimal resource usage and performance for a usually acceptable trade-off in precision, depending on the dataset/algorithm.</p>
 </blockquote>
 <ol>
 <li><p>Double-click <strong>ColorSpace<em>Conversion</em>fixed_start.slx</strong> in the Current Folder to open the design.</p></li>
@@ -104,7 +120,7 @@ The HLS blocks are organized into subcategories based on functionality. Spend a 
 <li><strong>Fractional length</strong> to <strong>7</strong></li></ul></li>
 </ol>
 <blockquote>
-  <p>⭐ <strong>Tip</strong>: You can use the <strong>View > Property Inspector</strong> command to open the Property Inspector window. When you select the different Gain or Constant blocks, you can see and modify the properties on the selected block.</p>
+<p>⭐ <strong>Tip</strong>: You can use the <strong>View > Property Inspector</strong> command to open the Property Inspector window. When you select the different Gain or Constant blocks, you can see and modify the properties on the selected block.</p>
 </blockquote>
 <ul>
 <br><br>Ensure you do this for all the Constant and Gain blocks in the design. Update the model (Ctrl+D) and observe the fixed point data types being propagated along with automatic bit growth in gain blocks and adder trees in the design as shown in the following figure:
@@ -233,7 +249,7 @@ You can view a completed version of the design here: <samp> ug1498-model-compose
 <li>How to use the Data Type Conversion block to control the conversion between data types, including floating-point to fixed-point data types.</li>
 </ul>
 <blockquote>
-  <p>📝 <strong>Note</strong>: Vitis Model Composer supports the same floating and integer data types as Simulink blocks and also supports Xilinx fixed point data types.</p>
+<p> <strong>Note</strong>: Vitis Model Composer supports the same floating and integer data types as Simulink blocks and also supports Xilinx fixed point data types.</p>
 </blockquote>
 <p>The following solution directories contain the final Vitis Model Composer files for this lab:</p>
 <ul>
@@ -241,191 +257,191 @@ You can view a completed version of the design here: <samp> ug1498-model-compose
 <li><samp> \HLS_Library\Lab1\Section2\solution </samp></li>
 </ul>
 
-        </div>
-        <style type='text/css'>body {
-  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #111;
-  background-color: #fdfdfd;
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-feature-settings: "kern" 1;
-  -moz-font-feature-settings: "kern" 1;
-  -o-font-feature-settings: "kern" 1;
-  font-feature-settings: "kern" 1;
-  font-kerning: normal;
-  padding: 30px;
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
 }
 
 @media only screen and (max-width: 600px) {
-  body {
-    padding: 5px;
-  }
-
-  body > #content {
-    padding: 0px 20px 20px 20px !important;
-  }
+body {
+padding: 5px;
 }
 
 body > #content {
-  margin: 0px;
-  max-width: 900px;
-  border: 1px solid #e1e4e8;
-  padding: 10px 40px;
-  padding-bottom: 20px;
-  border-radius: 2px;
-  margin-left: auto;
-  margin-right: auto;
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
 }
 
 hr {
-  color: #bbb;
-  background-color: #bbb;
-  height: 1px;
-  flex: 0 1 auto;
-  margin: 1em 0;
-  padding: 0;
-  border: none;
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
 }
 
 /**
- * Links
- */
+* Links
+*/
 a {
-  color: #0366d6;
-  text-decoration: none; }
-  a:visited {
-    color: #0366d6; }
-  a:hover {
-    color: #0366d6;
-    text-decoration: underline; }
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
 
 pre {
-  background-color: #f6f8fa;
-  border-radius: 3px;
-  font-size: 85%;
-  line-height: 1.45;
-  overflow: auto;
-  padding: 16px;
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
 }
 
 /**
-  * Code blocks
-  */
+* Code blocks
+*/
 
 code {
-  background-color: rgba(27,31,35,.05);
-  border-radius: 3px;
-  font-size: 85%;
-  margin: 0;
-  word-wrap: break-word;
-  padding: .2em .4em;
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
 }
 
 pre > code {
-  background-color: transparent;
-  border: 0;
-  display: inline;
-  line-height: inherit;
-  margin: 0;
-  overflow: visible;
-  padding: 0;
-  word-wrap: normal;
-  font-size: 100%;
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
 }
 
 
 /**
- * Blockquotes
- */
+* Blockquotes
+*/
 blockquote {
-  margin-left: 30px;
-  margin-top: 0px;
-  margin-bottom: 16px;
-  border-left-width: 3px;
-  padding: 0 1em;
-  color: #828282;
-  border-left: 4px solid #e8e8e8;
-  padding-left: 15px;
-  font-size: 18px;
-  letter-spacing: -1px;
-  font-style: italic;
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
 }
 blockquote * {
-  font-style: normal !important;
-  letter-spacing: 0;
-  color: #6a737d !important;
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
 }
 
 /**
- * Tables
- */
+* Tables
+*/
 table {
-  border-spacing: 2px;
-  display: block;
-  font-size: 14px;
-  overflow: auto;
-  width: 100%;
-  margin-bottom: 16px;
-  border-spacing: 0;
-  border-collapse: collapse;
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
 }
 
 td {
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
 }
 
 th {
-  font-weight: 600;
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
 }
 
 tr {
-  background-color: #fff;
-  border-top: 1px solid #c6cbd1;
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
 }
 
 table tr:nth-child(2n) {
-  background-color: #f6f8fa;
+background-color: #f6f8fa;
 }
 
 /**
- * Others
- */
+* Others
+*/
 
 img {
-  max-width: 100%;
+max-width: 100%;
 }
 
 p {
-  line-height: 24px;
-  font-weight: 400;
-  font-size: 16px;
-  color: #24292e; }
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
 
 ul {
-  margin-top: 0; }
+margin-top: 0; }
 
 li {
-  color: #24292e;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5; }
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
 
 li + li {
-  margin-top: 0.25em; }
+margin-top: 0.25em; }
 
 * {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  color: #24292e; }
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
 
 a:visited {
-  color: #0366d6; }
+color: #0366d6; }
 
 h1, h2, h3 {
-  border-bottom: 1px solid #eaecef;
-  color: #111;
-  /* Darker */ }</style>
-      </body>
-    </html>
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>

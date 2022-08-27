@@ -1,12 +1,28 @@
 
-    <html>
-      <head>
-        <title></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-      </head>
-      <body>
-        <div id='content'>
-    <h1 id="lab-2-importing-code-into-vitis-model-composer">Lab 2: Importing Code into Vitis Model Composer</h1>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="lab-2-importing-code-into-vitis-model-composer">Lab 2: Importing Code into Vitis Model Composer</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:chdir('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
 <p>Vitis Model Composer lets you import Vitis™ HLS library functions and user C/C++ code as custom blocks to use in your algorithm for both simulation and code generation.</p>
 <p>The Library Import feature is a MATLAB function, xmcImportFunction, which lets you specify the required source files and automatically creates an associated block that can be added into a model in Simulink® .</p>
 <p>This lab primarily has two parts:</p>
@@ -25,15 +41,15 @@ You will import this function as a Vitis Model Composer block using the <code>xm
 Vitis Model Composer identifies arguments specified with the const qualifier as inputs to the block, and all other arguments as outputs.</li>
 </ol>
 <blockquote>
-  <p>📝<strong>Note:</strong>  For more details and other options for specifying the direction of the arguments, see the Vitis Model Composer User Guide <br />
-  (<a href="https://docs.xilinx.com/r/en-US/ug1483-model-composer-sys-gen-user-guide/Overview">UG1483</a>).</p>
-  <p>❗❗ <strong>Important:</strong>  You can use the <code>const</code> qualifier in the function signature to identify the inputs to the block or use the pragma <code>INPORT</code>.</p>
+<p><strong>Note:</strong>  For more details and other options for specifying the direction of the arguments, see the Vitis Model Composer User Guide <br />
+(<a href="https://docs.xilinx.com/r/en-US/ug1483-model-composer-sys-gen-user-guide/Overview">UG1483</a>).</p>
+<p>❗❗ <strong>Important:</strong>  You can use the <code>const</code> qualifier in the function signature to identify the inputs to the block or use the pragma <code>INPORT</code>.</p>
 </blockquote>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In the case of the <code>basic_array function</code>, the <code>in1</code> and <code>in2</code> arguments are identified as inputs.</p>
 <pre><code>void basic_array(
-   uint8_t out1[4], 
-   const uint8_t in1[4], 
-   const uint8_t in2[4])
+uint8_t out1[4], 
+const uint8_t in1[4], 
+const uint8_t in2[4])
 </code></pre>
 <ol start="2">
 <li><p>To learn how to use the <code>xmcImportFunction</code> function, type <code>help xmcImportFunction</code> at the MATLAB command prompt to view the help text and understand the function signature.</p></li>
@@ -44,18 +60,18 @@ Vitis Model Composer identifies arguments specified with the const qualifier as 
 <ul>
 The information is defined as follows:
 
-   <b> Library Name: </b> `basic_array_library`. This is the name of the Simulink library that is created with the new block.
+<b> Library Name: </b> `basic_array_library`. This is the name of the Simulink library that is created with the new block.
 
-   <b> Function Names: </b> `basic_array`. This is the name of the function that you want to import as a block.
+<b> Function Names: </b> `basic_array`. This is the name of the function that you want to import as a block.
 
-   <b> Header File: </b> `basic_array.h`. This is the header file for the function.
+<b> Header File: </b> `basic_array.h`. This is the header file for the function.
 
-   <b> Source Files: </b> `basic_array.cpp`. This is the source file for the imported function.
+<b> Source Files: </b> `basic_array.cpp`. This is the source file for the imported function.
 
-   <b> Search Paths: </b> This argument is used to specify the search path(s) for header files. In this example, there are no additional search paths to specify and hence you can leave it as { } which indicates none.
- </ul>
+<b> Search Paths: </b> This argument is used to specify the search path(s) for header files. In this example, there are no additional search paths to specify and hence you can leave it as { } which indicates none.
+</ul>
 <blockquote>
-  <p>📝 <strong>Note:</strong> Look at import<em>function</em>solution.m in the solution folder for the completed version.</p>
+<p> <strong>Note:</strong> Look at import<em>function</em>solution.m in the solution folder for the completed version.</p>
 </blockquote>
 <ol start="4">
 <li>Run the <code>import_function.m</code> script from the MATLAB command line:</li>
@@ -87,7 +103,7 @@ Save this Simulink library model. </ul>
 <li><p>In the piece of code, note the <code>#pragma XMC INPORT vector_in</code>. This is a way to manually specify port directions using pragmas. Here, we are specifying the function argument <code>vector_in</code> as the input port. Similarly, we can define <code>XMC OUTPORT</code> also.</p></li>
 </ol>
 <blockquote>
-  <p>📝 <strong>Note</strong>: For additional information about specifying ports, see Vitis Model Composer User Guide (<a href="https://docs.xilinx.com/access/sources/dita/map?Doc_Version=2022.1%20English&url=ug1483-model-composer-sys-gen-user-guide">UG1483</a>).</p>
+<p> <strong>Note</strong>: For additional information about specifying ports, see Vitis Model Composer User Guide (<a href="https://docs.xilinx.com/access/sources/dita/map?Doc_Version=2022.1%20English&url=ug1483-model-composer-sys-gen-user-guide">UG1483</a>).</p>
 </blockquote>
 <ol start="4">
 <li><p>Notice the use of template before the function declaration. To support the inputs of different sizes, <code>NUMOFELEMENTS</code> is declared as a parameter and used the same while defining an array <code>vector_in</code> as shown in the following figure. This allows you to connect signals of different sizes to the input port of the block.<br />
@@ -105,7 +121,7 @@ Save this Simulink library model. </ul>
 &gt;&gt;xmcImportFunction('design_lib',{'Mux'},'template_design.h',{},{},'override','unlock')
 </code></pre>
 <blockquote>
-  <p>📝 <strong>Note</strong>: The same library is specified for both the functions.</p>
+<p> <strong>Note</strong>: The same library is specified for both the functions.</p>
 </blockquote>
 <ol start="9">
 <li>Run the <samp> import_function.m </samp> script from the MATLAB command line:</li>
@@ -148,11 +164,11 @@ Save this Simulink library model. </ul>
 <li>How to perform simple arithmetic operations using template variables.</li>
 </ul>
 <blockquote>
-  <p>📝 <strong>Note</strong>: Current feature support enables you to import code that uses:</p>
-  <ul>
-  <li>Vectors and 2D matrices</li>
-  <li>Floating, integer, and Vitis HLS fixed-point data types</li>
-  </ul>
+<p> <strong>Note</strong>: Current feature support enables you to import code that uses:</p>
+<ul>
+<li>Vectors and 2D matrices</li>
+<li>Floating, integer, and Vitis HLS fixed-point data types</li>
+</ul>
 </blockquote>
 <p>The following solution directory contains the final Vitis Model Composer (<samp> *.slx </samp>) files for this lab.</p>
 <ul>
@@ -160,191 +176,191 @@ Save this Simulink library model. </ul>
 <li><samp> \HLS_Library\Lab2\Section2\solution </samp></li>
 </ul>
 
-        </div>
-        <style type='text/css'>body {
-  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #111;
-  background-color: #fdfdfd;
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-feature-settings: "kern" 1;
-  -moz-font-feature-settings: "kern" 1;
-  -o-font-feature-settings: "kern" 1;
-  font-feature-settings: "kern" 1;
-  font-kerning: normal;
-  padding: 30px;
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
 }
 
 @media only screen and (max-width: 600px) {
-  body {
-    padding: 5px;
-  }
-
-  body > #content {
-    padding: 0px 20px 20px 20px !important;
-  }
+body {
+padding: 5px;
 }
 
 body > #content {
-  margin: 0px;
-  max-width: 900px;
-  border: 1px solid #e1e4e8;
-  padding: 10px 40px;
-  padding-bottom: 20px;
-  border-radius: 2px;
-  margin-left: auto;
-  margin-right: auto;
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
 }
 
 hr {
-  color: #bbb;
-  background-color: #bbb;
-  height: 1px;
-  flex: 0 1 auto;
-  margin: 1em 0;
-  padding: 0;
-  border: none;
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
 }
 
 /**
- * Links
- */
+* Links
+*/
 a {
-  color: #0366d6;
-  text-decoration: none; }
-  a:visited {
-    color: #0366d6; }
-  a:hover {
-    color: #0366d6;
-    text-decoration: underline; }
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
 
 pre {
-  background-color: #f6f8fa;
-  border-radius: 3px;
-  font-size: 85%;
-  line-height: 1.45;
-  overflow: auto;
-  padding: 16px;
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
 }
 
 /**
-  * Code blocks
-  */
+* Code blocks
+*/
 
 code {
-  background-color: rgba(27,31,35,.05);
-  border-radius: 3px;
-  font-size: 85%;
-  margin: 0;
-  word-wrap: break-word;
-  padding: .2em .4em;
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
 }
 
 pre > code {
-  background-color: transparent;
-  border: 0;
-  display: inline;
-  line-height: inherit;
-  margin: 0;
-  overflow: visible;
-  padding: 0;
-  word-wrap: normal;
-  font-size: 100%;
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
 }
 
 
 /**
- * Blockquotes
- */
+* Blockquotes
+*/
 blockquote {
-  margin-left: 30px;
-  margin-top: 0px;
-  margin-bottom: 16px;
-  border-left-width: 3px;
-  padding: 0 1em;
-  color: #828282;
-  border-left: 4px solid #e8e8e8;
-  padding-left: 15px;
-  font-size: 18px;
-  letter-spacing: -1px;
-  font-style: italic;
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
 }
 blockquote * {
-  font-style: normal !important;
-  letter-spacing: 0;
-  color: #6a737d !important;
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
 }
 
 /**
- * Tables
- */
+* Tables
+*/
 table {
-  border-spacing: 2px;
-  display: block;
-  font-size: 14px;
-  overflow: auto;
-  width: 100%;
-  margin-bottom: 16px;
-  border-spacing: 0;
-  border-collapse: collapse;
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
 }
 
 td {
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
 }
 
 th {
-  font-weight: 600;
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
 }
 
 tr {
-  background-color: #fff;
-  border-top: 1px solid #c6cbd1;
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
 }
 
 table tr:nth-child(2n) {
-  background-color: #f6f8fa;
+background-color: #f6f8fa;
 }
 
 /**
- * Others
- */
+* Others
+*/
 
 img {
-  max-width: 100%;
+max-width: 100%;
 }
 
 p {
-  line-height: 24px;
-  font-weight: 400;
-  font-size: 16px;
-  color: #24292e; }
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
 
 ul {
-  margin-top: 0; }
+margin-top: 0; }
 
 li {
-  color: #24292e;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5; }
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
 
 li + li {
-  margin-top: 0.25em; }
+margin-top: 0.25em; }
 
 * {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  color: #24292e; }
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
 
 a:visited {
-  color: #0366d6; }
+color: #0366d6; }
 
 h1, h2, h3 {
-  border-bottom: 1px solid #eaecef;
-  color: #111;
-  /* Darker */ }</style>
-      </body>
-    </html>
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>
