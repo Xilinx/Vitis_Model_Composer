@@ -26,9 +26,9 @@ document.location=commandURI
 <p>The AI Engine Dynamic Point FFT block in Vitis Model Composer allows taking FFT of different sizes (up to a maximum FFT size) of the input frame. The FFT size is determined by a header that is appended to every input frame. This example showcases the use of this block.</p>
 <p><img src="images/screen_shot.png" alt="" /></p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
-<p><img width="18" height="18" src="../../../Images/bulb.png"> Every input frame must be appended by a header.</p>
-<p><img width="18" height="18" src="../../../Images/bulb.png"> If the FFT size (N) is smaller than the frame size, the block takes the N point FFT of the first N samples in the input frame, and discards the rest of the samples in the frame.</p>
-<p><img width="18" height="18" src="../../../Images/bulb.png"> If the frame size is an integer multiple (M) of max FFT size, M FFT iterations will be performed on a given input frame, resulting in multiple iterations of output samples, reducing the number of times the kernel needs to be triggered to process a given number of input data samples. As a result, the overheads inferred during kernel triggering are reduced and overall performance is increased.</p>
+<p><img width="18" height="18" src="../../../../Images/bulb.png"> Every input frame must be appended by a header.</p>
+<p><img width="18" height="18" src="../../../../Images/bulb.png"> If the FFT size (N) is smaller than the frame size, the block takes the N point FFT of the first N samples in the input frame, and discards the rest of the samples in the frame.</p>
+<p><img width="18" height="18" src="../../../../Images/bulb.png"> If the frame size is an integer multiple (M) of max FFT size, M FFT iterations will be performed on a given input frame, resulting in multiple iterations of output samples, reducing the number of times the kernel needs to be triggered to process a given number of input data samples. As a result, the overheads inferred during kernel triggering are reduced and overall performance is increased.</p>
 <p>The picture below depicts the output of a Dynamic Point FFT block with a 128 point FFT, an input frame size of 2048 random inputs, and max fft size of 1024.</p>
 <p><img src="images/output.png" alt="" /></p>
 <hr />

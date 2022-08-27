@@ -11,15 +11,15 @@
 If you are simulating a heterogeneous system with both PL (modeled with HDL blocks) and AI Engine, you need to use “AIE to HDL” and “HDL to AIE” blocks to properly <br />
 manage the sampling times across the two domains. This Quick Guide explains how to set these two blocks properly and what to be aware of.</p>
 <h1 id="setting-the-aie-to-hdl-block">Setting the AIE to HDL block</h1>
-<p>The image below depicts the components that are needed to connect an AI Engine subsystem to an HDL desgin. In setting this connection, we should keep few input design criteria in mind and set the parameters of the blocks accordingly. These input design criteria are:</p>
+<p>The image below depicts the components that are needed to connect an AI Engine subsystem to an HDL desgin. In setting this connection, we should keep few input design criteria in mind and set the parameters of the blocks accordingly. These input design criteria are (refer to the image below):</p>
 <ol>
-<li>In the HDL design, the bit width of the tdata signal line (<strong>W</strong>). This is the bit width of the data in the programmable logic.</li>
-<li>HDL design sample time (<strong>T</strong>). This sample time determines the target clock rate for which the HDL design will be clocked in hardware. For single clock designs, this will be the sample time set in the <em>Gateway In AXIS</em> block. </li>
-<li>As mentioned earlier, simulation in HDL domain is cycle accurate. An HDL design may not be ready to accept a new sample at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). This is referred as the initilization interval (<strong>ii</strong>) of the HDL design. For example, if an HDL design accepts a new sample every 10 cycles, the design would have an initiation interval of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.</li>
-<li>Number of samples in the output of the AI Engine kernel (<strong>S</strong>).</li>
-<li>Output data type of the AI Engine kernel (<strong>DT</strong>).</li>
+<li><strong>W</strong>, the bit width of the tdata signal in the programmable logic.</li>
+<li><strong>T</strong>, This sample time determines the target clock rate for which the HDL design will be clocked in hardware. For single clock designs, this will be the sample time set in the <em>Gateway In AXIS</em> block. </li>
+<li><strong>ii</strong>, As mentioned earlier, simulation in HDL domain is cycle accurate. An HDL design may not be ready to accept a new sample at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). This is referred as the initilization interval (<strong>ii</strong>) of the HDL design. For example, if an HDL design accepts a new sample every 10 cycles, the design would have an initiation interval of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.</li>
+<li><strong>S</strong>, Number of output samples of the AI Engine kernel.</li>
+<li><strong>DT</strong>, Output data type of the AI Engine kernel.</li>
 </ol>
-<p>Let's set <strong>P</strong> to be the period of the AI Engine subsystem. Note that all the inputs and outputs signals of the AI Engine subsystem must have the same period. Later we will determine a lower limit to <strong>P</strong>.</p>
+<p>Let's set <strong>P</strong> to be the period of the AI Engine subsystem. Note that all the input and output signals of the AI Engine subsystem must have the same period.</p>
 <p>Also note that the PLIO block is a pass through block and only impacts code generation. </p>
 <p><img src="images/high_level_AIE_HDL2.png" alt="" /></p>
 <p>Keeping the above five input design criteria in mind, we can set the parameters of the blocks accordingly as described below:</p>
@@ -27,15 +27,16 @@ manage the sampling times across the two domains. This Quick Guide explains how 
 <p>Set the PLIO bit width to <strong>W</strong>.</p>
 <h2 id="step-2-set-parameters-of-the-aie-to-hdl-block">Step 2 Set parameters of the AIE to HDL block</h2>
 <h4 id="output-data-type">Output Data Type</h4>
-<p>Set the <em>Output Data Type</em> such that the output bit width is <strong>W</strong>. If <strong>W</strong> is larger than the bit width of the input, the output should be unsigned, or else the output should have the same signedness of the input. Note that the input bit width cannot be larger than <strong>W</strong>. </p>
+<p>Set the <em>Output Data Type</em> such that the output bit width is <strong>W</strong>.</p>
+<ul>
+<li>If <strong>W</strong> is larger than the input bit width, the output should be unsigned.</li>
+<li>If <strong>W</strong> is eqaul to the input bit width, the output should have the same signedness of the input.</li>
+<li>Input bit width to the block cannot be larger than <strong>W</strong>. </li>
+</ul>
 <h4 id="output-sample-time">Output Sample Time</h4>
-<p>Set the <em>Ouptut Sample Time</em> to <em>Inherit: Same as tready</em> (this is equivalent of setting this to <strong>T</strong>). Note that the bit rate into the block is</p>
-<p><img src="https://render.githubusercontent.com/render/math?math=\frac{S\times \text{(DT bit width)}}{P}"></p>
-<p>and the output bit rate of the block is </p>
-<p><img src="https://render.githubusercontent.com/render/math?math=\frac{W}{T}"> </p>
-<p>For the internal buffers of the block not to overflow, the input rate should be less than or equal to the output rate. However, the HDL design has an initialization interval of <strong>ii</strong>. As such,</p>
-<p><img src="https://render.githubusercontent.com/render/math?math=\text{input rate} \leq \frac{\text{output rate}}{ii}"> </p>
-<p>or</p>
+<p>Set the <em>Ouptut Sample Time</em> to <em>Inherit: Same as tready</em> (this is equivalent of setting this to <strong>T</strong>). </p>
+<h2 id="signal-period-into-the-block">Signal Period into the block</h2>
+<p>If the input rate into the block is larger than the output rate, eventually the internal buffers of the block will overflow and the simulation will stop. As such, the input period <strong>P</strong> should meet the following equation:</p>
 <p><img src="https://render.githubusercontent.com/render/math?math=P \geq  \frac{S\times T\times ii \times \text{(DT bit width)}}{W}"></p>
 <h2 id="step-3-set-parameters-of-the-gateway-in-axis-block">Step 3 Set parameters of the Gateway In, AXIS block</h2>
 <ul>
@@ -66,7 +67,7 @@ manage the sampling times across the two domains. This Quick Guide explains how 
 <h1 id="examples">Examples</h1>
 <p>In this GitHub repository, you can find several examples in which the AIE to HDL and HDL to AIE blocks are being used:</p>
 <ul>
-<li><a href="../../AIENGINE_plus_PL/AIE_HDL/FFT2D/README.html">2D FFT (AI Engines + HDL/HLS) </a></li>
+<li><a href="../../AIENGINE_plus_PL/FFT2D/README.html">2D FFT (AI Engines + HDL/HLS) </a></li>
 <li><a href="../../AIENGINE_plus_PL/AIE_HDL/README.html">Designs with both AI Engine and RTL blocks</a></li>
 </ul>
 <hr />
