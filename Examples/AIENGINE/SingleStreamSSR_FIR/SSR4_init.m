@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Copyright 2020 Xilinx
+% Copyright 2021-2022 Xilinx
 %
 % Licensed under the Apache License, Version 2.0 (the "License");
 % you may not use this file except in compliance with the License.
@@ -59,6 +59,8 @@ LOCATION_2_0 = [25,2];
 LOCATION_3_0 = [28,3];
 
 %PLIO Frequency
-
 PLIO_FREQ = 500;
+
+
+
 
