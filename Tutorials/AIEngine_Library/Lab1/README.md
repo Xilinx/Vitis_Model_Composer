@@ -70,7 +70,7 @@ void fir_27t_sym_hb_2i
 
 >  ❗❗ **Important**: The Signal size parameter is the maximum size of the output signal.
 
-12. Connect this block to the existing design and it should now look as follows.
+13. Connect this block to the existing design and update the diagram by pressing Ctrl+D. The design should now look as follows.
 <br><br><img src="Images/Step1/Step13.png">
 <br><br>You have connected a block with a window output to a block with a stream input.
 
@@ -116,12 +116,12 @@ Vitis Model Composer can generate graph code from your design. It also generates
 3. Drag the Model Composer Hub from the library browser or simply click on the canvas and start typing `Model Composer Hub`.
 
 4. Double-click the Model Composer Hub and make changes as follows.
-<br><br><img src="Images/Step3/Step1.png">
+<br><br><img src="Images/Step3/Step4.png">
 <br><br>When you check **Create testbench**, the tool generates a testbench, including input and output test vectors from Vitis Model Composer. You can use AI Engine SystemC Simulator to verify the correctness of the design by comparing the results with the test vectors from Vitis Model Composer.
 
 > 📝 **Note**: The AIE simulation may take some time to complete.
 
-5. Click **Apply** and then **Generate** and **Run**. Within a few seconds the code directory gets created. Because you also checked **Create testbench**, the aiecompiler will get invoked under the hood and compile the code using the generated graph code and the kernel source codes. It subsequently runs the AIE Simulation.
+5. Click **Apply** and then **Generate**. Within a few seconds the code directory gets created. Because you also checked **Create testbench**, the aiecompiler will get invoked under the hood and compile the code using the generated graph code and the kernel source codes. It subsequently runs the AIE Simulation.
 <br><br>This operation takes some time. Observe the simulation completion message along with the comparison of the output to the Simulink output (<samp>data/reference_output/Out1.txt</samp>). It prints any diff, in the wait dialog.
 <br><br><img src="Images/Step3/Step5.png">
 
