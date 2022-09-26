@@ -36,21 +36,16 @@ xmcOpenExamples();
 <br><br><img src="Images/Step1/Step5.png">
 
 6. Click Click **Open Design** at the top left corner. This opens the example design.
-
-
-7. In the Vitis Model Composer examples dialog box, select **optical flow** and click **Open example.** This opens the example design. at the top left corner. This opens the example design.
 <br><br><img src="Images/Step1/Step7.png">
 
-8. Click on the **Lucas_Kanade** subsystem and press **Ctrl+U** to look under the mask.
-
-9. Right-click on the **Lucas-Kanade** subsystem and select **Mask > Look Under Mask** to observe the calculating-roots block.
+7. Right-click on the **Lucas-Kanade** subsystem and select **Mask > Look Under Mask** to observe the calculating-roots block.
 <br><br><img src="Images/Step1/Step9-1.png">
 
 > 📝 **Note:** This block has been generated using the `xmcImportFunction` feature. Its function declaration can be seen by double-clicking on the block.
 
 <ul><br><br><img src="Images/Step1/Step9-2.png"></ul>
 
-10. To view the function definition of `calculating_roots`, navigate to the current folder in the MATLAB window and double-click on <samp> calculating_roots.h </samp>.
+8. To view the function definition of `calculating_roots`, navigate to the current folder in the MATLAB window and double-click on <samp> calculating_roots.h </samp>.
 <br><br><img src="Images/Step1/Step10.png">
 
 The setup is now ready for you to debug your `C/C++` code. In the next step, you will see how to debug the code using GDB tool debugger.
@@ -67,10 +62,10 @@ The setup is now ready for you to debug your `C/C++` code. In the next step, you
 <br><br><img src="Images/Step2/Step2.png">
 <br><br> Note the gdb link that you will use to invoke the debugger tool, and the MATLAB process ID that you will use to attach the process to the debugger.
 
-3. Click on the **gdb** link, to invoke the Windows command prompt and launch gdb.
+3. Click on the **gdb** link, to invoke the terminal and launch gdb.
 <br><br><img src="Images/Step2/Step3.png">
 
- 4. At the Windows command prompt, use the following command to specify the breakpoint in the <samp> calculating_roots.h </samp> file where you want the code to stop executing. Press **Enter** to run the command.
+ 4. At the terminal, use the following command to specify the breakpoint in the <samp> calculating_roots.h </samp> file where you want the code to stop executing. Press **Enter** to run the command.
 ```
 (gdb) break calculating_roots.h:53 
 
@@ -79,7 +74,7 @@ The setup is now ready for you to debug your `C/C++` code. In the next step, you
 
 <ul><br><br><img src="Images/Step2/Step4.png"></ul>
 
-5. Once the command runs, you can see a pending breakpoint in the command window. This is shown in the following figure.
+5. Once the command runs, you can see a pending breakpoint in the terminal. This is shown in the following figure.
 <br><br><img src="Images/Step2/Step5.png">
 <br><br>If you see any questions from GDB, answer “yes” and press Enter.
 
@@ -92,13 +87,13 @@ The setup is now ready for you to debug your `C/C++` code. In the next step, you
  
 > 📝 **Note** : During the debug process, if prompted to press 'c' to continue, type 'c' and hit Enter.
 
-7. Type `cont` at the Windows command prompt.
+7. Type `cont` in the terminal.
 <br><br><img src="Images/Step2/Step7.png">
 
 8. Now go to the Simulink® model and run the simulation by clicking the **Run** button.
 <br><br><img src="Images/Step2/Step8.png">
 
-9. The model takes some time to initialize. As the simulation starts, you see the simulation come to the breakpoint at line 53 in the Windows command prompt.
+9. The model takes some time to initialize. As the simulation starts, you see the simulation come to the breakpoint at line 53 in the terminal window.
 <br><br><img src="Images/Step2/Step9.png">
 <br><br>Now, type the command list to view the lines of code around line 53.
 ```

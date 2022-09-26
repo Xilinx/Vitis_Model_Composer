@@ -17,9 +17,7 @@ In this step you see how Vitis Model Composer fits into the Simulink environment
 
 Vitis Model Composer provides an HLS Library for use within the Simulink environment You can access these from within the Simulink Library Browser:
 
-1. Use either of these techniques to open the Simulink Library Browser:
-    - On the Home tab, the click Blank Model, and choose a model template. In the new model, click the Library Browser button. <img width="20" height="20" src="../Images/Buttons/libaryBrowserButton.png">
-    - At the command prompt, type: `slLibraryBrowser`
+1. At the MATLAB command prompt, type: `slLibraryBrowser`
 
 2. In the browser, navigate to the HLS library in the Xilinx Toolbox .
 <img src="./Images/Step1/Step2.png">
@@ -53,7 +51,7 @@ Sobel edge detection is a classical algorithm in the field of image and video pr
 
 <ul> <img src="Images/Step2/Part2/Step5.png"> </ul>
 
-6. Select the **Simulation > Run** command or click the <img width="18" height="20" src="Images/Buttons/runemoji.png"> button to simulate the model and view the results of the Sobel Edge Detection algorithm.
+6. Select the **Simulation > Run** command to simulate the model and view the results of the Sobel Edge Detection algorithm.
 <br><br><img src="Images/Step2/Part2/Step6.png">
 <br><br> One way to assess the simulation performance of the algorithm is to check the video frame rate of the simulation. To do this:
 
@@ -76,7 +74,7 @@ This exercise has two primary parts, and one optional part:
 
 ### Work with Native Simulink Data Types
 
-1. In the MATLAB Current Folder, navigate to the <samp> ug1498-model-composer-sys-gen-tutorial\HLS_Library\Lab1\Section2 </samp> folder.
+1. In the MATLAB Current Folder, navigate to the <samp>HLS_Library\Lab1\Section2 </samp> folder.
 
 2. Double-click **ColorSpace_Conversion.slx** to open the design.
 <br><br>This is a Color Space conversion design, built with basic Vitis Model Composer blocks, that performs a RGB to YCbCr conversion.
@@ -128,7 +126,7 @@ To convert the previous design to use Xilinx Fixed Point types:
 <br><br> <b>fl</b>: Fractional Length
 <br><br> For example, <samp> x_sfix16_En8 </samp> represents a signed fixed point number with Word Length=16 and Fractional Length=8.
 
-You can view a completed version of the design here: <samp> ug1498-model-composer-sys-gen-tutorial\HLS_Library\Lab1\Section2\solution\Colorspace_Conversion_fixed.slx </samp>
+You can view a completed version of the design here: <samp> HLS_Library\Lab1\Section2\solution\Colorspace_Conversion_fixed.slx </samp>
 </ul>
 
 ### Convert Data Types (Alternative)
