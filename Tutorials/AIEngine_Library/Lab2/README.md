@@ -22,13 +22,12 @@ In this step you will import graph code (generated using the design in Lab 1) us
 <br><br> You can also click on the canvas and start typing `AIE Graph`.
 <br><br><img src="Images/Step1/Step3-2.png">
 
-4. Double-click the block and select **Source file (\*.cpp)** from the Graph file parameter as shown.
+4. Double-click the block to open its parameters.
 <br><br><img src="Images/Step1/Step4.png">
 
-> 📝 **Note**: Here, the \*.cpp flow is used to import the graph. Alternatively, you can use the\ *.h flow (in which case the following steps will differ slightly).
-
 5. Update the block parameters as follows:
-<br><br> **Graph source file(\*.cpp)**: <samp> aie_system.cpp </samp>
+<br><br> **Graph header file(\*.h)**: <samp> aie_system.h </samp>
+<br><br> **Graph class**: <samp>Aie_system</samp>
 <br><br> **Graph search paths**: Either browse to locate the kernels or enter {`'./kernels/src', './kernels/inc', './include'`} as the parameter.
 <br><br> **Preprocessor options**: Leave empty
 
@@ -43,7 +42,7 @@ In this step you will import graph code (generated using the design in Lab 1) us
 
 ## Step 2: Simulate the Design
 
-1. Click **Simulate**. You will get similar results as those in Lab 1 (Import AIE Kernel).
+1. Click **Run**. You will get similar results as those in Lab 1 (Import AIE Kernel).
 <br><br><img src="Images/Step2/Step1.png">
 
 ## Step 3: Code Generation and AI Engine SystemC Simulation
@@ -62,7 +61,7 @@ In this step you will import graph code (generated using the design in Lab 1) us
 4. Double-click the Vitis Model Composer Hub block and make changes as follows (Similar to those in Lab 1 - Import AIE kernel).
 <br><br><img src="Images/Step3/Step4.png">
 
-5. Click **Apply**, then click **Generate** and **Run**.
+5. Click **Apply**, then click **Generate**.
 
 6. The Simulation procedure is similar to that of Lab 1 (Import AIE Kernel). It also generates the Target directory (<samp> ./code </samp> in this case) under which you can see the top level graph code under <samp> code/src_aie </samp> directory and the code/data directory which contains the data logged from the Simulink design along with output from the AIE simulation.
 <br><br><img src="Images/Step3/Step6.png">
