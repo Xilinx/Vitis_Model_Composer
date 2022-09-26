@@ -12,7 +12,7 @@ For more details and information about other Model Composer features, see the Vi
 
 # Step 1: Set up the Import Function Example
 
-In the MATLAB Current Folder panel, navigate to <samp> ug1498-model-composer-sys-gen-tutorial\HLS_Library\Lab2\Section1 </samp> folder.
+In the MATLAB Current Folder panel, navigate to <samp> HLS_Library\Lab2\Section1 </samp> folder.
 
 1.  Double-click the **basic_array.cpp** and **basic_array.h** files to view the source code in the MATLAB Editor.
 <br><br> These are the source files for a simple `basic_array` function in `C++`, which calculates the sum of two arrays of size 4. 
@@ -132,14 +132,14 @@ In this step we will walk through an example to do the following:
 <br><br><img src="Images/Step2/Step13.png">
 
 14. To understand how templatized inputs add advantage and flexibility to your design, perform the following:
-    - Double-click the **DTC** block.
+    - Double-click the input **DTC** block.
     - In the Block Parameters dialog box, change the Word length from 16 to 32.
     - Change the Fractional length from 8 to 16. <br><br><img src="Images/Step2/Step14-1.png">
     - Click **OK** and press **Ctrl+D**. Observe the signal dimensions in the design. <br><br><img src="Images/Step2/Step14-2.png">
  <br><br>To make sure the output is correct, run the simulation and observe that the same block can still be used in a generic way for different values of Word length and Fractional length. This is possible only because we have templatized the W and I values in our C design.
 
 15. For an additional understanding of template parameters, perform the following:
-    - Right-click the canvas and select **Model Configuration Parameters** to open the Model Properties window.
+    - Right-click the canvas and select **Model Properties**.
     - In the Model Properties window, click the **Callbacks** tab and select **initFcn** and edit the SSR value from 8 to 16 as shown in the following figure. <br><br><img src="Images/Step2/Step15-1.png">
     - Click **OK** and press **Ctrl+D** to observe the change in the number of elements in the Constant block output vector. The bitwidth changes when we change the datatype on the input DTC. This is possible only because of the template parameter `NUMOFELEMENTS`. <br><br><img src="Images/Step2/Step15-2.png">
     - Run the simulation and validate the output according to the input values.
