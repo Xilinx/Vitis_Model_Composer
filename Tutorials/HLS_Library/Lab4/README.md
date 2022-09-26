@@ -28,7 +28,7 @@ In this step, you review the three requirements to move from your algorithm in S
 
 <ul> Next, you add the Model Composer Hub block at the top level of your design. </ul>
 
-4. Open the Simulink Library Browser and navigate to **Xilinx Tool Box > HLS > Tools** sub-library.
+4. Open the Simulink Library Browser and navigate to **Xilinx Toolbox > HLS > Tools** sub-library.
 
 5. Find the Model Composer Hub block, and add it into the design as shown in the following figure. 
 <br><br><img src="Images/Step1/Step5.jfif">
@@ -38,18 +38,12 @@ In this step, you review the three requirements to move from your algorithm in S
 <img src="Images/Step1/Step6.png">
 
 7. On the Code Generation tab, you can set the following options as shown in the previous figure:
-<br><br> **Code directory**: In this case, use ./codegen_edge_detection for the generating code.
-<br><br>**Subsystem name**: In this case, use the Edge Detection subsystem. You can have multiple subsystems at the top-level and use the Model Composer Hub block to select and individually compile the subsystem you want.
-<br><br> **Target**: This option determines what you want to convert your design into. In this case IP Catalog. You can select other compilation targets from the drop-down.
+<br><br> **Code Directory**: In this case, use ./codegen_edge_detection for the generating code.
+<br><br> **Compilation Type**: This option determines what you want to convert your design into. In this case IP Catalog. You can select other compilation targets from the drop-down.
     - Vitis HLS Synthesizable C++ code.
-    - System Generator.
+<br><br> **FPGA clock frequency (MHz)**: The default value is 200 MHz.
 
-> 📝 **Note**: The AI Engines (default) target is not applicable for the HLS block library.
-
-
-8. On the Hardware tab, you can specify the target FPGA clock frequency in MHz. The default value is 200 MHz.
-
-9. Click **Apply** then **OK**.
+8. Click **Apply** then **OK**.
 
 ## Step 2: Mapping Interfaces
 
@@ -88,10 +82,9 @@ Using the same example, you will generate an IP from the Edge Detection algorith
 
 2. Double-click into the **Edge Detection** subsystem and review the settings on the Interface Spec block. Based on the previous lab, this block has already been set up to map the input and output ports to AXI4-Stream Video interface, and to use the YUV 4:2:2 video format.
 
-3. Double-click the **Model Composer Hub** block, and set the following in the Block dialog box:
-<br><br> **Target** : IP Catalog
-<br><br> **Code directory**: `./codegen_IP`
-<br><br> **Subsystem name**: Edge_Detection
+3. Double-click the **Model Composer Hub** block, and set the following on the Code Generation tab:
+<br><br> **Code Directory**: `./codegen_IP`
+<br><br> **Compilation Type** : IP Catalog
 
 4. To generate an IP from this design, click the **Apply** button in the Model Composer Hub block dialog box to save the settings. Then click the **Generate** button to start the code generation process.
 <br><br> Vitis Model Composer opens a progress window to show you the status. After completion, click OK and you will see the new codegen_IP/Edge_Detection_prj folder in the Current Folder, which contains the generated IP solution1 folder.
@@ -126,9 +119,8 @@ When you create the Vivado RTL project, specify the Board as **Kintex-7 KC705 Ev
 In this section you will generate HLS Synthesizable code from the original Edge Detection design. Use the <samp>  CodeGen_Cplus.slx </samp> design for this lab. Simulate the model and ensure that algorithm is functionally correct and gives you the results you would expect.
 
 1. Open the Model Composer Hub block dialog box, and set the following:
-<br><br> **Target**: HLS C++ code
-<br><br> **Code directory**: <samp> ./codegen_edge_detection </samp> 
-<br><br> **Subsystem name**: `Edge Detection`
+<br><br> **Code Directory**: <samp> ./codegen_edge_detection </samp> 
+<br><br> **Compilation Type**: HLS C++ code
 
 2. Click the **Apply** button on the Model Composer Hub block dialog box to save the settings and then click the **Generate** button to start the code generation process.
 <br><br><img src="Images/Step4/Step2.png">
@@ -146,10 +138,10 @@ In this section you will generate HLS Synthesizable code from the original Edge 
 
 5. Navigate back to the directory where the Simulink file is present, open the Model Composer Hub block dialog box and modify the block settings as shown in the following figure.
     - Check the Create and run testbench check box.
-    - Modify the Code directory folder.
+    - Modify the Code Directory folder.
 <br><br><img src="Images/Step4/Step5.png">
 
-6. Click **Apply** and regenerate the code by clicking the **Generate and Run** button. Click **OK** after you see Done Verification in the status bar.
+6. Click **Apply** and regenerate the code by clicking the **Generate** button. Click **OK** after you see Done Verification in the status bar.
 <br><br> You should now see a new folder, <samp> codegen_edge_detection2 </samp>, in your Current Folder.
 
 7. Open the <samp> codegen_edge_detection2 </samp> folder and explore the generated code files
@@ -160,7 +152,7 @@ In this section you will generate HLS Synthesizable code from the original Edge 
 
 Using Vitis Model Composer, you can package a model for integration into a HDL model, which is especially useful if you are an existing Vitis Model Composer HDL user. This allows you to take advantage of both the high level of abstraction and simulation speed provided by Vitis Model Composer for portions of your HLS design, and the more architecture-aware environment provided by Vitis Model Composer HDL design.
 
-**Figure:** System Generator Export Type
+**Figure:** IP Catalog Export Type
 <img src="Images/Step5/Figure1.png">
 
 Choosing **IP Catalog** as the Target, and clicking **Generate**, creates a synthesized RTL block that you can directly add to a Vitis Model Composer HDL design using the Vitis HLS block in the HDL Library.
