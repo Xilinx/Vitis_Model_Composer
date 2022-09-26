@@ -54,10 +54,8 @@ while simulating the entire design in Simulink® .</p>
 <li><p>Click <strong>HLS Examples</strong> under heading Table of Contents. This redirects you to the list of HLS Examples as shown. </p></li>
 <li><p>Click the <strong>Optical Flow</strong>. A description of the example displays.<br />
 <br><br><img src="Images/Step1/Step5.png"></p></li>
-<li><p>Click Click <strong>Open Design</strong> at the top left corner. This opens the example design.</p></li>
-<li><p>In the Vitis Model Composer examples dialog box, select <strong>optical flow</strong> and click <strong>Open example.</strong> This opens the example design. at the top left corner. This opens the example design.<br />
+<li><p>Click Click <strong>Open Design</strong> at the top left corner. This opens the example design.<br />
 <br><br><img src="Images/Step1/Step7.png"></p></li>
-<li><p>Click on the <strong>Lucas_Kanade</strong> subsystem and press <strong>Ctrl+U</strong> to look under the mask.</p></li>
 <li><p>Right-click on the <strong>Lucas-Kanade</strong> subsystem and select <strong>Mask > Look Under Mask</strong> to observe the calculating-roots block.<br />
 <br><br><img src="Images/Step1/Step9-1.png"></p></li>
 </ol>
@@ -65,7 +63,7 @@ while simulating the entire design in Simulink® .</p>
 <p> <strong>Note:</strong> This block has been generated using the <code>xmcImportFunction</code> feature. Its function declaration can be seen by double-clicking on the block.</p>
 </blockquote>
 <ul><br><br><img src="Images/Step1/Step9-2.png"></ul>
-<ol start="10">
+<ol start="8">
 <li>To view the function definition of <code>calculating_roots</code>, navigate to the current folder in the MATLAB window and double-click on <samp> calculating_roots.h </samp>.<br />
 <br><br><img src="Images/Step1/Step10.png"></li>
 </ol>
@@ -83,9 +81,9 @@ while simulating the entire design in Simulink® .</p>
 <li><p>Press Enter to see the applied settings in command window, as shown in the following figure.<br />
 <br><br><img src="Images/Step2/Step2.png"><br />
 <br><br> Note the gdb link that you will use to invoke the debugger tool, and the MATLAB process ID that you will use to attach the process to the debugger.</p></li>
-<li><p>Click on the <strong>gdb</strong> link, to invoke the Windows command prompt and launch gdb.<br />
+<li><p>Click on the <strong>gdb</strong> link, to invoke the terminal and launch gdb.<br />
 <br><br><img src="Images/Step2/Step3.png"></p></li>
-<li><p>At the Windows command prompt, use the following command to specify the breakpoint in the <samp> calculating_roots.h </samp> file where you want the code to stop executing. Press <strong>Enter</strong> to run the command.</p></li>
+<li><p>At the terminal, use the following command to specify the breakpoint in the <samp> calculating_roots.h </samp> file where you want the code to stop executing. Press <strong>Enter</strong> to run the command.</p></li>
 </ol>
 <pre><code>(gdb) break calculating_roots.h:53 
 </code></pre>
@@ -94,7 +92,7 @@ while simulating the entire design in Simulink® .</p>
 </blockquote>
 <ul><br><br><img src="Images/Step2/Step4.png"></ul>
 <ol start="5">
-<li><p>Once the command runs, you can see a pending breakpoint in the command window. This is shown in the following figure.<br />
+<li><p>Once the command runs, you can see a pending breakpoint in the terminal. This is shown in the following figure.<br />
 <br><br><img src="Images/Step2/Step5.png"><br />
 <br><br>If you see any questions from GDB, answer “yes” and press Enter.</p></li>
 <li><p>To attach the MATLAB process to the GDB debugger, type the following:</p></li>
@@ -107,11 +105,11 @@ while simulating the entire design in Simulink® .</p>
 <p> <strong>Note</strong> : During the debug process, if prompted to press 'c' to continue, type 'c' and hit Enter.</p>
 </blockquote>
 <ol start="7">
-<li><p>Type <code>cont</code> at the Windows command prompt.<br />
+<li><p>Type <code>cont</code> in the terminal.<br />
 <br><br><img src="Images/Step2/Step7.png"></p></li>
 <li><p>Now go to the Simulink® model and run the simulation by clicking the <strong>Run</strong> button.<br />
 <br><br><img src="Images/Step2/Step8.png"></p></li>
-<li><p>The model takes some time to initialize. As the simulation starts, you see the simulation come to the breakpoint at line 53 in the Windows command prompt.<br />
+<li><p>The model takes some time to initialize. As the simulation starts, you see the simulation come to the breakpoint at line 53 in the terminal window.<br />
 <br><br><img src="Images/Step2/Step9.png"><br />
 <br><br>Now, type the command list to view the lines of code around line 53.</p></li>
 </ol>

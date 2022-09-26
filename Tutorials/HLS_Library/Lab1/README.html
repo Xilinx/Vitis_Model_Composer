@@ -36,10 +36,7 @@ document.location=commandURI
 <h3 id="access-the-hls-library">Access the HLS Library</h3>
 <p>Vitis Model Composer provides an HLS Library for use within the Simulink environment You can access these from within the Simulink Library Browser:</p>
 <ol>
-<li><p>Use either of these techniques to open the Simulink Library Browser:</p>
-<ul>
-<li>On the Home tab, the click Blank Model, and choose a model template. In the new model, click the Library Browser button. <img width="20" height="20" src="../Images/Buttons/libaryBrowserButton.png"></li>
-<li>At the command prompt, type: <code>slLibraryBrowser</code></li></ul></li>
+<li><p>At the MATLAB command prompt, type: <code>slLibraryBrowser</code></p></li>
 <li><p>In the browser, navigate to the HLS library in the Xilinx Toolbox .<br />
 <img src="./Images/Step1/Step2.png"><br />
 The HLS blocks are organized into subcategories based on functionality. Spend a few minutes navigating through the sub-libraries and familiarizing yourself with the available blocks.</p></li>
@@ -64,7 +61,7 @@ The HLS blocks are organized into subcategories based on functionality. Spend a 
 </blockquote>
 <ul> <img src="Images/Step2/Part2/Step5.png"> </ul>
 <ol start="6">
-<li><p>Select the <strong>Simulation > Run</strong> command or click the <img width="18" height="20" src="Images/Buttons/runemoji.png"> button to simulate the model and view the results of the Sobel Edge Detection algorithm.<br />
+<li><p>Select the <strong>Simulation > Run</strong> command to simulate the model and view the results of the Sobel Edge Detection algorithm.<br />
 <br><br><img src="Images/Step2/Part2/Step6.png"><br />
 <br><br> One way to assess the simulation performance of the algorithm is to check the video frame rate of the simulation. To do this:</p></li>
 <li><p>Add the Frame Rate Display block from the Simulink Computer Vision System Toolbox (under the Sinks category) and connect it to the output of the algorithm as shown in the following figure.</p></li>
@@ -84,7 +81,7 @@ The HLS blocks are organized into subcategories based on functionality. Spend a 
 </ul>
 <h3 id="work-with-native-simulink-data-types">Work with Native Simulink Data Types</h3>
 <ol>
-<li><p>In the MATLAB Current Folder, navigate to the <samp> ug1498-model-composer-sys-gen-tutorial\HLS_Library\Lab1\Section2 </samp> folder.</p></li>
+<li><p>In the MATLAB Current Folder, navigate to the <samp>HLS_Library\Lab1\Section2 </samp> folder.</p></li>
 <li><p>Double-click <strong>ColorSpace_Conversion.slx</strong> to open the design.<br />
 <br><br>This is a Color Space conversion design, built with basic Vitis Model Composer blocks, that performs a RGB to YCbCr conversion.</p></li>
 <li><p>Update the model (<strong>Ctrl+D</strong>) and observe that the Data Types, Signal Dimensions and Sample Times from the Source blocks in Simulink all propagate through the Vitis Model Composer blocks. Note that the design uses single precision floating point data types.</p></li>
@@ -133,7 +130,7 @@ The HLS blocks are organized into subcategories based on functionality. Spend a 
 <br><br> <b>fl</b>: Fractional Length
 <br><br> For example, <samp> x_sfix16_En8 </samp> represents a signed fixed point number with Word Length=16 and Fractional Length=8.
 
-You can view a completed version of the design here: <samp> ug1498-model-composer-sys-gen-tutorial\HLS_Library\Lab1\Section2\solution\Colorspace_Conversion_fixed.slx </samp>
+You can view a completed version of the design here: <samp> HLS_Library\Lab1\Section2\solution\Colorspace_Conversion_fixed.slx </samp>
 </ul>
 <h3 id="convert-data-types-alternative">Convert Data Types (Alternative)</h3>
 <p>Vitis Model Composer supports Data Type Expressions that make it easier to change data types and quickly explore the results from your design.</p>

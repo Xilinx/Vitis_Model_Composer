@@ -47,25 +47,18 @@ document.location=commandURI
 </blockquote>
 <ul> Next, you add the Model Composer Hub block at the top level of your design. </ul>
 <ol start="4">
-<li><p>Open the Simulink Library Browser and navigate to <strong>Xilinx Tool Box > HLS > Tools</strong> sub-library.</p></li>
+<li><p>Open the Simulink Library Browser and navigate to <strong>Xilinx Toolbox > HLS > Tools</strong> sub-library.</p></li>
 <li><p>Find the Model Composer Hub block, and add it into the design as shown in the following figure. <br />
 <br><br><img src="Images/Step1/Step5.jfif"><br />
 <br><br>Next, you use the Model Composer Hub block to select the code generation options for the design.</p></li>
 <li><p>Double-click the block to open the block interface and set up as shown in the following figure.<br />
 <img src="Images/Step1/Step6.png"></p></li>
 <li><p>On the Code Generation tab, you can set the following options as shown in the previous figure:<br />
-<br><br> <strong>Code directory</strong>: In this case, use ./codegen<em>edge</em>detection for the generating code.<br />
-<br><br><strong>Subsystem name</strong>: In this case, use the Edge Detection subsystem. You can have multiple subsystems at the top-level and use the Model Composer Hub block to select and individually compile the subsystem you want.<br />
-<br><br> <strong>Target</strong>: This option determines what you want to convert your design into. In this case IP Catalog. You can select other compilation targets from the drop-down.</p>
+<br><br> <strong>Code Directory</strong>: In this case, use ./codegen<em>edge</em>detection for the generating code.<br />
+<br><br> <strong>Compilation Type</strong>: This option determines what you want to convert your design into. In this case IP Catalog. You can select other compilation targets from the drop-down.</p>
 <ul>
-<li>Vitis HLS Synthesizable C++ code.</li>
-<li>System Generator.</li></ul></li>
-</ol>
-<blockquote>
-<p> <strong>Note</strong>: The AI Engines (default) target is not applicable for the HLS block library.</p>
-</blockquote>
-<ol start="8">
-<li><p>On the Hardware tab, you can specify the target FPGA clock frequency in MHz. The default value is 200 MHz.</p></li>
+<li>Vitis HLS Synthesizable C++ code.<br />
+<br><br> <strong>FPGA clock frequency (MHz)</strong>: The default value is 200 MHz.</li></ul></li>
 <li><p>Click <strong>Apply</strong> then <strong>OK</strong>.</p></li>
 </ol>
 <h2 id="step-2-mapping-interfaces">Step 2: Mapping Interfaces</h2>
@@ -99,10 +92,9 @@ document.location=commandURI
 <ol>
 <li><p>Double-click the <strong>CodeGen_IP.slx</strong> model in the Current Folder.</p></li>
 <li><p>Double-click into the <strong>Edge Detection</strong> subsystem and review the settings on the Interface Spec block. Based on the previous lab, this block has already been set up to map the input and output ports to AXI4-Stream Video interface, and to use the YUV 4:2:2 video format.</p></li>
-<li><p>Double-click the <strong>Model Composer Hub</strong> block, and set the following in the Block dialog box:<br />
-<br><br> <strong>Target</strong> : IP Catalog<br />
-<br><br> <strong>Code directory</strong>: <code>./codegen_IP</code><br />
-<br><br> <strong>Subsystem name</strong>: Edge_Detection</p></li>
+<li><p>Double-click the <strong>Model Composer Hub</strong> block, and set the following on the Code Generation tab:<br />
+<br><br> <strong>Code Directory</strong>: <code>./codegen_IP</code><br />
+<br><br> <strong>Compilation Type</strong> : IP Catalog</p></li>
 <li><p>To generate an IP from this design, click the <strong>Apply</strong> button in the Model Composer Hub block dialog box to save the settings. Then click the <strong>Generate</strong> button to start the code generation process.<br />
 <br><br> Vitis Model Composer opens a progress window to show you the status. After completion, click OK and you will see the new codegen<em>IP/Edge</em>Detection_prj folder in the Current Folder, which contains the generated IP solution1 folder.<br />
 <br><br><img src="Images/Step3/Step4-1.png"><br />
@@ -135,9 +127,8 @@ When you create the Vivado RTL project, specify the Board as <strong>Kintex-7 KC
 <p>In this section you will generate HLS Synthesizable code from the original Edge Detection design. Use the <samp>  CodeGen_Cplus.slx </samp> design for this lab. Simulate the model and ensure that algorithm is functionally correct and gives you the results you would expect.</p>
 <ol>
 <li><p>Open the Model Composer Hub block dialog box, and set the following:<br />
-<br><br> <strong>Target</strong>: HLS C++ code<br />
-<br><br> <strong>Code directory</strong>: <samp> ./codegen<em>edge</em>detection </samp> <br />
-<br><br> <strong>Subsystem name</strong>: <code>Edge Detection</code></p></li>
+<br><br> <strong>Code Directory</strong>: <samp> ./codegen<em>edge</em>detection </samp> <br />
+<br><br> <strong>Compilation Type</strong>: HLS C++ code</p></li>
 <li><p>Click the <strong>Apply</strong> button on the Model Composer Hub block dialog box to save the settings and then click the <strong>Generate</strong> button to start the code generation process.<br />
 <br><br><img src="Images/Step4/Step2.png"></p></li>
 <li><p>At the end of code generation, observe the Current Folder in MATLAB.<br />
@@ -157,9 +148,9 @@ When you create the Vivado RTL project, specify the Board as <strong>Kintex-7 KC
 <li><p>Navigate back to the directory where the Simulink file is present, open the Model Composer Hub block dialog box and modify the block settings as shown in the following figure.</p>
 <ul>
 <li>Check the Create and run testbench check box.</li>
-<li>Modify the Code directory folder.<br />
+<li>Modify the Code Directory folder.<br />
 <br><br><img src="Images/Step4/Step5.png"></li></ul></li>
-<li><p>Click <strong>Apply</strong> and regenerate the code by clicking the <strong>Generate and Run</strong> button. Click <strong>OK</strong> after you see Done Verification in the status bar.<br />
+<li><p>Click <strong>Apply</strong> and regenerate the code by clicking the <strong>Generate</strong> button. Click <strong>OK</strong> after you see Done Verification in the status bar.<br />
 <br><br> You should now see a new folder, <samp> codegen<em>edge</em>detection2 </samp>, in your Current Folder.</p></li>
 <li><p>Open the <samp> codegen<em>edge</em>detection2 </samp> folder and explore the generated code files<br />
 <br><br><img src="Images/Step4/Step7.png"><br />
@@ -167,7 +158,7 @@ When you create the Vivado RTL project, specify the Board as <strong>Kintex-7 KC
 </ol>
 <h2 id="step-5-port-a-vitis-model-composer-hls-design-to-hdl-design">Step 5: Port a Vitis Model Composer HLS Design to HDL Design</h2>
 <p>Using Vitis Model Composer, you can package a model for integration into a HDL model, which is especially useful if you are an existing Vitis Model Composer HDL user. This allows you to take advantage of both the high level of abstraction and simulation speed provided by Vitis Model Composer for portions of your HLS design, and the more architecture-aware environment provided by Vitis Model Composer HDL design.</p>
-<p><strong>Figure:</strong> System Generator Export Type<br />
+<p><strong>Figure:</strong> IP Catalog Export Type<br />
 <img src="Images/Step5/Figure1.png"></p>
 <p>Choosing <strong>IP Catalog</strong> as the Target, and clicking <strong>Generate</strong>, creates a synthesized RTL block that you can directly add to a Vitis Model Composer HDL design using the Vitis HLS block in the HDL Library.</p>
 <p>In this lab, you create an IP using Vitis Model Composer HLS Design and then use the synthesized RTL as a block in a Vitis Model Composer HDL design.</p>

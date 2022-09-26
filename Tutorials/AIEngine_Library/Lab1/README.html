@@ -84,8 +84,8 @@ output_window_cint16 * cb_output)
 <p>❗❗ <strong>Important</strong>: Here, the Window size and Window margin fields are only applicable for window type signals.</p>
 <p>❗❗ <strong>Important</strong>: The Signal size parameter is the maximum size of the output signal.</p>
 </blockquote>
-<ol start="12">
-<li><p>Connect this block to the existing design and it should now look as follows.<br />
+<ol start="13">
+<li><p>Connect this block to the existing design and update the diagram by pressing Ctrl+D. The design should now look as follows.<br />
 <br><br><img src="Images/Step1/Step13.png"><br />
 <br><br>You have connected a block with a window output to a block with a stream input.</p></li>
 <li><p>Use the subsequent steps to import the final kernel function <code>fir_27t_symm_hb_dec2</code> into the design. This is a decimation by two filter and the signature to this function is as follows.</p></li>
@@ -123,14 +123,14 @@ output_window_cint16 * outputw
 <li><p>Assign a name to the subsystem, for example <code>aie_system</code>.</p></li>
 <li><p>Drag the Model Composer Hub from the library browser or simply click on the canvas and start typing <code>Model Composer Hub</code>.</p></li>
 <li><p>Double-click the Model Composer Hub and make changes as follows.<br />
-<br><br><img src="Images/Step3/Step1.png"><br />
+<br><br><img src="Images/Step3/Step4.png"><br />
 <br><br>When you check <strong>Create testbench</strong>, the tool generates a testbench, including input and output test vectors from Vitis Model Composer. You can use AI Engine SystemC Simulator to verify the correctness of the design by comparing the results with the test vectors from Vitis Model Composer.</p></li>
 </ol>
 <blockquote>
 <p> <strong>Note</strong>: The AIE simulation may take some time to complete.</p>
 </blockquote>
 <ol start="5">
-<li><p>Click <strong>Apply</strong> and then <strong>Generate</strong> and <strong>Run</strong>. Within a few seconds the code directory gets created. Because you also checked <strong>Create testbench</strong>, the aiecompiler will get invoked under the hood and compile the code using the generated graph code and the kernel source codes. It subsequently runs the AIE Simulation.<br />
+<li><p>Click <strong>Apply</strong> and then <strong>Generate</strong>. Within a few seconds the code directory gets created. Because you also checked <strong>Create testbench</strong>, the aiecompiler will get invoked under the hood and compile the code using the generated graph code and the kernel source codes. It subsequently runs the AIE Simulation.<br />
 <br><br>This operation takes some time. Observe the simulation completion message along with the comparison of the output to the Simulink output (<samp>data/reference_output/Out1.txt</samp>). It prints any diff, in the wait dialog.<br />
 <br><br><img src="Images/Step3/Step5.png"></p></li>
 <li><p>Click <strong>OK</strong> to exit the Progress window.</p></li>

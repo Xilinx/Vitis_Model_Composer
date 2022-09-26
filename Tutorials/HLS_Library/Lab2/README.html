@@ -32,7 +32,7 @@ document.location=commandURI
 </ul>
 <p>For more details and information about other Model Composer features, see the Vitis Model Composer User Guide (UG1483).</p>
 <h1 id="step-1-set-up-the-import-function-example">Step 1: Set up the Import Function Example</h1>
-<p>In the MATLAB Current Folder panel, navigate to <samp> ug1498-model-composer-sys-gen-tutorial\HLS_Library\Lab2\Section1 </samp> folder.</p>
+<p>In the MATLAB Current Folder panel, navigate to <samp> HLS_Library\Lab2\Section1 </samp> folder.</p>
 <ol>
 <li>Double-click the <strong>basic<em>array.cpp</strong> and <strong>basic</em>array.h</strong> files to view the source code in the MATLAB Editor.<br />
 <br><br> These are the source files for a simple <code>basic_array</code> function in <code>C++</code>, which calculates the sum of two arrays of size 4. <br />
@@ -143,14 +143,14 @@ Save this Simulink library model. </ul>
 <br><br><img src="Images/Step2/Step13.png"></p></li>
 <li><p>To understand how templatized inputs add advantage and flexibility to your design, perform the following:</p>
 <ul>
-<li>Double-click the <strong>DTC</strong> block.</li>
+<li>Double-click the input <strong>DTC</strong> block.</li>
 <li>In the Block Parameters dialog box, change the Word length from 16 to 32.</li>
 <li>Change the Fractional length from 8 to 16. <br><br><img src="Images/Step2/Step14-1.png"></li>
 <li>Click <strong>OK</strong> and press <strong>Ctrl+D</strong>. Observe the signal dimensions in the design. <br><br><img src="Images/Step2/Step14-2.png"><br />
 <br><br>To make sure the output is correct, run the simulation and observe that the same block can still be used in a generic way for different values of Word length and Fractional length. This is possible only because we have templatized the W and I values in our C design.</li></ul></li>
 <li><p>For an additional understanding of template parameters, perform the following:</p>
 <ul>
-<li>Right-click the canvas and select <strong>Model Configuration Parameters</strong> to open the Model Properties window.</li>
+<li>Right-click the canvas and select <strong>Model Properties</strong>.</li>
 <li>In the Model Properties window, click the <strong>Callbacks</strong> tab and select <strong>initFcn</strong> and edit the SSR value from 8 to 16 as shown in the following figure. <br><br><img src="Images/Step2/Step15-1.png"></li>
 <li>Click <strong>OK</strong> and press <strong>Ctrl+D</strong> to observe the change in the number of elements in the Constant block output vector. The bitwidth changes when we change the datatype on the input DTC. This is possible only because of the template parameter <code>NUMOFELEMENTS</code>. <br><br><img src="Images/Step2/Step15-2.png"></li>
 <li>Run the simulation and validate the output according to the input values.</li></ul></li>
