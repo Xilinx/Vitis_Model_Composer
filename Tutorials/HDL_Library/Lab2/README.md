@@ -24,7 +24,7 @@ In this step you will create the control logic for a Finite State Machine using 
 
 3. Add an MCode block from the Xilinx Toolbox/HDL/User-Defined Functions library. Before wiring up the block, you need to edit the MATLAB® function to create the correct ports and function name.
 
-4. Double-click the **MCode** block and click **Edit M-File**, as shown in the following figure.
+4. Double-click the **MCode** block and click the **Edit** button, as shown in the following figure.
 <br><br><img src="Images/Step1/Step4-1.png">
 <br><br> The following figure shows the defualt M-code in the MATLAB text editor
 <br><br><img src="Images/Step1/Step4-2.png">
@@ -90,7 +90,7 @@ A black box allows the design to be imported into Vitis Model Composer even thou
 <br><br> At this point, the subsystem contains two input ports and one output port. You will add a black box to this subsystem:
 <br><br><img src="Images/Step2/Step4.png">
 
-5. Right-click the design canvas, select **Xilinx BlockAdd**, and add a Black Box block to this subsystem.
+5. Left-click the design canvas and begin typing **Black Box** to a Black Box block to this subsystem.
 <br><br>A browser window opens, listing the VHDL source files that can be associated with the black box.
 
 6. From this window, select the top-level VHDL file <samp>transpose_fir.vhd</samp>. This is illustrated in the following figure
@@ -124,7 +124,7 @@ A black box allows the design to be imported into Vitis Model Composer even thou
 12. Notice the black box output shown in the Output Signal scope is zero. This is expected because the black box is configured to be Inactive during simulation.
 <br><br><img src="Images/Step2/Step12.png">
 
-13. From the Simulink Editor menu, select **Other Displays > Signals & Ports > Port Data Types** to display the port types for the black box.
+13. From the Simulink Toolstrip, select *Debug > Information Overlays > Alias Data Types** to display the port types for the black box.
 
 14. Compile the model (Ctrl-D) to ensure the port data types are up to date.
 <br><br>Notice that the black box port output type is `UFix_26_0`. This means it is unsigned, 26-bits wide, and has a binary point 0 positions to the left of the least significant bit.
@@ -209,8 +209,7 @@ Finished export RTL
 <br><br><img src="Images/Step3/Part2/Step1.png">
 
 2. Add a Vitis HLS block:
-    - Right-click anywhere on the canvas workspace.
-    - Select **Xilinx BlockAdd**.
+    - Left-click anywhere on the canvas workspace.
     - Type `Vitis HLS` in the Add block dialog box.
     - Select **Vitis HLS** as shown in the following figure.
 <br><br><img src="Images/Step3/Part2/Step2.png">
