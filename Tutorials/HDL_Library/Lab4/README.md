@@ -20,7 +20,7 @@ This lab has three primary parts:
 In this step you will review a design in which different parts of the design operate at different data rates and partition the design into subsystems to be implemented in different clock domains.
 
 1. Invoke Vitis Model Composer:
-    - On Windows systems select **Windows > Xilinx Design Tools > Vitis Model Composer 2021.2.**
+    - On Windows systems select **Windows > Xilinx Design Tools > Vitis Model Composer 2022.2.**
     - On Linux systems, type `model_composer` at the command prompt.
 
 2. Navigate to the Lab4 folder: <samp> \HDL_Library\Lab4. </samp>
@@ -40,7 +40,7 @@ In the following figure Sample Time Display is enabled with colors (right-click 
 5. The Vitis Model Composer environment automatically propagates the different data rates through the design.
 <br><br>When a multi-rate design such as this is implemented in hardware, the most optimal implementation is to use a clock at the same frequency as the data; however, the clock is abstracted away in this environment. The following methodology demonstrates how to create this ideal implementation in the most efficient manner.
 
-6. To efficiently implement a multi-rate (or multi-clock) design using Vitis Model Composer you should capture each part running at the same data rate (or clock frequency) in its own hierarchy with its own System Generator token. The separate hierarchies should then be linked with FIFOs.
+6. To efficiently implement a multi-rate (or multi-clock) design using Vitis Model Composer you should capture each part running at the same data rate (or clock frequency) in its own hierarchy. The separate hierarchies should then be linked with FIFOs.
 
 7. The current design has two obvious, and one less obvious, clock domains:
     - The gain control input POWER_SCALE could be configurable from a CPU and therefore can run at the same clock frequency as the CPU.
@@ -59,7 +59,7 @@ In the following figure Sample Time Display is enabled with colors (right-click 
 11. Select the components in the output path and create a subsystem named Gain Control.
 <img src="Images/Step1/Step11.png">
      
-12. Finally, select the Gateway In instance **POWER_SCALE** and **Constant** to create a new subsystem called CTRL. The final grouped design is shown in the following figure.
+12. Finally, select the Gateway In instance **POWER_SCALE** to create a new subsystem called CTRL. The final grouped design is shown in the following figure.
      
 13. When this design is complete, the logic within each subsystem will execute at different clock frequencies. The clock domains might not be synchronous with each other. There is presently nothing to prevent incorrect data being sampled between one subsystem and another subsystem.
 <br><br>In the next step you will create asynchronous channels between the different domains to ensure data will asynchronously and safely cross between the different clock domains when the design is implemented in hardware.     
