@@ -169,21 +169,19 @@ The first task is to define the coefficients of the new filter. For this task yo
 
 17. Click **OK** to exit the Hub Block.
 
-16. <p> Click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png"> to simulate the design and view the results, as shown in the following figure.
-<br> Because the new design is cycle and bit accurate, simulation might take longer to complete than before.</p>
-
+16. <p> Click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png"> to simulate the design and view the results, as shown in the following figure. Because the new design is cycle and bit accurate, simulation might take longer to complete than before.</p>
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step16.png">
 <br> The results are shown above, on the right hand side (in the Spectrum Analyzer HDL window), and differ slightly from the original design (shown on the left in the Spectrum Analyzer FDA Tool window). This is due to the quantization and sampling effect inherent when a continuous time system is described in discrete time hardware.
 <br>The final step is to implement this design in hardware. This process will synthesize everything contained between the Gateway In and Gateway Out blocks into a hardware description. This description of the design is output in the Verilog or VHDL Hardware Description Language (HDL). This process is controlled by the System Generator token.
 </ul>
 
-17. Double-click the **System Generator** token to open the Properties Editor.
+17. Double-click the **Vitis Model Composer Hub** block to open the Properties Editor.
 
-18. Select the **Compilation** tab to specify details on the device and design flow.
+18. You can click on **Hardware Selection** and choose a device. For now, use the default device.
 
-19. From the Compilation menu, select the IP catalog compilation target to ensure the output is in IP catalog format. The Part menu selects the FPGA device. For now, use the default device. Also, use the default Hardware description language, VHDL.
+19. Click on **Code Generation**, then clik on **HDL_filter** on the left. Make sure the **Compilation Type** is set to **IP Catalog**. This ensures the output is in IP Catalog format. Also, use the default Hardware description language, VHDL.
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step19.png"></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/IP_catalog_selection.png" width=400px; height=auto></ul>
 
 20. Click **Generate** to compile the design into hardware.
 <br>The compilation process transforms the design captured in Simulink blocks into an industry standard Register Transfer Level (RTL) design description. The RTL design can be synthesized into a hardware design. A Resource Analyzer window appears when the hardware design description has been generated.
