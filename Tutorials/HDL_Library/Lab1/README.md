@@ -255,7 +255,7 @@ In this step you will see how an FPGA can be used to create a more optimized ver
 
 10. In the Fixed-Point Precision section, replace 16 with ```num_bits``` and replace 14 with ```bin_pt```, as shown in the following figure.
 
-<ul><img src="Images/Step2/gateway_in_settings.png"></ul>
+<ul><img src="Images/Step2/gateway_in_settings.png" width=400px; height=auto></ul>
 
 11. Click **OK** to save and exit the Properties Editor. 
 <br> In the Vitis Model Composer Hub update the sampling frequency to 120 MHz (6 * 20 MHz) in this way:
@@ -268,7 +268,7 @@ In this step you will see how an FPGA can be used to create a more optimized ver
    
 > 📝 Note:  In order to see accurate results from the Resource Analyzer Window, it is recommended to specify a new target directory rather than use the current working directory.
 
-<ul><img src="Images/Step2/clock_settings_2.png"></ul>
+<ul><img src="Images/Step2/clock_settings_2.png" width=400px; height=auto></ul>
 
 12. Click **Generate** to compile the design into a hardware description.
 
