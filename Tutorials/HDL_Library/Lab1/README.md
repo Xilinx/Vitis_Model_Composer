@@ -195,8 +195,6 @@ The first task is to define the coefficients of the new filter. For this task yo
 
 22. Click **OK** to dismiss the Resource Analyzer window.
 
-23. Click **OK** to dismiss the System Generator token.
-
 The final step in the design process is to create the hardware and review the results.
 
 ### Review the Results
@@ -207,17 +205,17 @@ The output from design compilation process is written to the netlist directory. 
 <br><ul> This contains the RTL design description written in the industry standard VHDL format. This is provided for users experienced in hardware design who wish to view the detailed results. </ul>
 
 <samp>ip</samp>
-<br><ul> This directory contains the design IP, captured in Xilinx IP catalog format, which is used to transfer the design into the Xilinx Vivado. <em>Lab 5: Using AXI Interfaces and IP Integrator</em>, presented later in this document, explains in detail how to transfer your design IP into the Vivado for implementation in an FPGA
+<br><ul> This directory contains the design IP, captured in Xilinx IP catalog format, which is used to transfer the design into the Xilinx Vivado. <em>Lab 5: Using AXI Interfaces and IP Integrator</em>, presented later in this tutorial, explains in detail how to transfer your design IP into the Vivado for implementation in an FPGA
  </ul>
 
 <samp>ip_catalog</samp>
-<br><ul> This contains the RTL design description written in the industry standard VHDL format. This is provided for users experienced in hardware design who wish to view the detailed results. </ul>
+<br><ul> This directory contains an example Vivado project with the design IP already included. This project is provided only as a means of quick analysis. </ul>
 
 The previous Resource Analyzer: Lab1_1 figure shows the summary of resources used after the design is synthesized. You can also review the results in hardware by using the example Vivado project in the ip_catalog directory.
 
 >**Important: The Vivado project provided in the ip_catalog directory does not contain top-level I/O buffers. The results of synthesis provide a very good estimate of the final design results; however, the results from this project cannot be used to create the final FPGA.**
 
-When you have reviewed the results, exit the ```Lab1_1.slx``` Simulink worksheet.
+When you have reviewed the results, exit the ```Lab1_1.slx``` Simulink design.
 
 
 ## Step 2: Creating an Optimized Design in an FPGA
