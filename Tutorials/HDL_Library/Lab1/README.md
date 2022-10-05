@@ -103,7 +103,7 @@ The next part of the design process is to configure the HDL blocks.
 The first task is to define the coefficients of the new filter. For this task you will use the Xilinx block version of FDATool that you just added in step 8 above. 
 
 
-1. Double click on the block and review the existing Frequency and Magnitude specifications.
+1. Double click on the FDATool block and review the existing Frequency and Magnitude specifications.
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step2.png"></ul>
 
 2. Change the filter specifications to match the following values:
@@ -128,22 +128,23 @@ The first task is to define the coefficients of the new filter. For this task yo
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step7.png" width=400px; height=auto></ul>
 
 6. Click **OK** to exit the Digital FIR Filter Properties Editor.
-<br>In an FPGA, the design operates at a specific clock rate and using a specific number of bits to represent the data values.
+
+<br><br>In an FPGA, the design operates at a specific clock rate and using a specific number of bits to represent the data values.
 <br><br>The transition between the continuous time used in the standard Simulink environment and the discrete time of the FPGA hardware environment is determined by defining the sample rate of the Gateway In blocks. This determines how often the continuous input waveform is sampled. This sample rate is automatically propagated to other blocks in the design by Vitis Model Composer. In a similar manner, the number of bits used to represent the data is defined in the Gateway In block and also propagated through the system.
 <br><br>Although not used in this tutorial, some HDL blocks enable rate changes and bit-width changes, up or down, as part of this automatic propagation. More details on these blocks are found in the *Vitis Model Composer User Guide* ([UG1483](https://docs.xilinx.com/r/2021.2-English/ug1483-model-composer-sys-gen-user-guide/Revision-History)).
 <br><br>Both of these attributes (rate and bit width) determine the degree of accuracy with which the continuous time signal is represented. Both of these attributes also have an impact on the size, performance, and hence cost of the final hardware.
 <br><br>Vitis Model Composer allows you to use the Simulink environment to define, simulate, and review the impact of these attributes.
 
-9. Double-click the **Gateway In** block to open the Properties Editor.
+7. Double-click the **Gateway In** block to open the Properties Editor.
 <br>Because the highest frequency sine wave in the design is 9 MHz, sampling theory dictates the sampling frequency of the input port must be at least 18 MHz. For this design, you will use 20 MHz.
 
-10. At the bottom of the Properties Editor, set the Sample Period to 1/20e6.
+8. At the bottom of the Properties Editor, set the Sample Period to 1/20e6.
 
-11. For now, leave the bit width as the default fixed-point 2’s complement 16-bits with 14-bits representing the data below the binary point. This allows us to express a range of -2.0 to 1.999, which exceeds the range required for the summation of the sine waves (both of amplitude 1).
+9. For now, leave the bit width as the default fixed-point 2’s complement 16-bits with 14-bits representing the data below the binary point. This allows us to express a range of -2.0 to 1.999, which fits the range required for the summation of the sine waves (both of amplitude 1).
 
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step11.png" width=400px; height=auto></ul>
 
-12. Click **OK** to close the Gateway In Properties Editor.
+10. Click **OK** to close the Gateway In Properties Editor.
 <br>This now allows us to use accurate sample rate and bit-widths to accurately verify the hardware.
 
 13. Create a subsystem that inlcudes the Gateway blocks and the Digital FIR Filter. Call the subsystem, HDL_filter. 
