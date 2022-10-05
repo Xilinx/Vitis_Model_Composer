@@ -162,8 +162,8 @@ The first task is to define the coefficients of the new filter. For this task yo
 <ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=400px; height=auto></ul>
 
 16. Select the HDL Analysis tab:
-	- Select **Post Synthesis** for the Perform Analysis secltion.
-	- Select **Resource** for the Analyzer Type selectin. This option gives the resource utilization details after completion.
+	- For the Perform Analysis selection select **Post Synthesis** .
+	- For the Analyzer Type selection select **Resource**. This option gives the resource utilization details after completion.
 
 <ul><img src="Images/Step1/Configure_HDL_Blocks/hdl_analysis.png" width=400px; height=auto></ul>
 
