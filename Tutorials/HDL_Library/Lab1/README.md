@@ -63,7 +63,7 @@ In this step, you learn the basic operation of Vitis Model Composer and how to s
 
 <ul><img src="Images/Step1/Creating_a_Design_in_FPGA/Step5.png"></ul>
 
-6. Expand the **Xilinx Toolbox > HDL** menu, select **DSP**, **AXI-S** then select **Digital FIR Filter.**
+6. Expand the **Xilinx Toolbox > HDL** menu, select **DSP**, **Non AXI-S** then select **Digital FIR Filter.**
 
 7. Right-click the **Digital FIR Filter** block and select **Add block to model Lab1_1**
 
@@ -100,21 +100,13 @@ The next part of the design process is to configure the HDL blocks.
 
 ### Configure the HDL Blocks
 
-The first task is to define the coefficients of the new filter. For this task you will use the Xilinx block version of FDATool. If you open the existing FDATool block, you can review the existing Frequency and Magnitude specifications.
+The first task is to define the coefficients of the new filter. For this task you will use the Xilinx block version of FDATool that you just added in step 8 above. 
 
 
-1. Double-click the **Digital Filter Design** instance to open the Properties Editor.
-<br>This allows you to review the properties of the existing filter.
-
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step1.png"></ul>
-
-2. Close the Properties Editor for the Digital Filter Design instance.
-
-3. Double-click the **FDATool** instance to open the Properties Editor.
-
+1. Double click on the block and review the existing Frequency and Magnitude specifications.
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step2.png"></ul>
 
-4. Change the filter specifications to match the following values:
+2. Change the filter specifications to match the following values:
    - Frequency Specifications
       - Units = MHz
       - Fs = 20
@@ -124,16 +116,18 @@ The first task is to define the coefficients of the new filter. For this task yo
       - Units = dB
       - Apass = 0.01
       - Astop = 100
-5. Click the **Design Filter** button at the bottom and close the Properties Editor.
-<br> Now, associate the filter parameters of the FDATool instance with the Digital FIR Filter instance.
 
-6. Double-click the **Digital FIR Filter** instance to open the Properties Editor.
+3. Click the **Design Filter** button at the bottom. Your filter should look like below. Close the Properties Editor.
 
-7. In the Filter Parameters section, replace the existing coefficients (Coefficient Vector) with ```xlfda_numerator('FDATool')``` to use the coefficients defined by the FDATool instance.
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step1.png"></ul>
+
+4. Double-click the **Digital FIR Filter** instance to open the Properties Editor.
+
+5. In the Filter Parameters section, replace the existing coefficients (Coefficient Vector) with ```xlfda_numerator('FDATool')``` to use the coefficients defined by the FDATool instance.
 
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step7.png" width=400px; height=auto></ul>
 
-8. Click **OK** to exit the Digital FIR Filter Properties Editor.
+6. Click **OK** to exit the Digital FIR Filter Properties Editor.
 <br>In an FPGA, the design operates at a specific clock rate and using a specific number of bits to represent the data values.
 <br><br>The transition between the continuous time used in the standard Simulink environment and the discrete time of the FPGA hardware environment is determined by defining the sample rate of the Gateway In blocks. This determines how often the continuous input waveform is sampled. This sample rate is automatically propagated to other blocks in the design by Vitis Model Composer. In a similar manner, the number of bits used to represent the data is defined in the Gateway In block and also propagated through the system.
 <br><br>Although not used in this tutorial, some HDL blocks enable rate changes and bit-width changes, up or down, as part of this automatic propagation. More details on these blocks are found in the *Vitis Model Composer User Guide* ([UG1483](https://docs.xilinx.com/r/2021.2-English/ug1483-model-composer-sys-gen-user-guide/Revision-History)).
