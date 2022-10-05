@@ -123,7 +123,7 @@ The first task is to define the coefficients of the new filter. For this task yo
 
 4. Double-click the **Digital FIR Filter** instance to open the Properties Editor.
 
-5. In the Filter Parameters section, replace the existing coefficients (Coefficient Vector) with ```xlfda_numerator('FDATool')``` to use the coefficients defined by the FDATool instance.
+5. In the Filter Parameters section, replace the existing coefficients (Coefficient Vector) with ```xlfda_numerator( [bdroot, '/FDATool']))``` to use the coefficients defined by the FDATool instance that is at the top level in the model (and hence the reason to use the MATLAB 'bdroot' command).
 
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step7.png" width=400px; height=auto></ul>
 
@@ -229,15 +229,15 @@ In this step you will see how an FPGA can be used to create a more optimized ver
 3. Double-click the Vitis Model Composer Hub to open the Properties Editor.
 
 <ul> As noted in Step 1, the design requires a minimum sample frequency of 18 MHz and it is currently set to 20 MHz (a 50 ns FPGA clock period). <br>
-  <br><img src="Images/Step2/Step3.png"> <br>
+  <br><ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=400px; height=auto></ul> <br>
   <br>The frequency at which an FPGA device can be clocked easily exceeds 20 MHz. Running the FPGA at a much higher clock frequency will allow Vitis Model Composer to use the same hardware resources to compute multiple intermediate results.
 </ul>
 
 4. Double-click the **FDATool** instance to open the Properties Editor.
 
 5. Click the **Filter Coefficients** button <img src = "Images/Step2/filter_coefficient_button.png"> to view the filter coefficients
-<ul><img src="Images/Step2/Step3.png"><br>
-<br>This shows the filter uses 11 symmetrical coefficients. This requires a minimum of six multiplications. This is indeed what is shown at the end of the HDL Blocks section where the final hardware is using six DSP48 components, the FPGA resource used to perform a multiplication.
+<ul><img src="Images/Step2/Step5.png"><br>
+<br>This shows the filter uses 11 symmetrical coefficients. This requires a minimum of six multiplications. This is indeed what is shown at the end of the previous section where the final hardware is using six DSP48 components. DSP48 is the FPGA resource used to perform a multiplication.
 <br>The current design samples the input at a rate of 20 MHz. If the input is sampled at 6 times the current frequency, it is possible to perform all calculations using a single multiplier.
 </ul>
 
@@ -251,21 +251,24 @@ In this step you will see how an FPGA can be used to create a more optimized ver
 
 <ul><img src="Images/Step2/Step8.png"></ul>
 
-9. In design Lab1_2, double-click the **Gateway In** block to open the Properties Editor.
+9. In design Lab1_2, double-click the HDL_filter subssytem, and then double click the **Gateway In** block to open the Properties Editor.
 
 10. In the Fixed-Point Precision section, replace 16 with ```num_bits``` and replace 14 with ```bin_pt```, as shown in the following figure.
 
-<ul><img src="Images/Step2/Step10.png"></ul>
+<ul><img src="Images/Step2/gateway_settings_in.png"></ul>
 
 11. Click **OK** to save and exit the Properties Editor. 
-<br> In the System Generator token update the sampling frequency to 120 MHz (6 * 20 MHz) in this way: 
+<br> In the Vitis Model Composer Hub update the sampling frequency to 120 MHz (6 * 20 MHz) in this way:
+	 - Click on Code Generation, on the right side of the window click on HDL_filter.
+	 - Select the HDL Clock Settings tab. 
 	 - Specify an FPGA clock period of 8.33 ns (1/120 MHz).
-  	 - Specify a Simulink system period of 1/120e6 seconds. 
+  	 - Specify a Simulink system period of 1/120e6 seconds.
+	 - Select the HDL Analysis Settings tab.
 	 - From the Perform analysis menu, select <b>Post Synthesis</b> and from Analyzer type menu, select <b>Resource</b> as shown in the following figure. This option gives the resource utilization details after completion. 
    
-> 📝 Note:  In order to see accurate results from the Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.
+> 📝 Note:  In order to see accurate results from the Resource Analyzer Window, it is recommended to specify a new target directory rather than use the current working directory.
 
-<ul><img src="Images/Step2/Step11.png"></ul>
+<ul><img src="Images/Step2/Clock_settings_2.png"></ul>
 
 12. Click **Generate** to compile the design into a hardware description.
 
