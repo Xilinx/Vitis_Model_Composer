@@ -151,17 +151,23 @@ The first task is to define the coefficients of the new filter. For this task yo
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-1.png" width=400px; height=auto></ul>
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-2.png" width=400px; height=auto></ul>
 
-14. Double-click the **Vitis Model Composer Hub** token to open the Properties Editor.
+14. Double-click the **Vitis Model Composer Hub** token to open the Properties Editor. Click on the "Code Generation" icon on the top and then highlight the HDL_filter subsystem on the left. 
+<ul><img src="Images/Step1/Configure_HDL_Blocks/hub_block_hdl_filter.png" width=400px; height=auto></ul>
+
 <br>Because the input port is sampled at 20 MHz to adequately represent the data, you must define the clock rate of the FPGA and the Simulink sample period to be at least 20 MHz.
 
-14. Select the Clocking tab.
+15. Select the HDL Clock Settings tab:
 	 - Specify an FPGA clock period of 50 ns (1/20 MHz).
 	 - Specify a Simulink system period of 1/20e6 seconds.
-	 - From the Perform analysis menu, select **Post Synthesis** and from the Analyzer type menu select **Resource** as shown in the following figure. This option gives the resource utilization details after completion.
+<ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=400px; height=auto></ul>
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step14.png"></ul>
+16. Select the HDL Analysis tab:
+	- Select **Post Synthesis** for the Perform Analysis secltion.
+	- Select **Resource** for the Analyzer Type selectin. This option gives the resource utilization details after completion.
 
-15. Click **OK** to exit the System Generator token.
+<ul><img src="Images/Step1/Configure_HDL_Blocks/hdl_analysis.png" width=400px; height=auto></ul>
+
+17. Click **OK** to exit the Hub Block.
 
 16. <p> Click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png"> to simulate the design and view the results, as shown in the following figure.
 <br> Because the new design is cycle and bit accurate, simulation might take longer to complete than before.</p>
