@@ -220,13 +220,13 @@ When you have reviewed the results, exit the ```Lab1_1.slx``` Simulink design.
 
 ## Step 2: Creating an Optimized Design in an FPGA
 
-In this step you will see how an FPGA can be used to create a more optimized version of the same design used in Step 1, by oversampling. You will also learn about using workspace variables.
+In this step you will see how an FPGA can be used to create a more optimized version of the design in Step 1, by oversampling. You will also learn about using workspace variables.
 
 1. At the command prompt, type ```open Lab1_2.slx.```
 
-2. From your Simulink project worksheet, select Simulation > Run or click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png"> to confirm this is the same design used in Step 1: Creating a Design in an FPGA.
+2. From your Simulink project worksheet, select Simulation > Run or click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png">.
 
-3. Double-click the System Generator token to open the Properties Editor.
+3. Double-click the Vitis Model Composer Hub to open the Properties Editor.
 
 <ul> As noted in Step 1, the design requires a minimum sample frequency of 18 MHz and it is currently set to 20 MHz (a 50 ns FPGA clock period). <br>
   <br><img src="Images/Step2/Step3.png"> <br>
