@@ -334,7 +334,7 @@ This shows the same specifications as the previous steps in Lab 1 and confirms t
 <br><br><img src = "Images/Step3/dsp_instructions.png" width=400px; height=auto><br><br>
    - In the Pipeline Options tab, use the Pipeline Options drop-down menu to select **By_Tier.**
    - Select **Tier 3** and **Tier 5**. This will ensure registers are used at the inputs to A and B and between the multiply and accumulate operations. 
-<br><br><img src = "Images/Step3/dsp_pipieline.png" width=400px; height=auto><br><br> 
+<br><br><img src = "Images/Step3/dsp_pipeline.png" width=400px; height=auto><br><br> 
    - Click **OK** to exit the Properties Editor.
 
 9. Click **Save** to save the design.
