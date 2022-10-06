@@ -303,8 +303,8 @@ This discrete filter operates in this way:<br>
    - Expand the Xilinx Blockset menu.
    - As shown in the following figure, select the **Sources** section in the HDL library, then right-click **Counter** to add this component to the design.
 <br><br><img src = "Images/Step3/Step2.png"><br><br>
-   - Select the **Memory** section (shown at the bottom left in the figure above) and add a ROM to the design.
-   - Finally, select the **DSP** section and add a DSP Macro 1.0 to the design.
+   - Select the **Memory** section and then **Non AXI-S** (shown at the bottom left in the figure above) and add a ROM to the design.
+   - Finally, select the **DSP** section and then **Non AXI-S** and add a DSP Macro 1.0 to the design.
 
 3. Connect the three new instances to the rest of the design as shown in the following figure:
 <br><br><img src = "Images/Step3/Step3.png"><br><br>
@@ -317,24 +317,24 @@ This shows the same specifications as the previous steps in Lab 1 and confirms t
 5. Close the FDATool Properties Editor.
 
 6. Double-click the **Counter** instance to open the Properties Editor.
-   - For the Counter type, select **Count limited** and enter this value for **Count to value:** `length(xlfda_numerator('FDATool'))-1` <br>This will ensure the counter counts from 0 to 10 (11 coefficient and data addresses).
+   - For the Counter type, select **Count limited** and enter this value for **Count to value:** `length(xlfda_numerator([bdroot '/FDATool']))-1` <br>This will ensure the counter counts from 0 to 10 (11 coefficient and data addresses).
    - For Output type, leave default value at Unsigned and in Number of Bits enter the value 4. Only 4 binary address bits are required to count to 11.
    - For the Explicit period, enter the value `1/(11*20e6)` to ensure the sample period is 11 times the input data rate. The filter must perform 11 calculations for each input sample.
-<br><br><img src = "Images/Step3/Step6.png"><br><br>
+<br><br><img src = "Images/Step3/counter.png"  width=400px; height=auto><br><br>
    - Click **OK** to exit the Properties Editor.
  
 7. Double-click the **ROM** instance to open the Properties Editor.
-   - For the Depth, enter the value `length(xlfda_numerator('FDATool'))`. This will ensure the ROM has 11 elements.
-   - For the Initial value vector, enter `xlfda_numerator('FDATool')`. The coefficient values will be provided by the FDATool instance. 
-<br><br><img src = "Images/Step3/Step7.png"><br><br> 
+   - For the Depth, enter the value `length(xlfda_numerator([bdroot '/FDATool']))`. This will ensure the ROM has 11 elements.
+   - For the Initial value vector, enter `xlfda_numerator([bdroot '/FDATool'])`. The coefficient values will be provided by the FDATool instance. 
+<br><br><img src = "Images/Step3/ROM.png" width=400px; height=auto><br><br> 
    - Click **OK** to exit the Properties Editor.
 
 8. Double-click the **DSP Macro 1.0** instance to open the Properties Editor.
    - In the Instructions tab, replace the existing Instructions with `A*B+P` and then add `A*B`. When the `sel` input is false the DSP will multiply and accumulate. When the `sel` input is true the DSP will simply multiply. 
-<br><br><img src = "Images/Step3/Step8a.png"><br><br>
+<br><br><img src = "Images/Step3/dsp_instructions.png" width=400px; height=auto><br><br>
    - In the Pipeline Options tab, use the Pipeline Options drop-down menu to select **By_Tier.**
    - Select **Tier 3** and **Tier 5**. This will ensure registers are used at the inputs to A and B and between the multiply and accumulate operations. 
-<br><br><img src = "Images/Step3/Step8c.png"><br><br> 
+<br><br><img src = "Images/Step3/dsp_pipieline.png" width=400px; height=auto><br><br> 
    - Click **OK** to exit the Properties Editor.
 
 9. Click **Save** to save the design.
