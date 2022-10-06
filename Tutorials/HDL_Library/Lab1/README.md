@@ -290,7 +290,7 @@ In this step you will see how Vitis Model Composer can be used to build a design
 
 1. At the command prompt, type open `Lab1_3.slx.`
 <br><br>This opens the Simulink design shown in the following figure. This design is similar to the one in the previous two steps. However, this time the filter is designed with discrete components and is only partially complete. As part of this step, you will complete this design and learn how to add and configure discrete parts. <br>
-<br><br><img src = "Images/Step3/Step1.png"><br>
+<br><br><img src = "Images/Step3/lab1_3.png"><br>
 This discrete filter operates in this way:<br>
    - Samples arrive through port In and after a delay stored in a shift register (instance ASR)
    - A ROM is required for the filter coefficients.
