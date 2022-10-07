@@ -440,7 +440,7 @@ In this part you will re-implement the design from Part 1: Designing with Floati
 MyCoeffs = xlfda_numerator('FDATool')
 ```
 
-3. Double-click the instance Gateway In2 to confirm the data is being sampled as 16-bit fixed-point value.
+3. Double-click the instance Gateway In2 under the FIR-Fixed-Point subsystem to confirm the data is being sampled as 16-bit fixed-point value.
 
 4. Click Cancel to exit the Properties Editor.
 
@@ -453,9 +453,9 @@ MyCoeffs = xlfda_numerator('FDATool')
 Taking into account the positive and negative values of the coefficients the maximum gain possible is 1.2070 and the output signal should only ever be slightly smaller in magnitude than the input signal, which is a 16-bit signal. There is no need to have 15 bits (43-28) of data above the binary point.
 <br><br>You will now use the Reinterpret and Convert blocks to manipulate the fixed-point data to be no greater than the width required for an accurate result and produce the most hardware efficient design.
 
-7. Right-click with the mouse anywhere in the canvas and select **Xilinx BlockAdd**.
+7. Double-click with the mouse anywhere in the canvas.
 
-8. In the Add Block entry box, type `Reinterpret`.
+8. In the edit field, type `Reinterpret`.
 
 9. Double-click the **Reinterpret** component to add it to the design.
 
