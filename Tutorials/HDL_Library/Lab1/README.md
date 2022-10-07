@@ -420,7 +420,7 @@ The final step is to synthesize this design into hardware.
 <br><br><img src = "Images/Step4/Part1/Step13.png"><br><br>
 
 14. Click **OK** to dismiss the Compilation status dialog box.
-15. Click **OK** to dismiss the System Generator token.<br>
+15. Click **OK** to dismiss the Vitis Model Composer Hub.<br>
 <br>You implemented this same filter in Step 1 using fixed-point data types. When compared to the synthesis results from that implementation – the initial results from this step are shown in the following figure and you can see this current version of the design is using a large amount of registers (FF), BRAMs, LUTs, and DSP resources (Xilinx dedicated multiplier/add units).
 <br><br><img src = "Images/Step4/Part1/Step15.png"><br><br>
 Maintaining the full accuracy of floating-point types is an ideal implementation but implementing full floating-point accuracy requires a significant amount of hardware.
