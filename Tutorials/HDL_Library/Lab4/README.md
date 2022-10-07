@@ -167,27 +167,40 @@ In this step you will specify a different clock domain for each subsystem.
 > 📝 **Note**: There are now separate tabs (Clock1, Clock2, Clock3) to set the different clocks in the design. Each of these clocks will be associated with one of the subsystems (CTRL, Gain Control, DDC) in the design).
 
 You will specify a new clock rate for the CTRL block. This block will be clocked at 100 MHz and accessed using an AXI4-Lite interface.
+
 5. Select the Clock1 tab.
+
 6. Select the Subsystem "Lab4/HDL_DUT/CTRL".
+
 7. Set the FPGA clock period to 1e9/100e6.
+
 8. Set the Simulink system period to 1/100e6.
 <br><br><img src="Images/Step3/Step8.png">
 
 The DDC block uses the same clock frequency as the original design, 491 MHz, because this is the rate of the incoming data.
+
 9. Select the Clock2 tab.
+
 10. Select the Subsystem "Lab4/HDL_DUTDDC".
+
 11. Set the FPGA clock period to 1e9/491.52e6.
+
 12. Set the Simulink system period to 1/491.52e6.
 <br><br><img src="Images/Step3/Step12.png">
 
 You will now specify a new clock rate for the Gain Control block. The Gain Control block will be clocked at the same rate as the output from the DDC, 61.44 MHz.
+
 13. Select the Clock3 tab.
+
 14. Select the Subsystem "Lab4/HDL_DUT/Gain Control".
+
 15. Set the FPGA clock period to 1e9/61.44e6.
+
 16. Set the Simulink system period to 1/61.44e6.
 <br><br><img src="Images/Step3/Step16.png">
 
 17. Click Apply and OK to close the Model Composer Hub.
+
 18. Double-click the HDL DUT block and then the CTRL block to navigate into the subsystem.
 
 19. Double-click the Gateway In instance **POWER_SCALE** to open the Properties Editor.
