@@ -72,19 +72,17 @@ There are two data paths in the design where FIFOs are required:
  * Data from CTRL to Gain Control.
  * Data from DDC to Gain Control.
 
-1. Right-click anywhere in the canvas and select **Xilinx BlockAdd**.
+1. Left-click anywhere in the canvas and type `FIFO`.
 
-2. Type `FIFO` in the Add Block dialog box.
+2. Select FIFO from the menu to add a FIFO to the design.
 
-3. Select FIFO from the menu to add a FIFO to the design.
-
-4. Connect the data path through instance FIFO. Delete any existing connections to complete this task.
+3. Connect the data path through instance FIFO. Delete any existing connections to complete this task.
     - Connect `CTRL/Out1` to `FIFO/din`.
     - Connect `FIFO/dout` to `Gain Control/In1`.
 
-5. Make a copy of the FIFO instance (using Ctrl-C and Ctrl-V to copy and paste).
+4. Make a copy of the FIFO instance (right-click and drag to copy and paste).
 
-6. Connect the data path through instance FIFO1. Delete any existing connections to complete this task.
+5. Connect the data path through instance FIFO1. Delete any existing connections to complete this task.
     - Connect `DDC/Out2` to `FIFO1/din`.
     - Connect `FIFO1/dout` to `Gain Control/In3`.
 <br><br>You have now connected the data between the different domains and have the design shown in the following figure.
@@ -95,63 +93,63 @@ There are two data paths in the design where FIFOs are required:
     - The Gain Control must generate a read enable for both FIFOs. You will use the empty signal from the FIFOs and invert it; if there is data available, this block will read it.
 
 
-7. Double-click the **CTRL** block to open the subsystem.
+6. Double-click the **CTRL** block to open the subsystem.
 
-8. Right-click in the canvas and use **Xilinx BlockAdd** to add these blocks:
-    - Delay (Xilinx)
-    - Relational
+7. Left-click in the canvas and type to add these blocks:
+    - Delay (Xilinx Toolbox/HDL)
+    - Relational (Xilinx Toolbox/HDL)
 
-9. Select instance Out1 and make a copy (use Ctrl-C and Ctrl-V to cut and paste).
+8. Select instance Out1 and make a copy (right-click and drag to copy and paste).
 
-10. Double-click the **Relational** block to open the Properties Editor.
+9. Double-click the **Relational** block to open the Properties Editor.
 
-11. Use the Comparison drop-down menu to select **a!=b** and click **OK**.
+10. Use the Comparison drop-down menu to select **a!=b** and click **OK**.
 
-12. Connect the blocks as shown in the following figure.
-<br><br><img src="Images/Step2/Step12.png">
+11. Connect the blocks as shown in the following figure.
+<br><br><img src="Images/Step2/Step11.png">
 <br><br>This will create an output strobe on Out2 which will be active for one cycle when the input changes, and be used as the write-enable from CTRL to the Gain Control (the FIFO block at the top level).
 
-13. Click the Up to Parent toolbar button <img width="18" height="18" src="../Images/Buttons/upToParent.png"> to return to the top level.
+12. Click the Up to Parent toolbar button to return to the top level.
 
-14. Double-click the instance Gain Control to open the subsystem.
+13. Double-click the instance Gain Control to open the subsystem.
 
-15. Right-click in the canvas and use Xilinx BlockAdd to add these blocks:
-    - Inverter
+14. Left-click the canvas and type to add these blocks:
+    - Inverter (Xillinx Toolbox/HDL)
     - Inverter (for a total of two inverters)
-    - Delay (Xilinx)
+    - Delay (Xilinx Toolbox/HDL)
 
-16. Select the instance Out1 and make a copy `Out3` (use Ctrl-C and Ctrl-V to cut and paste).
+15. Select the instance Out1 and make a copy `Out3` (right-click and drag to copy and paste).
     - Rename Out3 to `DDC_Read`
 
-17. Select instance Out1 and make a copy `Out3` (use Ctrl-C and Ctrl-V to cut and paste).
+16. Select instance Out1 and make a copy `Out3` (right-click and drag to copy and paste).
     - Rename Out3 to `CTRL_Read`
 
-18. Select instance In1 and make a copy `In4` (use Ctrl-C and Ctrl-V to cut and paste).
+17. Select instance In1 and make a copy `In4` (right-click and drag to copy and paste).
     - Rename In4 to `CTRL_Empty`
 
-19. Connect the blocks as shown in the following figure
-<br><br><img src="Images/Step2/Step19.png"><br><br>
+18. Connect the blocks as shown in the following figure
+<br><br><img src="Images/Step2/Step18.png"><br><br>
     - The FIFO empty signal from the top-level Gain Control FIFO (FIFO) block is simply an inverter block used to create a read-enable for the top-level DDC FIFO (FIFO1). If the FIFO is not empty, the data will be read.
     - Similarly, the FIFO empty signal from the top-level DDC FIFO (FIFO1) is inverted to create a FIFO read-enable.
     - This same signal will be used as the new `data_tvalid` (which was In2). However, because the FIFO has a latency of 1, this signal must be delayed to ensure this control signal is correctly aligned with the data (which is now delayed by 1 through the FIFO).
 
-20. Use the Up to Parent toolbar button <img width="18" height="18" src="../Images/Buttons/upToParent.png"> to return to the top level.
+19. Use the Up to Parent toolbar button to return to the top level.
 <br><br>This shows the control signals are now present at the top level.
 <br><br><img src="Images/Step2/Step20.png">
 <br><br>You will now complete the final connections.
 
-21. Connect the control path through instance FIFO. Delete any existing connections to complete this task.
+20. Connect the control path through instance FIFO. Delete any existing connections to complete this task.
     - Connect `CTRL/Out2` to `FIFO/we`.
     - Connect `FIFO/empty` to `Gain Control/CTRL_Empty`.
     - Connect `Gain Control/CTRL_Read` to `FIFO/re`.
 
-22. Connect the control path through instance FIFO1. Delete any existing connections to complete this task.
+21. Connect the control path through instance FIFO1. Delete any existing connections to complete this task.
     - Connect `DDC/Out1` to `FIFO1/we`.
     - Connect `FIFO1/empty` to `Gain Control/In2`.
     - Connect` Gain Control/DDC_Read` to `FIFO1/re`.
 <br><br><img src="Images/Step2/Step22.png">
 
-23. Click the Run simulation button to simulate the design and confirm the correct operation – you will see the same results as Step 1 action 4.
+22. Click the Run simulation button to simulate the design and confirm the correct operation – you will see the same results as Step 1 action 4.
 
 In the next step, you will learn how to specify different clock domains are associated with each hierarchy.
 
