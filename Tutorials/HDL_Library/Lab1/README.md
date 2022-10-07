@@ -401,7 +401,7 @@ MyCoeffs = xlfda_numerator('FDATool')
 6. Return to the top-level design using the toolbar button Up To Parent , or click the tab labeled Lab1_4_1.<br>
 <br>The design is summing two sine waves, both of which are 9 MHz. The input gateway to the Vitis Model Composer must therefore sample at a rate of at least 18 MHz.
 
-7. Double-click the **Gateway In1** instance to open the Properties Editor and confirm the input is sampling the data at a rate of 20 MHz (a Sample period of 1/20e6).
+7. Double-click the FIR subsystem and then the **Gateway In1** instance to open the Properties Editor and confirm the input is sampling the data at a rate of 20 MHz (a Sample period of 1/20e6).
 
 8. Close the Gateway In Properties editor.
 
@@ -410,11 +410,11 @@ MyCoeffs = xlfda_numerator('FDATool')
 <br><br><img src = "Images/Step4/Part1/Step9.png"><br><br>
 The final step is to synthesize this design into hardware.
 
-10. Double-click the **System Generator** token to open the Properties Editor.
+10. Double-click the **Vitis Model Composer Hub** block to open the Properties Editor. Click on the FIR subsystem on the left.
 
-11. On the Compilation tab, make sure the Compilation target is IP Catalog.
+11. On the _HDL Settings_ tab, make sure the _Compilation Type_ is IP Catalog.
 
-12. On the Clocking tab, under Perform analysis select **Post Synthesis** and from the Analyzer type menu select **Resource**. This option gives the resource utilization details after completion.
+12. On the HDL Analysis tab, under _Perform Analysis_ select **Post Synthesis** and from the _Analyzer Type_ menu select **Resource**. This option gives the resource utilization details after completion.
 
 13. Click **Generate** to compile the design into a hardware description. After completion, it generates the resource utilization in Resource Analyzer window as shown in the following figure.
 <br><br><img src = "Images/Step4/Part1/Step13.png"><br><br>
