@@ -157,111 +157,65 @@ In the next step, you will learn how to specify different clock domains are asso
 
 In this step you will specify a different clock domain for each subsystem.
 
-1. Double-click the System Generator token to open the Properties Editor.
+1. Double-click the Model Composer Hub block.
 
-2. Select the **Clocking** tab.
+2. Select the **HDL Clock Settings** tab.
 
-3. Click **Enable multiple clocks**
+3. Click **Enable multiple clocks**.
+4. Change "Number of clocks" to 3.
 
-> 📝 **Note**: The FPGA clock period and the Simulink system period are now greyed out. This option informs Vitis Model Composer that clock rate will be specified separately for each hierarchy. It is therefore important the top level contains only subsystems and FIFOs; no other logic should be present at the top level in a multi-rate design.
+> 📝 **Note**: There are now separate tabs (Clock1, Clock2, Clock3) to set the different clocks in the design. Each of these clocks will be associated with one of the subsystems (CTRL, Gain Control, DDC) in the design).
 
-<ul><img src="Images/Step3/Step3.jfif"></ul>
+You will specify a new clock rate for the CTRL block. This block will be clocked at 100 MHz and accessed using an AXI4-Lite interface.
+5. Select the Clock1 tab.
+6. Select the Subsystem "Lab4/HDL_DUT/CTRL".
+7. Set the FPGA clock period to 1e9/100e6.
+8. Set the Simulink system period to 1/100e6.
+<br><br><img src="Images/Step3/Step8.png">
 
-4. Click **OK** to close the Properties Editor.
-<br><br>You will now specify a new clock rate for the CTRL block. The CTRL block will be driven from a CPU which executes at 100 MHz.
+The DDC block uses the same clock frequency as the original design, 491 MHz, because this is the rate of the incoming data.
+9. Select the Clock2 tab.
+10. Select the Subsystem "Lab4/HDL_DUTDDC".
+11. Set the FPGA clock period to 1e9/491.52e6.
+12. Set the Simulink system period to 1/491.52e6.
+<br><br><img src="Images/Step3/Step12.png">
 
-5. Select the **System Generator** token.
+You will now specify a new clock rate for the Gain Control block. The Gain Control block will be clocked at the same rate as the output from the DDC, 61.44 MHz.
+13. Select the Clock3 tab.
+14. Select the Subsystem "Lab4/HDL_DUT/Gain Control".
+15. Set the FPGA clock period to 1e9/61.44e6.
+16. Set the Simulink system period to 1/61.44e6.
+<br><br><img src="Images/Step3/Step16.png">
 
-6. Press the Ctrl+C key or right-click to copy the token.
-<br><br>You will specify a new clock rate for the CTRL block. This block will be clocked at 100 MHz and accessed using an AXI4-Lite interface.
+17. Click Apply and OK to close the Model Composer Hub.
+18. Double-click the HDL DUT block and then the CTRL block to navigate into the subsystem.
 
-7. Double-click the **CTRL** block to navigate into the subsystem.
+19. Double-click the Gateway In instance **POWER_SCALE** to open the Properties Editor.
 
-8. Press the Ctrl+V key or right-click to paste a System Generator token into CTRL.
-
-9. Double-click the **System Generator** token to open the Properties Editor.
-
-10. Select the **Clocking** tab.
-
-11. Deselect **Enable multiple clocks** (this was inherited when the token was copied).
-
-12. Change the FPGA clock period to 1e9/100e6.
-
-13. Change the Simulink system period to 1/100e6.
-<br><br><img src="Images/Step3/Step13.png">
-
-14. Click **OK** to close the Properties Editor.
-
-15. Double-click the Gateway In instance **POWER_SCALE** to open the Properties Editor.
-
-16. Change the Sample period to 1/100e6 to match the new frequency of this block.
+20. Change the Sample period to 1/100e6 to match the new frequency of this block.
 <br><br>In the Implementation tab, note that the Interface is set to AXI4-Lite. This will ensure this port is implemented as a register in an AXI4-Lite interface.
 
-17. Click **OK** to close the Properties Editor.
+21. Save the design.
 
-18. Select and copy the System Generator token.
-
-19. Click the **Up to Parent** toolbar button to return to the top level.
-<br><br>You will now specify a new clock rate for the Gain Control block. The Gain Control block will be clocked at the same rate as the output from the DDC, 61.44 MHz.
-
-20. Double-click the **Gain Control** block to navigate into the subsystem.
-
-21. Press the Ctrl+V key or right-click to paste a System Generator token into Gain Control.
-
-22. Double-click the **System Generator** token to open the Properties Editor.
-
-23. Select the **Clocking** tab.
-
-24. Change the FPGA clock period to 1e9/61.44e6.
-
-25. Change the Simulink system period to 1/61.44e6.
-<br><br><img src="Images/Step3/Step25.png">
-
-26. Click **OK** to close the Properties Editor.
-<br><br>Note that the output signals are prefixed with `M_AXI_DATA_`. This will ensure that each port will be implemented as an AXI4 interface, because the suffix for both signals is a valid AXI4 signal name (`tvalid` and `tdata`).
-
-27. Click the **Up to Parent** toolbar button to return to the top level.
-<br><br>The DDC block uses the same clock frequency as the original design, 491 MHz, because this is the rate of the incoming data.
-
-28. In the top-level design, select and copy the System Generator token.
-
-29. Double-click the **DDC** block to navigate into the subsystem.
-
-30. Press the Ctrl+V key or right-click to paste a System Generator token into the DDC.
-
-31. Double-click the **System Generator** token to open the Properties Editor.
-
-32. Select the **Clocking** tab.
-
-33. Deselect **Enable multiple clocks**. The FPGA clock period and Simulink system period are now set to represent 491 MHz.
-<br><br><img src="Images/Step3/Step33.png">
-
-34. Click **OK** to close the Properties Editor.
-
-35. Use the **Up to Parent** toolbar button to return to the top level.
-
-36. Save the design.
-
-37. Click the Run simulation button to simulate the design and confirm the same results as earlier.
+22. Click the Run simulation button to simulate the design and confirm the same results as earlier.
 <br><br>The design will now be implemented with three clock domains.
 
-38. Double-click the top-level **System Generator** token to open the Properties Editor.
+23. Double-click the top-level **Model Composer Hub** block.
 
-39. Click **Generate** to compile the design into a hardware description.
+24. Click **Generate** to compile the design into a hardware description.
 
-40. Click **Yes** to dismiss the simulation warning.
+25. When generation completes, click **OK** to dismiss the Compilation status dialog box.
 
-41. When generation completes, click **OK** to dismiss the Compilation status dialog box.
+26. Click **OK** to dismiss the Model Composer Hub.
 
-42. Click **OK** to dismiss the System Generator token.
-
-43. Open the file <samp> \HDL_Library\Lab4\IPP_QT_MCD_0001\DDC_HB_hier\ip\hdl\lab4_1.vhd </samp> to confirm the design is using three clocks, as shown in the following.
+27. Open the file <samp> \HDL_Library\Lab4\netlist\ip\hdl\hdl_dut.vhd </samp> to confirm the design is using three clocks, as shown in the following.
 ```
-entity lab4_1 is
+entity hdl_dut is
   port (
-     ctrl_clk : in std_logic;
-     ddc_clk : in std_logic;
-     gain_control_clk : in std_logic;
+    adc_in : in std_logic_vector( 16-1 downto 0 );
+    ddc_clk : in std_logic;
+    ctrl_clk : in std_logic;
+    gain_control_clk : in std_logic;
 ``` 
 
 ### Summary 
