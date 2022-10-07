@@ -299,11 +299,13 @@ This discrete filter operates in this way:<br>
    - The final down-sample unit selects an output every nth cycle.
 <ul>Start by adding the discrete components to the design.</ul>
 
-2. Click the Library Browser button <img width="18" height="18" src="Images/Step3/libaryBrowserButton.png"> in the Simulink toolbar to open the Simulink Library Browser.
+2. Double click on the HDL_filter to open the subsystem.
+
+3. Click the Library Browser button <img width="18" height="18" src="Images/Step3/libaryBrowserButton.png"> in the Simulink toolbar to open the Simulink Library Browser.
    - Expand the Xilinx Blockset menu.
    - As shown in the following figure, select the **Sources** section in the HDL library, then right-click **Counter** to add this component to the design.
 <br><br><img src = "Images/Step3/Step2.png"><br><br>
-   - Select the **Memory** section and then **Non AXI-S** (shown at the bottom left in the figure above) and add a ROM to the design.
+   - Select the **Memory** section and then **Non AXI-S** and add a ROM to the design.
    - Finally, select the **DSP** section and then **Non AXI-S** and add a DSP Macro 1.0 to the design.
 
 3. Connect the three new instances to the rest of the design as shown in the following figure:
@@ -312,7 +314,7 @@ You will now configure the instances to correctly filter the data.
 
 4. Double-click the FDATool instance and select Filter Coefficients <img width="18" height="18" src="Images/Step2/filter_coefficient_button.png"> from the toolbar to review the filter specifications.
 <br><br><img src = "Images/Step3/Step4.png"><br><br>
-This shows the same specifications as the previous steps in Lab 1 and confirms there are 11 coefficients. You can also confirm, by double-clicking on the input Gateway In that the input sample rate is once again 20 MHz (Sample period = 1/20e6). With this information, you can now configure the discrete components.
+This shows the same specifications as the previous steps in Lab 1 and confirms there are 11 coefficients. You can also confirm, by double-clicking on the input "Gateway In" in the HDL_filter subsystem that the input sample rate is once again 20 MHz (Sample period = 1/20e6). With this information, you can now configure the discrete components.
 
 5. Close the FDATool Properties Editor.
 
@@ -343,11 +345,11 @@ This shows the same specifications as the previous steps in Lab 1 and confirms t
 <br><br><img src = "Images/Step3/Step10.png"><br><br>
 The final step is to compile the design into a hardware description and synthesize it.
 
-11. Double-click the **System Generator** token to open the Properties Editor.
+11. Double-click the **Vitis Model Composer Hub** block to open the Properties Editor and select the HDL_filter subsystem on the left.
 
-12. From the Compilation tab, make sure the Compilation target is IP catalog.
+12. From the HDL Settings tab, make sure the Compilation Type is IP catalog.
 
-13. From the Clocking tab, under Perform analysis select **Post Synthesis** and for Analyzer type select **Resource**. This option gives the resource utilization details after completion.
+13. From the HDL Analysis tab select **Post Synthesis** for _Perfrom Analysis_ and for _Analysis Type_ select **Resource**. This option gives the resource utilization details after completion.
 
 
 > 🖊️ Note: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.
@@ -360,7 +362,7 @@ The design now uses fewer FPGA hardware resources than either of the versions de
 
 16. Click OK to dismiss the Compilation status dialog box.
 
-17. Click OK to dismiss the System Generator token.
+17. Click OK to dismiss the Vitis Model Composer Hub.
 
 18. Exit the `Lab1_3.slx` worksheet.
 
