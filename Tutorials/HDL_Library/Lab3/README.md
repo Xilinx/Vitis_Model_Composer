@@ -26,6 +26,7 @@ This lab has two primary parts:
     - Double-click Lab3.slx in the Current Folder browser.
 <br><br> The Lab3 design opens, as shown in the following figure.
 <br><br><img src="Images/Step1/Part1/Step3.png">
+Note that this design differs from the previous labs in that all of the HDL blocks are placed inside a subsystem (**HDL_DUT**) while the Vitis Model Composer Hub block remains at the top level of the model. Going forward, this is a recommended approach for architecting your model using Vitis Model Composer.
 
 4. From the Simulink Toolstrip, click the Run button to simulate the design.
 > 📝 **Note**:  In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.
