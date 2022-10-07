@@ -23,7 +23,7 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 1. Invoke Vitis Model Composer and use the **Current Folder** browser to change the directory to: <samp> \HDL_Library\Lab6. </samp>
 
 2. At the command prompt, type open Lab6_1.slx. This opens the design as shown in the following figure.
-<br><br><img src="Images/Step1/Step2.jfif">
+<br><br><img src="Images/Step1/Step2.png">
 <br><br>This design uses a number of AXI interfaces. These interfaces were reviewed in Lab 5: Using AXI Interfaces and IP Integrator and the review is repeated here with additional details on the AXI4-Lite register addressing.
     - Using AXI interfaces allows a design exported to the Vivado IP Catalog to be efficiently integrated into a larger system using IP integrator.
     - It is not a requirement for designs exported to the IP Catalog to use AXI interfaces. The design uses the following AXI interfaces:
