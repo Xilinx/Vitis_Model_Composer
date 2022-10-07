@@ -81,7 +81,7 @@ You will now create a version of this same filter using HDL blocks for implement
 </ol>
 <ul><img src="Images/Step1/Creating_a_Design_in_FPGA/Step5.png"></ul>
 <ol start="6">
-<li><p>Expand the <strong>Xilinx Toolbox > HDL</strong> menu, select <strong>DSP</strong>, <strong>AXI-S</strong> then select <strong>Digital FIR Filter.</strong></p></li>
+<li><p>Expand the <strong>Xilinx Toolbox > HDL</strong> menu, select <strong>DSP</strong>, <strong>Non AXI-S</strong> then select <strong>Digital FIR Filter.</strong></p></li>
 <li><p>Right-click the <strong>Digital FIR Filter</strong> block and select <strong>Add block to model Lab1_1</strong></p></li>
 </ol>
 <ul> <img src="Images/Step1/Creating_a_Design_in_FPGA/Step7.png"  width=400px; height=auto> <br><br>
@@ -114,18 +114,12 @@ You can define the filter coefficients for the Digital FIR Filter block by acces
 <ul><img src="Images/Step1/Creating_a_Design_in_FPGA/Step13.png"></ul>
 <p>The next part of the design process is to configure the HDL blocks.</p>
 <h3 id="configure-the-hdl-blocks">Configure the HDL Blocks</h3>
-<p>The first task is to define the coefficients of the new filter. For this task you will use the Xilinx block version of FDATool. If you open the existing FDATool block, you can review the existing Frequency and Magnitude specifications.</p>
+<p>The first task is to define the coefficients of the new filter. For this task you will use the Xilinx block version of FDATool that you just added in step 8 above. </p>
 <ol>
-<li>Double-click the <strong>Digital Filter Design</strong> instance to open the Properties Editor.<br />
-<br>This allows you to review the properties of the existing filter.</li>
-</ol>
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step1.png"></ul>
-<ol start="2">
-<li><p>Close the Properties Editor for the Digital Filter Design instance.</p></li>
-<li><p>Double-click the <strong>FDATool</strong> instance to open the Properties Editor.</p></li>
+<li>Double click on the FDATool block and review the existing Frequency and Magnitude specifications.</li>
 </ol>
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step2.png"></ul>
-<ol start="4">
+<ol start="2">
 <li>Change the filter specifications to match the following values:</li>
 </ol>
 <ul>
@@ -139,27 +133,31 @@ You can define the filter coefficients for the Digital FIR Filter block by acces
 <li>Apass = 0.01</li>
 <li>Astop = 100</li></ul></li>
 </ul>
+<ol start="2">
+<li>Click the <strong>Design Filter</strong> button at the bottom. Your filter should look like below. Close the Properties Editor.</li>
+</ol>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step1.png"></ul>
 <ol start="4">
-<li><p>Click the <strong>Design Filter</strong> button at the bottom and close the Properties Editor.<br />
-<br> Now, associate the filter parameters of the FDATool instance with the Digital FIR Filter instance.</p></li>
 <li><p>Double-click the <strong>Digital FIR Filter</strong> instance to open the Properties Editor.</p></li>
-<li><p>In the Filter Parameters section, replace the existing coefficients (Coefficient Vector) with <code>xlfda_numerator('FDATool')</code> to use the coefficients defined by the FDATool instance.</p></li>
+<li><p>In the Filter Parameters section, replace the existing coefficients (Coefficient Vector) with <code>xlfda_numerator( [bdroot, '/FDATool']))</code> to use the coefficients defined by the FDATool instance that is at the top level in the model (and hence the reason to use the MATLAB 'bdroot' command).</p></li>
 </ol>
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step7.png" width=400px; height=auto></ul>
-<ol start="8">
-<li><p>Click <strong>OK</strong> to exit the Digital FIR Filter Properties Editor.<br />
-<br>In an FPGA, the design operates at a specific clock rate and using a specific number of bits to represent the data values.<br />
+<ol start="6">
+<li>Click <strong>OK</strong> to exit the Digital FIR Filter Properties Editor.</li>
+</ol>
+<p><br><br>In an FPGA, the design operates at a specific clock rate and using a specific number of bits to represent the data values.<br />
 <br><br>The transition between the continuous time used in the standard Simulink environment and the discrete time of the FPGA hardware environment is determined by defining the sample rate of the Gateway In blocks. This determines how often the continuous input waveform is sampled. This sample rate is automatically propagated to other blocks in the design by Vitis Model Composer. In a similar manner, the number of bits used to represent the data is defined in the Gateway In block and also propagated through the system.<br />
 <br><br>Although not used in this tutorial, some HDL blocks enable rate changes and bit-width changes, up or down, as part of this automatic propagation. More details on these blocks are found in the <em>Vitis Model Composer User Guide</em> (<a href="https://docs.xilinx.com/r/2021.2-English/ug1483-model-composer-sys-gen-user-guide/Revision-History">UG1483</a>).<br />
 <br><br>Both of these attributes (rate and bit width) determine the degree of accuracy with which the continuous time signal is represented. Both of these attributes also have an impact on the size, performance, and hence cost of the final hardware.<br />
-<br><br>Vitis Model Composer allows you to use the Simulink environment to define, simulate, and review the impact of these attributes.</p></li>
+<br><br>Vitis Model Composer allows you to use the Simulink environment to define, simulate, and review the impact of these attributes.</p>
+<ol start="7">
 <li><p>Double-click the <strong>Gateway In</strong> block to open the Properties Editor.<br />
 <br>Because the highest frequency sine wave in the design is 9 MHz, sampling theory dictates the sampling frequency of the input port must be at least 18 MHz. For this design, you will use 20 MHz.</p></li>
 <li><p>At the bottom of the Properties Editor, set the Sample Period to 1/20e6.</p></li>
-<li><p>For now, leave the bit width as the default fixed-point 2’s complement 16-bits with 14-bits representing the data below the binary point. This allows us to express a range of -2.0 to 1.999, which exceeds the range required for the summation of the sine waves (both of amplitude 1).</p></li>
+<li><p>For now, leave the bit width as the default fixed-point 2’s complement 16-bits with 14-bits representing the data below the binary point. This allows us to express a range of -2.0 to 1.999, which fits the range required for the summation of the sine waves (both of amplitude 1).</p></li>
 </ol>
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step11.png" width=400px; height=auto></ul>
-<ol start="12">
+<ol start="10">
 <li><p>Click <strong>OK</strong> to close the Gateway In Properties Editor.<br />
 <br>This now allows us to use accurate sample rate and bit-widths to accurately verify the hardware.</p></li>
 <li><p>Create a subsystem that inlcudes the Gateway blocks and the Digital FIR Filter. Call the subsystem, HDL_filter. </p></li>
@@ -167,30 +165,36 @@ You can define the filter coefficients for the Digital FIR Filter block by acces
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-1.png" width=400px; height=auto></ul>
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-2.png" width=400px; height=auto></ul>
 <ol start="14">
-<li><p>Double-click the <strong>Vitis Model Composer Hub</strong> token to open the Properties Editor.<br />
-<br>Because the input port is sampled at 20 MHz to adequately represent the data, you must define the clock rate of the FPGA and the Simulink sample period to be at least 20 MHz.</p></li>
-<li><p>Select the Clocking tab.</p>
-<ul>
-<li>Specify an FPGA clock period of 50 ns (1/20 MHz).</li>
-<li>Specify a Simulink system period of 1/20e6 seconds.</li>
-<li>From the Perform analysis menu, select <strong>Post Synthesis</strong> and from the Analyzer type menu select <strong>Resource</strong> as shown in the following figure. This option gives the resource utilization details after completion.</li></ul></li>
+<li>Double-click the <strong>Vitis Model Composer Hub</strong> token to open the Properties Editor. Click on the "Code Generation" icon on the top, and then click the HDL_filter subsystem on the left. </li>
 </ol>
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step14.png"></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/hub_block_hdl_filter.png" width=400px; height=auto></ul>
+<p><br>Because the input port is sampled at 20 MHz to adequately represent the data, you must define the clock rate of the FPGA and the Simulink sample period to be at least 20 MHz.</p>
 <ol start="15">
-<li><p>Click <strong>OK</strong> to exit the System Generator token.</p></li>
-<li><p> Click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png"> to simulate the design and view the results, as shown in the following figure.
-<br> Because the new design is cycle and bit accurate, simulation might take longer to complete than before.</p></li>
+<li>Select the HDL Clock Settings tab:<ul>
+<li>Specify an FPGA clock period of 50 ns (1/20 MHz).</li>
+<li>Specify a Simulink system period of 1/20e6 seconds.</li></ul></li>
 </ol>
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step1.png">
+<ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=400px; height=auto></ul>
+<ol start="16">
+<li>Select the HDL Analysis tab:<ul>
+<li>For the Perform Analysis selection select <strong>Post Synthesis</strong> .</li>
+<li>For the Analyzer Type selection select <strong>Resource</strong>. This option gives the resource utilization details after completion.</li></ul></li>
+</ol>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/hdl_analysis.png" width=400px; height=auto></ul>
+<ol start="17">
+<li><p>Click <strong>OK</strong> to exit the Hub Block.</p></li>
+<li><p> Click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png"> to simulate the design and view the results, as shown in the following figure. Because the new design is cycle and bit accurate, simulation might take longer to complete than before.</p></li>
+</ol>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step16.png">
 <br> The results are shown above, on the right hand side (in the Spectrum Analyzer HDL window), and differ slightly from the original design (shown on the left in the Spectrum Analyzer FDA Tool window). This is due to the quantization and sampling effect inherent when a continuous time system is described in discrete time hardware.
 <br>The final step is to implement this design in hardware. This process will synthesize everything contained between the Gateway In and Gateway Out blocks into a hardware description. This description of the design is output in the Verilog or VHDL Hardware Description Language (HDL). This process is controlled by the System Generator token.
 </ul>
 <ol start="17">
-<li><p>Double-click the <strong>System Generator</strong> token to open the Properties Editor.</p></li>
-<li><p>Select the <strong>Compilation</strong> tab to specify details on the device and design flow.</p></li>
-<li><p>From the Compilation menu, select the IP catalog compilation target to ensure the output is in IP catalog format. The Part menu selects the FPGA device. For now, use the default device. Also, use the default Hardware description language, VHDL.</p></li>
+<li><p>Double-click the <strong>Vitis Model Composer Hub</strong> block to open the Properties Editor.</p></li>
+<li><p>You can click on <strong>Hardware Selection</strong> and choose a device. For now, use the default device.</p></li>
+<li><p>Click on <strong>Code Generation</strong>, then clik on <strong>HDL_filter</strong> on the left. Make sure the <strong>Compilation Type</strong> is set to <strong>IP Catalog</strong>. This ensures the output is in IP Catalog format. Also, use the default Hardware description language, VHDL.</p></li>
 </ol>
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step19.png"></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/IP_catalog_selection.png" width=400px; height=auto></ul>
 <ol start="20">
 <li>Click <strong>Generate</strong> to compile the design into hardware.<br />
 <br>The compilation process transforms the design captured in Simulink blocks into an industry standard Register Transfer Level (RTL) design description. The RTL design can be synthesized into a hardware design. A Resource Analyzer window appears when the hardware design description has been generated.</li>
@@ -202,7 +206,6 @@ You can define the filter coefficients for the Digital FIR Filter block by acces
 <ol start="21">
 <li><p>Click <strong>OK</strong> to dismiss the Compilation status dialog box.</p></li>
 <li><p>Click <strong>OK</strong> to dismiss the Resource Analyzer window.</p></li>
-<li><p>Click <strong>OK</strong> to dismiss the System Generator token.</p></li>
 </ol>
 <p>The final step in the design process is to create the hardware and review the results.</p>
 <h3 id="review-the-results">Review the Results</h3>
@@ -210,32 +213,32 @@ You can define the filter coefficients for the Digital FIR Filter block by acces
 <p><samp>sysgen</samp><br />
 <br><ul> This contains the RTL design description written in the industry standard VHDL format. This is provided for users experienced in hardware design who wish to view the detailed results. </ul></p>
 <p><samp>ip</samp><br />
-<br><ul> This directory contains the design IP, captured in Xilinx IP catalog format, which is used to transfer the design into the Xilinx Vivado. <em>Lab 5: Using AXI Interfaces and IP Integrator</em>, presented later in this document, explains in detail how to transfer your design IP into the Vivado for implementation in an FPGA
+<br><ul> This directory contains the design IP, captured in Xilinx IP catalog format, which is used to transfer the design into the Xilinx Vivado. <em>Lab 5: Using AXI Interfaces and IP Integrator</em>, presented later in this tutorial, explains in detail how to transfer your design IP into the Vivado for implementation in an FPGA
 </ul></p>
 <p><samp>ip_catalog</samp><br />
-<br><ul> This contains the RTL design description written in the industry standard VHDL format. This is provided for users experienced in hardware design who wish to view the detailed results. </ul></p>
+<br><ul> This directory contains an example Vivado project with the design IP already included. This project is provided only as a means of quick analysis. </ul></p>
 <p>The previous Resource Analyzer: Lab1<em>1 figure shows the summary of resources used after the design is synthesized. You can also review the results in hardware by using the example Vivado project in the ip</em>catalog directory.</p>
 <blockquote>
 <p><strong>Important: The Vivado project provided in the ip_catalog directory does not contain top-level I/O buffers. The results of synthesis provide a very good estimate of the final design results; however, the results from this project cannot be used to create the final FPGA.</strong></p>
 </blockquote>
-<p>When you have reviewed the results, exit the <code>Lab1_1.slx</code> Simulink worksheet.</p>
+<p>When you have reviewed the results, exit the <code>Lab1_1.slx</code> Simulink design.</p>
 <h2 id="step-2-creating-an-optimized-design-in-an-fpga">Step 2: Creating an Optimized Design in an FPGA</h2>
-<p>In this step you will see how an FPGA can be used to create a more optimized version of the same design used in Step 1, by oversampling. You will also learn about using workspace variables.</p>
+<p>In this step you will see how an FPGA can be used to create a more optimized version of the design in Step 1, by oversampling. You will also learn about using workspace variables.</p>
 <ol>
 <li><p>At the command prompt, type <code>open Lab1_2.slx.</code></p></li>
-<li><p>From your Simulink project worksheet, select Simulation &gt; Run or click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png"> to confirm this is the same design used in Step 1: Creating a Design in an FPGA.</p></li>
-<li><p>Double-click the System Generator token to open the Properties Editor.</p></li>
+<li><p>From your Simulink project worksheet, select Simulation &gt; Run or click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png">.</p></li>
+<li><p>Double-click the Vitis Model Composer Hub to open the Properties Editor.</p></li>
 </ol>
 <ul> As noted in Step 1, the design requires a minimum sample frequency of 18 MHz and it is currently set to 20 MHz (a 50 ns FPGA clock period). <br>
-<br><img src="Images/Step2/Step3.png"> <br>
+<br><ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=400px; height=auto></ul> <br>
 <br>The frequency at which an FPGA device can be clocked easily exceeds 20 MHz. Running the FPGA at a much higher clock frequency will allow Vitis Model Composer to use the same hardware resources to compute multiple intermediate results.
 </ul>
 <ol start="4">
 <li><p>Double-click the <strong>FDATool</strong> instance to open the Properties Editor.</p></li>
 <li><p>Click the <strong>Filter Coefficients</strong> button <img src = "Images/Step2/filter_coefficient_button.png"> to view the filter coefficients</p></li>
 </ol>
-<ul><img src="Images/Step2/Step3.png"><br>
-<br>This shows the filter uses 11 symmetrical coefficients. This requires a minimum of six multiplications. This is indeed what is shown at the end of the HDL Blocks section where the final hardware is using six DSP48 components, the FPGA resource used to perform a multiplication.
+<ul><img src="Images/Step2/Step5.png"><br>
+<br>This shows the filter uses 11 symmetrical coefficients. This requires a minimum of six multiplications. This is indeed what is shown at the end of the previous section where the final hardware is using six DSP48 components. DSP48 is the FPGA resource used to perform a multiplication.
 <br>The current design samples the input at a rate of 20 MHz. If the input is sampled at 6 times the current frequency, it is possible to perform all calculations using a single multiplier.
 </ul>
 <ol start="6">
@@ -249,21 +252,24 @@ You can define the filter coefficients for the Digital FIR Filter block by acces
 </ul>
 <ul><img src="Images/Step2/Step8.png"></ul>
 <ol start="9">
-<li><p>In design Lab1_2, double-click the <strong>Gateway In</strong> block to open the Properties Editor.</p></li>
+<li><p>In design Lab1<em>2, double-click the HDL</em>filter subssytem, and then double click the <strong>Gateway In</strong> block to open the Properties Editor.</p></li>
 <li><p>In the Fixed-Point Precision section, replace 16 with <code>num_bits</code> and replace 14 with <code>bin_pt</code>, as shown in the following figure.</p></li>
 </ol>
-<ul><img src="Images/Step2/Step10.png"></ul>
+<ul><img src="Images/Step2/gateway_in_settings.png" width=400px; height=auto></ul>
 <ol start="11">
 <li>Click <strong>OK</strong> to save and exit the Properties Editor. 
-<br> In the System Generator token update the sampling frequency to 120 MHz (6 * 20 MHz) in this way: <ul>
+<br> In the Vitis Model Composer Hub update the sampling frequency to 120 MHz (6 * 20 MHz) in this way:<ul>
+<li>Click on Code Generation, on the right side of the window click on HDL_filter.</li>
+<li>Select the HDL Clock Settings tab. </li>
 <li>Specify an FPGA clock period of 8.33 ns (1/120 MHz).</li>
-<li>Specify a Simulink system period of 1/120e6 seconds. </li>
+<li>Specify a Simulink system period of 1/120e6 seconds.</li>
+<li>Select the HDL Analysis Settings tab.</li>
 <li>From the Perform analysis menu, select <b>Post Synthesis</b> and from Analyzer type menu, select <b>Resource</b> as shown in the following figure. This option gives the resource utilization details after completion. </li></ul></li>
 </ol>
 <blockquote>
-<p> Note:  In order to see accurate results from the Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.</p>
+<p> Note:  In order to see accurate results from the Resource Analyzer Window, it is recommended to specify a new target directory rather than use the current working directory.</p>
 </blockquote>
-<ul><img src="Images/Step2/Step11.png"></ul>
+<ul><img src="Images/Step2/clock_settings_2.png" width=400px; height=auto></ul>
 <ol start="12">
 <li>Click <strong>Generate</strong> to compile the design into a hardware description.</li>
 </ol>
@@ -283,7 +289,7 @@ You can define the filter coefficients for the Digital FIR Filter block by acces
 <ol>
 <li>At the command prompt, type open <code>Lab1_3.slx.</code><br />
 <br><br>This opens the Simulink design shown in the following figure. This design is similar to the one in the previous two steps. However, this time the filter is designed with discrete components and is only partially complete. As part of this step, you will complete this design and learn how to add and configure discrete parts. <br><br />
-<br><br><img src = "Images/Step3/Step1.png"><br><br />
+<br><br><img src = "Images/Step3/lab1_3.png"><br><br />
 This discrete filter operates in this way:<br></li>
 </ol>
 <ul>
@@ -301,8 +307,8 @@ This discrete filter operates in this way:<br></li>
 <li>Expand the Xilinx Blockset menu.</li>
 <li>As shown in the following figure, select the <strong>Sources</strong> section in the HDL library, then right-click <strong>Counter</strong> to add this component to the design.<br />
 <br><br><img src = "Images/Step3/Step2.png"><br><br></li>
-<li>Select the <strong>Memory</strong> section (shown at the bottom left in the figure above) and add a ROM to the design.</li>
-<li>Finally, select the <strong>DSP</strong> section and add a DSP Macro 1.0 to the design.</li>
+<li>Select the <strong>Memory</strong> section and then <strong>Non AXI-S</strong> (shown at the bottom left in the figure above) and add a ROM to the design.</li>
+<li>Finally, select the <strong>DSP</strong> section and then <strong>Non AXI-S</strong> and add a DSP Macro 1.0 to the design.</li>
 </ul>
 <ol start="2">
 <li><p>Connect the three new instances to the rest of the design as shown in the following figure:<br />
@@ -315,19 +321,19 @@ This shows the same specifications as the previous steps in Lab 1 and confirms t
 <li><p>Double-click the <strong>Counter</strong> instance to open the Properties Editor.</p></li>
 </ol>
 <ul>
-<li>For the Counter type, select <strong>Count limited</strong> and enter this value for <strong>Count to value:</strong> <code>length(xlfda_numerator('FDATool'))-1</code> <br>This will ensure the counter counts from 0 to 10 (11 coefficient and data addresses).</li>
+<li>For the Counter type, select <strong>Count limited</strong> and enter this value for <strong>Count to value:</strong> <code>length(xlfda_numerator([bdroot '/FDATool']))-1</code> <br>This will ensure the counter counts from 0 to 10 (11 coefficient and data addresses).</li>
 <li>For Output type, leave default value at Unsigned and in Number of Bits enter the value 4. Only 4 binary address bits are required to count to 11.</li>
 <li>For the Explicit period, enter the value <code>1/(11*20e6)</code> to ensure the sample period is 11 times the input data rate. The filter must perform 11 calculations for each input sample.<br />
-<br><br><img src = "Images/Step3/Step6.png"><br><br></li>
+<br><br><img src = "Images/Step3/counter.png"  width=400px; height=auto><br><br></li>
 <li>Click <strong>OK</strong> to exit the Properties Editor.</li>
 </ul>
 <ol start="2">
 <li>Double-click the <strong>ROM</strong> instance to open the Properties Editor.</li>
 </ol>
 <ul>
-<li>For the Depth, enter the value <code>length(xlfda_numerator('FDATool'))</code>. This will ensure the ROM has 11 elements.</li>
-<li>For the Initial value vector, enter <code>xlfda_numerator('FDATool')</code>. The coefficient values will be provided by the FDATool instance. <br />
-<br><br><img src = "Images/Step3/Step7.png"><br><br> </li>
+<li>For the Depth, enter the value <code>length(xlfda_numerator([bdroot '/FDATool']))</code>. This will ensure the ROM has 11 elements.</li>
+<li>For the Initial value vector, enter <code>xlfda_numerator([bdroot '/FDATool'])</code>. The coefficient values will be provided by the FDATool instance. <br />
+<br><br><img src = "Images/Step3/ROM.png" width=400px; height=auto><br><br> </li>
 <li>Click <strong>OK</strong> to exit the Properties Editor.</li>
 </ul>
 <ol start="2">
@@ -335,10 +341,10 @@ This shows the same specifications as the previous steps in Lab 1 and confirms t
 </ol>
 <ul>
 <li>In the Instructions tab, replace the existing Instructions with <code>A*B+P</code> and then add <code>A*B</code>. When the <code>sel</code> input is false the DSP will multiply and accumulate. When the <code>sel</code> input is true the DSP will simply multiply. <br />
-<br><br><img src = "Images/Step3/Step8a.png"><br><br></li>
+<br><br><img src = "Images/Step3/dsp_instructions.png" width=400px; height=auto><br><br></li>
 <li>In the Pipeline Options tab, use the Pipeline Options drop-down menu to select <strong>By_Tier.</strong></li>
 <li>Select <strong>Tier 3</strong> and <strong>Tier 5</strong>. This will ensure registers are used at the inputs to A and B and between the multiply and accumulate operations. <br />
-<br><br><img src = "Images/Step3/Step8c.png"><br><br> </li>
+<br><br><img src = "Images/Step3/dsp_pipeline.png" width=400px; height=auto><br><br> </li>
 <li>Click <strong>OK</strong> to exit the Properties Editor.</li>
 </ul>
 <ol start="2">

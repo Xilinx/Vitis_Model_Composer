@@ -43,7 +43,7 @@ document.location=commandURI
 <ol>
 <li><p>Invoke Vitis Model Composer:</p>
 <ul>
-<li>On Windows systems select <strong>Windows > Xilinx Design Tools > Vitis Model Composer 2021.2.</strong></li>
+<li>On Windows systems select <strong>Windows > Xilinx Design Tools > Vitis Model Composer 2022.2.</strong></li>
 <li>On Linux systems, type <code>model_composer</code> at the command prompt.</li></ul></li>
 <li><p>Navigate to the Lab4 folder: <samp> \HDL_Library\Lab4. </samp></p></li>
 <li><p>At the command prompt, type open <code>Lab4_1.slx.</code><br />
@@ -60,7 +60,7 @@ In the following figure Sample Time Display is enabled with colors (right-click 
 <img src="Images/Step1/Step4.png"></p></li>
 <li><p>The Vitis Model Composer environment automatically propagates the different data rates through the design.<br />
 <br><br>When a multi-rate design such as this is implemented in hardware, the most optimal implementation is to use a clock at the same frequency as the data; however, the clock is abstracted away in this environment. The following methodology demonstrates how to create this ideal implementation in the most efficient manner.</p></li>
-<li><p>To efficiently implement a multi-rate (or multi-clock) design using Vitis Model Composer you should capture each part running at the same data rate (or clock frequency) in its own hierarchy with its own System Generator token. The separate hierarchies should then be linked with FIFOs.</p></li>
+<li><p>To efficiently implement a multi-rate (or multi-clock) design using Vitis Model Composer you should capture each part running at the same data rate (or clock frequency) in its own hierarchy. The separate hierarchies should then be linked with FIFOs.</p></li>
 <li><p>The current design has two obvious, and one less obvious, clock domains:</p>
 <ul>
 <li>The gain control input POWER_SCALE could be configurable from a CPU and therefore can run at the same clock frequency as the CPU.</li>
@@ -74,7 +74,7 @@ In the following figure Sample Time Display is enabled with colors (right-click 
 <img src="Images/Step1/Step10.png"></p></li>
 <li><p>Select the components in the output path and create a subsystem named Gain Control.<br />
 <img src="Images/Step1/Step11.png"></p></li>
-<li><p>Finally, select the Gateway In instance <strong>POWER_SCALE</strong> and <strong>Constant</strong> to create a new subsystem called CTRL. The final grouped design is shown in the following figure.</p></li>
+<li><p>Finally, select the Gateway In instance <strong>POWER_SCALE</strong> to create a new subsystem called CTRL. The final grouped design is shown in the following figure.</p></li>
 <li><p>When this design is complete, the logic within each subsystem will execute at different clock frequencies. The clock domains might not be synchronous with each other. There is presently nothing to prevent incorrect data being sampled between one subsystem and another subsystem.<br />
 <br><br>In the next step you will create asynchronous channels between the different domains to ensure data will asynchronously and safely cross between the different clock domains when the design is implemented in hardware.     </p></li>
 </ol>
@@ -86,14 +86,13 @@ In the following figure Sample Time Display is enabled with colors (right-click 
 <li>Data from DDC to Gain Control.</li>
 </ul>
 <ol>
-<li><p>Right-click anywhere in the canvas and select <strong>Xilinx BlockAdd</strong>.</p></li>
-<li><p>Type <code>FIFO</code> in the Add Block dialog box.</p></li>
+<li><p>Left-click anywhere in the canvas and type <code>FIFO</code>.</p></li>
 <li><p>Select FIFO from the menu to add a FIFO to the design.</p></li>
 <li><p>Connect the data path through instance FIFO. Delete any existing connections to complete this task.</p>
 <ul>
 <li>Connect <code>CTRL/Out1</code> to <code>FIFO/din</code>.</li>
 <li>Connect <code>FIFO/dout</code> to <code>Gain Control/In1</code>.</li></ul></li>
-<li><p>Make a copy of the FIFO instance (using Ctrl-C and Ctrl-V to copy and paste).</p></li>
+<li><p>Make a copy of the FIFO instance (right-click and drag to copy and paste).</p></li>
 <li><p>Connect the data path through instance FIFO1. Delete any existing connections to complete this task.</p>
 <ul>
 <li>Connect <code>DDC/Out2</code> to <code>FIFO1/din</code>.</li>
@@ -105,39 +104,39 @@ In the following figure Sample Time Display is enabled with colors (right-click 
 <li>From the DDC block a write enable is required. The data_tvalid from the final FIR stage can be used for this.</li>
 <li>The Gain Control must generate a read enable for both FIFOs. You will use the empty signal from the FIFOs and invert it; if there is data available, this block will read it.</li></ul></li>
 <li><p>Double-click the <strong>CTRL</strong> block to open the subsystem.</p></li>
-<li><p>Right-click in the canvas and use <strong>Xilinx BlockAdd</strong> to add these blocks:</p>
+<li><p>Left-click in the canvas and type to add these blocks:</p>
 <ul>
-<li>Delay (Xilinx)</li>
-<li>Relational</li></ul></li>
-<li><p>Select instance Out1 and make a copy (use Ctrl-C and Ctrl-V to cut and paste).</p></li>
+<li>Delay (Xilinx Toolbox/HDL)</li>
+<li>Relational (Xilinx Toolbox/HDL)</li></ul></li>
+<li><p>Select instance Out1 and make a copy (right-click and drag to copy and paste).</p></li>
 <li><p>Double-click the <strong>Relational</strong> block to open the Properties Editor.</p></li>
 <li><p>Use the Comparison drop-down menu to select <strong>a!=b</strong> and click <strong>OK</strong>.</p></li>
 <li><p>Connect the blocks as shown in the following figure.<br />
-<br><br><img src="Images/Step2/Step12.png"><br />
+<br><br><img src="Images/Step2/Step11.png"><br />
 <br><br>This will create an output strobe on Out2 which will be active for one cycle when the input changes, and be used as the write-enable from CTRL to the Gain Control (the FIFO block at the top level).</p></li>
-<li><p>Click the Up to Parent toolbar button <img width="18" height="18" src="../Images/Buttons/upToParent.png"> to return to the top level.</p></li>
+<li><p>Click the Up to Parent toolbar button to return to the top level.</p></li>
 <li><p>Double-click the instance Gain Control to open the subsystem.</p></li>
-<li><p>Right-click in the canvas and use Xilinx BlockAdd to add these blocks:</p>
+<li><p>Left-click the canvas and type to add these blocks:</p>
 <ul>
-<li>Inverter</li>
+<li>Inverter (Xillinx Toolbox/HDL)</li>
 <li>Inverter (for a total of two inverters)</li>
-<li>Delay (Xilinx)</li></ul></li>
-<li><p>Select the instance Out1 and make a copy <code>Out3</code> (use Ctrl-C and Ctrl-V to cut and paste).</p>
+<li>Delay (Xilinx Toolbox/HDL)</li></ul></li>
+<li><p>Select the instance Out1 and make a copy <code>Out3</code> (right-click and drag to copy and paste).</p>
 <ul>
 <li>Rename Out3 to <code>DDC_Read</code></li></ul></li>
-<li><p>Select instance Out1 and make a copy <code>Out3</code> (use Ctrl-C and Ctrl-V to cut and paste).</p>
+<li><p>Select instance Out1 and make a copy <code>Out3</code> (right-click and drag to copy and paste).</p>
 <ul>
 <li>Rename Out3 to <code>CTRL_Read</code></li></ul></li>
-<li><p>Select instance In1 and make a copy <code>In4</code> (use Ctrl-C and Ctrl-V to cut and paste).</p>
+<li><p>Select instance In1 and make a copy <code>In4</code> (right-click and drag to copy and paste).</p>
 <ul>
 <li>Rename In4 to <code>CTRL_Empty</code></li></ul></li>
 <li><p>Connect the blocks as shown in the following figure<br />
-<br><br><img src="Images/Step2/Step19.png"><br><br></p>
+<br><br><img src="Images/Step2/Step18.png"><br><br></p>
 <ul>
 <li>The FIFO empty signal from the top-level Gain Control FIFO (FIFO) block is simply an inverter block used to create a read-enable for the top-level DDC FIFO (FIFO1). If the FIFO is not empty, the data will be read.</li>
 <li>Similarly, the FIFO empty signal from the top-level DDC FIFO (FIFO1) is inverted to create a FIFO read-enable.</li>
 <li>This same signal will be used as the new <code>data_tvalid</code> (which was In2). However, because the FIFO has a latency of 1, this signal must be delayed to ensure this control signal is correctly aligned with the data (which is now delayed by 1 through the FIFO).</li></ul></li>
-<li><p>Use the Up to Parent toolbar button <img width="18" height="18" src="../Images/Buttons/upToParent.png"> to return to the top level.<br />
+<li><p>Use the Up to Parent toolbar button to return to the top level.<br />
 <br><br>This shows the control signals are now present at the top level.<br />
 <br><br><img src="Images/Step2/Step20.png"><br />
 <br><br>You will now complete the final connections.</p></li>
@@ -158,70 +157,56 @@ In the following figure Sample Time Display is enabled with colors (right-click 
 <h2 id="step-3-specifying-clock-domains">Step 3: Specifying Clock Domains</h2>
 <p>In this step you will specify a different clock domain for each subsystem.</p>
 <ol>
-<li><p>Double-click the System Generator token to open the Properties Editor.</p></li>
-<li><p>Select the <strong>Clocking</strong> tab.</p></li>
-<li><p>Click <strong>Enable multiple clocks</strong></p></li>
+<li><p>Double-click the Model Composer Hub block.</p></li>
+<li><p>Select the <strong>HDL Clock Settings</strong> tab.</p></li>
+<li><p>Click <strong>Enable multiple clocks</strong>.</p></li>
+<li><p>Change "Number of clocks" to 3.</p></li>
 </ol>
 <blockquote>
-<p> <strong>Note</strong>: The FPGA clock period and the Simulink system period are now greyed out. This option informs Vitis Model Composer that clock rate will be specified separately for each hierarchy. It is therefore important the top level contains only subsystems and FIFOs; no other logic should be present at the top level in a multi-rate design.</p>
+<p> <strong>Note</strong>: There are now separate tabs (Clock1, Clock2, Clock3) to set the different clocks in the design. Each of these clocks will be associated with one of the subsystems (CTRL, Gain Control, DDC) in the design).</p>
 </blockquote>
-<ul><img src="Images/Step3/Step3.jfif"></ul>
-<ol start="4">
-<li><p>Click <strong>OK</strong> to close the Properties Editor.<br />
-<br><br>You will now specify a new clock rate for the CTRL block. The CTRL block will be driven from a CPU which executes at 100 MHz.</p></li>
-<li><p>Select the <strong>System Generator</strong> token.</p></li>
-<li><p>Press the Ctrl+C key or right-click to copy the token.<br />
-<br><br>You will specify a new clock rate for the CTRL block. This block will be clocked at 100 MHz and accessed using an AXI4-Lite interface.</p></li>
-<li><p>Double-click the <strong>CTRL</strong> block to navigate into the subsystem.</p></li>
-<li><p>Press the Ctrl+V key or right-click to paste a System Generator token into CTRL.</p></li>
-<li><p>Double-click the <strong>System Generator</strong> token to open the Properties Editor.</p></li>
-<li><p>Select the <strong>Clocking</strong> tab.</p></li>
-<li><p>Deselect <strong>Enable multiple clocks</strong> (this was inherited when the token was copied).</p></li>
-<li><p>Change the FPGA clock period to 1e9/100e6.</p></li>
-<li><p>Change the Simulink system period to 1/100e6.<br />
-<br><br><img src="Images/Step3/Step13.png"></p></li>
-<li><p>Click <strong>OK</strong> to close the Properties Editor.</p></li>
+<p>You will specify a new clock rate for the CTRL block. This block will be clocked at 100 MHz and accessed using an AXI4-Lite interface.</p>
+<ol start="5">
+<li><p>Select the Clock1 tab.</p></li>
+<li><p>Select the Subsystem "Lab4/HDL_DUT/CTRL".</p></li>
+<li><p>Set the FPGA clock period to 1e9/100e6.</p></li>
+<li><p>Set the Simulink system period to 1/100e6.<br />
+<br><br><img src="Images/Step3/Step8.png"></p></li>
+</ol>
+<p>The DDC block uses the same clock frequency as the original design, 491 MHz, because this is the rate of the incoming data.</p>
+<ol start="9">
+<li><p>Select the Clock2 tab.</p></li>
+<li><p>Select the Subsystem "Lab4/HDL_DUTDDC".</p></li>
+<li><p>Set the FPGA clock period to 1e9/491.52e6.</p></li>
+<li><p>Set the Simulink system period to 1/491.52e6.<br />
+<br><br><img src="Images/Step3/Step12.png"></p></li>
+</ol>
+<p>You will now specify a new clock rate for the Gain Control block. The Gain Control block will be clocked at the same rate as the output from the DDC, 61.44 MHz.</p>
+<ol start="13">
+<li><p>Select the Clock3 tab.</p></li>
+<li><p>Select the Subsystem "Lab4/HDL_DUT/Gain Control".</p></li>
+<li><p>Set the FPGA clock period to 1e9/61.44e6.</p></li>
+<li><p>Set the Simulink system period to 1/61.44e6.<br />
+<br><br><img src="Images/Step3/Step16.png"></p></li>
+<li><p>Click Apply and OK to close the Model Composer Hub.</p></li>
+<li><p>Double-click the HDL DUT block and then the CTRL block to navigate into the subsystem.</p></li>
 <li><p>Double-click the Gateway In instance <strong>POWER_SCALE</strong> to open the Properties Editor.</p></li>
 <li><p>Change the Sample period to 1/100e6 to match the new frequency of this block.<br />
 <br><br>In the Implementation tab, note that the Interface is set to AXI4-Lite. This will ensure this port is implemented as a register in an AXI4-Lite interface.</p></li>
-<li><p>Click <strong>OK</strong> to close the Properties Editor.</p></li>
-<li><p>Select and copy the System Generator token.</p></li>
-<li><p>Click the <strong>Up to Parent</strong> toolbar button to return to the top level.<br />
-<br><br>You will now specify a new clock rate for the Gain Control block. The Gain Control block will be clocked at the same rate as the output from the DDC, 61.44 MHz.</p></li>
-<li><p>Double-click the <strong>Gain Control</strong> block to navigate into the subsystem.</p></li>
-<li><p>Press the Ctrl+V key or right-click to paste a System Generator token into Gain Control.</p></li>
-<li><p>Double-click the <strong>System Generator</strong> token to open the Properties Editor.</p></li>
-<li><p>Select the <strong>Clocking</strong> tab.</p></li>
-<li><p>Change the FPGA clock period to 1e9/61.44e6.</p></li>
-<li><p>Change the Simulink system period to 1/61.44e6.<br />
-<br><br><img src="Images/Step3/Step25.png"></p></li>
-<li><p>Click <strong>OK</strong> to close the Properties Editor.<br />
-<br><br>Note that the output signals are prefixed with <code>M_AXI_DATA_</code>. This will ensure that each port will be implemented as an AXI4 interface, because the suffix for both signals is a valid AXI4 signal name (<code>tvalid</code> and <code>tdata</code>).</p></li>
-<li><p>Click the <strong>Up to Parent</strong> toolbar button to return to the top level.<br />
-<br><br>The DDC block uses the same clock frequency as the original design, 491 MHz, because this is the rate of the incoming data.</p></li>
-<li><p>In the top-level design, select and copy the System Generator token.</p></li>
-<li><p>Double-click the <strong>DDC</strong> block to navigate into the subsystem.</p></li>
-<li><p>Press the Ctrl+V key or right-click to paste a System Generator token into the DDC.</p></li>
-<li><p>Double-click the <strong>System Generator</strong> token to open the Properties Editor.</p></li>
-<li><p>Select the <strong>Clocking</strong> tab.</p></li>
-<li><p>Deselect <strong>Enable multiple clocks</strong>. The FPGA clock period and Simulink system period are now set to represent 491 MHz.<br />
-<br><br><img src="Images/Step3/Step33.png"></p></li>
-<li><p>Click <strong>OK</strong> to close the Properties Editor.</p></li>
-<li><p>Use the <strong>Up to Parent</strong> toolbar button to return to the top level.</p></li>
 <li><p>Save the design.</p></li>
 <li><p>Click the Run simulation button to simulate the design and confirm the same results as earlier.<br />
 <br><br>The design will now be implemented with three clock domains.</p></li>
-<li><p>Double-click the top-level <strong>System Generator</strong> token to open the Properties Editor.</p></li>
+<li><p>Double-click the top-level <strong>Model Composer Hub</strong> block.</p></li>
 <li><p>Click <strong>Generate</strong> to compile the design into a hardware description.</p></li>
-<li><p>Click <strong>Yes</strong> to dismiss the simulation warning.</p></li>
 <li><p>When generation completes, click <strong>OK</strong> to dismiss the Compilation status dialog box.</p></li>
-<li><p>Click <strong>OK</strong> to dismiss the System Generator token.</p></li>
-<li><p>Open the file <samp> \HDL<em>Library\Lab4\IPP</em>QT<em>MCD</em>0001\DDC<em>HB</em>hier\ip\hdl\lab4_1.vhd </samp> to confirm the design is using three clocks, as shown in the following.</p></li>
+<li><p>Click <strong>OK</strong> to dismiss the Model Composer Hub.</p></li>
+<li><p>Open the file <samp> \HDL<em>Library\Lab4\netlist\ip\hdl\hdl</em>dut.vhd </samp> to confirm the design is using three clocks, as shown in the following.</p></li>
 </ol>
-<pre><code>entity lab4_1 is
+<pre><code>entity hdl_dut is
 port (
-ctrl_clk : in std_logic;
+adc_in : in std_logic_vector( 16-1 downto 0 );
 ddc_clk : in std_logic;
+ctrl_clk : in std_logic;
 gain_control_clk : in std_logic;
 </code></pre>
 <h3 id="summary">Summary</h3>
