@@ -49,18 +49,18 @@ In this step you review how AXI interfaces are defined and created.
 
 In this step you create a Vivado project which you will use to create your hardware design.
 
-1. Double-click the **System Generator** token to open the Properties Editor.
+1. Double-click the **Model Composer Hub** block.
 
-2. In the Properties Editor, make sure IP catalog is selected for the Compilation type.
+2. On the HDL Settings tab, make sure IP Catalog is selected for the Compilation Type.
 
 3. Click **Generate** to generate a design in IP catalog format.
 
 4. Click **OK** to dismiss the Compilation status dialog box.
 
-5. Click **OK** to dismiss the System Generator token.
+5. Click **OK** to dismiss the Model Composer Hub.
 <br><br> The design has been written in IP catalog format to the directory <samp> ./IPI_Project. </samp> You will now import this IP into the Vivado IP catalog and use the IP in an existing example project.
 
-6. Open the Vivado IDE using **Windows > Xilinx Design Tools > Vivado 2021.2.**
+6. Open the Vivado IDE using **Windows > Xilinx Design Tools > Vivado 2022.2.**
 
 7. Click **Create Project**.
 
@@ -193,3 +193,18 @@ The following <samp> solution </samp> directory contains the final Vitis Model C
 ```
 \HDL_Library\Lab5\solution
 ```
+
+--------------
+Copyright 2022 Xilinx
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

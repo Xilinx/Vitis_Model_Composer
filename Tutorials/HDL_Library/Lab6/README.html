@@ -43,7 +43,7 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 <ol>
 <li><p>Invoke Vitis Model Composer and use the <strong>Current Folder</strong> browser to change the directory to: <samp> \HDL_Library\Lab6. </samp></p></li>
 <li><p>At the command prompt, type open Lab6_1.slx. This opens the design as shown in the following figure.<br />
-<br><br><img src="Images/Step1/Step2.jfif"><br />
+<br><br><img src="Images/Step1/Step2.png"><br />
 <br><br>This design uses a number of AXI interfaces. These interfaces were reviewed in Lab 5: Using AXI Interfaces and IP Integrator and the review is repeated here with additional details on the AXI4-Lite register addressing.</p>
 <ul>
 <li>Using AXI interfaces allows a design exported to the Vivado IP Catalog to be efficiently integrated into a larger system using IP integrator.</li>
@@ -55,15 +55,14 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 <br><br> Also note how the address of this port may be automatically assigned (as the current setting of <strong>Auto assign address offset</strong> indicates), or the address may be manually specified.</p></li>
 <li><p>Click <strong>OK</strong> to exit the Properties Editor.<br />
 <br><br>Details on simulating the design are provided in the canvas notes. For this exercise, you will concentrate on exporting the design to the Vivado IP catalog and use the IP in an existing design.</p></li>
-<li><p>In the System Generator token, select <strong>Generate</strong> to generate a design in IP Catalog format.</p></li>
+<li><p>In the Model Composer Hub block, select <strong>Generate</strong> to generate a design in IP Catalog format.</p></li>
 <li><p>Click <strong>OK</strong> to dismiss the Compilation status dialog box.</p></li>
-<li><p>Click <strong>OK</strong> to dismiss the System Generator token.</p></li>
-<li><p>In the file system, navigate to the directory <samp> \HDL<em>Library\Lab6\sys</em>gen<em>ip\ip\drivers\lab6</em>1<em>v1</em>2\src </samp> and view the driver files.<br />
-<br><br>The driver files for the AXI4-Lite interface are automatically created by Vitis Model Composer when it saves a design in IP Catalog format.<br />
-<br><br><img src="Images/Step1/Step10.jfif"></p></li>
-<li><p>Open file <samp> lab6<em>1</em>hw.h </samp> to review which addresses the ports in the AXI4-Lite interface were automatically assigned.<br />
+<li><p>Click <strong>OK</strong> to dismiss the Model Composer Hub.</p></li>
+<li><p>In the file system, navigate to the directory <samp> \HDL<em>Library\Lab6\IPI</em>Project\ip\drivers\HDL<em>DUT</em>v1_0\src </samp> and view the driver files.<br />
+<br><br>The driver files for the AXI4-Lite interface are automatically created by Vitis Model Composer when it saves a design in IP Catalog format.</p></li>
+<li><p>Open file <samp> hdl<em>dut</em>hw.h </samp> to review which addresses the ports in the AXI4-Lite interface were automatically assigned.<br />
 <br><br><img src="Images/Step1/Step11.png"></p></li>
-<li><p>Open file <samp> lab6_1.c </samp> to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown in the following figure.<br />
+<li><p>Open file <samp> hdl_dut.c </samp> to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown in the following figure.<br />
 <br><br><img src="Images/Step1/Step12.png"><br />
 <br><br>The driver files are automatically included when the Vitis Model Composer design is added to the IP Catalog. The procedure for adding a Vitis Model Composer design to the IP Catalog is detailed in Lab 5: Using AXI Interfaces and IP Integrator. In the next step, you will implement the design.</p></li>
 </ol>
@@ -71,7 +70,7 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 <ol>
 <li><p>Open the Vivado IDE:</p>
 <ul>
-<li>Click <strong>Windows > Xilinx Design Tools > Vitis 2021.2.</strong><br />
+<li>Click <strong>Windows > Xilinx Design Tools > Vivado 2022.2.</strong><br />
 <br><br>In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP Integrator, but this time you will create the design using a Tcl file, rather than the interactive process.</li></ul></li>
 <li><p>Using the Tcl console as shown in the following figure:</p></li>
 </ol>
@@ -94,7 +93,7 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 <li><p>Click <strong>Finish</strong> to export the hardware.</p></li>
 <li><p>Open the Vitis IDE:</p>
 <ul>
-<li>Click <strong>Windows > Xilinx Design Tools > Vitis 2021.2.</strong></li></ul></li>
+<li>Click <strong>Windows > Xilinx Design Tools > Vitis 2022.2.</strong></li></ul></li>
 <li><p>Select the workspace space directory to store preferences and click Launch.</p></li>
 <li><p>From the Vitis IDE, select <strong>Create Application Project</strong>.</p></li>
 <li><p>Click <strong>Next</strong> in the Welcome page.</p></li>
@@ -145,6 +144,18 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 <p>In this lab, you learned how to export your Vivado IDE design containing Vitis Model Composer HDL IP to the Vitis software environment and to integrate the driver files automatically created by Vitis Model Composer to run the application on the ZC702 board. You then viewed the results of the acceleration.</p>
 <p>The following solutions directory contains the final Vitis Model Composer (<code>*.slx</code>) files for this lab. The solutions directory does not contain the IP output from Vitis Model Composer, the files and directories generated when the Vivado IDE is executed, or the Vitis workspace.</p>
 <p><samp> \HDL_Library\Lab6\solution </samp></p>
+<hr />
+<p>Copyright 2022 Xilinx</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
 
 </div>
 <style type='text/css'>body {

@@ -23,7 +23,7 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 1. Invoke Vitis Model Composer and use the **Current Folder** browser to change the directory to: <samp> \HDL_Library\Lab6. </samp>
 
 2. At the command prompt, type open Lab6_1.slx. This opens the design as shown in the following figure.
-<br><br><img src="Images/Step1/Step2.jfif">
+<br><br><img src="Images/Step1/Step2.png">
 <br><br>This design uses a number of AXI interfaces. These interfaces were reviewed in Lab 5: Using AXI Interfaces and IP Integrator and the review is repeated here with additional details on the AXI4-Lite register addressing.
     - Using AXI interfaces allows a design exported to the Vivado IP Catalog to be efficiently integrated into a larger system using IP integrator.
     - It is not a requirement for designs exported to the IP Catalog to use AXI interfaces. The design uses the following AXI interfaces:
@@ -39,27 +39,26 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 6. Click **OK** to exit the Properties Editor.
 <br><br>Details on simulating the design are provided in the canvas notes. For this exercise, you will concentrate on exporting the design to the Vivado IP catalog and use the IP in an existing design.
 
-7. In the System Generator token, select **Generate** to generate a design in IP Catalog format.
+7. In the Model Composer Hub block, select **Generate** to generate a design in IP Catalog format.
 
 8. Click **OK** to dismiss the Compilation status dialog box.
 
-9. Click **OK** to dismiss the System Generator token.
+9. Click **OK** to dismiss the Model Composer Hub.
 
-10. In the file system, navigate to the directory <samp> \HDL_Library\Lab6\sys_gen_ip\ip\drivers\lab6_1_v1_2\src </samp> and view the driver files.
+10. In the file system, navigate to the directory <samp> \HDL_Library\Lab6\IPI_Project\ip\drivers\HDL_DUT_v1_0\src </samp> and view the driver files.
 <br><br>The driver files for the AXI4-Lite interface are automatically created by Vitis Model Composer when it saves a design in IP Catalog format.
-<br><br><img src="Images/Step1/Step10.jfif">
 
-11. Open file <samp> lab6_1_hw.h </samp> to review which addresses the ports in the AXI4-Lite interface were automatically assigned.
+11. Open file <samp> hdl_dut_hw.h </samp> to review which addresses the ports in the AXI4-Lite interface were automatically assigned.
 <br><br><img src="Images/Step1/Step11.png">
 
-12. Open file <samp> lab6_1.c </samp> to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown in the following figure.
+12. Open file <samp> hdl_dut.c </samp> to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown in the following figure.
 <br><br><img src="Images/Step1/Step12.png">
 <br><br>The driver files are automatically included when the Vitis Model Composer design is added to the IP Catalog. The procedure for adding a Vitis Model Composer design to the IP Catalog is detailed in Lab 5: Using AXI Interfaces and IP Integrator. In the next step, you will implement the design.
 
 ## Step 2: Developing Software and Running it on the Zynq-7000 System
 
 1. Open the Vivado IDE:
-    - Click **Windows > Xilinx Design Tools > Vitis 2021.2.**
+    - Click **Windows > Xilinx Design Tools > Vivado 2022.2.**
 <br><br>In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP Integrator, but this time you will create the design using a Tcl file, rather than the interactive process.
 
 2. Using the Tcl console as shown in the following figure:
@@ -85,7 +84,7 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 8. Click **Finish** to export the hardware.
 
 9. Open the Vitis IDE:
-    - Click **Windows > Xilinx Design Tools > Vitis 2021.2.**
+    - Click **Windows > Xilinx Design Tools > Vitis 2022.2.**
 
 10. Select the workspace space directory to store preferences and click Launch.
 
@@ -161,3 +160,18 @@ In this lab, you learned how to export your Vivado IDE design containing Vitis M
 The following solutions directory contains the final Vitis Model Composer (`*.slx`) files for this lab. The solutions directory does not contain the IP output from Vitis Model Composer, the files and directories generated when the Vivado IDE is executed, or the Vitis workspace.
 
 <samp> \HDL_Library\Lab6\solution </samp>
+
+--------------
+Copyright 2022 Xilinx
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

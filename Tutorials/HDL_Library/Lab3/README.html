@@ -40,7 +40,7 @@ document.location=commandURI
 <ol>
 <li><p>Invoke Vitis Model Composer.</p>
 <ul>
-<li>On Windows systems select <strong>Windows > Xilinx Design Tools > Vitis Model Composer 2021.2.</strong></li>
+<li>On Windows systems select <strong>Windows > Xilinx Design Tools > Vitis Model Composer 2022.2.</strong></li>
 <li>On Linux systems, type <code>model_composer</code> at the command prompt.</li></ul></li>
 <li><p>Navigate to the Lab3 folder: <samp>\HDL_Library\Lab3.</samp><br />
 <br><br>You can view the directory contents in the MATLAB® Current Folder browser, or type ls at the command line prompt.</p></li>
@@ -50,17 +50,17 @@ document.location=commandURI
 <li>Double-click Lab3.slx in the Current Folder browser.<br />
 <br><br> The Lab3 design opens, as shown in the following figure.<br />
 <br><br><img src="Images/Step1/Part1/Step3.png"></li></ul></li>
-<li><p>From your Simulink project worksheet, select Simulation &gt; Run or click the Run simulation button to simulate the design.</p></li>
+<li><p>From the Simulink Toolstrip, click the Run button to simulate the design.</p></li>
 </ol>
 <blockquote>
 <p> <strong>Note</strong>:  In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.</p>
 </blockquote>
 <ol start="5">
-<li><p>Double-click the <strong>System Generator</strong> token to open the Properties Editor.</p></li>
-<li><p>Select the <strong>Clocking</strong> tab.</p></li>
-<li><p>From the Perform analysis menu, select <strong>Post Synthesis</strong> and from Analyzer type menu select <strong>Timing</strong> as shown in the following figure.<br />
+<li><p>Double-click the <strong>Vitis Model Composer Hub</strong> block to open the Properties Editor.</p></li>
+<li><p>Select the <strong>HDL_DUT</strong> subsystem on the left, then the <strong>HDL Analysis</strong> tab.</p></li>
+<li><p>From the Perform Analysis menu, select <strong>Post Synthesis</strong> and from Analyzer type menu select <strong>Timing</strong> as shown in the following figure.<br />
 <br><br><img src="Images/Step1/Part1/Step7.png"></p></li>
-<li><p>In the System Generator token dialog box, click Generate.<br />
+<li><p>In the Model Composer Hub dialog box, click Generate.<br />
 <br><br>When you generate, the following occurs:</p>
 <ul>
 <li>Vitis Model Composer generates the required files for the selected compilation target. For timing analysis Vitis Model Composer invokes Vivado in the background for the design project, and passes design timing constraints to Vivado.</li>
@@ -78,11 +78,11 @@ document.location=commandURI
 <br><br><img src="Images/Step1/Part1/Step12.png"></p></li>
 <li><p>Double-click the second path in the Timing Analyzer table and cross-probe, the corresponding highlighted path in green which indicates no timing violation.<br />
 <br><br><img src="Images/Step1/Part1/Step13-1.png"><br />
-<br><br> If you close the Timing Analyzer sometime later you might want to relaunch the Timing Analyzer table using the existing timing analyzer results for the model. A Launch button is provided under the Clocking tab of the System Generator token dialog box. This will only work if you already ran timing analysis on the Simulink model.<br />
+<br><br> If you close the Timing Analyzer sometime later you might want to relaunch the Timing Analyzer table using the existing timing analyzer results for the model. A Launch button is provided under the HDL Analysis tab of the Model Composer Hub dialog box. This will only work if you already ran timing analysis on the Simulink model.<br />
 <br><br><img src="Images/Step1/Part1/Step13-2.png"></p></li>
 </ol>
 <blockquote>
-<p> <strong>Note</strong>: If you relaunch the Timing Analyzer window, make sure that the Analyzer type field is set to Timing. The table that opens will display the results stored in the Target directory specified in the System Generator token dialog box, regardless of the option selected for Perform analysis (Post Synthesis or Post Implementation).</p>
+<p> <strong>Note</strong>: If you relaunch the Timing Analyzer window, make sure that the Analysis Type field is set to Timing. The table that opens will display the results stored in the Code Directory specified in the Model Composer Hub dialog box, regardless of the option selected for Perform Analysis (Post Synthesis or Post Implementation).</p>
 </blockquote>
 <h3 id="troubleshooting-timing-violations">Troubleshooting Timing Violations</h3>
 <p>Inserting some registers in the combinational path might give better timing results and might help overcome timing violations if any. This can be done by changing latency of the combinational blocks as explained in the following.</p>
@@ -92,7 +92,7 @@ document.location=commandURI
 <li><p>Double-click the Mult block to open the Multiplier block parameters window as shown in the following figure.<br />
 <br><br><img src="Images/Step1/Part2/Step2.png"></p></li>
 <li><p>Under Basic tab, change the latency from 1 to 2 and click <strong>OK</strong>.</p></li>
-<li><p>Double-click the <strong>System Generator</strong> token, and ensure that the Analyzer Type is Timing and click <strong>Generate</strong>.</p></li>
+<li><p>Double-click the <strong>Model Composer Hub</strong> block, ensure that the Analyzer Type is Timing and click <strong>Generate</strong>.</p></li>
 <li><p>After the generation completes, it opens the timing Analyzer table as shown in the following figure. Observe the status pass at the top-right corner. It indicates there are no timing violated paths in the design.<br />
 <br><br><img src="Images/Step1/Part2/Step5.png"></p></li>
 </ol>
@@ -104,7 +104,7 @@ b. Changing the latency of the block might increase the number of resources whic
 <h2 id="step-2-resource-analysis-in-vitis-model-composer">Step 2: Resource Analysis in Vitis Model Composer</h2>
 <p>In this step we use same design, <samp>Lab3.slx</samp>, used for Step 1 but we are going to perform Resource Analysis.</p>
 <blockquote>
-<p>⭐ <strong>Tip</strong>: Resource Analysis can be performed whenever you generate any of the following compilation targets: <br></p>
+<p>⭐ <strong>Tip</strong>: Resource Analysis can be performed whenever you generate any of the following compilation types: <br></p>
 <ul>
 <li>IP catalog <br></li>
 <li>Hardware Co-Simulation <br></li>
@@ -113,30 +113,44 @@ b. Changing the latency of the block might increase the number of resources whic
 </ul>
 </blockquote>
 <ol>
-<li>Double-click the <strong>System Generator</strong> token in the Simulink model. Ensure that the part is specified and Compilation is set to any one of the compilation targets listed above.</li>
+<li>Double-click the <strong>Model Composer Hub</strong> block in the Simulink model. On the HDL Settings tab, ensure that one of the Compilation Types listed above is selected.</li>
 </ol>
 <blockquote>
 <p> <strong>Note</strong>: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.</p>
 </blockquote>
 <ol start="2">
-<li><p>In the Clocking tab, set the Perform Analysis field to <strong>Post Synthesis</strong> and Analyzer type field to <strong>Resource</strong>.<br />
+<li><p>In the HDL Analysis tab, set the Perform Analysis field to <strong>Post Synthesis</strong> and Analysis Type type field to <strong>Resource</strong>.<br />
 <br><br><img src="Images/Step2/Step2.png"></p></li>
-<li><p>In the System Generator token dialog box, click <strong>Generate</strong><br />
-<br><br>Model Comoser processes the resource utilization data and displays a Resource Analyzer window with resource utilization information.<br />
+<li><p>In the Model Composer Hub dialog box, click <strong>Generate</strong><br />
+<br><br>Model Composer processes the resource utilization data and displays a Resource Analyzer window with resource utilization information.<br />
 <br><br><img src="Images/Step2/Step3.png"><br />
 <br><br>Each column heading (for example, BRAMs, DSPs, or LUTs) in the window shows the total number of each type of resources available in the Xilinx device for which you are targeting your design. The rest of the window displays a hierarchical listing of each subsystem and block in the design, with the count of these resource types.</p></li>
 <li><p>You can cross probe from the Resource Analyzer window to the Simulink model by clicking a block or subsystem name in the Resource Analyzer window, which highlights the corresponding Vitis Model Composer HDL block or subsystem in the model.<br />
 <br><br>Cross probing is useful to identify blocks and subsystems that are implemented using a particular type of resource.</p></li>
-<li><p>The block you have selected in the window will be highlighted yellow and outlined in red.<br />
-<br><br><img src="Images/Step2/Step5.png"></p></li>
-<li><p>If the block or subsystem you have selected in the window is within an upper-level subsystem, then the parent subsystem is highlighted in red in addition to the underlying block as shown in the following figure.<br />
-<br><br><img src="Images/Step2/Step6.png"></p></li>
+<li><p>The block you have selected in the window will be highlighted yellow and outlined in red.</p></li>
+</ol>
+<!-- <br><br><img src="Images/Step2/Step5.png"> -->
+<ol start="6">
+<li>If the block or subsystem you have selected in the window is within an upper-level subsystem, then the parent subsystem is highlighted in red in addition to the underlying block as shown in the following figure.<br />
+<br><br><img src="Images/Step2/Step6.png"></li>
 </ol>
 <blockquote>
-<p>❗❗ <strong>Important</strong>: If the Resource Analyzer window or the Timing Analyzer window opens and no information is displayed in the window (table cells are empty), double-click the System Generator token and set the Target directory to a new directory, that is, a directory that has not been used before. Then run the analysis again.</p>
+<p>❗❗ <strong>Important</strong>: If the Resource Analyzer window or the Timing Analyzer window opens and no information is displayed in the window (table cells are empty), double-click the Model Composer Hub block and set the Code Directory to a new directory, that is, a directory that has not been used before. Then run the analysis again.</p>
 </blockquote>
 <h2 id="summary">Summary</h2>
 <p>In this lab you learned how to use timing and resource analysis inside Model Composer which, in turn, invokes Vivado synthesis to collect the information for the analysis. You also learned how to identify timing violated paths and to troubleshoot them for simple designs.</p>
+<hr />
+<p>Copyright 2022 Xilinx</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
 
 </div>
 <style type='text/css'>body {

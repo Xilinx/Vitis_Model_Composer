@@ -41,7 +41,7 @@ document.location=commandURI
 <br><br>You see the following incomplete diagram. <br><br />
 <img src="Images/Step1/Step2.png"></p></li>
 <li><p>Add an MCode block from the Xilinx Toolbox/HDL/User-Defined Functions library. Before wiring up the block, you need to edit the MATLAB® function to create the correct ports and function name.</p></li>
-<li><p>Double-click the <strong>MCode</strong> block and click <strong>Edit M-File</strong>, as shown in the following figure.<br />
+<li><p>Double-click the <strong>MCode</strong> block and click the <strong>Edit</strong> button, as shown in the following figure.<br />
 <br><br><img src="Images/Step1/Step4-1.png"><br />
 <br><br> The following figure shows the defualt M-code in the MATLAB text editor<br />
 <br><br><img src="Images/Step1/Step4-2.png"></p></li>
@@ -97,7 +97,7 @@ matched = 0;
 <li><p>Open the subsystem named Transpose FIR Filter Black Box.<br />
 <br><br> At this point, the subsystem contains two input ports and one output port. You will add a black box to this subsystem:<br />
 <br><br><img src="Images/Step2/Step4.png"></p></li>
-<li><p>Right-click the design canvas, select <strong>Xilinx BlockAdd</strong>, and add a Black Box block to this subsystem.<br />
+<li><p>Left-click the design canvas and begin typing <strong>Black Box</strong> to a Black Box block to this subsystem.<br />
 <br><br>A browser window opens, listing the VHDL source files that can be associated with the black box.</p></li>
 <li><p>From this window, select the top-level VHDL file <samp>transpose<em>fir.vhd</samp>. This is illustrated in the following figure<br />
 <br><br><img src="Images/Step2/Step6.png"><br />
@@ -123,7 +123,7 @@ matched = 0;
 <li><p>Move to the design top-level and run the simulation by clicking the <strong>Run simulation</strong> button <img width="18" height="18" src="../Images/HDL/Lab1/Step1/Configure_HDL_Blocks/runemoji.png">, then double-click the <strong>Scope</strong> block.</p></li>
 <li><p>Notice the black box output shown in the Output Signal scope is zero. This is expected because the black box is configured to be Inactive during simulation.<br />
 <br><br><img src="Images/Step2/Step12.png"></p></li>
-<li><p>From the Simulink Editor menu, select <strong>Other Displays > Signals & Ports > Port Data Types</strong> to display the port types for the black box.</p></li>
+<li><p>From the Simulink Toolstrip, select <em>Debug > Information Overlays > Alias Data Types</em>* to display the port types for the black box.</p></li>
 <li><p>Compile the model (Ctrl-D) to ensure the port data types are up to date.<br />
 <br><br>Notice that the black box port output type is <code>UFix_26_0</code>. This means it is unsigned, 26-bits wide, and has a binary point 0 positions to the left of the least significant bit.</p></li>
 <li><p>Open the configuration M-function <samp>transpose<em>fir</em>config.m</samp> and change the output type from <code>UFix_26_0</code> to <code>Fix_26_12</code>. The modified line (line 26) should read:</p></li>
@@ -191,8 +191,7 @@ You should see a display similar to that shown below.<br />
 <br><br><img src="Images/Step3/Part2/Step1.png"></p></li>
 <li><p>Add a Vitis HLS block:</p>
 <ul>
-<li>Right-click anywhere on the canvas workspace.</li>
-<li>Select <strong>Xilinx BlockAdd</strong>.</li>
+<li>Left-click anywhere on the canvas workspace.</li>
 <li>Type <code>Vitis HLS</code> in the Add block dialog box.</li>
 <li>Select <strong>Vitis HLS</strong> as shown in the following figure.<br />
 <br><br><img src="Images/Step3/Part2/Step2.png"></li></ul></li>
@@ -224,6 +223,18 @@ You should see a display similar to that shown below.<br />
 <li><samp>\HDL_Library\Lab2\HDL\solution</samp></li>
 <li><samp>\HDL<em>Library\Lab2\M</em>code\solution</samp></li>
 </ul>
+<hr />
+<p>Copyright 2022 Xilinx</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
 
 </div>
 <style type='text/css'>body {

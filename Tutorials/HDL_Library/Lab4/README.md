@@ -72,19 +72,17 @@ There are two data paths in the design where FIFOs are required:
  * Data from CTRL to Gain Control.
  * Data from DDC to Gain Control.
 
-1. Right-click anywhere in the canvas and select **Xilinx BlockAdd**.
+1. Left-click anywhere in the canvas and type `FIFO`.
 
-2. Type `FIFO` in the Add Block dialog box.
+2. Select FIFO from the menu to add a FIFO to the design.
 
-3. Select FIFO from the menu to add a FIFO to the design.
-
-4. Connect the data path through instance FIFO. Delete any existing connections to complete this task.
+3. Connect the data path through instance FIFO. Delete any existing connections to complete this task.
     - Connect `CTRL/Out1` to `FIFO/din`.
     - Connect `FIFO/dout` to `Gain Control/In1`.
 
-5. Make a copy of the FIFO instance (using Ctrl-C and Ctrl-V to copy and paste).
+4. Make a copy of the FIFO instance (right-click and drag to copy and paste).
 
-6. Connect the data path through instance FIFO1. Delete any existing connections to complete this task.
+5. Connect the data path through instance FIFO1. Delete any existing connections to complete this task.
     - Connect `DDC/Out2` to `FIFO1/din`.
     - Connect `FIFO1/dout` to `Gain Control/In3`.
 <br><br>You have now connected the data between the different domains and have the design shown in the following figure.
@@ -95,63 +93,63 @@ There are two data paths in the design where FIFOs are required:
     - The Gain Control must generate a read enable for both FIFOs. You will use the empty signal from the FIFOs and invert it; if there is data available, this block will read it.
 
 
-7. Double-click the **CTRL** block to open the subsystem.
+6. Double-click the **CTRL** block to open the subsystem.
 
-8. Right-click in the canvas and use **Xilinx BlockAdd** to add these blocks:
-    - Delay (Xilinx)
-    - Relational
+7. Left-click in the canvas and type to add these blocks:
+    - Delay (Xilinx Toolbox/HDL)
+    - Relational (Xilinx Toolbox/HDL)
 
-9. Select instance Out1 and make a copy (use Ctrl-C and Ctrl-V to cut and paste).
+8. Select instance Out1 and make a copy (right-click and drag to copy and paste).
 
-10. Double-click the **Relational** block to open the Properties Editor.
+9. Double-click the **Relational** block to open the Properties Editor.
 
-11. Use the Comparison drop-down menu to select **a!=b** and click **OK**.
+10. Use the Comparison drop-down menu to select **a!=b** and click **OK**.
 
-12. Connect the blocks as shown in the following figure.
-<br><br><img src="Images/Step2/Step12.png">
+11. Connect the blocks as shown in the following figure.
+<br><br><img src="Images/Step2/Step11.png">
 <br><br>This will create an output strobe on Out2 which will be active for one cycle when the input changes, and be used as the write-enable from CTRL to the Gain Control (the FIFO block at the top level).
 
-13. Click the Up to Parent toolbar button <img width="18" height="18" src="../Images/Buttons/upToParent.png"> to return to the top level.
+12. Click the Up to Parent toolbar button to return to the top level.
 
-14. Double-click the instance Gain Control to open the subsystem.
+13. Double-click the instance Gain Control to open the subsystem.
 
-15. Right-click in the canvas and use Xilinx BlockAdd to add these blocks:
-    - Inverter
+14. Left-click the canvas and type to add these blocks:
+    - Inverter (Xillinx Toolbox/HDL)
     - Inverter (for a total of two inverters)
-    - Delay (Xilinx)
+    - Delay (Xilinx Toolbox/HDL)
 
-16. Select the instance Out1 and make a copy `Out3` (use Ctrl-C and Ctrl-V to cut and paste).
+15. Select the instance Out1 and make a copy `Out3` (right-click and drag to copy and paste).
     - Rename Out3 to `DDC_Read`
 
-17. Select instance Out1 and make a copy `Out3` (use Ctrl-C and Ctrl-V to cut and paste).
+16. Select instance Out1 and make a copy `Out3` (right-click and drag to copy and paste).
     - Rename Out3 to `CTRL_Read`
 
-18. Select instance In1 and make a copy `In4` (use Ctrl-C and Ctrl-V to cut and paste).
+17. Select instance In1 and make a copy `In4` (right-click and drag to copy and paste).
     - Rename In4 to `CTRL_Empty`
 
-19. Connect the blocks as shown in the following figure
-<br><br><img src="Images/Step2/Step19.png"><br><br>
+18. Connect the blocks as shown in the following figure
+<br><br><img src="Images/Step2/Step18.png"><br><br>
     - The FIFO empty signal from the top-level Gain Control FIFO (FIFO) block is simply an inverter block used to create a read-enable for the top-level DDC FIFO (FIFO1). If the FIFO is not empty, the data will be read.
     - Similarly, the FIFO empty signal from the top-level DDC FIFO (FIFO1) is inverted to create a FIFO read-enable.
     - This same signal will be used as the new `data_tvalid` (which was In2). However, because the FIFO has a latency of 1, this signal must be delayed to ensure this control signal is correctly aligned with the data (which is now delayed by 1 through the FIFO).
 
-20. Use the Up to Parent toolbar button <img width="18" height="18" src="../Images/Buttons/upToParent.png"> to return to the top level.
+19. Use the Up to Parent toolbar button to return to the top level.
 <br><br>This shows the control signals are now present at the top level.
 <br><br><img src="Images/Step2/Step20.png">
 <br><br>You will now complete the final connections.
 
-21. Connect the control path through instance FIFO. Delete any existing connections to complete this task.
+20. Connect the control path through instance FIFO. Delete any existing connections to complete this task.
     - Connect `CTRL/Out2` to `FIFO/we`.
     - Connect `FIFO/empty` to `Gain Control/CTRL_Empty`.
     - Connect `Gain Control/CTRL_Read` to `FIFO/re`.
 
-22. Connect the control path through instance FIFO1. Delete any existing connections to complete this task.
+21. Connect the control path through instance FIFO1. Delete any existing connections to complete this task.
     - Connect `DDC/Out1` to `FIFO1/we`.
     - Connect `FIFO1/empty` to `Gain Control/In2`.
     - Connect` Gain Control/DDC_Read` to `FIFO1/re`.
 <br><br><img src="Images/Step2/Step22.png">
 
-23. Click the Run simulation button to simulate the design and confirm the correct operation – you will see the same results as Step 1 action 4.
+22. Click the Run simulation button to simulate the design and confirm the correct operation – you will see the same results as Step 1 action 4.
 
 In the next step, you will learn how to specify different clock domains are associated with each hierarchy.
 
@@ -159,111 +157,78 @@ In the next step, you will learn how to specify different clock domains are asso
 
 In this step you will specify a different clock domain for each subsystem.
 
-1. Double-click the System Generator token to open the Properties Editor.
+1. Double-click the Model Composer Hub block.
 
-2. Select the **Clocking** tab.
+2. Select the **HDL Clock Settings** tab.
 
-3. Click **Enable multiple clocks**
+3. Click **Enable multiple clocks**.
+4. Change "Number of clocks" to 3.
 
-> 📝 **Note**: The FPGA clock period and the Simulink system period are now greyed out. This option informs Vitis Model Composer that clock rate will be specified separately for each hierarchy. It is therefore important the top level contains only subsystems and FIFOs; no other logic should be present at the top level in a multi-rate design.
+> 📝 **Note**: There are now separate tabs (Clock1, Clock2, Clock3) to set the different clocks in the design. Each of these clocks will be associated with one of the subsystems (CTRL, Gain Control, DDC) in the design).
 
-<ul><img src="Images/Step3/Step3.jfif"></ul>
+You will specify a new clock rate for the CTRL block. This block will be clocked at 100 MHz and accessed using an AXI4-Lite interface.
 
-4. Click **OK** to close the Properties Editor.
-<br><br>You will now specify a new clock rate for the CTRL block. The CTRL block will be driven from a CPU which executes at 100 MHz.
+5. Select the Clock1 tab.
 
-5. Select the **System Generator** token.
+6. Select the Subsystem "Lab4/HDL_DUT/CTRL".
 
-6. Press the Ctrl+C key or right-click to copy the token.
-<br><br>You will specify a new clock rate for the CTRL block. This block will be clocked at 100 MHz and accessed using an AXI4-Lite interface.
+7. Set the FPGA clock period to 1e9/100e6.
 
-7. Double-click the **CTRL** block to navigate into the subsystem.
+8. Set the Simulink system period to 1/100e6.
+<br><br><img src="Images/Step3/Step8.png">
 
-8. Press the Ctrl+V key or right-click to paste a System Generator token into CTRL.
+The DDC block uses the same clock frequency as the original design, 491 MHz, because this is the rate of the incoming data.
 
-9. Double-click the **System Generator** token to open the Properties Editor.
+9. Select the Clock2 tab.
 
-10. Select the **Clocking** tab.
+10. Select the Subsystem "Lab4/HDL_DUTDDC".
 
-11. Deselect **Enable multiple clocks** (this was inherited when the token was copied).
+11. Set the FPGA clock period to 1e9/491.52e6.
 
-12. Change the FPGA clock period to 1e9/100e6.
+12. Set the Simulink system period to 1/491.52e6.
+<br><br><img src="Images/Step3/Step12.png">
 
-13. Change the Simulink system period to 1/100e6.
-<br><br><img src="Images/Step3/Step13.png">
+You will now specify a new clock rate for the Gain Control block. The Gain Control block will be clocked at the same rate as the output from the DDC, 61.44 MHz.
 
-14. Click **OK** to close the Properties Editor.
+13. Select the Clock3 tab.
 
-15. Double-click the Gateway In instance **POWER_SCALE** to open the Properties Editor.
+14. Select the Subsystem "Lab4/HDL_DUT/Gain Control".
 
-16. Change the Sample period to 1/100e6 to match the new frequency of this block.
+15. Set the FPGA clock period to 1e9/61.44e6.
+
+16. Set the Simulink system period to 1/61.44e6.
+<br><br><img src="Images/Step3/Step16.png">
+
+17. Click Apply and OK to close the Model Composer Hub.
+
+18. Double-click the HDL DUT block and then the CTRL block to navigate into the subsystem.
+
+19. Double-click the Gateway In instance **POWER_SCALE** to open the Properties Editor.
+
+20. Change the Sample period to 1/100e6 to match the new frequency of this block.
 <br><br>In the Implementation tab, note that the Interface is set to AXI4-Lite. This will ensure this port is implemented as a register in an AXI4-Lite interface.
 
-17. Click **OK** to close the Properties Editor.
+21. Save the design.
 
-18. Select and copy the System Generator token.
-
-19. Click the **Up to Parent** toolbar button to return to the top level.
-<br><br>You will now specify a new clock rate for the Gain Control block. The Gain Control block will be clocked at the same rate as the output from the DDC, 61.44 MHz.
-
-20. Double-click the **Gain Control** block to navigate into the subsystem.
-
-21. Press the Ctrl+V key or right-click to paste a System Generator token into Gain Control.
-
-22. Double-click the **System Generator** token to open the Properties Editor.
-
-23. Select the **Clocking** tab.
-
-24. Change the FPGA clock period to 1e9/61.44e6.
-
-25. Change the Simulink system period to 1/61.44e6.
-<br><br><img src="Images/Step3/Step25.png">
-
-26. Click **OK** to close the Properties Editor.
-<br><br>Note that the output signals are prefixed with `M_AXI_DATA_`. This will ensure that each port will be implemented as an AXI4 interface, because the suffix for both signals is a valid AXI4 signal name (`tvalid` and `tdata`).
-
-27. Click the **Up to Parent** toolbar button to return to the top level.
-<br><br>The DDC block uses the same clock frequency as the original design, 491 MHz, because this is the rate of the incoming data.
-
-28. In the top-level design, select and copy the System Generator token.
-
-29. Double-click the **DDC** block to navigate into the subsystem.
-
-30. Press the Ctrl+V key or right-click to paste a System Generator token into the DDC.
-
-31. Double-click the **System Generator** token to open the Properties Editor.
-
-32. Select the **Clocking** tab.
-
-33. Deselect **Enable multiple clocks**. The FPGA clock period and Simulink system period are now set to represent 491 MHz.
-<br><br><img src="Images/Step3/Step33.png">
-
-34. Click **OK** to close the Properties Editor.
-
-35. Use the **Up to Parent** toolbar button to return to the top level.
-
-36. Save the design.
-
-37. Click the Run simulation button to simulate the design and confirm the same results as earlier.
+22. Click the Run simulation button to simulate the design and confirm the same results as earlier.
 <br><br>The design will now be implemented with three clock domains.
 
-38. Double-click the top-level **System Generator** token to open the Properties Editor.
+23. Double-click the top-level **Model Composer Hub** block.
 
-39. Click **Generate** to compile the design into a hardware description.
+24. Click **Generate** to compile the design into a hardware description.
 
-40. Click **Yes** to dismiss the simulation warning.
+25. When generation completes, click **OK** to dismiss the Compilation status dialog box.
 
-41. When generation completes, click **OK** to dismiss the Compilation status dialog box.
+26. Click **OK** to dismiss the Model Composer Hub.
 
-42. Click **OK** to dismiss the System Generator token.
-
-43. Open the file <samp> \HDL_Library\Lab4\IPP_QT_MCD_0001\DDC_HB_hier\ip\hdl\lab4_1.vhd </samp> to confirm the design is using three clocks, as shown in the following.
+27. Open the file <samp> \HDL_Library\Lab4\netlist\ip\hdl\hdl_dut.vhd </samp> to confirm the design is using three clocks, as shown in the following.
 ```
-entity lab4_1 is
+entity hdl_dut is
   port (
-     ctrl_clk : in std_logic;
-     ddc_clk : in std_logic;
-     gain_control_clk : in std_logic;
+    adc_in : in std_logic_vector( 16-1 downto 0 );
+    ddc_clk : in std_logic;
+    ctrl_clk : in std_logic;
+    gain_control_clk : in std_logic;
 ``` 
 
 ### Summary 
@@ -278,3 +243,18 @@ The following <samp> solution </samp> directory contains the final Vitis Model C
 * The results from Step 2 are provided in file <samp> Lab4_2_sol.slx </samp>
 * The final results from Step 3 are provided in file <samp> Lab4_3_sol.slx </samp>
 
+
+--------------
+Copyright 2022 Xilinx
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
