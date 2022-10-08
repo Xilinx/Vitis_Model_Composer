@@ -440,7 +440,7 @@ In this part you will re-implement the design from Part 1: Designing with Floati
 MyCoeffs = xlfda_numerator('FDATool')
 ```
 
-3. Double-click the instance Gateway In2 to confirm the data is being sampled as 16-bit fixed-point value.
+3. Double-click the instance Gateway In2 under the FIR-Fixed-Point subsystem to confirm the data is being sampled as 16-bit fixed-point value.
 
 4. Click Cancel to exit the Properties Editor.
 
@@ -453,15 +453,15 @@ MyCoeffs = xlfda_numerator('FDATool')
 Taking into account the positive and negative values of the coefficients the maximum gain possible is 1.2070 and the output signal should only ever be slightly smaller in magnitude than the input signal, which is a 16-bit signal. There is no need to have 15 bits (43-28) of data above the binary point.
 <br><br>You will now use the Reinterpret and Convert blocks to manipulate the fixed-point data to be no greater than the width required for an accurate result and produce the most hardware efficient design.
 
-7. Right-click with the mouse anywhere in the canvas and select **Xilinx BlockAdd**.
+7. Double-click on the FIR-Fixed-Point subsystem and then double click anywhere in the canvas.
 
-8. In the Add Block entry box, type `Reinterpret`.
+8. In the edit field, type `Reinterpret`.
 
-9. Double-click the **Reinterpret** component to add it to the design.
+9. Click the **Reinterpret** component from Xilinx Toolbox/HDL library to add it to the design.
 
 10. Repeat the previous three steps for these components: 
     - Convert
-    - Scope
+    - Scope (pick any scope)
 
 11. In the design, select the Gateway Out2 instance
     - Right-click and use Copy and Paste to create a new instance of the Gateway Out block.
@@ -469,6 +469,7 @@ Taking into account the positive and negative values of the coefficients the max
 
 12. Double-click the **Scope** component.
     - In the Scope properties dialog box, select **File > Number of Inputs > 3**.
+    - In the Scope properties dialog box, select **Viwe > Layout** and select three verticl squares. 
     - Select **View > Configuration Properties** and confirm that the Number of input ports is 3.
 <br><br><img src = "Images/Step4/Part2/Step12.png"><br><br>
     - Click **OK** to close the Configuration Properties dialog box.
@@ -490,7 +491,7 @@ The Reinterpret and Convert blocks have not been configured at this point and so
 <br><br>The HDL Reinterpret block forces its output to a new type without any regard for retaining the numerical value represented by the input. The block allows for unsigned data to be reinterpreted as signed data, or, conversely, for signed data to be reinterpreted as unsigned. It also allows for the reinterpretation of the data's scaling, through the repositioning of the binary point within the data.
 <br><br>In this exercise you will scale the data by a factor of 2 to model the presence of additional design processing which might occur in a larger system. The Reinterpret block can also be used to scale down.</ul>
 
-17.  Double-click the **Reinterpret** block to open the Properties Editor.
+17. Double-click the **Reinterpret** block to open the Properties Editor.
 
 18. Select **Force Binary** Point.
 
@@ -514,27 +515,29 @@ The Reinterpret and Convert blocks have not been configured at this point and so
 <br><br><img src = "Images/Step4/Part2/Step16.png"><br><br>
 The final step is to synthesize this design into hardware.</ul>
 
-25. Double-click the System Generator token to open the Properties Editor.
+25. Double-click the Vitis Model Composer Hub block to open the Properties Editor.
 
-26. On the Compilation tab, ensure the Compilation target is IP catalog.
+26. Select the FIR-Fixed-Point subsystem on the left.
 
-27. On the Clocking tab, under Perform analysis select **Post Synthesis** and from Analyzer type menu select Resource. This option gives the resource utilization details after completion.
+27. On the HDL Settings tab, ensure the Compilation Type is IP catalog.
+
+28. On the HDL Analysis tab, under Perform Analysis select **Post Synthesis** and from Analysis Type menu select Resource. This option gives the resource utilization details after completion.
 
 > 🖊️ Note: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.
 
-28. Click **Generate** to compile the design into a hardware description. After completion, it generates the resource utilization in Resource Analyzer window as shown in the following figure.
+29. Click **Generate** to compile the design into a hardware description. After completion, it generates the resource utilization in Resource Analyzer window as shown in the following figure.
 <br><br><img src = "Images/Step4/Part2/Step16.png"><br><br>
 
-29. Click **OK** to dismiss the Compilation status dialog box.
+30. Click **OK** to dismiss the Compilation status dialog box.
 
-30. Click **OK** to dismiss the System Generator token.<br>
+31. Click **OK** to dismiss the Vitis Model Composer property editor.<br>
 Notice, as compared to the results in Step 1, these results show approximately:
     - 45% more Flip-Flops 
     - 20% more LUTs
     - 30% more DSP48s
 However, this design contains both the original floating-point filter and the new fixed-point version: the fixed-point version therefore uses approximately 75-50% fewer resources with the acceptable signal fidelity and design performance.
 
-31. Exit Vivado.
+32. Exit Vivado.
 32. Exit the <samp>Lab1_4_2.slx</samp> worksheet.
 
 ### Summary
