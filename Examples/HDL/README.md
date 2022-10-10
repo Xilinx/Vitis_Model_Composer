@@ -61,7 +61,7 @@
  </tr>
  <tr>
  <td align="left">
-   <a href="./Digital_Filtering/SSR_FIR/README.md">High speed SSR FIR</a> <img src="../Images/new.PNG" width="50">
+   <a href="./Digital_Filtering/SSR_FIR/README.md">High speed SSR FIR</a> <img src="../../Images/new.PNG" width="50">
  </td>
  <td> This reference design can be used as a starting design point when efficient implementations of very high data rate (over 1 Gsps) Single Rate FIRs are required.</td>
  <tr>
