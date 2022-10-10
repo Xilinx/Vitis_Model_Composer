@@ -1,9 +1,9 @@
 # Cosimulation of AI Engine and Programmable Logic (HLS)
-This example showcases a design containing both AI Engine blocks and Programmable Logic (HLS). We are using the *HLS Kernel* block to import an HLS kernel into Model Composer as a block. To connect the AI Engine blocks to the HLS kernel block, we use the *AIE to HLS* and *HLS to AIE* interface blocks if there is a data type mismatch, otherwise, we can connect the blocks directly (Refer to the example [AIE HLS without interface](../AIE_HLS_without_interface/README.html)). 
+This example showcases a design containing both AI Engine blocks and Programmable Logic (HLS). We are using the *HLS Kernel* block to import an HLS kernel into Vitis Model Composer as a block. To connect the AI Engine blocks to the HLS kernel block, we use the *AIE to HLS* and *HLS to AIE* interface blocks if there is a data type mismatch, otherwise, we can connect the blocks directly (Refer to the example [AIE HLS without interface](../AIE_HLS_without_interface/README.html)). 
 
 
 ## Knowledge nuggets
-:bulb: In Model Composer, you can cosimulate HLS kernels and AI Engine blocks.
+:bulb: In Vitis Model Composer, you can cosimulate HLS kernels and AI Engine blocks.
 
 :bulb: The argument type for the HLS kernel should be hls::stream. The arguments can also be scalar or vector to model run-time parameter interfaces. 
 
