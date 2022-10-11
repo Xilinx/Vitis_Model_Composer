@@ -532,9 +532,9 @@ The final step is to synthesize this design into hardware.</ul>
 
 31. Click **OK** to dismiss the Vitis Model Composer property editor.<br>
 Notice, as compared to the results in Step 1, these results show approximately:
-    - 45% more Flip-Flops 
-    - 20% more LUTs
-    - 30% more DSP48s
+    - 55% less registers 
+    - 90% less LUTs
+    - 66% less DSP48s
 
 32. Exit Vivado.
 32. Exit the <samp>Lab1_4_2.slx</samp> worksheet.
