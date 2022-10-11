@@ -18,7 +18,7 @@ In this step you will create the control logic for a Finite State Machine using 
 
 1. Launch Vitis Model Composer and change the working directory to: **\HDL_Library\Lab2\M_code**
 
-2. Open the file <samp>Lab2_1.slx</samp>
+2. Open the file <samp>Lab2_1.slx</samp> and double-click on the HDL_DUT subsystem.
 <br><br>You see the following incomplete diagram. <br>
 <img src="Images/Step1/Step2.png">
 
@@ -205,7 +205,7 @@ Finished export RTL
 
 ### Part 2: Including a Vitis HLS Package in a Vitis Model Composer Design
 
-1. Launch Vitis Model Composer and open the `Lab2_3.slx` file in the <samp>Lab2/C_code</samp> folder. This should open the model as shown in the following figure.
+1. Launch Vitis Model Composer, open the `Lab2_3.slx` file in the <samp>Lab2/C_code</samp> folder, and double-click on the HDL_DUT subsystem. This should open the model as shown in the following figure.
 <br><br><img src="Images/Step3/Part2/Step1.png">
 
 2. Add a Vitis HLS block:
