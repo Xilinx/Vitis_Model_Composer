@@ -422,7 +422,7 @@ The final step is to synthesize this design into hardware.
 14. Click **OK** to dismiss the Compilation status dialog box.
 15. Click **OK** to dismiss the Vitis Model Composer Hub.<br>
 <br>You implemented this same filter in Step 1 using fixed-point data types. When compared to the synthesis results from that implementation – the initial results from this step are shown in the following figure and you can see this current version of the design is using a large amount of registers (FF), BRAMs, LUTs, and DSP resources (Xilinx dedicated multiplier/add units).
-<br><br><img src = "Images/Step4/Part1/Step15.png"><br><br>
+<br><br><img src = "Images/Step1/Configure_HDL_Blocks/Step20-1.png"><br><br>
 Maintaining the full accuracy of floating-point types is an ideal implementation but implementing full floating-point accuracy requires a significant amount of hardware.
 <br><br>For this particular design, the entire range of the floating-point types is not required. The design is using considerably more resources than what is required. In the next part, you will learn how to compare designs with different data types inside the Simulink environment.
 
