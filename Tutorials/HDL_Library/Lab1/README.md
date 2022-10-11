@@ -380,19 +380,18 @@ This step has two primary parts:
 In this part you will review a design implemented with floating-point data types.
 
 1. At the command prompt, type `open Lab1_4_1.slx.`
-<br><br>This opens the Simulink design shown in the following figure. This design is similar to the design used in Lab 1_1, however this time the design is using float data types and the filter is implemented in sub-system FIR.<br><br>
+<br><br>This opens the Simulink design shown in the following figure. This design is similar to the design used in Lab 1_1, however this time the design is using float data types.<br><br>
 First, you will review the attributes of the design, then simulate the design to review the performance, and finally synthesize the design.
 <br><br><img src = "Images/Step4/Part1/Step1.png"><br><br>
-In the previous figure, both the input and output of instance FIR are of type double.
 
 2. In the MATLAB Command Window enter:
 ```
 MyCoeffs = xlfda_numerator('FDATool')
 ```
 
-3. Double-click the instance **FIR** to open the sub-system.
+3. Double-click the **FIR** subsystem to open the subsystem.
 
-4. Double-click the instance **Constant1** to open the Properties Editor.
+4. Double-click the instance **Constant1** (close to the top) to open the Properties Editor.
 <br><br>This shows the Constant value is defined by `MyCoeffs(1).`
 <br><br><img src = "Images/Step4/Part1/Step4.png"><br><br>
 
@@ -401,12 +400,13 @@ MyCoeffs = xlfda_numerator('FDATool')
 6. Return to the top-level design using the toolbar button Up To Parent , or click the tab labeled Lab1_4_1.<br>
 <br>The design is summing two sine waves, both of which are 9 MHz. The input gateway to the Vitis Model Composer must therefore sample at a rate of at least 18 MHz.
 
-7. Double-click the FIR subsystem and then the **Gateway In1** instance to open the Properties Editor and confirm the input is sampling the data at a rate of 20 MHz (a Sample period of 1/20e6).
+7. Double-click the FIR subsystem and then the **Gateway In1** (close to the top) instance to open the Properties Editor and confirm the input is sampling the data at a rate of 20 MHz (a Sample period of 1/20e6) and the Gateway is producing a single precision output.
 
 8. Close the Gateway In Properties editor.
 
 9. Click the Run simulation button to simulate the design.<br>
-<br>The results shown in the following figure show the Vitis Model Composer HDL blockset produces results which are very close to the ideal case, shown in the center. The results are not identical because the Vitis Model Composer design must sample the continuous input waveform into discrete time values.
+<br>The results shown in the following figure show the Vitis Model Composer HDL blockset produces results which are very close to the ideal case, shown in the center. The results are not identical because the Vitis Model Composer HDL design is operating on single precision data while the _Filter Designer_ block is operating on double precision data. 
+
 <br><br><img src = "Images/Step4/Part1/Step9.png"><br><br>
 The final step is to synthesize this design into hardware.
 
@@ -457,7 +457,7 @@ Taking into account the positive and negative values of the coefficients the max
 
 8. In the edit field, type `Reinterpret`.
 
-9. Click the **Reinterpret** component from Xilinx Toolbox/HDL library to add it to the design.
+9. Click the **Reinterpret** component from **Xilinx Toolbox/HDL** library to add it to the design.
 
 10. Repeat the previous three steps for these components: 
     - Convert
@@ -469,7 +469,7 @@ Taking into account the positive and negative values of the coefficients the max
 
 12. Double-click the **Scope** component.
     - In the Scope properties dialog box, select **File > Number of Inputs > 3**.
-    - In the Scope properties dialog box, select **Viwe > Layout** and select three verticl squares. 
+    - In the Scope properties dialog box, select **Viwe > Layout** and select three vertical squares. 
     - Select **View > Configuration Properties** and confirm that the Number of input ports is 3.
 <br><br><img src = "Images/Step4/Part2/Step12.png"><br><br>
     - Click **OK** to close the Configuration Properties dialog box.
@@ -512,7 +512,7 @@ The Reinterpret and Convert blocks have not been configured at this point and so
 
 <ul>In the following figure you can see the output from the filter (Growth) has values between plus and minus 1. The output from the Reinterpret block moves the data values to between plus and minus 2.
 <br><br>In this detailed view of the waveform, the final output (Convert) shows no difference in fidelity, when compared to the reinterpret results, but uses only 16 bits.
-<br><br><img src = "Images/Step4/Part2/Step16.png"><br><br>
+<br><br><img src = "Images/Step4/Part2/Step24.png"><br><br>
 The final step is to synthesize this design into hardware.</ul>
 
 25. Double-click the Vitis Model Composer Hub block to open the Properties Editor.
@@ -526,7 +526,7 @@ The final step is to synthesize this design into hardware.</ul>
 > 🖊️ Note: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.
 
 29. Click **Generate** to compile the design into a hardware description. After completion, it generates the resource utilization in Resource Analyzer window as shown in the following figure.
-<br><br><img src = "Images/Step4/Part2/Step16.png"><br><br>
+<br><br><img src = "Images/Step4/Part2/Step28.png"><br><br>
 
 30. Click **OK** to dismiss the Compilation status dialog box.
 
@@ -535,7 +535,6 @@ Notice, as compared to the results in Step 1, these results show approximately:
     - 45% more Flip-Flops 
     - 20% more LUTs
     - 30% more DSP48s
-However, this design contains both the original floating-point filter and the new fixed-point version: the fixed-point version therefore uses approximately 75-50% fewer resources with the acceptable signal fidelity and design performance.
 
 32. Exit Vivado.
 32. Exit the <samp>Lab1_4_2.slx</samp> worksheet.
