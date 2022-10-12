@@ -172,7 +172,7 @@ The first task is to define the coefficients of the new filter. For this task yo
 16. <p> Click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png"> to simulate the design and view the results, as shown in the following figure. Because the new design is cycle and bit accurate, simulation might take longer to complete than before.</p>
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step16.png">
 <br> The results are shown above, on the right hand side (in the Spectrum Analyzer HDL window), and differ slightly from the original design (shown on the left in the Spectrum Analyzer FDA Tool window). This is due to the quantization and sampling effect inherent when a continuous time system is described in discrete time hardware.
-<br>The final step is to implement this design in hardware. This process will synthesize everything contained between the Gateway In and Gateway Out blocks into a hardware description. This description of the design is output in the Verilog or VHDL Hardware Description Language (HDL). This process is controlled by the System Generator token.
+<br>The final step is to implement this design in hardware. This process will synthesize everything contained between the Gateway In and Gateway Out blocks into a hardware description. This description of the design is output in the Verilog or VHDL Hardware Description Language (HDL). This process is controlled by the Vitis Model Composer Hub.
 </ul>
 
 17. Double-click the **Vitis Model Composer Hub** block to open the Properties Editor.
@@ -280,7 +280,7 @@ In this step you will see how an FPGA can be used to create a more optimized ver
 <br><img src="Images/Step2/Step13.png"></ul>
 
 14. Click **OK** to dismiss the Resource Analyzer window.
-15. Click **OK** to dismiss the System Generator token.
+15. Click **OK** to dismiss the Vitis Model Composer Hub block. 
 
 Exit the <samp>Lab1_2.slx</samp> Simulink worksheet.
 
@@ -549,7 +549,7 @@ The Reinterpret and Convert blocks are powerful tools which allow you to optimiz
 
 Finally, you learned how you can take total control of the hardware implementation by using discrete primitives.
 
-> 🖊️ Note: In this tutorial you learned how to add Vitis Model Composer HDL blocks to the design and then configure them. A useful productivity technique is to add and configure the System Generator token first. If the target device is set at the start, some complex IP blocks will be automatically configured for the device when they are added to the design.
+> 🖊️ Note: In this tutorial you learned how to add Vitis Model Composer HDL blocks to the design and then configure them. A useful productivity technique is to add and configure the Vitis Model Composer Hub block first. If the target device is set at the start, some complex IP blocks will be automatically configured for the device when they are added to the design.
 
 The following solution directory contains the final Vitis Model Composer (`*.slx`) files for this lab.
 ```
