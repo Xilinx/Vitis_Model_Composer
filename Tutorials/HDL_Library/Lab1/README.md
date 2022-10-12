@@ -393,7 +393,7 @@ MyCoeffs = xlfda_numerator('FDATool')
 
 4. Double-click the instance **Constant1** (close to the top) to open the Properties Editor.
 <br><br>This shows the Constant value is defined by `MyCoeffs(1).`
-<br><br><img src = "Images/Step4/Part1/Step4.png"><br><br>
+<br><br><img src = "Images/Step4/Part1/Step4.png" width=600px; height=auto><br><br>
 
 5. Close the Constant1 Properties editor.
 
