@@ -67,7 +67,7 @@ In this step, you learn the basic operation of Vitis Model Composer and how to s
 
 7. Right-click the **Digital FIR Filter** block and select **Add block to model Lab1_1**
 
-<ul> <img src="Images/Step1/Creating_a_Design_in_FPGA/Step7.png"  width=400px; height=auto> <br><br>
+<ul> <img src="Images/Step1/Creating_a_Design_in_FPGA/Step7.png"  width=600px; height=auto> <br><br>
 	
   You can define the filter coefficients for the Digital FIR Filter block by accessing the block attributes–double-click the <b>Digital FIR Filter</b> block to view these–or, as in this case, they can be defined using the FDATool.
 </ul>
@@ -125,7 +125,7 @@ The first task is to define the coefficients of the new filter. For this task yo
 
 5. In the Filter Parameters section, replace the existing coefficients (Coefficient Vector) with ```xlfda_numerator( [bdroot, '/FDATool'])``` to use the coefficients defined by the FDATool instance that is at the top level in the model (and hence the reason to use the MATLAB 'bdroot' command).
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step7.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step7.png" width=600px; height=auto></ul>
 
 6. Click **OK** to exit the Digital FIR Filter Properties Editor.
 
@@ -268,7 +268,7 @@ In this step you will see how an FPGA can be used to create a more optimized ver
    
 > 📝 Note:  In order to see accurate results from the Resource Analyzer Window, it is recommended to specify a new target directory rather than use the current working directory.
 
-<ul><img src="Images/Step2/clock_settings_2.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step2/clock_settings_2.png" width=600px; height=auto></ul>
 
 12. Click **Generate** to compile the design into a hardware description.
 
@@ -322,21 +322,21 @@ This shows the same specifications as the previous steps in Lab 1 and confirms t
    - For the Counter type, select **Count limited** and enter this value for **Count to value:** `length(xlfda_numerator([bdroot '/FDATool']))-1` <br>This will ensure the counter counts from 0 to 10 (11 coefficient and data addresses).
    - For Output type, leave default value at Unsigned and in Number of Bits enter the value 4. Only 4 binary address bits are required to count to 11.
    - For the Explicit period, enter the value `1/(11*20e6)` to ensure the sample period is 11 times the input data rate. The filter must perform 11 calculations for each input sample.
-<br><br><img src = "Images/Step3/counter.png"  width=400px; height=auto><br><br>
+<br><br><img src = "Images/Step3/counter.png"  width=600px; height=auto><br><br>
    - Click **OK** to exit the Properties Editor.
  
 7. Double-click the **ROM** instance to open the Properties Editor.
    - For the Depth, enter the value `length(xlfda_numerator([bdroot '/FDATool']))`. This will ensure the ROM has 11 elements.
    - For the Initial value vector, enter `xlfda_numerator([bdroot '/FDATool'])`. The coefficient values will be provided by the FDATool instance. 
-<br><br><img src = "Images/Step3/ROM.png" width=400px; height=auto><br><br> 
+<br><br><img src = "Images/Step3/ROM.png" width=600px; height=auto><br><br> 
    - Click **OK** to exit the Properties Editor.
 
 8. Double-click the **DSP Macro 1.0** instance to open the Properties Editor.
    - In the Instructions tab, replace the existing Instructions with `A*B+P` and then add `A*B`. When the `sel` input is false the DSP will multiply and accumulate. When the `sel` input is true the DSP will simply multiply. 
-<br><br><img src = "Images/Step3/dsp_instructions.png" width=400px; height=auto><br><br>
+<br><br><img src = "Images/Step3/dsp_instructions.png" width=600px; height=auto><br><br>
    - In the Pipeline Options tab, use the Pipeline Options drop-down menu to select **By_Tier.**
    - Select **Tier 3** and **Tier 5**. This will ensure registers are used at the inputs to A and B and between the multiply and accumulate operations. 
-<br><br><img src = "Images/Step3/dsp_pipeline.png" width=400px; height=auto><br><br> 
+<br><br><img src = "Images/Step3/dsp_pipeline.png" width=600px; height=auto><br><br> 
    - Click **OK** to exit the Properties Editor.
 
 9. Click **Save** to save the design.
