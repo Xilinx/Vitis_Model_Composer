@@ -1,4 +1,4 @@
-# How to access the examples?
+# How to access the examples and tutorials?
 
 The GitHub repository contains the examples and tutorials for the latest release of Vitis Model Composer. Examples and tutorials for older versions of the product 
 are on git branches with the same name as the product version.
