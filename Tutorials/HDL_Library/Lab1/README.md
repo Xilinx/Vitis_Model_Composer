@@ -142,30 +142,30 @@ The first task is to define the coefficients of the new filter. For this task yo
 
 9. For now, leave the bit width as the default fixed-point 2’s complement 16-bits with 14-bits representing the data below the binary point. This allows us to express a range of -2.0 to 1.999, which fits the range required for the summation of the sine waves (both of amplitude 1).
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11.png" width=600px; height=auto></ul>
 
 10. Click **OK** to close the Gateway In Properties Editor.
 <br>This now allows us to use accurate sample rate and bit-widths to accurately verify the hardware.
 
 13. Create a subsystem that inlcudes the Gateway blocks and the Digital FIR Filter. Call the subsystem, HDL_filter. 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-1.png" width=400px; height=auto></ul>
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-2.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-1.png" width=600px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-2.png" width=600px; height=auto></ul>
 
 14. Double-click the **Vitis Model Composer Hub** token to open the Properties Editor. Click on the "Code Generation" icon on the top, and then click the HDL_filter subsystem on the left. 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/hub_block_hdl_filter.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/hub_block_hdl_filter.png" width=600px; height=auto></ul>
 
 <br>Because the input port is sampled at 20 MHz to adequately represent the data, you must define the clock rate of the FPGA and the Simulink sample period to be at least 20 MHz.
 
 15. Select the HDL Clock Settings tab:
 	 - Specify an FPGA clock period of 50 ns (1/20 MHz).
 	 - Specify a Simulink system period of 1/20e6 seconds.
-<ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=600px; height=auto></ul>
 
 16. Select the HDL Analysis tab:
 	- For the Perform Analysis selection select **Post Synthesis** .
 	- For the Analyzer Type selection select **Resource**. This option gives the resource utilization details after completion.
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/hdl_analysis.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/hdl_analysis.png" width=600px; height=auto></ul>
 
 17. Click **OK** to exit the Hub Block.
 
@@ -181,7 +181,7 @@ The first task is to define the coefficients of the new filter. For this task yo
 
 19. Click on **Code Generation**, then clik on **HDL_filter** on the left. Make sure the **Compilation Type** is set to **IP Catalog**. This ensures the output is in IP Catalog format. Also, use the default Hardware description language, VHDL.
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/IP_catalog_selection.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/IP_catalog_selection.png" width=600px; height=auto></ul>
 
 20. Click **Generate** to compile the design into hardware.
 <br>The compilation process transforms the design captured in Simulink blocks into an industry standard Register Transfer Level (RTL) design description. The RTL design can be synthesized into a hardware design. A Resource Analyzer window appears when the hardware design description has been generated.
@@ -229,7 +229,7 @@ In this step you will see how an FPGA can be used to create a more optimized ver
 3. Double-click the Vitis Model Composer Hub to open the Properties Editor.
 
 <ul> As noted in Step 1, the design requires a minimum sample frequency of 18 MHz and it is currently set to 20 MHz (a 50 ns FPGA clock period). <br>
-  <br><ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=400px; height=auto></ul> <br>
+  <br><ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=600px; height=auto></ul> <br>
   <br>The frequency at which an FPGA device can be clocked easily exceeds 20 MHz. Running the FPGA at a much higher clock frequency will allow Vitis Model Composer to use the same hardware resources to compute multiple intermediate results.
 </ul>
 
@@ -255,7 +255,7 @@ In this step you will see how an FPGA can be used to create a more optimized ver
 
 10. In the Fixed-Point Precision section, replace 16 with ```num_bits``` and replace 14 with ```bin_pt```, as shown in the following figure.
 
-<ul><img src="Images/Step2/gateway_in_settings.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step2/gateway_in_settings.png" width=600px; height=auto></ul>
 
 11. Click **OK** to save and exit the Properties Editor. 
 <br> In the Vitis Model Composer Hub update the sampling frequency to 120 MHz (6 * 20 MHz) in this way:
