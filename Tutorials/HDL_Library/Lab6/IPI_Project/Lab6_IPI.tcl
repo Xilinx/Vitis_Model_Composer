@@ -135,7 +135,7 @@ proc create_root_design { parentCell } {
   set_property -dict [ list CONFIG.NUM_MI {1} CONFIG.NUM_SI {2}  ] $axi_mem_intercon
 
   # Create instance: lab6_1_0, and set properties
-  set lab6_1_0 [ create_bd_cell -type ip -vlnv Xilinx_Tutorial:SysGen:lab6_1:1.2 lab6_1_0 ]
+  set lab6_1_0 [ create_bd_cell -type ip -vlnv User_Company:VMC:HDL_DUT:1.0 lab6_1_0 ]
 
   # Create instance: processing_system7_0, and set properties
   set processing_system7_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0 ]
@@ -157,7 +157,7 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net processing_system7_0_DDR [get_bd_intf_ports DDR] [get_bd_intf_pins processing_system7_0/DDR]
   connect_bd_intf_net -intf_net processing_system7_0_FIXED_IO [get_bd_intf_ports FIXED_IO] [get_bd_intf_pins processing_system7_0/FIXED_IO]
   connect_bd_intf_net -intf_net processing_system7_0_M_AXI_GP0 [get_bd_intf_pins processing_system7_0/M_AXI_GP0] [get_bd_intf_pins processing_system7_0_axi_periph/S00_AXI]
-  connect_bd_intf_net -intf_net processing_system7_0_axi_periph_M00_AXI [get_bd_intf_pins lab6_1_0/lab6_1_s_axi] [get_bd_intf_pins processing_system7_0_axi_periph/M00_AXI]
+  connect_bd_intf_net -intf_net processing_system7_0_axi_periph_M00_AXI [get_bd_intf_pins lab6_1_0/hdl_dut_s_axi] [get_bd_intf_pins processing_system7_0_axi_periph/M00_AXI]
   connect_bd_intf_net -intf_net processing_system7_0_axi_periph_M01_AXI [get_bd_intf_pins axi_dma/S_AXI_LITE] [get_bd_intf_pins processing_system7_0_axi_periph/M01_AXI]
 
   # Create port connections
@@ -170,7 +170,7 @@ proc create_root_design { parentCell } {
   create_bd_addr_seg -range 0x40000000 -offset 0x0 [get_bd_addr_spaces axi_dma/Data_MM2S] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] SEG_processing_system7_0_HP0_DDR_LOWOCM
   create_bd_addr_seg -range 0x40000000 -offset 0x0 [get_bd_addr_spaces axi_dma/Data_S2MM] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] SEG_processing_system7_0_HP0_DDR_LOWOCM
   create_bd_addr_seg -range 0x10000 -offset 0x40400000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_dma/S_AXI_LITE/Reg] SEG_axi_dma_Reg
-  create_bd_addr_seg -range 0x10000 -offset 0x43C00000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs lab6_1_0/lab6_1_s_axi/reg0] SEG_lab6_1_0_reg0
+  create_bd_addr_seg -range 0x10000 -offset 0x43C00000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs lab6_1_0/hdl_dut_s_axi/reg0] SEG_lab6_1_0_reg0
   
 
   # Restore current instance
