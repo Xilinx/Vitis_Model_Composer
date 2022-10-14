@@ -124,14 +124,14 @@ In this step you will create a design using the Vitis Model Composer IP.
 13. Right-click anywhere in the block diagram and select **Add IP**.
 <br><br><img src= "Images/Step3/Step13.png">
 
-14. Type `lab5` in the Search dialog box.
+14. Type `HDL_DUT` in the Search dialog box.
 
-15. Double-click **lab5_1** to add the IP to the design.
+15. Double-click **HDL_DUT** to add the IP to the design.
 <br><br> You will now connect the IP to the rest of the design. Vivado IP integrator provides automated assistance when the design uses AXI interfaces.
 
 16. Click **Run Connection Automation** (at the top of the design canvas).
 
-17. Click **OK** to accept the default options ( <samp> lab5_1_0/lab5_1_s_axi </samp> to <samp> processing_system7_0/M_AXI_GP0 </samp>) and connect the AXI4-Lite interface to the Zynq®-7000 IP SoC.
+17. Click **OK** to accept the default options ( <samp> HDL_DUT_0/HDL_DUT_s_axi </samp> to <samp> processing_system7_0/M_AXI_GP0 </samp>) and connect the AXI4-Lite interface to the Zynq®-7000 IP SoC.
 
 18. Double-click the **ZYNQ7 Processing System** to customize the IP.
 
@@ -143,7 +143,7 @@ In this step you will create a design using the Vitis Model Composer IP.
 
 21. Click **OK** to add this port to the Zynq Processing System.
 
-22. On the Model Composer IP lab5_1 block, click the AXI4-Stream input interface port `s_axis_source` and drag the mouse. Possible valid connections are shown with green check marks as the pencil cursor approaches them. Drag the mouse to the `S_AXI_HP0` port on the Zynq Processing System to complete the connection.
+22. On the Model Composer IP HDL_DUT block, click the AXI4-Stream input interface port `s_axis_source` and drag the mouse. Possible valid connections are shown with green check marks as the pencil cursor approaches them. Drag the mouse to the `S_AXI_HP0` port on the Zynq Processing System to complete the connection.
 <br><br><img src= "Images/Step3/Step22.png">
 
 23. Click **OK** in the Make Connection dialog box.
