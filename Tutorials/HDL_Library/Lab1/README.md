@@ -67,7 +67,7 @@ In this step, you learn the basic operation of Vitis Model Composer and how to s
 
 7. Right-click the **Digital FIR Filter** block and select **Add block to model Lab1_1**
 
-<ul> <img src="Images/Step1/Creating_a_Design_in_FPGA/Step7.png"  width=400px; height=auto> <br><br>
+<ul> <img src="Images/Step1/Creating_a_Design_in_FPGA/Step7.png"  width=600px; height=auto> <br><br>
 	
   You can define the filter coefficients for the Digital FIR Filter block by accessing the block attributes–double-click the <b>Digital FIR Filter</b> block to view these–or, as in this case, they can be defined using the FDATool.
 </ul>
@@ -125,7 +125,7 @@ The first task is to define the coefficients of the new filter. For this task yo
 
 5. In the Filter Parameters section, replace the existing coefficients (Coefficient Vector) with ```xlfda_numerator( [bdroot, '/FDATool'])``` to use the coefficients defined by the FDATool instance that is at the top level in the model (and hence the reason to use the MATLAB 'bdroot' command).
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step7.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step7.png" width=600px; height=auto></ul>
 
 6. Click **OK** to exit the Digital FIR Filter Properties Editor.
 
@@ -142,37 +142,37 @@ The first task is to define the coefficients of the new filter. For this task yo
 
 9. For now, leave the bit width as the default fixed-point 2’s complement 16-bits with 14-bits representing the data below the binary point. This allows us to express a range of -2.0 to 1.999, which fits the range required for the summation of the sine waves (both of amplitude 1).
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11.png" width=600px; height=auto></ul>
 
 10. Click **OK** to close the Gateway In Properties Editor.
 <br>This now allows us to use accurate sample rate and bit-widths to accurately verify the hardware.
 
 13. Create a subsystem that inlcudes the Gateway blocks and the Digital FIR Filter. Call the subsystem, HDL_filter. 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-1.png" width=400px; height=auto></ul>
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-2.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-1.png" width=600px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-2.png" width=600px; height=auto></ul>
 
 14. Double-click the **Vitis Model Composer Hub** token to open the Properties Editor. Click on the "Code Generation" icon on the top, and then click the HDL_filter subsystem on the left. 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/hub_block_hdl_filter.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/hub_block_hdl_filter.png" width=600px; height=auto></ul>
 
 <br>Because the input port is sampled at 20 MHz to adequately represent the data, you must define the clock rate of the FPGA and the Simulink sample period to be at least 20 MHz.
 
 15. Select the HDL Clock Settings tab:
 	 - Specify an FPGA clock period of 50 ns (1/20 MHz).
 	 - Specify a Simulink system period of 1/20e6 seconds.
-<ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=600px; height=auto></ul>
 
 16. Select the HDL Analysis tab:
 	- For the Perform Analysis selection select **Post Synthesis** .
 	- For the Analyzer Type selection select **Resource**. This option gives the resource utilization details after completion.
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/hdl_analysis.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/hdl_analysis.png" width=600px; height=auto></ul>
 
 17. Click **OK** to exit the Hub Block.
 
 16. <p> Click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png"> to simulate the design and view the results, as shown in the following figure. Because the new design is cycle and bit accurate, simulation might take longer to complete than before.</p>
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step16.png">
 <br> The results are shown above, on the right hand side (in the Spectrum Analyzer HDL window), and differ slightly from the original design (shown on the left in the Spectrum Analyzer FDA Tool window). This is due to the quantization and sampling effect inherent when a continuous time system is described in discrete time hardware.
-<br>The final step is to implement this design in hardware. This process will synthesize everything contained between the Gateway In and Gateway Out blocks into a hardware description. This description of the design is output in the Verilog or VHDL Hardware Description Language (HDL). This process is controlled by the System Generator token.
+<br>The final step is to implement this design in hardware. This process will synthesize everything contained between the Gateway In and Gateway Out blocks into a hardware description. This description of the design is output in the Verilog or VHDL Hardware Description Language (HDL). This process is controlled by the Vitis Model Composer Hub.
 </ul>
 
 17. Double-click the **Vitis Model Composer Hub** block to open the Properties Editor.
@@ -181,7 +181,7 @@ The first task is to define the coefficients of the new filter. For this task yo
 
 19. Click on **Code Generation**, then clik on **HDL_filter** on the left. Make sure the **Compilation Type** is set to **IP Catalog**. This ensures the output is in IP Catalog format. Also, use the default Hardware description language, VHDL.
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/IP_catalog_selection.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step1/Configure_HDL_Blocks/IP_catalog_selection.png" width=600px; height=auto></ul>
 
 20. Click **Generate** to compile the design into hardware.
 <br>The compilation process transforms the design captured in Simulink blocks into an industry standard Register Transfer Level (RTL) design description. The RTL design can be synthesized into a hardware design. A Resource Analyzer window appears when the hardware design description has been generated.
@@ -229,7 +229,7 @@ In this step you will see how an FPGA can be used to create a more optimized ver
 3. Double-click the Vitis Model Composer Hub to open the Properties Editor.
 
 <ul> As noted in Step 1, the design requires a minimum sample frequency of 18 MHz and it is currently set to 20 MHz (a 50 ns FPGA clock period). <br>
-  <br><ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=400px; height=auto></ul> <br>
+  <br><ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=600px; height=auto></ul> <br>
   <br>The frequency at which an FPGA device can be clocked easily exceeds 20 MHz. Running the FPGA at a much higher clock frequency will allow Vitis Model Composer to use the same hardware resources to compute multiple intermediate results.
 </ul>
 
@@ -255,7 +255,7 @@ In this step you will see how an FPGA can be used to create a more optimized ver
 
 10. In the Fixed-Point Precision section, replace 16 with ```num_bits``` and replace 14 with ```bin_pt```, as shown in the following figure.
 
-<ul><img src="Images/Step2/gateway_in_settings.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step2/gateway_in_settings.png" width=600px; height=auto></ul>
 
 11. Click **OK** to save and exit the Properties Editor. 
 <br> In the Vitis Model Composer Hub update the sampling frequency to 120 MHz (6 * 20 MHz) in this way:
@@ -268,7 +268,7 @@ In this step you will see how an FPGA can be used to create a more optimized ver
    
 > 📝 Note:  In order to see accurate results from the Resource Analyzer Window, it is recommended to specify a new target directory rather than use the current working directory.
 
-<ul><img src="Images/Step2/clock_settings_2.png" width=400px; height=auto></ul>
+<ul><img src="Images/Step2/clock_settings_2.png" width=600px; height=auto></ul>
 
 12. Click **Generate** to compile the design into a hardware description.
 
@@ -280,7 +280,7 @@ In this step you will see how an FPGA can be used to create a more optimized ver
 <br><img src="Images/Step2/Step13.png"></ul>
 
 14. Click **OK** to dismiss the Resource Analyzer window.
-15. Click **OK** to dismiss the System Generator token.
+15. Click **OK** to dismiss the Vitis Model Composer Hub block. 
 
 Exit the <samp>Lab1_2.slx</samp> Simulink worksheet.
 
@@ -322,21 +322,21 @@ This shows the same specifications as the previous steps in Lab 1 and confirms t
    - For the Counter type, select **Count limited** and enter this value for **Count to value:** `length(xlfda_numerator([bdroot '/FDATool']))-1` <br>This will ensure the counter counts from 0 to 10 (11 coefficient and data addresses).
    - For Output type, leave default value at Unsigned and in Number of Bits enter the value 4. Only 4 binary address bits are required to count to 11.
    - For the Explicit period, enter the value `1/(11*20e6)` to ensure the sample period is 11 times the input data rate. The filter must perform 11 calculations for each input sample.
-<br><br><img src = "Images/Step3/counter.png"  width=400px; height=auto><br><br>
+<br><br><img src = "Images/Step3/counter.png"  width=600px; height=auto><br><br>
    - Click **OK** to exit the Properties Editor.
  
 7. Double-click the **ROM** instance to open the Properties Editor.
    - For the Depth, enter the value `length(xlfda_numerator([bdroot '/FDATool']))`. This will ensure the ROM has 11 elements.
    - For the Initial value vector, enter `xlfda_numerator([bdroot '/FDATool'])`. The coefficient values will be provided by the FDATool instance. 
-<br><br><img src = "Images/Step3/ROM.png" width=400px; height=auto><br><br> 
+<br><br><img src = "Images/Step3/ROM.png" width=600px; height=auto><br><br> 
    - Click **OK** to exit the Properties Editor.
 
 8. Double-click the **DSP Macro 1.0** instance to open the Properties Editor.
    - In the Instructions tab, replace the existing Instructions with `A*B+P` and then add `A*B`. When the `sel` input is false the DSP will multiply and accumulate. When the `sel` input is true the DSP will simply multiply. 
-<br><br><img src = "Images/Step3/dsp_instructions.png" width=400px; height=auto><br><br>
+<br><br><img src = "Images/Step3/dsp_instructions.png" width=600px; height=auto><br><br>
    - In the Pipeline Options tab, use the Pipeline Options drop-down menu to select **By_Tier.**
    - Select **Tier 3** and **Tier 5**. This will ensure registers are used at the inputs to A and B and between the multiply and accumulate operations. 
-<br><br><img src = "Images/Step3/dsp_pipeline.png" width=400px; height=auto><br><br> 
+<br><br><img src = "Images/Step3/dsp_pipeline.png" width=600px; height=auto><br><br> 
    - Click **OK** to exit the Properties Editor.
 
 9. Click **Save** to save the design.
@@ -393,7 +393,7 @@ MyCoeffs = xlfda_numerator('FDATool')
 
 4. Double-click the instance **Constant1** (close to the top) to open the Properties Editor.
 <br><br>This shows the Constant value is defined by `MyCoeffs(1).`
-<br><br><img src = "Images/Step4/Part1/Step4.png"><br><br>
+<br><br><img src = "Images/Step4/Part1/Step4.png" width=600px; height=auto><br><br>
 
 5. Close the Constant1 Properties editor.
 
@@ -549,7 +549,7 @@ The Reinterpret and Convert blocks are powerful tools which allow you to optimiz
 
 Finally, you learned how you can take total control of the hardware implementation by using discrete primitives.
 
-> 🖊️ Note: In this tutorial you learned how to add Vitis Model Composer HDL blocks to the design and then configure them. A useful productivity technique is to add and configure the System Generator token first. If the target device is set at the start, some complex IP blocks will be automatically configured for the device when they are added to the design.
+> 🖊️ Note: In this tutorial you learned how to add Vitis Model Composer HDL blocks to the design and then configure them. A useful productivity technique is to add and configure the Vitis Model Composer Hub block first. If the target device is set at the start, some complex IP blocks will be automatically configured for the device when they are added to the design.
 
 The following solution directory contains the final Vitis Model Composer (`*.slx`) files for this lab.
 ```

@@ -8,9 +8,9 @@
 # Set project parameters
 set my_part xc7z020clg484-1
 set my_board_part xilinx.com:zc702:part0:1.4
-set projdir C:/ug1498-model-composer-sys-gen-tutorial/HDL_Library/Lab6/IPI_Project/project_1
+set projdir ./project_1
 set projname project_1
-set repo_dir C:/ug1498-model-composer-sys-gen-tutorial/HDL_Library/Lab6/sys_gen_ip/ip
+set repo_dir ./ip
 
 
 create_project -force $projname $projdir -part $my_part

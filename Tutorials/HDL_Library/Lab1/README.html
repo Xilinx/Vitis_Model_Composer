@@ -139,7 +139,7 @@ You can define the filter coefficients for the Digital FIR Filter block by acces
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step1.png"></ul>
 <ol start="4">
 <li><p>Double-click the <strong>Digital FIR Filter</strong> instance to open the Properties Editor.</p></li>
-<li><p>In the Filter Parameters section, replace the existing coefficients (Coefficient Vector) with <code>xlfda_numerator( [bdroot, '/FDATool']))</code> to use the coefficients defined by the FDATool instance that is at the top level in the model (and hence the reason to use the MATLAB 'bdroot' command).</p></li>
+<li><p>In the Filter Parameters section, replace the existing coefficients (Coefficient Vector) with <code>xlfda_numerator( [bdroot, '/FDATool'])</code> to use the coefficients defined by the FDATool instance that is at the top level in the model (and hence the reason to use the MATLAB 'bdroot' command).</p></li>
 </ol>
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step7.png" width=400px; height=auto></ul>
 <ol start="6">
@@ -301,13 +301,14 @@ This discrete filter operates in this way:<br></li>
 </ul>
 <ul>Start by adding the discrete components to the design.</ul>
 <ol start="2">
-<li>Click the Library Browser button <img width="18" height="18" src="Images/Step3/libaryBrowserButton.png"> in the Simulink toolbar to open the Simulink Library Browser.</li>
+<li><p>Double click on the HDL_filter to open the subsystem.</p></li>
+<li><p>Click the Library Browser button <img width="18" height="18" src="Images/Step3/libaryBrowserButton.png"> in the Simulink toolbar to open the Simulink Library Browser.</p></li>
 </ol>
 <ul>
 <li>Expand the Xilinx Blockset menu.</li>
 <li>As shown in the following figure, select the <strong>Sources</strong> section in the HDL library, then right-click <strong>Counter</strong> to add this component to the design.<br />
 <br><br><img src = "Images/Step3/Step2.png"><br><br></li>
-<li>Select the <strong>Memory</strong> section and then <strong>Non AXI-S</strong> (shown at the bottom left in the figure above) and add a ROM to the design.</li>
+<li>Select the <strong>Memory</strong> section and then <strong>Non AXI-S</strong> and add a ROM to the design.</li>
 <li>Finally, select the <strong>DSP</strong> section and then <strong>Non AXI-S</strong> and add a DSP Macro 1.0 to the design.</li>
 </ul>
 <ol start="2">
@@ -316,7 +317,7 @@ This discrete filter operates in this way:<br></li>
 You will now configure the instances to correctly filter the data.</p></li>
 <li><p>Double-click the FDATool instance and select Filter Coefficients <img width="18" height="18" src="Images/Step2/filter_coefficient_button.png"> from the toolbar to review the filter specifications.<br />
 <br><br><img src = "Images/Step3/Step4.png"><br><br><br />
-This shows the same specifications as the previous steps in Lab 1 and confirms there are 11 coefficients. You can also confirm, by double-clicking on the input Gateway In that the input sample rate is once again 20 MHz (Sample period = 1/20e6). With this information, you can now configure the discrete components.</p></li>
+This shows the same specifications as the previous steps in Lab 1 and confirms there are 11 coefficients. You can also confirm, by double-clicking on the input "Gateway In" in the HDL_filter subsystem that the input sample rate is once again 20 MHz (Sample period = 1/20e6). With this information, you can now configure the discrete components.</p></li>
 <li><p>Close the FDATool Properties Editor.</p></li>
 <li><p>Double-click the <strong>Counter</strong> instance to open the Properties Editor.</p></li>
 </ol>
@@ -352,9 +353,9 @@ This shows the same specifications as the previous steps in Lab 1 and confirms t
 <li><p>Click the Run simulation button to simulate the design and view the results, as shown in the following figure.<br />
 <br><br><img src = "Images/Step3/Step10.png"><br><br><br />
 The final step is to compile the design into a hardware description and synthesize it.</p></li>
-<li><p>Double-click the <strong>System Generator</strong> token to open the Properties Editor.</p></li>
-<li><p>From the Compilation tab, make sure the Compilation target is IP catalog.</p></li>
-<li><p>From the Clocking tab, under Perform analysis select <strong>Post Synthesis</strong> and for Analyzer type select <strong>Resource</strong>. This option gives the resource utilization details after completion.</p></li>
+<li><p>Double-click the <strong>Vitis Model Composer Hub</strong> block to open the Properties Editor and select the HDL_filter subsystem on the left.</p></li>
+<li><p>From the HDL Settings tab, make sure the Compilation Type is IP catalog.</p></li>
+<li><p>From the HDL Analysis tab select <strong>Post Synthesis</strong> for <em>Perfrom Analysis</em> and for <em>Analysis Type</em> select <strong>Resource</strong>. This option gives the resource utilization details after completion.</p></li>
 </ol>
 <blockquote>
 <p>️ Note: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.</p>
@@ -365,7 +366,7 @@ The final step is to compile the design into a hardware description and synthesi
 The design now uses fewer FPGA hardware resources than either of the versions designed with the Digital FIR Filter macro.</p></li>
 <li><p>Click OK to dismiss the Resource Analyzer window.</p></li>
 <li><p>Click OK to dismiss the Compilation status dialog box.</p></li>
-<li><p>Click OK to dismiss the System Generator token.</p></li>
+<li><p>Click OK to dismiss the Vitis Model Composer Hub.</p></li>
 <li><p>Exit the <code>Lab1_3.slx</code> worksheet.</p></li>
 </ol>
 <h2 id="step-4-creating-a-design-using-discrete-components">Step 4: Creating a Design using Discrete Components</h2>
@@ -379,37 +380,38 @@ The design now uses fewer FPGA hardware resources than either of the versions de
 <p>In this part you will review a design implemented with floating-point data types.</p>
 <ol>
 <li><p>At the command prompt, type <code>open Lab1_4_1.slx.</code><br />
-<br><br>This opens the Simulink design shown in the following figure. This design is similar to the design used in Lab 1_1, however this time the design is using float data types and the filter is implemented in sub-system FIR.<br><br><br />
+<br><br>This opens the Simulink design shown in the following figure. This design is similar to the design used in Lab 1_1, however this time the design is using float data types.<br><br><br />
 First, you will review the attributes of the design, then simulate the design to review the performance, and finally synthesize the design.<br />
-<br><br><img src = "Images/Step4/Part1/Step1.png"><br><br><br />
-In the previous figure, both the input and output of instance FIR are of type double.</p></li>
+<br><br><img src = "Images/Step4/Part1/Step1.png"><br><br></p></li>
 <li><p>In the MATLAB Command Window enter:</p></li>
 </ol>
 <pre><code>MyCoeffs = xlfda_numerator('FDATool')
 </code></pre>
 <ol start="3">
-<li><p>Double-click the instance <strong>FIR</strong> to open the sub-system.</p></li>
-<li><p>Double-click the instance <strong>Constant1</strong> to open the Properties Editor.<br />
+<li><p>Double-click the <strong>FIR</strong> subsystem to open the subsystem.</p></li>
+<li><p>Double-click the instance <strong>Constant1</strong> (close to the top) to open the Properties Editor.<br />
 <br><br>This shows the Constant value is defined by <code>MyCoeffs(1).</code><br />
 <br><br><img src = "Images/Step4/Part1/Step4.png"><br><br></p></li>
 <li><p>Close the Constant1 Properties editor.</p></li>
 <li><p>Return to the top-level design using the toolbar button Up To Parent , or click the tab labeled Lab1<em>4</em>1.<br><br />
 <br>The design is summing two sine waves, both of which are 9 MHz. The input gateway to the Vitis Model Composer must therefore sample at a rate of at least 18 MHz.</p></li>
-<li><p>Double-click the <strong>Gateway In1</strong> instance to open the Properties Editor and confirm the input is sampling the data at a rate of 20 MHz (a Sample period of 1/20e6).</p></li>
+<li><p>Double-click the FIR subsystem and then the <strong>Gateway In1</strong> (close to the top) instance to open the Properties Editor and confirm the input is sampling the data at a rate of 20 MHz (a Sample period of 1/20e6) and the Gateway is producing a single precision output.</p></li>
 <li><p>Close the Gateway In Properties editor.</p></li>
 <li><p>Click the Run simulation button to simulate the design.<br><br />
-<br>The results shown in the following figure show the Vitis Model Composer HDL blockset produces results which are very close to the ideal case, shown in the center. The results are not identical because the Vitis Model Composer design must sample the continuous input waveform into discrete time values.<br />
-<br><br><img src = "Images/Step4/Part1/Step9.png"><br><br><br />
-The final step is to synthesize this design into hardware.</p></li>
-<li><p>Double-click the <strong>System Generator</strong> token to open the Properties Editor.</p></li>
-<li><p>On the Compilation tab, make sure the Compilation target is IP Catalog.</p></li>
-<li><p>On the Clocking tab, under Perform analysis select <strong>Post Synthesis</strong> and from the Analyzer type menu select <strong>Resource</strong>. This option gives the resource utilization details after completion.</p></li>
+<br>The results shown in the following figure show the Vitis Model Composer HDL blockset produces results which are very close to the ideal case, shown in the center. The results are not identical because the Vitis Model Composer HDL design is operating on single precision data while the <em>Filter Designer</em> block is operating on double precision data. </p></li>
+</ol>
+<p><br><br><img src = "Images/Step4/Part1/Step9.png"><br><br><br />
+The final step is to synthesize this design into hardware.</p>
+<ol start="10">
+<li><p>Double-click the <strong>Vitis Model Composer Hub</strong> block to open the Properties Editor. Click on the FIR subsystem on the left.</p></li>
+<li><p>On the <em>HDL Settings</em> tab, make sure the <em>Compilation Type</em> is IP Catalog.</p></li>
+<li><p>On the HDL Analysis tab, under <em>Perform Analysis</em> select <strong>Post Synthesis</strong> and from the <em>Analyzer Type</em> menu select <strong>Resource</strong>. This option gives the resource utilization details after completion.</p></li>
 <li><p>Click <strong>Generate</strong> to compile the design into a hardware description. After completion, it generates the resource utilization in Resource Analyzer window as shown in the following figure.<br />
 <br><br><img src = "Images/Step4/Part1/Step13.png"><br><br></p></li>
 <li><p>Click <strong>OK</strong> to dismiss the Compilation status dialog box.</p></li>
-<li><p>Click <strong>OK</strong> to dismiss the System Generator token.<br><br />
+<li><p>Click <strong>OK</strong> to dismiss the Vitis Model Composer Hub.<br><br />
 <br>You implemented this same filter in Step 1 using fixed-point data types. When compared to the synthesis results from that implementation – the initial results from this step are shown in the following figure and you can see this current version of the design is using a large amount of registers (FF), BRAMs, LUTs, and DSP resources (Xilinx dedicated multiplier/add units).<br />
-<br><br><img src = "Images/Step4/Part1/Step15.png"><br><br><br />
+<br><br><img src = "Images/Step1/Configure_HDL_Blocks/Step20-1.png"><br><br><br />
 Maintaining the full accuracy of floating-point types is an ideal implementation but implementing full floating-point accuracy requires a significant amount of hardware.<br />
 <br><br>For this particular design, the entire range of the floating-point types is not required. The design is using considerably more resources than what is required. In the next part, you will learn how to compare designs with different data types inside the Simulink environment.</p></li>
 <li><p>Exit the <samp>Lab1<em>4</em>1.slx</samp> Simulink worksheet.</p></li>
@@ -424,7 +426,7 @@ Maintaining the full accuracy of floating-point types is an ideal implementation
 <pre><code>MyCoeffs = xlfda_numerator('FDATool')
 </code></pre>
 <ol start="3">
-<li><p>Double-click the instance Gateway In2 to confirm the data is being sampled as 16-bit fixed-point value.</p></li>
+<li><p>Double-click the instance Gateway In2 under the FIR-Fixed-Point subsystem to confirm the data is being sampled as 16-bit fixed-point value.</p></li>
 <li><p>Click Cancel to exit the Properties Editor.</p></li>
 <li><p>Click the Run simulation button to simulate the design and confirm instance Spectrum Analyzer HDL Fixed shows the filtered output.<br />
 <br><br>As you will see if you examine the output of instance FIR-Fixed-Point (shown in the previous figure) Vitis Model Composer has automatically propagated the input data type through the filter and determined the output must be 43-bit (with 28 binary bits) to maintain the resolution of the signal.<br />
@@ -433,13 +435,13 @@ Maintaining the full accuracy of floating-point types is an ideal implementation
 <br><br><img src = "Images/Step4/Part2/Step6.png"><br><br><br />
 Taking into account the positive and negative values of the coefficients the maximum gain possible is 1.2070 and the output signal should only ever be slightly smaller in magnitude than the input signal, which is a 16-bit signal. There is no need to have 15 bits (43-28) of data above the binary point.<br />
 <br><br>You will now use the Reinterpret and Convert blocks to manipulate the fixed-point data to be no greater than the width required for an accurate result and produce the most hardware efficient design.</p></li>
-<li><p>Right-click with the mouse anywhere in the canvas and select <strong>Xilinx BlockAdd</strong>.</p></li>
-<li><p>In the Add Block entry box, type <code>Reinterpret</code>.</p></li>
-<li><p>Double-click the <strong>Reinterpret</strong> component to add it to the design.</p></li>
+<li><p>Double-click on the FIR-Fixed-Point subsystem and then double click anywhere in the canvas.</p></li>
+<li><p>In the edit field, type <code>Reinterpret</code>.</p></li>
+<li><p>Click the <strong>Reinterpret</strong> component from <strong>Xilinx Toolbox/HDL</strong> library to add it to the design.</p></li>
 <li><p>Repeat the previous three steps for these components: </p>
 <ul>
 <li>Convert</li>
-<li>Scope</li></ul></li>
+<li>Scope (pick any scope)</li></ul></li>
 <li><p>In the design, select the Gateway Out2 instance</p>
 <ul>
 <li>Right-click and use Copy and Paste to create a new instance of the Gateway Out block.</li>
@@ -447,6 +449,7 @@ Taking into account the positive and negative values of the coefficients the max
 <li><p>Double-click the <strong>Scope</strong> component.</p>
 <ul>
 <li>In the Scope properties dialog box, select <strong>File > Number of Inputs > 3</strong>.</li>
+<li>In the Scope properties dialog box, select <strong>Viwe > Layout</strong> and select three vertical squares. </li>
 <li>Select <strong>View > Configuration Properties</strong> and confirm that the Number of input ports is 3.<br />
 <br><br><img src = "Images/Step4/Part2/Step12.png"><br><br></li>
 <li>Click <strong>OK</strong> to close the Configuration Properties dialog box.</li>
@@ -482,27 +485,27 @@ The Reinterpret and Convert blocks have not been configured at this point and so
 </blockquote>
 <ul>In the following figure you can see the output from the filter (Growth) has values between plus and minus 1. The output from the Reinterpret block moves the data values to between plus and minus 2.
 <br><br>In this detailed view of the waveform, the final output (Convert) shows no difference in fidelity, when compared to the reinterpret results, but uses only 16 bits.
-<br><br><img src = "Images/Step4/Part2/Step16.png"><br><br>
+<br><br><img src = "Images/Step4/Part2/Step24.png"><br><br>
 The final step is to synthesize this design into hardware.</ul>
 <ol start="25">
-<li><p>Double-click the System Generator token to open the Properties Editor.</p></li>
-<li><p>On the Compilation tab, ensure the Compilation target is IP catalog.</p></li>
-<li><p>On the Clocking tab, under Perform analysis select <strong>Post Synthesis</strong> and from Analyzer type menu select Resource. This option gives the resource utilization details after completion.</p></li>
+<li><p>Double-click the Vitis Model Composer Hub block to open the Properties Editor.</p></li>
+<li><p>Select the FIR-Fixed-Point subsystem on the left.</p></li>
+<li><p>On the HDL Settings tab, ensure the Compilation Type is IP catalog.</p></li>
+<li><p>On the HDL Analysis tab, under Perform Analysis select <strong>Post Synthesis</strong> and from Analysis Type menu select Resource. This option gives the resource utilization details after completion.</p></li>
 </ol>
 <blockquote>
 <p>️ Note: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.</p>
 </blockquote>
-<ol start="28">
+<ol start="29">
 <li><p>Click <strong>Generate</strong> to compile the design into a hardware description. After completion, it generates the resource utilization in Resource Analyzer window as shown in the following figure.<br />
-<br><br><img src = "Images/Step4/Part2/Step16.png"><br><br></p></li>
+<br><br><img src = "Images/Step4/Part2/Step28.png"><br><br></p></li>
 <li><p>Click <strong>OK</strong> to dismiss the Compilation status dialog box.</p></li>
-<li><p>Click <strong>OK</strong> to dismiss the System Generator token.<br><br />
+<li><p>Click <strong>OK</strong> to dismiss the Vitis Model Composer property editor.<br><br />
 Notice, as compared to the results in Step 1, these results show approximately:</p>
 <ul>
-<li>45% more Flip-Flops </li>
-<li>20% more LUTs</li>
-<li>30% more DSP48s<br />
-However, this design contains both the original floating-point filter and the new fixed-point version: the fixed-point version therefore uses approximately 75-50% fewer resources with the acceptable signal fidelity and design performance.</li></ul></li>
+<li>55% less registers </li>
+<li>90% less LUTs</li>
+<li>66% less DSP48s</li></ul></li>
 <li><p>Exit Vivado.</p></li>
 <li><p>Exit the <samp>Lab1<em>4</em>2.slx</samp> worksheet.</p></li>
 </ol>
