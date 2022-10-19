@@ -23,7 +23,7 @@ Vitis Model Composer provides an HLS Library for use within the Simulink environ
 <img src="./Images/Step1/Step2.png">
 The HLS blocks are organized into subcategories based on functionality. Spend a few minutes navigating through the sub-libraries and familiarizing yourself with the available blocks.
 
-## Step 2: Step 2: Build Designs with HLS Blocks
+## Step 2: Build Designs with HLS Blocks
 
 In this step, you build a simple design using the existing HLS blocks.
 
@@ -53,7 +53,7 @@ Sobel edge detection is a classical algorithm in the field of image and video pr
 
 6. Select the **Simulation > Run** command to simulate the model and view the results of the Sobel Edge Detection algorithm.
 <br><br><img src="Images/Step2/Part2/Step6.png">
-<br><br> One way to assess the simulation performance of the algorithm is to check the video frame rate of the simulation. To do this:
+<br><br> One way to assess the simulation performance of the algorithm is to check the video frame rate of the simulation. Do the following:
 
 7. Add the Frame Rate Display block from the Simulink Computer Vision System Toolbox (under the Sinks category) and connect it to the output of the algorithm as shown in the following figure.
 

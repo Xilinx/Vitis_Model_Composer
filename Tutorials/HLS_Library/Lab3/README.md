@@ -54,7 +54,7 @@ The setup is now ready for you to debug your `C/C++` code. In the next step, you
  
 1. Specify the debug tool using the `xmcImportFunctionSettings` command. At the MATLAB® command prompt, type the following command:
 ```
->> xmcImportFunctionSettings(‘build’, ‘debug’);
+>> xmcImportFunctionSettings('build', 'debug');
 ```
 > ⭐ **Tip**: You can restore the release build environment, using the `release` value of the `build` option: `xmcImportFunctionSettings('build','release')`.
 
