@@ -1,0 +1,26 @@
+<AutoPilot:solution xmlns:AutoPilot="com.autoesl.autopilot.solution">
+    <name>
+        <value string="solution1"/>
+    </name>
+    <project>
+        <value string="ModelComposerDesign_prj"/>
+    </project>
+    <flowTarget value="vivado"/>
+    <targetInfo>
+        <TargetInfo value="xc7k325t:-ffg900:-2"/>
+    </targetInfo>
+    <libraryList>
+        <library value="xilinx/kintex7/kintex7" name="DefaultPlatform"/>
+    </libraryList>
+    <clockList>
+        <clock name="default" period="5.000000" default="false"/>
+    </clockList>
+    <config>
+        <config_rtl module_auto_prefix="0"/>
+        <config_export format="sysgen"/>
+    </config>
+    <ExportDesign askAgain="true" evaluate="false" rtl="verilog" formatName="ip_catalog">
+        <Format formatName="ip_catalog" description="" vendor="" library="" ipname="" version="" display_name="" taxonomy=""/>
+    </ExportDesign>
+</AutoPilot:solution>
+

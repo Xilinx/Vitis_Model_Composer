@@ -1,0 +1,353 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="lab-1-importing-ai-engine-kernels">Lab 1: Importing AI Engine Kernels</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:chdir('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
+<p>This section of tutorial shows how to import AI Engine kernels into Vitis Model Composer, generate the code, and simulate using AIE Simulation.</p>
+<h3 id="procedure">Procedure</h3>
+<p>This lab has the following steps:</p>
+<ul>
+<li>In Step 1, you build your design with three AI Engine kernels in Vitis Model Composer.</li>
+<li>In Step 2, you simulate the design.</li>
+<li>In Step 3, you generate a graph code and simulate using AIE simulation.</li>
+</ul>
+<h2 id="step-1-build-the-ai-engine-design-in-vitis-model-composer">Step 1: Build the AI Engine Design in Vitis Model Composer</h2>
+<p>In this step, you will import three kernel functions using the AIE Kernel block available in the Vitis Model Composer AI Engine library and build a design.</p>
+<ol>
+<li><p>In the MATLAB Current Folder, navigate to <samp> AIEngine_Library/Lab1/. </samp> </p></li>
+<li><p>Use the subsequent steps to import the kernel function <samp>fir<em>27t</em>sym<em>hb</em>2i</samp> into the design. This is an interpolating-by-two filter fir symmetric filter. Because it is interpolating, the output of the filter is twice the size of the input. Open the source code <samp>hb<em>27</em>2i.cpp</samp> from <samp> kernels/src/hb<em>27</em>2i.cpp</samp>, and notice this kernel has a Window input and a Window output.</p></li>
+</ol>
+<pre><code>void fir_27t_sym_hb_2i
+(
+input_window_cint16 * cb_input,
+output_window_cint16 * cb_output)
+{
+</code></pre>
+<ol start="3">
+<li><p>Double-click <samp> import_kernel.slx </samp> to open the model. This is a model with only sources and sinks. You will fill the design in-between.</p></li>
+<li><p>From the Library Browser, select the <strong>AIE Kernel</strong> block from under the User-Defined functions of the AI Engine library. Drag the block into the <samp> import_kernel.slx </samp> file.<br />
+<br><br><img src="Images/Step1/Step4.png"></p></li>
+<li><p>Double-click the block. The following Block Parameters dialog box displays.<br />
+<br><br><img src="Images/Step1/Step5.png"></p></li>
+<li><p>Update the block parameters as follows:<br />
+<br><br><strong>Kernel header file</strong>: Either browse to locate the <samp> hb<em>27</em>2i.h </samp> file or enter <code>kernels/inc/hb_27_2i.h</code> as the parameter.<br />
+<br><br><strong>Kernel function</strong>: <code>fir_27t_sym_hb_2i</code><br />
+<br><br><strong>Kernel init function</strong>: Leave empty<br />
+<br><br><strong>Kernel source file</strong>: Either browse to locate <samp> hb<em>27</em>2i.cpp </samp> file or enter <code>kernels/src/hb_27_2i.cpp</code> as the parameter.<br />
+<br><br><strong>Kernel search path</strong>: Leave empty<br />
+<br><br><strong>Preprocessor options</strong>: Leave empty</p></li>
+<li><p>Click <strong>Import</strong>. The tool parses the function signature in the header file and updates the AIE Kernel block GUI interface. The Function tab is displayed as shown in the following figure.<br />
+<br><br><img src="Images/Step1/Step7.png"></p></li>
+<li><p>Update the parameter values as indicated in the following figure.<br />
+<br><br><img src="Images/Step1/Step8.png"></p></li>
+</ol>
+<blockquote>
+<p>❗❗ <strong>Important</strong>: All parameters are in samples (not bytes).</p>
+<p>❗❗ <strong>Important</strong>: The tool does not parse the kernel function and it does not have any knowledge about the input or output window sizes, nor the input window margin size.</p>
+</blockquote>
+<ol start="9">
+<li><p>After applying, click <strong>OK</strong> to close the window and connect the block to the input as shown in the following figure.<br />
+<br><br><img src="Images/Step1/Step9.png"></p></li>
+<li><p>Next we will import the <samp> polar_clip </samp> function. Unlike the previous kernel, the polar clip has a stream in port and a stream out port. The function signature is as follows.<br />
+<br><br><img src="Images/Step1/Step10.png"></p></li>
+<li><p>Drag the new AIE Kernel block from AI Engine library and update the parameters as follows:<br />
+<br><br> <strong>Kernel header file</strong>: <samp> kernels/inc/polar<em>clip.h </samp><br />
+<br><br> <strong>Kernel function</strong>: <samp> polar</em>clip </samp><br />
+<br><br> <strong>Kernel init function</strong>: Leave empty<br />
+<br><br> <strong>Kernel source file</strong>: <samp> kernels/src/polar_clip.cpp </samp> <br />
+<br><br> <strong>Kernel search paths</strong>: Leave empty<br />
+<br><br> <strong>Preprocessor options</strong>: Leave empty</p></li>
+<li><p>Click <strong>Import</strong>. The tool parses the header file and creates the block. Update the parameter value as shown in the following figure.<br />
+<br><br><img src="Images/Step1/Step12.png"></p></li>
+</ol>
+<blockquote>
+<p>❗❗ <strong>Important</strong>: Here, the Window size and Window margin fields are only applicable for window type signals.</p>
+<p>❗❗ <strong>Important</strong>: The Signal size parameter is the maximum size of the output signal.</p>
+</blockquote>
+<ol start="13">
+<li><p>Connect this block to the existing design and update the diagram by pressing Ctrl+D. The design should now look as follows.<br />
+<br><br><img src="Images/Step1/Step13.png"><br />
+<br><br>You have connected a block with a window output to a block with a stream input.</p></li>
+<li><p>Use the subsequent steps to import the final kernel function <code>fir_27t_symm_hb_dec2</code> into the design. This is a decimation by two filter and the signature to this function is as follows.</p></li>
+</ol>
+<pre><code>void fir_27taps_symm_hb_dec2
+(
+input_window_cint16 * inputw,
+output_window_cint16 * outputw
+){
+</code></pre>
+<ol start="15">
+<li><p>Drag the new AIE Kernel block from the AI Engine library and update the parameters as follows:<br />
+<br><br> <strong>Kernel header file</strong>: <samp> kernels/inc/hb<em>27</em>2d.h </samp><br />
+<br><br> <strong>Kernel function</strong>: <code>fir_27taps_symm_hb_dec2</code><br />
+<br><br> <strong>Kernel init function</strong>: Leave empty<br />
+<br><br> <strong>Kernel source file</strong>: <samp> kernels/src/hb<em>27</em>2d.cpp </samp><br />
+<br><br> <strong>Kernel search paths</strong>: Leave empty<br />
+<br><br> <strong>Preprocessor options</strong>: Leave empty</p></li>
+<li><p>After applying, click <strong>OK</strong> to close the window. A new Function tab opens. Set the parameters for this kernel as follows.<br />
+<br><br><img src="Images/Step1/Step16.png"></p></li>
+<li><p>Connect the block to the existing design as follows.<br />
+<br><br><img src="Images/Step1/Step17.png"></p></li>
+</ol>
+<h2 id="step-2-simulate-the-design">Step 2: Simulate the Design</h2>
+<ol>
+<li><p>As with any other Simulink design, simulate the design using the Simulink <strong>Run</strong> button. Notice that the first time you simulate, it takes some time (less than a minute) before the simulation starts. During this time, the code for each kernel is getting compiled and executable files are getting created.</p></li>
+<li><p>After compilation, you should get the real and imaginary outputs in scope as shown in the following figure.<br />
+<br><br><img src="Images/Step2/Step2.png"></p></li>
+</ol>
+<h2 id="step-3-code-generation-and-running-ai-engine-systemc-simulation">Step 3: Code Generation and Running AI Engine SystemC Simulation</h2>
+<p>Vitis Model Composer can generate graph code from your design. It also generates a make file and collects data from the input and output port of your system. In this step you will see how this is done.</p>
+<ol>
+<li><p>Create a subsystem from all three blocks in your design. You can do this by selecting the blocks and clicking the <strong>Create Subsystem</strong> button as shown in the following figure.<br />
+<br><br><img src="Images/Step3/Step1.png"></p></li>
+<li><p>Assign a name to the subsystem, for example <code>aie_system</code>.</p></li>
+<li><p>Drag the Model Composer Hub from the library browser or simply click on the canvas and start typing <code>Model Composer Hub</code>.</p></li>
+<li><p>Double-click the Model Composer Hub and make changes as follows.<br />
+<br><br><img src="Images/Step3/Step4.png"><br />
+<br><br>When you check <strong>Create testbench</strong>, the tool generates a testbench, including input and output test vectors from Vitis Model Composer. You can use AI Engine SystemC Simulator to verify the correctness of the design by comparing the results with the test vectors from Vitis Model Composer.</p></li>
+</ol>
+<blockquote>
+<p> <strong>Note</strong>: The AIE simulation may take some time to complete.</p>
+</blockquote>
+<ol start="5">
+<li><p>Click <strong>Apply</strong> and then <strong>Generate</strong>. Within a few seconds the code directory gets created. Because you also checked <strong>Create testbench</strong>, the aiecompiler will get invoked under the hood and compile the code using the generated graph code and the kernel source codes. It subsequently runs the AIE Simulation.<br />
+<br><br>This operation takes some time. Observe the simulation completion message along with the comparison of the output to the Simulink output (<samp>data/reference_output/Out1.txt</samp>). It prints any diff, in the wait dialog.<br />
+<br><br><img src="Images/Step3/Step5.png"></p></li>
+<li><p>Click <strong>OK</strong> to exit the Progress window.</p></li>
+<li><p>Navigate to <samp> code/src_aie </samp> to inspect the generated graph code and Makefile. The tool automates the generation of all these files.<br />
+<br><br><img src="Images/Step3/Step7.png"></p></li>
+<li><p>Navigate to the data folder and observe the <samp> reference<em>output/ </samp> directory where the data logged from Simulink gets stored. The <samp> aiesimulator</em>output/ </samp> folder logs the data from AI Engine SystemC simulator and Vitis Model Composer compares the results at the end of simulation.<br />
+<br><br><img src="Images/Step3/Step8.png"></p></li>
+</ol>
+<h3 id="conclusion">Conclusion</h3>
+<p>In this lab, you learned:</p>
+<ul>
+<li>How to import AI Engine kernels into Vitis Model Composer and build a design.</li>
+<li>How to generate the graph code using the Model Composer Hub block.</li>
+<li>How to perform AI Engine SystemC simulation.</li>
+</ul>
+<p>The following solution directory contains the final Vitis Model Composer files for this lab.</p>
+<ul>
+<li><samp> AIEngine_Library/Lab1/Solution </samp></li>
+</ul>
+<hr />
+<p>Copyright 2022 Xilinx</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h1, h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>

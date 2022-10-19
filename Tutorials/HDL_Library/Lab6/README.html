@@ -1,0 +1,347 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="lab-6-using-a-vitis-model-composer-hdl-design-with-a-zynq-7000-soc">Lab 6: Using a Vitis Model Composer HDL Design with a Zynq-7000 SoC</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:chdir('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
+<p>In this lab, you will learn how to export your Vivado® design with Vitis Model Composer HDL IP to a software environment and use driver files created by Vitis Model Composer to quickly implement your project on a Xilinx® evaluation board, running hardware with software in the same design.</p>
+<h3 id="objectives">Objectives</h3>
+<p>After completing this lab, you will have learned:</p>
+<ul>
+<li>How to export your Vivado design with Vitis Model Composer HDL IP to a software environment ( Vitis™ software platform).</li>
+<li>How Vitis Model Composer automatically creates software driver files for AXI4-Lite interfaces.</li>
+<li>How to integrate the Vitis Model Composer driver files into your software application.</li>
+</ul>
+<h3 id="procedure">Procedure</h3>
+<p>This lab has two primary parts:</p>
+<ul>
+<li>In Step 1, you will review the AXI4-Lite interface and associated C drivers.</li>
+<li>In Step 2, you will export your Vivado design to a Vitis software environment and run it on a board.</li>
+</ul>
+<h2 id="step-1-review-the-axi4-lite-interface-drivers">Step 1: Review the AXI4-Lite Interface Drivers</h2>
+<p>In this step you review how AXI4-Lite interface drivers are provided when a design with an AXI4-Lite interface is saved.<br />
+This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integrator.</p>
+<ol>
+<li><p>Invoke Vitis Model Composer and use the <strong>Current Folder</strong> browser to change the directory to: <samp> \HDL_Library\Lab6. </samp></p></li>
+<li><p>At the command prompt, type open Lab6_1.slx. This opens the design as shown in the following figure.<br />
+<br><br><img src="Images/Step1/Step2.png"><br />
+<br><br>This design uses a number of AXI interfaces. These interfaces were reviewed in Lab 5: Using AXI Interfaces and IP Integrator and the review is repeated here with additional details on the AXI4-Lite register addressing.</p>
+<ul>
+<li>Using AXI interfaces allows a design exported to the Vivado IP Catalog to be efficiently integrated into a larger system using IP integrator.</li>
+<li>It is not a requirement for designs exported to the IP Catalog to use AXI interfaces. The design uses the following AXI interfaces:<ul>
+<li>An AXI4-Stream interface is used for ports <code>s_axis_source_*</code>. All Gateway In and Out signals are prefixed with same name (<code>s_axis_source_</code>) ensuring they are grouped into the same interface. The suffix for all ports are valid AXI4-Stream interface signal names (<code>tvalid</code>, <code>tlast</code>, and <code>tdata</code>).</li></ul></li></ul></li>
+<li><p>Double-click <strong>Gateway In</strong> decrypt (or any of <strong>reset</strong>, <strong>Keys[63:32]</strong>, <strong>Keys[31:0]</strong>, <strong>parity_err</strong>).</p></li>
+<li><p>In the Properties Editor select the <strong>Implementation</strong> tab.</p></li>
+<li><p>Confirm the Interface is specified as AXI4-Lite in the Interface options.<br />
+<br><br> Also note how the address of this port may be automatically assigned (as the current setting of <strong>Auto assign address offset</strong> indicates), or the address may be manually specified.</p></li>
+<li><p>Click <strong>OK</strong> to exit the Properties Editor.<br />
+<br><br>Details on simulating the design are provided in the canvas notes. For this exercise, you will concentrate on exporting the design to the Vivado IP catalog and use the IP in an existing design.</p></li>
+<li><p>In the Model Composer Hub block, select <strong>Generate</strong> to generate a design in IP Catalog format.</p></li>
+<li><p>Click <strong>OK</strong> to dismiss the Compilation status dialog box.</p></li>
+<li><p>Click <strong>OK</strong> to dismiss the Model Composer Hub.</p></li>
+<li><p>In the file system, navigate to the directory <samp> \HDL<em>Library\Lab6\IPI</em>Project\ip\drivers\HDL<em>DUT</em>v1_0\src </samp> and view the driver files.<br />
+<br><br>The driver files for the AXI4-Lite interface are automatically created by Vitis Model Composer when it saves a design in IP Catalog format.</p></li>
+<li><p>Open file <samp> hdl<em>dut</em>hw.h </samp> to review which addresses the ports in the AXI4-Lite interface were automatically assigned.<br />
+<br><br><img src="Images/Step1/Step11.png"></p></li>
+<li><p>Open file <samp> hdl_dut.c </samp> to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown in the following figure.<br />
+<br><br><img src="Images/Step1/Step12.png"><br />
+<br><br>The driver files are automatically included when the Vitis Model Composer design is added to the IP Catalog. The procedure for adding a Vitis Model Composer design to the IP Catalog is detailed in Lab 5: Using AXI Interfaces and IP Integrator. In the next step, you will implement the design.</p></li>
+</ol>
+<h2 id="step-2-developing-software-and-running-it-on-the-zynq-7000-system">Step 2: Developing Software and Running it on the Zynq-7000 System</h2>
+<ol>
+<li><p>Open the Vivado IDE:</p>
+<ul>
+<li>Click <strong>Windows > Xilinx Design Tools > Vivado 2022.2.</strong><br />
+<br><br>In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP Integrator, but this time you will create the design using a Tcl file, rather than the interactive process.</li></ul></li>
+<li><p>Using the Tcl console as shown in the following figure:</p></li>
+</ol>
+<ul>
+<li>Type <code>cd C:\ug1498-model-composer-sys-gen-tutorial\HDL_Library\Lab6\IPI_Project</code> to change to the project directory.</li>
+<li>Type source lab6_design.tcl to create the RTL design.</li>
+</ul>
+<blockquote>
+<p> Note: If you have copied the tutorials to a different directory or changed the file names, you should update the Tcl file accordingly.</p>
+</blockquote>
+<ul><img src="Images/Step2/Step2.jfif"></ul>
+<ol start="3">
+<li><p>Click <strong>Open Implemented Design</strong> in the Flow Navigator pane.</p></li>
+<li><p>From the Vivado IDE main menu select <strong>File > Export > Export Hardware</strong>.</p></li>
+<li><p>Click <strong>Next</strong> in the Export Hardware Platform page.<br />
+<br><br><img src="Images/Step2/Step5.png"></p></li>
+<li><p>Select the <strong>Include Bitstream</strong> option in the Output page and click Next.<br />
+<br><br><img src="Images/Step2/Step6.png"></p></li>
+<li><p>Leave the <strong>XSA file name</strong> and the <strong>Export to</strong> fields at the default setting and click <strong>Next</strong>.</p></li>
+<li><p>Click <strong>Finish</strong> to export the hardware.</p></li>
+<li><p>Open the Vitis IDE:</p>
+<ul>
+<li>Click <strong>Windows > Xilinx Design Tools > Vitis 2022.2.</strong></li></ul></li>
+<li><p>Select the workspace space directory to store preferences and click Launch.</p></li>
+<li><p>From the Vitis IDE, select <strong>Create Application Project</strong>.</p></li>
+<li><p>Click <strong>Next</strong> in the Welcome page.</p></li>
+<li><p>Switch to the <strong>Create a new platform from hardware(XSA)</strong> tab and click <strong>Browse</strong> to create a custom platform from the XSA.</p></li>
+<li><p>Navigate to <strong>Lab6 > IPI<em>Project > project</em>1</strong>, select <strong>design<em>1</em>wrapper.xsa</strong> and click <strong>Open</strong></p></li>
+<li><p>Click <strong>Next</strong>.<br />
+<br><br><img src="Images/Step2/Step15.png"></p></li>
+<li><p>Enter the application project name <code>Des_Test</code> in the Application project name field.</p></li>
+<li><p>In the Target processor section, select the processor <strong>ps7<em>cortexa9</em>0</strong> and click <strong>Next</strong>.<br />
+<br><br><img src="Images/Step2/Step17.png"></p></li>
+<li><p>Click <strong>Next</strong>.</p></li>
+<li><p>In the Domain page ensure the CPU selected is <strong>ps7<em>cortexa9</em>0</strong> and click <strong>Next</strong>.</p></li>
+<li><p>Select the <strong>Hello World</strong> template and click <strong>Finish</strong>.</p></li>
+<li><p>Expand the <strong>design<em>1</em>wrapper</strong> container as shown to confirm the AXI4-Lite driver code is included in the project.<br />
+<br><br><img src="Images/Step2/Step21.png"></p></li>
+<li><p>Power up the ZC702 board to program the FPGA.</p></li>
+<li><p>Click <strong>Xilinx > Program Device</strong> and from the resulting window, click <strong>Program</strong>.<br />
+<br><br> The Done LED (DS3) goes ON, on the FPGA board.</p></li>
+<li><p>Click <strong>Window > Show View</strong> and in the Show view window, type <code>Vitis</code>, select Vitis Serial Terminal and click <strong>Open</strong>.<br />
+<br><br><img src="Images/Step2/Step24.png"></p></li>
+<li><p>To set up the terminal in the Vitis Serial Terminal view, click the + icon and perform the following:<br />
+<br><br><img src="Images/Step2/Step25.png"></p>
+<ul>
+<li>Select the COM port to which the USB UART cable is connected. On Windows, if you are unsure, open the <strong>Device Manager</strong> and identify the port with the "Silicon Labs" driver under Ports (COM &amp; LPT).</li>
+<li>Change the Baud Rate to 115200.</li>
+<li>Click <strong>OK</strong> to exit the Terminal Settings dialog box.</li>
+<li>Check that the terminal is connected by the message in tab title bar.</li></ul></li>
+<li><p>Right-click the application project <strong>Des_Test</strong> in the Explorer view, select <strong>Build Project</strong>.<br />
+<br><br> When this completes, you will see the message “Build Finished” in the console.</p></li>
+<li><p>Right-click on application project <strong>Des_Test</strong>, select <strong>Run As > Launch on Hardware.</strong></p></li>
+<li><p>Switch to the <strong>Vitis Serial Terminal</strong> tab and confirm that <code>Hello World</code> was received.</p></li>
+<li><p>Expand the container <code>Des_Test</code> and then expand the container <code>src</code>.</p></li>
+<li><p>Double-click the <strong>helloworld.c</strong> file.</p></li>
+<li><p>Replace the contents of this file with the contents of the file <code>hello_world_final.c</code> from the <code>lab6</code> directory.</p></li>
+<li><p>Save the <code>helloworld.c</code> source code.</p></li>
+<li><p>Right-click application project <code>Des_Test</code> in the Explorer view, and select <strong>Build Project</strong>.<br />
+<br><br> When this completes, you will see the message “Build Finished” in the console.</p></li>
+<li><p>Right-click again and select <strong>Run As > Launch on Hardware.</strong></p></li>
+</ol>
+<blockquote>
+<p> Note: If a window opens displaying the text “Run Session is already active”, click OK in that window.</p>
+</blockquote>
+<ol start="35">
+<li>Review the results in the Vitis Serial Terminal tab (shown in the following figure).<br />
+<br><br><img src="Images/Step2/Step35.jfif"></li>
+</ol>
+<h3 id="summary">Summary</h3>
+<p>In this lab, you learned how to export your Vivado IDE design containing Vitis Model Composer HDL IP to the Vitis software environment and to integrate the driver files automatically created by Vitis Model Composer to run the application on the ZC702 board. You then viewed the results of the acceleration.</p>
+<p>The following solutions directory contains the final Vitis Model Composer (<code>*.slx</code>) files for this lab. The solutions directory does not contain the IP output from Vitis Model Composer, the files and directories generated when the Vivado IDE is executed, or the Vitis workspace.</p>
+<p><samp> \HDL_Library\Lab6\solution </samp></p>
+<hr />
+<p>Copyright 2022 Xilinx</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h1, h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>

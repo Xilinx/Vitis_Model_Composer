@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xd:acceleratorMap xmlns:xd="http://www.xilinx.com/xidane" xd:functionName="ModelComposerDesign" xd:componentRef="ModelComposerDesign" xd:initiationInterval="20688" xd:clockPeriod="5" xd:sequential="true" xd:hostMachine="64" xd:reset="control">
+  <xd:arg xd:name="Image_in" xd:originalName="Image_in" xd:direction="in" xd:interfaceRef="Image_in" xd:busTypeRef="axis" xd:dataWidth="8"/>
+  <xd:arg xd:name="Edge_out" xd:originalName="Edge_out" xd:direction="out" xd:interfaceRef="Edge_out" xd:busTypeRef="axis" xd:dataWidth="8"/>
+  <xd:latencyEstimates xd:best-case="20690" xd:worst-case="20690" xd:average-case="20690"/>
+  <xd:resourceEstimates xd:LUT="3065" xd:FF="1820" xd:BRAM="0" xd:DSP="0"/>
+</xd:acceleratorMap>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vivadoHLSLog:LogRoot xmlns:vivadoHLSLog="www.xilinx.com/vivadoHLSLog">
+  <errorLogs>
+    <logs>
+      <synLog/>
+      <simLog/>
+      <mgLog/>
+      <packageLog/>
+      <csimLog/>
+    </logs>
+  </errorLogs>
+  <warningLogs>
+    <logs>
+      <synLog>
+        <logs message="WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_6' is power-on initialization." projectName="hls_project" solutionName="solution1" date="2021-06-11T22:45:33.304+0530" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_7' is power-on initialization." projectName="hls_project" solutionName="solution1" date="2021-06-11T22:45:33.263+0530" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_3' is power-on initialization." projectName="hls_project" solutionName="solution1" date="2021-06-11T22:45:33.236+0530" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_4' is power-on initialization." projectName="hls_project" solutionName="solution1" date="2021-06-11T22:45:33.209+0530" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_0' is power-on initialization." projectName="hls_project" solutionName="solution1" date="2021-06-11T22:45:33.195+0530" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_1' is power-on initialization." projectName="hls_project" solutionName="solution1" date="2021-06-11T22:45:33.171+0530" type="Warning"/>
+      </synLog>
+      <simLog/>
+      <mgLog/>
+      <packageLog/>
+      <csimLog/>
+    </logs>
+  </warningLogs>
+</vivadoHLSLog:LogRoot>

@@ -1,0 +1,75 @@
+==============================================================
+Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2021.1 (64-bit)
+Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1611] Setting target device to 'xcvu11p-flga2577-1-e'
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+INFO: [HLS 200-1510] Running: set_part xcvu11p-flga2577-1-e 
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.236 seconds; current allocated memory: 233.136 MB.
+INFO: [HLS 200-10] Analyzing design file 'MedianFilter.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 1 seconds. CPU system time: 4 seconds. Elapsed time: 7.135 seconds; current allocated memory: 234.656 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 214-279] Initial Interval estimation mode is set into default.
+INFO: [HLS 214-284] Auto array partition mode is set into default.
+INFO: [HLS 214-270] Starting automatic array partition analysis...
+INFO: [HLS 214-270] Inferring complete partitioning for array 'MedianFilter(unsigned char, unsigned char, unsigned char, unsigned char*)::pixelWindowBuffer' on dimension 1 (MedianFilter.cpp:49:0)
+INFO: [HLS 214-270] Inferring complete partitioning for array 'sortBuffer' on dimension 1 (MedianFilter.cpp:51:12)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 2 seconds. CPU system time: 8 seconds. Elapsed time: 10.12 seconds; current allocated memory: 236.863 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.143 seconds; current allocated memory: 236.863 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.278 seconds; current allocated memory: 238.100 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 1 seconds. Elapsed time: 0.249 seconds; current allocated memory: 237.593 MB.
+INFO: [XFORM 203-502] Unrolling all loops for pipelining in function 'MedianFilter' (MedianFilter.cpp:43).
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_56_1' (MedianFilter.cpp:56) in function 'MedianFilter' completely with a factor of 3.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_57_2' (MedianFilter.cpp:57) in function 'MedianFilter' completely with a factor of 2.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_69_3' (MedianFilter.cpp:69) in function 'MedianFilter' completely with a factor of 9.
+INFO: [XFORM 203-101] Partitioning array 'pixelWindowBuffer'  in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'sortBuffer' (MedianFilter.cpp:51) in dimension 1 completely.
+INFO: [XFORM 203-602] Inlining function 'OptMedian9' into 'MedianFilter' (MedianFilter.cpp:73) automatically.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.343 seconds; current allocated memory: 257.740 MB.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.199 seconds; current allocated memory: 249.814 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'MedianFilter' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'MedianFilter' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'MedianFilter'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, function 'MedianFilter'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 2 seconds. Elapsed time: 1.036 seconds; current allocated memory: 250.151 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.335 seconds; current allocated memory: 250.421 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'MedianFilter' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'MedianFilter/row1' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'MedianFilter/row2' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'MedianFilter/row3' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'MedianFilter/V' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'MedianFilter' to 'ap_ctrl_hs'.
+WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_1' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_0' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_4' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_3' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_7' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'pixelWindowBuffer_6' is power-on initialization.
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'MedianFilter' pipeline 'MedianFilter' pipeline type 'function pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'MedianFilter'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 0.801 seconds; current allocated memory: 251.091 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 2 seconds. CPU system time: 5 seconds. Elapsed time: 2.65 seconds; current allocated memory: 253.611 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 0 seconds. CPU system time: 2 seconds. Elapsed time: 1.275 seconds; current allocated memory: 256.685 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for MedianFilter.
+INFO: [VLOG 209-307] Generating Verilog RTL for MedianFilter.
+INFO: [HLS 200-789] **** Estimated Fmax: 150.29 MHz
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 10 seconds. CPU system time: 24 seconds. Elapsed time: 25.038 seconds; current allocated memory: 256.679 MB.
+INFO: [HLS 200-112] Total CPU user time: 15 seconds. Total CPU system time: 28 seconds. Total elapsed time: 32.829 seconds; peak allocated memory: 257.740 MB.
