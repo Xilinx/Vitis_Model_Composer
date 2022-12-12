@@ -43,11 +43,13 @@ For example if you feed the kernel with 16 samples, you would want to set the ou
 
 # Example 2
 Here is another example of a kernel function we are importing into Vitis Model Composer:
-![](images/myKernel.png)
+<img src="images/myKernel.png"  width=400px; height=auto>
+  
+
 
 And below is a screenshot of a design including this kernel:
-![](images/myKernel_design.png)
-
+<img src="images/myKernel_design.png"  width=800px; height=auto>
+  
 The input signal size to the block is 128 samples. As such, at each invocation of the block, the kernel will consume all 128 samples and produces 256 samples. If we set the _Signal Size_ parameter for the output to a number smaller than 256 (say 128 as shown in the design above) and run the simulation long enough, eventually the internal buffer for the output port will fill up. The reason is that at each invocation of the kernel, the kernel will produce 256 samples, but we are only presenting 128 samples in Simulink and storing the rest in the internal buffer for the output port. At this point, the kernel can no longer write to the internal buffer for the output port and will block at one of the _wrtieincr_ functions. However, the input will continue to arrive to the kernel. Since the kernel is stalled, eventually the internal buffer for the input buffer port will also fill up and the simulation will stop with an error indicating the input buffer is full. 
 
 
