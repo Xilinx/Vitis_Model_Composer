@@ -5,7 +5,7 @@ This short tutorial goes over how to optimally set the signal size for AI Engine
 # What is "Signal Size"?
 
 Signal Size is a block mask property associated with each stream or cascade output of an imported AI Engine block. 
-This value is always set as samples and not bytes. Here is an example of  block mask for a kernel with a stream output.
+This value is always set as samples and not bytes. Here is an example of the block mask for a kernel with a stream output.
 
 ![](images/mask.png)
 
@@ -17,9 +17,11 @@ In the case above, the stream output of this block will be a variable-size signa
 
 # Example 1
 Here is an example of a kernel function we are importing into Vitis Model Composer:
+
 <img src="images/myKernel.png"  width=400px; height=auto>
   
 And below is a screenshot of a design including this kernel:
+
 <img src="images/myKernel_design.png"  width=800px; height=auto>
 
 The input signal size to the block is 128 samples. As such, at each invocation of the block, the kernel will consume all 128 samples (128 calls to _readincr_) and produce 256 samples (256 calls to _writeincr_). 
