@@ -1,125 +1,78 @@
 /*
- * (c) Copyright 2020 Xilinx, Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
-#include <adf.h>
+* (c) Copyright 2020 Xilinx, Inc. All rights reserved.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
 
 #include "FirSingleStream.h"
-//#include "../system_settings.h"
-
-#define MULMAC(N) \
-		taps =  *coeff++; \
-		acc = mul4(data,N,0x3210,1,taps,0,0x0000,1); \
-		acc = mac4(acc,data,N+2,0x3210,1,taps,2,0x0000,1);\
-		acc = mac4(acc,data,N+4,0x3210,1,taps,4,0x0000,1);\
-		acc = mac4(acc,data,N+6,0x3210,1,taps,6,0x0000,1)
-
-#define MACMAC(N) \
-		taps =  *coeff++; \
-		acc = mac4(acc,data,N,0x3210,1,taps,0,0x0000,1); \
-		acc = mac4(acc,data,N+2,0x3210,1,taps,2,0x0000,1);\
-		acc = mac4(acc,data,N+4,0x3210,1,taps,4,0x0000,1);\
-		acc = mac4(acc,data,N+6,0x3210,1,taps,6,0x0000,1)
 
 
-
-
-template <int NSamples,int ShiftAcc>
-void SingleStream::FIR_SingleStream<NSamples,ShiftAcc>::filter(input_stream_cint16* sin,output_stream_cint16* sout)
+template <int SAMPLES,int SHIFT>
+void SingleStream::FIR_SingleStream<SAMPLES,SHIFT>::filter(input_stream_cint16* sig_in,output_stream_cint16* sig_out)
 {
-	v8cint16 *coeff =  (v8cint16*) weights;
-	v8cint16 taps = undef_v8cint16();
-	v32cint16 *ptr_delay_line = (v32cint16 *)delay_line;
-	v32cint16 data = *ptr_delay_line;
 
-	v4cacc48 acc = undef_v4cacc48();
+    const int LSIZE=(SAMPLES/32);
+    aie::accum<cacc48,8> acc;
+    const aie::vector<cint16,8> coe[4] = {aie::load_v<8>(eq_coef),aie::load_v<8>(eq_coef+8),aie::load_v<8>(eq_coef+16),aie::load_v<8>(eq_coef+24)};
+    aie::vector<cint16,32> buff=delay_line;
+    for(int i=0;i<LSIZE;i++){
+        //performace 1st 8 samples
+        acc = aie::sliding_mul<8,8>(coe[0],0,buff,0);
+        acc = aie::sliding_mac<8,8>(acc,coe[1],0,buff,8);
+        buff.insert(0,readincr_v<4>(sig_in));
+        buff.insert(1,readincr_v<4>(sig_in));
+        acc = aie::sliding_mac<8,8>(acc,coe[2],0,buff,16);
+        acc = aie::sliding_mac<8,8>(acc,coe[3],0,buff,24);
+        writeincr(sig_out,acc.to_vector<cint16>(SHIFT));
 
+        //performace 2nd 8 samples
+        acc = aie::sliding_mul<8,8>(coe[0],0,buff,8);
+        acc = aie::sliding_mac<8,8>(acc,coe[1],0,buff,16);
+        buff.insert(2,readincr_v<4>(sig_in));
+        buff.insert(3,readincr_v<4>(sig_in));
+        acc = aie::sliding_mac<8,8>(acc,coe[2],0,buff,24);
+        acc = aie::sliding_mac<8,8>(acc,coe[3],0,buff,0);
+        writeincr(sig_out,acc.to_vector<cint16>(SHIFT));
 
+        //performace 3rd 8 samples
+        acc = aie::sliding_mul<8,8>(coe[0],0,buff,16);
+        acc = aie::sliding_mac<8,8>(acc,coe[1],0,buff,24);
+        buff.insert(4,readincr_v<4>(sig_in));
+        buff.insert(5,readincr_v<4>(sig_in));
+        acc = aie::sliding_mac<8,8>(acc,coe[2],0,buff,0);
+        acc = aie::sliding_mac<8,8>(acc,coe[3],0,buff,8);
+        writeincr(sig_out,acc.to_vector<cint16>(SHIFT));
 
-// Computes 32 samples per iteration
-	for(int i=0;i<NSamples/32;i++)
-		chess_prepare_for_pipelining
-		chess_loop_range(NSamples/32,NSamples/32)
-		chess_pipeline_adjust_preamble(10)
-	{
-		MULMAC(1);
-		MACMAC(9);
-		MACMAC(17);
-		data = upd_v(data,0,readincr_v4(sin));
-		MACMAC(25);
-		writeincr_v4(sout,srs(acc,ShiftAcc));
-		coeff -= 4;
+        //performace 4th 8 samples
+        acc = aie::sliding_mul<8,8>(coe[0],0,buff,24);
+        acc = aie::sliding_mac<8,8>(acc,coe[1],0,buff,0);
+        buff.insert(6,readincr_v<4>(sig_in));
+        buff.insert(7,readincr_v<4>(sig_in));
+        acc = aie::sliding_mac<8,8>(acc,coe[2],0,buff,8);
+        acc = aie::sliding_mac<8,8>(acc,coe[3],0,buff,16);
+        writeincr(sig_out,acc.to_vector<cint16>(SHIFT));
+    }
+    delay_line=buff;
+}
 
-		MULMAC(5);
-		MACMAC(13);
-		MACMAC(21);
-		data = upd_v(data,1,readincr_v4(sin));
-		MACMAC(29);
-		writeincr_v4(sout,srs(acc,ShiftAcc));
-		coeff -= 4;
+template <int SAMPLES,int SHIFT>
+void SingleStream::FIR_SingleStream<SAMPLES,SHIFT>::filter_init(const cint16 (&taps)[32]) {
 
-		MULMAC(9);
-		MACMAC(17);
-		MACMAC(25);
-		data = upd_v(data,2,readincr_v4(sin));
-		MACMAC(1);
-		writeincr_v4(sout,srs(acc,ShiftAcc));
-		coeff -= 4;
+    for(int i=0;i<32;i++)
+    {
+        eq_coef[i] = taps[i];
+    }
 
-		MULMAC(13);
-		MACMAC(21);
-		MACMAC(29);
-		data = upd_v(data,3,readincr_v4(sin));
-		MACMAC(5);
-		writeincr_v4(sout,srs(acc,ShiftAcc));
-		coeff -= 4;
-
-		MULMAC(17);
-		MACMAC(25);
-		MACMAC(1);
-		data = upd_v(data,4,readincr_v4(sin));
-		MACMAC(9);
-		writeincr_v4(sout,srs(acc,ShiftAcc));
-		coeff -= 4;
-
-		MULMAC(21);
-		MACMAC(29);
-		MACMAC(5);
-		data = upd_v(data,5,readincr_v4(sin));
-		MACMAC(13);
-		writeincr_v4(sout,srs(acc,ShiftAcc));
-		coeff -= 4;
-
-		MULMAC(25);
-		MACMAC(1);
-		MACMAC(9);
-		data = upd_v(data,6,readincr_v4(sin));
-		MACMAC(17);
-		writeincr_v4(sout,srs(acc,ShiftAcc));
-		coeff -= 4;
-
-		MULMAC(29);
-		MACMAC(5);
-		MACMAC(13);
-		data = upd_v(data,7,readincr_v4(sin));
-		MACMAC(21);
-		writeincr_v4(sout,srs(acc,ShiftAcc));
-		coeff -= 4;
-
-	}
-
-	*ptr_delay_line = data;
+    delay_line = aie::zeros<cint16, 32>();
 }
