@@ -1,6 +1,6 @@
 # Vitis Model Composer Tutorials
 
-These tutorials take users through the design methodology and programming model for developing algorithms in Vitis Model Composer for AMD/Xilinx devices including Versal devices and the AI Engines.
+These tutorials take users through the design methodology and programming model for developing algorithms in Vitis Model Composer for AMD/Xilinx devices including Versal devices with AI Engines.
 
 <table style="width:100%">
 <tr>
