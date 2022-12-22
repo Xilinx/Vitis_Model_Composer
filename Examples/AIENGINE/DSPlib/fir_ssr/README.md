@@ -8,6 +8,9 @@ Each stream input to the filter block has a thoughput of close to 1 GSPS for a t
 * PL frequency speccifed in the PLIO block at 500 MHz.
 * A high input frame size parameter to the filter block, in this case 8192. 
 
+<img height="300" src="./Images/throughput.png">
+
+
 ## Knowledge nuggets
 
 :bulb:  The input data is split over four ports, where each successive sample is sent to a different input port in a round-robin fashion
@@ -18,11 +21,9 @@ Each stream input to the filter block has a thoughput of close to 1 GSPS for a t
 
 :bulb: Note how you can design the filter using the *Filter Design and Analysis tool* and directly pass the resulting taps to the AI Engine 'FIR Asymmetric Filter' block. 
 
-![](images/screen_shot.PNG)
+![](Images/screen_shot.png)
 
 The image below depicts the output of DSPlib AI Engine FIR in comparison with the Simulink FIR block.
-
-![](images/output.PNG)
 
 
 ------------
