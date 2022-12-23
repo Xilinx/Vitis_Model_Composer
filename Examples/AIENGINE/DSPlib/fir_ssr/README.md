@@ -6,7 +6,7 @@ Each stream input to the filter block has a thoughput of close to 1 GSPS for a t
 
 * 64 bit wide PLIO blocks on all the inputs and outputs.
 * PL frequency specified in the PLIO block at 500 MHz.
-* A high value for the parameter "Input frame size" on the filter block, in this case 8192. Note this parameter is the sum of the signal sizes of all the four inputs. A larger value means at each invocation of the filter, more samples will be processed which reduces the total overhead we incur when we invoking the kernel. 
+* A high value for the parameter "Input frame size" on the filter block, in this case 8192. Note this parameter is the sum of the signal sizes of all the four inputs. A larger value means at each invocation of the filter more samples will be processed, which reduces the total overhead we incur when we invoke the kernel. 
 
 <img height="300" src="./Images/throughput.png">
 
