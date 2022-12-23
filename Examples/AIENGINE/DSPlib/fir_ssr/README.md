@@ -2,7 +2,7 @@
 
 This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block with an SSR of 4 in Vitis Model Composer to achieve a high throughput and comparing the results to the Simulink FIR block.
 
-Each stream input to the filter block has a thoughput of close to 1 GSPS for a total of 4 GSPS. To achieve throughput the following factors are in play:
+Each stream input to the filter block has a thoughput of close to 1 GSPS for a total of 4 GSPS. To achieve this throughput the following factors are in play:
 
 * 64 bit wide PLIO blocks on all the inputs and outputs.
 * PL frequency specified in the PLIO block at 500 MHz.
