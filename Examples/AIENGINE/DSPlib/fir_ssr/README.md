@@ -1,4 +1,4 @@
-# Using DSPLib AI Engine FIR directly from the library browser
+# Using DSPLib AI Engine SSR FIR directly from the library browser
 
 This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block with an SSR of 4 in Vitis Model Composer to achieve a high throughput and comparing the results to the Simulink FIR block.
 
