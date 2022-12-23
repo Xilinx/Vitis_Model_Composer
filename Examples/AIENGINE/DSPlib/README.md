@@ -16,6 +16,7 @@ Here you see examples for FIR,FFT and Matrix Multiply functions.
 
 ## Examples
 - [Using the AI Engine FIR block from the library browser](fir/README.md)
+- [Using the AI Engine SSR FIR block from the library bowser to achieve 4 Gsps](fir_ssr/README.md)
 - [Usign the AI Engine FFT block from the library browser](fft/README.md)
 - [Importing Matrix Multiply from DSPLib as a block](matrix_multiply/README.md)
 
