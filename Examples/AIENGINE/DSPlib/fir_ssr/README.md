@@ -23,7 +23,6 @@ Each stream input to the filter block has a thoughput of close to 1 GSPS for a t
 
 ![](Images/screen_shot.png)
 
-The image below depicts the output of DSPlib AI Engine FIR in comparison with the Simulink FIR block.
 
 
 ------------
