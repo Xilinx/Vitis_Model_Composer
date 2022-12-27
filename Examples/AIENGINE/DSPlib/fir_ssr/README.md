@@ -1,8 +1,8 @@
-# Using DSPLib AI Engine SSR FIR directly from the library browser
+# Using DSPLib AI Engine SSR FIR block to achieve 4 GSPS throughput
 
-This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block with an SSR of 4 in Vitis Model Composer to achieve a high throughput and comparing the results to the Simulink FIR block.
+This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block with a Super Sample Rate (SSR) of 4 in Vitis Model Composer to achieve a high throughput. We also compare the results to the Simulink FIR block for functional correctness.
 
-Each stream input to the filter block has a thoughput of close to 1 GSPS for a total of 4 GSPS. To achieve this throughput the following factors are in play:
+Each stream input to the AI Engine FIR block has a thoughput of close to 1 GSPS for a total of 4 GSPS. To achieve this throughput the following factors are in play:
 
 * 64 bit wide PLIO blocks on all the inputs and outputs.
 * PL frequency specified in the PLIO block at 500 MHz.
@@ -13,13 +13,10 @@ Each stream input to the filter block has a thoughput of close to 1 GSPS for a t
 
 ## Knowledge nuggets
 
-:bulb:  The input data is split over four ports, where each successive sample is sent to a different input port in a round-robin fashion
+:bulb: The input data is split over four ports, where each successive sample is sent to a different input port in a round-robin fashion.
 
 :bulb: The number of AI Engines used is equal to SSR^2 * CASC_LEN (in this case 4^2*2=32)
 
-:bulb: Note that the Spectrum Analyzer block accepts a Variable Size Signal as input. Likewise, Simulink *Scope* block and *Display* block also accept variable size signals as inputs.
-
-:bulb: Note how you can design the filter using the *Filter Design and Analysis tool* and directly pass the resulting taps to the AI Engine 'FIR Asymmetric Filter' block. 
 
 ![](Images/screen_shot.png)
 
