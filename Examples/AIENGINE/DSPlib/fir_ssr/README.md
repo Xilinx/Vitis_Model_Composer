@@ -1,4 +1,4 @@
-# Using DSPLib AI Engine SSR FIR block to achieve 4 GSPS throughput
+# Using DSPLib AI Engine SSR FIR block to achieve 4 Gsps throughput
 
 This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block with a Super Sample Rate (SSR) of 4 in Vitis Model Composer to achieve a high throughput. We also compare the results to the Simulink FIR block for functional correctness.
 
@@ -6,7 +6,7 @@ Each stream input to the AI Engine FIR block has a thoughput of close to 1 GSPS 
 
 * 64 bit wide PLIO blocks on all the inputs and outputs.
 * PL frequency specified in the PLIO block at 500 MHz.
-* A high value for the parameter "Input frame size" on the filter block, in this case 8192. Note this parameter is the sum of the signal sizes of all the four inputs. A larger value means at each invocation of the filter more samples will be processed, which reduces the total overhead we incur when we invoke the kernel. 
+* A high value for the parameter "Input frame size" on the filter block, in this case 8192. Note this parameter is the sum of the signal sizes of all the four inputs. A larger value means at each invocation of the filter more samples will be processed, which reduces the total overhead we incur when we invoke the kernel, and hence a higher throughput. 
 
 <img height="300" src="./Images/throughput.png">
 
@@ -15,13 +15,15 @@ Each stream input to the AI Engine FIR block has a thoughput of close to 1 GSPS 
 
 :bulb: The input data is split over four ports, where each successive sample is sent to a different input port in a round-robin fashion.
 
-:bulb: The number of AI Engines used is equal to SSR^2 * CASC_LEN (in this case 4^2*2=32)
+:bulb: The number of AI Engines used is equal to SSR^2 * CASC_LEN (in this case 4^2*1=16)
 
 
 ![](Images/screen_shot.png)
 
 
+## Related Examples
 
+* [This](../../SingleStreamSSR_FIR/README.md) is another example of a high throughput filter built from scratch instead of using the block from the Xilinx AI Engine DSP library. 
 ------------
 Copyright 2022 Xilinx
 
