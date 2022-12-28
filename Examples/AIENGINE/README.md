@@ -139,5 +139,6 @@ This example showcases the use of the AI Engine Dynamic Point FFT block.
  </tr>
  
  </table>
- 
 
+# More AI Engine and Programmable Logic Examples
+For more examples with AI Engine and Programmable Logic click [here](../AIENGINE_plus_PL). 
