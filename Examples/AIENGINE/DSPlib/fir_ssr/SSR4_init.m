@@ -22,12 +22,12 @@ setenv('SRC','./src');
 
 % N is frame size.
 N = 2048;
+NPHASES = 4;
 
 Norm = 32768;
 i = sqrt(-1);
 UTaps = CreateFilter(32);
 Taps = NormalizeCoef(UTaps,32768);
-
 
 
 if(DISPLAY==1)
@@ -44,8 +44,6 @@ SaveTaps(Taps,fullfile(getenv('SRC'),'FilterTaps.txt'));
 
 
 SHIFT_ACC = 15;
-NPHASES = 4;
-BURST_LENGTH = 512;
 
 phi_3 = fliplr(Taps(1:4:end));
 phi_2 = fliplr(Taps(2:4:end));
