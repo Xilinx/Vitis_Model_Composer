@@ -8,7 +8,7 @@ Each stream input to the AI Engine FIR block has a thoughput of close to 1 GSPS 
 * PL frequency specified in the PLIO block at 500 MHz.
 * A high value for the parameter "Input frame size" on the filter block, in this case 8192. Note this parameter is the sum of the signal sizes of all the four inputs. A larger value means at each invocation of the filter more samples will be processed, which reduces the total overhead we incur when we invoke the kernel, and hence a higher throughput. 
 
-<img height="300" src="./Images/fir.png">
+<img height="200" src="./Images/fir.png">
 
 <img height="300" src="./Images/throughput.png">
 
