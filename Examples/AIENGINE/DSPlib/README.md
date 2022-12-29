@@ -10,9 +10,8 @@ Here you see examples for FIR,FFT and Matrix Multiply functions.
 
 ## Knowledge nuggets
 
-:bulb: For FIR and FFT examples, we are using the blocks available in AIEngine/DSPlib library directly. However, for matrix multiply example, we are importing the function as a graph from the  DSPlib [Git hub location].
+:bulb: For FIR and FFT examples, we are using the blocks available in AIEngine/DSPlib library directly. However, for matrix multiply example, we are importing the function as a graph from the  DSPlib shipped with Vitis Model Composer.
 
-:bulb: When importing the graph, you use the graph header file from 'dsplib/L2/include'to import the function.
 
 ## Examples
 - [Using the AI Engine FIR block from the library browser](fir/README.md)
