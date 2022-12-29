@@ -14,8 +14,6 @@ Here you see examples for FIR,FFT and Matrix Multiply functions.
 
 :bulb: You can find the DSPlib functions shipped with Vitis Model Composer at _$DSPLIB_ROOT/L2/include/aie/_ where the environmental variable _$DSPLIB_ROOT_ can be set in MATLAB command window using the command _setenv("DSPLIB_ROOT",xmcLibraryPath('get','dsplib'))_.
 
-:bulb: You can also clone the latest DSPlib functions from [this](https://github.com/Xilinx/Vitis_Libraries) GitHub location and then import any one of them into Vitis Model Composer using the *AIE Graph* import block as shown in [Importing Matrix Multiply from DSPLib as a block](matrix_multiply/README.md) example.
-
 ## Examples
 - [Using the AI Engine FIR block from the library browser](fir/README.md)
 - [Using the AI Engine SSR FIR block from the library bowser to achieve 4 Gsps](fir_ssr/README.md)
