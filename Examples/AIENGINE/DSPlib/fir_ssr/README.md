@@ -14,6 +14,9 @@ Each stream input to the AI Engine FIR block has a thoughput of close to 1 GSPS 
 
 
 ## Knowledge nuggets
+:bulb: To see the estimated throughput, we are setting the hub block as below before pushing the _Generate_ button:
+
+<img height="300" src="./Images/hub.png">
 
 :bulb: The input data is split over four ports, where each successive sample is sent to a different input port in a round-robin fashion.
 
