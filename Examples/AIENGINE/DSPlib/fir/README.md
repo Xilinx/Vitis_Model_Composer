@@ -14,6 +14,8 @@ This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in M
 |512|4|799 Msps|
 |1024|4|898 Msps|
 
+:bulb: The larger the _Input_Window_Size_ the larger is the latency of the filter.
+
 
 
 
