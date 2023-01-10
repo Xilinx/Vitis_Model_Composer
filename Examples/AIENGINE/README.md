@@ -104,6 +104,15 @@ This example showcases the use of the AI Engine Dynamic Point FFT block.
 </td>
 </tr> 
   
+<tr>
+<td>
+<a href="./DSPlib/fir_ssr/README.md">Using DSPLib AI Engine SSR FIR</a>
+</td>
+<td>
+Using DSPLib AI Engine SSR FIR block to achieve 4 Gsps throughput. 
+</td>
+</tr> 
+  
 </table>
 <br/>
 

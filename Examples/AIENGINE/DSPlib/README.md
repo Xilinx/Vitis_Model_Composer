@@ -19,6 +19,8 @@ Here you see examples for FIR,FFT and Matrix Multiply functions.
 - [Using the AI Engine SSR FIR block from the library bowser to achieve 4 Gsps](fir_ssr/README.md)
 - [Usign the AI Engine FFT block from the library browser](fft/README.md)
 - [Importing Matrix Multiply from DSPLib as a block](matrix_multiply/README.md)
+- [Using DSPLib AI Engine SSR FIR](fir_ssr/README.md)
+- [AI Engine Dynamic Point FFT](Dynamic_FFT/README.md)
 
 --------------
 Copyright 2020 Xilinx

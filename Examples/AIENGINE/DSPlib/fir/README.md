@@ -2,7 +2,25 @@
 
 This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in Model Composer and comparing the results to the Simulink FIR block.
 
-## Knowledge nuggets
+## Knowledge nuggets about throughput
+:bulb: To estimate the throughput for this design, you should run the AI Engine System C simulator.
+
+:bulb: The FIR Asymmetric block has two parameters that you can adjust to achieve a desired throughput. The _Input Window Size_ and the _Number of Cascade Stages_. The number of AI Engine tiles used in the implementation is equal to the _Number of Cascade Stages_. The table below gives you an idea of how the throughput changes for this design as you change these parameters:
+
+| Input Window Size | Cascade Length | Throughput |
+|-------------------|----------------|------------|
+|256|1|296 Msps|
+|256|4|674 Msps|
+|512|4|799 Msps|
+|1024|4|898 Msps|
+
+:bulb: The larger the _Input_Window_Size_ the larger is the latency of the filter.
+
+
+
+
+
+## Knowledge nuggets about setting up the design
 
 :bulb: Note that the Spectrum Analyzer block accepts a Variable Size Signal as input. Likewise, Simulink *Scope* block and *Display* block also accept variable size signals as inputs. 
 
