@@ -13,6 +13,8 @@ This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in M
 
 :bulb: The 64 bit wide PLIO blocks with a PL frequency of 500 MHz blocks at the input and output of the filter block are needed to achieve the highest throughput possible. This means a 64 bit data transfer (two 16-bit complex inputs) can be transferred from PL to AIE at each PL clock, for a total throughput of upto 1 GSPS.
 
+<img src="images/plio.png" width="650"/>
+
 :bulb: The FIR Asymmetric block has two parameters that you can adjust to achieve a desired throughput. The _Input Window Size_ and the _Number of Cascade Stages_. The number of AI Engine tiles used in the implementation is equal to the _Number of Cascade Stages_. The table below gives you an idea of how the throughput changes for this design as you change these parameters:
 
 | Input Window Size | Cascade Length | Throughput |
