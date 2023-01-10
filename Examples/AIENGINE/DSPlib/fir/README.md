@@ -3,7 +3,10 @@
 This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in Model Composer and comparing the results to the Simulink FIR block.
 
 ## Knowledge nuggets about throughput
-:bulb: To estimate the throughput for this design, you should run the AI Engine System C simulator.
+:bulb: To estimate the throughput for this design, you should setup the Vitis Model Composer Hub block as below before clicking Generate. After simulation is done, the Simulink Data Inspector will show the estimated throughput.
+
+<img src="images/hub.png" width="450"/>
+
 
 :bulb: The FIR Asymmetric block has two parameters that you can adjust to achieve a desired throughput. The _Input Window Size_ and the _Number of Cascade Stages_. The number of AI Engine tiles used in the implementation is equal to the _Number of Cascade Stages_. The table below gives you an idea of how the throughput changes for this design as you change these parameters:
 
