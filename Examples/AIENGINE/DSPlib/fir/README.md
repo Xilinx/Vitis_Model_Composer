@@ -5,7 +5,7 @@ This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in M
 ## Knowledge nuggets about throughput
 :bulb: To estimate the throughput for this design, you should run the AI Engine System C simulator.
 
-:bulb: The FIR Asymmetric block has two parameters to tweak to adjust the throughput. The _Input Window Size_ and the _Number of Cascade Stages_. The number of AI Engine tiles used in the implementation is equal to the _Number of Cascade Stages_. The table below gives you an idea of how the throughput changes for this design as you change these parameters:
+:bulb: The FIR Asymmetric block has two parameters that you can adjust to achieve a desired throughput. The _Input Window Size_ and the _Number of Cascade Stages_. The number of AI Engine tiles used in the implementation is equal to the _Number of Cascade Stages_. The table below gives you an idea of how the throughput changes for this design as you change these parameters:
 
 | Input Window Size | Cascade Length | Throughput |
 |-------------------|----------------|------------|
