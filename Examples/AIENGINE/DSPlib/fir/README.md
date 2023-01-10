@@ -3,10 +3,15 @@
 This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in Model Composer and comparing the results to the Simulink FIR block.
 
 ## Knowledge nuggets about throughput
-:bulb: To estimate the throughput for this design, you should setup the Vitis Model Composer Hub block as below before clicking Generate. After simulation is done, the Simulink Data Inspector will show the estimated throughput.
+:bulb: To estimate the throughput for this design, you should setup the Vitis Model Composer Hub block as below before clicking Generate. 
 
 <img src="images/hub.png" width="450"/>
 
+:bulb: After simulation is done, the Simulink Data Inspector will show the estimated throughput.
+
+<img src="images/data_inspector.png" width="450"/>
+
+:bulb: The 64 bit wide PLIO blocks with a PL frequency of 500 MHz blocks at the input and output of the filter block are needed to achieve the highest throughput possible. This means a 64 bit data transfer (two 16-bit complex inputs) can be transferred from PL to AIE at each PL clock, for a total throughput of upto 1 GSPS.
 
 :bulb: The FIR Asymmetric block has two parameters that you can adjust to achieve a desired throughput. The _Input Window Size_ and the _Number of Cascade Stages_. The number of AI Engine tiles used in the implementation is equal to the _Number of Cascade Stages_. The table below gives you an idea of how the throughput changes for this design as you change these parameters:
 
@@ -18,10 +23,6 @@ This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in M
 |1024|4|898 Msps|
 
 :bulb: The larger the _Input_Window_Size_ the larger is the latency of the filter.
-
-
-
-
 
 ## Knowledge nuggets about setting up the design
 
