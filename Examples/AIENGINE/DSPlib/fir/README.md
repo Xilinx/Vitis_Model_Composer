@@ -44,7 +44,7 @@ The image below depicts the output of DSPlib AI Engine FIR in comparison with th
 
 ## Related Examples
 
-To acheive throughput over 1GHz, you should use the FIR block Super Sample Rate capability. Take a look at [this](../fir_ssr/README.md) example. The completly match. Note that "Saturate on integer overflow" is checked on the Simulink FIR block.
+To achieve throughput over 1GHz, you should use the FIR block Super Sample Rate capability. Take a look at [this](../fir_ssr/README.md) example. The completely match. Note that "Saturate on integer overflow" is checked on the Simulink FIR block.
 
 
 ------------
