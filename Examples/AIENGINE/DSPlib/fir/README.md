@@ -40,8 +40,7 @@ This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in M
 
 The image below depicts the output of DSPlib AI Engine FIR in comparison with the Simulink FIR block.
 
-![](images/output.PNG)
-
+<img src="images/output.PNG" width="450"/>
 
 ------------
 Copyright 2020 Xilinx
