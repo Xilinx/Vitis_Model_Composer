@@ -21,7 +21,7 @@ DISPLAY = 0;
 setenv('SRC','./src');
 
 % N is frame size.
-N = 4;
+N = 512;
 
 Norm = 32768;
 i = sqrt(-1);
