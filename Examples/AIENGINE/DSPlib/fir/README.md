@@ -42,6 +42,11 @@ The image below depicts the output of DSPlib AI Engine FIR in comparison with th
 
 <img src="images/output.PNG" width="450"/>
 
+## Related Examples
+
+To acheive throughput over 1GHz, you should use the FIR block Super Sample Rate capability. Take a look at [this](../../fir_ssr/README.md) example. 
+
+
 ------------
 Copyright 2020 Xilinx
 
