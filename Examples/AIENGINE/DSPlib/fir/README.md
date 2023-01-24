@@ -38,14 +38,14 @@ This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in M
 
 ![](images/screen_shot.PNG)
 
-The image below depicts the output of DSPlib AI Engine FIR in comparison with the Simulink FIR block.
+The image below depicts the output of DSPlib AI Engine FIR in comparison with the Simulink FIR block. They completely match. Note that "Saturate on integer overflow" is checked on the Simulink FIR block.
+
 
 <img src="images/output.PNG" width="450"/>
 
 ## Related Examples
 
-To achieve throughput over 1GHz, you should use the FIR block Super Sample Rate capability. Take a look at [this](../fir_ssr/README.md) example. The completely match. Note that "Saturate on integer overflow" is checked on the Simulink FIR block.
-
+To achieve throughput over 1GHz, you should use the FIR block Super Sample Rate capability. Take a look at [this](../fir_ssr/README.md) example. 
 
 ------------
 Copyright 2020 Xilinx
