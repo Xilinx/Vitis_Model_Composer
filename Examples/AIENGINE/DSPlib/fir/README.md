@@ -11,7 +11,7 @@ This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in M
 
 <img src="images/data_inspector.png" width="450"/>
 
-:bulb: The 64 bit wide PLIO blocks with a PL frequency of 500 MHz blocks at the input and output of the filter block are needed to achieve the highest throughput possible. This means a 64 bit data transfer (two 16-bit complex inputs) can be transferred from PL to AIE at each PL clock, for a total throughput of upto 1 GSPS.
+:bulb: The 64 bit wide PLIO blocks with a PL frequency of 500 MHz at the input and output of the filter block are needed to achieve the highest throughput possible. This means a 64 bit data transfer (two 16-bit complex inputs) can be transferred from PL to AIE at each PL clock, for a total throughput of upto 1 GSPS.
 
 <img src="images/plio.png" width="650"/>
 
@@ -25,6 +25,8 @@ This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in M
 |1024|4|898 Msps|
 
 :bulb: The larger the _Input_Window_Size_ the larger is the latency of the filter.
+
+:bulb: The _Cascade_Length_ trades throughput for the number of AI Engine kernels used by the filter. For details, refer to the [AI Engine FIR function documentation](https://docs.xilinx.com/r/en-US/Vitis_Libraries/dsp/user_guide/L2/func-fir-filters.html).
 
 ## Knowledge nuggets about setting up the design
 
