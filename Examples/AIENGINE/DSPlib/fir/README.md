@@ -2,7 +2,33 @@
 
 This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in Model Composer and comparing the results to the Simulink FIR block.
 
-## Knowledge nuggets
+## Knowledge nuggets about throughput
+:bulb: To estimate the throughput for this design, you should setup the Vitis Model Composer Hub block as below before clicking Generate. 
+
+<img src="images/hub.png" width="450"/>
+
+:bulb: After simulation is done, the Simulink Data Inspector will show the estimated throughput.
+
+<img src="images/data_inspector.png" width="450"/>
+
+:bulb: The 64 bit wide PLIO blocks with a PL frequency of 500 MHz at the input and output of the filter block are needed to achieve the highest throughput possible. This means a 64 bit data transfer (two 16-bit complex inputs) can be transferred from PL to AIE at each PL clock, for a total throughput of upto 1 GSPS.
+
+<img src="images/plio.png" width="650"/>
+
+:bulb: The FIR Asymmetric block has two parameters that you can adjust to achieve a desired throughput. The _Input Window Size_ and the _Number of Cascade Stages_. The number of AI Engine tiles used in the implementation is equal to the _Number of Cascade Stages_. The table below gives you an idea of how the throughput changes for this design as you change these parameters:
+
+| Input Window Size | Cascade Length | Throughput |
+|-------------------|----------------|------------|
+|256|1|296 Msps|
+|256|4|674 Msps|
+|512|4|799 Msps|
+|1024|4|898 Msps|
+
+:bulb: The larger the _Input_Window_Size_ the larger is the latency of the filter.
+
+:bulb: The _Cascade_Length_ trades throughput for the number of AI Engine kernels used by the filter. For details, refer to the [AI Engine FIR function documentation](https://docs.xilinx.com/r/en-US/Vitis_Libraries/dsp/user_guide/L2/func-fir-filters.html).
+
+## Knowledge nuggets about setting up the design
 
 :bulb: Note that the Spectrum Analyzer block accepts a Variable Size Signal as input. Likewise, Simulink *Scope* block and *Display* block also accept variable size signals as inputs. 
 
@@ -14,10 +40,23 @@ This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in M
 
 ![](images/screen_shot.PNG)
 
-The image below depicts the output of DSPlib AI Engine FIR in comparison with the Simulink FIR block.
+The image below depicts the output of DSPlib AI Engine FIR in comparison with the Simulink FIR block. They completely match. 
 
-![](images/output.PNG)
+<img src="images/output.PNG">
 
+:bulb: In order for the AIE and Simulink outputs to completely match, it is necessary to set the data types on the Discrete FIR Filter block as follows:
+
+<img src="images/data_types.PNG">
+
+These settings match the saturation behavior, coefficient width, output width, and accumulator width used by the AIE FIR Asymmetric block.
+
+:bulb: Also note the "Scale output down by 2^" setting (8) on the FIR Asymmetric Filter block. This is necessary to shift the AIE FIR output (24 bits wide) to fit in the desired cint16 output data type. To match the AIE and Simulink outputs, we need to add to the Simulink output a Gain block that performs the same scaling operation.
+
+<img src="images/aie_filter_settings.PNG">
+
+## Related Examples
+
+To achieve throughput over 1GHz, you should use the FIR block Super Sample Rate capability. Take a look at [this](../fir_ssr/README.md) example. 
 
 ------------
 Copyright 2020 Xilinx
