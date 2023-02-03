@@ -50,7 +50,7 @@ The image below depicts the output of DSPlib AI Engine FIR in comparison with th
 
 These settings match the saturation behavior, coefficient width, output width, and accumulator width used by the AIE FIR Asymmetric block.
 
-:bulb: Also note the "Scale output down by 2^" setting (8) on the FIR Asymmetric Filter block. This is necessary to shift the AIE FIR output (24 bits wide) to fit in the desired cint16 output data type. To match the AIE and Simulink outputs, we need to add to the Simulink output a Gain block that performs the same scaling operation.
+:bulb: Also note the "Scale output down by 2^" setting (16) on the FIR Asymmetric Filter block. This is necessary to shift the AIE FIR output (32 bits wide) to fit in the desired cint16 output data type. To match the AIE and Simulink outputs, we need to add to the Simulink output a Gain block that performs the same scaling operation.
 
 <img src="images/aie_filter_settings.PNG">
 
