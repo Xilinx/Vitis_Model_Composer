@@ -76,7 +76,7 @@ document.location=commandURI
 <p><img width="18" height="18" src="Images/bulb.png"> In order for the AIE and Simulink outputs to completely match, it is necessary to set the data types on the Discrete FIR Filter block as follows:</p>
 <p><img src="images/data_types.PNG"></p>
 <p>These settings match the saturation behavior, coefficient width, output width, and accumulator width used by the AIE FIR Asymmetric block.</p>
-<p><img width="18" height="18" src="Images/bulb.png"> Also note the "Scale output down by 2^" setting (8) on the FIR Asymmetric Filter block. This is necessary to shift the AIE FIR output (24 bits wide) to fit in the desired cint16 output data type. To match the AIE and Simulink outputs, we need to add to the Simulink output a Gain block that performs the same scaling operation.</p>
+<p><img width="18" height="18" src="Images/bulb.png"> Also note the "Scale output down by 2^" setting (16) on the FIR Asymmetric Filter block. This is necessary to shift the AIE FIR output (32 bits wide) to fit in the desired cint16 output data type. To match the AIE and Simulink outputs, we need to add to the Simulink output a Gain block that performs the same scaling operation.</p>
 <p><img src="images/aie_filter_settings.PNG"></p>
 <h2 id="related-examples">Related Examples</h2>
 <p>To achieve throughput over 1GHz, you should use the FIR block Super Sample Rate capability. Take a look at <a href="../fir_ssr/README.html">this</a> example. </p>
