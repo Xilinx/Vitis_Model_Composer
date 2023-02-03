@@ -40,10 +40,19 @@ This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in M
 
 ![](images/screen_shot.PNG)
 
-The image below depicts the output of DSPlib AI Engine FIR in comparison with the Simulink FIR block. They completely match. Note that "Saturate on integer overflow" is checked on the Simulink FIR block.
+The image below depicts the output of DSPlib AI Engine FIR in comparison with the Simulink FIR block. They completely match. 
 
+<img src="images/output.PNG">
 
-<img src="images/output.PNG" width="450"/>
+:bulb: In order for the AIE and Simulink outputs to completely match, it is necessary to set the data types on the Discrete FIR Filter block as follows:
+
+<img src="images/data_types.PNG">
+
+These settings match the saturation behavior, coefficient width, output width, and accumulator width used by the AIE FIR Asymmetric block.
+
+:bulb: Also note the "Scale output down by 2^" setting (8) on the FIR Asymmetric Filter block. This is necessary to shift the AIE FIR output (24 bits wide) to fit in the desired cint16 output data type. To match the AIE and Simulink outputs, we need to add to the Simulink output a Gain block that performs the same scaling operation.
+
+<img src="images/aie_filter_settings.PNG">
 
 ## Related Examples
 
