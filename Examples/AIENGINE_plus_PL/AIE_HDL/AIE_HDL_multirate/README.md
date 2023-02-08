@@ -9,7 +9,7 @@
 
 # Multirate Example
 
-***Version: Vitis™ 2023.1 and Matlab™ R2021a with Simulink™ and the DSP System Toolbox™***
+***Version: Vitis™ 2022.2 and Matlab™ R2021a with Simulink™ and the DSP System Toolbox™***
 
 ## Prerequisites
 
