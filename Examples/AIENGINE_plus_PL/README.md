@@ -94,6 +94,14 @@ A 2D FFT desgin with both AI Engine and HDL Kernel.
 This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we consider latencies within the kernels, which are implemented into the FIFO's included in AXI-Stream Interconnect(PL).
 </td>
 </tr>
+
+<tr> 
+<td>
+<a href="./AIE_HDL/AIE_HDL_multirate/README.md">AIE-PL Multirate Design</a>
+</td>
+<td>
+This design highlights best practices for working with multirate designs.  The example utilizes multirate AIE FIR filters to generate outputs in multiple clock domains which are then fed thru the PL.  The DSP aspects are discussed separately, so for designers not interested in filtering the discussion still provides useful information.
+</td>
+</tr>
  
 </table>
-

@@ -59,7 +59,7 @@ These settings match the saturation behavior, coefficient width, output width, a
 To achieve throughput over 1GHz, you should use the FIR block Super Sample Rate capability. Take a look at [this](../fir_ssr/README.md) example. 
 
 ------------
-Copyright 2020 Xilinx
+Copyright 2022 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
