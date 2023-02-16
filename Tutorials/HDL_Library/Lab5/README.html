@@ -116,18 +116,18 @@ Then you will see how IP integrator enhances your productively by supplying conn
 <li><p>Leave Apply Board Preset selected and click <strong>OK</strong>. This will ensure the design is automatically configured to operate on the ZC702 evaluation board.</p></li>
 <li><p>Right-click anywhere in the block diagram and select <strong>Add IP</strong>.<br />
 <br><br><img src= "Images/Step3/Step13.png"></p></li>
-<li><p>Type <code>lab5</code> in the Search dialog box.</p></li>
-<li><p>Double-click <strong>lab5_1</strong> to add the IP to the design.<br />
+<li><p>Type <code>HDL_DUT</code> in the Search dialog box.</p></li>
+<li><p>Double-click <strong>HDL_DUT</strong> to add the IP to the design.<br />
 <br><br> You will now connect the IP to the rest of the design. Vivado IP integrator provides automated assistance when the design uses AXI interfaces.</p></li>
 <li><p>Click <strong>Run Connection Automation</strong> (at the top of the design canvas).</p></li>
-<li><p>Click <strong>OK</strong> to accept the default options ( <samp> lab5<em>1</em>0/lab5<em>1</em>s<em>axi </samp> to <samp> processing</em>system7<em>0/M</em>AXI_GP0 </samp>) and connect the AXI4-Lite interface to the Zynq®-7000 IP SoC.</p></li>
+<li><p>Click <strong>OK</strong> to accept the default options ( <samp> HDL<em>DUT</em>0/HDL<em>DUT</em>s<em>axi </samp> to <samp> processing</em>system7<em>0/M</em>AXI_GP0 </samp>) and connect the AXI4-Lite interface to the Zynq®-7000 IP SoC.</p></li>
 <li><p>Double-click the <strong>ZYNQ7 Processing System</strong> to customize the IP.</p></li>
 <li><p>Click the <strong>PS-PL Configuration</strong> as shown in the following figure.</p></li>
 <li><p>Expand the HP Slave AXI Interface and select the <strong>S AXI HP0</strong> interface.<br />
 <br><br> Make sure to check the box next to S AXI HP0 interface.<br />
 <br><br><img src= "Images/Step3/Step20.png"></p></li>
 <li><p>Click <strong>OK</strong> to add this port to the Zynq Processing System.</p></li>
-<li><p>On the Model Composer IP lab5_1 block, click the AXI4-Stream input interface port <code>s_axis_source</code> and drag the mouse. Possible valid connections are shown with green check marks as the pencil cursor approaches them. Drag the mouse to the <code>S_AXI_HP0</code> port on the Zynq Processing System to complete the connection.<br />
+<li><p>On the Model Composer IP HDL_DUT block, click the AXI4-Stream input interface port <code>s_axis_source</code> and drag the mouse. Possible valid connections are shown with green check marks as the pencil cursor approaches them. Drag the mouse to the <code>S_AXI_HP0</code> port on the Zynq Processing System to complete the connection.<br />
 <br><br><img src= "Images/Step3/Step22.png"></p></li>
 <li><p>Click <strong>OK</strong> in the Make Connection dialog box.</p></li>
 <li><p>Click <strong>Run Connection Automation</strong> to connect the AXI4-Lite interface on the AXI DMA to the processor.</p></li>

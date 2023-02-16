@@ -3,7 +3,7 @@ In this section we showcase a 2D-FFT design using both AI Engines and Programmab
 Two 1D FFTs are implemented on AI Engiens and a transpose operation is implemented using HDL blocks on the programmable logic.
 
 ## Knowledge nuggets
-:bulb: You can seamlessly connect AI Engine blocks to HLS kernel blocks.
+:bulb: You can seamlessly connect AI Engine blocks to HDL kernel blocks.
 
 :bulb: _AIE to HDL_ blocks are needed for connectivity between AIE blocks and HDL blocks. 
 
