@@ -6,7 +6,7 @@ Vitis Model Composer provides a library of performance-optimized blocks for desi
 
 # How to access the examples and tutorials?<a name="access"></a>
     
-We are storing and managing Vitis Model Composer examples and tutorials in GitHub. This way, users will have access to the most up-to-date material. You can get the examples and tutorials from GitHub. However, we recommend you get them directly from Vitis Model Composer.
+We are storing and managing Vitis Model Composer examples and tutorials in GitHub. This way, you will have access to the most up-to-date material. You can get the examples and tutorials from GitHub. However, we recommend you get them directly from Vitis Model Composer.
 
 Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis Model Composer examples and tutorials.
 
