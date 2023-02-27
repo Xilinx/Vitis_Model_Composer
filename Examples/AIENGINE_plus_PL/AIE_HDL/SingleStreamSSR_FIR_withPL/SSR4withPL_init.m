@@ -20,9 +20,6 @@ DISPLAY = 0;
 
 setenv('SRC','./src');
 
-% N is frame size.
-N = 4;
-
 Norm = 32768;
 i = sqrt(-1);
 UTaps = CreateFilter(32);
