@@ -35,16 +35,11 @@ class OverlapSave {
 
 class ApplyFdTaps {
     private:
-    alignas(32) cint16 coeff [FFT_SIZE];
+    alignas(32) cint16 (&coeff)[FFT_SIZE];
 
     public:
-    ApplyFdTaps(const cint16 (&taps)[FFT_SIZE])
-    {
-        for(int i=0;i<FFT_SIZE;i++)
-        {
-            coeff[i] = taps[i];
-        }
-    };
+    ApplyFdTaps(cint16 (&taps)[FFT_SIZE]):coeff(taps) {};
+
 
     void apply_fd_taps(adf::input_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_i,
                        adf::output_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_o );
@@ -52,6 +47,7 @@ class ApplyFdTaps {
     static void registerKernelClass()
     {
         REGISTER_FUNCTION(ApplyFdTaps::apply_fd_taps);
+        REGISTER_PARAMETER(coeff);
     };
 };
 
