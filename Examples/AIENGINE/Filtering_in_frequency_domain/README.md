@@ -49,5 +49,6 @@ Note the second class that applies the filter coefficinets is using a non-defaul
 
 ## Simulation results
 
+In this design, we are comparing the output of the frequency domain filtering using the AI Engine blocks with a block from 
 <img src="./Images/simulink_design.png" width="900">
 
