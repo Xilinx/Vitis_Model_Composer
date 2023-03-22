@@ -18,7 +18,7 @@ In this example the FFT length is 128 and the filter lenght is 32.
 
 ![](./Images/design.png)
 
-This design uses the Class Import block to import the Overlap-Save and the multiplication operation. The class declaration for the Overlap-Save is shown below:
+This design uses the Class Import block to import the Overlap-Save and applying the frequency domain coefficients. The class declaration for the Overlap-Save is shown below:
 
 ```
 class OverlapSave {
