@@ -1,11 +1,9 @@
-%% Number of blocks to run:
-Nb = 100;
 Nfft = 128;
 
 %% Generate a 32-tap filter:
 % --> quantize to <s,16,0> representation:
 tmp = firgr(30,[0,0.2,0.5,1],[1,1,0,0]);
-tmp = double(fi(tmp,1,16,16,'RoundingMethod','Nearest','OverflowAction','Saturate'));
+tmp = double(int16(tmp*2^16))/2^16;
 taps_td = zeros(1,32);
 taps_td(2:end) = tmp;
 
@@ -21,5 +19,4 @@ grid on; xlabel('Normalized Frequency (Fs)'); ylabel('Magnitude (dB)');
 %% Calculate filter taps in frequency domain
 Ntaps = numel(taps_td);
 Nblock = Nfft - Ntaps;
-taps_fd_fxp = fi( fft([taps_td,zeros(1,Nblock)]), 1, 16, 15, 'RoundingMethod','Nearest','OverflowAction','Saturate');
-taps_fd = double(taps_fd_fxp);
+taps_fd = double(int16(fft([taps_td,zeros(1,Nblock)])*2^15))/2^15;
