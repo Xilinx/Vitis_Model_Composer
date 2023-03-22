@@ -45,4 +45,5 @@ The image below depicts how the the Overlap-save algorithm processes input data 
 
 Note the second class that applies the filter coefficinets is using a non-default constrcutor to initialize a static array with the freqency domain filter coefficinets. The image below depicts the block mask where the filter coefficients is passed to the constrcutor. 
 
-![](./Images/constructor.png)
+<img src="./Images/constructor.png" width="600">
+
