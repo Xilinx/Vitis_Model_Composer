@@ -1,4 +1,4 @@
-h1. Filtering in Frequencey Domain
+# Filtering in Frequency Domain
 
 In the frequency domain, the filtering operation involves the multiplication of the Fourier transform of the input and the Fourier transform of the 
 impulse response followed by an inverse fourier transofrm.
