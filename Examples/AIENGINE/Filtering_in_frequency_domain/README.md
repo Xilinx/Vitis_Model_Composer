@@ -16,7 +16,6 @@ In this example the FFT length is 128 and the filter lenght is 32.
 
 ## The Design
 
-
-
+![](./Images/desgin.png)
 
 
