@@ -18,4 +18,21 @@ In this example the FFT length is 128 and the filter lenght is 32.
 
 ![](./Images/design.png)
 
+This design uses the Class Import block to import the the kerenls that do Overlap-Save and the discarding of the samples at the end. The class declaration for the Overlap-Save is shown below:
+
+class OverlapSave {
+    private:
+    alignas(32) cint16 overlap_state [TAP_NUM];
+
+    public:
+    void overlap_save(adf::input_buffer<cint16,adf::extents<WIN_SIZE> > & restrict win_i,
+                      adf::output_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_o);
+
+    static void registerKernelClass()
+    {
+        REGISTER_FUNCTION(OverlapSave::overlap_save);
+    };
+};
+
+
 
