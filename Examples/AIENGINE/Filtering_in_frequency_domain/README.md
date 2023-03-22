@@ -38,5 +38,6 @@ class OverlapSave {
 
 Note that the Class is using a state array variable which is the same size as the filter length.
 
-The image below depicts the Overlap-Size algorithm
+The image below depicts how the the Overlap-Size algorithm processes input data to generate ouptu blocks of 128 sample each:
+
 ![](./Images/overlap_save.png)
