@@ -8,6 +8,6 @@ As the length of the impulse response increases, the frequency-domain filtering 
 
 This exmaple uses the Overlap-Save method. The diagram below depicts this algorithm at a high level:
 
-
+![](./Images/high_level.png)
 
 
