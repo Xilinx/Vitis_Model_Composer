@@ -39,4 +39,4 @@ class OverlapSave {
 Note that the Class is using a state array variable which is the same size as the filter length.
 
 The image below depicts the Overlap-Size algorithm
-![](./Images/overlap-save.png)
+![](./Images/overlap_save.png)
