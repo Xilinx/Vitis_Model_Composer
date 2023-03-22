@@ -47,3 +47,7 @@ Note the second class that applies the filter coefficinets is using a non-defaul
 
 <img src="./Images/constructor.png" width="600">
 
+## Simulation results
+
+<img src="./Images/simulink_design.png" width="900">
+
