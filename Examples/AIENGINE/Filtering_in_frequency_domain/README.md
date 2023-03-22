@@ -10,4 +10,7 @@ This exmaple uses the Overlap-Save method. The diagram below depicts this algori
 
 ![](./Images/high_level.png)
 
+The input stream is partitioned into overlapping blocks of size NFTT, with an overlap factor of NumLen – 1 samples. NFFT is the FFT length and NumLen is the length of the FIR filter. The FFT of each block of input samples is computed and multiplied with the FFT of length NFFT of the FIR numerator. The inverse fast Fourier transform (IFFT) of the result is performed, and the last NFFT – NumLen + 1 samples are saved. The remaining samples are discarded.
+
+
 
