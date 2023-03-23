@@ -49,6 +49,14 @@ Note the second class that applies the filter coefficinets is using a non-defaul
 
 ## Simulation results
 
-In this design, we are comparing the output of the frequency domain filtering using the AI Engine blocks with a block from 
+In this design, we are comparing the output of the frequency domain filtering using the AI Engine blocks with FIR block from MathWorks DSP System Toolbox. 
+
 <img src="./Images/simulink_design.png" width="900">
+
+The output of the spectrum analyzer is shown below:
+
+<img src="./Images/spectrum.png" width="500">
+
+
+
 
