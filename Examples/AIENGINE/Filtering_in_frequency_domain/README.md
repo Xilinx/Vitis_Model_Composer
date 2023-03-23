@@ -73,7 +73,10 @@ The estimated throughput of 224 MHz is limited by the FFT blocks. To increase th
 
 <img src="./Images/throughput_2.png" width="500">
 
-
+Note that there are three factors in play that results in a higher throughput:
+* PLIO of width 64
+* PLIO frequency of 500MHz
+* Number of cascade length of 4 for each FFT
 
 
 
