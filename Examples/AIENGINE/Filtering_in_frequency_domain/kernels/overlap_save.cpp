@@ -21,7 +21,7 @@
 #include "kernels.h"
 
 
-void __attribute__ ((noinline)) OverlapSave::overlap_save( adf::input_buffer<cint16,adf::extents<WIN_SIZE>, adf::margin<TAP_NUM> > & restrict win_i,
+void __attribute__ ((noinline)) overlap_save( adf::input_buffer<cint16,adf::extents<WIN_SIZE>, adf::margin<TAP_NUM> > & restrict win_i,
                                               adf::output_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_o )
 {
   auto win_ot = aie::begin_vector<8>( win_o );

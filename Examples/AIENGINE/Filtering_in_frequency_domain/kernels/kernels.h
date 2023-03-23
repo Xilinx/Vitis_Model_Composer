@@ -19,19 +19,10 @@
 
 #include "kernels_common.h"
 
-class OverlapSave {
-    private:
-    alignas(32) cint16 overlap_state [TAP_NUM];
 
-    public:
-    void overlap_save(adf::input_buffer<cint16,adf::extents<WIN_SIZE>, adf::margin<TAP_NUM> > & restrict win_i,
+void overlap_save(adf::input_buffer<cint16,adf::extents<WIN_SIZE>, adf::margin<TAP_NUM> > & restrict win_i,
                       adf::output_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_o);
 
-    static void registerKernelClass()
-    {
-        REGISTER_FUNCTION(OverlapSave::overlap_save);
-    };
-};
 
 class ApplyFdTaps {
     private:
