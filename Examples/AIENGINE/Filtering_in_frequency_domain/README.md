@@ -14,6 +14,8 @@ The input stream is partitioned into overlapping blocks of size NFTT, with an ov
 
 In this example the FFT length is 128 and the filter lenght is 32.
 
+The time domain and the filter domain coeeficinets for this example are calucalted in the MATLAB script, _test_tap32_fft128.m_.
+
 ## The Design
 
 ![](./Images/design.png)
