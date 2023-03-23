@@ -59,10 +59,20 @@ The output of the spectrum analyzer is shown below. As you can see the output of
 
 <img src="./Images/spectrum.png" width="500">
 
-## Performacne
+## Throughput
 
 It is easy to access the throughput of this design in Model Composer. You need to generate code and run the cycle approximate aie simulation from the Hub block. Set the hub block as shown below:
 
 <img src="./Images/hub.png" width="500">
+
+After running the cycle approximate aie simulation, the Simlink Data Inspector will pop up and you would see the output signal and the estimated throughput there:
+
+<img src="./Images/throughput_1.png" width="500">
+
+The estimated thoughtput of 224 MHz is limited by the FFT blocks. To increase the throughput, you can change the Number of Cascade Length paraemters of the two FFT blocks to 4. This spreads the FFT operation over 4 AI Engine tiles and will result in a throughput increase. The result is shown below.
+
+<img src="./Images/throughput_2.png" width="500">
+
+
 
 
