@@ -1,20 +1,20 @@
 # Filtering in Frequency Domain
 
 In the frequency domain, the filtering operation involves the multiplication of the Fourier transform of the input and the Fourier transform of the 
-impulse response followed by an inverse fourier transofrm.
+impulse response followed by an inverse Fourier transform.
 As the length of the impulse response increases, the frequency-domain filtering technique becomes more efficient compared to time-domain filtering.
 
 ## The Algorithm
 
-This exmaple uses the Overlap-Save method. The diagram below depicts this algorithm at a high level:
+This example uses the Overlap-Save method. The diagram below depicts this algorithm at a high level:
 
 ![](./Images/high_level.png)
 
 The input stream is partitioned into overlapping blocks of size NFTT, with an overlap of NumLen samples. NFFT is the FFT length and NumLen is the length of the FIR filter. The FFT of each block of input samples is computed and multiplied with the FFT of length NFFT of the FIR numerator. The inverse fast Fourier transform (IFFT) of the result is performed, and the last NFFT – NumLen samples are streamed the output. The remaining samples are discarded.
 
-In this example the FFT length is 128 and the filter lenght is 32.
+In this example the FFT length is 128 and the filter length is 32.
 
-The time domain and the filter domain coeeficinets for this example are calucalted in the MATLAB script, _test_tap32_fft128.m_.
+The time domain and the filter domain coefficients for this example are calculated in the MATLAB script, _test_tap32_fft128.m_.
 
 ## The Design
 
@@ -40,12 +40,12 @@ class OverlapSave {
 
 Note that the Class is using a state array variable which is the same size as the filter length.
 
-The image below depicts how the the Overlap-save algorithm processes input data to generate output blocks of 128 sample each:
+The image below depicts how the Overlap-save algorithm processes input data to generate output blocks of 128 sample each:
 
 ![](./Images/overlap_save.png)
 
 
-Note the second class that applies the filter coefficinets is using a non-default constrcutor to initialize a static array with the freqency domain filter coefficinets. The image below depicts the block mask where the filter coefficients is passed to the constrcutor. 
+Note the second class that applies the filter coefficients is using a non-default constructor to initialize a static array with the frequency domain filter coefficients. The image below depicts the block mask where the filter coefficients is passed to the constructor. 
 
 <img src="./Images/constructor.png" width="600">
 
@@ -55,10 +55,6 @@ In this design, we are comparing the output of the frequency domain filtering us
 
 <img src="./Images/simulink_design.png" width="900">
 
-The output of the spectrum analyzer is shown below:
+The output of the spectrum analyzer is shown below. As you can see the output of the two paths are almost completely overlapping. 
 
 <img src="./Images/spectrum.png" width="500">
-
-
-
-
