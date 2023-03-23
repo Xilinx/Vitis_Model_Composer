@@ -8,7 +8,8 @@ As the length of the impulse response increases, the frequency-domain filtering 
 
 This example uses the Overlap-Save method. The diagram below depicts this algorithm at a high level:
 
-![](./Images/high_level.png)
+<img src="./Images/high_level.png" width="600">
+
 
 The input stream is partitioned into overlapping blocks of size NFTT, with an overlap of NumLen samples. NFFT is the FFT length and NumLen is the length of the FIR filter. The FFT of each block of input samples is computed and multiplied with the FFT of length NFFT of the FIR numerator. The inverse fast Fourier transform (IFFT) of the result is performed, and the last NFFT – NumLen samples are streamed the output. The remaining samples are discarded.
 
@@ -42,8 +43,7 @@ Note that the Class is using a state array variable which is the same size as th
 
 The image below depicts how the Overlap-save algorithm processes input data to generate output blocks of 128 sample each:
 
-![](./Images/overlap_save.png)
-
+<img src="./Images/overlap_save.png" width="600">
 
 Note the second class that applies the filter coefficients is using a non-default constructor to initialize a static array with the frequency domain filter coefficients. The image below depicts the block mask where the filter coefficients is passed to the constructor. 
 
@@ -58,3 +58,11 @@ In this design, we are comparing the output of the frequency domain filtering us
 The output of the spectrum analyzer is shown below. As you can see the output of the two paths are almost completely overlapping. 
 
 <img src="./Images/spectrum.png" width="500">
+
+## Performacne
+
+It is easy to access the throughput of this design in Model Composer. You need to generate code and run the cycle approximate aie simulation from the Hub block. Set the hub block as shown below:
+
+<img src="./Images/hub.png" width="500">
+
+
