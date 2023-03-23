@@ -74,7 +74,7 @@ The estimated throughput of 326 MHz is limited by the FFT blocks. To increase th
 
 | Cascade length = 2      | Cascade length = 4  |
 | ------------- |:-------------:|
-| <img src="./Images/throughput_2.png" width="300">     | <img src="./Images/throughput_3.png" width="300"> |
+| <img src="./Images/throughput_2.png" width="300">     | <img src="./Images/throughput_4.png" width="300"> |
 
 
 
