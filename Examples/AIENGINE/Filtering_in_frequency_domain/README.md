@@ -54,7 +54,7 @@ Note the second class that applies the filter coefficients is using a non-defaul
 
 ## Simulation results
 
-In this design, we are comparing the output of the frequency domain filtering using the AI Engine blocks with FIR block from MathWorks DSP System Toolbox. 
+In this design, we are comparing the output of the frequency domain filtering using the AI Engine blocks with the FIR block from MathWorks DSP System Toolbox. 
 
 <img src="./Images/simulink_design.png" width="900">
 
@@ -64,11 +64,11 @@ The output of the spectrum analyzer is shown below. As you can see the output of
 
 ## Throughput
 
-It is easy to access the throughput of this design in Model Composer. You need to generate code and run the cycle approximate aie simulation from the Hub block. Set the hub block as shown below:
+It is easy to access the throughput of this design in Vitis Model Composer. You need to generate code and run the cycle-approximate aie simulation from the Hub block. The Hub block configuaiton is shown below:
 
 <img src="./Images/hub.png" width="500">
 
-After running the cycle approximate aie simulation, the Simulink Data Inspector will pop up and you would see the output signal and the estimated throughput there:
+After running the cycle-approximate aie simulation, the Simulink Data Inspector will pop up and you would see the output signal and the estimated throughput there:
 
 <img src="./Images/throughput_1.png" width="500">
 
