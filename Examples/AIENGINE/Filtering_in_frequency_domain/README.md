@@ -10,9 +10,9 @@ This example uses the Overlap-Save method. The diagram below depicts this algori
 
 <img src="./Images/high_level.png" width="600">
 
-The input stream is divided into overlapping segments of size NFFT, where each segment has an overlap of NumLen samples. NFFT represents the length of the FFT, while NumLen is the length of the FIR filter. To process each segment, the FFT of the segment is multiplied by the FFT of the FIR numerator, both of length NFFT. The resulting product undergoes an inverse fast Fourier transform (IFFT), and the last NFFT – NumLen samples are directed to the output. Any remaining samples are discarded.
+The input stream is divided into overlapping segments of size FFT_SIZE, where each segment has an overlap of TAP_NUM samples (see image in the desgin section). FFT_SIZE represents the length of the FFT, while TAP_NUM is the length of the FIR filter. To process each segment, the FFT of the segment is multiplied by the FFT of the FIR numerator, both of length FFT_SIZE. The resulting product undergoes an inverse fast Fourier transform (IFFT), and the last FFT_SIZE – TAP_NUM samples are directed to the output. Any remaining samples are discarded.
 
-For this specific implementation, NFFT is 128, and the filter length is 32. The input is provided in 96-sample frames, where the sum of the input frame size and the filter size equals the FFT length.
+For this specific implementation, FFT_SIZE is 128, and the TAP_NUM is 32. The input is provided in 96-sample frames, where the sum of the input frame size and the filter size equals the FFT length.
 
 To obtain the coefficients for the time domain and filter domain for this implementation, we use the MATLAB script called test_tap32_fft128.m.
 
@@ -20,9 +20,9 @@ To obtain the coefficients for the time domain and filter domain for this implem
 
 ![](./Images/design.png)
 
-This design uses the _AIE Kenrel_ block to import the Overlap-Save kernel and uses the _ AIE Class Kernel_ block to import the kernel that applies the freqency domain coefficinets.
+This design uses the _AIE Kenrel_ block to import the Overlap-Save kernel and uses the _AIE Class Kernel_ block to import the kernel that applies the freqency domain coefficinets.
 
-The definition of the Overlap-Save is shown below:
+The definition of the Overlap-Save kernel is shown below:
 
 ```
 void __attribute__ ((noinline)) overlap_save( adf::input_buffer<cint16,adf::extents<WIN_SIZE>, adf::margin<TAP_NUM> > & restrict win_i,
