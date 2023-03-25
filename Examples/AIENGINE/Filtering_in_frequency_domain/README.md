@@ -14,7 +14,7 @@ The input stream is divided into overlapping segments of size FFT_SIZE, where ea
 
 For this specific implementation, FFT_SIZE is 128, and the TAP_NUM is 32. The input is provided in 96-sample frames, where the sum of the input frame size and the filter size equals the FFT length.
 
-To obtain the coefficients for the time domain and filter domain for this implementation, we use the MATLAB script called test_tap32_fft128.m.
+To obtain the coefficients for the time domain and filter domain for this implementation, we use a MATLAB script called test_tap32_fft128.m.
 
 ## The Design
 
@@ -42,9 +42,7 @@ void __attribute__ ((noinline)) overlap_save( adf::input_buffer<cint16,adf::exte
 }
 ```
 
-Note that this kernel is using an input buffer with the size of WIN_SIZE = 96 and a margin of TAP_NUM = 32. 
-
-The image below depicts how the Overlap-save algorithm processes input data to generate output blocks of 128 samples each:
+This kernel is using an input buffer with the size of WIN_SIZE = 96 and a margin of TAP_NUM = 32 samples. In cases where an algorithm needs a certain number of samples from the previous frame, _margin_ is utilized. Specifically, for this particular scenario, every 128-sample output block is made up of a 96-sample input frame and 32 samples from the previous input frame. The following image illustrates the process by which the Overlap-save algorithm operates on input data to produce output blocks consisting of 128 samples each:
 
 <img src="./Images/overlap_save.png" width="600">
 
