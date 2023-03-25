@@ -73,7 +73,7 @@ After running the cycle-approximate aie simulation, the Simulink Data Inspector 
 ### Increasing thoughput by using more AI Engine cores
 The estimated throughput of 326 MHz is limited by the FFT blocks. To increase the throughput, you can increase the value of the Number of Cascade Length parameters of the FFT and IFFT blocks. This spreads the FFT operation over more than one AI Engine tile and will result in a throughput increase. The results for Number of Cascade Length of 2 and 4 are shown below:
 
-| Cascade length = 2      | Cascade length = 4  |
+| Cascade length = 2   (454 MHz)   | Cascade length = 4   (790 MHz)|
 | ------------- |:-------------:|
 | <img src="./Images/throughput_2.png" width="400">     | <img src="./Images/throughput_4.png" width="400"> |
 
