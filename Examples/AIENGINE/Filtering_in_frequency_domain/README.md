@@ -10,36 +10,39 @@ This example uses the Overlap-Save method. The diagram below depicts this algori
 
 <img src="./Images/high_level.png" width="600">
 
+The input stream is divided into overlapping segments of size NFFT, where each segment has an overlap of NumLen samples. NFFT represents the length of the FFT, while NumLen is the length of the FIR filter. To process each segment, the FFT of the segment is multiplied by the FFT of the FIR numerator, both of length NFFT. The resulting product undergoes an inverse fast Fourier transform (IFFT), and the last NFFT – NumLen samples are directed to the output. Any remaining samples are discarded.
 
-The input stream is partitioned into overlapping blocks of size NFTT, with an overlap of NumLen samples. NFFT is the FFT length and NumLen is the length of the FIR filter. The FFT of each block of input samples is computed and multiplied with the FFT of length NFFT of the FIR numerator. The inverse fast Fourier transform (IFFT) of the result is performed, and the last NFFT – NumLen samples are streamed the output. The remaining samples are discarded.
+For this specific implementation, NFFT is 128, and the filter length is 32. The input is provided in 96-sample frames, where the sum of the input frame size and the filter size equals the FFT length.
 
-In this example the FFT length is 128 and the filter length is 32.
-
-The time domain and the filter domain coefficients for this example are calculated in the MATLAB script, _test_tap32_fft128.m_.
+To obtain the coefficients for the time domain and filter domain for this implementation, we use the MATLAB script called test_tap32_fft128.m.
 
 ## The Design
 
 ![](./Images/design.png)
 
-This design uses the Class Import block to import the Overlap-Save and applying the frequency domain coefficients. The class declaration for the Overlap-Save is shown below:
+This design uses the _AIE Kenrel_ block to import the Overlap-Save kernel and uses the _ AIE Class Kernel_ block to import the kernel that applies the freqency domain coefficinets.
+
+The definition of the Overlap-Save is shown below:
 
 ```
-class OverlapSave {
-    private:
-    alignas(32) cint16 overlap_state [TAP_NUM];
-
-    public:
-    void overlap_save(adf::input_buffer<cint16,adf::extents<WIN_SIZE> > & restrict win_i,
-                      adf::output_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_o);
-
-    static void registerKernelClass()
-    {
-        REGISTER_FUNCTION(OverlapSave::overlap_save);
-    };
-};
+void __attribute__ ((noinline)) overlap_save( adf::input_buffer<cint16,adf::extents<WIN_SIZE>, adf::margin<TAP_NUM> > & restrict win_i,
+                                              adf::output_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_o )
+{
+  auto win_ot = aie::begin_vector<8>( win_o );
+  auto win_it = aie::begin_vector<8>( win_i );
+  
+  // Loop over input window, copy to output window:
+  for ( unsigned int ll=0; ll < (WIN_SIZE + TAP_NUM) / 8; ll++)
+    chess_loop_range(4,)
+    chess_prepare_for_pipelining
+  {
+    aie::vector<cint16, 8> w = *win_it++;
+    *win_ot++ = w;
+  }
+}
 ```
 
-Note that the Class is using a state array variable which is the same size as the filter length.
+Note that this kernel is using an input buffer with the size of WIN_SIZE = 96 and a margin of TAP_NUM = 32. 
 
 The image below depicts how the Overlap-save algorithm processes input data to generate output blocks of 128 samples each:
 
