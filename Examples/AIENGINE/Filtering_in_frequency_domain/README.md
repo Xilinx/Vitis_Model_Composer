@@ -73,16 +73,30 @@ After running the cycle-approximate AI Engine simulation, the Simulink Data Insp
 ### Increasing throughput by using more AI Engine cores
 The estimated throughput of 326 MHz is limited by the FFT blocks. To increase the throughput, you can increase the value of the Number of Cascade Length parameters of the FFT and IFFT blocks. This spreads the FFT operation over more than one AI Engine tile and will result in a throughput increase. The results for Number of Cascade Length of 2 and 4 are shown below:
 
-| Cascade length = 2   (454 MHz)   | Cascade length = 4   (790 MHz)|
+| Cascade length| Throughput(MSPS)|
 | ------------- |:-------------:|
-| <img src="./Images/throughput_2.png" width="400">     | <img src="./Images/throughput_4.png" width="400"> |
+|1  | 326|
+|2|451|
+|3|500|
+|4|500|
+
+Note that increasing the cascade length beyond 3 is no longer increasing the thoughput. To increase the throughput furthur, we need to inlcresae the PLIO width
+
+### Increasing throughout by incresaing the PLIO width
+The PLIO width can be configured to 32, 64, or 128. In this example, the PLIO width has been set to 32 and the PLIO frequency has been set to 500MHz. This implies that the AI Engine will receive data from the PL at a maximum rate of 500 MSPS, with each sample being 32 bits. Consequently, the maximum throughput is limited to 500 MSPS (see the table above). However, if we increase the PLIO width to 64, while maintaining the PLIO frequency at 500MHz, the PL can send data to the AI Engine at a rate of 500 MSPS with each sample being 64 bits. This means the AI Engine can process incoming 32-bit data at 1GSPS, potentially achieving a throughput of 1GSPS.
+
+Here are the new throughput numbers with a PLIO width of 64:
+
+| Cascade length| Throughput(MSPS)|
+| ------------- |:-------------:|
+|1  | 326|
+|2|454|
+|3|549|
+|4|718|
 
 
 
-Note that there are three factors in this design that result in a higher throughput:
-* PLIO width of 64 bits
-* PLIO frequency of 500MHz
-* Cascade length greater than one for the FFT and IFFT blocks. 
+
 
 
 
