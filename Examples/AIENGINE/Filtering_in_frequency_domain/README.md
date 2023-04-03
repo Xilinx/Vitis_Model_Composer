@@ -94,7 +94,7 @@ Here are the new throughput numbers with a PLIO width of 64:
 |3|549|
 |4|718|
 
-### Increasing throughput by increasing the number of frames fed to the FFT blocks. 
+### Increasing throughput by increasing the number of frames fed to the FFT blocks
 
 Increasing the value of the Input Window Size parameter of the FFT/IFFT blocks can boost the throughput. By setting this parameter as an integer multiple of the FFT size, multiple FFT iterations can be performed on a given input window, generating multiple iterations of output samples. This reduces the number of times the kernel needs to be triggered to process a given number of input data samples, resulting in lower overheads during kernel triggering and an overall increase in throughput.
 
