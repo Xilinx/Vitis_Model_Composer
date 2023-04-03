@@ -109,6 +109,7 @@ The table below illustrates the impact on throughput as we increase the number o
 |4|976|
 |8|1000|
 
+By employing the mentioned techniques to boost the throughput, we have achieved a 1GSPS throughput. However, this comes at the cost of higher resource usage due to the increased cascade length and increased design latency resulting from the higher number of frames. 
 
 
 
