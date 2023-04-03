@@ -25,24 +25,31 @@ This design uses the _AIE Kernel_ block to import the Overlap-Save kernel and us
 The definition of the Overlap-Save kernel is shown below:
 
 ```
-void __attribute__ ((noinline)) overlap_save( adf::input_buffer<cint16,adf::extents<WIN_SIZE>, adf::margin<TAP_NUM> > & restrict win_i,
-                                              adf::output_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_o )
+template <int NUM_OF_FRAMES>
+void __attribute__ ((noinline)) overlap_save(adf::input_buffer<cint16,adf::extents<adf::inherited_extent>, adf::margin<TAP_NUM>> & restrict win_i,
+                                                   adf::output_buffer<cint16> & restrict win_o )
 {
-  auto win_ot = aie::begin_vector<8>( win_o );
-  auto win_it = aie::begin_vector<8>( win_i );
-  
-  // Loop over input window, copy to output window:
-  for ( unsigned int ll=0; ll < (WIN_SIZE + TAP_NUM) / 8; ll++)
-    chess_loop_range(4,)
-    chess_prepare_for_pipelining
-  {
-    aie::vector<cint16, 8> w = *win_it++;
-    *win_ot++ = w;
-  }
+    auto win_ot = aie::begin_vector<8>( win_o );
+    auto win_it = aie::begin_vector<8>( win_i );
+
+    for ( unsigned int jj=0; jj < NUM_OF_FRAMES; jj++) 
+    {
+            // Loop over input window, copy to output window:
+            for ( unsigned int ll=0; ll < (WIN_SIZE + TAP_NUM) / 8; ll++)
+                chess_loop_range(4,)
+                chess_prepare_for_pipelining
+            {
+                aie::vector<cint16, 8> w = *win_it++;
+                *win_ot++ = w;
+            }
+
+        win_it -= TAP_NUM/8;
+    }
+
 }
 ```
 
-This kernel is using an input buffer with the size of WIN_SIZE = 96 and a margin of TAP_NUM = 32 samples. In cases where an algorithm needs a certain number of samples from the previous frame, _margin_ is utilized. Specifically, for this particular scenario, every 128-sample output block is made up of a 96-sample input frame and 32 samples from the previous input frame. The following image illustrates the process by which the Overlap-save algorithm operates on input data to produce output blocks consisting of 128 samples each:
+The kernel uses an input buffer of size WIN_SIZE = 96, as specified in the block mask, along with a margin of TAP_NUM = 32 samples. The template parameter, NUM_OF_FRAMES, defaults to one, and the purpose for requiring it will be explained later when discussing design throughput. The margin is utilized in situations where an algorithm requires a certain number of samples from the previous frame. In this scenario, every 128-sample output block comprises a 96-sample input frame and 32 samples from the previous input frame. The process by which the Overlap-save algorithm produces output blocks of 128 samples is depicted in the following image:
 
 <img src="./Images/overlap_save.png" width="600">
 
