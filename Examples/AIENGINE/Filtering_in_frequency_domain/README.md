@@ -82,7 +82,7 @@ The estimated throughput of 326 MHz is limited by the FFT blocks. To increase th
 
 Note that increasing the cascade length beyond 3 is no longer increasing the thoughput. To increase the throughput furthur, we need to inlcresae the PLIO width
 
-### Increasing throughout by incresaing the PLIO width
+### Increasing throughput by incresaing the PLIO width
 The PLIO width can be configured to 32, 64, or 128. In this example, the PLIO width has been set to 32 and the PLIO frequency has been set to 500MHz. This implies that the AI Engine will receive data from the PL at a maximum rate of 500 MSPS, with each sample being 32 bits. Consequently, the maximum throughput is limited to 500 MSPS (see the table above). However, if we increase the PLIO width to 64, while maintaining the PLIO frequency at 500MHz, the PL can send data to the AI Engine at a rate of 500 MSPS with each sample being 64 bits. This means the AI Engine can process incoming 32-bit data at 1GSPS, potentially achieving a throughput of 1GSPS.
 
 Here are the new throughput numbers with a PLIO width of 64:
@@ -94,6 +94,20 @@ Here are the new throughput numbers with a PLIO width of 64:
 |3|549|
 |4|718|
 
+### Increasing throughput by increasing the number of frames fed to the FFT blocks. 
+
+Increasing the value of the Input Window Size parameter of the FFT/IFFT blocks can boost the throughput. By setting this parameter as an integer multiple of the FFT size, multiple FFT iterations can be performed on a given input window, generating multiple iterations of output samples. This reduces the number of times the kernel needs to be triggered to process a given number of input data samples, resulting in lower overheads during kernel triggering and an overall increase in throughput.
+
+To increase the number of frames that are supplied to the FFT blocks, you can set the variable NUM_OF_FRAMES to an integer value in the MATLAB command window. The default value for this variable is one.
+
+The table below illustrates the impact on throughput as we increase the number of input frames for a PLIO of 64 and cascade lengths of 4:
+
+| Number of frames| Throughput(MSPS)|
+| ------------- |:-------------:|
+|1  | 718|
+|2|874|
+|4|976|
+|8|1000|
 
 
 
