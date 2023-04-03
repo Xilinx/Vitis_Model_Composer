@@ -1,4 +1,5 @@
 Nfft = 128;
+NUM_OF_FRAMES = 2;
 
 %% Generate a 32-tap filter:
 % --> quantize to <s,16,0> representation:

@@ -20,20 +20,25 @@
 #include "kernels_common.h"
 #include "kernels.h"
 
-
-void __attribute__ ((noinline)) overlap_save( adf::input_buffer<cint16,adf::extents<WIN_SIZE>, adf::margin<TAP_NUM> > & restrict win_i,
-                                              adf::output_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_o )
+template <int NUM_OF_FRAMES>
+void __attribute__ ((noinline)) overlap_save(adf::input_buffer<cint16,adf::extents<adf::inherited_extent>, adf::margin<TAP_NUM>> & restrict win_i,
+                                                   adf::output_buffer<cint16> & restrict win_o )
 {
-  auto win_ot = aie::begin_vector<8>( win_o );
-  auto win_it = aie::begin_vector<8>( win_i );
+    auto win_ot = aie::begin_vector<8>( win_o );
+    auto win_it = aie::begin_vector<8>( win_i );
 
-  // Loop over input window, copy to output window:
-  for ( unsigned int ll=0; ll < (WIN_SIZE + TAP_NUM) / 8; ll++)
-    chess_loop_range(4,)
-    chess_prepare_for_pipelining
-  {
-    aie::vector<cint16, 8> w = *win_it++;
-    *win_ot++ = w;
-  }
+    for ( unsigned int jj=0; jj < NUM_OF_FRAMES; jj++) 
+    {
+            // Loop over input window, copy to output window:
+            for ( unsigned int ll=0; ll < (WIN_SIZE + TAP_NUM) / 8; ll++)
+                chess_loop_range(4,)
+                chess_prepare_for_pipelining
+            {
+                aie::vector<cint16, 8> w = *win_it++;
+                *win_ot++ = w;
+            }
+
+        win_it -= TAP_NUM/8;
+    }
 
 }

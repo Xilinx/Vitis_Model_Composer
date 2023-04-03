@@ -15,15 +15,17 @@
 // **********/
 
 #ifndef _KERNELS_H_
-#define _KERNELS_H_ 1
+#define _KERNELS_H_
 
 #include "kernels_common.h"
 
 
-void overlap_save(adf::input_buffer<cint16,adf::extents<WIN_SIZE>, adf::margin<TAP_NUM> > & restrict win_i,
-                      adf::output_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_o);
+template <int NUM_OF_FRAMES>
+void overlap_save(adf::input_buffer<cint16,adf::extents<adf::inherited_extent>, adf::margin<TAP_NUM>> & restrict win_i,
+                                              adf::output_buffer<cint16> & restrict win_o );
 
 
+template <int NUM_OF_FRAMES>
 class ApplyFdTaps {
     private:
     alignas(32) cint16 coeff[FFT_SIZE];
@@ -36,8 +38,8 @@ class ApplyFdTaps {
         }
     };
 
-    void apply_fd_taps(adf::input_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_i,
-                       adf::output_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_o );
+    void apply_fd_taps(adf::input_buffer<cint16> & restrict win_i,
+                       adf::output_buffer<cint16> & restrict win_o );
 
     static void registerKernelClass()
     {
@@ -46,7 +48,7 @@ class ApplyFdTaps {
 };
 
 
-void overlap_discard(adf::input_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_i,
-                       adf::output_buffer<cint16,adf::extents<WIN_SIZE> > & restrict win_o );
-
+template <int NUM_OF_FRAMES>
+void overlap_discard(adf::input_buffer<cint16> & restrict win_i,
+                                                      adf::output_buffer<cint16> & restrict win_o );
 #endif

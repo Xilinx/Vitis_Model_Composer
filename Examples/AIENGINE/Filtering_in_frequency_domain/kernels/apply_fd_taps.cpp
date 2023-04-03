@@ -24,25 +24,30 @@
 // --> Assume: data <s,16,1> x coeff <s,16,1> = <s,32,2> --> result <s,16,15>
 #define DN_SHIFT 15
 
-void __attribute__ ((noinline)) ApplyFdTaps::apply_fd_taps(adf::input_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_i,
-                   adf::output_buffer<cint16,adf::extents<FFT_SIZE> > & restrict win_o )
+template <int NUM_OF_FRAMES>
+void __attribute__ ((noinline)) ApplyFdTaps<NUM_OF_FRAMES>::apply_fd_taps(adf::input_buffer<cint16 > & restrict win_i,
+                                                           adf::output_buffer<cint16> & restrict win_o )
 {
-  // Use 'iterator' to walk through coefficients:
-  auto it = aie::begin_vector<8>( (const cint16*) coeff );
-  auto wi = aie::begin_vector<8>( win_i );
-  auto wo = aie::begin_vector<8>( win_o );
+    // Use 'iterator' to walk through coefficients:
+    auto it = aie::begin_vector<8>( (const cint16*) coeff );
+    auto wi = aie::begin_vector<8>( win_i );
+    auto wo = aie::begin_vector<8>( win_o );
 
-  // Loop over frequency, performing 8 multiplications at a time
-  for (unsigned int ll=0; ll < FFT_SIZE / 8; ll++)
-    chess_loop_range(4,)
-    chess_prepare_for_pipelining
-  {
-    aie::set_saturation(aie::saturation_mode::saturate);
-    aie::set_rounding(aie::rounding_mode::conv_even); 
+    for (unsigned int ii=0; ii<NUM_OF_FRAMES; ii++) 
+    {
+        // Loop over frequency, performing 8 multiplications at a time
+        for (unsigned int ll=0; ll < FFT_SIZE / 8; ll++)
+        chess_loop_range(4,)
+        chess_prepare_for_pipelining
+        {
+            aie::set_saturation(aie::saturation_mode::saturate);
+            aie::set_rounding(aie::rounding_mode::conv_even);
 
-    aie::vector<cint16,8> taps = *it++;
-    aie::vector<cint16,8> data = *wi++;
-    aie::accum<cacc48,8> acc = aie::mul<cacc48>( data, taps );
-    *wo++ = acc.to_vector<cint16>( DN_SHIFT );
-  }
+            aie::vector<cint16,8> taps = *it++;
+            aie::vector<cint16,8> data = *wi++;
+            aie::accum<cacc48,8> acc = aie::mul<cacc48>( data, taps );
+            *wo++ = acc.to_vector<cint16>( DN_SHIFT );
+        }
+        it-=FFT_SIZE/8;
+    }
 }
