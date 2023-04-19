@@ -1,0 +1,353 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="filtering-in-frequency-domain">Filtering in Frequency Domain</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
+              
+</html>
+<p>In the frequency domain, the filtering operation involves the multiplication of the Fourier transform of the input and the Fourier transform of the <br />
+impulse response followed by an inverse Fourier transform.<br />
+As the length of the impulse response increases, the frequency-domain filtering technique becomes more efficient compared to time-domain filtering.</p>
+<h2 id="the-algorithm">The Algorithm</h2>
+<p>This example uses the Overlap-Save method. The diagram below depicts this algorithm at a high level:</p>
+<p><img src="./Images/high_level.png" width="600"></p>
+<p>The input stream is divided into overlapping segments of size FFT<em>SIZE, where each segment has an overlap of TAP</em>NUM samples (see image in the design section). FFT<em>SIZE represents the length of the FFT, while TAP</em>NUM is the length of the FIR filter. To process each segment, the FFT of the segment is multiplied by the FFT of the FIR numerator, both of length FFT<em>SIZE. The resulting product undergoes an inverse fast Fourier transform (IFFT), and the last FFT</em>SIZE – TAP_NUM samples are directed to the output. Any remaining samples are discarded.</p>
+<p>For this specific implementation, FFT<em>SIZE is 128, and the TAP</em>NUM is 32. The input is provided in 96-sample frames, where the sum of the input frame size and the filter size equals the FFT length.</p>
+<p>To obtain the coefficients for the time domain and filter domain for this implementation, we use a MATLAB script called <code>test_tap32_fft128.m</code>.</p>
+<h2 id="the-design">The Design</h2>
+<p><img src="./Images/design.png" alt="" /></p>
+<p>This design uses the <em>AIE Kernel</em> block to import the Overlap-Save kernel and uses the <em>AIE Class Kernel</em> block to import the kernel that applies the frequency domain coefficinets.</p>
+<p>The definition of the Overlap-Save kernel is shown below:</p>
+<pre><code>template &lt;int NUM_OF_FRAMES&gt;
+void __attribute__ ((noinline)) overlap_save(adf::input_buffer&lt;cint16,adf::extents&lt;adf::inherited_extent&gt;, adf::margin&lt;TAP_NUM&gt;&gt; &amp; restrict win_i,
+adf::output_buffer&lt;cint16&gt; &amp; restrict win_o )
+{
+auto win_ot = aie::begin_vector&lt;8&gt;( win_o );
+auto win_it = aie::begin_vector&lt;8&gt;( win_i );
+
+for ( unsigned int jj=0; jj &lt; NUM_OF_FRAMES; jj++) 
+{
+// Loop over input window, copy to output window:
+for ( unsigned int ll=0; ll &lt; (WIN_SIZE + TAP_NUM) / 8; ll++)
+chess_loop_range(4,)
+chess_prepare_for_pipelining
+{
+aie::vector&lt;cint16, 8&gt; w = *win_it++;
+*win_ot++ = w;
+}
+
+win_it -= TAP_NUM/8;
+}
+
+}
+</code></pre>
+<p>The kernel uses an input buffer of size WIN<em>SIZE = 96, as specified in the block mask, along with a margin of TAP</em>NUM = 32 samples. The template parameter, NUM<em>OF</em>FRAMES, defaults to one, and the purpose for requiring it will be explained later when discussing design throughput. The margin is utilized in situations where an algorithm requires a certain number of samples from the previous frame. In this scenario, every 128-sample output block comprises a 96-sample input frame and 32 samples from the previous input frame. The process by which the Overlap-save algorithm produces output blocks of 128 samples is depicted in the following image:</p>
+<p><img src="./Images/overlap_save.png" width="600"></p>
+<p>Note the second class that applies the filter coefficients is using a non-default constructor to initialize a static array with the frequency domain filter coefficients. The image below depicts the block mask where the filter coefficients are passed to the constructor. </p>
+<p><img src="./Images/constructor.png" width="600"></p>
+<h2 id="simulation-results">Simulation results</h2>
+<p>In this design, we are comparing the output of the frequency domain filtering using the AI Engine blocks with the FIR block from MathWorks DSP System Toolbox. </p>
+<p><img src="./Images/simulink_design.png" width="900"></p>
+<p>The output of the spectrum analyzer is shown below. As you can see, the spectra of the two paths are almost completely overlapping. </p>
+<p><img src="./Images/spectrum.png" width="500"></p>
+<h2 id="throughput">Throughput</h2>
+<p>It is easy to estimate the throughput of this design in Vitis Model Composer. You need to generate code and run the cycle-approximate AI Engine simulation from the Hub block. The Hub block configuration is shown below:</p>
+<p><img src="./Images/hub.png" width="500"></p>
+<p>After running the cycle-approximate AI Engine simulation, the Simulink Data Inspector will pop up and you will see the output signal and the estimated throughput:</p>
+<p><img src="./Images/throughput_1.png" width="500"></p>
+<h3 id="increasing-throughput-by-using-more-ai-engine-cores">Increasing throughput by using more AI Engine cores</h3>
+<p>The estimated throughput of 326 MHz is limited by the FFT blocks. To increase the throughput, you can increase the value of the Number of Cascade Length parameters of the FFT and IFFT blocks. This spreads the FFT operation over more than one AI Engine tile and will result in a throughput increase. The results for Number of Cascade Length of 2 and 4 are shown below:</p>
+<table>
+<thead>
+<tr>
+<th>Cascade length</th>
+<th style="text-align:center;">Throughput(MSPS)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:center;">326</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:center;">451</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:center;">500</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:center;">500</td>
+</tr>
+</tbody>
+</table>
+<p>Note that increasing the cascade length beyond 3 is no longer increasing the thoughput. To increase the throughput furthur, we need to inlcresae the PLIO width</p>
+<h3 id="increasing-throughput-by-incresaing-the-plio-width">Increasing throughput by incresaing the PLIO width</h3>
+<p>The PLIO width can be configured to 32, 64, or 128. In this example, the PLIO width has been set to 32 and the PLIO frequency has been set to 500MHz. This implies that the AI Engine will receive data from the PL at a maximum rate of 500 MSPS, with each sample being 32 bits. Consequently, the maximum throughput is limited to 500 MSPS (see the table above). However, if we increase the PLIO width to 64, while maintaining the PLIO frequency at 500MHz, the PL can send data to the AI Engine at a rate of 500 MSPS with each sample being 64 bits. This means the AI Engine can process incoming 32-bit data at 1GSPS, potentially achieving a throughput of 1GSPS.</p>
+<p>Here are the new throughput numbers with a PLIO width of 64:</p>
+<table>
+<thead>
+<tr>
+<th>Cascade length</th>
+<th style="text-align:center;">Throughput(MSPS)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:center;">326</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:center;">454</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:center;">549</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:center;">718</td>
+</tr>
+</tbody>
+</table>
+<h3 id="increasing-throughput-by-increasing-the-number-of-frames-fed-to-the-fft-blocks">Increasing throughput by increasing the number of frames fed to the FFT blocks</h3>
+<p>Increasing the value of the Input Window Size parameter of the FFT/IFFT blocks can boost the throughput. By setting this parameter as an integer multiple of the FFT size, multiple FFT iterations can be performed on a given input window, generating multiple iterations of output samples. This reduces the number of times the kernel needs to be triggered to process a given number of input data samples, resulting in lower overheads during kernel triggering and an overall increase in throughput.</p>
+<p>To increase the number of frames that are supplied to the FFT blocks, you can set the variable NUM<em>OF</em>FRAMES to an integer value in the MATLAB command window. The default value for this variable is one.</p>
+<p>The table below illustrates the impact on throughput as we increase the number of input frames for a PLIO of 64 and cascade lengths of 4:</p>
+<table>
+<thead>
+<tr>
+<th>Number of frames</th>
+<th style="text-align:center;">Throughput(MSPS)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:center;">718</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:center;">874</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:center;">976</td>
+</tr>
+<tr>
+<td>8</td>
+<td style="text-align:center;">1000</td>
+</tr>
+</tbody>
+</table>
+<p>By employing the mentioned techniques to boost the throughput, we have achieved a 1GSPS throughput. However, this comes at the cost of higher resource usage due to the increased cascade length and increased design latency resulting from the higher number of frames. </p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h1, h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>
