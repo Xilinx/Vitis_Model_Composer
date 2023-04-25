@@ -153,8 +153,6 @@ Using DSPLib AI Engine SSR FIR block to achieve 4 Gsps throughput.
  </td>
  <td> This design showcases filtering in frequency domain and also shows how to increase the throughput using different techniques.</td>
  </tr> 
- 
-  Filtering_in_frequency_domain
   
  </table>
 
