@@ -107,19 +107,55 @@ Automatic Code Generation
 
 <tr>
 <td>
-<a href="./AIEngine_Library/Lab1/README.md">Lab 1</a>
+<a href="./01-Introduction_to_Versal_ACAP_and_AI_Engines/README.md">Lab 1</a>
 </td>
 <td>
-Importing AI Engine Kernels
+Introduction to Versal ACAP and AI Engines
 </td>
 </tr> 
  
 <tr>
 <td>
-<a href="./AIEngine_Library/Lab2/README.md">Lab 2</a>
+<a href="./02-Build_and_Simulate_AI_Engine_Design/README.md">Lab 2</a>
 </td>
 <td>
-Importing AI Engine Graphs
+Build and Simulate an AI Engine Design
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="./03-Import_Custom_AI_Engine_Code/README.md">Lab 3</a>
+</td>
+<td>
+Import Custom AI Engine Code
+</td>
+</tr> 
+ 
+<tr>
+<td>
+<a href="./04-AI_Engine_Code_Generation/README.md">Lab 4</a>
+</td>
+<td>
+AI Engine Code Generation and Cycle-Approximate Simulation
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="./05-Vitis_Analyzer/README.md">Lab 5</a>
+</td>
+<td>
+View AI Engine Designs in Vitis Analyzer
+</td>
+</tr> 
+ 
+<tr>
+<td>
+<a href="./06-Hardware_Validation/README.md">Lab 6</a>
+</td>
+<td>
+Hardware Validation of Versal ACAP Design
 </td>
 </tr> 
 
@@ -128,6 +164,7 @@ Importing AI Engine Graphs
 
 --------------
 Copyright 2022 Xilinx
+Copyright 2023 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
