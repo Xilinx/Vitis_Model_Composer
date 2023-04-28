@@ -1,0 +1,468 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<table class="sphinxhide" width="100%">
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:chdir('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
+<tr width="100%">
+<td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
+<a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
+<a href="https://www.xilinx.com/products/design-tools/vitis/vitis-ai.html">See Vitis™ AI Development Environment on xilinx.com</a>
+</td>
+</tr>
+</table>
+<h1 id="lab-2-build-and-simulate-an-ai-engine-design">Lab 2: Build and Simulate an AI Engine Design</h1>
+<p>In this lab, you will begin building the decimation chain design using AI Engine DSP library functions. You will also see how to use Vitis Model Composer to inspect the functional performance of the design.</p>
+<p>:warning: This AI Engine Lab can be done only in a Linux environment.</p>
+<h3 id="procedure">Procedure</h3>
+<p>This lab has the following steps:</p>
+<ul>
+<li>In Step 1, you will construct a simple model that compares the output of a single AI Engine filter to a golden reference.</li>
+<li>In Step 2, you will add the remaining filters to the model to continue building up the decimation chain.</li>
+<li>In Step 3, you will see how to attach additional scopes and log signals to the MATLAB workspace for further analysis.</li>
+</ul>
+<h2 id="step-1-model-a-single-ai-engine-filter">Step 1: Model a Single AI Engine Filter</h2>
+<p>In this step, you will create a simple testbench for a block from the <a href="https://github.com/Xilinx/Vitis_Libraries/tree/main/dsp">AI Engine DSP Library</a>.</p>
+<ol>
+<li><p>Run the <strong><em>setupLab2</em></strong> script to initialize a working directory and preload the DSP filter configurations.</p></li>
+<li><p>On the MATLAB GUI, select the <strong>Home Tab</strong> and click <strong>Simulink</strong>.</p></li>
+</ol>
+<p><img src="Images/Image_001.png" alt="missing image" /></p>
+<ol start="3">
+<li>Select <strong>Blank Model</strong> to create a new canvas on which to design the Decimation Chain.</li>
+</ol>
+<p><img src="Images/Image_002.png" alt="missing image" /></p>
+<p>Perform the next step to automatically call the filter configuration script when opening the design or when you update it.</p>
+<ol start="4">
+<li>Right-click in the canvas and select <strong>Model Properties</strong>:<ul>
+<li>Click the <strong>Callbacks</strong> tab.</li>
+<li>Click <strong>PreLoadFcn</strong> and type <code>CreateFilter;</code> in the edit window on the right.</li>
+<li>Click <strong>InitFcn</strong> and type <code>CreateFilter;</code> in the edit window on the right.</li>
+<li>Click <strong>Apply</strong>.</li></ul></li>
+</ol>
+<p><img src="Images/Image_003.png" alt="missing image" /></p>
+<p>Save the model <strong>CTRL+S</strong> and assign the name <strong>VMC_DecimationChain</strong>.</p>
+<ol start="5">
+<li>Click the <strong>Library Browser</strong> icon.</li>
+</ol>
+<p><img src="Images/Image_006.png" alt="missing image" /></p>
+<p>Find the <strong>AMD Toolbox</strong>, which contains three sub-libraries:</p>
+<ul>
+<li>AI Engine</li>
+<li>HDL</li>
+<li>HLS</li>
+</ul>
+<p>Click the <strong>AI Engine</strong> section. This reveals the following sub-sections:</p>
+<ul>
+<li>DSP</li>
+<li>Interfaces</li>
+<li>Signal Routing</li>
+<li>Sinks</li>
+<li>Sources</li>
+<li>Tools</li>
+<li>User-Defined functions</li>
+</ul>
+<ol>
+<li>Click the <strong>DSP</strong> sub-section. There are 2 sub-menu entries:</li>
+</ol>
+<ul>
+<li>Buffer IO: which contains filter implementations using frame-based input and output.</li>
+<li>Stream IO : which contains filter implementations using streaming input and output:</li>
+</ul>
+<ol>
+<li>Click the <strong>Buffer IO</strong> sub-section and place the <strong>FIR Halfband Decimator</strong> block in the canvas as shown in the following figure.</li>
+</ol>
+<p><img src="Images/Image_007.png" alt="missing image" /></p>
+<ol start="8">
+<li><p>Double-click the <strong>AIE FIR Halfband Decimator</strong> block to open the GUI. Populate the GUI with the following parameters :</p>
+<ul>
+<li><strong>Input/output data type</strong>: cint16</li>
+<li><strong>Filter coefficients data type</strong>: int16</li>
+<li><strong>Filter coefficients</strong>: hb1_aie</li>
+<li><strong>Input Window size (Number of samples)</strong>: 2048</li>
+<li><strong>Scale output down by 2</strong>: Shift1</li>
+<li><strong>Rounding mode</strong>: Floor</li></ul>
+<p>Click <strong>Apply</strong> and <strong>OK</strong>.</p></li>
+</ol>
+<p><img src="Images/Image_008.png" alt="missing image" /></p>
+<p>Now create a data source to feed this filter.</p>
+<ol start="9">
+<li>Create the following two blocks by clicking the canvas and typing the beginning of the name of the block. Then enter the given parameters:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">Name to Type</th>
+<th style="text-align:left;">Block Name to Select</th>
+<th style="text-align:left;">Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">random</td>
+<td style="text-align:left;">Random Source</td>
+<td style="text-align:left;">Source Type: Uniform <br> Minimum: -30000  <br> Maximum: 30000  <br>  Sample time: 1   <br> Samples per frame: 2048   <br> Complexity: complex</td>
+</tr>
+<tr>
+<td style="text-align:left;">cast</td>
+<td style="text-align:left;">Cast</td>
+<td style="text-align:left;">Output data type: int16</td>
+</tr>
+</tbody>
+</table>
+<ol start="10">
+<li><p>Cascade the three blocks: <strong>Random Source</strong>, <strong>Cast</strong>, <strong>AIE FIR Filter</strong>.</p></li>
+<li><p>The file <code>ReferenceChain.slx</code> contains the decimation chain using Simulink blocks. <strong>Open</strong> the file <strong>ReferenceChain.slx</strong>. Copy the block <strong>HB1</strong> over to your design.</p></li>
+<li><p>Copy the small set of blocks (<strong>To Fixed Size</strong>, <strong>Subtract</strong>, <strong>Scope</strong>) to create the following design:</p></li>
+</ol>
+<p><img src="Images/Image_009.png" alt="missing image" /></p>
+<ol start="13">
+<li><p>In the Simulink toolstrip, set the <strong>Stop Time</strong> to <code>5000</code> and click <strong>Run</strong> to simulate the design. The FIR filter is compiled and the design is run. </p></li>
+<li><p>Double-click the <strong>Scope</strong> block to view the simulation results. The Error scope should show a completely null difference.</p></li>
+</ol>
+<p><img src="Images/Image_009a.png" alt="missing image" /></p>
+<ol start="15">
+<li>To gain more information about the signals traveling through the wires, update the following display parameters:<ul>
+<li>Right-click the canvas and select <strong>Other Displays --> Signals and Ports --> Signal Dimensions</strong>.</li>
+<li>Right-click the canvas and select <strong>Other Displays --> Signals and Ports --> Port Data Types</strong>.</li>
+<li>Right-click the canvas and select <strong>Sample Time Display --> all</strong>.</li></ul></li>
+</ol>
+<p>After updating the design with <strong>CTRL-D</strong>, the display should look as follows:</p>
+<p><img src="Images/Image_010.png" alt="missing image" /></p>
+<p>Notice that before implementing the Decimation Filter the vector length was <code>2048</code>, but after implementation this was reduced to <code>1024</code>. This corresponds to decimation by a factor of 2.</p>
+<h2 id="step-2-add-additional-filters-to-the-model">Step 2: Add Additional Filters to the Model</h2>
+<ol>
+<li>Update the design with the other three filters using the following parameters:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">Parameter</th>
+<th style="text-align:left;">HB1</th>
+<th style="text-align:left;">HB2</th>
+<th style="text-align:left;">HB3</th>
+<th style="text-align:left;">Channel Filter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">Filter Block</td>
+<td style="text-align:left;">FIR Halfband Decimator</td>
+<td style="text-align:left;">FIR Halfband Decimator</td>
+<td style="text-align:left;">FIR Halfband Decimator</td>
+<td style="text-align:left;">FIR Symmetric Filter</td>
+</tr>
+<tr>
+<td style="text-align:left;">Input Output data type</td>
+<td style="text-align:left;">cint16</td>
+<td style="text-align:left;">cint16</td>
+<td style="text-align:left;">cint16</td>
+<td style="text-align:left;">cint16</td>
+</tr>
+<tr>
+<td style="text-align:left;">Filter Coefficients Data Type</td>
+<td style="text-align:left;">int16</td>
+<td style="text-align:left;">int16</td>
+<td style="text-align:left;">int16</td>
+<td style="text-align:left;">int16</td>
+</tr>
+<tr>
+<td style="text-align:left;">Filter Coefficients</td>
+<td style="text-align:left;">hb1_aie</td>
+<td style="text-align:left;">hb2_aie</td>
+<td style="text-align:left;">hb3_aie</td>
+<td style="text-align:left;">cfi_aie</td>
+</tr>
+<tr>
+<td style="text-align:left;">Filter Length</td>
+<td style="text-align:left;">N/A</td>
+<td style="text-align:left;">N/A</td>
+<td style="text-align:left;">N/A</td>
+<td style="text-align:left;">length(cfi)</td>
+</tr>
+<tr>
+<td style="text-align:left;">Input window size (Number of samples)</td>
+<td style="text-align:left;">2048</td>
+<td style="text-align:left;">1024</td>
+<td style="text-align:left;">512</td>
+<td style="text-align:left;">256</td>
+</tr>
+<tr>
+<td style="text-align:left;">Scale output down by 2^</td>
+<td style="text-align:left;">Shift1</td>
+<td style="text-align:left;">Shift2</td>
+<td style="text-align:left;">Shift3</td>
+<td style="text-align:left;">ShiftCF</td>
+</tr>
+<tr>
+<td style="text-align:left;">Rounding mode    floor</td>
+<td style="text-align:left;">floor</td>
+<td style="text-align:left;">floor</td>
+<td style="text-align:left;">floor</td>
+<td style="text-align:left;">floor</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>Update the <strong>Output Size</strong> parameter of the <strong>To Fixed Size</strong> block to <code>256</code>. The design should look like as follows:</li>
+</ol>
+<p><img src="Images/Image_011.png" alt="missing image" /></p>
+<ol start="4">
+<li>Run the design. The added filters are compiled and the design is run through the 5000 samples. The difference between the outputs should still be 0.</li>
+</ol>
+<h2 id="step-3-further-analysis-of-the-design">Step 3: Further Analysis of the Design</h2>
+<p>When creating a DSP design, one of the most important parameters to consider is the spectrum. In Simulink, the spectrum can be displayed using a spectrum scope.</p>
+<ol>
+<li>Right-click the canvas and type <code>spectrum</code>.</li>
+<li>Select <strong>Spectrum Analyzer</strong> from the DSP System Toolbox.</li>
+<li>Connect the spectrum scope at the output of the last filter (the Channel Filter).</li>
+<li>Set the Stop Time of the simulation to <strong>inf</strong>.</li>
+</ol>
+<p><img src="Images/Image_013.png" alt="missing image" /></p>
+<p>Run the simulation. The spectrum scope should display similar to the following:</p>
+<p><img src="Images/Image_014.png" alt="missing image" /></p>
+<p>You can easily place a spectrum scope anywhere within the model to study the signal at different stages of the design. Furthermore, Simulink has a lot of specific blocksets that can be used to generate test vectors, create a reference model, and compare the signals at any point in the design.</p>
+<p>You can also export any signal to the MATLAB workspace for more complex analysis: </p>
+<ol start="5">
+<li>Stop the simulation if it is still running.</li>
+<li>Right-click the canvas and type <code>variable size</code>.</li>
+<li>Select <strong>Variable Size Signal to Workspace</strong> from the <strong>Xilinx Toolbox --> AI Engine --> Tools</strong> library.</li>
+<li>Connect the block to the output of the FIR Symmetric filter.</li>
+</ol>
+<p><img src="Images/Image_015.png" alt="missing image" /></p>
+<ol start="9">
+<li>Set the Stop Time of the simulation to <strong>5000</strong> and run the simulation.</li>
+<li>Type the following in the MATLAB Command Window: <code>plot(abs(out.simout))</code> This plots the magnitude of the complex-valued AI Engine output.</li>
+</ol>
+<p>The signal should display similar to the following. You can now work with the simulation output just like any other variable in the MATLAB workspace.</p>
+<p><img src="Images/Image_016.png" alt="missing image" /></p>
+<blockquote>
+<p><strong>Why use <em><strong>Variable Size Signal to Workspace</strong></em> instead of <em><strong>To Workspace</strong></em>?</strong></p>
+<p>AI Engine kernels can consume or produce different numbers of data samples (or no data samples at all) each time they are invoked. To model this behavior in Simulink, Vitis Model Composer uses <a href="https://www.mathworks.com/help/simulink/ug/variable-size-signal-basics.html">variable-sized signals</a>, which are denoted by the thick dashed line between the AI Engine blocks. In this model, there is a <strong>To Fixed Size</strong> block that converts the variable-sized signal to a fixed-size signal with a valid signal that indicates when data is actually present. <strong>Variable Size Signal to Workspace</strong> is a convenience block that behaves similarly to <strong>To Workspace</strong>, but it automatically discards empty samples in the variable-sized signal and concatenates the valid samples into a single MATLAB vector. </p>
+<p>For more details, refer to <a href="https://docs.xilinx.com/r/en-US/ug1483-model-composer-sys-gen-user-guide/Variable-Size-Signals">Variable-Sized Signals</a> in the Vitis Model Composer documentation.</p>
+</blockquote>
+<p>AI Engine simulations within Simulink are bit-exact but do not provide timing information for the design as it will run on the hardware. In later labs, we will see how to invoke the cycle-approximate AIE Simulator and view timing analysis results from within Vitis Model Composer.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p><strong>Congratulations!</strong> This concludes Lab 2. In this lab, you built a model of the decimation chain using blocks from the AI Engine DSP Library. You also used Simulink scopes to compare the AI Engine implementation of the design against a golden reference.</p>
+<p>In the next lab, you will see how to bring in custom AI Engine kernel or graph code and simulate it with Vitis Model Composer.</p>
+<hr />
+<p>&copy; Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>    http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+<p align="center"><sup>XD058 | &copy; Copyright 2023 Advanced Micro Devices, Inc.</sup></p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h1, h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>
