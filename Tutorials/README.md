@@ -107,7 +107,7 @@ Automatic Code Generation
 
 <tr>
 <td>
-<a href="./01-Introduction_to_Versal_ACAP_and_AI_Engines/README.md">Lab 1</a>
+<a href="./AIEngine_Library/01-Introduction_to_Versal_ACAP_and_AI_Engines/README.md">Lab 1</a>
 </td>
 <td>
 Introduction to Versal ACAP and AI Engines
@@ -116,7 +116,7 @@ Introduction to Versal ACAP and AI Engines
  
 <tr>
 <td>
-<a href="./02-Build_and_Simulate_AI_Engine_Design/README.md">Lab 2</a>
+<a href="./AIEngine_Library/02-Build_and_Simulate_AI_Engine_Design/README.md">Lab 2</a>
 </td>
 <td>
 Build and Simulate an AI Engine Design
@@ -125,7 +125,7 @@ Build and Simulate an AI Engine Design
 
 <tr>
 <td>
-<a href="./03-Import_Custom_AI_Engine_Code/README.md">Lab 3</a>
+<a href="./AIEngine_Library/03-Import_Custom_AI_Engine_Code/README.md">Lab 3</a>
 </td>
 <td>
 Import Custom AI Engine Code
@@ -134,7 +134,7 @@ Import Custom AI Engine Code
  
 <tr>
 <td>
-<a href="./04-AI_Engine_Code_Generation/README.md">Lab 4</a>
+<a href="./AIEngine_Library/04-AI_Engine_Code_Generation/README.md">Lab 4</a>
 </td>
 <td>
 AI Engine Code Generation and Cycle-Approximate Simulation
@@ -143,7 +143,7 @@ AI Engine Code Generation and Cycle-Approximate Simulation
 
 <tr>
 <td>
-<a href="./05-Vitis_Analyzer/README.md">Lab 5</a>
+<a href="./AIEngine_Library/05-Vitis_Analyzer/README.md">Lab 5</a>
 </td>
 <td>
 View AI Engine Designs in Vitis Analyzer
@@ -152,7 +152,7 @@ View AI Engine Designs in Vitis Analyzer
  
 <tr>
 <td>
-<a href="./06-Hardware_Validation/README.md">Lab 6</a>
+<a href="./AIEngine_Library/06-Hardware_Validation/README.md">Lab 6</a>
 </td>
 <td>
 Hardware Validation of Versal ACAP Design
