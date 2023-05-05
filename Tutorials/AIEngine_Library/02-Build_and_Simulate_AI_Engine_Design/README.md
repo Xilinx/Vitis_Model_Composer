@@ -146,7 +146,7 @@ Notice that before implementing the Decimation Filter the vector length was ``20
 
 When creating a DSP design, one of the most important parameters to consider is the spectrum. In Simulink, the spectrum can be displayed using a spectrum scope.
 
-1. Right-click the canvas and type ``spectrum``.
+1. Click on the canvas and type ``spectrum``.
 2. Select **Spectrum Analyzer** from the DSP System Toolbox.
 3. Connect the spectrum scope at the output of the last filter (the Channel Filter).
 4. Set the Stop Time of the simulation to **inf**.
@@ -162,7 +162,7 @@ You can easily place a spectrum scope anywhere within the model to study the sig
 You can also export any signal to the MATLAB workspace for more complex analysis: 
 
 5. Stop the simulation if it is still running.
-6. Right-click the canvas and type ``variable size``.
+6. Click on the canvas and type ``variable size``.
 7. Select **Variable Size Signal to Workspace** from the **Xilinx Toolbox --> AI Engine --> Tools** library.
 8. Connect the block to the output of the FIR Symmetric filter.
 

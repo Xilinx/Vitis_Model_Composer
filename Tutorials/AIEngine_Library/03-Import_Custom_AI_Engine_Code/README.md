@@ -144,9 +144,11 @@ The end result is that this function takes frames of data, multiplies the frame 
 
 ![missing image](Images/Image_021.png)
 
-3. Switch the **Stop Time** back to ``5000``.
+3. Stop the simulation if it is still running.
 
-4. Click **Run**. On the Time Scope, verify that the difference is still 0.
+4. Switch the **Stop Time** back to ``5000``.
+
+5. Click **Run**. On the Time Scope, verify that the difference is still 0.
 
 ![missing image](Images/Image_022.png)
 

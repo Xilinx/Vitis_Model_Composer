@@ -31,14 +31,22 @@ In this step, you will generate and review graph code for the decimation filter 
 
 4. Click the canvas and type ***model co***. Select the Vitis Model Composer Hub block.
 
-5. Double-click the Model Composer Hub block, select the FIRchain subsystem and set the following parameters on the AIE Settings tab:
+5. Double-click the Model Composer Hub block. 
+
+6. On the **Hardware Selection** tab, click the **...** button next to Select Hardware to open the Device Chooser.
+
+7. Type ***xcvc1902*** into the Search box.
+
+8. Select the first device on the list (beginning with ***xcvc1902***) and click **OK**.
+
+9. Back in the Vitis Model Composer Hub block, on the Code Generation tab, select the FIRchain subsystem and set the following parameters on the AIE Settings tab:
     * Check **Create testbench**.
     * Check **Run cycle-approximate AIE Simulation after code generation**.
     * Check **Plot AIE Simulation Output and Estimate Throughput**.
 
-6. Click **Apply**.
+10. Click **Apply**.
 
-7. Click **Generate**.
+11. Click **Generate**.
 
 The Simulink model is run to generate the testbench, then the AI Engine graph code is generated and compiled. The source code can be viewed in ``./code/src_aie/FIRchain.h``.
 
