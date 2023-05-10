@@ -33,7 +33,7 @@ Once the internal buffer for the output port fills up, the kernel can no longer 
 
 The animation below demonstrates how buffer overflow occurs when the signal size is set to a value smaller than the number of samples that the kernel produces.
 
-<img src="images/Buffer_over_flow.gif"  width=500px; height=auto>
+<img src="images/Buffer_over_flow2.gif"  width=500px; height=auto>
 
 
 # Example 2
