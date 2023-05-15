@@ -29,7 +29,12 @@ If we set the _Signal Size_ parameter for the output to a number smaller than 25
 
 <img src="images/myKernel_mask.png"  width=500px; height=auto>
 
-Once the internal buffer for the output port fills up, the kernel can no longer write to it and will block at one of the _writeincr_ function calls. However, input samples will continue arriving to the kernel. Since the kernel is stalled, eventually its internal buffer for the input port will also fill up and the simulation will stop with an error indicating the input buffer is full. 
+Once the internal buffer for the output port fills up, the kernel can no longer write to it and will block at one of the _writeincr_ function calls. However, input samples will continue arriving to the kernel. Since the kernel is stalled, eventually its internal buffer for the input port will also fill up and the simulation will stop with an error indicating the input buffer is full.
+
+The animation below demonstrates how buffer overflow occurs when the signal size is set to a value smaller than the number of samples that the kernel produces.
+
+<img src="images/Buffer_over_flow2.gif"  width=500px; height=auto>
+
 
 # Example 2
 Let's look at the following kernel function we are importing:
