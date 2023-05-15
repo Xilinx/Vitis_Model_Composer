@@ -9,14 +9,16 @@ In Model Composer you can simulate designs with both AI Engine blocks and HLS Ke
 :bulb: The HLS kernel code should have stream interfaces. Run-time Parameters (RTPs) are also supported. 
 
 ## Examples
-- [A desgin with both AI Engine and HLS Kernel blocks connected through interface blocks ](AIE_HLS_with_interface/README.md)
-- [A desgin with both AI Engine and HLS Kernel blocks connected directly ](AIE_HLS_without_interface/README.md)
-- [2D FFT desgin with both AI Engine and HLS Kernel blocks](../AIE_HLS/FFT2D/README.md)
+- [Polyphase Channelizer](Channelizer/README.md)
+- [A design with both AI Engine and HLS Kernel blocks connected through interface blocks ](AIE_HLS_with_interface/README.md)
+- [A design with both AI Engine and HLS Kernel blocks connected directly ](AIE_HLS_without_interface/README.md)
+- [2D FFT design with both AI Engine and HLS Kernel blocks](FFT2D/README.md)
+- [200 MHz Transmit Chain](Tx_chain_200MHz/README.md)
 
 
 
 ------------
-Copyright 2020 Xilinx
+Copyright 2023 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

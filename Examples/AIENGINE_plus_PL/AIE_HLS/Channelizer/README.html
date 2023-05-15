@@ -1,0 +1,408 @@
+
+    <html>
+      <head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+      <body>
+        <div id='content'>
+    <!--
+Copyright (C) 2023, Advanced Micro Devices, Inc. All rights reserved.
+SPDX-License-Identifier: MIT
+Author: Rob Graessle
+-->
+<table class="sphinxhide" width="100%">
+ <tr width="100%">
+    <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
+    <a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
+    <a href="https://www.xilinx.com/products/design-tools/vitis/vitis-model-composer.html">See Vitis™ Model Composer Development Environment on xilinx.com</a>
+    </td>
+ </tr>
+</table>
+<h1 id="polyphase-channelizer">Polyphase Channelizer</h1>
+<p><strong><em>Version: Vitis Model Composer 2023.1</em></strong></p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#channelizer-requirements">Channelizer Requirements</a></li>
+<li><a href="#channelizer-implementation">Channelizer Implementation</a></li>
+<li><a href="#matlab-model">MATLAB Model</a></li>
+<li><a href="#simulink-model">Simulink Model</a></li>
+<li><a href="#functional-verification">Functional Verification</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ol>
+<p><a href="#references">References</a></p>
+<h2 id="introduction">Introduction</h2>
+<p>The polyphase channelizer [<a href="https://ieeexplore.ieee.org/document/1193158" title="Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications, F.J. Harris et. al.">1</a>] down-converts simultaneously a set of frequency-division multiplexed (FDM) channels carried in a single data stream using an<br />
+efficient approach based on digital signal processing. Channelizer use is ubiquitous in many wireless communications systems. Channelizer sampling rates increase <br />
+steadily as the capabilities of RF-DAC and RF-ADC technology advances, making them challenging to implement in high speed reconfigurable devices such as field programmable<br />
+gate arrays (FPGAs). This example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices. </p>
+<p>To aid in simulation and verification, the AI Engine and Programmable Logic parts of the design are brought into Vitis Model Composer, which enables functional simulation of the AI Engine and PL components together.</p>
+<h2 id="channelizer-requirements">Channelizer Requirements</h2>
+<p>The table below shows the system requirements for the polyphase channelizer. The input sampling rate is 10.5 Gsps. The design supports M=16 channels with each one supporting 10.5G / 16 = 656.25 MHz of bandwidth. The channelizer employs a polyphase technique as outlined in [<a href="https://ieeexplore.ieee.org/document/1193158" title="Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications, F.J. Harris et. al.">1</a>] to achieve an oversampled output at a rate of P/Q = 8/7 times the channel bandwidth, or 656.25 * 8/7 = 750 Msps. The prototype filter used by the channelizer uses K=8 taps per phase, leading to a total of 16 x 8 = 128 taps overall.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input Sampling Rate (Fs)</td>
+<td>10.5</td>
+<td>Gsps</td>
+</tr>
+<tr>
+<td># of Channels (M)</td>
+<td>16</td>
+<td>channels</td>
+</tr>
+<tr>
+<td>Interpolation Factor (P)</td>
+<td>8</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Decimation Factor (Q)</td>
+<td>7</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Channel Bandwidth</td>
+<td>656.25</td>
+<td>MHz</td>
+</tr>
+<tr>
+<td>Output Sampling Rate</td>
+<td>750</td>
+<td>Msps</td>
+</tr>
+<tr>
+<td># of taps per phase (K)</td>
+<td>8</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<p><em>Polyphase Channelizer System Requirements.</em></p>
+<h2 id="channelizer-implementation">Channelizer Implementation</h2>
+<p>The figure below shows a block diagram of the polyphase channelizer. The polyphase channelizer consists of the following functions:</p>
+<ul>
+<li>The <strong>Circular Buffer</strong> converts the scalar input data stream into an M-vector output format for the downstream blocks, and introduces state to manage the P/Q output oversampling.   </li>
+<li>The <strong>Polyphase Filter</strong> implements a parallel bank of M filters, each with K = 8 coefficients. The filter produces a single vector of M output samples.</li>
+<li>The <strong>Cyclic Shift Buffer</strong> removes frequency-dependent phase shifts from the downstream Inverse Discrete Fourier Transform (IDFT) outputs using a memoryless and periodically time-varying circular shift of its inputs. </li>
+<li>The <strong>Inverse Fast Fourier Transform (IFFT)</strong> performs an IDFT operation on its input vector of M samples to produce a transformed vector of output samples. Each IDFT output represents a separate down-converted channel of bandwidth Fs / M sampled at a rate of Fs / M * P / Q samples per second.</li>
+</ul>
+<p><img src="images/channelizer-block-diagram.png" alt="figure1" /><br />
+<em>Polyphase Channelizer Block Diagram.</em></p>
+<p>For a more detailed description of the implementation, refer to <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/AI_Engine_Development/Design_Tutorials/04-Polyphase-Channelizer">Polyphase Channelizer</a> in <a href="https://github.com/Xilinx/Vitis-Tutorials">Vitis-Tutorials</a>. </p>
+<p>The remainder of this example will focus on how to bring the polyphase channelizer implementation into Vitis Model Composer and simulate it.</p>
+<h2 id="matlab-model">MATLAB Model</h2>
+<p>The figure below shows a system model of the polyphase channelizer built in MATLAB and encapsulated in a MATLAB app. This provides a comprehensive golden model of the channelizer algorithms and illustrates the relationships between the various system parameters. The model was built to support a broader range of parameter settings than the actual Versal design:</p>
+<ul>
+<li>The model supports two different input sampling rates, Fs = 10.5 Gsps and Fs = 20.5 Gsps.</li>
+<li>The number of channels M may be set to 16, 32, 64, or 128 using a dial.</li>
+<li>The output oversampling ratio P/Q may be set to 1/1, 2/1, 4/3, or 8/7 using the appropriate button.</li>
+<li>The number of active channels may be entered in the bottom left. This value must be less than the chosen value of M.</li>
+</ul>
+<p><img src="images/App.png" alt="figure2" /><br />
+<em>Polyphase Channelizer system model implemented as a MATLAB app.</em></p>
+<p>To run the MATLAB polyphase channelizer model:</p>
+<ol>
+<li><p>Navigate to the <strong>app</strong> folder.</p></li>
+<li><p>Run <code>channelizer</code>.</p></li>
+<li><p>Specify the <strong>Oversampling Ratio</strong>, <strong>Number of Channels</strong>, <strong>Sampling Frequency</strong>, and <strong>Number Active</strong> according to the figure above.</p></li>
+<li><p>Click <strong>Go</strong>.</p></li>
+</ol>
+<p>When this occurs, the model generates the desired number of active channels and positions them in randomly chosen carrier locations. Each signal is modeled as filtered Gaussian noise for simplicity. The model displays the impulse response of the prototype channelizer filter computed for the given system parameters in the top left plot. The bottom left plot shows this same filter in the frequency domain in red along with the actual signal to be extracted by the channelizer in blue. The top right plot shows the input spectrum to the channelizer along with the active carriers and their index labels. The bottom right plot shows the extracted channels at baseband in the time domain, where the blue signals are the channelizer inputs (delayed by the known group delay of the channelizer) and the red signals are the channelizer outputs.</p>
+<h2 id="simulink-model">Simulink Model</h2>
+<p>To aid in simulation and verification, the AI Engine graph code and HLS kernel code are brought into Vitis Model Composer, which enables functional simulation of the AI Engine and PL components together.</p>
+<ol>
+<li><p>Open the Simulink model <code>Channelizer.slx</code>.</p></li>
+<li><p>Press <strong>Ctrl+D</strong> to update the model and display signal dimensions and data types.</p></li>
+</ol>
+<p><img src="images/Model.png" alt="" /></p>
+<p>The inputs and outputs of the channelizer are 16 bits wide with 15 bits of fractional precision. The floating-point channelizer inputs from the MATLAB workspace are scaled by 2^15 and converted to an <code>int16</code> data type. The channelizer outputs are scaled by 2^-15 to convert back to floating-point precision before being written to the MATLAB workspace.</p>
+<p>Note also that the inputs and outputs are 4 elements wide. This is because 128 bits of data (4 complex <code>int16</code> samples) can be transferred to and from the design on each stream and sample.</p>
+<ol start="3">
+<li>Double-click on the <strong>Channelizer</strong> subsystem.</li>
+</ol>
+<p><img src="images/Channelizer.png" alt="" /></p>
+<p>The model shows the partitioning of the design between the AI Engine and PL. The channelizer input enters the input permute HLS Kernel at the upper-left, then proceeds into the AI Engine for polyphase filter processing. The polyphase filter output is routed back to the PL for the output permute and cyclic shift operations. The cyclic shift output is routed back to the AI Engine for the DFT operation, from which the output exits the channelizer.</p>
+<p>Note the use of <strong>AIE to HLS</strong> and <strong>HLS to AIE</strong> blocks before and after the HLS kernels. The HLS kernels' inputs and outputs are 128 bits wide, so these blocks convert between a 4-element <code>cint16</code> vector (recognized by the AI Engine) and a single <code>uint128</code> value.</p>
+<h3 id="ai-engine-implementation">AI Engine Implementation</h3>
+<p>The polyphase filter and DFT implementation are implemented as separate AI Engine graphs. The graph code for each has been brought in to Vitis Model Composer using the <strong>AIE Graph</strong> block.</p>
+<ol start="4">
+<li>Double-click on the <strong>AIE</strong> subsystem.</li>
+</ol>
+<p><img src="images/AI_Engine.png" alt="" /></p>
+<p>Each input and output stream has a 64-bit PLIO. This means that 2 <code>cint16</code> samples are transferred on each stream during each clock cycle. To achieve high throughput, the AI Engine design is implemented using a Super Sample Rate (SSR) parallel architecture. Refer to <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/AI_Engine_Development/Design_Tutorials/04-Polyphase-Channelizer">Polyphase Channelizer</a> in Vitis-Tutorials for further details on the parallel architecture.</p>
+<ol start="5">
+<li>Double-click on the <strong>m16<em>ssr8</em>filterbank_graph</strong> block.</li>
+</ol>
+<p><img src="images/AIE_Graph_Function.png" alt="" /></p>
+<p>Note that each output has a Signal size of 4 <code>cint16</code> samples. This means that the kernel's output will be available to Simulink once 4 samples are available in the kernel's output buffer.</p>
+<ol start="6">
+<li>Click on the <strong>General</strong> tab.</li>
+</ol>
+<p><img src="images/AIE_Graph_General.png" alt="" /></p>
+<p>This tab provides the path to the AI Engine graph code for the polyphase channelizer's filter bank. Click the <img src="images/Edit.png" alt="" /> icon next to the path to view the graph source code.</p>
+<ol start="7">
+<li>Click <strong>Cancel</strong> to close the window without making changes.</li>
+</ol>
+<p>Optionally, you can double-click on the <strong>m16<em>ssr8</em>dft_graph</strong> block to observe that it is configured similarly to the filter bank.</p>
+<h3 id="programmable-logic-pl-implementation">Programmable Logic (PL) Implementation</h3>
+<p>The PL portion of the polyphase channelizer design contains 3 IPs that perform the following functions:</p>
+<ul>
+<li>Input Circular Buffer </li>
+<li>Output Permute</li>
+<li>Cyclic Shift Buffer</li>
+</ul>
+<p>These functions are explained in greater detail in <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/AI_Engine_Development/Design_Tutorials/04-Polyphase-Channelizer">Polyphase Channelizer</a>.</p>
+<p>These blocks are implemented in PL using HLS @ 312.5 MHz. With 4 samples transferred in each PL clock cycle, the AI Engine is able to operate at a rate of 1250 MHz.</p>
+<p>Each function is imported into Vitis Model Composer using the <strong>HLS Kernel</strong> block.</p>
+<ol start="8">
+<li><p>Return up to the <strong>Channelizer</strong> subsystem.</p></li>
+<li><p>Double-click on the <strong>m16<em>ssr8</em>permute<em>fb</em>i_wrapper</strong> block, which implements the Input Circular Buffer.</p></li>
+</ol>
+<p><img src="images/HLS_Kernel_Function.png" alt="" /></p>
+<p>Note that each output has a Signal size of 1 uint128 sample. As mentioned earlier, this corresponds to 4 cint16 samples. </p>
+<ol start="10">
+<li>Click on the <strong>General</strong> tab.</li>
+</ol>
+<p><img src="images/HLS_Kernel_General.png" alt="" /></p>
+<p>This tab provides the path to the HLS source code for the input circular buffer kernel. Click the <img src="images/Edit.png" alt="" /> icon next to the path to view the kernel source code.</p>
+<ol start="11">
+<li>Click <strong>Cancel</strong> to close the window without making changes.</li>
+</ol>
+<p>Optionally, you can double-click on the two remaining HLS Kernel blocks to observe that they are configured similarly.</p>
+<h2 id="functional-verification">Functional Verification</h2>
+<p>A MATLAB script has been provided as a test bench to generate channelizer inputs, execute the Simulink model, and compare the Simulink model's implementation to the MATLAB golden reference implementation.</p>
+<ol>
+<li><p>Open the <code>Channelizer.mlx</code> MATLAB script.</p></li>
+<li><p>On the MATLAB toolstrip, click <strong>Run and Advance</strong>: <img src="images/RunAndAdvance.png" alt="" /></p></li>
+</ol>
+<p>This executes the first 3 steps of the testbench: <em>Preparation</em>, <em>Initialize the Channelizer Model</em>, and <em>Create Testbench Stimulus</em>. The end result is that the channelizer is simulated in MATLAB, and reference input and output vectors are saved in the MATLAB workspace under the variable <code>channelizer</code>.</p>
+<ol start="3">
+<li>On the MATLAB toolstrip, click <strong>Run Section</strong>: <img src="images/RunSection.png" alt="" /></li>
+</ol>
+<p>This executes the next step of the testbench, which is to run the Simulink model. The input streams are pulled from the workspace variable <code>channelizer</code> and the output streams are written to the workspace variable <code>out</code>.</p>
+<ol start="4">
+<li><p>Wait until the Simulink model is finished executing before proceeding to the next step.</p></li>
+<li><p>Click the code section labeled <em>Check Simulink Outputs against MATLAB Reference</em>, then click <strong>Run Section</strong>.</p></li>
+</ol>
+<p>This section compares the Simulink output and MATLAB reference for each stream. If the outputs match, this means the Simulink model (and therefore the AI Engine and HLS code implementations) match the MATLAB golden reference.</p>
+<h2 id="imageschannel1png-imageschannel2png"><img src="images/Channel1.png" alt="" /> <img src="images/Channel2.png" alt="" /></h2>
+<h2 id="conclusion">Conclusion</h2>
+<p>This example showcased the following capabilities of Vitis Model Composer for Versal development:</p>
+<ol>
+<li>Import AI Engine and HLS source code into Vitis Model Composer.</li>
+<li>Model data exchange between AI Engine and PL in simulation.</li>
+<li>Simulate AI Engine and PL together in a single design.</li>
+</ol>
+<h2 id="4-compare-a-versal-hardware-code-implementation-to-a-matlab-golden-reference">4. Compare a Versal hardware code implementation to a MATLAB golden reference.</h2>
+<h2 id="references">References</h2>
+<p>[<a href="https://ieeexplore.ieee.org/document/1193158" title="Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications, F.J. Harris et. al.">1</a>] F.J. Harris et. al., "<a href="https://ieeexplore.ieee.org/document/1193158">Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications</a>", IEEE Transactions on Microwave Theory and Techniques, Vol. 51, No. 4, April 2003.</p>
+<hr />
+<p>Copyright (c) 2023 Advanced Micro Devices, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+
+        </div>
+        <style type='text/css'>body {
+  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #111;
+  background-color: #fdfdfd;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 5px;
+  }
+
+  body > #content {
+    padding: 0px 20px 20px 20px !important;
+  }
+}
+
+body > #content {
+  margin: 0px;
+  max-width: 900px;
+  border: 1px solid #e1e4e8;
+  padding: 10px 40px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr {
+  color: #bbb;
+  background-color: #bbb;
+  height: 1px;
+  flex: 0 1 auto;
+  margin: 1em 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+ * Links
+ */
+a {
+  color: #0366d6;
+  text-decoration: none; }
+  a:visited {
+    color: #0366d6; }
+  a:hover {
+    color: #0366d6;
+    text-decoration: underline; }
+
+pre {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+/**
+  * Code blocks
+  */
+
+code {
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  word-wrap: break-word;
+  padding: .2em .4em;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+  background-color: transparent;
+  border: 0;
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  word-wrap: normal;
+  font-size: 100%;
+}
+
+
+/**
+ * Blockquotes
+ */
+blockquote {
+  margin-left: 30px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  border-left-width: 3px;
+  padding: 0 1em;
+  color: #828282;
+  border-left: 4px solid #e8e8e8;
+  padding-left: 15px;
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+blockquote * {
+  font-style: normal !important;
+  letter-spacing: 0;
+  color: #6a737d !important;
+}
+
+/**
+ * Tables
+ */
+table {
+  border-spacing: 2px;
+  display: block;
+  font-size: 14px;
+  overflow: auto;
+  width: 100%;
+  margin-bottom: 16px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+th {
+  font-weight: 600;
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+/**
+ * Others
+ */
+
+img {
+  max-width: 100%;
+}
+
+p {
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #24292e; }
+
+ul {
+  margin-top: 0; }
+
+li {
+  color: #24292e;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5; }
+
+li + li {
+  margin-top: 0.25em; }
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #24292e; }
+
+a:visited {
+  color: #0366d6; }
+
+h1, h2, h3 {
+  border-bottom: 1px solid #eaecef;
+  color: #111;
+  /* Darker */ }</style>
+      </body>
+    </html>

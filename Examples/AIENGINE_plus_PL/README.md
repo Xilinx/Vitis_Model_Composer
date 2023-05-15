@@ -19,6 +19,15 @@ Versal AI Core devices are highly integrated, multicore compute platform that ca
 
 <tr>
 <td>
+<a href="./AIE_HLS/Channelizer/README.md">Polyphase Channelizer</a>
+</td>
+<td>
+This example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices. 
+</td>
+</tr> 
+
+<tr>
+<td>
 <a href="./AIE_HLS/Tx_chain_200MHz/README.md">TX Chain 200MHz </a>
 </td>
 <td>
@@ -31,7 +40,7 @@ This design showcases the Vitis Model Composer implementation of the Commslib ex
 <a href="./AIE_HLS/AIE_HLS_with_interface/README.md">AI Engines and HLS Kernel with interface blocks</a>
 </td>
 <td>
-A desgin with both AI Engine and HLS Kernel blocks connected through interface blocks.
+A design with both AI Engine and HLS Kernel blocks connected through interface blocks.
 </td>
 </tr> 
  
@@ -40,7 +49,7 @@ A desgin with both AI Engine and HLS Kernel blocks connected through interface b
 <a href="./AIE_HLS/AIE_HLS_without_interface/README.md">AI Engines and HLS Kernel connected directly</a>
 </td>
 <td>
-A desgin with both AI Engine and HLS Kernel blocks connected directly.
+A design with both AI Engine and HLS Kernel blocks connected directly.
 </td>
 </tr>
 
@@ -49,7 +58,7 @@ A desgin with both AI Engine and HLS Kernel blocks connected directly.
 <a href="./AIE_HLS/FFT2D/README.md">2D FFT</a>
 </td>
 <td>
-A 2D FFT desgin with both AI Engine and HLS Kernel.
+A 2D FFT design with both AI Engine and HLS Kernel.
 </td>
  </tr>
 </table>
@@ -82,7 +91,7 @@ Design with imported RTL and AI Engine blocks.
 <a href="./AIE_HDL/FFT2D/README.md">2D FFT</a>
 </td>
 <td>
-A 2D FFT desgin with both AI Engine and HDL Kernel.
+A 2D FFT design with both AI Engine and HDL Kernel.
 </td>
 </tr>
 
