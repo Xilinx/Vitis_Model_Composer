@@ -107,10 +107,10 @@ Automatic Code Generation
 
 <tr>
 <td>
-<a href="./AIEngine_Library/01-Introduction_to_Versal_ACAP_and_AI_Engines/README.md">Lab 1</a>
+<a href="./AIEngine_Library/01-Introduction_to_Versal_and_AI_Engines/README.md">Lab 1</a>
 </td>
 <td>
-Introduction to Versal ACAP and AI Engines
+Introduction to Versal Adaptive SoC and AI Engines
 </td>
 </tr> 
  
@@ -155,7 +155,7 @@ View AI Engine Designs in Vitis Analyzer
 <a href="./AIEngine_Library/06-Hardware_Validation/README.md">Lab 6</a>
 </td>
 <td>
-Hardware Validation of Versal ACAP Design
+Hardware Validation of Versal Adaptive SoC Design
 </td>
 </tr> 
 

@@ -182,7 +182,7 @@ This limits the throughput calculation to the area between the two cursors. In t
 
 When you generate AI Engine code with Vitis Model Composer, a number of artifacts are also generated. These artifacts can be used to run the AI Engine simulation outside of Vitis Model Composer or to integrate the generated code within a larger project.
 
-The artifacts include shell scripts and Makefiles for compiling, simulating, and building the AI Engine application. Makefiles are commonly used to build applications targeting Versal ACAP devices. For an example build flow that uses Makefiles, see the [Versal Custom Thin Platform](https://github.com/Xilinx/Vitis-Tutorials/tree/2022.2/Developer_Contributed/01-Versal_Custom_Thin_Platform_Extensible_System). 
+The artifacts include shell scripts and Makefiles for compiling, simulating, and building the AI Engine application. Makefiles are commonly used to build applications targeting Versal Adaptive SoC devices. For an example build flow that uses Makefiles, see the [Versal Custom Thin Platform](https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/Developer_Contributed/01-Versal_Custom_Thin_Platform_Extensible_System). 
 
 ![missing image](Images/Image07.png)
 
@@ -199,7 +199,7 @@ The artifacts include shell scripts and Makefiles for compiling, simulating, and
 
 To reproduce Steps 1 & 2 of this lab outside of Vitis Model Composer, you can ``cd`` to the ``code`` folder and execute ``./make.sh`` from a bash shell. This script requires an environment variable named ``XILINX_VITIS`` to point to the Vitis installation location, such as ``/opt/Xilinx/Vitis/2022.2``.
 
-You can also study and modify the generated Makefiles to incorporate the generated AI Engine code as part of a larger Versal ACAP design.
+You can also study and modify the generated Makefiles to incorporate the generated AI Engine code as part of a larger Versal Adaptive SoC design.
 
 ## Conclusion
 

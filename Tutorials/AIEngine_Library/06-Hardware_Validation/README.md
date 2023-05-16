@@ -7,13 +7,13 @@
  </tr>
 </table>
 
-# Lab 6: Hardware Validation of Versal ACAP Design
+# Lab 6: Hardware Validation of Versal Adaptive SoC Design
 
-This lab shows how to use Vitis Model Composer to perform validation of an AI Engine design running on Versal ACAP hardware.
+This lab shows how to use Vitis Model Composer to perform validation of an AI Engine design running on Versal Adaptive SoC hardware.
 
 In Lab 5, we used cycle-approximate AI Engine simulation to simulate the behavior of the AIE kernels. This gave us confidence that the algorithm is functionally correct, but did not explore how the AI Engine interacts with the Programmable Logic (PL) and Processing System (PS). 
 
-Hardware validation is an important next step to test the Versal ACAP design. Vitis Model Composer can be used to create a hardware image for either a physical board or a hardware emulation flow that simulates the full behavior of the Versal ACAP including AI Engine, PL and PS. 
+Hardware validation is an important next step to test the Versal Adaptive SoC design. Vitis Model Composer can be used to create a hardware image for either a physical board or a hardware emulation flow that simulates the full behavior of the Versal Adaptive SoC including AI Engine, PL and PS. 
 
 When creating the hardware image, the input data samples that are fed into the design
 during simulation in Simulink are collected. Likewise, the output data samples from the design are
@@ -30,7 +30,7 @@ information is communicated between Vitis Model Composer and the hardware.
 ### Procedure
 This lab has the following steps:
  * In Step 1, you will configure the Vitis Model Composer Hub block to generate a hardware image to perform validation.
- * In Step 2, you will run hardware emulation to simulate the behavior of the Versal ACAP design including AI Engine, PL and PS.
+ * In Step 2, you will run hardware emulation to simulate the behavior of the Versal Adaptive SoC design including AI Engine, PL and PS.
  * In Step 3, you will download the hardware image to a VCK190 board and perform hardware validation.
 
 :warning: Steps 1 and 2 of this lab can be completed without hardware. Step 3 requires a Versal board such as the [VCK190](https://www.xilinx.com/products/boards-and-kits/vck190.html).
@@ -84,7 +84,7 @@ The **HW System Type** provides two options: __Baremetal__ or __Linux__ flow.
 * With a _baremetal_ environment, the PS application is compiled to run directly on the processor. The application must integrate and manage the AI Engine graph and PL kernels directly without the support of any operating system. AMD provides a standalone board support package (BSP), drivers, and libraries for applications to use to reduce development effort.
 * With _Linux_, the PS application is compiled to run on a Linux operating system. AMD provides an ADF API to control control the AI Engine graph and the Xilinx Runtime (XRT) API to control PL kernels.
 
-For more details, refer to the [AI Engine Tools and Flows User Guide (UG1076)](https://docs.xilinx.com/r/en-US/ug1076-ai-engine-environment/Programming-the-PS-Host-Application). In either scenario, Vitis Model Composer automatically generates all required source code for the host application to execute the testbench and interact with the ACAP device. **We will use Baremetal flow for this lab.**
+For more details, refer to the [AI Engine Tools and Flows User Guide (UG1076)](https://docs.xilinx.com/r/en-US/ug1076-ai-engine-environment/Programming-the-PS-Host-Application). In either scenario, Vitis Model Composer automatically generates all required source code for the host application to execute the testbench and interact with the Adaptive SoC device. **We will use Baremetal flow for this lab.**
 
 **Target** has two options: __hw__ or __hw emu__.
 
@@ -95,7 +95,7 @@ For more information, see [Simulating an AI Engine Graph Application](https://do
 
 **If you do not have access to a board and/or would like to perform hardware emulation, select _hw emu_ as the Target and proceed to Step 2.**
 
-**If you have access to a VCK190 evaluation board (or another Versal ACAP board), select _hw_ as the Target and proceed to Step 3.**
+**If you have access to a VCK190 evaluation board (or another Versal Adaptive SoC board), select _hw_ as the Target and proceed to Step 3.**
 
 ## Step 2: Validation using Hardware Emulation
 

@@ -25,10 +25,10 @@ Vitis Model Composer can be used to create complex systems targeting the PL (RTL
 
 This tutorial includes the following labs which introduce AI Engine support in Vitis Model Composer.
 
-### [Lab 1](./01-Introduction_to_Versal_ACAP_and_AI_Engines/README.md)
+### [Lab 1](./01-Introduction_to_Versal_and_AI_Engines/README.md)
 
-Introduction to Versal ACAP and AI Engines
- * Learn about the Versal ACAP architecture and AI Engines
+Introduction to Versal Adaptive SoC and AI Engines
+ * Learn about the Versal Adaptive SoC architecture and AI Engines
  * Install required software to compile and simulate AI Engine designs
  * Simulate an example AI Engine design in Vitis Model Composer
 
@@ -62,9 +62,9 @@ View AI Engine Designs in Vitis Analyzer
 
 ### [Lab 6](./06-Hardware_Validation/README.md)
 
-Hardware Validation of Versal ACAP Design
+Hardware Validation of Versal Adaptive SoC Design
  * Generate a hardware image to perform validation
- * Run hardware emulation to simulate the behavior of the Versal ACAP design including AI Engine, PL and PS
+ * Run hardware emulation to simulate the behavior of the Versal Adaptive SoC design including AI Engine, PL and PS
  * Download the hardware image to a VCK190 board and perform hardware validation
 
 ---

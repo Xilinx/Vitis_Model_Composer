@@ -30,10 +30,10 @@ document.location=commandURI
 </td>
 </tr>
 </table>
-<h1 id="lab-6-hardware-validation-of-versal-acap-design">Lab 6: Hardware Validation of Versal ACAP Design</h1>
-<p>This lab shows how to use Vitis Model Composer to perform validation of an AI Engine design running on Versal ACAP hardware.</p>
+<h1 id="lab-6-hardware-validation-of-versal-adaptive-soc-design">Lab 6: Hardware Validation of Versal Adaptive SoC Design</h1>
+<p>This lab shows how to use Vitis Model Composer to perform validation of an AI Engine design running on Versal Adaptive SoC hardware.</p>
 <p>In Lab 5, we used cycle-approximate AI Engine simulation to simulate the behavior of the AIE kernels. This gave us confidence that the algorithm is functionally correct, but did not explore how the AI Engine interacts with the Programmable Logic (PL) and Processing System (PS). </p>
-<p>Hardware validation is an important next step to test the Versal ACAP design. Vitis Model Composer can be used to create a hardware image for either a physical board or a hardware emulation flow that simulates the full behavior of the Versal ACAP including AI Engine, PL and PS. </p>
+<p>Hardware validation is an important next step to test the Versal Adaptive SoC design. Vitis Model Composer can be used to create a hardware image for either a physical board or a hardware emulation flow that simulates the full behavior of the Versal Adaptive SoC including AI Engine, PL and PS. </p>
 <p>When creating the hardware image, the input data samples that are fed into the design<br />
 during simulation in Simulink are collected. Likewise, the output data samples from the design are<br />
 also collected. The input and output data are packaged as part of the hardware image and<br />
@@ -48,7 +48,7 @@ information is communicated between Vitis Model Composer and the hardware.</p>
 <p>This lab has the following steps:</p>
 <ul>
 <li>In Step 1, you will configure the Vitis Model Composer Hub block to generate a hardware image to perform validation.</li>
-<li>In Step 2, you will run hardware emulation to simulate the behavior of the Versal ACAP design including AI Engine, PL and PS.</li>
+<li>In Step 2, you will run hardware emulation to simulate the behavior of the Versal Adaptive SoC design including AI Engine, PL and PS.</li>
 <li>In Step 3, you will download the hardware image to a VCK190 board and perform hardware validation.</li>
 </ul>
 <p>:warning: Steps 1 and 2 of this lab can be completed without hardware. Step 3 requires a Versal board such as the <a href="https://www.xilinx.com/products/boards-and-kits/vck190.html">VCK190</a>.</p>
@@ -93,7 +93,7 @@ information is communicated between Vitis Model Composer and the hardware.</p>
 <li>With a <em>baremetal</em> environment, the PS application is compiled to run directly on the processor. The application must integrate and manage the AI Engine graph and PL kernels directly without the support of any operating system. AMD provides a standalone board support package (BSP), drivers, and libraries for applications to use to reduce development effort.</li>
 <li>With <em>Linux</em>, the PS application is compiled to run on a Linux operating system. AMD provides an ADF API to control control the AI Engine graph and the Xilinx Runtime (XRT) API to control PL kernels.</li>
 </ul>
-<p>For more details, refer to the <a href="https://docs.xilinx.com/r/en-US/ug1076-ai-engine-environment/Programming-the-PS-Host-Application">AI Engine Tools and Flows User Guide (UG1076)</a>. In either scenario, Vitis Model Composer automatically generates all required source code for the host application to execute the testbench and interact with the ACAP device. <strong>We will use Baremetal flow for this lab.</strong></p>
+<p>For more details, refer to the <a href="https://docs.xilinx.com/r/en-US/ug1076-ai-engine-environment/Programming-the-PS-Host-Application">AI Engine Tools and Flows User Guide (UG1076)</a>. In either scenario, Vitis Model Composer automatically generates all required source code for the host application to execute the testbench and interact with the Adaptive SoC device. <strong>We will use Baremetal flow for this lab.</strong></p>
 <p><strong>Target</strong> has two options: <strong>hw</strong> or <strong>hw emu</strong>.</p>
 <ul>
 <li><em>hw</em> generates a binary image (for baremetal) or an SD card image (for Linux) with which to program the hardware.</li>
@@ -101,7 +101,7 @@ information is communicated between Vitis Model Composer and the hardware.</p>
 </ul>
 <p>For more information, see <a href="https://docs.xilinx.com/r/en-US/ug1076-ai-engine-environment/Simulating-an-AI-Engine-Graph-Application">Simulating an AI Engine Graph Application</a>.</p>
 <p><strong>If you do not have access to a board and/or would like to perform hardware emulation, select <em>hw emu</em> as the Target and proceed to Step 2.</strong></p>
-<p><strong>If you have access to a VCK190 evaluation board (or another Versal ACAP board), select <em>hw</em> as the Target and proceed to Step 3.</strong></p>
+<p><strong>If you have access to a VCK190 evaluation board (or another Versal Adaptive SoC board), select <em>hw</em> as the Target and proceed to Step 3.</strong></p>
 <h2 id="step-2-validation-using-hardware-emulation">Step 2: Validation using Hardware Emulation</h2>
 <p>In this step, you will use Vitis hardware emulation to validate the design. As stated above, this simulates the AI Engine kernels, PL kernels, and PS application side-by-side. This allows you to gain confidence that the design will run on the actual hardware without requiring access to a board. However, running hardware emulation is slower than running the design on the board itself.</p>
 <ol>

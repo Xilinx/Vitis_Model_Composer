@@ -1,5 +1,5 @@
 # Run Time Parameters (RTP)
-These examples demonstrate modeling and simulation of Run Time Parameters in Model Composer. In Versal ACAPs with AI Engines, the processing system (PS) can be used to dynamically load,
+These examples demonstrate modeling and simulation of Run Time Parameters in Model Composer. In Versal Adaptive SoCs with AI Engines, the processing system (PS) can be used to dynamically load,
 monitor, and control the graphs that are executing on the AI Engine array. Even if the AI Engine
 graph is loaded once as a single bitstream image, the PS program can be used to monitor the
 state of the execution and modify the Run-Time Parameters of the graph. This is done through Run Time Parameters. 
@@ -19,7 +19,8 @@ Here we demonstrate two exmaples:
 
 
 ------------
-Copyright 2020 Xilinx
+Copyright 2020-2022 Xilinx
+Copyright 2023 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

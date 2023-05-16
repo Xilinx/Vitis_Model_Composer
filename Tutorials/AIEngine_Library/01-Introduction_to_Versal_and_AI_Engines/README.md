@@ -7,23 +7,23 @@
  </tr>
 </table>
 
-# Lab 1: Introduction to Versal ACAP and AI Engines
+# Lab 1: Introduction to Versal Adaptive SoC and AI Engines
 
-This lab gives an overview of Versal ACAP devices and the AI Engine architecture. You will also configure your development environment for AI Engine compilation and run your first AI Engine design in Vitis Model Composer.
+This lab gives an overview of Versal Adaptive SoC devices and the AI Engine architecture. You will also configure your development environment for AI Engine compilation and run your first AI Engine design in Vitis Model Composer.
 
 :warning: This AI Engine Lab can be done only in a Linux environment.
 
 ### Procedure
 This lab has the following steps:
- * In Step 1, you will learn about Versal ACAP, AI Engines, and key concepts for designing AI Engine applications.
+ * In Step 1, you will learn about Versal Adaptive SoC, AI Engines, and key concepts for designing AI Engine applications.
  * In Step 2, you will install required prerequisites for AI Engine development.
  * In Step 3, you will examine a sample AI Engine signal processing design and simulate it using Vitis Model Composer.
   
-## Step 1: Introduction to Versal ACAP and AI Engines
+## Step 1: Introduction to Versal Adaptive SoC and AI Engines
 
-### Versal ACAP
+### Versal Adaptive SoC
 
-Versal Adaptive Compute Acceleration Platforms (ACAPs) are the latest generation of AMD devices, built on the TSMC 7 nm FinFET process technology. They combine ***Scalar Engines*** (which represents the Processor System (PS)), ***Adaptable Engines*** (which represents the Programmable Logic (PL)), and ***Intelligent Engines*** which are connected together using a high-bandwidth ***Network-on-Chip*** (NoC).
+Versal Adaptive SoCs are the latest generation of AMD devices, built on the TSMC 7 nm FinFET process technology. They combine ***Scalar Engines*** (which represents the Processor System (PS)), ***Adaptable Engines*** (which represents the Programmable Logic (PL)), and ***Intelligent Engines*** which are connected together using a high-bandwidth ***Network-on-Chip*** (NoC).
 
 <img src="Images/Image01.png">
 
@@ -31,7 +31,7 @@ This tutorial will focus on AI Engines, which are a part of the Intelligent Engi
 
 ### AI Engines
 
-The AI Engines are included in some AMD Versal ACAPs. They are organized as a two-dimensional array of ***AI Engine Tiles*** which are connected together with Memory, Stream and Cascade Interfaces. This array can contain up to 400 tiles on the current ACAP devices (for example, the VC1902 device). The array also include an ***AI Engine interface***, located at the last row row of the array, which allows the array to interface with the rest of the device (PS, PL and NoC).
+The AI Engines are included in some AMD Versal Adaptive SoCs. They are organized as a two-dimensional array of ***AI Engine Tiles*** which are connected together with Memory, Stream and Cascade Interfaces. This array can contain up to 400 tiles on the current Adaptive SoC devices (for example, the VC1902 device). The array also include an ***AI Engine interface***, located at the last row row of the array, which allows the array to interface with the rest of the device (PS, PL and NoC).
 
 <img src="Images/Image02.png">
 
@@ -92,7 +92,7 @@ AMD will provide pre-built kernels included in libraries that users will be able
 
 #### Graph Programming
 
-AMD provides a C++ framework to create ***graphs*** from kernels. This framework includes graph nodes and connections declarations. These nodes are in the AI Engine Array. To have full control over the kernel location, there will be a set of methods that will constrain the placer (kernels, buffers, system memory, ...). A graph will instantiate and connect the kernels together using buffers and streams. It will also describes the data transfer from/to the AI Engine Array to/from the rest of the ACAP device (PL, DDR).
+AMD provides a C++ framework to create ***graphs*** from kernels. This framework includes graph nodes and connections declarations. These nodes are in the AI Engine Array. To have full control over the kernel location, there will be a set of methods that will constrain the placer (kernels, buffers, system memory, ...). A graph will instantiate and connect the kernels together using buffers and streams. It will also describes the data transfer from/to the AI Engine Array to/from the rest of the Adaptive SoC device (PL, DDR).
 
 AMD will provide pre-built graphs included in libraries that users will then be able to use in their applications.
 
