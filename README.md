@@ -9,7 +9,7 @@ To learn more, visit the Vitis Model Composer [website](https://www.xilinx.com/p
 # What is new?
 * Take a look at the latest [tutorial series](./Tutorials) on AI Engines. This set of tutorials provides an excellent introduction to AI Engines and guides you through the process of developing a DSP algorithm on AI Engines using Vitis Model Composer.
 * The new [Channelizer](./Examples/AIENGINE_plus_PL/AIE_HLS/Channelizer) example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices.
-* The [filtering in frequency doamin]( /Examples/AIENGINE/Filtering_in_frequency_domain/) design showcases filtering in frequency domain in AI Engines and also shows how to increase the throughput using different techniques.
+* The [filtering in frequency domain]( /Examples/AIENGINE/Filtering_in_frequency_domain/) design showcases filtering in frequency domain in AI Engines and also shows how to increase the throughput using different techniques.
 
 # Examples
 
