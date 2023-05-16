@@ -11,8 +11,6 @@ To learn more, visit the Vitis Model Composer [website](https://www.xilinx.com/p
 * The new [Channelizer](./Examples/AIENGINE_plus_PL/AIE_HLS/Channelizer) example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices.
 * The [filtering in frequency doamin]( /Examples/AIENGINE/Filtering_in_frequency_domain/) design showcases filtering in frequency domain in AI Engines and also shows how to increase the throughput using different techniques.
 
-Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis Model Composer examples and tutorials.
-
 # Examples
 
 <p align="center">
@@ -31,19 +29,6 @@ Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis 
 <p align="center">
    <a href="./QuickGuides/README.md"><img src="Images/QuickGuides.jpg" width="350" ></a>
 </p>
-
-
-
-
-# Videos<a name="videos"></a>
-<table style="width:100%">
-<tr>
-    <td width="100%" align="center"><b>Design for Versal AI Engines (20 minutes)</b>
-</tr>  
-<tr>
-<td width="100%" align="center"><a href="https://www.mathworks.com/videos/designing-ai-engines-of-xilinx-versal-acap-using-simulink-and-vitis-model-composer-1635957693985.html?s_tid=srchtitle_versal%20AI%20engine_1"><img src="Images/webinar_screen_shot.png" alt="drawing" width="300"/></a>
-</tr>
-</table>
 
 --------------
 Copyright 2022 Xilinx
