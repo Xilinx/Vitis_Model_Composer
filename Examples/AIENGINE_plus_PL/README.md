@@ -19,7 +19,7 @@ Versal AI Core devices are highly integrated, multicore compute platform that ca
 
 <tr>
 <td>
-<a href="./AIE_HLS/Channelizer/README.md">Polyphase Channelizer</a>
+<a href="./AIE_HLS/Channelizer/README.md">Polyphase Channelizer</a> <img src="../../Images/new.PNG" width="50">
 </td>
 <td>
 This example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices. 
