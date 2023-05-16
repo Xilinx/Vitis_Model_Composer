@@ -89,10 +89,10 @@ The estimated throughput of 326 MHz is limited by the FFT blocks. To increase th
 
 Note that increasing the cascade length beyond 3 is no longer increasing the thoughput. To increase the throughput furthur, we need to inlcresae the PLIO width
 
-### Increasing throughput by incresaing the PLIO width
+### Increasing throughput by increasing the PLIO width
 The PLIO width can be configured to 32, 64, or 128. In this example, the PLIO width has been set to 32 and the PLIO frequency has been set to 500MHz. This implies that the AI Engine will receive data from the PL at a maximum rate of 500 MSPS, with each sample being 32 bits. Consequently, the maximum throughput is limited to 500 MSPS (see the table above). However, if we increase the PLIO width to 64, while maintaining the PLIO frequency at 500MHz, the PL can send data to the AI Engine at a rate of 500 MSPS with each sample being 64 bits. This means the AI Engine can process incoming 32-bit data at 1GSPS, potentially achieving a throughput of 1GSPS.
 
-Here are the new throughput numbers with a PLIO width of 64:
+*Here are the new throughput numbers with a PLIO width of 64:*
 
 | Cascade length| Throughput(MSPS)|
 | ------------- |:-------------:|
