@@ -4,7 +4,7 @@
 
 Within the Simulink environment, Vitis Model Composer offers a range of performance-optimized blocks that facilitate the design and implementation of DSP algorithms on AMD devices. The inclusion of the Vitis Model Composer AI Engine, HLS, and HDL libraries enables efficient algorithm exploration and greatly expedites the path towards production.
 
-To learn more visit the Vitis Model Composer [website](https://www.xilinx.com/products/design-tools/vitis/vitis-model-composer.html).
+To learn more, visit the Vitis Model Composer [website](https://www.xilinx.com/products/design-tools/vitis/vitis-model-composer.html).
 
 # What is new?
 * Take a look at the latest [tutorial series](./Tutorials) on AI Engines. This set of tutorials provides an excellent introduction to AI Engines and guides you through the process of developing a DSP algorithm on AI Engines using Vitis Model Composer.
