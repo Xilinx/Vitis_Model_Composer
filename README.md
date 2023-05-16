@@ -4,16 +4,14 @@
 
 Within the Simulink environment, Vitis Model Composer offers a range of performance-optimized blocks that facilitate the design and implementation of DSP algorithms on AMD devices. The inclusion of the Vitis Model Composer AI Engine, HLS, and HDL libraries enables efficient algorithm exploration and greatly expedites the path towards production.
 
-# How to access the examples and tutorials?<a name="access"></a>
-    
-We are storing and managing Vitis Model Composer examples and tutorials in GitHub. This way, users will have access to the most up-to-date material. You can get the examples and tutorials from GitHub or directly from Vitis Model Composer.
-
-Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis Model Composer examples and tutorials.
+To learn more visit the Vitis Model Composer [website](https://www.xilinx.com/products/design-tools/vitis/vitis-model-composer.html).
 
 # What is new?
 * Take a look at the latest [tutorial series](./Tutorials) on AI Engines. This set of tutorials provides an excellent introduction to AI Engines and guides you through the process of developing a DSP algorithm on AI Engines using Vitis Model Composer.
 * The new [Channelizer](./Examples/AIENGINE_plus_PL/AIE_HLS/Channelizer) example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices.
 * The [filtering in frequency doamin]( /Examples/AIENGINE/Filtering_in_frequency_domain/) design showcases filtering in frequency domain in AI Engines and also shows how to increase the throughput using different techniques.
+
+Click [here](./QuickGuides/Get_Examples/README.md) to learn how to access Vitis Model Composer examples and tutorials.
 
 # Examples
 
