@@ -48,9 +48,19 @@ This example showcases a desgin that inlcudes a AI Engine kernel with a scalar i
 <a href="./Run_Time_Parameters/rtp_vector/README.md">A design with a vector RTP input</a>
 </td>
 <td>
-This example showcases a desgin that inlcudes a AI Engine kernel with a vector input RTP.
+This example showcases a desgin that inlcudes an AI Engine kernel with a syncronous vector input RTP.
 </td>
 </tr> 
+  
+<tr>
+<td>
+<a href="./Run_Time_Parameters/rtp_vector_async/README.md">A design with a vector asyncronous RTP input</a>
+</td>
+<td>
+This example showcases a desgin that inlcudes an AI Engine kernel with a asyncronous vector input RTP.
+</td>
+</tr>   
+  
 </table>
 <br/>
  
