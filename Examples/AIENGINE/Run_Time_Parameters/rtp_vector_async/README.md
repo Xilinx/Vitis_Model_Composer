@@ -1,12 +1,12 @@
 # Vector Real Time Parameter (RTP), async
-This is an example of an AIE DSP filter that is controlled by a asyncronous RTP input. The value of the RTP input changes between a wide filter and a narrow filter.
+This is an example of an AIE DSP filter that is controlled by a asynchronous RTP input. The value of the RTP input changes between a wide filter and a narrow filter.
 
 ## Knowledge nuggets
 :bulb: An RTP input can be a scaler or a vector.
 
 :bulb: Note the usage of 'RTP Source' block. This block allows you to convinienetly set the RTP input source to an AI Engine block.
 
-:bulb: In this example, the RTP input is an _async_ input.
+:bulb: In this example, the RTP input is an asynchronous input. Asynchronous parameters can be changed at any time by a controlling processor such as the Arm® processor. They are read each time a kernel is invoked. If there are no input RTP values at the time of the invocation, (in Vitis Model Composer this is modeled as an empty variable size signal at the time of invocation), the kernel will proceed with the previous value of RTP.
 
 :bulb: In the RTP source block, we set the _"Form output after final data"_ parameter to _Cycle repetition_ so that the switch between the narrow filter and wide filter described above will continue until the end of the simulation. 
 
