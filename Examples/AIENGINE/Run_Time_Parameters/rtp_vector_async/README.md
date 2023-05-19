@@ -1,4 +1,4 @@
-# Vector Real Time Parameter (RTP), async
+# Vector asynchronous Real Time Parameter (RTP)
 This is an example of an AIE DSP filter that is controlled by a asynchronous RTP input. The value of the RTP input changes between a wide filter and a narrow filter.
 
 ## Knowledge nuggets
