@@ -1,12 +1,12 @@
-# Vector Real Time Parameter (RTP)
-This is an example of an AIE Kernel that is controlled by a syncronous RTP input. The value of the RTP input changes between a wide filter and a narrow filter.
+# Vector Real Time Parameter (RTP), async
+This is an example of an AIE DSP filter that is controlled by a asyncronous RTP input. The value of the RTP input changes between a wide filter and a narrow filter.
 
 ## Knowledge nuggets
 :bulb: An RTP input can be a scaler or a vector.
 
 :bulb: Note the usage of 'RTP Source' block. This block allows you to convinienetly set the RTP input source to an AI Engine block.
 
-:bulb: In this example, the RTP input is a _async_ input. For the kernel to run, a write to the input parameter needs to take place for every invocation of the kernel or else the kernel will not run. For this reason, in the RTP source block we use MATALB _repmat_ command to set the RTP value to _[repmat(narrow_filter,1, 512), repmat(wide_filter,1, 512)]_. As such, for the first 512 invocations, we pass the narrow filter to the kernel, and for the next 512 invocations, we pass the wide filter to the kernel.
+:bulb: In this example, the RTP input is an _async_ input.
 
 :bulb: In the RTP source block, we set the _"Form output after final data"_ parameter to _Cycle repetition_ so that the switch between the narrow filter and wide filter described above will continue until the end of the simulation. 
 
