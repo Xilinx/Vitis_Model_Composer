@@ -102,7 +102,7 @@ Automatic Code Generation
 </tr>
 
 <tr>
-  <td align="center" colspan="2" style="bold" ><b>AI Engine Library</a></b>
+  <td align="center" colspan="2" style="bold" ><b>AI Engine Library</a></b> <img src="../Images/new.PNG" width="50">
 </tr>
 
 <tr>
