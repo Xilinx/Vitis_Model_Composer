@@ -33,6 +33,9 @@ void __attribute__ ((noinline)) ApplyFdTaps<NUM_OF_FRAMES>::apply_fd_taps(adf::i
     auto wi = aie::begin_vector<8>( win_i );
     auto wo = aie::begin_vector<8>( win_o );
 
+    aie::set_saturation(aie::saturation_mode::saturate);
+    aie::set_rounding(aie::rounding_mode::conv_even);
+
     for (unsigned int ii=0; ii<NUM_OF_FRAMES; ii++) 
     {
         // Loop over frequency, performing 8 multiplications at a time
@@ -40,8 +43,6 @@ void __attribute__ ((noinline)) ApplyFdTaps<NUM_OF_FRAMES>::apply_fd_taps(adf::i
         chess_loop_range(4,)
         chess_prepare_for_pipelining
         {
-            aie::set_saturation(aie::saturation_mode::saturate);
-            aie::set_rounding(aie::rounding_mode::conv_even);
 
             aie::vector<cint16,8> taps = *it++;
             aie::vector<cint16,8> data = *wi++;
