@@ -4,7 +4,7 @@ This is an example of an AIE DSP filter that is controlled by a asynchronous RTP
 ## Knowledge nuggets
 :bulb: An RTP input can be a scaler or a vector.
 
-:bulb: Note the usage of 'RTP Source' block. This block allows you to convinienetly set the RTP input source to an AI Engine block.
+:bulb: Note the usage of 'RTP Source' block. This block allows you to conveniently set the RTP input source to an AI Engine block.
 
 :bulb: In this example, the RTP input is an asynchronous input. Asynchronous parameters can be changed at any time by a controlling processor such as the Arm® processor. They are read each time a kernel is invoked. If there are no input RTP values at the time of the invocation, (in Vitis Model Composer this is modeled as an empty variable size signal at the time of invocation), the kernel will proceed with the previous value of RTP. 
 
