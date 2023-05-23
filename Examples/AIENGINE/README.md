@@ -12,7 +12,7 @@ Vitis Model Composer allows you to create AI Engine designs and generate code fo
 <a href="./Importing_AIE_blocks/AIE_Class_Kernel_FIR/README.md">Importing a kernel class as a block                      </a>
 </td>
 <td>
-In this example we import an AI Engine class kernel into Vitis Model Compsoer as a block.
+In this example we import an AI Engine class kernel into Vitis Model Composer as a block.
 </td>
 </tr> 
  
@@ -21,7 +21,7 @@ In this example we import an AI Engine class kernel into Vitis Model Compsoer as
 <a href="./Importing_AIE_blocks/AIE_Graph/README.md">Importing a graph as a block</a>
 </td>
 <td>
-In this example we import an AI Engine graph into Vitis Model Compsoer as a block.
+In this example we import an AI Engine graph into Vitis Model Composer as a block.
 </td>
 </tr> 
 </table>
@@ -39,7 +39,7 @@ In this example we import an AI Engine graph into Vitis Model Compsoer as a bloc
 <a href="./Run_Time_Parameters/rtp_scalar/README.md">A design with a scalar RTP input</a>
 </td>
 <td>
-This example showcases a desgin that inlcudes a AI Engine kernel with a scalar input RTP.
+This example showcases a design that includes an AI Engine kernel with a scalar input RTP.
 </td>
 </tr> 
  
@@ -48,16 +48,16 @@ This example showcases a desgin that inlcudes a AI Engine kernel with a scalar i
 <a href="./Run_Time_Parameters/rtp_vector/README.md">A design with a vector RTP input</a>
 </td>
 <td>
-This example showcases a desgin that inlcudes an AI Engine kernel with a syncronous vector input RTP.
+This example showcases a design that includes an AI Engine kernel with a synchronous vector input RTP.
 </td>
 </tr> 
   
 <tr>
 <td>
-<a href="./Run_Time_Parameters/rtp_vector_async/README.md">A design with a vector asyncronous RTP input</a>
+<a href="./Run_Time_Parameters/rtp_vector_async/README.md">A design with a vector asynchronous RTP input</a>
 </td>
 <td>
-This example showcases a desgin that inlcudes an AI Engine kernel with a asyncronous vector input RTP.
+This example showcases a design that includes an AI Engine kernel with a asynchronous vector input RTP.
 </td>
 </tr>   
   
@@ -74,7 +74,7 @@ This example showcases a desgin that inlcudes an AI Engine kernel with a asyncro
 <a href="./DSPlib/fft/README.md">Using the AI Engine FFT block from the library browser</a>
 </td>
 <td>
-This example showcases a desgin that uses an AI Engine FFT block from the library browser.
+This example showcases a design that uses an AI Engine FFT block from the library browser.
 </td>
 </tr> 
  
@@ -83,7 +83,7 @@ This example showcases a desgin that uses an AI Engine FFT block from the librar
 <a href="./DSPlib/fir/README.md">Using the AI Engine FIR block from the library browser</a>
 </td>
 <td>
-This example showcases a desgin that uses an AI Engine FIR block from the library browser.
+This example showcases a design that uses an AI Engine FIR block from the library browser.
 </td>
 </tr>
 
@@ -92,7 +92,7 @@ This example showcases a desgin that uses an AI Engine FIR block from the librar
 <a href="./DSPlib/stream_fft/README.md">Using the AI Engine FFT Stream block from the library browser</a>
 </td>
 <td>
-This example showcases a desgin that uses an AI Engine Stream FFT block with SSR of 2 from the library browser.
+This example showcases a design that uses an AI Engine Stream FFT block with SSR of 2 from the library browser.
 </td>
 </tr> 
  
@@ -167,4 +167,4 @@ Using DSPLib AI Engine SSR FIR block to achieve 4 Gsps throughput.
  </table>
 
 # More AI Engine and Programmable Logic Examples
-For more examples with AI Engine and Programmable Logic click [here](../AIENGINE_plus_PL). 
+For more examples with AI Engine and Programmable Logic click [here](../AIENGINE_plus_PL).
