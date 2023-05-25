@@ -14,7 +14,7 @@ This model is a simple unit testbench for an energy detection algorithm that has
 
 ![](images/subsystem.png)
 
-The AI Engine kernel has been brought into Vitis Model Composer using the **AIE Class Kernel** block. The kernel source code can be viewed in the source files **detectSingleWindow.cpp** and **detectSingleWindow.h**.
+The AI Engine kernel has been brought into Vitis Model Composer using the **AIE Class Kernel** block. The kernel source code can be viewed in the source files `detectSingleWindow.cpp` and `detectSingleWindow.h`.
 
 Now we will simulate the model to see whether the AI Engine kernel produces the desired behavior.
 
@@ -32,7 +32,11 @@ On some of the execution time steps, the AI Engine kernel will appear to produce
 
 5. Continue clicking ![Step Forward](images/step_forward.png) several times.
 
-Eventually after advancing several more time steps, the AI Engine kernel output will settle into a steady state that looks like below. This is the desired output of the energy detection algorithm.
+Eventually after advancing several more time steps, the AI Engine kernel output will settle into a steady state that looks like below. 
+
+![](images/arrayplot2.png) 
+
+This is the desired output of the energy detection algorithm.
 
 The odd transient behavior at the beginning of the algorithm execution is what we would like to debug.
 
@@ -42,9 +46,9 @@ The odd transient behavior at the beginning of the algorithm execution is what w
 
 We will use the **gdb** debugger for C/C++ source code to debug the execution of the AI Engine kernel. First, let's look at the source code.
 
-1. Open the source file **detectSingleWindow.cpp**.
+1. Open the source file `detectSingleWindow.cpp`.
 
-The bulk of the AI Engine kernel's processing is contained within a for loop:
+The bulk of the AI Engine kernel's processing is contained within a `for` loop:
 
     for (size_t ctr=0; ctr<NUMSAMPLES/8; ctr++)
         chess_prepare_for_pipelining
@@ -85,7 +89,7 @@ The bulk of the AI Engine kernel's processing is contained within a for loop:
 
 This kernel iterates over frames of 2048 samples, 8 samples at a time, while computing the moving average of the past 32 samples. The output of the kernel is the moving average.
 
-There is also an initialization function that prepares variables for function execution. A for loop clears two buffers that will be used for accumulation:
+There is also an initialization function that prepares variables for function execution. A `for` loop clears two buffers that will be used for accumulation:
 
     for (int ctr=0; ctr < NUMSAMPLES/8; ctr++)
     {
@@ -115,13 +119,13 @@ This guide will show some of the most useful gdb commands, but you may also refe
 
 4. Set a breakpoint in the AI Engine code at the beginning of the line `*clearMem0 = pWinZero;` by typing the following command:
 
-    break detectSingleWindow.cpp:82
+    `break detectSingleWindow.cpp:82`
 
-The `break` command has the syntax `break (source file name):(line number).
+<div class="noteBox">The `break` command has the syntax `break (source file name):(line number)`.</div>
 
 5. Attach gdb to the MATLAB process. In place of (process ID), use the process ID from step 2 above.
 
-    attach (process ID)
+    `attach (process ID)`
 
 Once you do this, your MATLAB session will freeze because gdb is now controlling its execution. It may take a moment for the gdb prompt to return.
 
@@ -129,7 +133,7 @@ Once you do this, your MATLAB session will freeze because gdb is now controlling
 
 MATLAB is now responsive. Now that we've added a breakpoint to our AI Engine code and attached the MATLAB process to gdb, we are ready to run the Simulink model.
 
-7. In the **detect_test.slx** model, click **Run**.
+7. In the `detect_test.slx` model, click **Run**.
 
 After the model compiles but before it begins simulating, the AI Engine kernel's `init` function is invoked. gdb halts execution when the breakpoint is reached.
 
@@ -145,8 +149,8 @@ Now we can clearly see where the execution has paused within the code. We can al
 
 9. Type the following commands:
 
-    display clearMem0
-    display clearMem1
+    `display clearMem0`
+    `display clearMem1`
 
 ![](images/gdb3.png)
 
@@ -156,7 +160,7 @@ The `display` commands will show the variable values every time you step forward
 
 ![](images/gdb4.png)
 
-This advances execution through one iteration of the for loop. The interesting thing here is that the pointer locations `clearMem0` and `clearMem1` do not change. As a result, this for loop will repeatedly write zeros to the first location in each buffer. This is not the intended behavior. We need to iterate (increase) the pointer on each iteration of the loop so that the entire buffer is full of zeros. 
+This advances execution through one iteration of the `for` loop. The interesting thing here is that the pointer locations `clearMem0` and `clearMem1` do not change. As a result, this `for` loop will repeatedly write zeros to the first location in each buffer. This is not the intended behavior. We need to iterate (increase) the pointer on each iteration of the loop so that the entire buffer is full of zeros. 
 
 Now that we understand what's wrong with this code, we can exit gdb and fix the code.
 
@@ -170,7 +174,7 @@ Now that we understand what's wrong with this code, we can exit gdb and fix the 
 
 We learned in the previous section that there is a bug in our code that zeros out the 2 accumulator buffers before execution begins. We can fix this error by advancing the memory pointer location on each loop iteration.
 
-1. Add lines to the loop inside `detectSingleWindow.cpp` increment the pointers as follows:
+1. Add 2 lines to the loop inside `detectSingleWindow.cpp` increment the pointers as follows:
 
 ![](images/fix.png)
 
