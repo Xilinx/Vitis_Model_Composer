@@ -174,7 +174,7 @@ Now that we understand what's wrong with this code, we can exit gdb and fix the 
 
 We learned in the previous section that there is a bug in our code that zeros out the 2 accumulator buffers before execution begins. We can fix this error by advancing the memory pointer location on each loop iteration.
 
-1. Add 2 lines to the loop inside `detectSingleWindow.cpp` increment the pointers as follows:
+1. Add 2 lines to the loop inside `detectSingleWindow.cpp` to increment the pointers as follows:
 
 ![](images/fix.png)
 
