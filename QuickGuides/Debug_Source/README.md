@@ -115,6 +115,8 @@ A terminal window will open to the gdb prompt:
 
 ![](images/gdb0.png)
 
+**NOTE:** If the hyperlink doesn't work, execute the following command from any terminal window: `gdb -ex "handle SIGSEGV nostop noprint" -ex "set breakpoint pending on"`.
+
 This guide will show some of the most useful gdb commands, but you may also refer to a [cheat sheet](https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf).
 
 4. Set a breakpoint in the AI Engine code at the beginning of the line `*clearMem0 = pWinZero;` by typing the following command:
