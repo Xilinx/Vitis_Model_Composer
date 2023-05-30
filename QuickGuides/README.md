@@ -28,5 +28,13 @@
  <td>Setting the properties of the AIE to HDL and HDL to AIE blocks can be tricky. This tutorial explains how to set these parameters.
  </td>
  </tr>
+
+ <tr>
+ <td align="left">
+   <a href="./Debug_Source/README.md">Debugging C/C++ Source Code</a>
+ </td>
+ <td>This guide will show how to debug C/C++ source code (AI Engine or HLS kernels) that has been imported into a Vitis Model Composer model.
+ </td>
+ </tr>
     
  </table>
