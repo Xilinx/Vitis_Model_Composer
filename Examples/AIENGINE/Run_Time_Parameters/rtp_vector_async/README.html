@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<h1 id="vitis-model-composer-tutorials">Vitis Model Composer Tutorials</h1>
+<h1 id="vector-asynchronous-real-time-parameter-rtp">Vector asynchronous Real Time Parameter (RTP)</h1>
 <html>    
 <script>
 function myFunction() {
@@ -13,179 +13,28 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:chdir('" + directory + "');"
+commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
 
 document.location=commandURI
 }
 </script>
 <noscript>Sorry, your browser does not support JavaScript!</noscript>
        
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
               
 </html>
-<p>These tutorials take users through the design methodology and programming model for developing algorithms in Vitis Model Composer for AMD/Xilinx devices including Versal devices with AI Engines.</p>
-<table style="width:100%">
-<tr>
-<td align="center" colspan="2" style="bold" ><b>HDL Library</a></b>
-</tr>
-
-<tr>
-<td>
-<a href="./HDL_Library/Lab1/README.html">Lab 1</a>
-</td>
-<td>
-Introduction to Vitis Model Composer HDL Library
-</td>
-</tr> 
-
-<tr>
-<td>
-<a href="./HDL_Library/Lab2/README.html">Lab 2</a>
-</td>
-<td>
-Importing Code into a Vitis Model Composer HDL Design
-</td>
-</tr> 
-
-<tr>
-<td>
-<a href="./HDL_Library/Lab3/README.html">Lab 3</a>
-</td>
-<td>
-Timing and Resource Analysis.
-</td>
-</tr>
-
-<tr> 
-<td>
-<a href="./HDL_Library/Lab4/README.html">Lab 4</a>
-</td>
-<td>
-Working with Multi-Rate Systems
-</td>
-</tr>
-
-<tr> 
-<td>
-<a href="./HDL_Library/Lab5/README.html">Lab 5</a>
-</td>
-<td>
-Using AXI Interfaces and IP Integrator
-</td>
-</tr>
-
-<tr> 
-<td>
-<a href="./HDL_Library/Lab6/README.html">Lab 6</a>
-</td>
-<td>
-Using a Vitis Model Composer HDL Design with a Zynq-7000 SoC
-</td>
-</tr>
-
-<tr>
-<td align="center" colspan="2" style="bold" ><b>HLS Library</a></b>
-</tr>
-
-<tr>
-<td>
-<a href="./HLS_Library/Lab1/README.html">Lab 1</a>
-</td>
-<td>
-Introduction to Model Composer HLS Library
-</td>
-</tr> 
-
-<tr>
-<td>
-<a href="./HLS_Library/Lab2/README.html">Lab 2</a>
-</td>
-<td>
-Importing Code into Vitis Model Composer
-</td>
-</tr> 
-
-<tr>
-<td>
-<a href="./HLS_Library/Lab3/README.html">Lab 3</a>
-</td>
-<td>
-Debugging Imported C/C++-Code Using GDB Debugger
-</td>
-</tr>
-
-<tr> 
-<td>
-<a href="./HLS_Library/Lab4/README.html">Lab 4</a>
-</td>
-<td>
-Automatic Code Generation
-</td>
-</tr>
-
-<tr>
-<td align="center" colspan="2" style="bold" ><b>AI Engine Library</a></b> <img src="../Images/new.PNG" width="50">
-</tr>
-
-<tr>
-<td>
-<a href="./AIEngine_Library/01-Introduction_to_Versal_and_AI_Engines/README.html">Lab 1</a>
-</td>
-<td>
-Introduction to Versal Adaptive SoC and AI Engines
-</td>
-</tr> 
-
-<tr>
-<td>
-<a href="./AIEngine_Library/02-Build_and_Simulate_AI_Engine_Design/README.html">Lab 2</a>
-</td>
-<td>
-Build and Simulate an AI Engine Design
-</td>
-</tr> 
-
-<tr>
-<td>
-<a href="./AIEngine_Library/03-Import_Custom_AI_Engine_Code/README.html">Lab 3</a>
-</td>
-<td>
-Import Custom AI Engine Code
-</td>
-</tr> 
-
-<tr>
-<td>
-<a href="./AIEngine_Library/04-AI_Engine_Code_Generation/README.html">Lab 4</a>
-</td>
-<td>
-AI Engine Code Generation and Cycle-Approximate Simulation
-</td>
-</tr> 
-
-<tr>
-<td>
-<a href="./AIEngine_Library/05-Vitis_Analyzer/README.html">Lab 5</a>
-</td>
-<td>
-View AI Engine Designs in Vitis Analyzer
-</td>
-</tr> 
-
-<tr>
-<td>
-<a href="./AIEngine_Library/06-Hardware_Validation/README.html">Lab 6</a>
-</td>
-<td>
-Hardware Validation of Versal Adaptive SoC Design
-</td>
-</tr> 
-
-
-</table>
+<p>This is an example of an AIE DSP filter that is controlled by a asynchronous RTP input. The value of the RTP input changes between a wide filter and a narrow filter.</p>
+<h2 id="knowledge-nuggets">Knowledge nuggets</h2>
+<p><img width="18" height="18" src="../../../../Images/bulb.png"> An RTP input can be a scaler or a vector.</p>
+<p><img width="18" height="18" src="../../../../Images/bulb.png"> Note the usage of 'RTP Source' block. This block allows you to conveniently set the RTP input source to an AI Engine block.</p>
+<p><img width="18" height="18" src="../../../../Images/bulb.png"> In this example, the RTP input is an asynchronous input. Asynchronous parameters can be changed at any time by a controlling processor such as the Arm® processor. They are read each time a kernel is invoked. If there are no input RTP values at the time of the invocation, (in Vitis Model Composer this is modeled as an empty variable size signal at the time of invocation), the kernel will proceed with the previous value of RTP. </p>
+<p>In the provided example, it is important to note that the value of the RTP parameter is set as <em>[narrow</em>filter, nan(length(narrow<em>filter),500), wide</em>filter, nan(length(narrow<em>filter),500)]</em>. The block's output is typically an empty variable size signal, except for two instances in time. Initially, a narrow band filter is applied to the RTP input of the FIR block. Consequently, the output of the RTP source block remains empty, but the FIR block utilizes the coefficients of the narrow band filter until the wide band filter is introduced. From that point onward, the filter employs the coefficients of the wide band filter. This pattern repeats in a cycle. </p>
+<p><img width="18" height="18" src="../../../../Images/bulb.png"> In the RTP source block, we set the <em>"Form output after final data"</em> parameter to <em>Cycle repetition</em> so that the switch between the narrow filter and wide filter described above will continue until the end of the simulation. </p>
+<p><img src="images/screen_shot.PNG" alt="" /></p>
+<p><img src="images/out_narrow.PNG" alt="" /></p>
+<p><img src="images/out_wide.PNG" alt="" /></p>
 <hr />
-<p>Copyright 2022 Xilinx<br />
-Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>Copyright 2020 Xilinx</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

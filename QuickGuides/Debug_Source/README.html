@@ -1,0 +1,381 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="debugging-cc-source-code">Debugging C/C++ Source Code</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
+              
+</html>
+<p>This quick guide will show how to debug C/C++ source code that has been imported into a Vitis Model Composer model. We will demonstrate with an AI Engine kernel, but the same process can be followed to debug imported HLS functions or kernels as well.</p>
+<h2 id="testbench-model-and-ai-engine-code">Testbench Model and AI Engine Code</h2>
+<ol>
+<li>Open the model <strong>detect_test.slx</strong>.</li>
+</ol>
+<p><img src="images/model.png" alt="" /></p>
+<p>This model is a simple unit testbench for an energy detection algorithm that has been implemented as an AI Engine kernel. </p>
+<ol start="2">
+<li>Double-click on the <strong>peak_detect</strong> subsystem to open it.</li>
+</ol>
+<p><img src="images/subsystem.png" alt="" /></p>
+<p>The AI Engine kernel has been brought into Vitis Model Composer using the <strong>AIE Class Kernel</strong> block. The kernel source code can be viewed in the source files <code>detectSingleWindow.cpp</code> and <code>detectSingleWindow.h</code>.</p>
+<p>Now we will simulate the model to see whether the AI Engine kernel produces the desired behavior.</p>
+<ol start="3">
+<li>On the Simulink toolstrip, click <img src="images/step_forward.png" alt="Step Forward" />.</li>
+</ol>
+<p>This will initialize the simulation and pause it at the first time step (<code>t=0</code>). The Array Plot shows the output of the AI Engine kernel.</p>
+<p><img src="images/arrayplot0.png" alt="" /></p>
+<ol start="4">
+<li>Click <img src="images/step_forward.png" alt="Step Forward" /> several times to move to the next time step of the simulation.</li>
+</ol>
+<p>On some of the execution time steps, the AI Engine kernel will appear to produce garbage samples like this:</p>
+<p><img src="images/arrayplot1.png" alt="" /> </p>
+<ol start="5">
+<li>Continue clicking <img src="images/step_forward.png" alt="Step Forward" /> several times.</li>
+</ol>
+<p>Eventually after advancing several more time steps, the AI Engine kernel output will settle into a steady state that looks like below. </p>
+<p><img src="images/arrayplot2.png" alt="" /> </p>
+<p>This is the desired output of the energy detection algorithm.</p>
+<p>The odd transient behavior at the beginning of the algorithm execution is what we would like to debug.</p>
+<ol start="6">
+<li>Stop the model.</li>
+</ol>
+<h2 id="debug-the-code">Debug the Code</h2>
+<p>We will use the <strong>gdb</strong> debugger for C/C++ source code to debug the execution of the AI Engine kernel. First, let's look at the source code.</p>
+<ol>
+<li>Open the source file <code>detectSingleWindow.cpp</code>.</li>
+</ol>
+<p>The bulk of the AI Engine kernel's processing is contained within a <code>for</code> loop:</p>
+<pre><code>for (size_t ctr=0; ctr&lt;NUMSAMPLES/8; ctr++)
+chess_prepare_for_pipelining
+chess_loop_range(NUMSAMPLES/8,)
+{
+pWin = window_readincr_v&lt;8&gt;(iwinPower);
+if (mode)
+{
+mWin0 = *mem0in;
+accWin0.from_vector(mWin0,0);
+accWin0 = aie::add(accWin0, pWin);
+*mem0out = accWin0.to_vector&lt;int32&gt;(0);           
+if (count == 1 &amp;&amp; !prevmode)
+{
+mWin1 = *mem1in;
+mWin1 = aie::downshift(mWin1,m_bit_avg);
+window_writeincr(owinDetect, mWin1);
+(*mem1out) = pWinZero;
+}
+} else {
+mWin1 = *mem1in;
+accWin0.from_vector(mWin1,0);
+accWin0 = aie::add(accWin0, pWin);
+*mem1out = accWin0.to_vector&lt;int32&gt;(0);          
+if (count == 1 &amp;&amp; !prevmode)
+{
+mWin0 = *mem0in;
+mWin0 = aie::downshift(mWin0,m_bit_avg); 
+window_writeincr(owinDetect, mWin0);
+(*mem0out) = pWinZero;
+}
+}
+mem1out++;
+mem0out++;
+mem0in++;
+mem1in++;
+}
+</code></pre>
+<p>This kernel iterates over frames of 2048 samples, 8 samples at a time, while computing the moving average of the past 32 samples. The output of the kernel is the moving average.</p>
+<p>There is also an initialization function that prepares variables for function execution. A <code>for</code> loop clears two buffers that will be used for accumulation:</p>
+<pre><code>for (int ctr=0; ctr &lt; NUMSAMPLES/8; ctr++)
+{
+*clearMem0 = pWinZero;
+*clearMem1 = pWinZero;
+}
+</code></pre>
+<p>We would expect the accumulator buffers to be zeroed out at the beginning of execution, so the AI Engine kernel should output all zeros initially. For some reason, this loop is not operating as expected. We can set breakpoints and debug this loop using gdb.</p>
+<p>Initialize the <strong>gdb</strong> debugger from within Vitis Model Composer:</p>
+<ol start="2">
+<li>Type the following in the MATLAB Command Window: <code>xmcImportFunctionSettings('build','debug')</code>.</li>
+</ol>
+<p>The following output appears in the Command Window:</p>
+<p><img src="images/command.png" alt="" /></p>
+<p>Note the MATLAB process ID; we will need this information later.</p>
+<ol start="3">
+<li>Click the hyperlink to open <strong>gdb</strong>.</li>
+</ol>
+<p>A terminal window will open to the gdb prompt:</p>
+<p><img src="images/gdb0.png" alt="" /></p>
+<p><strong>NOTE:</strong> If the hyperlink doesn't work, execute the following command from any terminal window: <code>gdb -ex "handle SIGSEGV nostop noprint" -ex "set breakpoint pending on"</code>.</p>
+<p>This guide will show some of the most useful gdb commands, but you may also refer to a <a href="https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf">cheat sheet</a>.</p>
+<ol start="4">
+<li><p>Set a breakpoint in the AI Engine code at the beginning of the line <code>*clearMem0 = pWinZero;</code> by typing the following command:</p>
+<p><code>break detectSingleWindow.cpp:82</code></p></li>
+</ol>
+<div class="noteBox">The `break` command has the syntax `break (source file name):(line number)`.</div>
+<ol start="5">
+<li><p>Attach gdb to the MATLAB process. In place of (process ID), use the process ID from step 2 above.</p>
+<p><code>attach (process ID)</code></p></li>
+</ol>
+<p>Once you do this, your MATLAB session will freeze because gdb is now controlling its execution. It may take a moment for the gdb prompt to return.</p>
+<ol start="6">
+<li>Continue MATLAB's execution by typing <code>continue</code> at the gdb prompt.</li>
+</ol>
+<p>MATLAB is now responsive. Now that we've added a breakpoint to our AI Engine code and attached the MATLAB process to gdb, we are ready to run the Simulink model.</p>
+<ol start="7">
+<li>In the <code>detect_test.slx</code> model, click <strong>Run</strong>.</li>
+</ol>
+<p>After the model compiles but before it begins simulating, the AI Engine kernel's <code>init</code> function is invoked. gdb halts execution when the breakpoint is reached.</p>
+<p><img src="images/gdb1.png" alt="" /></p>
+<p>To make debugging easier, we can display the source code alongside the gdb prompt and execution status.</p>
+<ol start="8">
+<li>Press <code>Ctrl+X</code>, followed by 'A'.</li>
+</ol>
+<p><img src="images/gdb2.png" alt="" /></p>
+<p>Now we can clearly see where the execution has paused within the code. We can also use gdb to look at variable values, such as the location of the <code>clearMem0</code> and <code>clearMem1</code> pointers.</p>
+<ol start="9">
+<li><p>Type the following commands:</p>
+<p><code>display clearMem0</code><br />
+<code>display clearMem1</code></p></li>
+</ol>
+<p><img src="images/gdb3.png" alt="" /></p>
+<p>The <code>display</code> commands will show the variable values every time you step forward in the execution. We will use the <code>next</code> command to step to the next line of the code (without advancing into any subfunctions).</p>
+<ol start="10">
+<li>Type the <code>next</code> command at least 3 times.</li>
+</ol>
+<p><img src="images/gdb4.png" alt="" /></p>
+<p>This advances execution through one iteration of the <code>for</code> loop. The interesting thing here is that the pointer locations <code>clearMem0</code> and <code>clearMem1</code> do not change. As a result, this <code>for</code> loop will repeatedly write zeros to the first location in each buffer. This is not the intended behavior. We need to iterate (increase) the pointer on each iteration of the loop so that the entire buffer is full of zeros. </p>
+<p>Now that we understand what's wrong with this code, we can exit gdb and fix the code.</p>
+<ol start="11">
+<li><p>Type <code>clear 1</code> to remove the breakpoint from the code.</p></li>
+<li><p>Type <code>continue</code> to allow the Simulink model to finish execution.</p></li>
+<li><p>Type <code>quit</code> to exit gdb. Type <code>y</code> when asked if you want to detach the process.</p></li>
+</ol>
+<h2 id="fix-the-bug">Fix The Bug</h2>
+<p>We learned in the previous section that there is a bug in our code that zeros out the 2 accumulator buffers before execution begins. We can fix this error by advancing the memory pointer location on each loop iteration.</p>
+<ol>
+<li>Add 2 lines to the loop inside <code>detectSingleWindow.cpp</code> to increment the pointers as follows:</li>
+</ol>
+<p><img src="images/fix.png" alt="" /></p>
+<ol start="2">
+<li><p>Save <code>detectSingleWindow.cpp</code>. </p></li>
+<li><p>Run the <code>detect_test</code> model.</p></li>
+</ol>
+<p>The AI Engine kernel is rebuilt with the source code changes. We no longer see the transient behavior in the output signal at the beginning of execution.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this example, you saw how to use gdb to debug source code that is running in Vitis Model Composer. This approach can be used with AI Engine and HLS C/C++ code.</p>
+<hr />
+<p>Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h1, h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>
