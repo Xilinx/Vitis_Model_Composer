@@ -1,6 +1,6 @@
 # Simulink Basics
 
-If you need a refresher on Simulink start [here](./Simulink_Basics/READEME.md).
+If you need a refresher on Simulink start [here](./Simulink_Basics/README.md).
 
 # Vitis Model Composer Tutorials
 
