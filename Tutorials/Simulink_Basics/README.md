@@ -1,7 +1,7 @@
 # Things you need to know about Simulink before you start using Vitis Model Composer
 
 ## 0-The very basics
-[This](https://www.mathworks.com/videos/getting-started-with-simulink-part-1-building-and-simulating-a-simple-simulink-model-1508442030520.html) 8-minute video goes over the very basic of opening Simulink and putting a very simple design together. 
+This 8-minute [video](https://www.mathworks.com/videos/getting-started-with-simulink-part-1-building-and-simulating-a-simple-simulink-model-1508442030520.html) goes over the very basic of opening Simulink and putting a very simple design together. 
 
 ## 1-Sample time
 On the block GUI for any source block in Simulink there is a "Sample time" field. Sample time is the time between two samples on a signal. There is no unit for this, but for the sake of this discussion let's assume the unit is in seconds. Note that this is simulation time and not wall time.
