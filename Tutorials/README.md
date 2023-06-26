@@ -1,6 +1,6 @@
 # Simulink Basics
 
-If you need a refresher on Simulink start [here](./Simulink_Basics/README.md). This is a 10 minute read.
+If you need a refresher on Simulink start [here](./Simulink_Basics/README.md). This is a 15 minute read.
 
 # Vitis Model Composer Tutorials
 
