@@ -1,10 +1,10 @@
 # Things you need to know about Simulink before you start using Vitis Model Composer
 
 ## 0-The very basics
-This 8-minute [video](https://www.mathworks.com/videos/getting-started-with-simulink-part-1-building-and-simulating-a-simple-simulink-model-1508442030520.html) goes over the very basic of opening Simulink and putting a very simple design together. 
+This 8-minute [video](https://www.mathworks.com/videos/getting-started-with-simulink-part-1-building-and-simulating-a-simple-simulink-model-1508442030520.html) goes over the very basics of opening Simulink and putting a very simple design together. 
 
-## 1-Sample time
-On the block GUI for any source block in Simulink there is a "Sample time" field. Sample time is the time between two samples on a signal. There is no unit for this, but for the sake of this discussion let's assume the unit is in seconds. Note that this is simulation time and not wall time.
+## 1. Sample time
+On the block GUI for any source block in Simulink, there is a "Sample time" field. Sample time is the time between two samples on a signal. There is no unit for this, but for the sake of this discussion let's assume the unit is in seconds. Note that this is simulation time and not wall time.
 
 For example, here is the block GUI for the "Constant" source block:
 
@@ -29,14 +29,14 @@ For example, for the constant block above, you see the sample time in the "Timin
 
 <img src="./images/constant1.png" width="500">
 
-## 2-Stop time
+## 2. Stop time
 The "Stop time" field allows you to determine the duration for which the simulation will run. Let's say your design has a sample time of 1. If you set the stop time to 10, Simulink will iterate over the blocks for a total of 11 times (10 + 1). The blocks are initially executed at sample time 0, and then at each subsequent time step, they are executed again until the stop time of 10 is reached.
 
 <img src="./images/stop_time.png" width="500">
 
 The duration of your design's execution is determined by the smallest sample time in your design and the value specified for the stop time. It's important to note that these two factors work together to determine the overall runtime of your design. 
 
-## 3-Frame
+## 3. Frame
 Some blocks in the DSP System Toolbox allow you to create a frame of samples. The "Signal from Workspace" block is one of them:
 
 <img src="./images/Signal_from_works_space.png" width="900">
@@ -53,8 +53,8 @@ A timing diagram for the three outputs in the design above is depicted below:
 <img src="./images/timing_diagram.jpg" width="600">
 
 
-## 4-Displaying Signal Dimensions and Port Data Types
-One of the most important things to be aware of when you are putting your design together is the Signal Dimensions and the Port Data Types. To do that:
+## 4. Displaying Signal Dimensions and Port Data Types
+The Signal Dimensions and the Port Data Types are important aspects of your design. To view them:
 
 1. Right-click anywhere on your design.
 1. From the context menu, select "Signal & Ports".
@@ -63,10 +63,10 @@ One of the most important things to be aware of when you are putting your design
 
 <img src="./images/signal_dimentions.png" width="700">
 
-## 5-Variable Size Signals
+## 5. Variable Size Signals
 These signals are used for AI Engines and the HLS Kernel block. During simulation, the number of samples in these signals can range from zero to their maximum capacity. To learn more about variable size signals, please refer to [this](https://github.com/Xilinx/Vitis_Model_Composer/tree/HEAD/QuickGuides/Variable_Size_Signals) resource.
 
-## 6-Most commonly used source blocks
+## 6. Most commonly used source blocks
 
 | Block    | Description |
 | ----------- | ----------- |
@@ -76,14 +76,14 @@ These signals are used for AI Engines and the HLS Kernel block. During simulatio
 |<img src="./images/sine_wave.jpg" width="100">|This block is part of the DSP System Toolbox. It outputs discrete sinusoids that can be real or complex.|
 |<img src="./images/free_counter.jpg" width="100">|This blocks is useful when debugging a design where you need a predictable input.|
 
-## 7-Most commonly used sink blocks
+## 7. Most commonly used sink blocks
 | Block    | Description |
 | ----------- | ----------- |
 |<img src="./images/display.jpg" width="100">    |This block is very handy for debugging. It is also very useful if you would like to see numbers in hexadecimal format. Right click on the block -> Block parameters (Display) and select "hex" for "Numeric Display format"|
 |<img src="./images/scope.jpg" width="100">  | This block is the primary block to view signals. You must change the "Input processing" to "Columns as Channels (frame based)" to view frame based signals.   <img src="./images/scope_settings.png" width="50">|
-|<img src="./images/to_work_space.jpg" width="100">|This block allows you to log a signal data into MATLAB workspace for further processing in MATLAB.|
+|<img src="./images/to_work_space.jpg" width="100">|This block allows you to log signal data into the MATLAB workspace for further processing.|
 |<img src="./images/spectrum.jpg" width="100">|This block is part of the DSP System Toolbox. It is a very easy way to see the spectrum of a signal.|
-## 8-Creating a Subsystem
+## 8. Creating a Subsystem
 To generate HDL, HLS, or AI Engine code for a DUT, Vitis Model Composer requires the blocks to be organized into a subsystem. To create a subsystem, follow these steps:
 
 * Left-click and drag to create a boundary around all the blocks you want to include in the subsystem.
@@ -94,7 +94,7 @@ To generate HDL, HLS, or AI Engine code for a DUT, Vitis Model Composer requires
 
 A subsystem created in this way is called a _virtual subsystem_. Virtual subsystems organize the blocks into a hierarchy, but they do not affect the output of the simulation.
 
-## 9-Stepping through your design
+## 9. Stepping through your design
 Instead of executing your entire design at once, you have the option to proceed incrementally. This approach proves valuable while troubleshooting a design as it allows you to inspect Display blocks that are positioned at various parts of your design, providing visibility at each step.
 
 <img src="./images/step.gif" width="700">
