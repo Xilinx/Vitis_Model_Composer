@@ -1,3 +1,7 @@
+# Simulink Basics
+
+Click [here](./Simulink_Basics/README.md) to learn what you need to know about Simulink before you start using Vitis Model Composer.
+
 # Vitis Model Composer Tutorials
 
 These tutorials take users through the design methodology and programming model for developing algorithms in Vitis Model Composer for AMD/Xilinx devices including Versal devices with AI Engines.
