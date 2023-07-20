@@ -95,6 +95,8 @@ When this occurs, the model generates the desired number of active channels and 
 
 To aid in simulation and verification, the AI Engine graph code and HLS kernel code are brought into Vitis Model Composer, which enables functional simulation of the AI Engine and PL components together.
 
+The `aie` and `hls` folders contain separate Simulink models for evaluating and studying the operation of each AI Engine graph and HLS kernel in isolation. In particular, the `Channelizer_DFT_testbench` model can be used to observe the permutation on the input and output streams to and from the AI Engine DFT implementation.
+
 1. Open the Simulink model `Channelizer.slx`.
 
 2. Press **Ctrl+D** to update the model and display signal dimensions and data types.
