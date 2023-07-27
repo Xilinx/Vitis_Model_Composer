@@ -19,6 +19,7 @@
 #define HLS_KERNELS_H
 
 #include "hls_stream.h"
+#include <complex>
 
 ////// This header file is for adf only. HLS cpp does NOT include this header. //////
 
