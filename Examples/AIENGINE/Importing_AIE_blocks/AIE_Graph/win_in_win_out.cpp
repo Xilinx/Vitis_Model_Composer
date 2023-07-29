@@ -19,12 +19,6 @@
 // instantiate adf  dataflow graph
 Win_in_win_out mygraph;
 
-// connect dataflow graph to simulation platform
-adf::simulation::platform<2,1> platform("~", "~", "~");
-adf::connect<> net1(platform.src[0], mygraph.In1);
-adf::connect<> net2(platform.src[1], mygraph.In2);
-adf::connect<> net3(mygraph.Out1, platform.sink[0]);
-
 // initialize and run the dataflow graph
 #ifdef __AIESIM__
 int main(void) {
