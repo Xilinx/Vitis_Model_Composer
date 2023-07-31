@@ -1,3 +1,4 @@
+<!--Hash:c743406c58b017f13ce39cbf942fd0ab21be5b89-->
 
 <html>
 <head>
@@ -13,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:chdir('" + directory + "');"
+commandURI="matlab:XmcExampleApi.changeDirectory('AIEngine_Library');"
 
 document.location=commandURI
 }
@@ -43,42 +44,42 @@ document.location=commandURI
 <p>:warning: The AI Engine Lab can be done only in a Linux environment.</p>
 <h2 id="overview">Overview</h2>
 <p>This tutorial includes the following labs which introduce AI Engine support in Vitis Model Composer.</p>
-<h3 id="lab-101-introduction_to_versal_and_ai_enginesreadmemd"><a href="./01-Introduction_to_Versal_and_AI_Engines/README.html">Lab 1</a></h3>
+<h3 id="lab-101-introduction_to_versal_and_ai_enginesreadmemd"><a href="matlab:XmcExampleApi.getExample('01-Introduction_to_Versal_and_AI_Engines')">Lab 1</a></h3>
 <p>Introduction to Versal Adaptive SoC and AI Engines</p>
 <ul>
 <li>Learn about the Versal Adaptive SoC architecture and AI Engines</li>
 <li>Install required software to compile and simulate AI Engine designs</li>
 <li>Simulate an example AI Engine design in Vitis Model Composer</li>
 </ul>
-<h3 id="lab-202-build_and_simulate_ai_engine_designreadmemd"><a href="./02-Build_and_Simulate_AI_Engine_Design/README.html">Lab 2</a></h3>
+<h3 id="lab-202-build_and_simulate_ai_engine_designreadmemd"><a href="matlab:XmcExampleApi.getExample('02-Build_and_Simulate_AI_Engine_Design')">Lab 2</a></h3>
 <p>Build and Simulate an AI Engine Design</p>
 <ul>
 <li>Construct a signal processing chain using AI Engine DSP library blocks</li>
 <li>Generate a top-level graph</li>
 <li>Simulate the design using the AI Engine SystemC Simulator</li>
 </ul>
-<h3 id="lab-303-import_custom_ai_engine_codereadmemd"><a href="./03-Import_Custom_AI_Engine_Code/README.html">Lab 3</a></h3>
+<h3 id="lab-303-import_custom_ai_engine_codereadmemd"><a href="matlab:XmcExampleApi.getExample('03-Import_Custom_AI_Engine_Code')">Lab 3</a></h3>
 <p>Import Custom AI Engine Code</p>
 <ul>
 <li>Learn about AI Engine programming and study an AI Engine kernel function </li>
 <li>Import the AI Engine kernel function into Vitis Model Composer</li>
 <li>Simulate the AI Engine kernel function and understand its execution within Vitis Model Composer</li>
 </ul>
-<h3 id="lab-404-ai_engine_code_generationreadmemd"><a href="./04-AI_Engine_Code_Generation/README.html">Lab 4</a></h3>
+<h3 id="lab-404-ai_engine_code_generationreadmemd"><a href="matlab:XmcExampleApi.getExample('04-AI_Engine_Code_Generation')">Lab 4</a></h3>
 <p>AI Engine Code Generation and Cycle-Approximate Simulation</p>
 <ul>
 <li>Generate AI Engine graph code from a Vitis Model Composer design</li>
 <li>Simulate AI Engine design and review estimated throughput</li>
 <li>Automate building and simulation of AI Engine as part of a larger design</li>
 </ul>
-<h3 id="lab-505-vitis_analyzerreadmemd"><a href="./05-Vitis_Analyzer/README.html">Lab 5</a></h3>
+<h3 id="lab-505-vitis_analyzerreadmemd"><a href="matlab:XmcExampleApi.getExample('05-Vitis_Analyzer')">Lab 5</a></h3>
 <p>View AI Engine Designs in Vitis Analyzer</p>
 <ul>
 <li>Widen PLIO width to increase design throughput</li>
 <li>Cascade FIR filter algorithm across multiple AIE kernels</li>
 <li>View detailed timing information in the Vitis Analyzer and calculate latency</li>
 </ul>
-<h3 id="lab-606-hardware_validationreadmemd"><a href="./06-Hardware_Validation/README.html">Lab 6</a></h3>
+<h3 id="lab-606-hardware_validationreadmemd"><a href="matlab:XmcExampleApi.getExample('06-Hardware_Validation')">Lab 6</a></h3>
 <p>Hardware Validation of Versal Adaptive SoC Design</p>
 <ul>
 <li>Generate a hardware image to perform validation</li>

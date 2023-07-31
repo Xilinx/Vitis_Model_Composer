@@ -1,3 +1,4 @@
+<!--Hash:654171647baa6be8557a5d627cf35c7075ebb257-->
 
 <html>
 <head>
@@ -13,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:chdir('" + directory + "');"
+commandURI="matlab:XmcExampleApi.changeDirectory('Tutorials');"
 
 document.location=commandURI
 }
@@ -23,7 +24,7 @@ document.location=commandURI
 <button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
               
 </html>
-<p>Click <a href="./Simulink_Basics/README.html">here</a> to learn what you need to know about Simulink before you start using Vitis Model Composer.</p>
+<p>Click <a href="matlab:XmcExampleApi.getExample('Simulink_Basics')">here</a> to learn what you need to know about Simulink before you start using Vitis Model Composer.</p>
 <h1 id="vitis-model-composer-tutorials">Vitis Model Composer Tutorials</h1>
 <p>These tutorials take users through the design methodology and programming model for developing algorithms in Vitis Model Composer for AMD/Xilinx devices including Versal devices with AI Engines.</p>
 <table style="width:100%">
@@ -33,7 +34,7 @@ document.location=commandURI
 
 <tr>
 <td>
-<a href="./HDL_Library/Lab1/README.html">Lab 1</a>
+<a href="matlab:XmcExampleApi.getExample('Lab1')">Lab 1</a>
 </td>
 <td>
 Introduction to Vitis Model Composer HDL Library
@@ -42,7 +43,7 @@ Introduction to Vitis Model Composer HDL Library
 
 <tr>
 <td>
-<a href="./HDL_Library/Lab2/README.html">Lab 2</a>
+<a href="matlab:XmcExampleApi.getExample('Lab2')">Lab 2</a>
 </td>
 <td>
 Importing Code into a Vitis Model Composer HDL Design
@@ -51,7 +52,7 @@ Importing Code into a Vitis Model Composer HDL Design
 
 <tr>
 <td>
-<a href="./HDL_Library/Lab3/README.html">Lab 3</a>
+<a href="matlab:XmcExampleApi.getExample('Lab3')">Lab 3</a>
 </td>
 <td>
 Timing and Resource Analysis.
@@ -60,7 +61,7 @@ Timing and Resource Analysis.
 
 <tr> 
 <td>
-<a href="./HDL_Library/Lab4/README.html">Lab 4</a>
+<a href="matlab:XmcExampleApi.getExample('Lab4')">Lab 4</a>
 </td>
 <td>
 Working with Multi-Rate Systems
@@ -69,7 +70,7 @@ Working with Multi-Rate Systems
 
 <tr> 
 <td>
-<a href="./HDL_Library/Lab5/README.html">Lab 5</a>
+<a href="matlab:XmcExampleApi.getExample('Lab5')">Lab 5</a>
 </td>
 <td>
 Using AXI Interfaces and IP Integrator
@@ -78,7 +79,7 @@ Using AXI Interfaces and IP Integrator
 
 <tr> 
 <td>
-<a href="./HDL_Library/Lab6/README.html">Lab 6</a>
+<a href="matlab:XmcExampleApi.getExample('Lab6')">Lab 6</a>
 </td>
 <td>
 Using a Vitis Model Composer HDL Design with a Zynq-7000 SoC
@@ -91,7 +92,7 @@ Using a Vitis Model Composer HDL Design with a Zynq-7000 SoC
 
 <tr>
 <td>
-<a href="./HLS_Library/Lab1/README.html">Lab 1</a>
+<a href="matlab:XmcExampleApi.getExample('HLS_Lab1')">Lab 1</a>
 </td>
 <td>
 Introduction to Model Composer HLS Library
@@ -100,7 +101,7 @@ Introduction to Model Composer HLS Library
 
 <tr>
 <td>
-<a href="./HLS_Library/Lab2/README.html">Lab 2</a>
+<a href="matlab:XmcExampleApi.getExample('HLS_Lab2')">Lab 2</a>
 </td>
 <td>
 Importing Code into Vitis Model Composer
@@ -109,7 +110,7 @@ Importing Code into Vitis Model Composer
 
 <tr>
 <td>
-<a href="./HLS_Library/Lab3/README.html">Lab 3</a>
+<a href="matlab:XmcExampleApi.getExample('HLS_Lab3')">Lab 3</a>
 </td>
 <td>
 Debugging Imported C/C++-Code Using GDB Debugger
@@ -118,7 +119,7 @@ Debugging Imported C/C++-Code Using GDB Debugger
 
 <tr> 
 <td>
-<a href="./HLS_Library/Lab4/README.html">Lab 4</a>
+<a href="matlab:XmcExampleApi.getExample('HLS_Lab4')">Lab 4</a>
 </td>
 <td>
 Automatic Code Generation
@@ -131,7 +132,7 @@ Automatic Code Generation
 
 <tr>
 <td>
-<a href="./AIEngine_Library/01-Introduction_to_Versal_and_AI_Engines/README.html">Lab 1</a>
+<a href="matlab:XmcExampleApi.getExample('01-Introduction_to_Versal_and_AI_Engines')">Lab 1</a>
 </td>
 <td>
 Introduction to Versal Adaptive SoC and AI Engines
@@ -140,7 +141,7 @@ Introduction to Versal Adaptive SoC and AI Engines
 
 <tr>
 <td>
-<a href="./AIEngine_Library/02-Build_and_Simulate_AI_Engine_Design/README.html">Lab 2</a>
+<a href="matlab:XmcExampleApi.getExample('02-Build_and_Simulate_AI_Engine_Design')">Lab 2</a>
 </td>
 <td>
 Build and Simulate an AI Engine Design
@@ -149,7 +150,7 @@ Build and Simulate an AI Engine Design
 
 <tr>
 <td>
-<a href="./AIEngine_Library/03-Import_Custom_AI_Engine_Code/README.html">Lab 3</a>
+<a href="matlab:XmcExampleApi.getExample('03-Import_Custom_AI_Engine_Code')">Lab 3</a>
 </td>
 <td>
 Import Custom AI Engine Code
@@ -158,7 +159,7 @@ Import Custom AI Engine Code
 
 <tr>
 <td>
-<a href="./AIEngine_Library/04-AI_Engine_Code_Generation/README.html">Lab 4</a>
+<a href="matlab:XmcExampleApi.getExample('04-AI_Engine_Code_Generation')">Lab 4</a>
 </td>
 <td>
 AI Engine Code Generation and Cycle-Approximate Simulation
@@ -167,7 +168,7 @@ AI Engine Code Generation and Cycle-Approximate Simulation
 
 <tr>
 <td>
-<a href="./AIEngine_Library/05-Vitis_Analyzer/README.html">Lab 5</a>
+<a href="matlab:XmcExampleApi.getExample('05-Vitis_Analyzer')">Lab 5</a>
 </td>
 <td>
 View AI Engine Designs in Vitis Analyzer
@@ -176,7 +177,7 @@ View AI Engine Designs in Vitis Analyzer
 
 <tr>
 <td>
-<a href="./AIEngine_Library/06-Hardware_Validation/README.html">Lab 6</a>
+<a href="matlab:XmcExampleApi.getExample('06-Hardware_Validation')">Lab 6</a>
 </td>
 <td>
 Hardware Validation of Versal Adaptive SoC Design

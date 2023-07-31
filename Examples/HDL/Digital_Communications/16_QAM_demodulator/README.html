@@ -1,3 +1,4 @@
+<!--Hash:c54fb210630627cb72fe6da7cb38db47b8e999c1-->
 
 <html>
 <head>
@@ -13,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('16_QAM_demodulator');"
 
 document.location=commandURI
 }

@@ -1,3 +1,4 @@
+<!--Hash:351530016f879fc5adb06a726858c2af7dd3ce1c-->
 
 <html>
 <head>
@@ -13,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('Symmetric_Interpolation_FIR');"
 
 document.location=commandURI
 }

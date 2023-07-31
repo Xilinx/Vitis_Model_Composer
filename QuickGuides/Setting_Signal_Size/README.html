@@ -1,3 +1,4 @@
+<!--Hash:3c8a541bf119602ebff381f2f51db965696208c2-->
 
     <html>
       <head>
@@ -11,7 +12,7 @@
 <h1 id="what-is-signal-size">What is "Signal Size"?</h1>
 <p>Signal Size is a block mask property associated with each stream or cascade output of an imported AI Engine block. This property is used only in Simulink simulation and is not reflected in the generated code. This value is always set as samples and not bytes. Here is an example of the block mask for a kernel with a stream output.</p>
 <p><img src="images/mask.png" alt="" /></p>
-<p>In the example above, the stream output of this block will be a <a href="../Variable_Size_Signals/README.html">variable-size signal</a> with a maximum size of 4 samples as shown below:</p>
+<p>In the example above, the stream output of this block will be a <a href="matlab:XmcExampleApi.getExample('Variable_Size_Signals')">variable-size signal</a> with a maximum size of 4 samples as shown below:</p>
 <p><img src="images/block_with_output_stream.png" alt="" /></p>
 <h1 id="how-to-set-signal-size">How to set "Signal Size"?</h1>
 <h1 id="example-1">Example 1</h1>
@@ -44,9 +45,9 @@ This will reduce the overhead of calling the block many times and will increase 
 For example if you feed the kernel with 16 samples, you would want to set the output signal size to 16 to both have a full variable-size signal <br />
 (in case you want to view the signal on a scope) and avoid memory overflows.</p>
 <h1 id="conclusions">Conclusions</h1>
-<p><img width="18" height="18" src="../../Images/bulb.png"> Inspect the AI Engine kernel code to decide on the size of the "Signal Size" property.</p>
-<p><img width="18" height="18" src="../../Images/bulb.png"> If possible avoid having a variable-size signal that is not full.</p>
-<p><img width="18" height="18" src="../../Images/bulb.png"> If you set the "Signal Size" parameter to smaller than what it should be, you may encounter buffer overflow. </p>
+<p><img width="18" height="18" src="../Images/bulb.png"> Inspect the AI Engine kernel code to decide on the size of the "Signal Size" property.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> If possible avoid having a variable-size signal that is not full.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> If you set the "Signal Size" parameter to smaller than what it should be, you may encounter buffer overflow. </p>
 
         </div>
         <style type='text/css'>body {

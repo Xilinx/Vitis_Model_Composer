@@ -1,3 +1,4 @@
+<!--Hash:e7d2ca15488026d3144b11756c0ea32a4af7fbad-->
 
 <html>
 <head>
@@ -13,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('AIE_HDL_cosim');"
 
 document.location=commandURI
 }
@@ -26,8 +27,8 @@ document.location=commandURI
 <p>In this example, we are connecting an AI Engine block to an <em>AXI FIFO</em> HDL block. Note that the output of the AI Engine <br />
 block is a vector of size 8 with and a period of 8 (i.e. one sample per second).</p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> The inputs to the HDL domain and the outputs of the HDL domain are always scaler signals. </p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> When the output of the AI Engine block is a vector, the HDL domain must be sampled at a higher sampling rate or else the internal memory of the AIE to HDL block will overflow.<br />
+<p><img width="18" height="18" src="../Images/bulb.png"> The inputs to the HDL domain and the outputs of the HDL domain are always scaler signals. </p>
+<p><img width="18" height="18" src="../Images/bulb.png"> When the output of the AI Engine block is a vector, the HDL domain must be sampled at a higher sampling rate or else the internal memory of the AIE to HDL block will overflow.<br />
 In this example, the HDL domain is sampled at 8 times higher than the AI Engine domain. The sampling time of the HDL domain is set at the <em>Gateway In</em> blocks. Note that the <em>Output Sample Time</em> field of the <em>AIE to HDL</em> block is set to <em>Inherit from tready</em>. </p>
 <p><img src="images/screen_shot.PNG" alt="" /></p>
 <hr />
