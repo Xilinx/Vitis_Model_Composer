@@ -1,4 +1,4 @@
-<!--Hash:621a58d77f5bed6313b808f9b9165390fe9bbc7-->
+
 
 <html>
 <head>
@@ -14,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:chdir('" + directory + "');"
+commandURI="matlab:XmcExampleApi.changeDirectory('Tx_chain_200MHz');"
 
 document.location=commandURI
 }
