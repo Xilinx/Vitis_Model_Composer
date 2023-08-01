@@ -103,7 +103,7 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <p>For a more detailed description of the implementation, refer to <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/AI_Engine_Development/Design_Tutorials/04-Polyphase-Channelizer">Polyphase Channelizer</a> in <a href="https://github.com/Xilinx/Vitis-Tutorials">Vitis-Tutorials</a>. </p>
 <p>The remainder of this example will focus on how to bring the polyphase channelizer implementation into Vitis Model Composer and simulate it.</p>
 <h2 id="matlab-model">MATLAB Model</h2>
-<p>The figure below shows a system model of the polyphase channelizer built in MATLAB and encapsulated in a MATLAB app. This provides a comprehensive golden model of the channelizer algorithms and illustrates the relationships between the various system parameters. The model was built to support a broader range of parameter settings than the actual Versal design:</p>
+<p>The figure below shows a system model of the polyphase channelizer built in MATLAB and encapsulated in a MATLAB app. This provides a comprehensive golden model of the channelizer algorithms and illustrates the relationships between the various system parameters. The model was built to support a different, broader range of parameter settings than the actual Versal design:</p>
 <ul>
 <li>The model supports two different input sampling rates, Fs = 10.5 Gsps and Fs = 20.5 Gsps.</li>
 <li>The number of channels M may be set to 16, 32, 64, or 128 using a dial.</li>
@@ -198,15 +198,33 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <li><p>Click the code section labeled <em>Check Simulink Outputs against MATLAB Reference</em>, then click <strong>Run Section</strong>.</p></li>
 </ol>
 <p>This section compares the Simulink output and MATLAB reference for each stream. If the outputs match, this means the Simulink model (and therefore the AI Engine and HLS code implementations) match the MATLAB golden reference.</p>
-<h2 id="imageschannel1png-imageschannel2png"><img src="images/Channel1.png" alt="" /> <img src="images/Channel2.png" alt="" /></h2>
+<p><img src="images/Channel1.png" alt="" /> <img src="images/Channel2.png" alt="" /></p>
+<h2 id="estimating-throughput">Estimating Throughput</h2>
+<p>Vitis Model Composer can call <code>aiesimulator</code> to simulate and plot the estimated throughput of the design.</p>
+<ol>
+<li><p>Open the <code>Channelizer.slx</code> model.</p></li>
+<li><p>On the top level of the model, click the <strong>Model Composer Hub</strong> block.</p></li>
+<li><p>Select the <strong>AIE</strong> subsystem and ensure that the settings are as follows, especially that <strong>Plot AIE Simulation Output</strong> is enabled. Also note the AIE Compiler command line option to specify the PL clock rate. This information is used by the <code>aiesimulator</code> when calculating timing.</p></li>
+</ol>
+<p><img src="images/VMCHub1.png" alt="" /></p>
+<ol start="4">
+<li>Select the <strong>Channelizer</strong> subsystem and ensure that the settings are as follows:</li>
+</ol>
+<p><img src="images/VMCHub2.png" alt="" /></p>
+<ol start="5">
+<li>Click <strong>Generate</strong>.</li>
+</ol>
+<p>After code generation, AIE simulation is performed. This is a cycle-approximate simulation that can be used to estimate throughput. The results are displayed in the Simulation Data Inspector. Note that the throughput on each of the 8 output streams is approximately 1250 MSPS. It takes 2 clock cycles for the 8 output streams to produce a 16-point DFT output. Therefore, the DFT updates at a rate of 625 MHz, for which the channelizer was designed. </p>
+<h2 id="imagesthroughputpng"><img src="images/Throughput.png" alt="" /></h2>
 <h2 id="conclusion">Conclusion</h2>
 <p>This example showcased the following capabilities of Vitis Model Composer for Versal development:</p>
 <ol>
 <li>Import AI Engine and HLS source code into Vitis Model Composer.</li>
 <li>Model data exchange between AI Engine and PL in simulation.</li>
 <li>Simulate AI Engine and PL together in a single design.</li>
+<li>Compare a Versal hardware code implementation to a MATLAB golden reference.</li>
 </ol>
-<h2 id="4-compare-a-versal-hardware-code-implementation-to-a-matlab-golden-reference">4. Compare a Versal hardware code implementation to a MATLAB golden reference.</h2>
+<hr />
 <h2 id="references">References</h2>
 <p>[<a href="https://ieeexplore.ieee.org/document/1193158" title="Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications, F.J. Harris et. al.">1</a>] F.J. Harris et. al., "<a href="https://ieeexplore.ieee.org/document/1193158">Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications</a>", IEEE Transactions on Microwave Theory and Techniques, Vol. 51, No. 4, April 2003.</p>
 <hr />

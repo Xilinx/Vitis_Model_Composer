@@ -56,7 +56,7 @@ The remainder of this example will focus on how to bring the polyphase channeliz
 
 ## MATLAB Model
 
-The figure below shows a system model of the polyphase channelizer built in MATLAB and encapsulated in a MATLAB app. This provides a comprehensive golden model of the channelizer algorithms and illustrates the relationships between the various system parameters. The model was built to support a broader range of parameter settings than the actual Versal design:
+The figure below shows a system model of the polyphase channelizer built in MATLAB and encapsulated in a MATLAB app. This provides a comprehensive golden model of the channelizer algorithms and illustrates the relationships between the various system parameters. The model was built to support a different, broader range of parameter settings than the actual Versal design:
 * The model supports two different input sampling rates, Fs = 10.5 Gsps and Fs = 20.5 Gsps.
 * The number of channels M may be set to 16, 32, 64, or 128 using a dial.
 * The output oversampling ratio P/Q may be set to 1/1, 2/1, 4/3, or 8/7 using the appropriate button.
@@ -180,7 +180,30 @@ This executes the next step of the testbench, which is to run the Simulink model
 This section compares the Simulink output and MATLAB reference for each stream. If the outputs match, this means the Simulink model (and therefore the AI Engine and HLS code implementations) match the MATLAB golden reference.
 
 ![](images/Channel1.png) ![](images/Channel2.png)
+
+## Estimating Throughput
+
+Vitis Model Composer can call `aiesimulator` to simulate and plot the estimated throughput of the design.
+
+1. Open the `Channelizer.slx` model.
+
+2. On the top level of the model, click the **Model Composer Hub** block.
+
+3. Select the **AIE** subsystem and ensure that the settings are as follows, especially that **Plot AIE Simulation Output** is enabled. Also note the AIE Compiler command line option to specify the PL clock rate. This information is used by the `aiesimulator` when calculating timing.
+
+![](images/VMCHub1.png)
+
+4. Select the **Channelizer** subsystem and ensure that the settings are as follows:
+
+![](images/VMCHub2.png)
+
+5. Click **Generate**.
+
+After code generation, AIE simulation is performed. This is a cycle-approximate simulation that can be used to estimate throughput. The results are displayed in the Simulation Data Inspector. Note that the throughput on each of the 8 output streams is approximately 1250 MSPS. It takes 2 clock cycles for the 8 output streams to produce a 16-point DFT output. Therefore, the DFT updates at a rate of 625 MHz, for which the channelizer was designed. 
+
+![](images/Throughput.png)
 ---
+
 ## Conclusion
 
 This example showcased the following capabilities of Vitis Model Composer for Versal development:
@@ -189,6 +212,7 @@ This example showcased the following capabilities of Vitis Model Composer for Ve
 2. Model data exchange between AI Engine and PL in simulation.
 3. Simulate AI Engine and PL together in a single design.
 4. Compare a Versal hardware code implementation to a MATLAB golden reference.
+
 ---
 ## References
 
