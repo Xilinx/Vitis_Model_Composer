@@ -23,8 +23,7 @@ document.location=commandURI
 <button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
               
 </html>
-<p>test<br />
-<strong><em>Version: Vitis Model Composer 2023.1</em></strong></p>
+<p><strong><em>Version: Vitis Model Composer 2023.1</em></strong></p>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#introduction">Introduction</a></li>
@@ -166,7 +165,7 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <li>Cyclic Shift Buffer</li>
 </ul>
 <p>These functions are explained in greater detail in <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/AI_Engine_Development/Design_Tutorials/04-Polyphase-Channelizer">Polyphase Channelizer</a>.</p>
-<p>These blocks are implemented in PL using HLS @ 312.5 MHz. With 4 samples transferred in each PL clock cycle, the AI Engine is able to operate at a rate of 1250 MHz.</p>
+<p>These blocks are implemented in PL using HLS @ 625 MHz. With 2 samples transferred in each PL clock cycle, the AI Engine is able to operate at a rate of 1250 MHz.</p>
 <p>Each function is imported into Vitis Model Composer using the <strong>HLS Kernel</strong> block.</p>
 <ol start="8">
 <li><p>Return up to the <strong>Channelizer</strong> subsystem.</p></li>
