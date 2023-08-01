@@ -43,7 +43,7 @@ steadily as the capabilities of RF-DAC and RF-ADC technology advances, making th
 gate arrays (FPGAs). This example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices. </p>
 <p>To aid in simulation and verification, the AI Engine and Programmable Logic parts of the design are brought into Vitis Model Composer, which enables functional simulation of the AI Engine and PL components together.</p>
 <h2 id="channelizer-requirements">Channelizer Requirements</h2>
-<p>The table below shows the system requirements for the polyphase channelizer. The input sampling rate is 10.5 Gsps. The design supports M=16 channels with each one supporting 10.5G / 16 = 656.25 MHz of bandwidth. The channelizer employs a polyphase technique as outlined in [<a href="https://ieeexplore.ieee.org/document/1193158" title="Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications, F.J. Harris et. al.">1</a>] to achieve an oversampled output at a rate of P/Q = 8/7 times the channel bandwidth, or 656.25 * 8/7 = 750 Msps. The prototype filter used by the channelizer uses K=8 taps per phase, leading to a total of 16 x 8 = 128 taps overall.</p>
+<p>The table below shows the system requirements for the polyphase channelizer. The input sampling rate is 8.75 Gsps. The design supports M=16 channels with each one supporting 8.75G / 16 = 546.8765 MHz of bandwidth. The channelizer employs a polyphase technique as outlined in [<a href="https://ieeexplore.ieee.org/document/1193158" title="Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications, F.J. Harris et. al.">1</a>] to achieve an oversampled output at a rate of P/Q = 8/7 times the channel bandwidth, or 546.8765 * 8/7 = 625 Msps. The prototype filter used by the channelizer uses K=8 taps per phase, leading to a total of 16 x 8 = 128 taps overall.</p>
 <table>
 <thead>
 <tr>
@@ -55,7 +55,7 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <tbody>
 <tr>
 <td>Input Sampling Rate (Fs)</td>
-<td>10.5</td>
+<td>8.75</td>
 <td>Gsps</td>
 </tr>
 <tr>
@@ -75,12 +75,12 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 </tr>
 <tr>
 <td>Channel Bandwidth</td>
-<td>656.25</td>
+<td>546.8765</td>
 <td>MHz</td>
 </tr>
 <tr>
 <td>Output Sampling Rate</td>
-<td>750</td>
+<td>625</td>
 <td>Msps</td>
 </tr>
 <tr>

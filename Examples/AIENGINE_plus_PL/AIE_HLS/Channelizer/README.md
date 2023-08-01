@@ -1,5 +1,5 @@
 # Polyphase Channelizer
-test
+
 ***Version: Vitis Model Composer 2023.1***
 
 ## Table of Contents
@@ -25,16 +25,16 @@ To aid in simulation and verification, the AI Engine and Programmable Logic part
 
 ## Channelizer Requirements
 
-The table below shows the system requirements for the polyphase channelizer. The input sampling rate is 10.5 Gsps. The design supports M=16 channels with each one supporting 10.5G / 16 = 656.25 MHz of bandwidth. The channelizer employs a polyphase technique as outlined in [[1]] to achieve an oversampled output at a rate of P/Q = 8/7 times the channel bandwidth, or 656.25 * 8/7 = 750 Msps. The prototype filter used by the channelizer uses K=8 taps per phase, leading to a total of 16 x 8 = 128 taps overall.
+The table below shows the system requirements for the polyphase channelizer. The input sampling rate is 8.75 Gsps. The design supports M=16 channels with each one supporting 8.75G / 16 = 546.8765 MHz of bandwidth. The channelizer employs a polyphase technique as outlined in [[1]] to achieve an oversampled output at a rate of P/Q = 8/7 times the channel bandwidth, or 546.8765 * 8/7 = 625 Msps. The prototype filter used by the channelizer uses K=8 taps per phase, leading to a total of 16 x 8 = 128 taps overall.
 
 |Parameter|Value|Units|
 |---|---|---|
-| Input Sampling Rate (Fs) | 10.5 | Gsps |
+| Input Sampling Rate (Fs) | 8.75 | Gsps |
 | # of Channels (M) | 16 | channels |
 | Interpolation Factor (P)| 8 | n/a |
 | Decimation Factor (Q) | 7 | n/a |
-| Channel Bandwidth | 656.25 | MHz |
-| Output Sampling Rate | 750 | Msps |
+| Channel Bandwidth | 546.8765 | MHz |
+| Output Sampling Rate | 625 | Msps |
 | # of taps per phase (K) | 8 | n/a |
 
 *Polyphase Channelizer System Requirements.*
@@ -137,7 +137,7 @@ The PL portion of the polyphase channelizer design contains 3 IPs that perform t
 
 These functions are explained in greater detail in [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/AI_Engine_Development/Design_Tutorials/04-Polyphase-Channelizer).
 
-These blocks are implemented in PL using HLS @ 312.5 MHz. With 4 samples transferred in each PL clock cycle, the AI Engine is able to operate at a rate of 1250 MHz.
+These blocks are implemented in PL using HLS @ 625 MHz. With 2 samples transferred in each PL clock cycle, the AI Engine is able to operate at a rate of 1250 MHz.
 
 Each function is imported into Vitis Model Composer using the **HLS Kernel** block.
 

@@ -115,5 +115,3 @@ This design highlights best practices for working with multirate designs.  The e
  
 </table>
 
-# More AI Engine Examples
-For more examples with AI Engine and Programmable Logic click [here](../AIENGINE). 
