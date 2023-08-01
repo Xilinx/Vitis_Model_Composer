@@ -1,3 +1,4 @@
+<!--Hash:ebf683a9da18cd3057f6356719f825d8bc6d3aa3-->
 
 <html>
 <head>
@@ -13,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('DDS_Compiler');"
 
 document.location=commandURI
 }

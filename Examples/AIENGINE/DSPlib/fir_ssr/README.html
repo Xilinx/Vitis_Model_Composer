@@ -1,3 +1,4 @@
+<!--Hash:45345254a30194efce27a8292e7daa8bc29f89fd-->
 
 <html>
 <head>
@@ -13,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('fir_ssr');"
 
 document.location=commandURI
 }
@@ -32,16 +33,16 @@ document.location=commandURI
 <p><img height="200" src="./Images/fir.png"></p>
 <p><img height="300" src="./Images/throughput.png"></p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> To see the estimated throughput, we are setting the Vitis Model Composer Hub block as below before pushing the <em>Generate</em> button:</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> To see the estimated throughput, we are setting the Vitis Model Composer Hub block as below before pushing the <em>Generate</em> button:</p>
 <p><img height="300" src="./Images/hub.png"></p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> The input data is split over four ports, where each successive sample is sent to a different input port in a round-robin fashion.</p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> The number of AI Engines used is equal to SSR^2 * CASC_LEN (in this case 4^2*1=16)</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> The input data is split over four ports, where each successive sample is sent to a different input port in a round-robin fashion.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> The number of AI Engines used is equal to SSR^2 * CASC_LEN (in this case 4^2*1=16)</p>
 <p><img src="Images/screen_shot.png" alt="" /></p>
 <h2 id="related-examples">Related Examples</h2>
 <ul>
-<li><a href="../../SingleStreamSSR_FIR/README.html">This</a> is another example of a high throughput filter built from scratch instead of using the block from the Xilinx AI Engine DSP library.</li>
+<li><a href="matlab:XmcExampleApi.getExample('SingleStreamSSR_FIR')">This</a> is another example of a high throughput filter built from scratch instead of using the block from the Xilinx AI Engine DSP library.</li>
 </ul>
-<h2 id="-thisaiengine_plus_plaie_hdlsinglestreamssr_fir_withplreadmemd-is-an-example-of-an-ai-engineprogrammable-logic-heterogeneous-design-where-the-ai-engine-is-also-built-from-scratch-instead-of-using-the-block-from-the-xilinx-ai-engine-dsp-library-along-with-hdl-blocks-feeding-the-ai-engine-array-and-receiving-the-filtered-data-back-from-the-array">* <a href="../../../AIENGINE_plus_PL/AIE_HDL/SingleStreamSSR_FIR_withPL/README.html">This</a> is an example of an AI Engine/Programmable Logic heterogeneous design where the AI Engine is also built from scratch instead of using the block from the Xilinx AI Engine DSP library along with HDL blocks feeding the AI Engine array and receiving the filtered data back from the array.</h2>
+<h2 id="-thisaiengine_plus_plaie_hdlsinglestreamssr_fir_withplreadmemd-is-an-example-of-an-ai-engineprogrammable-logic-heterogeneous-design-where-the-ai-engine-is-also-built-from-scratch-instead-of-using-the-block-from-the-xilinx-ai-engine-dsp-library-along-with-hdl-blocks-feeding-the-ai-engine-array-and-receiving-the-filtered-data-back-from-the-array">* <a href="matlab:XmcExampleApi.getExample('SingleStreamSSR_FIR_withPL')">This</a> is an example of an AI Engine/Programmable Logic heterogeneous design where the AI Engine is also built from scratch instead of using the block from the Xilinx AI Engine DSP library along with HDL blocks feeding the AI Engine array and receiving the filtered data back from the array.</h2>
 <p>Copyright 2022 Xilinx</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />

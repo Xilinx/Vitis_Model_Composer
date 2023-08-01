@@ -1,3 +1,4 @@
+<!--Hash:fb33213c95c13f9c46bda6c307123d5f7b6cfb0b-->
 
 <html>
 <head>
@@ -13,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('AIE_HDL_multirate');"
 
 document.location=commandURI
 }
@@ -165,13 +166,13 @@ document.location=commandURI
 <hr />
 <h2 id="conclusion">Conclusion</h2>
 <p>If a Vitis Model Composer model with AIE and PL blocks has multiple clock domains then there are some guidelines that should be followed for structuring and constraining the design:</p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> The first requirement is to partition the PL portion of the design into a single subsystem from the top-level.</p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> The second structural requirement is that within the PL subsystem additional subsystems should be generated such that each subsystem contains a single clock domain.</p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> Once the multiple rates are established within PL subsystems you must constrain the clocks for those domains using the Vitis Model Composer Hub block.</p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> Multirate designs simulate in the same manner as single rate designs.</p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> The scope will not display vectorized AIE paths in a usable format unless you either change the default scope input processing to frame-based or use a Simulink Unbuffer block to convert the signal before connecting to the scope.</p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> The spectrum analyzer can process the vectorized format of the AIE signal paths.</p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> The Simulink option to view sample times is useful for interpreting clock domains within a model.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> The first requirement is to partition the PL portion of the design into a single subsystem from the top-level.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> The second structural requirement is that within the PL subsystem additional subsystems should be generated such that each subsystem contains a single clock domain.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> Once the multiple rates are established within PL subsystems you must constrain the clocks for those domains using the Vitis Model Composer Hub block.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> Multirate designs simulate in the same manner as single rate designs.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> The scope will not display vectorized AIE paths in a usable format unless you either change the default scope input processing to frame-based or use a Simulink Unbuffer block to convert the signal before connecting to the scope.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> The spectrum analyzer can process the vectorized format of the AIE signal paths.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> The Simulink option to view sample times is useful for interpreting clock domains within a model.</p>
 <hr />
 <hr />
 <p>Copyright 2023 AMD</p>

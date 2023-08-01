@@ -1,3 +1,4 @@
+<!--Hash:8ed68f59962331726131509d768cf846d449d21e-->
 
 <html>
 <head>
@@ -13,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('Filtering_in_frequency_domain');"
 
 document.location=commandURI
 }

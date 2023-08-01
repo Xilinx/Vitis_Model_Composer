@@ -1,3 +1,4 @@
+<!--Hash:988292a37ee8f6f714090cb99a2b8f951d8f405d-->
 
 <html>
 <head>
@@ -13,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('DualStreamSSR_FIR');"
 
 document.location=commandURI
 }
@@ -27,7 +28,7 @@ document.location=commandURI
 FIR filter to process a 16 GSPS stream built with 64 AI Engine kernels. In addition, we compare the output of the AI Engine design with a Simulink FIR filter block that we consider as our golden reference.</p>
 <p>For more details on how to build this design and some of the theoretical aspect of it click <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2021.1/AI_Engine_Development/Design_Tutorials/02-super_sampling_rate_fir/DualStreamSSR">here</a>.</p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
-<p><img width="18" height="18" src="../../../Images/bulb.png"> In the Model Composer Hub block select <em>"Plot AIE Simulation output and estimate throughput"</em> to see the throughput for each output signal after running aiesimulation. <br />
+<p><img width="18" height="18" src="../Images/bulb.png"> In the Model Composer Hub block select <em>"Plot AIE Simulation output and estimate throughput"</em> to see the throughput for each output signal after running aiesimulation. <br />
 <br/><br/><br />
 <br/><br/></p>
 <p><img src="Images/DualStreamSSR.PNG" alt="" /></p>

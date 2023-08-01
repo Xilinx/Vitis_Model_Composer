@@ -1,3 +1,4 @@
+<!--Hash:14f7ffe882b7e494591d74151888d633a6b9799c-->
 
 <html>
 <head>
@@ -13,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('Synthesizable_Mcode_impl_of_Fibonacci_Num_Gen');"
 
 document.location=commandURI
 }
