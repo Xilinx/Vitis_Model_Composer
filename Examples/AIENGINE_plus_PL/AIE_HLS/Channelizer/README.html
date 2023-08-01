@@ -1,25 +1,28 @@
 
-    <html>
-      <head>
-        <title></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-      </head>
-      <body>
-        <div id='content'>
-    <!--
-Copyright (C) 2023, Advanced Micro Devices, Inc. All rights reserved.
-SPDX-License-Identifier: MIT
-Author: Rob Graessle
--->
-<table class="sphinxhide" width="100%">
- <tr width="100%">
-    <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
-    <a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
-    <a href="https://www.xilinx.com/products/design-tools/vitis/vitis-model-composer.html">See Vitis™ Model Composer Development Environment on xilinx.com</a>
-    </td>
- </tr>
-</table>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
 <h1 id="polyphase-channelizer">Polyphase Channelizer</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
+              
+</html>
 <p><strong><em>Version: Vitis Model Composer 2023.1</em></strong></p>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
@@ -39,7 +42,7 @@ steadily as the capabilities of RF-DAC and RF-ADC technology advances, making th
 gate arrays (FPGAs). This example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices. </p>
 <p>To aid in simulation and verification, the AI Engine and Programmable Logic parts of the design are brought into Vitis Model Composer, which enables functional simulation of the AI Engine and PL components together.</p>
 <h2 id="channelizer-requirements">Channelizer Requirements</h2>
-<p>The table below shows the system requirements for the polyphase channelizer. The input sampling rate is 10.5 Gsps. The design supports M=16 channels with each one supporting 10.5G / 16 = 656.25 MHz of bandwidth. The channelizer employs a polyphase technique as outlined in [<a href="https://ieeexplore.ieee.org/document/1193158" title="Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications, F.J. Harris et. al.">1</a>] to achieve an oversampled output at a rate of P/Q = 8/7 times the channel bandwidth, or 656.25 * 8/7 = 750 Msps. The prototype filter used by the channelizer uses K=8 taps per phase, leading to a total of 16 x 8 = 128 taps overall.</p>
+<p>The table below shows the system requirements for the polyphase channelizer. The input sampling rate is 8.75 Gsps. The design supports M=16 channels with each one supporting 8.75G / 16 = 546.8765 MHz of bandwidth. The channelizer employs a polyphase technique as outlined in [<a href="https://ieeexplore.ieee.org/document/1193158" title="Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications, F.J. Harris et. al.">1</a>] to achieve an oversampled output at a rate of P/Q = 8/7 times the channel bandwidth, or 546.8765 * 8/7 = 625 Msps. The prototype filter used by the channelizer uses K=8 taps per phase, leading to a total of 16 x 8 = 128 taps overall.</p>
 <table>
 <thead>
 <tr>
@@ -51,7 +54,7 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <tbody>
 <tr>
 <td>Input Sampling Rate (Fs)</td>
-<td>10.5</td>
+<td>8.75</td>
 <td>Gsps</td>
 </tr>
 <tr>
@@ -71,12 +74,12 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 </tr>
 <tr>
 <td>Channel Bandwidth</td>
-<td>656.25</td>
+<td>546.8765</td>
 <td>MHz</td>
 </tr>
 <tr>
 <td>Output Sampling Rate</td>
-<td>750</td>
+<td>625</td>
 <td>Msps</td>
 </tr>
 <tr>
@@ -100,7 +103,7 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <p>For a more detailed description of the implementation, refer to <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/AI_Engine_Development/Design_Tutorials/04-Polyphase-Channelizer">Polyphase Channelizer</a> in <a href="https://github.com/Xilinx/Vitis-Tutorials">Vitis-Tutorials</a>. </p>
 <p>The remainder of this example will focus on how to bring the polyphase channelizer implementation into Vitis Model Composer and simulate it.</p>
 <h2 id="matlab-model">MATLAB Model</h2>
-<p>The figure below shows a system model of the polyphase channelizer built in MATLAB and encapsulated in a MATLAB app. This provides a comprehensive golden model of the channelizer algorithms and illustrates the relationships between the various system parameters. The model was built to support a broader range of parameter settings than the actual Versal design:</p>
+<p>The figure below shows a system model of the polyphase channelizer built in MATLAB and encapsulated in a MATLAB app. This provides a comprehensive golden model of the channelizer algorithms and illustrates the relationships between the various system parameters. The model was built to support a different, broader range of parameter settings than the actual Versal design:</p>
 <ul>
 <li>The model supports two different input sampling rates, Fs = 10.5 Gsps and Fs = 20.5 Gsps.</li>
 <li>The number of channels M may be set to 16, 32, 64, or 128 using a dial.</li>
@@ -162,7 +165,7 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <li>Cyclic Shift Buffer</li>
 </ul>
 <p>These functions are explained in greater detail in <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/AI_Engine_Development/Design_Tutorials/04-Polyphase-Channelizer">Polyphase Channelizer</a>.</p>
-<p>These blocks are implemented in PL using HLS @ 312.5 MHz. With 4 samples transferred in each PL clock cycle, the AI Engine is able to operate at a rate of 1250 MHz.</p>
+<p>These blocks are implemented in PL using HLS @ 625 MHz. With 2 samples transferred in each PL clock cycle, the AI Engine is able to operate at a rate of 1250 MHz.</p>
 <p>Each function is imported into Vitis Model Composer using the <strong>HLS Kernel</strong> block.</p>
 <ol start="8">
 <li><p>Return up to the <strong>Channelizer</strong> subsystem.</p></li>
@@ -195,15 +198,33 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <li><p>Click the code section labeled <em>Check Simulink Outputs against MATLAB Reference</em>, then click <strong>Run Section</strong>.</p></li>
 </ol>
 <p>This section compares the Simulink output and MATLAB reference for each stream. If the outputs match, this means the Simulink model (and therefore the AI Engine and HLS code implementations) match the MATLAB golden reference.</p>
-<h2 id="imageschannel1png-imageschannel2png"><img src="images/Channel1.png" alt="" /> <img src="images/Channel2.png" alt="" /></h2>
+<p><img src="images/Channel1.png" alt="" /> <img src="images/Channel2.png" alt="" /></p>
+<h2 id="estimating-throughput">Estimating Throughput</h2>
+<p>Vitis Model Composer can call <code>aiesimulator</code> to simulate and plot the estimated throughput of the design.</p>
+<ol>
+<li><p>Open the <code>Channelizer.slx</code> model.</p></li>
+<li><p>On the top level of the model, click the <strong>Model Composer Hub</strong> block.</p></li>
+<li><p>Select the <strong>AIE</strong> subsystem and ensure that the settings are as follows, especially that <strong>Plot AIE Simulation Output</strong> is enabled. Also note the AIE Compiler command line option to specify the PL clock rate. This information is used by the <code>aiesimulator</code> when calculating timing.</p></li>
+</ol>
+<p><img src="images/VMCHub1.png" alt="" /></p>
+<ol start="4">
+<li>Select the <strong>Channelizer</strong> subsystem and ensure that the settings are as follows:</li>
+</ol>
+<p><img src="images/VMCHub2.png" alt="" /></p>
+<ol start="5">
+<li>Click <strong>Generate</strong>.</li>
+</ol>
+<p>After code generation, AIE simulation is performed. This is a cycle-approximate simulation that can be used to estimate throughput. The results are displayed in the Simulation Data Inspector. Note that the throughput on each of the 8 output streams is approximately 1250 MSPS. It takes 2 clock cycles for the 8 output streams to produce a 16-point DFT output. Therefore, the DFT updates at a rate of 625 MHz, for which the channelizer was designed. </p>
+<h2 id="imagesthroughputpng"><img src="images/Throughput.png" alt="" /></h2>
 <h2 id="conclusion">Conclusion</h2>
 <p>This example showcased the following capabilities of Vitis Model Composer for Versal development:</p>
 <ol>
 <li>Import AI Engine and HLS source code into Vitis Model Composer.</li>
 <li>Model data exchange between AI Engine and PL in simulation.</li>
 <li>Simulate AI Engine and PL together in a single design.</li>
+<li>Compare a Versal hardware code implementation to a MATLAB golden reference.</li>
 </ol>
-<h2 id="4-compare-a-versal-hardware-code-implementation-to-a-matlab-golden-reference">4. Compare a Versal hardware code implementation to a MATLAB golden reference.</h2>
+<hr />
 <h2 id="references">References</h2>
 <p>[<a href="https://ieeexplore.ieee.org/document/1193158" title="Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications, F.J. Harris et. al.">1</a>] F.J. Harris et. al., "<a href="https://ieeexplore.ieee.org/document/1193158">Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications</a>", IEEE Transactions on Microwave Theory and Techniques, Vol. 51, No. 4, April 2003.</p>
 <hr />
@@ -219,191 +240,197 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
 See the License for the specific language governing permissions and<br />
 limitations under the License.</p>
 
-        </div>
-        <style type='text/css'>body {
-  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #111;
-  background-color: #fdfdfd;
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-feature-settings: "kern" 1;
-  -moz-font-feature-settings: "kern" 1;
-  -o-font-feature-settings: "kern" 1;
-  font-feature-settings: "kern" 1;
-  font-kerning: normal;
-  padding: 30px;
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
 }
 
 @media only screen and (max-width: 600px) {
-  body {
-    padding: 5px;
-  }
-
-  body > #content {
-    padding: 0px 20px 20px 20px !important;
-  }
+body {
+padding: 5px;
 }
 
 body > #content {
-  margin: 0px;
-  max-width: 900px;
-  border: 1px solid #e1e4e8;
-  padding: 10px 40px;
-  padding-bottom: 20px;
-  border-radius: 2px;
-  margin-left: auto;
-  margin-right: auto;
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
 }
 
 hr {
-  color: #bbb;
-  background-color: #bbb;
-  height: 1px;
-  flex: 0 1 auto;
-  margin: 1em 0;
-  padding: 0;
-  border: none;
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
 }
 
 /**
- * Links
- */
+* Links
+*/
 a {
-  color: #0366d6;
-  text-decoration: none; }
-  a:visited {
-    color: #0366d6; }
-  a:hover {
-    color: #0366d6;
-    text-decoration: underline; }
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
 
 pre {
-  background-color: #f6f8fa;
-  border-radius: 3px;
-  font-size: 85%;
-  line-height: 1.45;
-  overflow: auto;
-  padding: 16px;
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
 }
 
 /**
-  * Code blocks
-  */
+* Code blocks
+*/
 
 code {
-  background-color: rgba(27,31,35,.05);
-  border-radius: 3px;
-  font-size: 85%;
-  margin: 0;
-  word-wrap: break-word;
-  padding: .2em .4em;
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
 }
 
 pre > code {
-  background-color: transparent;
-  border: 0;
-  display: inline;
-  line-height: inherit;
-  margin: 0;
-  overflow: visible;
-  padding: 0;
-  word-wrap: normal;
-  font-size: 100%;
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
 }
 
 
 /**
- * Blockquotes
- */
+* Blockquotes
+*/
 blockquote {
-  margin-left: 30px;
-  margin-top: 0px;
-  margin-bottom: 16px;
-  border-left-width: 3px;
-  padding: 0 1em;
-  color: #828282;
-  border-left: 4px solid #e8e8e8;
-  padding-left: 15px;
-  font-size: 18px;
-  letter-spacing: -1px;
-  font-style: italic;
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
 }
 blockquote * {
-  font-style: normal !important;
-  letter-spacing: 0;
-  color: #6a737d !important;
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
 }
 
 /**
- * Tables
- */
+* Tables
+*/
 table {
-  border-spacing: 2px;
-  display: block;
-  font-size: 14px;
-  overflow: auto;
-  width: 100%;
-  margin-bottom: 16px;
-  border-spacing: 0;
-  border-collapse: collapse;
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
 }
 
 td {
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
 }
 
 th {
-  font-weight: 600;
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
 }
 
 tr {
-  background-color: #fff;
-  border-top: 1px solid #c6cbd1;
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
 }
 
 table tr:nth-child(2n) {
-  background-color: #f6f8fa;
+background-color: #f6f8fa;
 }
 
 /**
- * Others
- */
+* Others
+*/
 
 img {
-  max-width: 100%;
+max-width: 100%;
 }
 
 p {
-  line-height: 24px;
-  font-weight: 400;
-  font-size: 16px;
-  color: #24292e; }
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
 
 ul {
-  margin-top: 0; }
+margin-top: 0; }
 
 li {
-  color: #24292e;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5; }
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
 
 li + li {
-  margin-top: 0.25em; }
+margin-top: 0.25em; }
 
 * {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  color: #24292e; }
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
 
 a:visited {
-  color: #0366d6; }
+color: #0366d6; }
 
-h1, h2, h3 {
-  border-bottom: 1px solid #eaecef;
-  color: #111;
-  /* Darker */ }</style>
-      </body>
-    </html>
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: green;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+</body>
+</html>
