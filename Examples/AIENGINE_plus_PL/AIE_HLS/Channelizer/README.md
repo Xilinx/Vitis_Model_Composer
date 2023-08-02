@@ -1,17 +1,3 @@
-<!--
-Copyright (C) 2023, Advanced Micro Devices, Inc. All rights reserved.
-SPDX-License-Identifier: MIT
-Author: Rob Graessle
--->
-<table class="sphinxhide" width="100%">
- <tr width="100%">
-    <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
-    <a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
-    <a href="https://www.xilinx.com/products/design-tools/vitis/vitis-model-composer.html">See Vitis™ Model Composer Development Environment on xilinx.com</a>
-    </td>
- </tr>
-</table>
-
 # Polyphase Channelizer
 
 ***Version: Vitis Model Composer 2023.1***
@@ -39,16 +25,16 @@ To aid in simulation and verification, the AI Engine and Programmable Logic part
 
 ## Channelizer Requirements
 
-The table below shows the system requirements for the polyphase channelizer. The input sampling rate is 10.5 Gsps. The design supports M=16 channels with each one supporting 10.5G / 16 = 656.25 MHz of bandwidth. The channelizer employs a polyphase technique as outlined in [[1]] to achieve an oversampled output at a rate of P/Q = 8/7 times the channel bandwidth, or 656.25 * 8/7 = 750 Msps. The prototype filter used by the channelizer uses K=8 taps per phase, leading to a total of 16 x 8 = 128 taps overall.
+The table below shows the system requirements for the polyphase channelizer. The input sampling rate is 8.75 Gsps. The design supports M=16 channels with each one supporting 8.75G / 16 = 546.8765 MHz of bandwidth. The channelizer employs a polyphase technique as outlined in [[1]] to achieve an oversampled output at a rate of P/Q = 8/7 times the channel bandwidth, or 546.8765 * 8/7 = 625 Msps. The prototype filter used by the channelizer uses K=8 taps per phase, leading to a total of 16 x 8 = 128 taps overall.
 
 |Parameter|Value|Units|
 |---|---|---|
-| Input Sampling Rate (Fs) | 10.5 | Gsps |
+| Input Sampling Rate (Fs) | 8.75 | Gsps |
 | # of Channels (M) | 16 | channels |
 | Interpolation Factor (P)| 8 | n/a |
 | Decimation Factor (Q) | 7 | n/a |
-| Channel Bandwidth | 656.25 | MHz |
-| Output Sampling Rate | 750 | Msps |
+| Channel Bandwidth | 546.8765 | MHz |
+| Output Sampling Rate | 625 | Msps |
 | # of taps per phase (K) | 8 | n/a |
 
 *Polyphase Channelizer System Requirements.*
@@ -70,7 +56,7 @@ The remainder of this example will focus on how to bring the polyphase channeliz
 
 ## MATLAB Model
 
-The figure below shows a system model of the polyphase channelizer built in MATLAB and encapsulated in a MATLAB app. This provides a comprehensive golden model of the channelizer algorithms and illustrates the relationships between the various system parameters. The model was built to support a broader range of parameter settings than the actual Versal design:
+The figure below shows a system model of the polyphase channelizer built in MATLAB and encapsulated in a MATLAB app. This provides a comprehensive golden model of the channelizer algorithms and illustrates the relationships between the various system parameters. The model was built to support a different, broader range of parameter settings than the actual Versal design:
 * The model supports two different input sampling rates, Fs = 10.5 Gsps and Fs = 20.5 Gsps.
 * The number of channels M may be set to 16, 32, 64, or 128 using a dial.
 * The output oversampling ratio P/Q may be set to 1/1, 2/1, 4/3, or 8/7 using the appropriate button.
@@ -151,7 +137,7 @@ The PL portion of the polyphase channelizer design contains 3 IPs that perform t
 
 These functions are explained in greater detail in [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/AI_Engine_Development/Design_Tutorials/04-Polyphase-Channelizer).
 
-These blocks are implemented in PL using HLS @ 312.5 MHz. With 4 samples transferred in each PL clock cycle, the AI Engine is able to operate at a rate of 1250 MHz.
+These blocks are implemented in PL using HLS @ 625 MHz. With 2 samples transferred in each PL clock cycle, the AI Engine is able to operate at a rate of 1250 MHz.
 
 Each function is imported into Vitis Model Composer using the **HLS Kernel** block.
 
@@ -194,7 +180,30 @@ This executes the next step of the testbench, which is to run the Simulink model
 This section compares the Simulink output and MATLAB reference for each stream. If the outputs match, this means the Simulink model (and therefore the AI Engine and HLS code implementations) match the MATLAB golden reference.
 
 ![](images/Channel1.png) ![](images/Channel2.png)
+
+## Estimating Throughput
+
+Vitis Model Composer can call `aiesimulator` to simulate and plot the estimated throughput of the design.
+
+1. Open the `Channelizer.slx` model.
+
+2. On the top level of the model, click the **Model Composer Hub** block.
+
+3. Select the **AIE** subsystem and ensure that the settings are as follows, especially that **Plot AIE Simulation Output** is enabled. Also note the AIE Compiler command line option to specify the PL clock rate. This information is used by the `aiesimulator` when calculating timing.
+
+![](images/VMCHub1.png)
+
+4. Select the **Channelizer** subsystem and ensure that the settings are as follows:
+
+![](images/VMCHub2.png)
+
+5. Click **Generate**.
+
+After code generation, AIE simulation is performed. This is a cycle-approximate simulation that can be used to estimate throughput. The results are displayed in the Simulation Data Inspector. Note that the throughput on each of the 8 output streams is approximately 1250 MSPS. It takes 2 clock cycles for the 8 output streams to produce a 16-point DFT output. Therefore, the DFT updates at a rate of 625 MHz, for which the channelizer was designed. 
+
+![](images/Throughput.png)
 ---
+
 ## Conclusion
 
 This example showcased the following capabilities of Vitis Model Composer for Versal development:
@@ -203,6 +212,7 @@ This example showcased the following capabilities of Vitis Model Composer for Ve
 2. Model data exchange between AI Engine and PL in simulation.
 3. Simulate AI Engine and PL together in a single design.
 4. Compare a Versal hardware code implementation to a MATLAB golden reference.
+
 ---
 ## References
 

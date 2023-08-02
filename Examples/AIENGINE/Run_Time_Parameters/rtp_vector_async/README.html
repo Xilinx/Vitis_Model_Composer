@@ -1,4 +1,5 @@
 
+
 <html>
 <head>
 <title></title>
@@ -13,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('rtp_vector_async');"
 
 document.location=commandURI
 }
@@ -25,11 +26,11 @@ document.location=commandURI
 </html>
 <p>This is an example of an AIE DSP filter that is controlled by a asynchronous RTP input. The value of the RTP input changes between a wide filter and a narrow filter.</p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> An RTP input can be a scaler or a vector.</p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> Note the usage of 'RTP Source' block. This block allows you to conveniently set the RTP input source to an AI Engine block.</p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> In this example, the RTP input is an asynchronous input. Asynchronous parameters can be changed at any time by a controlling processor such as the Arm® processor. They are read each time a kernel is invoked. If there are no input RTP values at the time of the invocation, (in Vitis Model Composer this is modeled as an empty variable size signal at the time of invocation), the kernel will proceed with the previous value of RTP. </p>
+<p><img width="18" height="18" src="../Images/bulb.png"> An RTP input can be a scaler or a vector.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> Note the usage of 'RTP Source' block. This block allows you to conveniently set the RTP input source to an AI Engine block.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> In this example, the RTP input is an asynchronous input. Asynchronous parameters can be changed at any time by a controlling processor such as the Arm® processor. They are read each time a kernel is invoked. If there are no input RTP values at the time of the invocation, (in Vitis Model Composer this is modeled as an empty variable size signal at the time of invocation), the kernel will proceed with the previous value of RTP. </p>
 <p>In the provided example, it is important to note that the value of the RTP parameter is set as <em>[narrow</em>filter, nan(length(narrow<em>filter),500), wide</em>filter, nan(length(narrow<em>filter),500)]</em>. The block's output is typically an empty variable size signal, except for two instances in time. Initially, a narrow band filter is applied to the RTP input of the FIR block. Consequently, the output of the RTP source block remains empty, but the FIR block utilizes the coefficients of the narrow band filter until the wide band filter is introduced. From that point onward, the filter employs the coefficients of the wide band filter. This pattern repeats in a cycle. </p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> In the RTP source block, we set the <em>"Form output after final data"</em> parameter to <em>Cycle repetition</em> so that the switch between the narrow filter and wide filter described above will continue until the end of the simulation. </p>
+<p><img width="18" height="18" src="../Images/bulb.png"> In the RTP source block, we set the <em>"Form output after final data"</em> parameter to <em>Cycle repetition</em> so that the switch between the narrow filter and wide filter described above will continue until the end of the simulation. </p>
 <p><img src="images/screen_shot.PNG" alt="" /></p>
 <p><img src="images/out_narrow.PNG" alt="" /></p>
 <p><img src="images/out_wide.PNG" alt="" /></p>

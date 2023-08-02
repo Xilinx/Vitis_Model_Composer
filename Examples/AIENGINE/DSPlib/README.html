@@ -1,4 +1,5 @@
 
+
     <html>
       <head>
         <title></title>
@@ -12,16 +13,16 @@
 <p><img height="450" src="images/screen_shot.PNG"></p>
 <p>Here you see examples for FIR,FFT and Matrix Multiply functions.</p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
-<p><img width="18" height="18" src="../../../Images/bulb.png"> For FIR and FFT examples, we are using the blocks available in AIEngine/DSPlib library directly. However, for matrix multiply example, we are importing the function as a graph from the  DSPlib shipped with Vitis Model Composer.</p>
-<p><img width="18" height="18" src="../../../Images/bulb.png"> You can find the DSPlib functions shipped with Vitis Model Composer at <em>$DSPLIB</em>ROOT/L2/include/aie/_ where the environmental variable <em>$DSPLIB</em>ROOT_ can be set in MATLAB command window using the command <em>setenv("DSPLIB</em>ROOT",xmcLibraryPath('get','dsplib'))_.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> For FIR and FFT examples, we are using the blocks available in AIEngine/DSPlib library directly. However, for matrix multiply example, we are importing the function as a graph from the  DSPlib shipped with Vitis Model Composer.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> You can find the DSPlib functions shipped with Vitis Model Composer at <em>$DSPLIB</em>ROOT/L2/include/aie/_ where the environmental variable <em>$DSPLIB</em>ROOT_ can be set in MATLAB command window using the command <em>setenv("DSPLIB</em>ROOT",xmcLibraryPath('get','dsplib'))_.</p>
 <h2 id="examples">Examples</h2>
 <ul>
-<li><a href="fir/README.html">Using the AI Engine FIR block from the library browser</a></li>
-<li><a href="fir_ssr/README.html">Using the AI Engine SSR FIR block from the library bowser to achieve 4 Gsps</a></li>
-<li><a href="fft/README.html">Usign the AI Engine FFT block from the library browser</a></li>
-<li><a href="matrix_multiply/README.html">Importing Matrix Multiply from DSPLib as a block</a></li>
-<li><a href="fir_ssr/README.html">Using DSPLib AI Engine SSR FIR</a></li>
-<li><a href="Dynamic_FFT/README.html">AI Engine Dynamic Point FFT</a></li>
+<li><a href="matlab:XmcExampleApi.getExample('fir')">Using the AI Engine FIR block from the library browser</a></li>
+<li><a href="matlab:XmcExampleApi.getExample('fir_ssr')">Using the AI Engine SSR FIR block from the library bowser to achieve 4 Gsps</a></li>
+<li><a href="matlab:XmcExampleApi.getExample('fft')">Usign the AI Engine FFT block from the library browser</a></li>
+<li><a href="matlab:XmcExampleApi.getExample('matrix_multiply')">Importing Matrix Multiply from DSPLib as a block</a></li>
+<li><a href="matlab:XmcExampleApi.getExample('fir_ssr')">Using DSPLib AI Engine SSR FIR</a></li>
+<li><a href="matlab:XmcExampleApi.getExample('Dynamic_FFT')">AI Engine Dynamic Point FFT</a></li>
 </ul>
 <hr />
 <p>Copyright 2020 Xilinx</p>

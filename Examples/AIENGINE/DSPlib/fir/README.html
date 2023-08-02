@@ -1,4 +1,5 @@
 
+
 <html>
 <head>
 <title></title>
@@ -13,7 +14,7 @@ function myFunction() {
 var path = document.location.pathname;
 var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:xmcHtmlOpenDesign('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('fir');"
 
 document.location=commandURI
 }
@@ -25,13 +26,13 @@ document.location=commandURI
 </html>
 <p>This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block in Model Composer and comparing the results to the Simulink FIR block.</p>
 <h2 id="knowledge-nuggets-about-throughput">Knowledge nuggets about throughput</h2>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> To estimate the throughput for this design, you should setup the Vitis Model Composer Hub block as below before clicking Generate. </p>
+<p><img width="18" height="18" src="../Images/bulb.png"> To estimate the throughput for this design, you should setup the Vitis Model Composer Hub block as below before clicking Generate. </p>
 <p><img src="images/hub.png" width="450"/></p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> After simulation is done, the Simulink Data Inspector will show the estimated throughput.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> After simulation is done, the Simulink Data Inspector will show the estimated throughput.</p>
 <p><img src="images/data_inspector.png" width="450"/></p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> The 64 bit wide PLIO blocks with a PL frequency of 500 MHz at the input and output of the filter block are needed to achieve the highest throughput possible. This means a 64 bit data transfer (two 16-bit complex inputs) can be transferred from PL to AIE at each PL clock, for a total throughput of upto 1 GSPS.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> The 64 bit wide PLIO blocks with a PL frequency of 500 MHz at the input and output of the filter block are needed to achieve the highest throughput possible. This means a 64 bit data transfer (two 16-bit complex inputs) can be transferred from PL to AIE at each PL clock, for a total throughput of upto 1 GSPS.</p>
 <p><img src="images/plio.png" width="650"/></p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> The FIR Asymmetric block has two parameters that you can adjust to achieve a desired throughput. The <em>Input Window Size</em> and the <em>Number of Cascade Stages</em>. The number of AI Engine tiles used in the implementation is equal to the <em>Number of Cascade Stages</em>. The table below gives you an idea of how the throughput changes for this design as you change these parameters:</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> The FIR Asymmetric block has two parameters that you can adjust to achieve a desired throughput. The <em>Input Window Size</em> and the <em>Number of Cascade Stages</em>. The number of AI Engine tiles used in the implementation is equal to the <em>Number of Cascade Stages</em>. The table below gives you an idea of how the throughput changes for this design as you change these parameters:</p>
 <table>
 <thead>
 <tr>
@@ -63,23 +64,23 @@ document.location=commandURI
 </tr>
 </tbody>
 </table>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> The larger the <em>Input</em>Window<em>Size</em> the larger is the latency of the filter.</p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> The <em>Cascade</em>Length_ trades throughput for the number of AI Engine kernels used by the filter. For details, refer to the <a href="https://docs.xilinx.com/r/en-US/Vitis_Libraries/dsp/user_guide/L2/func-fir-filters.html">AI Engine FIR function documentation</a>.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> The larger the <em>Input</em>Window<em>Size</em> the larger is the latency of the filter.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> The <em>Cascade</em>Length_ trades throughput for the number of AI Engine kernels used by the filter. For details, refer to the <a href="https://docs.xilinx.com/r/en-US/Vitis_Libraries/dsp/user_guide/L2/func-fir-filters.html">AI Engine FIR function documentation</a>.</p>
 <h2 id="knowledge-nuggets-about-setting-up-the-design">Knowledge nuggets about setting up the design</h2>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> Note that the Spectrum Analyzer block accepts a Variable Size Signal as input. Likewise, Simulink <em>Scope</em> block and <em>Display</em> block also accept variable size signals as inputs. </p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> In this example, the output variable size signal is always full, i.e. the number of samples in the signal is equal to the maximum size of the variable size signal (in this case 256). We can monitor this using Simulink <em>width</em> block and a scope. Note that the number shown on the <em>width</em> block is the maximum size of the input signal while the output of the block is the number of samples in the variable size signal. </p>
+<p><img width="18" height="18" src="../Images/bulb.png"> Note that the Spectrum Analyzer block accepts a Variable Size Signal as input. Likewise, Simulink <em>Scope</em> block and <em>Display</em> block also accept variable size signals as inputs. </p>
+<p><img width="18" height="18" src="../Images/bulb.png"> In this example, the output variable size signal is always full, i.e. the number of samples in the signal is equal to the maximum size of the variable size signal (in this case 256). We can monitor this using Simulink <em>width</em> block and a scope. Note that the number shown on the <em>width</em> block is the maximum size of the input signal while the output of the block is the number of samples in the variable size signal. </p>
 <p>:warning: If the number of samples in the variable size signal is not equal to the maximum number of samples of the variable size signal, directly attaching the variable size signal to the spectrum analyzer will result in a misleading output (zeros will be inserted to fill the missing samples). For cases where the variable size signal is not full, use the <em>Variable Size Signal to Workspace</em> block to move the data to the workspace and then post process the data. </p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> Note how you can design the filter using the <em>Filter Design and Analysis tool</em> and directly pass the resulting taps to the AI Engine 'FIR Asymmetric Filter' block. </p>
+<p><img width="18" height="18" src="../Images/bulb.png"> Note how you can design the filter using the <em>Filter Design and Analysis tool</em> and directly pass the resulting taps to the AI Engine 'FIR Asymmetric Filter' block. </p>
 <p><img src="images/screen_shot.PNG" alt="" /></p>
 <p>The image below depicts the output of DSPlib AI Engine FIR in comparison with the Simulink FIR block. They completely match. </p>
 <p><img src="images/output.PNG"></p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> In order for the AIE and Simulink outputs to completely match, it is necessary to set the data types on the Discrete FIR Filter block as follows:</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> In order for the AIE and Simulink outputs to completely match, it is necessary to set the data types on the Discrete FIR Filter block as follows:</p>
 <p><img src="images/data_types.PNG"></p>
 <p>These settings match the saturation behavior, coefficient width, output width, and accumulator width used by the AIE FIR Asymmetric block.</p>
-<p><img width="18" height="18" src="../../../../Images/bulb.png"> Also note the "Scale output down by 2^" setting (16) on the FIR Asymmetric Filter block. This is necessary to shift the AIE FIR output (32 bits wide) to fit in the desired cint16 output data type. To match the AIE and Simulink outputs, we need to add to the Simulink output a Gain block that performs the same scaling operation.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> Also note the "Scale output down by 2^" setting (16) on the FIR Asymmetric Filter block. This is necessary to shift the AIE FIR output (32 bits wide) to fit in the desired cint16 output data type. To match the AIE and Simulink outputs, we need to add to the Simulink output a Gain block that performs the same scaling operation.</p>
 <p><img src="images/aie_filter_settings.PNG"></p>
 <h2 id="related-examples">Related Examples</h2>
-<p>To achieve throughput over 1GHz, you should use the FIR block Super Sample Rate capability. Take a look at <a href="../fir_ssr/README.html">this</a> example. </p>
+<p>To achieve throughput over 1GHz, you should use the FIR block Super Sample Rate capability. Take a look at <a href="matlab:XmcExampleApi.getExample('fir_ssr')">this</a> example. </p>
 <hr />
 <p>Copyright 2022 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
