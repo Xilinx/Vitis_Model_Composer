@@ -15,7 +15,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 #include <hls_stream.h>
-#include <complex.h>
+#include <complex>
 
 #define MSIZE 32
 
