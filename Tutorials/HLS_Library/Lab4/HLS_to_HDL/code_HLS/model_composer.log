@@ -1,9 +1,0 @@
-INFO-XMC-1005: Model Composer v2021.2 build 3367213 on Tue Oct 19 02:53:04 MDT 2021
-INFO-XMC-1008: Starting generation of target: System Generator at 15:32:02 ...
-INFO-XMC-3033: Analyzing design 'ModelComposerDesign' for insertion of dataflow directives.
-INFO-XMC-3039: Applying dataflow directive to function 'ModelComposerDesign'.
-INFO-XMC-1009: Finished generation of target: System Generator in 0.10 seconds
-INFO-XMC-1008: Starting synthesizing design at 15:32:03 ...
-INFO-XMC-5008: The current process has a stack size limit of 8 MB.
-INFO-XMC-5009: Set a new stack size limit of 10 MB for the current process.
-INFO-XMC-1009: Finished synthesizing design in 92.24 seconds
