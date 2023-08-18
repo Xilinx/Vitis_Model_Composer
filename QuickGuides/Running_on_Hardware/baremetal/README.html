@@ -1,0 +1,281 @@
+
+
+    <html>
+      <head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+      <body>
+        <div id='content'>
+    <h1 id="how-to-run-bootbin-on-hardware">How to run BOOT.BIN on Hardware</h1>
+<p>Hardware validation flow in Vitis Model Composer provides a methodology to verify AI Engine based applications on Hardware. It also provides the option to generate a hardware image (BOOT.BIN), targeting a<br />
+specific platform. This hardware image can then be run on a board to verify whether the results from hardware match with the simulation outputs.</p>
+<p>This quick guide explains how to manage the board settings, make cable connections, connect the board through your system, and program the BOOT.BIN on a VCK190 Versal board.</p>
+<blockquote>
+  <p>Note: Here we are assuming the board is physically connected to a Windows machine and the BOOT.BIN is generated using Vitis Model Composer on a Linux machine.</p>
+</blockquote>
+<ol>
+<li><p>Connect the power cable to the board.</p></li>
+<li><p>Connect a USB Micro cable between the host machine and USB JTAG connector on the target board. This cable is used for USB to serial transfer.</p></li>
+<li><p>Ensure that the SW1 switch is set to the JTAG boot mode and power on the VCK190 board using the power switch as shown in the following figure.</p>
+<p><img src="images/board.png" alt="" /></p></li>
+</ol>
+<p>Once your board is set up, program the device as follows:</p>
+<ol start="4">
+<li><p>In Windows 10, click the search box on the taskbar and type Device Manager , then select from the Menu.</p></li>
+<li><p>When the board is powered ON and connected to your machine through the USB interface, determine the COM ports that are between the VCK190 board and your computer from Windows Device Manager.</p>
+<p><img src="images/device_manager.png" alt="" /></p></li>
+<li><p>Use a Terminal application (Teraterm or Putty) to open up COM port interfaces on these ports (COM4, COM5 and COM6 in the above case at 115200 baud rate). Note that only one of these terminals will print the output. </p>
+<p><img src="images/putty.png" alt="" /></p></li>
+</ol>
+<blockquote>
+  <p>Note: Ensure the Connection type is set to Serial.</p>
+</blockquote>
+<ol start="7">
+<li>Run Hardware Server on Windows.</li>
+</ol>
+<blockquote>
+  <p>Note : This step assumes that you have Hardware Server installed on you Windows machine as part of Vitis or Vivado Installation. If you do not have Hardware Server  installed, please refer to the section <a href="#How-to-Install-Hardware-Server">How to Install Hardware Server</a>. </p>
+</blockquote>
+<p>Open Windows command prompt and provide complete path to <code>hw_server</code> application and hit <code>Enter</code>. You can see the hostname and port number as highlighted below.</p>
+<p><img src="images/hw_server.png" alt="" /></p>
+<ol start="8">
+<li><p>Launch XSDB and create a target connection to the host running the hw_server.</p>
+<p>a. In Linux environment, open a new terminal and launch XSDB using the <code>xsdb</code> file from the Vitis installation directory as shown.</p>
+<pre><code>  &lt;Xilinx Install Directory&gt;/Vitis/&lt;Version&gt;/bin/xsdb
+</code></pre>
+<p>b. From the XSDB prompt, run the following commands:</p>
+<pre><code>   connect -url &lt;Hostname&gt;:&lt;Port_num&gt;
+   ta 1
+</code></pre>
+<p>Note : You should use the hostname and port number as highlighted in step-7. Do not prepend the hostname with 'TCP:'.</p>
+<p>c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is at <code>&lt;code-generation-directory&gt;/run_hw/src_ps/BOOT.BIN</code>.</p>
+<pre><code>   cd &lt;code-generation-directory&gt;/run_hw/src_ps
+</code></pre>
+<pre><code>   
+</code></pre></li>
+<li><p>Program the device and run:</p>
+<p>a. From the XSDB prompt, run the following command:</p>
+<pre><code>  device program BOOT.BIN
+</code></pre>
+<p>You will see following message in the XSDB prompt if the device program is successful.</p>
+<p><img src="images/xsdb_prompt.png" alt="" /></p>
+<p>b. This will run the design on the board. In the Terminal application, you should see the log similar to the following. Here, the hardware results are compared with the golden results.</p>
+<pre><code>   ******************************** Test Results ********************************
+   ****** Model Composer and Hardware outputs match for all 40944 samples for output signal Out1 *******
+   ****** Test passed ********
+</code></pre>
+<p>c. To re-run the results, run following commands:</p>
+<pre><code>    rst -system
+    device program BOOT.BIN
+</code></pre></li>
+</ol>
+<h1 id="how-to-install-hardware-server">How to Install Hardware Server</h1>
+<p>Xilinx Unified installer allows you to install multiple Xilinx tools using the single installer. Follow the steps below to install Hardware server in windows machine. </p>
+<ol>
+<li><p>Download the Xilinx Unified installer package and run the <code>xsetup.exe</code> file.</p></li>
+<li><p>In the Installer window, select 'Hardware Server' from the list of products.</p>
+<p><img src="images/installer.PNG" alt="" /></p></li>
+<li><p>Click <code>Next</code> and continue rest of the installation process to complete. </p></li>
+</ol>
+<hr />
+<p>Copyright 2020 Xilinx</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+
+        </div>
+        <style type='text/css'>body {
+  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #111;
+  background-color: #fdfdfd;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 5px;
+  }
+
+  body > #content {
+    padding: 0px 20px 20px 20px !important;
+  }
+}
+
+body > #content {
+  margin: 0px;
+  max-width: 900px;
+  border: 1px solid #e1e4e8;
+  padding: 10px 40px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr {
+  color: #bbb;
+  background-color: #bbb;
+  height: 1px;
+  flex: 0 1 auto;
+  margin: 1em 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+ * Links
+ */
+a {
+  color: #0366d6;
+  text-decoration: none; }
+  a:visited {
+    color: #0366d6; }
+  a:hover {
+    color: #0366d6;
+    text-decoration: underline; }
+
+pre {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+/**
+  * Code blocks
+  */
+
+code {
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  word-wrap: break-word;
+  padding: .2em .4em;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+  background-color: transparent;
+  border: 0;
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  word-wrap: normal;
+  font-size: 100%;
+}
+
+
+/**
+ * Blockquotes
+ */
+blockquote {
+  margin-left: 30px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  border-left-width: 3px;
+  padding: 0 1em;
+  color: #828282;
+  border-left: 4px solid #e8e8e8;
+  padding-left: 15px;
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+blockquote * {
+  font-style: normal !important;
+  letter-spacing: 0;
+  color: #6a737d !important;
+}
+
+/**
+ * Tables
+ */
+table {
+  border-spacing: 2px;
+  display: block;
+  font-size: 14px;
+  overflow: auto;
+  width: 100%;
+  margin-bottom: 16px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+th {
+  font-weight: 600;
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+/**
+ * Others
+ */
+
+img {
+  max-width: 100%;
+}
+
+p {
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #24292e; }
+
+ul {
+  margin-top: 0; }
+
+li {
+  color: #24292e;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5; }
+
+li + li {
+  margin-top: 0.25em; }
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #24292e; }
+
+a:visited {
+  color: #0366d6; }
+
+h1, h2, h3 {
+  border-bottom: 1px solid #eaecef;
+  color: #111;
+  /* Darker */ }</style>
+      </body>
+    </html>

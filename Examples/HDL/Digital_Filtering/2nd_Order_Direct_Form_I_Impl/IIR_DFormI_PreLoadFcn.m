@@ -1,0 +1,10 @@
+data_width = 12;
+data_binary_pt = 11;
+coef_width = 12;
+coef_binary_pt = 10;
+Fs = 1;
+b0 = 1;
+b1 = -1.6929;
+b2 = 1;
+a1 = 1.2591;
+a2 = 0.82538;

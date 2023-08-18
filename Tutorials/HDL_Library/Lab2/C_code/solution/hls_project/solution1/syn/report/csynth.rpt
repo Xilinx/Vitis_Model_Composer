@@ -1,0 +1,24 @@
+
+
+================================================================
+== Synthesis Summary Report of 'MedianFilter'
+================================================================
++ General Information: 
+    * Date:           Mon Nov  9 16:00:13 2020
+    * Version:        2020.2 (Build 3056071 on Thu Nov  5 18:07:33 MST 2020)
+    * Project:        hls_project
+    * Solution:       solution1 (Vivado IP Flow Target)
+    * Product family: virtexuplus
+    * Target device:  xcvu11p-flga2577-1-e
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +----------------+------+-------+---------+--------+----------+---------+------+----------+------+----+----------+-----------+-----+
+    |     Modules    | Issue|       | Latency | Latency| Iteration|         | Trip |          |      |    |          |           |     |
+    |     & Loops    | Type | Slack | (cycles)|  (ns)  |  Latency | Interval| Count| Pipelined| BRAM | DSP|    FF    |    LUT    | URAM|
+    +----------------+------+-------+---------+--------+----------+---------+------+----------+------+----+----------+-----------+-----+
+    |+ MedianFilter  |     -|  -0.65|        1|  10.000|         -|        1|     -|       yes|     -|   -|  74 (~0%)|  451 (~0%)|    -|
+    +----------------+------+-------+---------+--------+----------+---------+------+----------+------+----+----------+-----------+-----+
+

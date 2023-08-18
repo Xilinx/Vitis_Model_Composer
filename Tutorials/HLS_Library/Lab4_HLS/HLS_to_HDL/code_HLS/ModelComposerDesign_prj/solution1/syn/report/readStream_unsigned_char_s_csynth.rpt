@@ -1,0 +1,153 @@
+
+
+================================================================
+== Vitis HLS Report for 'readStream_unsigned_char_s'
+================================================================
+* Date:           Sat Nov 13 15:33:00 2021
+
+* Version:        2021.2 (Build 3367213 on Tue Oct 19 02:47:39 MDT 2021)
+* Project:        ModelComposerDesign_prj
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: kintex7
+* Target device:  xc7k325t-ffg900-2
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  5.00 ns|  2.180 ns|     1.35 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-------+-------+---------+
+    |  Latency (cycles) |   Latency (absolute)  |    Interval   | Pipeline|
+    |   min   |   max   |    min    |    max    |  min  |  max  |   Type  |
+    +---------+---------+-----------+-----------+-------+-------+---------+
+    |    19202|    19202|  96.010 us|  96.010 us|  19202|  19202|       no|
+    +---------+---------+-----------+-----------+-------+-------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------------------------------+---------+---------+----------+-----------+-----------+-------+----------+
+        |                                     |  Latency (cycles) | Iteration|  Initiation Interval  |  Trip |          |
+        |              Loop Name              |   min   |   max   |  Latency |  achieved |   target  | Count | Pipelined|
+        +-------------------------------------+---------+---------+----------+-----------+-----------+-------+----------+
+        |- VITIS_LOOP_371_1_VITIS_LOOP_372_2  |    19200|    19200|         2|          1|          1|  19200|       yes|
+        +-------------------------------------+---------+---------+----------+-----------+-----------+-------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+--------+--------+-----+
+|       Name      | BRAM_18K| DSP |   FF   |   LUT  | URAM|
++-----------------+---------+-----+--------+--------+-----+
+|DSP              |        -|    -|       -|       -|    -|
+|Expression       |        -|    -|       0|      42|    -|
+|FIFO             |        -|    -|       -|       -|    -|
+|Instance         |        -|    -|       -|       -|    -|
+|Memory           |        -|    -|       -|       -|    -|
+|Multiplexer      |        -|    -|       -|      63|    -|
+|Register         |        -|    -|      27|       -|    -|
++-----------------+---------+-----+--------+--------+-----+
+|Total            |        0|    0|      27|     105|    0|
++-----------------+---------+-----+--------+--------+-----+
+|Available        |      890|  840|  407600|  203800|    0|
++-----------------+---------+-----+--------+--------+-----+
+|Utilization (%)  |        0|    0|      ~0|      ~0|    0|
++-----------------+---------+-----+--------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +----------------------------------+----------+----+---+----+------------+------------+
+    |           Variable Name          | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------------------+----------+----+---+----+------------+------------+
+    |add_ln371_fu_71_p2                |         +|   0|  0|  22|          15|           1|
+    |ap_condition_107                  |       and|   0|  0|   2|           1|           1|
+    |icmp_ln371_fu_65_p2               |      icmp|   0|  0|  12|          15|          15|
+    |ap_block_pp0_stage0_01001         |        or|   0|  0|   2|           1|           1|
+    |ap_block_state1_pp0_stage0_iter0  |        or|   0|  0|   2|           1|           1|
+    |ap_enable_pp0                     |       xor|   0|  0|   2|           1|           2|
+    +----------------------------------+----------+----+---+----+------------+------------+
+    |Total                             |          |   0|  0|  42|          34|          21|
+    +----------------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +--------------------------------------+----+-----------+-----+-----------+
+    |                 Name                 | LUT| Input Size| Bits| Total Bits|
+    +--------------------------------------+----+-----------+-----+-----------+
+    |Image_in_TDATA_blk_n                  |   9|          2|    1|          2|
+    |Image_in_adapter_out1_blk_n           |   9|          2|    1|          2|
+    |ap_done_int                           |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1               |   9|          2|    1|          2|
+    |ap_sig_allocacmp_indvar_flatten_load  |   9|          2|   15|         30|
+    |indvar_flatten_fu_40                  |   9|          2|   15|         30|
+    |real_start                            |   9|          2|    1|          2|
+    +--------------------------------------+----+-----------+-----+-----------+
+    |Total                                 |  63|         14|   35|         70|
+    +--------------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+----+----+-----+-----------+
+    |           Name          | FF | LUT| Bits| Const Bits|
+    +-------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                |   1|   0|    1|          0|
+    |ap_done_reg              |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1  |   1|   0|    1|          0|
+    |indvar_flatten_fu_40     |  15|   0|   15|          0|
+    |start_once_reg           |   1|   0|    1|          0|
+    |tmp_reg_92               |   8|   0|    8|          0|
+    +-------------------------+----+----+-----+-----------+
+    |Total                    |  27|   0|   27|          0|
+    +-------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++------------------------------+-----+-----+------------+---------------------------+--------------+
+|           RTL Ports          | Dir | Bits|  Protocol  |       Source Object       |    C Type    |
++------------------------------+-----+-----+------------+---------------------------+--------------+
+|ap_clk                        |   in|    1|  ap_ctrl_hs|  readStream<unsigned char>|  return value|
+|ap_rst                        |   in|    1|  ap_ctrl_hs|  readStream<unsigned char>|  return value|
+|ap_start                      |   in|    1|  ap_ctrl_hs|  readStream<unsigned char>|  return value|
+|start_full_n                  |   in|    1|  ap_ctrl_hs|  readStream<unsigned char>|  return value|
+|ap_done                       |  out|    1|  ap_ctrl_hs|  readStream<unsigned char>|  return value|
+|ap_continue                   |   in|    1|  ap_ctrl_hs|  readStream<unsigned char>|  return value|
+|ap_idle                       |  out|    1|  ap_ctrl_hs|  readStream<unsigned char>|  return value|
+|ap_ready                      |  out|    1|  ap_ctrl_hs|  readStream<unsigned char>|  return value|
+|start_out                     |  out|    1|  ap_ctrl_hs|  readStream<unsigned char>|  return value|
+|start_write                   |  out|    1|  ap_ctrl_hs|  readStream<unsigned char>|  return value|
+|Image_in_TVALID               |   in|    1|        axis|                   Image_in|       pointer|
+|Image_in_TDATA                |   in|    8|        axis|                   Image_in|       pointer|
+|Image_in_TREADY               |  out|    1|        axis|                   Image_in|       pointer|
+|Image_in_adapter_out1_din     |  out|    8|     ap_fifo|      Image_in_adapter_out1|       pointer|
+|Image_in_adapter_out1_full_n  |   in|    1|     ap_fifo|      Image_in_adapter_out1|       pointer|
+|Image_in_adapter_out1_write   |  out|    1|     ap_fifo|      Image_in_adapter_out1|       pointer|
++------------------------------+-----+-----+------------+---------------------------+--------------+
+

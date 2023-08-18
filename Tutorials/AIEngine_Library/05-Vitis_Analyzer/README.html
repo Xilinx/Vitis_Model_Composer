@@ -1,0 +1,389 @@
+
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<table class="sphinxhide" width="100%">
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:XmcExampleApi.changeDirectory('05-Vitis_Analyzer');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
+<tr width="100%">
+<td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
+<a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
+<a href="https://www.xilinx.com/products/design-tools/vitis/vitis-ai.html">See Vitis™ AI Development Environment on xilinx.com</a>
+</td>
+</tr>
+</table>
+<h1 id="lab-5-ai-engine-throughput-and-latency-with-vitis-analyzer">Lab 5: AI Engine Throughput and Latency with Vitis Analyzer</h1>
+<p>This lab will take our existing decimation filter chain design and explore different techniques to increase algorithm throughput. We will also view detailed timing and resource information in the Vitis Analyzer.</p>
+<p>:warning: This AI Engine Lab can be done only in a Linux environment.</p>
+<h3 id="procedure">Procedure</h3>
+<p>This lab has the following steps:</p>
+<ul>
+<li>In Step 1, you will add PLIO blocks to the boundary of the AI Engine subsystem and run cycle-approximate simulation to observe increased throughput.</li>
+<li>In Step 2, you will use cascaded implementation of the FIR filter algorithm to further increase throughput.</li>
+<li>In Step 3, you will view detailed timing information in the Vitis Analyzer and calculate latency.</li>
+</ul>
+<h2 id="step-1-use-plio-blocks-to-increase-throughput">Step 1: Use PLIO Blocks to Increase Throughput</h2>
+<p>In Lab 4, we ran cycle-approximate AI Engine simulation to estimate the throughput of our decimation filter chain. We would expect a filter chain that decimates a 1 GSPS input by a factor of 8 to output samples at a rate of 125 MSPS. However, the estimated throughput we obtained in AI Engine simulation was much less than that, approximately 35 MSPS.</p>
+<p>There are several ways to improve the throughput of AI Engine designs. In this lab, we will discuss two of them: <strong><em>increasing bandwidth between the PL and AIE</em></strong> and <strong><em>cascading algorithms across multiple AIE tiles</em></strong>.</p>
+<p>PLIO refers to a port attribute in the graph code that establish a stream connection to or from the programmable logic. Vitis Model Composer automatically generates a PLIO interface for each port at the boundary of the AIE design. PLIOs can be 32, 64, or 128 bits wide; the PLIO width determines how much data is transferred on each clock cycle.</p>
+<p>You can use the <strong><em>PLIO</em></strong> block to change the PLIO width as well as the PL clock frequency. These values have no effect on the Simulink simulation, but they do affect the generated AI Engine graph code. The values are used by the cycle-approximate AIE simulation to estimate throughput.</p>
+<p>In this example, we assume that our PL operates at a rate of 500 MHz, a typical clock rate for signal processing systems. We further assume that the AI Engine operates at a rate of 1 GHz. This means that the AI Engine can operate on 2 samples per PL clock cycle. In order to transfer 2 cint16 samples from PL to AI Engine on each clock cycle, the PLIO needs to be 64 bits wide.</p>
+<ol>
+<li><p>Run the <strong><em>setupLab5</em></strong> script to initialize a working directory.</p></li>
+<li><p>Open the model <code>Lab5_Part1_Start.slx</code>.</p></li>
+<li><p>Double-click the <strong><em>FIRchain</em></strong> block to open the subsystem.</p></li>
+<li><p>Click the canvas and type <strong><em>PLIO</em></strong>. Select the PLIO block from the AMD Toolbox/AI Engine/Interfaces library.</p></li>
+</ol>
+<p><img src="Images/Image02.png" alt="missing image" /></p>
+<ol start="5">
+<li><p>Double-click the <strong><em>PLIO</em></strong> block to open its parameters.</p></li>
+<li><p>Set the <strong><em>PLIO width (bits)</em></strong> parameter to 64.</p></li>
+<li><p>Select the <strong><em>Specify PLIO frequency</em></strong> checkbox.</p></li>
+<li><p>Set the <strong><em>PLIO frequency (MHz)</em></strong> to 500.</p></li>
+<li><p>Click <strong><em>Apply</em></strong> and <strong><em>OK</em></strong>.</p></li>
+<li><p>Create a copy of the PLIO block by right-clicking on it and dragging.</p></li>
+<li><p>Place one PLIO block at the input to the AIE subsystem and one PLIO block at the output.</p></li>
+</ol>
+<p><img src="Images/Image03.png" alt="missing image" /></p>
+<ol start="12">
+<li>Press <strong><em>Ctrl+D</em></strong> to update the diagram.</li>
+</ol>
+<p>Note that the input and output of the AIE subsystem are complex 16-bit integers.</p>
+<p><img src="Images/Image04.png" alt="missing image" /></p>
+<p>Setting the PLIO width to 128 bits effectively transfers four samples of data between the PL and AI Engine on every clock cycle of the PL.</p>
+<p>In the generated graph code, Vitis Model Composer will insert 64-bit PLIOs on the input and output ports. In the generated Makefile to run the <code>aiesimulator</code>, the PL will be configured execute at a clock rate of 500 MHz.</p>
+<ol start="13">
+<li><p>At the top level of the model, double-click the Model Composer Hub block and select the FIRchain subsystem.</p></li>
+<li><p>Click <strong>Generate</strong>.</p></li>
+</ol>
+<p>After code generation and AI Engine simulation completes, the Simulation Data Inspector appears.</p>
+<ol start="15">
+<li><p>In the Simulation Data Inspector window, select the <strong>Out1</strong> signal from the Inspect menu.</p></li>
+<li><p>Select the Cursor icon from the toolbar, then select <strong>Two Cursors</strong>. <img src="Images/Image05.png" alt="missing image" /></p></li>
+<li><p>Position the cursors at the beginning of the first and third signal frames, as shown below.</p></li>
+</ol>
+<p><img src="Images/Image06.png" alt="missing image" /></p>
+<p>This limits the throughput calculation to the area between the two cursors. In the figure above, the estimated throughput is 124 MSPS (your displayed value may vary slightly). This approximately satisfies our expected throughput of at least 125 MSPS.</p>
+<p>We can see the affects of adding the PLIO block in the generated graph code (<code>FIRchain.h</code>):</p>
+<pre><code>  In1 = adf::input_plio::create("In1",
+adf::plio_64_bits,
+"./data/input/In1.txt",
+500);
+
+Out1 = adf::output_plio::create("Out1",
+adf::plio_64_bits,
+"Out1.txt",
+500);
+</code></pre>
+<p>The input and output PLIO widths are set to 64 bits, and the fourth argument tells the AIE simulator to simulate these PLIOs operating at 500 MHz.</p>
+<h2 id="step-2-cascading-algorithms-across-multiple-aie-tiles">Step 2: Cascading Algorithms Across Multiple AIE Tiles</h2>
+<p>In Step 1, we used PLIOs to increase the throughput of our AI Engine design. It now barely satisfies our expected throughput of 125 MSPS.</p>
+<p>What if we need to increase our throughput further? We have a few options:</p>
+<ul>
+<li>Increase the PL clock rate beyond 500 MHz. This will be challenging from a digital design perspective.</li>
+<li>Increase the AI Engine clock rate beyond 1 GHz and transfer more data from PL to AIE by increasing the PLIO width to 128 bits.  </li>
+<li>Parallelize the algorithms within the AI Engine.</li>
+</ul>
+<p>AI Engine devices have cascade streams that implement high-speed interfaces between adjacent kernels. This enables an algorithm to be spread across adjacent kernels to process data in parallel, thus increasing throughput. </p>
+<p>The FIR filter blocks in the Vitis Model Composer AI Engine DSP library have a parameter <strong>Number of cascade stages</strong> that let you easily specify parallelization of the filter. The parallelization effectively spreads the multiply-accumulate operations for each coefficient across multiple AI Engine tiles. The AI Engine vector unit supports 8 MACs per cycle for cint16 data types, so setting the number of cascade stages to <code>ceil(N/8)</code>, where N is the filter length, will achieve full parallelization. The diagram below shows a 32-tap filter parallelize across 4 AI Engine kernels:</p>
+<p><img src="Images/Image07.png" alt="missing image" /></p>
+<p>For more details, refer to <a href="https://docs.xilinx.com/r/en-US/ug1079-ai-engine-kernel-coding/Multiple-Kernels-Coding-Example-FIR-Filter">Multiple Kernels Coding Example: FIR Filter</a>.</p>
+<p>Our halfband filters have 4, 5, and 14 non-zero taps respectively, while the symmetric filter has 61 non-zero taps. This means that the 3rd halfband decimation filter can be parallelized across up to 2 AIE kernels (8 MACs per kernel) and the symmetric filter can be parallelized across up to 8 AIE kernels. The actual number of kernels to use is a tradeoff between required throughput and the design size within the AI Engine. Vitis Model Composer coupled with the AI Engine simulator can be used to explore these tradeoffs.</p>
+<ol>
+<li><p>Open the model <code>Lab5_Part2_Start.slx</code>.</p></li>
+<li><p>Double-click the <strong><em>FIRchain</em></strong> subsystem.</p></li>
+<li><p>Double-click the 3rd FIR Halfband Decimator block.</p></li>
+<li><p>Change the <strong><em>Number of cascade stages</em></strong> parameter from 1 to 2.</p></li>
+</ol>
+<p><img src="Images/Image11.png" alt="missing image" /></p>
+<ol start="5">
+<li><p>Click <strong><em>Apply</em></strong> then <strong><em>OK</em></strong>.</p></li>
+<li><p>Double-click the FIR Symmetric block.</p></li>
+<li><p>Change the <strong><em>Number of cascade stages</em></strong> parameter from 1 to 8.</p></li>
+<li><p>Click <strong><em>Apply</em></strong> then <strong><em>OK</em></strong>.</p></li>
+<li><p>At the top level of the model, double-click the Model Composer Hub block and select the FIRchain subsystem.</p></li>
+<li><p>Click <strong>Generate</strong>.</p></li>
+</ol>
+<p>After code generation and AI Engine simulation completes, the Simulation Data Inspector appears.</p>
+<ol start="11">
+<li><p>In the Simulation Data Inspector window, select the <strong>Out1</strong> signal from the Inspect menu.</p></li>
+<li><p>Select the Cursor icon from the toolbar, then select <strong>Two Cursors</strong>. <img src="Images/Image05.png" alt="missing image" /></p></li>
+<li><p>Position the cursors at the beginning of the first and third signal frames, as shown below.</p></li>
+</ol>
+<p><img src="Images/Image12.png" alt="missing image" /></p>
+<p>This limits the throughput calculation to the area between the two cursors. In the figure above, the estimated throughput is 157 MSPS (your displayed value may vary slightly). The cascading of the FIR filter algorithm across multiple AI Engine kernels has increased our throughput. In the next step, we will see how this change has affected how the algorithm is implemented in the AI Engine.</p>
+<p>By combining multiple techniques: high throughput across the AIE-PL boundary, cascading the algorithm across multiple AI Engine tiles and Super Sample Rate (SSR) parallelism, it is possible to implement designs well in excess of 1 GSPS. One example is an <a href="https://github.com/Xilinx/Vitis_Model_Composer/blob/HEAD/Examples/AIENGINE/DSPlib/fir_ssr/README.html">AI Engine SSR FIR</a> that achieves 4 GSPS.</p>
+<h2 id="step-3-use-vitis-analyzer-to-calculate-latency">Step 3: Use Vitis Analyzer to Calculate Latency</h2>
+<p>In addition to throughput, a key design metric for signal processing systems is latency. The AI Engine simulator can be configured to capture detailed timing information for display in Vitis Analyzer, which can be used to calculate latency.</p>
+<ol>
+<li><p>Open the model <code>Lab5_Part3_Start.slx</code>.</p></li>
+<li><p>Double-click the Model Composer Hub block and select the FIRchain subsystem.</p></li>
+<li><p>On the AIE Settings tab, note that <strong>Collect trace data for Vitis Analyzer</strong> has been selected. Collecting trace data will enable detailed timing information to be viewed in Vitis Analyzer after AI Engine simulation completes. AI Engine simulation will take longer as a result. </p></li>
+<li><p>Click <strong>Generate</strong>.</p></li>
+</ol>
+<p>After code generation and AI Engine simulation completes, the Simulation Data Inspector appears. In addition, Vitis Unified IDE will open and display the AI Engine Run summary.</p>
+<p><img src="Images/Image13.png" alt="missing image" /></p>
+<p>Vitis Unified IDE has opened in Vitis Analyzer view. Vitis Analyzer lets you view detailed information about the AI Engine simulation run and the AI Engine design itself.</p>
+<ol start="5">
+<li>In the Analysis panel on the left-hand side of the Vitis Analyzer, click on <strong><em>Graph</em></strong>.</li>
+</ol>
+<p>This displays a schematic of the AI Engine design, including kernels, buffers, and input/output ports.</p>
+<p><img src="Images/Image14.png" alt="missing image" /></p>
+<p>Note that the 3rd decimation filter uses 2 AIE kernels and the symmetric FIR filter uses 8 AIE kernels.</p>
+<ol start="6">
+<li><p>At the top of the Graph window, toggle between the <strong><em>Subgraph View</em></strong>, <strong><em>Tile View</em></strong>, and <strong><em>Flat View</em></strong> to observe how the schematic is affected.</p></li>
+<li><p>In the Analysis panel, click on <strong><em>Array</em></strong>.</p></li>
+</ol>
+<p>This displays a schematic of the AI Engine itself and depicts how the design maps onto the hardware.</p>
+<ol start="8">
+<li>Click and drag to zoom in on the occupied area of the AI Engine.</li>
+</ol>
+<p><img src="Images/Image15.png" alt="missing image" /></p>
+<p>AI Engine tile locations are described in terms of (column, row). Our design occupies the area (17,0) to (24,2). Note that the input stream from the PL enters the AI Engine array at tile (18,0) and the output exits the array at tile (24,0). Also note the kernels from (17,2) to (24,2): this is the symmetric FIR filter. The cascaded filter implementation is taking advantage of the cascade stream between kernels moving left to right across this row. </p>
+<p>You can mouse over the green signal lines to view additional information about the signal, including the net name. In this design, the input from the PL is 'net0' and the output to the PL is 'net21'. We can use this knowledge, along with the timing trace data, to compute latency between any two nets in the design.</p>
+<ol start="9">
+<li><p>In the Analysis panel, click on <strong><em>Trace</em></strong>.</p></li>
+<li><p>On the Trace toolbar, click <strong><em>Zoom Fit</em></strong> followed by <strong><em>Collapse All</em></strong>:  <img src="Images/Image16.png" alt="missing image" /></p></li>
+<li><p>Click the <img src="Images/Image17.png" alt="missing image" /> icon on the right side of the Trace window.</p></li>
+<li><p>De-select <code>All</code>.</p></li>
+<li><p>Click the <img src="Images/Image17a.png" alt="missing image" /> icon and search for <code>net0</code>.</p></li>
+<li><p>Select <code>net0</code>.</p></li>
+</ol>
+<p><img src="Images/Image17b.png" alt="missing image" /></p>
+<ol start="15">
+<li>Repeat the previous 2 steps to search for and select <code>net21</code>.</li>
+</ol>
+<p><img src="Images/Image17c.png" alt="missing image" /></p>
+<p>The Trace view should now look like this:</p>
+<p><img src="Images/Image18.png" alt="missing image" /></p>
+<p>The gray line on the trace diagram represents data flowing into the AIE from the PL. The blue line represents data exiting the AIE to the PL. We can calculate the time difference between these traces to determine the latency of the AI Engine design.</p>
+<ol start="16">
+<li><p>Add a second marker to the trace by clicking <img src="Images/Image19.png" alt="missing image" />. </p></li>
+<li><p>Arrange the markers so they touch the beginning of the gray and blue lines on the trace diagram:</p></li>
+</ol>
+<p><img src="Images/Image20.png" alt="missing image" /></p>
+<p>The difference between the markers is shown at the bottom of the display: approximately 3.1 microseconds. This is the latency of our AI Engine design: the time between the first sample appearing at the input and the first sample appearing at the output.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p><strong>Congratulations!</strong> This concludes Lab 5. In this lab, you explored different ways to increase throughput of your AI Engine design. You also saw how to view the design in the Vitis Analyzer to calculate latency.</p>
+<p>In the next lab, you will see how to validate the AI Engine design running on real hardware.</p>
+<hr />
+<p>&copy; Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>    http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+<p align="center"><sup>XD058 | &copy; Copyright 2023 Advanced Micro Devices, Inc.</sup></p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h1, h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>
