@@ -1,0 +1,427 @@
+
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="lab-2-importing-code-into-a-vitis-model-composer-hdl-design">Lab 2: Importing Code into a Vitis Model Composer HDL Design</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:XmcExampleApi.changeDirectory('Lab2');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
+<h2 id="objectives">Objectives</h2>
+<p>After completing this lab, you will be able to:</p>
+<ul>
+<li>Create a Finite State Machine using the MCode block in Vitis Model Composer.</li>
+<li>Import an RTL HDL description into Vitis Model Composer.</li>
+<li>Configure the black box to ensure the design can be successfully simulated.</li>
+<li>Incorporate a design, synthesized from C, C++ or SystemC using Vitis HLS, as a block into your MATLAB design.</li>
+</ul>
+<h2 id="step-1-modeling-control-with-m-code">Step 1: Modeling Control with M-Code</h2>
+<p>In this step you will be creating a simple Finite State Machine (FSM) using the MCode block to detect a sequence of binary values 1011. The FSM needs to be able to detect multiple transmissions as well, such as 10111011.</p>
+<h3 id="procedure">Procedure</h3>
+<p>In this step you will create the control logic for a Finite State Machine using M-code. You will then simulate the final design to confirm the correct operation.</p>
+<ol>
+<li><p>Launch Vitis Model Composer and change the working directory to: <strong>\HDL<em>Library\Lab2\M</em>code</strong></p></li>
+<li><p>Open the file <samp>Lab2<em>1.slx</samp> and double-click on the HDL</em>DUT subsystem.<br />
+<br><br>You see the following incomplete diagram. <br><br />
+<img src="Images/Step1/Step2.png"></p></li>
+<li><p>Add an MCode block from the Xilinx Toolbox/HDL/User-Defined Functions library. Before wiring up the block, you need to edit the MATLAB® function to create the correct ports and function name.</p></li>
+<li><p>Double-click the <strong>MCode</strong> block and click the <strong>Edit</strong> button, as shown in the following figure.<br />
+<br><br><img src="Images/Step1/Step4-1.png"><br />
+<br><br> The following figure shows the defualt M-code in the MATLAB text editor<br />
+<br><br><img src="Images/Step1/Step4-2.png"></p></li>
+<li><p>Edit the default MATLAB function to include the function name <code>state_machine</code> and the input <code>din</code> and output <code>matched</code>.</p></li>
+<li><p>You can now delete the sample M-code.<br />
+<br><br><img src="Images/Step1/Step6.png"></p></li>
+<li><p>After you make the edits, use Save As to save the MATLAB file as state<em>machine.m to the Lab2/M</em>code folder.</p>
+<ul>
+<li>In the MCode Properties Editor, use the Browse button to ensure that the MCode block is referencing the local M-code file (<samp>state_machine.m</samp>).</li></ul></li>
+<li><p>In the MCode Properties Editor, click OK.<br />
+<br><br>You will see the MCode block assume the new ports and function name.</p></li>
+<li><p>Now connect the MCode block to the diagram as shown in the following figure:<br />
+<br><br><img src="Images/Step1/Step9-1.png"><br />
+<br><br>You are now ready to start coding the state machine. The bubble diagram for this state machine is shown in the following figure. This FSM has five states and is capable of detecting two sequences in succession.<br />
+<br><br><img src="Images/Step1/Step9-2.png"></p></li>
+<li><p>Edit the M-code file, state_machine.m, and define the state variable using the Xilinx <code>xl_state</code> data type as shown in the following. This requires that you declare a variable as a persistent variable. The <code>xl_state</code> function requires two arguments: the initial condition and a fixed-point declaration.<br />
+<br><br>Because you need to count up to 4, you need 3 bits.</p></li>
+</ol>
+<pre><code>persistent state, state = xl_state(0,{xlUnsigned, 3, 0}); 
+</code></pre>
+<ol start="11">
+<li>Use a switch-case statement to define the FSM states shown. A small sample is provided, shown as follows, to get you started.</li>
+</ol>
+<pre><code>switch state
+case 0
+if din == 1
+state = 1;
+else
+state = 0;
+end
+matched = 0;
+</code></pre>
+<blockquote>
+<p> Note: You need an otherwise statement as your last case</p>
+</blockquote>
+<ol start="12">
+<li>Save the M-code file and run the simulation. The waveform should look like the following figure.<br />
+<br><br>You should notice two detections of the sequence.<br />
+<br><br><img src="Images/Step1/Step12.png"></li>
+</ol>
+<h2 id="step-2-modeling-blocks-with-hdl">Step 2: Modeling Blocks with HDL</h2>
+<p>In this step, you will import an RTL design into Vitis Model Composer as a black box.</p>
+<p>A black box allows the design to be imported into Vitis Model Composer even though the description is in Hardware Description Language (HDL) format.</p>
+<ol>
+<li><p>Invoke Vitis Model Composer and from the MATLAB console, change the directory to: \HDL_Library\Lab2\HDL.<br />
+<br><br>The following files are located in this directory:</p>
+<ul>
+<li>Lab2_2.slx - A Simulink model containing a black box example.</li>
+<li>transpose_fir.vhd - Top-level VHDL for a transpose form FIR filter. This file is the VHDL that is associated with the black box.</li>
+<li>mac.vhd – Multiply and adder component used to build the transpose FIR filter.</li></ul></li>
+<li><p>Type open <code>Lab2_2.slx on the MATLAB</code> command line.</p></li>
+<li><p>Open the subsystem named Down Converter.</p></li>
+<li><p>Open the subsystem named Transpose FIR Filter Black Box.<br />
+<br><br> At this point, the subsystem contains two input ports and one output port. You will add a black box to this subsystem:<br />
+<br><br><img src="Images/Step2/Step4.png"></p></li>
+<li><p>Left-click the design canvas and begin typing <strong>Black Box</strong> to a Black Box block to this subsystem.<br />
+<br><br>A browser window opens, listing the VHDL source files that can be associated with the black box.</p></li>
+<li><p>From this window, select the top-level VHDL file <samp>transpose<em>fir.vhd</samp>. This is illustrated in the following figure<br />
+<br><br><img src="Images/Step2/Step6.png"><br />
+<br><br>The associated configuration M-code <samp>transpose</em>fir_config.m</samp> opens in an Editor for modifications.</p></li>
+<li><p>Close the Editor.</p></li>
+<li><p>Wire the ports of the black box to the corresponding subsystem ports and save the design<br />
+<br><br><img src="Images/Step2/Step8.png"></p></li>
+<li><p>Double-click the Black Box block to open this dialog box:<br />
+<br><br>A browser window opens, listing the VHDL source files that can be associated with the black box.<br />
+<br><br><img src="Images/Step2/Step9.gif"><br />
+<br><br> The following are the fields in the dialog box:<br />
+<br><br>   <strong>Block configuration m-function</strong><br />
+<br> &emsp; This specifies the name of the configuration M-function for the black box. In this example, the field contains the name of the function that was generated by the Configuration Wizard. By default, the black box uses the function the wizard produces. You can however substitute one you create yourself.<br />
+<br><br><strong>Simulation mode</strong><br />
+<br><br>There are three simulation modes: <br />
+<br><br> <b>Inactive</b><br />
+<br> &emsp; In this mode the black box participates in the simulation by ignoring its inputs and producing zeros. This setting is typically used when a separate simulation model is available for the black box, and the model is wired in parallel with the black box using a simulation multiplexer.<br />
+<br><br> <b>Vivado Simulator</b><br />
+<br> &emsp; In this mode simulation results for the black box are produced using co-simulation on the HDL associated with the black box.<br />
+<br><br>  <strong>External co-simulator</strong><br />
+<br> &emsp; In this mode it is necessary to add a Questa HDL co-simulation block to the design, and to specify the name of the Questa block in the HDL co-simulator to use field. In this mode, the black box is simulated using HDL co-simulation.</p></li>
+<li><p>Set the Simulation mode to Inactive and click OK to close the dialog box.</p></li>
+<li><p>Move to the design top-level and run the simulation by clicking the <strong>Run simulation</strong> button <img width="18" height="18" src="../Images/HDL/Lab1/Step1/Configure_HDL_Blocks/runemoji.png">, then double-click the <strong>Scope</strong> block.</p></li>
+<li><p>Notice the black box output shown in the Output Signal scope is zero. This is expected because the black box is configured to be Inactive during simulation.<br />
+<br><br><img src="Images/Step2/Step12.png"></p></li>
+<li><p>From the Simulink Toolstrip, select <em>Debug > Information Overlays > Alias Data Types</em>* to display the port types for the black box.</p></li>
+<li><p>Compile the model (Ctrl-D) to ensure the port data types are up to date.<br />
+<br><br>Notice that the black box port output type is <code>UFix_26_0</code>. This means it is unsigned, 26-bits wide, and has a binary point 0 positions to the left of the least significant bit.</p></li>
+<li><p>Open the configuration M-function <samp>transpose<em>fir</em>config.m</samp> and change the output type from <code>UFix_26_0</code> to <code>Fix_26_12</code>. The modified line (line 26) should read:</p></li>
+</ol>
+<pre><code>dout_port.setType('Fix_26_12');
+</code></pre>
+<p>Continue the following steps to edit the configuration M-function to associate an additional HDL file with the black box.</p>
+<ol start="16">
+<li>Locate line 65:</li>
+</ol>
+<pre><code>this_block.addFile('transpose_fir.vhd');
+</code></pre>
+<ol start="17">
+<li>Immediately above this line, add the following:</li>
+</ol>
+<pre><code>this_block.addFile('mac.vhd');
+</code></pre>
+<ol start="18">
+<li><p>Save the changes to the configuration M-function and close the file.</p></li>
+<li><p>Click the design canvas and recompile the model (Ctrl-D).<br />
+<br><br>Your Transpose FIR Filter Black Box subsystem should display as follows<br />
+<br><br><img src="Images/Step2/Step19.png"></p></li>
+<li><p>From the Black Box block parameter dialog box, change the Simulation mode field from <strong>Inactive</strong> to <strong>Vivado Simulator</strong> and then click <strong>OK</strong>.</p></li>
+<li><p>Move to the top-level of the design and run the simulation.</p></li>
+<li><p>Examine the scope output after the simulation has completed.<br />
+<br><br> Notice the waveform is no longer zero. When the Simulation Mode was Inactive, the Output Signal scope displayed constant zero. Now, the Output Signal shows a sine wave as the results from the Vivado Simulation.</p></li>
+<li><p>Right-click the Output Signal display and select <strong>Configuration Properties</strong>. In the Main tab, set <strong>Axis Scaling</strong> to the <strong>Auto</strong> setting.<br />
+You should see a display similar to that shown below.<br />
+<br><br><img src="Images/Step2/Step23.png"></p></li>
+</ol>
+<h2 id="step-3-modeling-blocks-with-cc-code">Step 3: Modeling Blocks with C/C++ Code</h2>
+<p>The Vitis HLS tool has the ability to transform C/C++ design sources into RTL. The Vitis Model Composer HDL library contains a Vitis HLS block in the HDL/User-Defined Functions library which enables you to bring in C/C++ source files into a Vitis Model Composer model.</p>
+<h3 id="procedure-1">Procedure</h3>
+<p>In part 1 you will first synthesize a C file using Vitis HLS. In Part 2, you incorporate the output from Vitis HLS into MATLAB and use the rich simulation features of MATLAB to verify that the C algorithm correctly filters an image.</p>
+<h3 id="part-1">Part 1</h3>
+<ol>
+<li><p>Invoke Vitis HLS: Click <strong>Windows > Xilinx Design Tools > Vitis HLS 2022.1.</strong></p></li>
+<li><p>Select <strong>Open Project</strong> in the welcome screen and navigate to the Vitis HLS project directory <samp>\HDL<em>Library\Lab2\C</em>code\hls_project</samp> as shown in the following figure.<br />
+<br><br><img src="Images/Step3/Part1/Step2.png"></p></li>
+<li><p>Click <strong>Select Folder</strong> to open the project.</p></li>
+<li><p>Expand the Source folder in the Explorer pane (left-hand side) and double-click the file MedianFilter.cpp to view the contents of the C++ file as shown in the following figure.<br />
+<br><br><img src="Images/Step3/Part1/Step4.png"><br />
+<br><br>This file implements a 2-Dimensional median filter on 3x3 window size.</p></li>
+<li><p>Synthesize the source file by right-clicking on solution1 and selecting <strong>C Synthesis > Active Solution</strong> as shown in the following figure.<br />
+<br><br><img src="Images/Step3/Part1/Step5.png"><br />
+<br><br>When the synthesis completes, Vitis HLS displays the following message on the console:</p></li>
+</ol>
+<pre><code>Finished C synthesis
+</code></pre>
+<ol start="6">
+<li><p>Click <strong>OK</strong> on the C Synthesis Active Solution window.</p></li>
+<li><p>Right-click <strong>solution1</strong> and select <strong>Export RTL</strong>.</p></li>
+<li><p>Set Format Selection to <strong>Vivado IP for System Generator</strong> as shown in the following figure and click <strong>OK</strong><br />
+<br><br><img src="Images/Step3/Part1/Step8.png"><br />
+<br><br>When the Export RTL process completes, Vitis HLS displays this message:</p></li>
+</ol>
+<pre><code>Finished export RTL
+</code></pre>
+<ol start="9">
+<li>Exit Vitis HLS</li>
+</ol>
+<h3 id="part-2-including-a-vitis-hls-package-in-a-vitis-model-composer-design">Part 2: Including a Vitis HLS Package in a Vitis Model Composer Design</h3>
+<ol>
+<li><p>Launch Vitis Model Composer, open the <code>Lab2_3.slx</code> file in the <samp>Lab2/C<em>code</samp> folder, and double-click on the HDL</em>DUT subsystem. This should open the model as shown in the following figure.<br />
+<br><br><img src="Images/Step3/Part2/Step1.png"></p></li>
+<li><p>Add a Vitis HLS block:</p>
+<ul>
+<li>Left-click anywhere on the canvas workspace.</li>
+<li>Type <code>Vitis HLS</code> in the Add block dialog box.</li>
+<li>Select <strong>Vitis HLS</strong> as shown in the following figure.<br />
+<br><br><img src="Images/Step3/Part2/Step2.png"></li></ul></li>
+<li><p>Double-click the Vitis HLS block to open the Properties Editor.</p></li>
+<li><p>Use the Browse button to select the solution created by Vitis HLS in Step 1, at <samp>\HDL<em>Library\Lab2\C</em>code\hls_project\solution1</samp>, as shown in the following figure.</p></li>
+<li><p>Click <strong>OK</strong> to import the Vitis HLS IP.<br />
+<br><br><img src="Images/Step3/Part2/Step5.png"></p></li>
+<li><p>Connect the input and output ports of the block as shown in the following figure.<br />
+<br><br><img src="Images/Step3/Part2/Step6.png"></p></li>
+<li><p>Navigate into the Noisy Image sub-system and double-click the <strong>Image From File</strong> block to open the Block Parameters dialog box.</p></li>
+<li><p>Use the <strong>Browse</strong> button to ensure the file name correctly points to the file <samp>xilinx_logo.jpg</samp> as shown in the following figure.<br />
+<br><br><img src="Images/Step3/Part2/Step8.png"></p></li>
+<li><p>Click <strong>OK</strong> to exit the Block Parameters dialog box.</p></li>
+<li><p>Use the Up to Parent  toolbar button to return to the top level.</p></li>
+<li><p>Save the design.</p></li>
+<li><p>Simulate the design and verify the image is filtered, as shown in the following figures.<br />
+<br><br><img src="Images/Step3/Part2/Step12.png"></p></li>
+</ol>
+<h3 id="summary">Summary</h3>
+<p>In this lab you learned:</p>
+<ul>
+<li>How to create control logic using M-Code. The final design can be used to create an HDL netlist, in the same manner as designs created using the HDL Blocksets.</li>
+<li>How to model blocks in Vitis Model Composer using HDL by incorporating an existing VHDL RTL design and the importance of matching the data types of the Vitis Model Composer model with those of the RTL design and how the RTL design is simulated within Vitis Model Composer.</li>
+<li>How to take a filter written in C++, synthesize it with Vitis HLS and incorporate the design into MATLAB. This process allows you to use any C, C++ or SystemC design and create a custom block for use in your designs. This exercise showed you how to import the RTL design generated by Vitis HLS and use the design inside MATLAB.</li>
+</ul>
+<p>Solutions to this lab can be found corresponding locations:</p>
+<ul>
+<li><samp>\HDL<em>Library\Lab2\C</em>code\solution</samp></li>
+<li><samp>\HDL_Library\Lab2\HDL\solution</samp></li>
+<li><samp>\HDL<em>Library\Lab2\M</em>code\solution</samp></li>
+</ul>
+<hr />
+<p>Copyright 2022 Xilinx</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h1, h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>

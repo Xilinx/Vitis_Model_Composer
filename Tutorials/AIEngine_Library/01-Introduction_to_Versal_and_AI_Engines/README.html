@@ -1,0 +1,341 @@
+
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<table class="sphinxhide" width="100%">
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:XmcExampleApi.changeDirectory('01-Introduction_to_Versal_and_AI_Engines');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
+<tr width="100%">
+<td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
+<a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
+<a href="https://www.xilinx.com/products/design-tools/vitis/vitis-ai.html">See Vitis™ AI Development Environment on xilinx.com</a>
+</td>
+</tr>
+</table>
+<h1 id="lab-1-introduction-to-versal-adaptive-soc-and-ai-engines">Lab 1: Introduction to Versal Adaptive SoC and AI Engines</h1>
+<p>This lab gives an overview of Versal Adaptive SoC devices and the AI Engine architecture. You will also configure your development environment for AI Engine compilation and run your first AI Engine design in Vitis Model Composer.</p>
+<p>:warning: This AI Engine Lab can be done only in a Linux environment.</p>
+<h3 id="procedure">Procedure</h3>
+<p>This lab has the following steps:</p>
+<ul>
+<li>In Step 1, you will learn about Versal Adaptive SoC, AI Engines, and key concepts for designing AI Engine applications.</li>
+<li>In Step 2, you will install required prerequisites for AI Engine development.</li>
+<li>In Step 3, you will examine a sample AI Engine signal processing design and simulate it using Vitis Model Composer.</li>
+</ul>
+<h2 id="step-1-introduction-to-versal-adaptive-soc-and-ai-engines">Step 1: Introduction to Versal Adaptive SoC and AI Engines</h2>
+<h3 id="versal-adaptive-soc">Versal Adaptive SoC</h3>
+<p>Versal Adaptive SoCs are the latest generation of AMD devices, built on the TSMC 7 nm FinFET process technology. They combine <strong><em>Scalar Engines</em></strong> (which represents the Processor System (PS)), <strong><em>Adaptable Engines</em></strong> (which represents the Programmable Logic (PL)), and <strong><em>Intelligent Engines</em></strong> which are connected together using a high-bandwidth <strong><em>Network-on-Chip</em></strong> (NoC).</p>
+<p><img src="Images/Image01.png"></p>
+<p>This tutorial will focus on AI Engines, which are a part of the Intelligent Engines.</p>
+<h3 id="ai-engines">AI Engines</h3>
+<p>The AI Engines are included in some AMD Versal Adaptive SoCs. They are organized as a two-dimensional array of <strong><em>AI Engine Tiles</em></strong> which are connected together with Memory, Stream and Cascade Interfaces. This array can contain up to 400 tiles on the current Adaptive SoC devices (for example, the VC1902 device). The array also include an <strong><em>AI Engine interface</em></strong>, located at the last row row of the array, which allows the array to interface with the rest of the device (PS, PL and NoC).</p>
+<p><img src="Images/Image02.png"></p>
+<p>The AI Engine interface includes <strong><em>PL and NoC interface tiles</em></strong> and a configuration tile. Interface from the PL to the AI Engine Array is done using AXI4-Stream interfaces through both the PL and NoC interface tiles. Interface from the NoC to the AI Engine Array is done using AXI4-Memory Mapped interfaces through the NoC interface tiles. </p>
+<p><img src="Images/Image03.png"></p>
+<p>It is interesting to see that a direct AXI4-Memory Mapped communication channel is only available from the NoC to the AI Engine tiles (and not from the AI Engine Tiles to the NoC). </p>
+<p><strong><em>Note:</em></strong> The exact number of PL and NoC interface tiles is device specific. The Versal Architecture and Product Data Sheet: Overview (DS950) lists the size of the AI Engine array.</p>
+<h3 id="ai-engine-tile-architecture">AI Engine Tile Architecture</h3>
+<p>Let's now have a closer look at the array and see what is inside an AI Engine tile.</p>
+<p><img src="Images/Image04.png"></p>
+<p>Each AI Engine tile includes:</p>
+<ul>
+<li>One tile interconnect module which handles AXI4-Stream and Memory Mapped AXI4 input/output</li>
+<li>One memory module which includes a 32 KB data memory divided into eight memory banks, a memory interface, DMA, and locks.</li>
+<li>One AI Engine</li>
+</ul>
+<p>The AI Engine can access up to 4 memory modules in all four directions as one contiguous block of memory. This means that in addition to the memory local to its tile, the AI Engine can access the local memory of 3 neighboring tiles (unless the tile is located on the edges of the array):</p>
+<ul>
+<li>The memory module on the north</li>
+<li>The memory module on the south</li>
+<li>The memory module on the east or west depending on the row and the relative placement of the AI Engine and memory module.</li>
+</ul>
+<h3 id="ai-engine-architecture">AI Engine Architecture</h3>
+<p>The AI Engine is a highly-optimized processor which includes the following highlights:</p>
+<ul>
+<li>32-bit scalar RISC processor (called Scalar Unit)</li>
+<li>A 512b SIMD vector unit featuring a Vector fixed-point/integer unit and a Single-precision floating-point (SPFP) vector unit</li>
+<li>Three address generator units (AGU)</li>
+<li>Very-long instruction word (VLIW) function</li>
+<li>Three data memory ports (Two load ports and one store port)</li>
+<li>Direct stream interface (Two input streams and two output streams)</li>
+</ul>
+<p><img src="Images/Image05.png"></p>
+<h3 id="programming-the-ai-engine-array">Programming the AI Engine Array</h3>
+<p>AI Engine tiles come in arrays of 10 or 100 units. Creating a single program embedding some directives to specify the parallelism would be a tedious, almost impossible task. That's why the programming model of the AI Engine Array is close to <a href="https://perso.ensta-paris.fr/~chapoutot/various/kahn_networks.pdf">Kahn Process Networks</a> where autonomous computing processes are connected to each other by communication edges generating a network of processes.</p>
+<p>In the AI Engine framework, edges of the graph are <strong><em>buffers</em></strong> and <strong><em>streams</em></strong> and the computing processes are called <strong><em>kernels</em></strong>. The kernels are instantiated and connected together and to the rest of the design (NoC or PL) within <strong><em>graphs</em></strong>.</p>
+<p>The programming flow is done in 2 stages.</p>
+<h4 id="single-kernel-programming">Single Kernel Programming</h4>
+<p>A kernel describes a specific computing process. One kernel will run on a single AI Engine tile. However, note that multiple kernels can run on the same AI Engine tile, sharing the processing time.</p>
+<p>Any C/C++ code can be used to program the AI Engine. The scalar processor will handle the majority of the code. If your goal is to design a high performance kernel, then you will target the vector processor using functions from the <a href="https://docs.xilinx.com/r/en-US/ug1079-ai-engine-kernel-coding/AI-Engine-API-Overview"><strong><em>AI Engine API</em></strong></a>. These functions are dedicated to the vector processor of the AI Engine and will allow you to extract a massive processing performance from the AI Engine.</p>
+<p>AMD will provide pre-built kernels included in libraries that users will be able to use in their custom graphs.</p>
+<h4 id="graph-programming">Graph Programming</h4>
+<p>AMD provides a C++ framework to create <strong><em>graphs</em></strong> from kernels. This framework includes graph nodes and connections declarations. These nodes are in the AI Engine Array. To have full control over the kernel location, there will be a set of methods that will constrain the placer (kernels, buffers, system memory, …). A graph will instantiate and connect the kernels together using buffers and streams. It will also describes the data transfer from/to the AI Engine Array to/from the rest of the Adaptive SoC device (PL, DDR).</p>
+<p>AMD will provide pre-built graphs included in libraries that users will then be able to use in their applications.</p>
+<p><img src ="Images/Image06.png"></p>
+<p>During runtime and simulation, the AI Engine application is controlled by the PS.</p>
+<p>AMD provides multiple APIs such as the following depending on the application OS:</p>
+<ul>
+<li>Xilinx Run Time (XRT) and OpenCL for Linux applications</li>
+<li>Baremetal drivers</li>
+</ul>
+<h2 id="step-2-set-up-development-environment">Step 2: Set Up Development Environment</h2>
+<p>Before you begin, be sure your system meets the <a href="https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/Installation-Requirements">minimum requirements</a>. In particular, <strong>at least 32 GB of system memory</strong> is required to complete this tutorial.</p>
+<p>To set up your environment to develop AI Engine applications, do the following:</p>
+<ol>
+<li><p>If you did not install the Vitis Software Platform when you installed Vitis Model Composer, follow the <a href="https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/Installing-the-Vitis-Software-Platform">installation instructions</a> to do so.</p></li>
+<li><p>To run this tutorial, make sure you are using a supported version of MATLAB (R2021a, R2021b, R2022a Update 6) with DSP System Toolbox installed. </p></li>
+<li><p>Invoke Vitis Model Composer while pointing to the correct versions of MATLAB and Vitis installed. For example: <code>./model_composer -vitis /opt/Xilinx/Vitis/2022.2 -matlab /tools/gensys/matlab/R2021a</code> </p></li>
+</ol>
+<h2 id="step-3-run-an-example-ai-engine-design">Step 3: Run an Example AI Engine Design</h2>
+<p>In this step, you will simulate a completed AI Engine design in Vitis Model Composer.</p>
+<p>The goal of this tutorial is to implement the Decimation Filter Chain depicted below using AI Engine kernels:</p>
+<p><img src ="Images/DecimationChain.svg"></p>
+<p>The chain consists of 3 half-band decimation filters that bring the sample rate from 1 GSPS to 125 MSPS in a step-wise fashion, followed by a channel filter.</p>
+<p>This decimation chain has been modeled for AI Engine using Vitis Model Composer. To simulate this model:</p>
+<ol>
+<li>Ensure that the MATLAB current folder is the Lab 1 folder, then type <code>setupLab1</code> in the Command Window.</li>
+</ol>
+<p>This prepares your MATLAB session to run the model. It also executes a script called <strong><em>CreateFilter</em></strong> that populates the MATLAB workspace with variables that describe the decimation chain's filters.</p>
+<p><img src ="Images/Workspace.png"></p>
+<ul>
+<li><code>hb1</code>, <code>hb2</code>, <code>hb3</code>, <code>cfi</code>: Coefficients of the filters which are used in the Simulink model.</li>
+<li><code>hb1_aie</code>, <code>hb2_aie</code>, <code>hb3_aie</code>, <code>cfi_aie</code>: Coefficients vectors which are used in the AI Engine design.</li>
+<li>For half-band filters this vector contains only the left-hand side non-null taps including the centre tap.</li>
+<li>For symmetric filters this vector contains only the left-hand side taps, including the center tap if the filter length is odd.</li>
+<li><code>Shift1</code>, <code>Shift2</code>, <code>Shift3</code>, <code>ShiftCF</code>: The number of bits bits by which the result has to be shifted before the result is sent to the ouput port.</li>
+</ul>
+<p>Study the <strong><em>CreateFilter</em></strong> script to see how the filters were defined.</p>
+<ol start="2">
+<li>Double-click the file <strong><em>DecimationChain.slx</em></strong> to open the model.</li>
+</ol>
+<p><img src ="Images/Model.png"></p>
+<p>This model contains two subsystems, <strong><em>AIE<em>DecimationFilterChain</em></strong> and <strong><em>Ref</em>DecimationFilterChain</em></strong>, which implement the decimation filter chain using AI Engine and basic Simulink blocks, respectively. Double-click on each subsystem to view the underlying blocks.</p>
+<p>The model also has a <strong><em>Scope</em></strong> block allowing us to compare the AI Engine output to the Simulink reference.</p>
+<ol start="3">
+<li><p>Run the design by clicking the <strong><em>Run</em></strong> button on the Simulink toolstrip.</p></li>
+<li><p>After the model runs, double-click on the <strong><em>Scope</em></strong> block to view the results.</p></li>
+</ol>
+<p>The Scope block shows that the AI Engine and Simulink reference outputs are equivalent.</p>
+<p><img src ="Images/Scope.png"></p>
+<p>In future labs, you will learn how to build up this model from scratch using Vitis Model Composer, and how to implement the design on AI Engine hardware. </p>
+<hr />
+<p>&copy; Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>    http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+<p align="center"><sup>XD058 | &copy; Copyright 2023 Advanced Micro Devices, Inc.</sup></p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h1, h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>

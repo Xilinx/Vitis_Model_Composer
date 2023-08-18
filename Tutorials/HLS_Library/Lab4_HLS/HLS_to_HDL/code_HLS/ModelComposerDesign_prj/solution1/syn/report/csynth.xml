@@ -1,0 +1,2022 @@
+<profile>
+    <ReportVersion>
+        <Version>2021.2</Version>
+    </ReportVersion>
+    <UserAssignments>
+        <unit>ns</unit>
+        <ProductFamily>kintex7</ProductFamily>
+        <Part>xc7k325t-ffg900-2</Part>
+        <TopModelName>ModelComposerDesign</TopModelName>
+        <TargetClockPeriod>5.00</TargetClockPeriod>
+        <ClockUncertainty>1.35</ClockUncertainty>
+        <FlowTarget>vivado</FlowTarget>
+    </UserAssignments>
+    <PerformanceEstimates>
+        <PipelineType>dataflow</PipelineType>
+        <SummaryOfTimingAnalysis>
+            <unit>ns</unit>
+            <EstimatedClockPeriod>3.650</EstimatedClockPeriod>
+        </SummaryOfTimingAnalysis>
+        <SummaryOfOverallLatency>
+            <unit>clock cycles</unit>
+            <Best-caseLatency>20690</Best-caseLatency>
+            <Average-caseLatency>20690</Average-caseLatency>
+            <Worst-caseLatency>20690</Worst-caseLatency>
+            <Best-caseRealTimeLatency>0.103 ms</Best-caseRealTimeLatency>
+            <Average-caseRealTimeLatency>0.103 ms</Average-caseRealTimeLatency>
+            <Worst-caseRealTimeLatency>0.103 ms</Worst-caseRealTimeLatency>
+            <DataflowPipelineThroughput>20688</DataflowPipelineThroughput>
+            <Interval-min>20688</Interval-min>
+            <Interval-max>20688</Interval-max>
+        </SummaryOfOverallLatency>
+    </PerformanceEstimates>
+    <AreaEstimates>
+        <Resources>
+            <BRAM_18K>3</BRAM_18K>
+            <FF>1820</FF>
+            <LUT>3061</LUT>
+            <DSP>0</DSP>
+            <URAM>0</URAM>
+        </Resources>
+        <AvailableResources>
+            <BRAM_18K>890</BRAM_18K>
+            <DSP>840</DSP>
+            <FF>407600</FF>
+            <LUT>203800</LUT>
+            <URAM>0</URAM>
+        </AvailableResources>
+    </AreaEstimates>
+    <InterfaceSummary>
+        <RtlPorts>
+            <name>ap_local_block</name>
+            <Object>ModelComposerDesign</Object>
+            <Type>return value</Type>
+            <Scope/>
+            <IOProtocol>ap_ctrl_none</IOProtocol>
+            <IOConfig/>
+            <Dir>out</Dir>
+            <Bits>1</Bits>
+            <Attribute>unknown</Attribute>
+        </RtlPorts>
+        <RtlPorts>
+            <name>ap_local_deadlock</name>
+            <Object>ModelComposerDesign</Object>
+            <Type>return value</Type>
+            <Scope/>
+            <IOProtocol>ap_ctrl_none</IOProtocol>
+            <IOConfig/>
+            <Dir>out</Dir>
+            <Bits>1</Bits>
+            <Attribute>unknown</Attribute>
+        </RtlPorts>
+        <RtlPorts>
+            <name>ap_clk</name>
+            <Object>ModelComposerDesign</Object>
+            <Type>return value</Type>
+            <Scope/>
+            <IOProtocol>ap_ctrl_none</IOProtocol>
+            <IOConfig/>
+            <Dir>in</Dir>
+            <Bits>1</Bits>
+            <Attribute>control</Attribute>
+        </RtlPorts>
+        <RtlPorts>
+            <name>ap_rst_n</name>
+            <Object>ModelComposerDesign</Object>
+            <Type>return value</Type>
+            <Scope/>
+            <IOProtocol>ap_ctrl_none</IOProtocol>
+            <IOConfig/>
+            <Dir>in</Dir>
+            <Bits>1</Bits>
+            <Attribute>control</Attribute>
+        </RtlPorts>
+        <RtlPorts>
+            <name>Image_in_TDATA</name>
+            <Object>Image_in</Object>
+            <Type>pointer</Type>
+            <Scope/>
+            <IOProtocol>axis</IOProtocol>
+            <IOConfig>register, both mode</IOConfig>
+            <Dir>in</Dir>
+            <Bits>8</Bits>
+            <Attribute>data</Attribute>
+            <CType>int</CType>
+        </RtlPorts>
+        <RtlPorts>
+            <name>Image_in_TVALID</name>
+            <Object>Image_in</Object>
+            <Type>pointer</Type>
+            <Scope/>
+            <IOProtocol>axis</IOProtocol>
+            <IOConfig>register, both mode</IOConfig>
+            <Dir>in</Dir>
+            <Bits>1</Bits>
+            <Attribute>control</Attribute>
+            <CType>int</CType>
+        </RtlPorts>
+        <RtlPorts>
+            <name>Image_in_TREADY</name>
+            <Object>Image_in</Object>
+            <Type>pointer</Type>
+            <Scope/>
+            <IOProtocol>axis</IOProtocol>
+            <IOConfig>register, both mode</IOConfig>
+            <Dir>out</Dir>
+            <Bits>1</Bits>
+            <Attribute>control</Attribute>
+            <CType>int</CType>
+        </RtlPorts>
+        <RtlPorts>
+            <name>Edge_out_TDATA</name>
+            <Object>Edge_out</Object>
+            <Type>pointer</Type>
+            <Scope/>
+            <IOProtocol>axis</IOProtocol>
+            <IOConfig>register, both mode</IOConfig>
+            <Dir>out</Dir>
+            <Bits>8</Bits>
+            <Attribute>data</Attribute>
+            <CType>int</CType>
+        </RtlPorts>
+        <RtlPorts>
+            <name>Edge_out_TVALID</name>
+            <Object>Edge_out</Object>
+            <Type>pointer</Type>
+            <Scope/>
+            <IOProtocol>axis</IOProtocol>
+            <IOConfig>register, both mode</IOConfig>
+            <Dir>out</Dir>
+            <Bits>1</Bits>
+            <Attribute>control</Attribute>
+            <CType>int</CType>
+        </RtlPorts>
+        <RtlPorts>
+            <name>Edge_out_TREADY</name>
+            <Object>Edge_out</Object>
+            <Type>pointer</Type>
+            <Scope/>
+            <IOProtocol>axis</IOProtocol>
+            <IOConfig>register, both mode</IOConfig>
+            <Dir>in</Dir>
+            <Bits>1</Bits>
+            <Attribute>control</Attribute>
+            <CType>int</CType>
+        </RtlPorts>
+    </InterfaceSummary>
+    <RTLDesignHierarchy>
+        <TopModule MAX_DEPTH="8">
+            <ModuleName>ModelComposerDesign</ModuleName>
+            <InstancesList>
+                <Instance>
+                    <InstName>readStream_unsigned_char_U0</InstName>
+                    <ModuleName>readStream_unsigned_char_s</ModuleName>
+                    <IsCompInst>true</IsCompInst>
+                    <ID>78</ID>
+                    <BindInstances>add_ln371_fu_71_p2</BindInstances>
+                </Instance>
+                <Instance>
+                    <InstName>SobelFilter_XMC_120_160_1_U0</InstName>
+                    <ModuleName>SobelFilter_XMC_120_160_1_s</ModuleName>
+                    <IsCompInst>true</IsCompInst>
+                    <ID>85</ID>
+                    <InstancesList>
+                        <Instance>
+                            <InstName>SobelFilter_XMC_120_160_1_Loop_VITIS_LOOP_94_1_proc7_U0</InstName>
+                            <ModuleName>SobelFilter_XMC_120_160_1_Loop_VITIS_LOOP_94_1_proc7</ModuleName>
+                            <IsCompInst>true</IsCompInst>
+                            <ID>52</ID>
+                            <BindInstances>add_ln94_fu_67_p2</BindInstances>
+                        </Instance>
+                        <Instance>
+                            <InstName>Sobel_0_3_0_2_120_160_1_false_U0</InstName>
+                            <ModuleName>Sobel_0_3_0_2_120_160_1_false_s</ModuleName>
+                            <IsCompInst>true</IsCompInst>
+                            <ID>59</ID>
+                            <InstancesList>
+                                <Instance>
+                                    <InstName>grp_xFSobelFilter3x3_0_2_120_160_1_0_3_1_1_5_160_false_s_fu_16</InstName>
+                                    <ModuleName>xFSobelFilter3x3_0_2_120_160_1_0_3_1_1_5_160_false_s</ModuleName>
+                                    <IsCompInst>true</IsCompInst>
+                                    <ID>16</ID>
+                                    <InstancesList>
+                                        <Instance>
+                                            <InstName>grp_xFSobelFilter3x3_0_2_120_160_1_0_3_1_1_5_160_false_Pipeline_Clear_Row_Loop_fu_134</InstName>
+                                            <ModuleName>xFSobelFilter3x3_0_2_120_160_1_0_3_1_1_5_160_false_Pipeline_Clear_Row_Loop</ModuleName>
+                                            <IsCompInst>true</IsCompInst>
+                                            <ID>134</ID>
+                                            <BindInstances>col_V_4_fu_105_p2</BindInstances>
+                                        </Instance>
+                                        <Instance>
+                                            <InstName>grp_xFSobelFilter3x3_0_2_120_160_1_0_3_1_1_5_160_false_Pipeline_Col_Loop_fu_144</InstName>
+                                            <ModuleName>xFSobelFilter3x3_0_2_120_160_1_0_3_1_1_5_160_false_Pipeline_Col_Loop</ModuleName>
+                                            <IsCompInst>true</IsCompInst>
+                                            <ID>144</ID>
+                                            <InstancesList>
+                                                <Instance>
+                                                    <InstName>call_ret_xFSobel3x3_1_1_0_3_s_fu_305</InstName>
+                                                    <ModuleName>xFSobel3x3_1_1_0_3_s</ModuleName>
+                                                    <IsCompInst>true</IsCompInst>
+                                                    <ID>305</ID>
+                                                    <InstancesList>
+                                                        <Instance>
+                                                            <InstName>tmp_xFGradientX3x3_0_3_s_fu_72</InstName>
+                                                            <ModuleName>xFGradientX3x3_0_3_s</ModuleName>
+                                                            <IsCompInst>true</IsCompInst>
+                                                            <ID>72</ID>
+                                                            <BindInstances>ret_fu_86_p2 ret_2_fu_104_p2 out_pix_7_fu_114_p2 out_pix_8_fu_124_p2 ap_return</BindInstances>
+                                                        </Instance>
+                                                        <Instance>
+                                                            <InstName>tmp_3_xFGradientY3x3_0_3_s_fu_88</InstName>
+                                                            <ModuleName>xFGradientY3x3_0_3_s</ModuleName>
+                                                            <IsCompInst>true</IsCompInst>
+                                                            <ID>88</ID>
+                                                            <BindInstances>ret_fu_86_p2 ret_1_fu_104_p2 out_pix_3_fu_114_p2 out_pix_4_fu_124_p2 ap_return</BindInstances>
+                                                        </Instance>
+                                                    </InstancesList>
+                                                </Instance>
+                                            </InstancesList>
+                                            <BindInstances>col_V_2_fu_361_p2</BindInstances>
+                                        </Instance>
+                                        <Instance>
+                                            <InstName>tmp_xFGradientX3x3_0_3_s_fu_167</InstName>
+                                            <ModuleName>xFGradientX3x3_0_3_s</ModuleName>
+                                            <IsCompInst>true</IsCompInst>
+                                            <ID>167</ID>
+                                            <BindInstances>ret_fu_86_p2 ret_2_fu_104_p2 out_pix_7_fu_114_p2 out_pix_8_fu_124_p2 ap_return</BindInstances>
+                                        </Instance>
+                                        <Instance>
+                                            <InstName>tmp_2_xFGradientY3x3_0_3_s_fu_180</InstName>
+                                            <ModuleName>xFGradientY3x3_0_3_s</ModuleName>
+                                            <IsCompInst>true</IsCompInst>
+                                            <ID>180</ID>
+                                            <BindInstances>ret_fu_86_p2 ret_1_fu_104_p2 out_pix_3_fu_114_p2 out_pix_4_fu_124_p2 ap_return</BindInstances>
+                                        </Instance>
+                                    </InstancesList>
+                                    <BindInstances>buf_V_U buf_V_1_U buf_V_2_U row_ind_V_1_fu_325_p2 row_V_3_fu_331_p2</BindInstances>
+                                </Instance>
+                            </InstancesList>
+                        </Instance>
+                        <Instance>
+                            <InstName>SobelFilter_XMC_120_160_1_Loop_VITIS_LOOP_104_3_proc8_U0</InstName>
+                            <ModuleName>SobelFilter_XMC_120_160_1_Loop_VITIS_LOOP_104_3_proc8</ModuleName>
+                            <IsCompInst>true</IsCompInst>
+                            <ID>66</ID>
+                            <BindInstances>add_ln104_fu_86_p2</BindInstances>
+                        </Instance>
+                    </InstancesList>
+                    <BindInstances>src_obj_data_U dstx_obj_data_U dsty_obj_data_U</BindInstances>
+                </Instance>
+                <Instance>
+                    <InstName>GradientMag_XMC_120_160_1_U0</InstName>
+                    <ModuleName>GradientMag_XMC_120_160_1_s</ModuleName>
+                    <IsCompInst>true</IsCompInst>
+                    <ID>92</ID>
+                    <InstancesList>
+                        <Instance>
+                            <InstName>GradientMag_XMC_120_160_1_Loop_VITIS_LOOP_93_1_proc9_U0</InstName>
+                            <ModuleName>GradientMag_XMC_120_160_1_Loop_VITIS_LOOP_93_1_proc9</ModuleName>
+                            <IsCompInst>true</IsCompInst>
+                            <ID>52</ID>
+                            <BindInstances>add_ln93_fu_84_p2</BindInstances>
+                        </Instance>
+                        <Instance>
+                            <InstName>xFMagnitudeKernel_2_2_120_160_3_3_1_5_5_160_2_U0</InstName>
+                            <ModuleName>xFMagnitudeKernel_2_2_120_160_3_3_1_5_5_160_2_s</ModuleName>
+                            <IsCompInst>true</IsCompInst>
+                            <ID>62</ID>
+                            <InstancesList>
+                                <Instance>
+                                    <InstName>grp_xFMagnitudeKernel_2_2_120_160_3_3_1_5_5_160_2_Pipeline_colLoop_fu_38</InstName>
+                                    <ModuleName>xFMagnitudeKernel_2_2_120_160_3_3_1_5_5_160_2_Pipeline_colLoop</ModuleName>
+                                    <IsCompInst>true</IsCompInst>
+                                    <ID>38</ID>
+                                    <BindInstances>j_2_fu_81_p2 sub_ln98_fu_92_p2 sub_ln99_fu_98_p2 dst_obj_451_din</BindInstances>
+                                </Instance>
+                            </InstancesList>
+                            <BindInstances>i_2_fu_62_p2</BindInstances>
+                        </Instance>
+                        <Instance>
+                            <InstName>GradientMag_XMC_120_160_1_Loop_VITIS_LOOP_106_3_proc10_U0</InstName>
+                            <ModuleName>GradientMag_XMC_120_160_1_Loop_VITIS_LOOP_106_3_proc10</ModuleName>
+                            <IsCompInst>true</IsCompInst>
+                            <ID>69</ID>
+                            <BindInstances>add_ln106_fu_68_p2</BindInstances>
+                        </Instance>
+                    </InstancesList>
+                    <BindInstances>srcX_obj_data_U srcY_obj_data_U dst_obj_data_U</BindInstances>
+                </Instance>
+                <Instance>
+                    <InstName>p31_U0</InstName>
+                    <ModuleName>p31</ModuleName>
+                    <IsCompInst>true</IsCompInst>
+                    <ID>99</ID>
+                    <BindInstances>add_ln62_fu_69_p2</BindInstances>
+                </Instance>
+                <Instance>
+                    <InstName>writeStream_bool_U0</InstName>
+                    <ModuleName>writeStream_bool_s</ModuleName>
+                    <IsCompInst>true</IsCompInst>
+                    <ID>105</ID>
+                    <BindInstances>add_ln390_fu_71_p2</BindInstances>
+                </Instance>
+            </InstancesList>
+            <BindInstances>SobelFilter_XMC_out1_U SobelFilter_XMC_out2_U GradientMag_XMC_out1_U Image_in_adapter_out1_U ModelComposerDesign_core_Edge_out_U</BindInstances>
+        </TopModule>
+    </RTLDesignHierarchy>
+    <ModuleInformation>
+        <Module>
+            <Name>readStream_unsigned_char_s</Name>
+            <Loops>
+                <VITIS_LOOP_371_1_VITIS_LOOP_372_2/>
+            </Loops>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>2.180</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>19202</Best-caseLatency>
+                    <Average-caseLatency>19202</Average-caseLatency>
+                    <Worst-caseLatency>19202</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>96.010 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>96.010 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>96.010 us</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>19202</PipelineInitiationInterval>
+                    <PipelineType>no</PipelineType>
+                </SummaryOfOverallLatency>
+                <SummaryOfLoopLatency>
+                    <VITIS_LOOP_371_1_VITIS_LOOP_372_2>
+                        <Name>VITIS_LOOP_371_1_VITIS_LOOP_372_2</Name>
+                        <TripCount>19200</TripCount>
+                        <Latency>19200</Latency>
+                        <AbsoluteTimeLatency>96.000 us</AbsoluteTimeLatency>
+                        <PipelineII>1</PipelineII>
+                        <PipelineDepth>2</PipelineDepth>
+                        <PipelineType>yes</PipelineType>
+                        <InstanceList/>
+                    </VITIS_LOOP_371_1_VITIS_LOOP_372_2>
+                </SummaryOfLoopLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>27</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>107</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="VITIS_LOOP_371_1_VITIS_LOOP_372_2" OPTYPE="add" PRAGMA="" RTLNAME="add_ln371_fu_71_p2" SOURCE="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:371" URAM="0" VARIABLE="add_ln371"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>SobelFilter_XMC_120_160_1_Loop_VITIS_LOOP_94_1_proc7</Name>
+            <Loops>
+                <VITIS_LOOP_94_1_VITIS_LOOP_95_2/>
+            </Loops>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.067</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>19202</Best-caseLatency>
+                    <Average-caseLatency>19202</Average-caseLatency>
+                    <Worst-caseLatency>19202</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>96.010 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>96.010 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>96.010 us</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>19202</PipelineInitiationInterval>
+                    <PipelineType>no</PipelineType>
+                </SummaryOfOverallLatency>
+                <SummaryOfLoopLatency>
+                    <VITIS_LOOP_94_1_VITIS_LOOP_95_2>
+                        <Name>VITIS_LOOP_94_1_VITIS_LOOP_95_2</Name>
+                        <TripCount>19200</TripCount>
+                        <Latency>19200</Latency>
+                        <AbsoluteTimeLatency>96.000 us</AbsoluteTimeLatency>
+                        <PipelineII>1</PipelineII>
+                        <PipelineDepth>2</PipelineDepth>
+                        <PipelineType>yes</PipelineType>
+                        <InstanceList/>
+                    </VITIS_LOOP_94_1_VITIS_LOOP_95_2>
+                </SummaryOfLoopLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>27</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>105</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="VITIS_LOOP_94_1_VITIS_LOOP_95_2" OPTYPE="add" PRAGMA="" RTLNAME="add_ln94_fu_67_p2" SOURCE="./sobelfilter_Wrap.h:94" URAM="0" VARIABLE="add_ln94"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>xFSobelFilter3x3_0_2_120_160_1_0_3_1_1_5_160_false_Pipeline_Clear_Row_Loop</Name>
+            <Loops>
+                <Clear_Row_Loop/>
+            </Loops>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.213</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>163</Best-caseLatency>
+                    <Average-caseLatency>163</Average-caseLatency>
+                    <Worst-caseLatency>163</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>0.815 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>0.815 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>0.815 us</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>163</PipelineInitiationInterval>
+                    <PipelineType>no</PipelineType>
+                </SummaryOfOverallLatency>
+                <SummaryOfLoopLatency>
+                    <Clear_Row_Loop>
+                        <Name>Clear_Row_Loop</Name>
+                        <TripCount>160</TripCount>
+                        <Latency>161</Latency>
+                        <AbsoluteTimeLatency>0.805 us</AbsoluteTimeLatency>
+                        <PipelineII>1</PipelineII>
+                        <PipelineDepth>3</PipelineDepth>
+                        <PipelineType>yes</PipelineType>
+                        <InstanceList/>
+                    </Clear_Row_Loop>
+                </SummaryOfLoopLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>37</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>75</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="Clear_Row_Loop" OPTYPE="add" PRAGMA="" RTLNAME="col_V_4_fu_105_p2" SOURCE="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Vitis_HLS/2021.2/common/technology/autopilot/ap_int_base.h:885" URAM="0" VARIABLE="col_V_4"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>xFGradientX3x3_0_3_s</Name>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <TargetInitiationInterval>4294967295</TargetInitiationInterval>
+                    <EstimatedClockPeriod>3.338</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>0</Best-caseLatency>
+                    <Average-caseLatency>0</Average-caseLatency>
+                    <Worst-caseLatency>0</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>0 ns</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>0 ns</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>0 ns</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>1</PipelineInitiationInterval>
+                    <PipelineDepth>1</PipelineDepth>
+                    <PipelineType>yes</PipelineType>
+                </SummaryOfOverallLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>0</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>0</UTIL_FF>
+                    <LUT>71</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="" OPTYPE="add" PRAGMA="" RTLNAME="ret_fu_86_p2" SOURCE="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Vitis_HLS/2021.2/common/technology/autopilot/ap_int_base.h:1540" URAM="0" VARIABLE="ret"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="" OPTYPE="add" PRAGMA="" RTLNAME="ret_2_fu_104_p2" SOURCE="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Vitis_HLS/2021.2/common/technology/autopilot/ap_int_base.h:1540" URAM="0" VARIABLE="ret_2"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op sub" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="" OPTYPE="sub" PRAGMA="" RTLNAME="out_pix_7_fu_114_p2" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:65" URAM="0" VARIABLE="out_pix_7"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op sub" DSP="0" ID="" IMPL="tadder" LATENCY="0" LOOP="" OPTYPE="sub" PRAGMA="" RTLNAME="out_pix_8_fu_124_p2" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:66" URAM="0" VARIABLE="out_pix_8"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op sub" DSP="0" ID="" IMPL="tadder" LATENCY="0" LOOP="" OPTYPE="sub" PRAGMA="" RTLNAME="ap_return" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:67" URAM="0" VARIABLE="out_pix"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>xFGradientY3x3_0_3_s</Name>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <TargetInitiationInterval>4294967295</TargetInitiationInterval>
+                    <EstimatedClockPeriod>3.338</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>0</Best-caseLatency>
+                    <Average-caseLatency>0</Average-caseLatency>
+                    <Worst-caseLatency>0</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>0 ns</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>0 ns</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>0 ns</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>1</PipelineInitiationInterval>
+                    <PipelineDepth>1</PipelineDepth>
+                    <PipelineType>yes</PipelineType>
+                </SummaryOfOverallLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>0</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>0</UTIL_FF>
+                    <LUT>71</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="" OPTYPE="add" PRAGMA="" RTLNAME="ret_fu_86_p2" SOURCE="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Vitis_HLS/2021.2/common/technology/autopilot/ap_int_base.h:1540" URAM="0" VARIABLE="ret"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="" OPTYPE="add" PRAGMA="" RTLNAME="ret_1_fu_104_p2" SOURCE="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Vitis_HLS/2021.2/common/technology/autopilot/ap_int_base.h:1540" URAM="0" VARIABLE="ret_1"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op sub" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="" OPTYPE="sub" PRAGMA="" RTLNAME="out_pix_3_fu_114_p2" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:113" URAM="0" VARIABLE="out_pix_3"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op sub" DSP="0" ID="" IMPL="tadder" LATENCY="0" LOOP="" OPTYPE="sub" PRAGMA="" RTLNAME="out_pix_4_fu_124_p2" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:114" URAM="0" VARIABLE="out_pix_4"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op sub" DSP="0" ID="" IMPL="tadder" LATENCY="0" LOOP="" OPTYPE="sub" PRAGMA="" RTLNAME="ap_return" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:115" URAM="0" VARIABLE="out_pix"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>xFSobel3x3_1_1_0_3_s</Name>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <TargetInitiationInterval>4294967295</TargetInitiationInterval>
+                    <EstimatedClockPeriod>3.338</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>0</Best-caseLatency>
+                    <Average-caseLatency>0</Average-caseLatency>
+                    <Worst-caseLatency>0</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>0 ns</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>0 ns</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>0 ns</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>1</PipelineInitiationInterval>
+                    <PipelineDepth>1</PipelineDepth>
+                    <PipelineType>yes</PipelineType>
+                </SummaryOfOverallLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>0</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>0</UTIL_FF>
+                    <LUT>142</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+        </Module>
+        <Module>
+            <Name>xFSobelFilter3x3_0_2_120_160_1_0_3_1_1_5_160_false_Pipeline_Col_Loop</Name>
+            <Loops>
+                <Col_Loop/>
+            </Loops>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.338</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>167</Best-caseLatency>
+                    <Average-caseLatency>167</Average-caseLatency>
+                    <Worst-caseLatency>167</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>0.835 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>0.835 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>0.835 us</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>167</PipelineInitiationInterval>
+                    <PipelineType>no</PipelineType>
+                </SummaryOfOverallLatency>
+                <SummaryOfLoopLatency>
+                    <Col_Loop>
+                        <Name>Col_Loop</Name>
+                        <TripCount>160</TripCount>
+                        <Latency>165</Latency>
+                        <AbsoluteTimeLatency>0.825 us</AbsoluteTimeLatency>
+                        <PipelineII>1</PipelineII>
+                        <PipelineDepth>7</PipelineDepth>
+                        <PipelineType>yes</PipelineType>
+                        <InstanceList>
+                            <Instance>call_ret_xFSobel3x3_1_1_0_3_s_fu_305</Instance>
+                        </InstanceList>
+                    </Col_Loop>
+                </SummaryOfLoopLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>335</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>537</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="Col_Loop" OPTYPE="add" PRAGMA="" RTLNAME="col_V_2_fu_361_p2" SOURCE="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Vitis_HLS/2021.2/common/technology/autopilot/ap_int_base.h:885" URAM="0" VARIABLE="col_V_2"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>xFSobelFilter3x3_0_2_120_160_1_0_3_1_1_5_160_false_s</Name>
+            <Loops>
+                <Row_Loop/>
+            </Loops>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.338</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>20686</Best-caseLatency>
+                    <Average-caseLatency>20686</Average-caseLatency>
+                    <Worst-caseLatency>20686</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>0.103 ms</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>0.103 ms</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>0.103 ms</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>20686</PipelineInitiationInterval>
+                    <PipelineType>no</PipelineType>
+                </SummaryOfOverallLatency>
+                <SummaryOfLoopLatency>
+                    <Row_Loop>
+                        <Name>Row_Loop</Name>
+                        <TripCount>120</TripCount>
+                        <Latency>20520</Latency>
+                        <AbsoluteTimeLatency>0.103 ms</AbsoluteTimeLatency>
+                        <IterationLatency>171</IterationLatency>
+                        <PipelineDepth>171</PipelineDepth>
+                        <PipelineType>no</PipelineType>
+                        <InstanceList>
+                            <Instance>grp_xFSobelFilter3x3_0_2_120_160_1_0_3_1_1_5_160_false_Pipeline_Col_Loop_fu_144</Instance>
+                            <Instance>tmp_xFGradientX3x3_0_3_s_fu_167</Instance>
+                            <Instance>tmp_2_xFGradientY3x3_0_3_s_fu_180</Instance>
+                        </InstanceList>
+                    </Row_Loop>
+                </SummaryOfLoopLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <BRAM_18K>3</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>~0</UTIL_BRAM>
+                    <FF>451</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>1192</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="storage" BRAM="1" BUNDLEDNAME="" DISPNAME="bind_storage ram_s2p" DSP="0" ID="" IMPL="bram" LATENCY="1" LOOP="" OPTYPE="ram_s2p" PRAGMA="yes" RTLNAME="buf_V_U" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:326" URAM="0" VARIABLE="buf_V"/>
+                <BindNode BINDTYPE="storage" BRAM="1" BUNDLEDNAME="" DISPNAME="bind_storage ram_s2p" DSP="0" ID="" IMPL="bram" LATENCY="1" LOOP="" OPTYPE="ram_s2p" PRAGMA="yes" RTLNAME="buf_V_1_U" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:326" URAM="0" VARIABLE="buf_V_1"/>
+                <BindNode BINDTYPE="storage" BRAM="1" BUNDLEDNAME="" DISPNAME="bind_storage ram_s2p" DSP="0" ID="" IMPL="bram" LATENCY="1" LOOP="" OPTYPE="ram_s2p" PRAGMA="yes" RTLNAME="buf_V_2_U" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:326" URAM="0" VARIABLE="buf_V_2"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="Row_Loop" OPTYPE="add" PRAGMA="" RTLNAME="row_ind_V_1_fu_325_p2" SOURCE="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Vitis_HLS/2021.2/common/technology/autopilot/ap_int_base.h:885" URAM="0" VARIABLE="row_ind_V_1"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="Row_Loop" OPTYPE="add" PRAGMA="" RTLNAME="row_V_3_fu_331_p2" SOURCE="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Vitis_HLS/2021.2/common/technology/autopilot/ap_int_base.h:885" URAM="0" VARIABLE="row_V_3"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>Sobel_0_3_0_2_120_160_1_false_s</Name>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.338</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>20687</Best-caseLatency>
+                    <Average-caseLatency>20687</Average-caseLatency>
+                    <Worst-caseLatency>20687</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>0.103 ms</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>0.103 ms</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>0.103 ms</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>20687</PipelineInitiationInterval>
+                    <PipelineType>no</PipelineType>
+                </SummaryOfOverallLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <BRAM_18K>3</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>~0</UTIL_BRAM>
+                    <FF>456</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>1252</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+        </Module>
+        <Module>
+            <Name>SobelFilter_XMC_120_160_1_Loop_VITIS_LOOP_104_3_proc8</Name>
+            <Loops>
+                <VITIS_LOOP_104_3_VITIS_LOOP_105_4/>
+            </Loops>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.650</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>19202</Best-caseLatency>
+                    <Average-caseLatency>19202</Average-caseLatency>
+                    <Worst-caseLatency>19202</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>96.010 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>96.010 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>96.010 us</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>19202</PipelineInitiationInterval>
+                    <PipelineType>no</PipelineType>
+                </SummaryOfOverallLatency>
+                <SummaryOfLoopLatency>
+                    <VITIS_LOOP_104_3_VITIS_LOOP_105_4>
+                        <Name>VITIS_LOOP_104_3_VITIS_LOOP_105_4</Name>
+                        <TripCount>19200</TripCount>
+                        <Latency>19200</Latency>
+                        <AbsoluteTimeLatency>96.000 us</AbsoluteTimeLatency>
+                        <PipelineII>1</PipelineII>
+                        <PipelineDepth>2</PipelineDepth>
+                        <PipelineType>yes</PipelineType>
+                        <InstanceList/>
+                    </VITIS_LOOP_104_3_VITIS_LOOP_105_4>
+                </SummaryOfLoopLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>18</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>114</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="VITIS_LOOP_104_3_VITIS_LOOP_105_4" OPTYPE="add" PRAGMA="" RTLNAME="add_ln104_fu_86_p2" SOURCE="./sobelfilter_Wrap.h:104" URAM="0" VARIABLE="add_ln104"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>SobelFilter_XMC_120_160_1_s</Name>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.650</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>20688</Best-caseLatency>
+                    <Average-caseLatency>20688</Average-caseLatency>
+                    <Worst-caseLatency>20688</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>0.103 ms</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>0.103 ms</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>0.103 ms</Worst-caseRealTimeLatency>
+                    <DataflowPipelineThroughput>20688</DataflowPipelineThroughput>
+                    <PipelineInitiationInterval>20688</PipelineInitiationInterval>
+                    <PipelineType>dataflow</PipelineType>
+                </SummaryOfOverallLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <BRAM_18K>3</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>~0</UTIL_BRAM>
+                    <FF>799</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>1683</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="storage" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_storage fifo" DSP="0" ID="" IMPL="srl" LATENCY="0" LOOP="" OPTYPE="fifo" PRAGMA="" RTLNAME="src_obj_data_U" SOURCE="./sobelfilter_Wrap.h:81" URAM="0" VARIABLE="src_obj_data"/>
+                <BindNode BINDTYPE="storage" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_storage fifo" DSP="0" ID="" IMPL="srl" LATENCY="0" LOOP="" OPTYPE="fifo" PRAGMA="" RTLNAME="dstx_obj_data_U" SOURCE="./sobelfilter_Wrap.h:85" URAM="0" VARIABLE="dstx_obj_data"/>
+                <BindNode BINDTYPE="storage" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_storage fifo" DSP="0" ID="" IMPL="srl" LATENCY="0" LOOP="" OPTYPE="fifo" PRAGMA="" RTLNAME="dsty_obj_data_U" SOURCE="./sobelfilter_Wrap.h:89" URAM="0" VARIABLE="dsty_obj_data"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>GradientMag_XMC_120_160_1_Loop_VITIS_LOOP_93_1_proc9</Name>
+            <Loops>
+                <VITIS_LOOP_93_1_VITIS_LOOP_94_2/>
+            </Loops>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.067</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>19202</Best-caseLatency>
+                    <Average-caseLatency>19202</Average-caseLatency>
+                    <Worst-caseLatency>19202</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>96.010 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>96.010 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>96.010 us</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>19202</PipelineInitiationInterval>
+                    <PipelineType>no</PipelineType>
+                </SummaryOfOverallLatency>
+                <SummaryOfLoopLatency>
+                    <VITIS_LOOP_93_1_VITIS_LOOP_94_2>
+                        <Name>VITIS_LOOP_93_1_VITIS_LOOP_94_2</Name>
+                        <TripCount>19200</TripCount>
+                        <Latency>19200</Latency>
+                        <AbsoluteTimeLatency>96.000 us</AbsoluteTimeLatency>
+                        <PipelineII>1</PipelineII>
+                        <PipelineDepth>2</PipelineDepth>
+                        <PipelineType>yes</PipelineType>
+                        <InstanceList/>
+                    </VITIS_LOOP_93_1_VITIS_LOOP_94_2>
+                </SummaryOfLoopLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>51</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>125</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="VITIS_LOOP_93_1_VITIS_LOOP_94_2" OPTYPE="add" PRAGMA="" RTLNAME="add_ln93_fu_84_p2" SOURCE="./GradientMag_Wrap.h:93" URAM="0" VARIABLE="add_ln93"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>xFMagnitudeKernel_2_2_120_160_3_3_1_5_5_160_2_Pipeline_colLoop</Name>
+            <Loops>
+                <colLoop/>
+            </Loops>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.171</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>163</Best-caseLatency>
+                    <Average-caseLatency>163</Average-caseLatency>
+                    <Worst-caseLatency>163</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>0.815 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>0.815 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>0.815 us</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>163</PipelineInitiationInterval>
+                    <PipelineType>no</PipelineType>
+                </SummaryOfOverallLatency>
+                <SummaryOfLoopLatency>
+                    <colLoop>
+                        <Name>colLoop</Name>
+                        <TripCount>160</TripCount>
+                        <Latency>161</Latency>
+                        <AbsoluteTimeLatency>0.805 us</AbsoluteTimeLatency>
+                        <PipelineII>1</PipelineII>
+                        <PipelineDepth>3</PipelineDepth>
+                        <PipelineType>yes</PipelineType>
+                        <InstanceList/>
+                    </colLoop>
+                </SummaryOfLoopLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>77</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>196</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="colLoop" OPTYPE="add" PRAGMA="" RTLNAME="j_2_fu_81_p2" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_magnitude.hpp:79" URAM="0" VARIABLE="j_2"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op sub" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="colLoop" OPTYPE="sub" PRAGMA="" RTLNAME="sub_ln98_fu_92_p2" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_magnitude.hpp:98" URAM="0" VARIABLE="sub_ln98"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op sub" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="colLoop" OPTYPE="sub" PRAGMA="" RTLNAME="sub_ln99_fu_98_p2" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_magnitude.hpp:99" URAM="0" VARIABLE="sub_ln99"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="colLoop" OPTYPE="add" PRAGMA="" RTLNAME="dst_obj_451_din" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_magnitude.hpp:102" URAM="0" VARIABLE="tmp_6"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>xFMagnitudeKernel_2_2_120_160_3_3_1_5_5_160_2_s</Name>
+            <Loops>
+                <rowLoop/>
+            </Loops>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.171</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>19801</Best-caseLatency>
+                    <Average-caseLatency>19801</Average-caseLatency>
+                    <Worst-caseLatency>19801</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>99.005 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>99.005 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>99.005 us</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>19801</PipelineInitiationInterval>
+                    <PipelineType>no</PipelineType>
+                </SummaryOfOverallLatency>
+                <SummaryOfLoopLatency>
+                    <rowLoop>
+                        <Name>rowLoop</Name>
+                        <TripCount>120</TripCount>
+                        <Latency>19800</Latency>
+                        <AbsoluteTimeLatency>99.000 us</AbsoluteTimeLatency>
+                        <IterationLatency>165</IterationLatency>
+                        <PipelineDepth>165</PipelineDepth>
+                        <PipelineType>no</PipelineType>
+                        <InstanceList>
+                            <Instance>grp_xFMagnitudeKernel_2_2_120_160_3_3_1_5_5_160_2_Pipeline_colLoop_fu_38</Instance>
+                        </InstanceList>
+                    </rowLoop>
+                </SummaryOfLoopLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>90</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>293</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="rowLoop" OPTYPE="add" PRAGMA="" RTLNAME="i_2_fu_62_p2" SOURCE="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_magnitude.hpp:72" URAM="0" VARIABLE="i_2"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>GradientMag_XMC_120_160_1_Loop_VITIS_LOOP_106_3_proc10</Name>
+            <Loops>
+                <VITIS_LOOP_106_3_VITIS_LOOP_107_4/>
+            </Loops>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.650</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>19202</Best-caseLatency>
+                    <Average-caseLatency>19202</Average-caseLatency>
+                    <Worst-caseLatency>19202</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>96.010 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>96.010 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>96.010 us</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>19202</PipelineInitiationInterval>
+                    <PipelineType>no</PipelineType>
+                </SummaryOfOverallLatency>
+                <SummaryOfLoopLatency>
+                    <VITIS_LOOP_106_3_VITIS_LOOP_107_4>
+                        <Name>VITIS_LOOP_106_3_VITIS_LOOP_107_4</Name>
+                        <TripCount>19200</TripCount>
+                        <Latency>19200</Latency>
+                        <AbsoluteTimeLatency>96.000 us</AbsoluteTimeLatency>
+                        <PipelineII>1</PipelineII>
+                        <PipelineDepth>2</PipelineDepth>
+                        <PipelineType>yes</PipelineType>
+                        <InstanceList/>
+                    </VITIS_LOOP_106_3_VITIS_LOOP_107_4>
+                </SummaryOfLoopLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>18</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>96</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="VITIS_LOOP_106_3_VITIS_LOOP_107_4" OPTYPE="add" PRAGMA="" RTLNAME="add_ln106_fu_68_p2" SOURCE="./GradientMag_Wrap.h:106" URAM="0" VARIABLE="add_ln106"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>GradientMag_XMC_120_160_1_s</Name>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.650</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>19801</Best-caseLatency>
+                    <Average-caseLatency>19801</Average-caseLatency>
+                    <Worst-caseLatency>19801</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>99.005 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>99.005 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>99.005 us</Worst-caseRealTimeLatency>
+                    <DataflowPipelineThroughput>19802</DataflowPipelineThroughput>
+                    <PipelineInitiationInterval>19802</PipelineInitiationInterval>
+                    <PipelineType>dataflow</PipelineType>
+                </SummaryOfOverallLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>457</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>726</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="storage" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_storage fifo" DSP="0" ID="" IMPL="srl" LATENCY="0" LOOP="" OPTYPE="fifo" PRAGMA="" RTLNAME="srcX_obj_data_U" SOURCE="./GradientMag_Wrap.h:81" URAM="0" VARIABLE="srcX_obj_data"/>
+                <BindNode BINDTYPE="storage" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_storage fifo" DSP="0" ID="" IMPL="srl" LATENCY="0" LOOP="" OPTYPE="fifo" PRAGMA="" RTLNAME="srcY_obj_data_U" SOURCE="./GradientMag_Wrap.h:84" URAM="0" VARIABLE="srcY_obj_data"/>
+                <BindNode BINDTYPE="storage" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_storage fifo" DSP="0" ID="" IMPL="srl" LATENCY="0" LOOP="" OPTYPE="fifo" PRAGMA="" RTLNAME="dst_obj_data_U" SOURCE="./GradientMag_Wrap.h:88" URAM="0" VARIABLE="dst_obj_data"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>p31</Name>
+            <Loops>
+                <VITIS_LOOP_62_1_VITIS_LOOP_63_2/>
+            </Loops>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.109</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>19203</Best-caseLatency>
+                    <Average-caseLatency>19203</Average-caseLatency>
+                    <Worst-caseLatency>19203</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>96.015 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>96.015 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>96.015 us</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>19203</PipelineInitiationInterval>
+                    <PipelineType>no</PipelineType>
+                </SummaryOfOverallLatency>
+                <SummaryOfLoopLatency>
+                    <VITIS_LOOP_62_1_VITIS_LOOP_63_2>
+                        <Name>VITIS_LOOP_62_1_VITIS_LOOP_63_2</Name>
+                        <TripCount>19200</TripCount>
+                        <Latency>19201</Latency>
+                        <AbsoluteTimeLatency>96.005 us</AbsoluteTimeLatency>
+                        <PipelineII>1</PipelineII>
+                        <PipelineDepth>3</PipelineDepth>
+                        <PipelineType>yes</PipelineType>
+                        <InstanceList/>
+                    </VITIS_LOOP_62_1_VITIS_LOOP_63_2>
+                </SummaryOfLoopLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>22</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>116</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="VITIS_LOOP_62_1_VITIS_LOOP_63_2" OPTYPE="add" PRAGMA="" RTLNAME="add_ln62_fu_69_p2" SOURCE="ModelComposerDesign.cpp:62" URAM="0" VARIABLE="add_ln62"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>writeStream_bool_s</Name>
+            <Loops>
+                <VITIS_LOOP_390_1_VITIS_LOOP_391_2/>
+            </Loops>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>2.180</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>19203</Best-caseLatency>
+                    <Average-caseLatency>19203</Average-caseLatency>
+                    <Worst-caseLatency>19203</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>96.015 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>96.015 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>96.015 us</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>19203</PipelineInitiationInterval>
+                    <PipelineType>no</PipelineType>
+                </SummaryOfOverallLatency>
+                <SummaryOfLoopLatency>
+                    <VITIS_LOOP_390_1_VITIS_LOOP_391_2>
+                        <Name>VITIS_LOOP_390_1_VITIS_LOOP_391_2</Name>
+                        <TripCount>19200</TripCount>
+                        <Latency>19201</Latency>
+                        <AbsoluteTimeLatency>96.005 us</AbsoluteTimeLatency>
+                        <PipelineII>1</PipelineII>
+                        <PipelineDepth>3</PipelineDepth>
+                        <PipelineType>yes</PipelineType>
+                        <InstanceList/>
+                    </VITIS_LOOP_390_1_VITIS_LOOP_391_2>
+                </SummaryOfLoopLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <FF>20</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>98</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="VITIS_LOOP_390_1_VITIS_LOOP_391_2" OPTYPE="add" PRAGMA="" RTLNAME="add_ln390_fu_71_p2" SOURCE="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:390" URAM="0" VARIABLE="add_ln390"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>ModelComposerDesign</Name>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>5.00</TargetClockPeriod>
+                    <ClockUncertainty>1.35</ClockUncertainty>
+                    <EstimatedClockPeriod>3.650</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>20690</Best-caseLatency>
+                    <Average-caseLatency>20690</Average-caseLatency>
+                    <Worst-caseLatency>20690</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>0.103 ms</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>0.103 ms</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>0.103 ms</Worst-caseRealTimeLatency>
+                    <DataflowPipelineThroughput>20688</DataflowPipelineThroughput>
+                    <PipelineInitiationInterval>20688</PipelineInitiationInterval>
+                    <PipelineType>dataflow</PipelineType>
+                </SummaryOfOverallLatency>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <BRAM_18K>3</BRAM_18K>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
+                    <UTIL_BRAM>~0</UTIL_BRAM>
+                    <FF>1820</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>3065</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
+                    <UTIL_LUT>1</UTIL_LUT>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="storage" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_storage fifo" DSP="0" ID="" IMPL="srl" LATENCY="0" LOOP="" OPTYPE="fifo" PRAGMA="" RTLNAME="SobelFilter_XMC_out1_U" SOURCE="ModelComposerDesign.cpp:81" URAM="0" VARIABLE="SobelFilter_XMC_out1"/>
+                <BindNode BINDTYPE="storage" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_storage fifo" DSP="0" ID="" IMPL="srl" LATENCY="0" LOOP="" OPTYPE="fifo" PRAGMA="" RTLNAME="SobelFilter_XMC_out2_U" SOURCE="ModelComposerDesign.cpp:83" URAM="0" VARIABLE="SobelFilter_XMC_out2"/>
+                <BindNode BINDTYPE="storage" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_storage fifo" DSP="0" ID="" IMPL="srl" LATENCY="0" LOOP="" OPTYPE="fifo" PRAGMA="" RTLNAME="GradientMag_XMC_out1_U" SOURCE="ModelComposerDesign.cpp:85" URAM="0" VARIABLE="GradientMag_XMC_out1"/>
+                <BindNode BINDTYPE="storage" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_storage fifo" DSP="0" ID="" IMPL="srl" LATENCY="0" LOOP="" OPTYPE="fifo" PRAGMA="" RTLNAME="Image_in_adapter_out1_U" SOURCE="ModelComposerDesign.cpp:107" URAM="0" VARIABLE="Image_in_adapter_out1"/>
+                <BindNode BINDTYPE="storage" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_storage fifo" DSP="0" ID="" IMPL="srl" LATENCY="0" LOOP="" OPTYPE="fifo" PRAGMA="" RTLNAME="ModelComposerDesign_core_Edge_out_U" SOURCE="ModelComposerDesign.cpp:109" URAM="0" VARIABLE="ModelComposerDesign_core_Edge_out"/>
+            </BindNodes>
+        </Module>
+    </ModuleInformation>
+    <FIFOInformation>
+        <FIFOInst>
+            <Name>src_obj_data_U</Name>
+            <ParentInst>SobelFilter_XMC_120_160_1_U0</ParentInst>
+            <StaticDepth>2</StaticDepth>
+            <RuntimeDepth>mOutPtr</RuntimeDepth>
+            <InterfaceList>
+                <Interface>clk</Interface>
+                <Interface>reset</Interface>
+                <Interface>if_write</Interface>
+                <Interface>if_din</Interface>
+                <Interface>if_full_n</Interface>
+                <Interface>if_read</Interface>
+                <Interface>if_empty_n</Interface>
+            </InterfaceList>
+        </FIFOInst>
+        <FIFOInst>
+            <Name>dstx_obj_data_U</Name>
+            <ParentInst>SobelFilter_XMC_120_160_1_U0</ParentInst>
+            <StaticDepth>2</StaticDepth>
+            <RuntimeDepth>mOutPtr</RuntimeDepth>
+            <InterfaceList>
+                <Interface>clk</Interface>
+                <Interface>reset</Interface>
+                <Interface>if_write</Interface>
+                <Interface>if_din</Interface>
+                <Interface>if_full_n</Interface>
+                <Interface>if_read</Interface>
+                <Interface>if_empty_n</Interface>
+            </InterfaceList>
+        </FIFOInst>
+        <FIFOInst>
+            <Name>dsty_obj_data_U</Name>
+            <ParentInst>SobelFilter_XMC_120_160_1_U0</ParentInst>
+            <StaticDepth>2</StaticDepth>
+            <RuntimeDepth>mOutPtr</RuntimeDepth>
+            <InterfaceList>
+                <Interface>clk</Interface>
+                <Interface>reset</Interface>
+                <Interface>if_write</Interface>
+                <Interface>if_din</Interface>
+                <Interface>if_full_n</Interface>
+                <Interface>if_read</Interface>
+                <Interface>if_empty_n</Interface>
+            </InterfaceList>
+        </FIFOInst>
+        <FIFOInst>
+            <Name>srcX_obj_data_U</Name>
+            <ParentInst>GradientMag_XMC_120_160_1_U0</ParentInst>
+            <StaticDepth>2</StaticDepth>
+            <RuntimeDepth>mOutPtr</RuntimeDepth>
+            <InterfaceList>
+                <Interface>clk</Interface>
+                <Interface>reset</Interface>
+                <Interface>if_write</Interface>
+                <Interface>if_din</Interface>
+                <Interface>if_full_n</Interface>
+                <Interface>if_read</Interface>
+                <Interface>if_empty_n</Interface>
+            </InterfaceList>
+        </FIFOInst>
+        <FIFOInst>
+            <Name>srcY_obj_data_U</Name>
+            <ParentInst>GradientMag_XMC_120_160_1_U0</ParentInst>
+            <StaticDepth>2</StaticDepth>
+            <RuntimeDepth>mOutPtr</RuntimeDepth>
+            <InterfaceList>
+                <Interface>clk</Interface>
+                <Interface>reset</Interface>
+                <Interface>if_write</Interface>
+                <Interface>if_din</Interface>
+                <Interface>if_full_n</Interface>
+                <Interface>if_read</Interface>
+                <Interface>if_empty_n</Interface>
+            </InterfaceList>
+        </FIFOInst>
+        <FIFOInst>
+            <Name>dst_obj_data_U</Name>
+            <ParentInst>GradientMag_XMC_120_160_1_U0</ParentInst>
+            <StaticDepth>2</StaticDepth>
+            <RuntimeDepth>mOutPtr</RuntimeDepth>
+            <InterfaceList>
+                <Interface>clk</Interface>
+                <Interface>reset</Interface>
+                <Interface>if_write</Interface>
+                <Interface>if_din</Interface>
+                <Interface>if_full_n</Interface>
+                <Interface>if_read</Interface>
+                <Interface>if_empty_n</Interface>
+            </InterfaceList>
+        </FIFOInst>
+        <FIFOInst>
+            <Name>Image_in_adapter_out1_U</Name>
+            <ParentInst/>
+            <StaticDepth>3</StaticDepth>
+            <RuntimeDepth>mOutPtr</RuntimeDepth>
+            <InterfaceList>
+                <Interface>clk</Interface>
+                <Interface>reset</Interface>
+                <Interface>if_write</Interface>
+                <Interface>if_din</Interface>
+                <Interface>if_full_n</Interface>
+                <Interface>if_read</Interface>
+                <Interface>if_empty_n</Interface>
+            </InterfaceList>
+        </FIFOInst>
+        <FIFOInst>
+            <Name>SobelFilter_XMC_out1_U</Name>
+            <ParentInst/>
+            <StaticDepth>3</StaticDepth>
+            <RuntimeDepth>mOutPtr</RuntimeDepth>
+            <InterfaceList>
+                <Interface>clk</Interface>
+                <Interface>reset</Interface>
+                <Interface>if_write</Interface>
+                <Interface>if_din</Interface>
+                <Interface>if_full_n</Interface>
+                <Interface>if_read</Interface>
+                <Interface>if_empty_n</Interface>
+            </InterfaceList>
+        </FIFOInst>
+        <FIFOInst>
+            <Name>SobelFilter_XMC_out2_U</Name>
+            <ParentInst/>
+            <StaticDepth>3</StaticDepth>
+            <RuntimeDepth>mOutPtr</RuntimeDepth>
+            <InterfaceList>
+                <Interface>clk</Interface>
+                <Interface>reset</Interface>
+                <Interface>if_write</Interface>
+                <Interface>if_din</Interface>
+                <Interface>if_full_n</Interface>
+                <Interface>if_read</Interface>
+                <Interface>if_empty_n</Interface>
+            </InterfaceList>
+        </FIFOInst>
+        <FIFOInst>
+            <Name>GradientMag_XMC_out1_U</Name>
+            <ParentInst/>
+            <StaticDepth>3</StaticDepth>
+            <RuntimeDepth>mOutPtr</RuntimeDepth>
+            <InterfaceList>
+                <Interface>clk</Interface>
+                <Interface>reset</Interface>
+                <Interface>if_write</Interface>
+                <Interface>if_din</Interface>
+                <Interface>if_full_n</Interface>
+                <Interface>if_read</Interface>
+                <Interface>if_empty_n</Interface>
+            </InterfaceList>
+        </FIFOInst>
+        <FIFOInst>
+            <Name>ModelComposerDesign_core_Edge_out_U</Name>
+            <ParentInst/>
+            <StaticDepth>3</StaticDepth>
+            <RuntimeDepth>mOutPtr</RuntimeDepth>
+            <InterfaceList>
+                <Interface>clk</Interface>
+                <Interface>reset</Interface>
+                <Interface>if_write</Interface>
+                <Interface>if_din</Interface>
+                <Interface>if_full_n</Interface>
+                <Interface>if_read</Interface>
+                <Interface>if_empty_n</Interface>
+            </InterfaceList>
+        </FIFOInst>
+    </FIFOInformation>
+    <UserConfigCommands>
+        <config_rtl module_auto_prefix="0"/>
+    </UserConfigCommands>
+    <Args>
+        <Arg ArgName="Image_in" index="0" direction="in" srcType="stream&lt;unsigned char, 0&gt;&amp;" srcSize="8">
+            <hwRefs>
+                <hwRef type="interface" interface="Image_in" name="" usage="data" direction="in"/>
+            </hwRefs>
+        </Arg>
+        <Arg ArgName="Edge_out" index="1" direction="out" srcType="stream&lt;bool, 0&gt;&amp;" srcSize="8">
+            <hwRefs>
+                <hwRef type="interface" interface="Edge_out" name="" usage="data" direction="out"/>
+            </hwRefs>
+        </Arg>
+    </Args>
+    <Interfaces>
+        <Interface InterfaceName="ap_clk" type="clock" busTypeName="clock" mode="slave">
+            <busParams>
+                <busParam busParamName="ASSOCIATED_BUSIF">Image_in:Edge_out</busParam>
+                <busParam busParamName="ASSOCIATED_RESET">ap_rst_n</busParam>
+            </busParams>
+            <portMaps>
+                <portMap portMapName="ap_clk">CLK</portMap>
+            </portMaps>
+            <ports>
+                <port>ap_clk</port>
+            </ports>
+        </Interface>
+        <Interface InterfaceName="ap_rst_n" type="reset" busTypeName="reset" mode="slave">
+            <busParams>
+                <busParam busParamName="POLARITY">ACTIVE_LOW</busParam>
+            </busParams>
+            <portMaps>
+                <portMap portMapName="ap_rst_n">RST</portMap>
+            </portMaps>
+            <ports>
+                <port>ap_rst_n</port>
+            </ports>
+        </Interface>
+        <Interface InterfaceName="Image_in" type="axi4stream" busTypeName="axis" mode="slave" dataWidth="8" portPrefix="Image_in_">
+            <ports>
+                <port>Image_in_TDATA</port>
+                <port>Image_in_TREADY</port>
+                <port>Image_in_TVALID</port>
+            </ports>
+            <constraints>
+                <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both" argName="Image_in"/>
+            </constraints>
+        </Interface>
+        <Interface InterfaceName="Edge_out" type="axi4stream" busTypeName="axis" mode="master" dataWidth="8" portPrefix="Edge_out_">
+            <ports>
+                <port>Edge_out_TDATA</port>
+                <port>Edge_out_TREADY</port>
+                <port>Edge_out_TVALID</port>
+            </ports>
+            <constraints>
+                <constraint constraint_type="pragma interface" mode="axis" register_option="0" register_mode="both" argName="Edge_out"/>
+            </constraints>
+        </Interface>
+    </Interfaces>
+    <ReportHWInterface>
+        <section name="HW Interfaces" level="0">
+            <item name="AXIS">
+                <table isCollapsed="0">
+                    <keys size="5">Interface, Register Mode, TDATA, TREADY, TVALID</keys>
+                    <column name="Edge_out">both, 8, 1, 1</column>
+                    <column name="Image_in">both, 8, 1, 1</column>
+                </table>
+            </item>
+            <item name="TOP LEVEL CONTROL">
+                <table isCollapsed="0">
+                    <keys size="3">Interface, Type, Ports</keys>
+                    <column name="ap_clk">clock, ap_clk</column>
+                    <column name="ap_rst_n">reset, ap_rst_n</column>
+                    <column name="ap_ctrl">ap_ctrl_none</column>
+                </table>
+            </item>
+        </section>
+    </ReportHWInterface>
+    <ReportSWInterface>
+        <section name="SW I/O Information" level="0">
+            <item name="Top Function Arguments">
+                <table isCollapsed="1">
+                    <keys size="3">Argument, Direction, Datatype</keys>
+                    <column name="Image_in">in, stream&lt;unsigned char 0&gt;&amp;</column>
+                    <column name="Edge_out">out, stream&lt;bool 0&gt;&amp;</column>
+                </table>
+            </item>
+            <item name="SW-to-HW Mapping">
+                <table isCollapsed="1">
+                    <keys size="3">Argument, HW Interface, HW Type</keys>
+                    <column name="Image_in">Image_in, interface</column>
+                    <column name="Edge_out">Edge_out, interface</column>
+                </table>
+            </item>
+        </section>
+    </ReportSWInterface>
+    <ReportBurst>
+        <section name="M_AXI Burst Information" level="0" HEADER_NOTE="Note: All burst requests might be further partitioned into multiple requests during RTL generation based on max_read_burst_length or max_write_burst_length settings."/>
+    </ReportBurst>
+    <PragmaReport>
+        <Pragma type="stream" location="./GradientMag_Wrap.h:82" status="warning" parentFunction="gradientmag_xmc" variable="srcX_obj" isDirective="0" options="variable=srcX_obj dim=1 depth=1">
+            <Msg msg_id="207-5505" msg_severity="WARNING" msg_body="the 'dim' option to 'Stream' pragma is not supported and will be ignored"/>
+            <Msg msg_id="207-5536" msg_severity="WARNING" msg_body="Invalid variable in '#pragma HLS stream': expect variable to have 'hls::stream' type"/>
+        </Pragma>
+        <Pragma type="stream" location="./GradientMag_Wrap.h:85" status="warning" parentFunction="gradientmag_xmc" variable="srcY_obj" isDirective="0" options="variable=srcY_obj dim=1 depth=1">
+            <Msg msg_id="207-5505" msg_severity="WARNING" msg_body="the 'dim' option to 'Stream' pragma is not supported and will be ignored"/>
+            <Msg msg_id="207-5536" msg_severity="WARNING" msg_body="Invalid variable in '#pragma HLS stream': expect variable to have 'hls::stream' type"/>
+        </Pragma>
+        <Pragma type="stream" location="./GradientMag_Wrap.h:89" status="warning" parentFunction="gradientmag_xmc" variable="dst_obj" isDirective="0" options="variable=dst_obj dim=1 depth=1">
+            <Msg msg_id="207-5505" msg_severity="WARNING" msg_body="the 'dim' option to 'Stream' pragma is not supported and will be ignored"/>
+            <Msg msg_id="207-5536" msg_severity="WARNING" msg_body="Invalid variable in '#pragma HLS stream': expect variable to have 'hls::stream' type"/>
+        </Pragma>
+        <Pragma type="dataflow" location="./GradientMag_Wrap.h:92" status="valid" parentFunction="gradientmag_xmc" variable="" isDirective="0" options=""/>
+        <Pragma type="pipeline" location="./GradientMag_Wrap.h:95" status="valid" parentFunction="gradientmag_xmc" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="./GradientMag_Wrap.h:108" status="valid" parentFunction="gradientmag_xmc" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="stream" location="./sobelfilter_Wrap.h:82" status="warning" parentFunction="sobelfilter_xmc" variable="src_obj" isDirective="0" options="variable=src_obj dim=1 depth=1">
+            <Msg msg_id="207-5505" msg_severity="WARNING" msg_body="the 'dim' option to 'Stream' pragma is not supported and will be ignored"/>
+            <Msg msg_id="207-5536" msg_severity="WARNING" msg_body="Invalid variable in '#pragma HLS stream': expect variable to have 'hls::stream' type"/>
+        </Pragma>
+        <Pragma type="stream" location="./sobelfilter_Wrap.h:86" status="warning" parentFunction="sobelfilter_xmc" variable="dstx_obj" isDirective="0" options="variable=dstx_obj dim=1 depth=1">
+            <Msg msg_id="207-5505" msg_severity="WARNING" msg_body="the 'dim' option to 'Stream' pragma is not supported and will be ignored"/>
+            <Msg msg_id="207-5536" msg_severity="WARNING" msg_body="Invalid variable in '#pragma HLS stream': expect variable to have 'hls::stream' type"/>
+        </Pragma>
+        <Pragma type="stream" location="./sobelfilter_Wrap.h:90" status="warning" parentFunction="sobelfilter_xmc" variable="dsty_obj" isDirective="0" options="variable=dsty_obj dim=1 depth=1">
+            <Msg msg_id="207-5505" msg_severity="WARNING" msg_body="the 'dim' option to 'Stream' pragma is not supported and will be ignored"/>
+            <Msg msg_id="207-5536" msg_severity="WARNING" msg_body="Invalid variable in '#pragma HLS stream': expect variable to have 'hls::stream' type"/>
+        </Pragma>
+        <Pragma type="dataflow" location="./sobelfilter_Wrap.h:93" status="valid" parentFunction="sobelfilter_xmc" variable="" isDirective="0" options=""/>
+        <Pragma type="pipeline" location="./sobelfilter_Wrap.h:96" status="valid" parentFunction="sobelfilter_xmc" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="./sobelfilter_Wrap.h:106" status="valid" parentFunction="sobelfilter_xmc" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:232" status="valid" parentFunction="scalar&lt;n, t&gt;" variable="" isDirective="0" options=""/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:233" status="valid" parentFunction="scalar&lt;n, t&gt;" variable="val" isDirective="0" options="variable=val dim=1 complete"/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:239" status="valid" parentFunction="scalar&lt;n, t&gt;" variable="" isDirective="0" options=""/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:240" status="valid" parentFunction="scalar&lt;n, t&gt;" variable="val" isDirective="0" options="variable=val dim=1 complete"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:247" status="valid" parentFunction="scalar&lt;n, t&gt;" variable="val" isDirective="0" options="variable=val dim=1 complete"/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:248" status="valid" parentFunction="scalar&lt;n, t&gt;" variable="" isDirective="0" options=""/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:256" status="valid" parentFunction="scalar&lt;n, t&gt;" variable="val" isDirective="0" options="variable=val dim=1 complete"/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:257" status="valid" parentFunction="scalar&lt;n, t&gt;" variable="" isDirective="0" options=""/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:266" status="valid" parentFunction="scalar&lt;n, t&gt;" variable="val" isDirective="0" options="variable=val dim=1 complete"/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:267" status="valid" parentFunction="scalar&lt;n, t&gt;" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:292" status="valid" parentFunction="operator=" variable="" isDirective="0" options=""/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:296" status="valid" parentFunction="operator=" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:305" status="valid" parentFunction="operator+" variable="" isDirective="0" options=""/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:310" status="valid" parentFunction="operator+" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:320" status="valid" parentFunction="operator+" variable="" isDirective="0" options=""/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:325" status="valid" parentFunction="operator+" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:335" status="valid" parentFunction="operator-" variable="" isDirective="0" options=""/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:340" status="valid" parentFunction="operator-" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:350" status="valid" parentFunction="operator-" variable="" isDirective="0" options=""/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:355" status="valid" parentFunction="operator-" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:365" status="valid" parentFunction="operator*" variable="" isDirective="0" options=""/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:370" status="valid" parentFunction="operator*" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:380" status="valid" parentFunction="operator*" variable="" isDirective="0" options=""/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:385" status="valid" parentFunction="operator*" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:395" status="valid" parentFunction="operator/" variable="" isDirective="0" options=""/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:400" status="valid" parentFunction="operator/" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:410" status="valid" parentFunction="operator/" variable="" isDirective="0" options=""/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:415" status="valid" parentFunction="operator/" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:473" status="valid" parentFunction="type" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:481" status="valid" parentFunction="depth" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:488" status="valid" parentFunction="channels" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:496" status="valid" parentFunction="init" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:615" status="valid" parentFunction="mat&lt;t, rows, cols, npc, xfcvdepth&gt;" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:624" status="valid" parentFunction="mat&lt;t, rows, cols, npc, xfcvdepth&gt;" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:639" status="valid" parentFunction="mat&lt;t, rows, cols, npc, xfcvdepth&gt;" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:648" status="valid" parentFunction="mat&lt;t, rows, cols, npc, xfcvdepth&gt;" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:753" status="valid" parentFunction="copyto" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:789" status="valid" parentFunction="copyfrom" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1005" status="valid" parentFunction="axi2axistream" variable="" isDirective="0" options="min=1 max=ADDRBOUND"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1006" status="valid" parentFunction="axi2axistream" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1019" status="valid" parentFunction="axi2axistream" variable="" isDirective="0" options="min=1 max=ADDRBOUND"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1020" status="valid" parentFunction="axi2axistream" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1040" status="valid" parentFunction="axistream2matstream" variable="" isDirective="0" options="min=1 max=LOOPBOUND"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1041" status="valid" parentFunction="axistream2matstream" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1074" status="valid" parentFunction="matstream2mat" variable="" isDirective="0" options="min=1 max=LOOPBOUND"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1075" status="valid" parentFunction="matstream2mat" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1086" status="valid" parentFunction="axistream2mat" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1098" status="valid" parentFunction="axistream2mat" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1112" status="valid" parentFunction="axi2mat" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1127" status="valid" parentFunction="axi2mat" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1139" status="valid" parentFunction="axi2mat" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1152" status="valid" parentFunction="axi2mat" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1224" status="valid" parentFunction="mat2matstream" variable="" isDirective="0" options="min=1 max=LOOPBOUND"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1225" status="valid" parentFunction="mat2matstream" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1243" status="valid" parentFunction="matstream2axistream" variable="" isDirective="0" options="min=1 max=ROWS"/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1248" status="valid" parentFunction="matstream2axistream" variable="" isDirective="0" options="min=1 max=COLS_BOUND_PER_NPC"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1249" status="valid" parentFunction="matstream2axistream" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1279" status="valid" parentFunction="mat2axistream" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1291" status="valid" parentFunction="mat2axistream" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1307" status="valid" parentFunction="axistream2axi" variable="" isDirective="0" options="min=1 max=ADDRBOUND"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1308" status="valid" parentFunction="axistream2axi" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1321" status="valid" parentFunction="axistream2axi" variable="" isDirective="0" options="min=1 max=ADDRBOUND"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1322" status="valid" parentFunction="axistream2axi" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1335" status="valid" parentFunction="mat2axi" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1345" status="valid" parentFunction="mat2axi" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1358" status="valid" parentFunction="mat2axi" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_structs.hpp:1371" status="valid" parentFunction="mat2axi" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:37" status="valid" parentFunction="xfpackpixels" variable="" isDirective="0" options=""/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:43" status="valid" parentFunction="xfpackpixels" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:55" status="valid" parentFunction="xfextractpixels" variable="" isDirective="0" options="off"/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:64" status="valid" parentFunction="xfextractpixels" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:87" status="valid" parentFunction="xfextractdata" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:107" status="valid" parentFunction="xfcopydata" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:115" status="valid" parentFunction="xfcopydata" variable="" isDirective="0" options="min=6 max=6"/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:116" status="valid" parentFunction="xfcopydata" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:184" status="valid" parentFunction="xfduplicatestream" variable="" isDirective="0" options="min=IN_BH max=IN_BH"/>
+        <Pragma type="loop_flatten" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:185" status="valid" parentFunction="xfduplicatestream" variable="" isDirective="0" options="off"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:189" status="valid" parentFunction="xfduplicatestream" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:190" status="valid" parentFunction="xfduplicatestream" variable="" isDirective="0" options="min=IN_BW max=IN_BW"/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:215" status="valid" parentFunction="array2hlsstrm" variable="" isDirective="0" options="min=1 max=TRIPCOUNT"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:216" status="valid" parentFunction="array2hlsstrm" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:251" status="valid" parentFunction="hlsstrm2xfmat" variable="" isDirective="0" options="min=1 max=TRIPCOUNT"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:252" status="valid" parentFunction="hlsstrm2xfmat" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:329" status="valid" parentFunction="axistrm2hlsstrm" variable="" isDirective="0" options="min=1 max=TRIPCOUNT"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:330" status="valid" parentFunction="axistrm2hlsstrm" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:340" status="valid" parentFunction="axistrm2xfmat" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:388" status="valid" parentFunction="xfmat2hlsstrm" variable="" isDirective="0" options="min=1 max=TRIPCOUNT"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:389" status="valid" parentFunction="xfmat2hlsstrm" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:434" status="valid" parentFunction="hlsstrm2array" variable="" isDirective="0" options="min=1 max=TRIPCOUNT"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:435" status="valid" parentFunction="hlsstrm2array" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:476" status="valid" parentFunction="hlsstrm2axistrm" variable="" isDirective="0" options="min=1 max=TRIPCOUNT"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:477" status="valid" parentFunction="hlsstrm2axistrm" variable="" isDirective="0" options=""/>
+        <Pragma type="dataflow" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/common/xf_utility.hpp:488" status="valid" parentFunction="xfmat2axistrm" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:2949" status="valid" parentFunction="inverse32" variable="" isDirective="0" options="min=4 max=4 avg=4"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:2950" status="valid" parentFunction="inverse32" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:2963" status="valid" parentFunction="inverse32" variable="" isDirective="0" options="min=4 max=4 avg=4"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:2964" status="valid" parentFunction="inverse32" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:2977" status="valid" parentFunction="inverse32" variable="" isDirective="0" options="min=4 max=4 avg=4"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:2978" status="valid" parentFunction="inverse32" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:2991" status="valid" parentFunction="inverse32" variable="" isDirective="0" options="min=4 max=4 avg=4"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:2992" status="valid" parentFunction="inverse32" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:3041" status="valid" parentFunction="inverse" variable="" isDirective="0" options="min=4 max=4 avg=4"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:3042" status="valid" parentFunction="inverse" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:3055" status="valid" parentFunction="inverse" variable="" isDirective="0" options="min=4 max=4 avg=4"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:3056" status="valid" parentFunction="inverse" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:3069" status="valid" parentFunction="inverse" variable="" isDirective="0" options="min=4 max=4 avg=4"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:3070" status="valid" parentFunction="inverse" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:3083" status="valid" parentFunction="inverse" variable="" isDirective="0" options="min=4 max=4 avg=4"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:3084" status="valid" parentFunction="inverse" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:3116" status="valid" parentFunction="identifysignbits" variable="" isDirective="0" options="min=24 max=24"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:3117" status="valid" parentFunction="identifysignbits" variable="" isDirective="0" options=""/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/core/xf_math.h:3448" status="valid" parentFunction="sqrt" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_magnitude.hpp:74" status="valid" parentFunction="xfmagnitudekernel" variable="" isDirective="0" options="min=ROWS max=ROWS"/>
+        <Pragma type="loop_flatten" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_magnitude.hpp:75" status="valid" parentFunction="xfmagnitudekernel" variable="" isDirective="0" options="off"/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_magnitude.hpp:81" status="valid" parentFunction="xfmagnitudekernel" variable="" isDirective="0" options="min=COLS_TRIP max=COLS_TRIP"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_magnitude.hpp:82" status="valid" parentFunction="xfmagnitudekernel" variable="" isDirective="0" options=""/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_magnitude.hpp:93" status="valid" parentFunction="xfmagnitudekernel" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_magnitude.hpp:149" status="valid" parentFunction="magnitude" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:54" status="valid" parentFunction="xfgradientx3x3" variable="" isDirective="0" options="off"/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:102" status="valid" parentFunction="xfgradienty3x3" variable="" isDirective="0" options="off"/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:140" status="valid" parentFunction="xfsobel3x3" variable="" isDirective="0" options="off"/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:154" status="valid" parentFunction="xfsobel3x3" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:208" status="valid" parentFunction="processsobel3x3" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:218" status="valid" parentFunction="processsobel3x3" variable="" isDirective="0" options="min=TC max=TC"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:219" status="valid" parentFunction="processsobel3x3" variable="" isDirective="0" options=""/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:310" status="valid" parentFunction="xfsobelfilter3x3" variable="GradientValuesX" isDirective="0" options="variable=GradientValuesX complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:311" status="valid" parentFunction="xfsobelfilter3x3" variable="GradientValuesY" isDirective="0" options="variable=GradientValuesY complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:319" status="valid" parentFunction="xfsobelfilter3x3" variable="src_buf1" isDirective="0" options="variable=src_buf1 complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:320" status="valid" parentFunction="xfsobelfilter3x3" variable="src_buf2" isDirective="0" options="variable=src_buf2 complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:321" status="valid" parentFunction="xfsobelfilter3x3" variable="src_buf3" isDirective="0" options="variable=src_buf3 complete dim=1"/>
+        <Pragma type="array" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:329" status="invalid" parentFunction="xfsobelfilter3x3" variable="" isDirective="0" options="reshape">
+            <Msg msg_id="207-5566" msg_severity="WARNING" msg_body="unknown HLS pragma ignored"/>
+        </Pragma>
+        <Pragma type="resource" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:330" status="warning" parentFunction="xfsobelfilter3x3" variable="buf" isDirective="0" options="variable=buf core=RAM_S2P_URAM">
+            <Msg msg_id="207-5523" msg_severity="WARNING" msg_body="'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead"/>
+        </Pragma>
+        <Pragma type="resource" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:334" status="warning" parentFunction="xfsobelfilter3x3" variable="buf" isDirective="0" options="variable=buf core=RAM_S2P_BRAM">
+            <Msg msg_id="207-5523" msg_severity="WARNING" msg_body="'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead"/>
+        </Pragma>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:335" status="valid" parentFunction="xfsobelfilter3x3" variable="buf" isDirective="0" options="variable=buf complete dim=1"/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:344" status="valid" parentFunction="xfsobelfilter3x3" variable="" isDirective="0" options="min=TC max=TC"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:345" status="valid" parentFunction="xfsobelfilter3x3" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:355" status="valid" parentFunction="xfsobelfilter3x3" variable="" isDirective="0" options="min=ROWS max=ROWS"/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:460" status="valid" parentFunction="xfgradientx5x5" variable="" isDirective="0" options="off"/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:535" status="valid" parentFunction="xfgradienty5x5" variable="" isDirective="0" options="off"/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:599" status="valid" parentFunction="xfsobel5x5" variable="" isDirective="0" options="off"/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:605" status="valid" parentFunction="xfsobel5x5" variable="" isDirective="0" options="min=8 max=8"/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:606" status="valid" parentFunction="xfsobel5x5" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:657" status="valid" parentFunction="processsobel5x5" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:668" status="valid" parentFunction="processsobel5x5" variable="" isDirective="0" options="min=TC max=TC"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:669" status="valid" parentFunction="processsobel5x5" variable="" isDirective="0" options=""/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:700" status="valid" parentFunction="processsobel5x5" variable="" isDirective="0" options=""/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:780" status="valid" parentFunction="xfsobelfilter5x5" variable="GradientValuesX" isDirective="0" options="variable=GradientValuesX complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:781" status="valid" parentFunction="xfsobelfilter5x5" variable="GradientValuesY" isDirective="0" options="variable=GradientValuesY complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:790" status="valid" parentFunction="xfsobelfilter5x5" variable="src_buf1" isDirective="0" options="variable=src_buf1 complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:791" status="valid" parentFunction="xfsobelfilter5x5" variable="src_buf2" isDirective="0" options="variable=src_buf2 complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:792" status="valid" parentFunction="xfsobelfilter5x5" variable="src_buf3" isDirective="0" options="variable=src_buf3 complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:793" status="valid" parentFunction="xfsobelfilter5x5" variable="src_buf4" isDirective="0" options="variable=src_buf4 complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:794" status="valid" parentFunction="xfsobelfilter5x5" variable="src_buf5" isDirective="0" options="variable=src_buf5 complete dim=1"/>
+        <Pragma type="resource" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:803" status="warning" parentFunction="xfsobelfilter5x5" variable="buf" isDirective="0" options="variable=buf core=RAM_S2P_URAM">
+            <Msg msg_id="207-5523" msg_severity="WARNING" msg_body="'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead"/>
+        </Pragma>
+        <Pragma type="array" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:804" status="invalid" parentFunction="xfsobelfilter5x5" variable="" isDirective="0" options="reshape">
+            <Msg msg_id="207-5566" msg_severity="WARNING" msg_body="unknown HLS pragma ignored"/>
+        </Pragma>
+        <Pragma type="resource" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:808" status="warning" parentFunction="xfsobelfilter5x5" variable="buf" isDirective="0" options="variable=buf core=RAM_S2P_BRAM">
+            <Msg msg_id="207-5523" msg_severity="WARNING" msg_body="'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead"/>
+        </Pragma>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:809" status="valid" parentFunction="xfsobelfilter5x5" variable="buf" isDirective="0" options="variable=buf complete dim=1"/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:818" status="valid" parentFunction="xfsobelfilter5x5" variable="" isDirective="0" options="min=TC max=TC"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:819" status="valid" parentFunction="xfsobelfilter5x5" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:831" status="valid" parentFunction="xfsobelfilter5x5" variable="" isDirective="0" options="min=TC max=TC"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:832" status="valid" parentFunction="xfsobelfilter5x5" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:842" status="valid" parentFunction="xfsobelfilter5x5" variable="" isDirective="0" options="min=ROWS max=ROWS"/>
+        <Pragma type="allocation" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:916" status="invalid" parentFunction="xfsobelfilter5x5" variable="" isDirective="0" options="instances">
+            <Msg msg_id="207-5551" msg_severity="WARNING" msg_body="unexpected pragma argument 'instances', expects function/operation"/>
+        </Pragma>
+        <Pragma type="allocation" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:917" status="invalid" parentFunction="xfsobelfilter5x5" variable="" isDirective="0" options="instances">
+            <Msg msg_id="207-5551" msg_severity="WARNING" msg_body="unexpected pragma argument 'instances', expects function/operation"/>
+        </Pragma>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:937" status="valid" parentFunction="xfsobelfilter5x5" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1002" status="valid" parentFunction="xfgradientx7x7" variable="" isDirective="0" options="off"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1003" status="valid" parentFunction="xfgradientx7x7" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1163" status="valid" parentFunction="xfgradienty7x7" variable="" isDirective="0" options="off"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1164" status="valid" parentFunction="xfgradienty7x7" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1290" status="valid" parentFunction="xfsobel7x7" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1294" status="valid" parentFunction="xfsobel7x7" variable="" isDirective="0" options="min=8 max=8"/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1295" status="valid" parentFunction="xfsobel7x7" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1351" status="valid" parentFunction="processsobel7x7" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1360" status="valid" parentFunction="processsobel7x7" variable="" isDirective="0" options="min=TC max=TC"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1361" status="valid" parentFunction="processsobel7x7" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1467" status="valid" parentFunction="rightborder7x7" variable="" isDirective="0" options="min=8 max=8"/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1468" status="valid" parentFunction="rightborder7x7" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1480" status="valid" parentFunction="rightborder7x7" variable="" isDirective="0" options="min=3 max=3"/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1481" status="valid" parentFunction="rightborder7x7" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1510" status="valid" parentFunction="rightborder7x7" variable="" isDirective="0" options="min=3 max=3"/>
+        <Pragma type="allocation" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1511" status="invalid" parentFunction="rightborder7x7" variable="" isDirective="0" options="instances">
+            <Msg msg_id="207-5551" msg_severity="WARNING" msg_body="unexpected pragma argument 'instances', expects function/operation"/>
+        </Pragma>
+        <Pragma type="allocation" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1512" status="invalid" parentFunction="rightborder7x7" variable="" isDirective="0" options="instances">
+            <Msg msg_id="207-5551" msg_severity="WARNING" msg_body="unexpected pragma argument 'instances', expects function/operation"/>
+        </Pragma>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1566" status="valid" parentFunction="xfsobelfilter7x7" variable="GradientValuesX" isDirective="0" options="variable=GradientValuesX complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1567" status="valid" parentFunction="xfsobelfilter7x7" variable="GradientValuesY" isDirective="0" options="variable=GradientValuesY complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1577" status="valid" parentFunction="xfsobelfilter7x7" variable="src_buf1" isDirective="0" options="variable=src_buf1 complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1578" status="valid" parentFunction="xfsobelfilter7x7" variable="src_buf2" isDirective="0" options="variable=src_buf2 complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1579" status="valid" parentFunction="xfsobelfilter7x7" variable="src_buf3" isDirective="0" options="variable=src_buf3 complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1580" status="valid" parentFunction="xfsobelfilter7x7" variable="src_buf4" isDirective="0" options="variable=src_buf4 complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1581" status="valid" parentFunction="xfsobelfilter7x7" variable="src_buf5" isDirective="0" options="variable=src_buf5 complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1582" status="valid" parentFunction="xfsobelfilter7x7" variable="src_buf6" isDirective="0" options="variable=src_buf6 complete dim=1"/>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1583" status="valid" parentFunction="xfsobelfilter7x7" variable="src_buf7" isDirective="0" options="variable=src_buf7 complete dim=1"/>
+        <Pragma type="resource" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1592" status="warning" parentFunction="xfsobelfilter7x7" variable="buf" isDirective="0" options="variable=buf core=RAM_S2P_URAM">
+            <Msg msg_id="207-5523" msg_severity="WARNING" msg_body="'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead"/>
+        </Pragma>
+        <Pragma type="array" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1593" status="invalid" parentFunction="xfsobelfilter7x7" variable="" isDirective="0" options="reshape">
+            <Msg msg_id="207-5566" msg_severity="WARNING" msg_body="unknown HLS pragma ignored"/>
+        </Pragma>
+        <Pragma type="resource" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1597" status="warning" parentFunction="xfsobelfilter7x7" variable="buf" isDirective="0" options="variable=buf core=RAM_S2P_BRAM">
+            <Msg msg_id="207-5523" msg_severity="WARNING" msg_body="'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead"/>
+        </Pragma>
+        <Pragma type="array_partition" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1598" status="valid" parentFunction="xfsobelfilter7x7" variable="buf" isDirective="0" options="variable=buf complete dim=1"/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1605" status="valid" parentFunction="xfsobelfilter7x7" variable="" isDirective="0" options="min=TC max=TC"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1606" status="valid" parentFunction="xfsobelfilter7x7" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1618" status="valid" parentFunction="xfsobelfilter7x7" variable="" isDirective="0" options="min=TC max=TC"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1619" status="valid" parentFunction="xfsobelfilter7x7" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1629" status="valid" parentFunction="xfsobelfilter7x7" variable="" isDirective="0" options="min=TC max=TC"/>
+        <Pragma type="pipeline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1630" status="valid" parentFunction="xfsobelfilter7x7" variable="" isDirective="0" options=""/>
+        <Pragma type="loop_tripcount" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1640" status="valid" parentFunction="xfsobelfilter7x7" variable="" isDirective="0" options="min=ROWS max=ROWS"/>
+        <Pragma type="unroll" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1703" status="valid" parentFunction="xfsobelfilter7x7" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/dsv_xhd/ravalib/documentation/ug1498-model-composer-sys-gen-tutorial/ug1498-model-composer-sys-gen-tutorial/HLS_Library/Lab4/HLS_to_HDL/include/imgproc/xf_sobel.hpp:1744" status="valid" parentFunction="sobel" variable="" isDirective="0" options="OFF"/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:224" status="valid" parentFunction="readstream" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:238" status="valid" parentFunction="writestream" variable="" isDirective="0" options=""/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:254" status="valid" parentFunction="readstream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:271" status="valid" parentFunction="writestream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:290" status="valid" parentFunction="readstream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:312" status="valid" parentFunction="writestream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:333" status="valid" parentFunction="readstream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:352" status="valid" parentFunction="writestream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:373" status="valid" parentFunction="readstream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:392" status="valid" parentFunction="writestream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:413" status="valid" parentFunction="readstream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:437" status="valid" parentFunction="writestream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:461" status="valid" parentFunction="readstream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:482" status="valid" parentFunction="writestream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:504" status="valid" parentFunction="readstream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:521" status="valid" parentFunction="writestream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:540" status="valid" parentFunction="readstream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:562" status="valid" parentFunction="writestream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:584" status="valid" parentFunction="readstream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:603" status="valid" parentFunction="writestream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:624" status="valid" parentFunction="readstream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:642" status="valid" parentFunction="writestream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:661" status="valid" parentFunction="readstream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:683" status="valid" parentFunction="writestream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:704" status="valid" parentFunction="readstream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:723" status="valid" parentFunction="writestream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:775" status="valid" parentFunction="readstream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="pipeline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/StreamAdapters.h:791" status="valid" parentFunction="writestream" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:85" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:99" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:110" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:121" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:135" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:154" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:164" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:174" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:191" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:209" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:223" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:234" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:245" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:259" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:278" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:288" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:298" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:315" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:331" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:345" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:356" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:367" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:382" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:397" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:417" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:437" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:449" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:466" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:481" status="valid" parentFunction="add" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:490" status="valid" parentFunction="add" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:500" status="valid" parentFunction="sub" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:509" status="valid" parentFunction="sub" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:519" status="valid" parentFunction="mul" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithBasics.h:528" status="valid" parentFunction="mul" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithComplex.h:21" status="valid" parentFunction="tohlscomplex" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithComplex.h:29" status="valid" parentFunction="tohlscomplex" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithComplex.h:37" status="valid" parentFunction="tostdcomplex" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithComplex.h:45" status="valid" parentFunction="tostdcomplex" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:94" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:110" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:130" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:154" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:170" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:186" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:201" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:217" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:237" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:256" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:273" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:290" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:307" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:325" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithConversion.h:341" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:87" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:109" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:129" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:143" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:154" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:165" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:180" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:195" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:306" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:342" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:352" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:363" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:380" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:389" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:398" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:413" status="valid" parentFunction="div" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithDivide.h:422" status="valid" parentFunction="div" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:89" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:107" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:125" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:149" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:158" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:167" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:187" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:209" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:227" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:245" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:269" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:287" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:297" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:307" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:328" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:350" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:368" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:386" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:410" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:427" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:437" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:458" status="valid" parentFunction="exec" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:477" status="valid" parentFunction="satadd" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:487" status="valid" parentFunction="satadd" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:501" status="valid" parentFunction="satsub" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:511" status="valid" parentFunction="satsub" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:525" status="valid" parentFunction="satmul" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatBasics.h:535" status="valid" parentFunction="satmul" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:125" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:140" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:155" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:182" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:197" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:222" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:265" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:280" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:295" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:310" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:327" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:344" status="valid" parentFunction="convert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:361" status="valid" parentFunction="satconvert" variable="" isDirective="0" options=""/>
+        <Pragma type="inline" location="/proj/xbuilds/SWIP/2021.2_1021_0703/installs/lin64/Model_Composer/2021.2/include/tb/xmcArithSatConversion.h:378" status="valid" parentFunction="satconvert" variable="" isDirective="0" options=""/>
+        <Pragma type="pipeline" location="ModelComposerDesign.cpp:64" status="valid" parentFunction="p31" variable="" isDirective="0" options="II=1"/>
+        <Pragma type="inline" location="ModelComposerDesign.cpp:80" status="valid" parentFunction="modelcomposerdesign_core" variable="" isDirective="0" options=""/>
+        <Pragma type="stream" location="ModelComposerDesign.cpp:82" status="valid" parentFunction="modelcomposerdesign_core" variable="SobelFilter_XMC_out1" isDirective="0" options="variable=SobelFilter_XMC_out1 depth=3"/>
+        <Pragma type="stream" location="ModelComposerDesign.cpp:84" status="valid" parentFunction="modelcomposerdesign_core" variable="SobelFilter_XMC_out2" isDirective="0" options="variable=SobelFilter_XMC_out2 depth=3"/>
+        <Pragma type="stream" location="ModelComposerDesign.cpp:86" status="valid" parentFunction="modelcomposerdesign_core" variable="GradientMag_XMC_out1" isDirective="0" options="variable=GradientMag_XMC_out1 depth=3"/>
+        <Pragma type="interface" location="ModelComposerDesign.cpp:103" status="valid" parentFunction="modelcomposerdesign" variable="Image_in" isDirective="0" options="axis port=Image_in"/>
+        <Pragma type="interface" location="ModelComposerDesign.cpp:104" status="valid" parentFunction="modelcomposerdesign" variable="Edge_out" isDirective="0" options="axis port=Edge_out"/>
+        <Pragma type="interface" location="ModelComposerDesign.cpp:105" status="valid" parentFunction="modelcomposerdesign" variable="return" isDirective="0" options="ap_ctrl_none port=return"/>
+        <Pragma type="dataflow" location="ModelComposerDesign.cpp:106" status="valid" parentFunction="modelcomposerdesign" variable="" isDirective="0" options=""/>
+        <Pragma type="stream" location="ModelComposerDesign.cpp:108" status="valid" parentFunction="modelcomposerdesign" variable="Image_in_adapter_out1" isDirective="0" options="variable=Image_in_adapter_out1 depth=3"/>
+        <Pragma type="stream" location="ModelComposerDesign.cpp:110" status="valid" parentFunction="modelcomposerdesign" variable="ModelComposerDesign_core_Edge_out" isDirective="0" options="variable=ModelComposerDesign_core_Edge_out depth=3"/>
+    </PragmaReport>
+</profile>
+

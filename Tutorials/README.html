@@ -1,0 +1,390 @@
+
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="simulink-basics">Simulink Basics</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+
+commandURI="matlab:XmcExampleApi.changeDirectory('Tutorials');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
+<p>Click <a href="matlab:XmcExampleApi.getExample('Simulink_Basics')">here</a> to learn what you need to know about Simulink before you start using Vitis Model Composer.</p>
+<h1 id="vitis-model-composer-tutorials">Vitis Model Composer Tutorials</h1>
+<p>These tutorials take users through the design methodology and programming model for developing algorithms in Vitis Model Composer for AMD/Xilinx devices including Versal devices with AI Engines.</p>
+<table style="width:100%">
+<tr>
+<td align="center" colspan="2" style="bold" ><b>HDL Library</a></b>
+</tr>
+
+<tr>
+<td>
+<a href="matlab:XmcExampleApi.getExample('Lab1')">Lab 1</a>
+</td>
+<td>
+Introduction to Vitis Model Composer HDL Library
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="matlab:XmcExampleApi.getExample('Lab2')">Lab 2</a>
+</td>
+<td>
+Importing Code into a Vitis Model Composer HDL Design
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="matlab:XmcExampleApi.getExample('Lab3')">Lab 3</a>
+</td>
+<td>
+Timing and Resource Analysis.
+</td>
+</tr>
+
+<tr> 
+<td>
+<a href="matlab:XmcExampleApi.getExample('Lab4')">Lab 4</a>
+</td>
+<td>
+Working with Multi-Rate Systems
+</td>
+</tr>
+
+<tr> 
+<td>
+<a href="matlab:XmcExampleApi.getExample('Lab5')">Lab 5</a>
+</td>
+<td>
+Using AXI Interfaces and IP Integrator
+</td>
+</tr>
+
+<tr> 
+<td>
+<a href="matlab:XmcExampleApi.getExample('Lab6')">Lab 6</a>
+</td>
+<td>
+Using a Vitis Model Composer HDL Design with a Zynq-7000 SoC
+</td>
+</tr>
+
+<tr>
+<td align="center" colspan="2" style="bold" ><b>HLS Library</a></b>
+</tr>
+
+<tr>
+<td>
+<a href="matlab:XmcExampleApi.getExample('Lab1_HLS')">Lab 1</a>
+</td>
+<td>
+Introduction to Model Composer HLS Library
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="matlab:XmcExampleApi.getExample('Lab2_HLS')">Lab 2</a>
+</td>
+<td>
+Importing Code into Vitis Model Composer
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="matlab:XmcExampleApi.getExample('Lab3_HLS')">Lab 3</a>
+</td>
+<td>
+Debugging Imported C/C++-Code Using GDB Debugger
+</td>
+</tr>
+
+<tr> 
+<td>
+<a href="matlab:XmcExampleApi.getExample('Lab4_HLS')">Lab 4</a>
+</td>
+<td>
+Automatic Code Generation
+</td>
+</tr>
+
+<tr>
+<td align="center" colspan="2" style="bold" ><b>AI Engine Library</a></b> <img src="../Images/new.PNG" width="50">
+</tr>
+
+<tr>
+<td>
+<a href="matlab:XmcExampleApi.getExample('01-Introduction_to_Versal_and_AI_Engines')">Lab 1</a>
+</td>
+<td>
+Introduction to Versal Adaptive SoC and AI Engines
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="matlab:XmcExampleApi.getExample('02-Build_and_Simulate_AI_Engine_Design')">Lab 2</a>
+</td>
+<td>
+Build and Simulate an AI Engine Design
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="matlab:XmcExampleApi.getExample('03-Import_Custom_AI_Engine_Code')">Lab 3</a>
+</td>
+<td>
+Import Custom AI Engine Code
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="matlab:XmcExampleApi.getExample('04-AI_Engine_Code_Generation')">Lab 4</a>
+</td>
+<td>
+AI Engine Code Generation and Cycle-Approximate Simulation
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="matlab:XmcExampleApi.getExample('05-Vitis_Analyzer')">Lab 5</a>
+</td>
+<td>
+View AI Engine Designs in Vitis Analyzer
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="matlab:XmcExampleApi.getExample('06-Hardware_Validation')">Lab 6</a>
+</td>
+<td>
+Hardware Validation of Versal Adaptive SoC Design
+</td>
+</tr> 
+
+
+</table>
+<hr />
+<p>Copyright 2022 Xilinx<br />
+Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 4px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h1, h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }</style>
+</body>
+</html>

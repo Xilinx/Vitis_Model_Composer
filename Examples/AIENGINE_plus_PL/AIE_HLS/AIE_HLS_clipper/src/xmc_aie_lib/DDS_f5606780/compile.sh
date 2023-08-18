@@ -1,0 +1,1 @@
+aiecompiler --verbose --workdir=./myWork --include="./" --include="$DSPLIB_ROOT/L1/include/hw/" --include="$DSPLIB_ROOT/L1/src/hw" --include="$DSPLIB_ROOT/L2/include/hw" --include="$DSPLIB_ROOT/L1/tests/inc/" DDS_f5606780.cpp
