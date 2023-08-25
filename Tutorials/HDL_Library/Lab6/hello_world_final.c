@@ -50,7 +50,7 @@
 #include "platform.h"
 
 #include "xaxidma.h"
-#include "lab6_1.h"
+#include "hdl_dut.h"
 
 /* DES Accelerator Test data */
 
@@ -117,7 +117,7 @@ void print_ciphertext(char *str, size_t len) {
 }
 
 
-void run_DES_test(lab6_1 *DES_inst, XAxiDma *PL_AXI_DMA_Device)
+void run_DES_test(hdl_dut *DES_inst, XAxiDma *PL_AXI_DMA_Device)
 {
 	int Status;
 	u32 key_LSW;
@@ -134,16 +134,16 @@ void run_DES_test(lab6_1 *DES_inst, XAxiDma *PL_AXI_DMA_Device)
 	/* Configure the encryption key */
 	key_MSW = 0x98674058;
 	key_LSW = 0x01645880;
-	lab6_1_key_31_0_write(DES_inst, key_LSW);
-	lab6_1_key_63_32_write(DES_inst, key_MSW);
+	hdl_dut_key_31_0_write(DES_inst, key_LSW);
+	hdl_dut_key_63_32_write(DES_inst, key_MSW);
 	decrypt = 0;	// encrypt
-	lab6_1_decrypt_write(DES_inst, decrypt);
+	hdl_dut_decrypt_write(DES_inst, decrypt);
 
 	/* Read back the DES configuration */
-	key_LSW = lab6_1_key_31_0_read(DES_inst);
-	key_MSW = lab6_1_key_63_32_read(DES_inst);
-	decrypt = lab6_1_decrypt_read(DES_inst);
-	key_parity_error = lab6_1_parity_err_read(DES_inst);
+	key_LSW = hdl_dut_key_31_0_read(DES_inst);
+	key_MSW = hdl_dut_key_63_32_read(DES_inst);
+	decrypt = hdl_dut_decrypt_read(DES_inst);
+	key_parity_error = hdl_dut_parity_err_read(DES_inst);
 	print("DES key = 0x");
 	putnum(key_MSW);
 	putnum(key_LSW);
@@ -187,7 +187,7 @@ void run_DES_test(lab6_1 *DES_inst, XAxiDma *PL_AXI_DMA_Device)
 
 	/* switch mode to decryption */
 	decrypt = 1;
-	lab6_1_decrypt_write(DES_inst, decrypt);
+	hdl_dut_decrypt_write(DES_inst, decrypt);
 
 	/* Disable the cache so we will see the results from the DMA transfer */
 	Xil_DCacheFlushRange((u32) deciphered_text, 256);
@@ -209,13 +209,6 @@ void run_DES_test(lab6_1 *DES_inst, XAxiDma *PL_AXI_DMA_Device)
 
 }
 
-
-
-
-
-
-
-
 int main()
 {
 	// Device instance variables and configuration pointers
@@ -223,7 +216,7 @@ int main()
 	XAxiDma PL_AXI_DMA_Device;
 	XAxiDma_Config *AxiDmaCfgPtr;
 	// b) DES Accelerator
-	lab6_1 DES_inst;
+	hdl_dut DES_inst;
 
 	int Status;
 	int i;
@@ -234,7 +227,7 @@ int main()
 	/*
 	 * initialize DES core
 	 */
-	Status = lab6_1_Initialize(&DES_inst, XPAR_LAB6_1_0_DEVICE_ID);
+	Status = hdl_dut_Initialize(&DES_inst, XPAR_LAB6_1_0_DEVICE_ID);
 
 	if (Status == XST_FAILURE) {
 		print("DES core initialization FAILED\r\n");
