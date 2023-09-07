@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "system_project_sw_emu_new",
+      "debugType": "sw_emu",
+      "type": "gdb",
+      "request": "launch",
+      "target": "${workspaceFolder}/host/build/x86sim/host",
+      "applicationProjectDir": "${workspaceFolder}/system_project",
+      "arguments": "${workspaceFolder}/system_project/build/sw_emu/package/binary_container_1.xclbin",
+      "cwd": "${workspaceFolder}/system_project/build/sw_emu/system_project_sw_emu_new",
+      "gdbpath": "${env:XILINX_VITIS}/bin/xgdb",
+      "valuesFormatting": "prettyPrinters",
+      "env": {
+        "XILINX_VITIS": "${env:XILINX_VITIS}",
+        "XILINX_HLS": "${env:XILINX_VITIS}",
+        "XCL_EMULATION_MODE": "sw_emu",
+        "ENABLE_KERNEL_DEBUG": "true",
+        "XCL_BIN_PATH": "${workspaceFolder}/system_project/build/sw_emu/package",
+        "LD_LIBRARY_PATH": "${env:XILINX_XRT}/lib"
+      }
+    }
+  ]
+}

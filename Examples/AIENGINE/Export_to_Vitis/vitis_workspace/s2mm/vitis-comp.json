@@ -1,0 +1,15 @@
+{
+  "name": "s2mm",
+  "type": "HLS",
+  "configuration": {
+    "componentType": "HLS",
+    "configFiles": [
+      "hls_config.cfg"
+    ],
+    "work_dir": "s2mm"
+  },
+  "previousBuildStatusMap": {
+    "sw_emu": "SUCCESS",
+    "hw_emu": "SUCCESS"
+  }
+}

@@ -1,0 +1,3 @@
+relativeroot=/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s
+original_argv=-c --mode hls --config /proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/hls_config.cfg --work_dir mm2s 
+

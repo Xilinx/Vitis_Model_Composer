@@ -1,0 +1,15 @@
+{
+  "name": "mm2s",
+  "type": "HLS",
+  "configuration": {
+    "componentType": "HLS",
+    "configFiles": [
+      "hls_config.cfg"
+    ],
+    "work_dir": "mm2s"
+  },
+  "previousBuildStatusMap": {
+    "sw_emu": "SUCCESS",
+    "hw_emu": "SUCCESS"
+  }
+}

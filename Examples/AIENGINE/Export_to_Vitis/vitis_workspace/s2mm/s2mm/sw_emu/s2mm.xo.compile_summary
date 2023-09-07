@@ -1,0 +1,168 @@
+<ENTRY>
+{
+ "thisFile": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm/sw_emu/s2mm.xo.compile_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Wed Aug 30 15:31:22 2023",
+ "timestampMillis": "1693423882921",
+ "buildStep": {
+  "cmdId": "eee2723a-45c9-4645-9ebf-0193f4ef8d52",
+  "name": "v++",
+  "logFile": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm/sw_emu/s2mm/s2mm.steps.log",
+  "commandLine": "/proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/bin/unwrapped/lnx64.o/v++  --vivado.prop \"run.__KERNEL__.{STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}={-directive sdx_optimization_effort_high}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_route_design_summary steps {route_design} runs {impl_1} options {-max_paths 10}\" --advanced.misc \"report=type report_timing_summary name impl_report_timing_summary_post_route_phys_opt_design_summary steps {post_route_phys_opt_design} runs {impl_1} options {-max_paths 10}\" -c -k s2mm --target sw_emu -g /proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm.cpp --platform /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/base_platforms/xilinx_vck190_base_202320_1/xilinx_vck190_base_202320_1.xpfm --temp_dir /proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm/sw_emu -o /proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm/sw_emu/s2mm.xo ",
+  "args": [
+   "-c",
+   "-k",
+   "s2mm",
+   "--target",
+   "sw_emu",
+   "-g",
+   "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm.cpp",
+   "--platform",
+   "/proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/base_platforms/xilinx_vck190_base_202320_1/xilinx_vck190_base_202320_1.xpfm",
+   "--temp_dir",
+   "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm/sw_emu",
+   "-o",
+   "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm/sw_emu/s2mm.xo"
+  ],
+  "iniFiles": [],
+  "cwd": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Aug 30 15:31:22 2023",
+ "timestampMillis": "1693423882921",
+ "status": {
+  "cmdId": "eee2723a-45c9-4645-9ebf-0193f4ef8d52",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Wed Aug 30 15:31:25 2023",
+ "timestampMillis": "1693423885481",
+ "buildSummary": {
+  "hardwarePlatform": "xilinx_vck190_base_202320_1.xpfm",
+  "hardwareDsa": "hw.xsa",
+  "platformDirectory": "/proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/base_platforms/xilinx_vck190_base_202320_1",
+  "runtime": "OpenCL",
+  "systemConfig": "Linux",
+  "flow": "BF_COMPILE",
+  "target": "TT_SW_EMU",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "s2mm",
+     "file": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm/sw_emu/s2mm.xo",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm.cpp"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "Vitis V++ Compiler Release 2023.2. SW Build 3980136 on 2023-08-29-16:48:33"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Aug 30 15:31:25 2023",
+ "timestampMillis": "1693423885489",
+ "buildStep": {
+  "cmdId": "6d05dbb4-e906-43dd-98d8-f3d05b14a634",
+  "name": "vitis_hls",
+  "logFile": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm/sw_emu/s2mm/s2mm/vitis_hls.log",
+  "commandLine": "vitis_hls -f /proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm/sw_emu/s2mm/s2mm/s2mm.tcl -messageDb vitis_hls.pb",
+  "args": [
+   "vitis_hls",
+   "-f",
+   "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm/sw_emu/s2mm/s2mm/s2mm.tcl",
+   "-messageDb",
+   "vitis_hls.pb"
+  ],
+  "iniFiles": [],
+  "cwd": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Aug 30 15:31:25 2023",
+ "timestampMillis": "1693423885490",
+ "status": {
+  "cmdId": "6d05dbb4-e906-43dd-98d8-f3d05b14a634",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Aug 30 15:31:44 2023",
+ "timestampMillis": "1693423904300",
+ "status": {
+  "cmdId": "6d05dbb4-e906-43dd-98d8-f3d05b14a634",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Aug 30 15:31:44 2023",
+ "timestampMillis": "1693423904550",
+ "status": {
+  "cmdId": "eee2723a-45c9-4645-9ebf-0193f4ef8d52",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 15:31:44 2023",
+ "timestampMillis": "1693423904613",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm/sw_emu/reports/s2mm/v++_compile_s2mm_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 15:31:44 2023",
+ "timestampMillis": "1693423904614",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/s2mm/sw_emu/v++_compile_s2mm_guidance.pb3",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

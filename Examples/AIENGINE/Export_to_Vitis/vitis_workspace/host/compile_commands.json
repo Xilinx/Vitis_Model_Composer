@@ -1,0 +1,7 @@
+[
+  {
+    "directory": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/host/_ide/_build",
+    "command": "/usr/bin/g++ -DVITIS_MAJOR_VERSION\u003d2023 -DVITIS_MINOR_VERSION\u003d2 -DVITIS_VERSION\u003d2023.2 -D__USE_XOPEN2K8 -I/proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis_HLS/2023.2/include -I/opt/xilinx/xrt/include -I/proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/aietools/include -g -Wall -Wextra -O0 -g3 -std\u003dc++1y -o CMakeFiles/host.dir/host.cpp.o -c /proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/host/host.cpp",
+    "file": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/host/host.cpp"
+  }
+]
