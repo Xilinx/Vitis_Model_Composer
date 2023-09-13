@@ -1,0 +1,425 @@
+paths:
+  /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw: {}
+os:
+  freertos10_xilinx:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/ThirdParty/bsp/freertos10_xilinx_v1_14
+  standalone:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/bsp/standalone_v9_0
+driver:
+  devcfg:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/devcfg_v3_8
+  emacps:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/emacps_v3_19
+  ipipsu:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/ipipsu_v2_14
+  pciepsu:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/pciepsu_v1_6
+  qspipsu:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/qspipsu_v1_18
+  qspips:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/qspips_v3_11
+  rtcpsu:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/rtcpsu_v1_13
+  sysmonpsv:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sysmonpsv_v4_1
+  uartps:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/uartps_v3_13
+  can:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/can_v3_7
+  dfeccf:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfeccf_v1_6
+  dfeofdm:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfeofdm_v1_1
+  dfxasm:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfxasm_v1_2
+  trngpsv:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/trngpsv_v1_4
+  ddrcpsu:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/ddrcpsu_v1_5
+  dfemix:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfemix_v1_6
+  xdmapcie:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/xdmapcie_v1_7
+  dfeequ:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfeequ_v1_5
+  sd_fec:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sd_fec_v1_3
+  cfupmc:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/cfupmc_v1_6
+  coresightps_dcc:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/coresightps_dcc_v1_9
+  scugic:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/scugic_v5_2
+  uartlite:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/uartlite_v3_9
+  zdma:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/zdma_v1_17
+  clockps:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/clockps_v1_5
+  ttcps:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/ttcps_v3_18
+  wdtps:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/wdtps_v3_6
+  uartpsv:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/uartpsv_v1_9
+  iomodule:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iomodule_v2_15
+  ospipsv:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/ospipsv_v1_9
+  common:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/common_v1_3
+  csudma:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/csudma_v1_14
+  sdps:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sdps_v4_2
+  cframe:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/cframe_v1_5
+  resetps:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/resetps_v1_6
+  dfeprach:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfeprach_v1_6
+  wdttb:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/wdttb_v5_7
+  aienginev2:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/aienginev2_v3_3
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/aienginev2_v3_4
+  axicdma:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axicdma_v4_12
+  axipmon:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axipmon_v6_10
+  axis_switch:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axis_switch_v1_6
+  bram:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/bram_v4_9
+  canfd:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/canfd_v2_8
+  canps:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/canps_v3_7
+  gpio:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/gpio_v4_10
+  gpiops:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/gpiops_v3_12
+  iicps:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iicps_v3_18
+  intc:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/intc_v3_17
+  llfifo:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/llfifo_v5_5
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/llfifo_v5_6
+  mbox:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/mbox_v4_6
+  mutex:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/mutex_v4_7
+  nandps:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/nandps_v2_8
+  prc:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/prc_v2_2
+  rfdc:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/rfdc_v12_1
+  spi:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/spi_v4_11
+  tft:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/tft_v6_4
+  uartns550:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/uartns550_v3_9
+  usbps:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/usbps_v2_8
+  usb:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/usb_v5_6
+  v_frmbuf_rd:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/v_frmbuf_rd_v4_7
+  v_tpg:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/v_tpg_v8_5
+  vtc:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/vtc_v8_5
+  axidma:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axidma_v9_17
+  clk_wiz:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/clk_wiz_v1_6
+  dmaps:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dmaps_v2_9
+  mcdma:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/mcdma_v1_9
+  nandpsu:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/nandpsu_v1_12
+  prd:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/prd_v2_2
+  scuwdt:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/scuwdt_v2_5
+  tmr_inject:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/tmr_inject_v1_6
+  trafgen:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/trafgen_v4_5
+  xxvethernet:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/xxvethernet_v1_8
+  emaclite:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/emaclite_v4_8
+  scutimer:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/scutimer_v2_5
+  spips:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/spips_v3_9
+  tmrctr:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/tmrctr_v4_11
+  tmr_manager:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/tmr_manager_v1_5
+  usbpsu:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/usbpsu_v1_14
+  v_frmbuf_wr:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/v_frmbuf_wr_v4_7
+  video_common:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/video_common_v4_14
+  axiethernet:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axiethernet_v5_16
+  axivdma:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axivdma_v6_14
+  emc:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/emc_v4_2
+  hwicap:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/hwicap_v11_6
+  sysmonpsu:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sysmonpsu_v2_9
+  sysmon:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sysmon_v7_8
+  iic:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iic_v3_10
+  xadcps:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/xadcps_v2_7
+library:
+  lwip213:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/ThirdParty/sw_services/lwip213_v1_1
+  libmetal:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/ThirdParty/sw_services/libmetal_v2_6
+  openamp:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/ThirdParty/sw_services/openamp_v1_9
+  xilflash:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilflash_v4_10
+  xilnvm:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilnvm_v3_2
+  xilpuf:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilpuf_v2_2
+  xilpdi:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilpdi_v1_8
+  xiltimer:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xiltimer_v1_3
+  xilfpga:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilfpga_v6_5
+  xilpm:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilpm_v5_1
+  xilplmi:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilplmi_v1_9
+  xilsecure:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilsecure_v5_2
+  xilsem:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilsem_v1_8
+  xilloader:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilloader_v1_9
+  xilffs:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilffs_v5_1
+  xilrsa:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilrsa_v1_7
+  xilmailbox:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilmailbox_v1_8
+  xilskey:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilskey_v7_5
+apps:
+  zynqmp_pmufw:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynqmp_pmufw
+  versal_plm:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/versal_plm
+  zynqmp_fsbl:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynqmp_fsbl
+  versal_psmfw:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/versal_psmfw
+  zynq_fsbl:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynq_fsbl
+  hello_world:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/hello_world
+  zynq_dram_test:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynq_dram_test
+  peripheral_tests:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/peripheral_tests
+  zynqmp_dram_test:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynqmp_dram_test
+  srec_spi_bootloader:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/srec_spi_bootloader
+  libmetal_echo_demo:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/libmetal_echo_demo
+  freertos_lwip_tcp_perf_client:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_tcp_perf_client
+  memory_tests:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/memory_tests
+  lwip_echo_server:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_echo_server
+  lwip_udp_perf_client:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_udp_perf_client
+  openamp_matrix_multiply:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/openamp_matrix_multiply
+  openamp_rpc_demo:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/openamp_rpc_demo
+  srec_bootloader:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/srec_bootloader
+  openamp_echo_test:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/openamp_echo_test
+  rsa_auth_app:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/rsa_auth_app
+  lwip_tcp_perf_server:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_tcp_perf_server
+  freertos_lwip_udp_perf_client:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_udp_perf_client
+  lwip_udp_perf_server:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_udp_perf_server
+  empty_application:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/empty_application
+  freertos_lwip_echo_server:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_echo_server
+  lwip_tcp_perf_client:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_tcp_perf_client
+  freertos_lwip_udp_perf_server:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_udp_perf_server
+  ddr_self_refresh:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/ddr_self_refresh
+  dhrystone:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/dhrystone
+  freertos_lwip_tcp_perf_server:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_tcp_perf_server
+  freertos_hello_world:
+    path:
+    - /proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_hello_world

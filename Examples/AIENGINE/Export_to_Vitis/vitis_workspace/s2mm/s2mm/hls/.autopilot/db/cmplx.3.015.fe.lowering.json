@@ -1,0 +1,14 @@
+{
+  "0": {
+    "basicblocks": 5,
+    "calls": "",
+    "file": "s2mm.cpp",
+    "fileloc": 14,
+    "instructions": 36,
+    "loads": {
+      "L": 1
+    },
+    "name": "s2mm",
+    "total_instructions": 36
+  }
+}

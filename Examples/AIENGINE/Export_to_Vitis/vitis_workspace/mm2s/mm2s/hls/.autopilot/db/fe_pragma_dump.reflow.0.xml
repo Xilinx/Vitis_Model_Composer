@@ -1,0 +1,16 @@
+<pragmas>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_user_ptr" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_id_ptr" off="0" region="0" recursive="0"/>
+<pragma file="/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/mm2s.cpp" line="24" pragmaType="pipeline" parentfunction="mm2s" off="0" ii="1" rewind="0" style=""/>
+<pragma file="/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/mm2s.cpp" line="15" pragmaType="interface" parentfunction="mm2s" mode="m_axi" port="mem" bundle="gmem" offset="slave" name="" depth="-1" num_read_outstanding="-1" num_write_outstanding="-1" max_burst_read_length="-1" max_burst_write_length="-1" latency="-1" max_widen_bitwidth="-1" channel=""/>
+<pragma file="/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/mm2s.cpp" line="17" pragmaType="interface" parentfunction="mm2s" mode="axis" port="s" register="0" register_mode="both" name="" depth="-1"/>
+<pragma file="/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/mm2s.cpp" line="19" pragmaType="interface" parentfunction="mm2s" mode="s_axilite" port="mem" bundle="control" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/mm2s.cpp" line="20" pragmaType="interface" parentfunction="mm2s" mode="s_axilite" port="size" bundle="control" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/mm2s.cpp" line="21" pragmaType="interface" parentfunction="mm2s" mode="s_axilite" port="" bundle="control" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_last_ptr" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_dest_ptr" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="write" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_data_ptr" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_keep_ptr" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_strb_ptr" off="0" region="0" recursive="0"/>
+</pragmas>

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "basicblocks": 5,
+    "calls": "",
+    "file": "mm2s.cpp",
+    "fileloc": 14,
+    "instructions": 43,
+    "loads": {
+      "L": 1
+    },
+    "name": "mm2s",
+    "stores": {
+      "L": 5
+    },
+    "total_instructions": 49
+  }
+}
