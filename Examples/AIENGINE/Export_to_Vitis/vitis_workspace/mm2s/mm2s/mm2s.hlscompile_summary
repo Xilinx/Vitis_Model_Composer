@@ -1,0 +1,372 @@
+<ENTRY>
+{
+ "thisFile": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/mm2s.hlscompile_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Wed Aug 30 14:56:20 2023",
+ "timestampMillis": "1693421780075",
+ "buildStep": {
+  "cmdId": "e77ce5b3-32ba-4ba0-a3e3-7101e69d5643",
+  "name": "v++",
+  "logFile": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/logs/mm2s.steps.log",
+  "commandLine": "/proj/xbuilds/SWIP/2023.2_0829_2224/installs/lin64/Vitis/2023.2/bin/unwrapped/lnx64.o/v++  -c --mode hls --config /proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/hls_config.cfg --work_dir mm2s ",
+  "args": [
+   "-c",
+   "--mode",
+   "hls",
+   "--config",
+   "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/hls_config.cfg",
+   "--work_dir",
+   "mm2s"
+  ],
+  "iniFiles": [
+   {
+    "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/hls_config.cfg",
+    "content": "part=xcvc1902-vsva2197-2MP-e-S\n\n[hls]\nflow_target=vitis\npackage.output.syn=1\nsyn.file=/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/mm2s.cpp\nsyn.top=mm2s\nclock=8ns\nclock_uncertainty=12%\npackage.output.format=xo\n"
+   }
+  ],
+  "cwd": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Aug 30 14:56:20 2023",
+ "timestampMillis": "1693421780075",
+ "status": {
+  "cmdId": "e77ce5b3-32ba-4ba0-a3e3-7101e69d5643",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Wed Aug 30 14:56:30 2023",
+ "timestampMillis": "1693421790817",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_COMPILE",
+  "target": "TT_HW",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "mm2s",
+     "file": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/mm2s.xo",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/mm2s.cpp"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2023.2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Aug 30 14:56:30 2023",
+ "timestampMillis": "1693421790819",
+ "buildStep": {
+  "cmdId": "f9322cea-46bd-42bb-a36f-e2261ce21e16",
+  "name": "csynth_design",
+  "logFile": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls/hls.log",
+  "commandLine": "csynth_design",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Aug 30 14:56:30 2023",
+ "timestampMillis": "1693421790820",
+ "status": {
+  "cmdId": "f9322cea-46bd-42bb-a36f-e2261ce21e16",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:56:30 2023",
+ "timestampMillis": "1693421790820",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls/hls_data.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:56:30 2023",
+ "timestampMillis": "1693421790821",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls/syn/report/csynth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:56:30 2023",
+ "timestampMillis": "1693421790822",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls/syn/report/csynth.xml",
+  "name": "",
+  "fileType": "XML",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:56:47 2023",
+ "timestampMillis": "1693421807745",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_DATAFLOW",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:56:47 2023",
+ "timestampMillis": "1693421807745",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_FUNCTION_CALL_GRAPH",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:56:47 2023",
+ "timestampMillis": "1693421807746",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_SCHEDULE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Aug 30 14:56:47 2023",
+ "timestampMillis": "1693421807746",
+ "status": {
+  "cmdId": "f9322cea-46bd-42bb-a36f-e2261ce21e16",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Wed Aug 30 14:56:47 2023",
+ "timestampMillis": "1693421807753",
+ "buildStep": {
+  "cmdId": "395e8bcd-ce1a-4f46-979a-81b9283bbbba",
+  "name": "export_design",
+  "logFile": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls/hls.log",
+  "commandLine": "export_design -flow none -format xo",
+  "args": [
+   "-flow",
+   "none",
+   "-format",
+   "xo"
+  ],
+  "iniFiles": [],
+  "cwd": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Aug 30 14:56:47 2023",
+ "timestampMillis": "1693421807754",
+ "status": {
+  "cmdId": "395e8bcd-ce1a-4f46-979a-81b9283bbbba",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:56:47 2023",
+ "timestampMillis": "1693421807754",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls/hls_data.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:56:47 2023",
+ "timestampMillis": "1693421807754",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls/syn/report/csynth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:56:47 2023",
+ "timestampMillis": "1693421807755",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls/syn/report/csynth.xml",
+  "name": "",
+  "fileType": "XML",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:57:22 2023",
+ "timestampMillis": "1693421842452",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_DATAFLOW",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:57:22 2023",
+ "timestampMillis": "1693421842452",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_FUNCTION_CALL_GRAPH",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:57:22 2023",
+ "timestampMillis": "1693421842453",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_SCHEDULE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Aug 30 14:57:22 2023",
+ "timestampMillis": "1693421842453",
+ "status": {
+  "cmdId": "395e8bcd-ce1a-4f46-979a-81b9283bbbba",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Wed Aug 30 14:57:22 2023",
+ "timestampMillis": "1693421842820",
+ "status": {
+  "cmdId": "e77ce5b3-32ba-4ba0-a3e3-7101e69d5643",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:57:22 2023",
+ "timestampMillis": "1693421842891",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/reports/v++_compile_mm2s_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Wed Aug 30 14:57:22 2023",
+ "timestampMillis": "1693421842894",
+ "report": {
+  "path": "/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/mm2s/mm2s/reports/.db/v++_compile_mm2s_guidance.pb3",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

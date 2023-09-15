@@ -1,0 +1,3 @@
+relativeroot=/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm
+original_argv=-c --mode hls --config /proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/workAIE/s2mm/hls_config.cfg --work_dir s2mm 
+

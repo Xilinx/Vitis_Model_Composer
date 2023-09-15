@@ -1,0 +1,27 @@
+<xilinx:hls_fe_msgs>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="directive:1:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaContext="directive" ARG_PragmaFunction="s2mm" ARG_PragmaIsValid="1" ARG_PragmaOptions="name=s2mm" ARG_PragmaType="top" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/s2mm.cpp:15:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="s2mm" ARG_PragmaIsValid="1" ARG_PragmaOptions="m_axi port=mem offset=slave bundle=gmem" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/s2mm.cpp:17:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="s2mm" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=s" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/s2mm.cpp:19:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="s2mm" ARG_PragmaIsValid="1" ARG_PragmaOptions="s_axilite port=mem bundle=control" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/s2mm.cpp:20:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="s2mm" ARG_PragmaIsValid="1" ARG_PragmaOptions="s_axilite port=size bundle=control" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/s2mm.cpp:21:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="s2mm" ARG_PragmaIsValid="1" ARG_PragmaOptions="s_axilite port=return bundle=control" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/s2mm.cpp:24:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="s2mm" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INTERFACE" msg_id="214-386" msg_severity="WARNING" msg_loc="/proj/xcoswmktg/robg/git/Vitis-Tutorials/Internal-Fork/AI_Engine_Development/Feature_Tutorials/05-AI-engine-versal-integration/pl_kernels/s2mm.cpp:14:0" msg_body="A depth specification is required for MAXI interface port 'mem' for cosimulation.">
+        <args Name="mem"/>
+    </msg>
+</xilinx:hls_fe_msgs>
+
