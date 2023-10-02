@@ -112,6 +112,13 @@
  <td>This design shows two distinct FPGA implementations of a 2nd order IIR filter in Direct Form II, and compares them to the double precision Simulink IIR filter block.
  </td>
  </tr>
+<tr>
+ <td align="left">
+   <a href="./Floating_Point/3x3_Matrix_Determinant/README.md">3x3 Matrix Determinant</a>
+ </td>
+ <td>This design demonstrates the calculation of the determinant of a 3x3 matrix with real, single precision floating point elements. It showcases the Black Box block for bringing hand-coded VHDL or Verilog code into Model Composer. It also shows the DSPFP32 for performing floating-point operations on Versal devices.
+ </td>
+ </tr>
  </table>
 
  
