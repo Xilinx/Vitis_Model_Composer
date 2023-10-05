@@ -55,7 +55,7 @@ A design with both AI Engine and HLS Kernel blocks connected directly.
 
 <tr> 
 <td>
-<a href="./AIE_HLS/FFT2D/README.md">2D FFT</a>
+<a href="./AIE_HLS/FFT2D_HLS/README.md">2D FFT</a>
 </td>
 <td>
 A 2D FFT design with both AI Engine and HLS Kernel.
