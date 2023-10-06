@@ -1,274 +1,191 @@
-
-
-    <html>
-      <head>
-        <title></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-      </head>
-      <body>
-        <div id='content'>
-    <h1 id="connecting-ai-engine-blocks-with-hdl-blocks">Connecting AI Engine blocks with HDL blocks</h1>
-<p>In Vitis Model Composer, simulation of the AI Engine blocks is untimed while the simulation of HDL blocks is timed (cycle accurate). <br />
-If you are simulating a heterogeneous system with both PL (modeled with HDL blocks) and AI Engine, you need to use “AIE to HDL” and “HDL to AIE” blocks to properly <br />
-manage the sampling times across the two domains. This Quick Guide explains how to set these two blocks properly and what to be aware of.</p>
-<h1 id="setting-the-aie-to-hdl-block">Setting the AIE to HDL block</h1>
-<p>The image below depicts the components that are needed to connect an AI Engine subsystem to an HDL desgin. In setting this connection, we should keep few input design criteria in mind and set the parameters of the blocks accordingly. These input design criteria are (refer to the image below):</p>
-<ol>
-<li><strong>W</strong>, the bit width of the tdata signal in the programmable logic.</li>
-<li><strong>T</strong>, This sample time determines the target clock rate for which the HDL design will be clocked in hardware. For single clock designs, this will be the sample time set in the <em>Gateway In AXIS</em> block. </li>
-<li><strong>ii</strong>, As mentioned earlier, simulation in HDL domain is cycle accurate. An HDL design may not be ready to accept a new sample at every cycle (the tready signal from the HDL design will be set to zero when the HDL design cannot accept new samples). This is referred as the initilization interval (<strong>ii</strong>) of the HDL design. For example, if an HDL design accepts a new sample every 10 cycles, the design would have an initiation interval of 10. A design that can accept a new sample at every clock cycle has an initiation interval of one.</li>
-<li><strong>S</strong>, Number of output samples of the AI Engine kernel.</li>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="/proj/xcoswmktg/robg/git/markdown_to_html/style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="connecting-ai-engine-blocks-with-hdl-blocks"
+class="level1">
+<h1>Connecting AI Engine blocks with HDL blocks</h1>
+<p>In Vitis Model Composer, simulation of the AI Engine blocks is
+untimed while the simulation of HDL blocks is timed (cycle accurate). If
+you are simulating a heterogeneous system with both PL (modeled with HDL
+blocks) and AI Engine, you need to use “AIE to HDL” and “HDL to AIE”
+blocks to properly manage the sampling times across the two domains.
+This Quick Guide explains how to set these two blocks properly and what
+to be aware of.</p>
+</section>
+<section id="setting-the-aie-to-hdl-block" class="level1">
+<h1>Setting the AIE to HDL block</h1>
+<p>The image below shows how to connect an AI Engine subsystem to an HDL
+subsystem. To configure the desgin correctly, we should consider the
+following design settings (refer to the image below):</p>
+<ol type="1">
+<li><strong>W</strong>, the bit width of the tdata signal in the
+programmable logic.</li>
+<li><strong>T</strong>, This sample time determines the target clock
+rate for which the HDL design will be clocked in hardware. For single
+clock designs, this will be the sample time set in the <em>Gateway In
+AXIS</em> block.</li>
+<li><strong>ii</strong>, As mentioned earlier, simulation in HDL domain
+is cycle accurate. An HDL design may not be ready to accept a new sample
+at every cycle (the tready signal from the HDL design will be set to
+zero when the HDL design cannot accept new samples). This is referred as
+the initilization interval (<strong>ii</strong>) of the HDL design. For
+example, if an HDL design accepts a new sample every 10 cycles, the
+design would have an initiation interval of 10. A design that can accept
+a new sample at every clock cycle has an initiation interval of
+one.</li>
+<li><strong>S</strong>, Number of output samples of the AI Engine
+kernel.</li>
 <li><strong>DT</strong>, Output data type of the AI Engine kernel.</li>
 </ol>
-<p>Let's set <strong>P</strong> to be the period of the AI Engine subsystem. Note that all the input and output signals of the AI Engine subsystem must have the same period.</p>
-<p>Also note that the PLIO block is a pass through block and only impacts code generation. </p>
-<p><img src="images/high_level_AIE_HDL2.png" alt="" /></p>
-<p>Keeping the above five input design criteria in mind, we can set the parameters of the blocks accordingly as described below:</p>
-<h2 id="step-1-set-the-plio-bit-width-in-the-plio-block">Step 1 Set the PLIO bit width in the PLIO block</h2>
+<p>Let's set <strong>P</strong> to be the period of the AI Engine
+subsystem. Note that all the input and output signals of the AI Engine
+subsystem must have the same period.</p>
+<p>Also note that the PLIO block is a pass through block and only
+impacts code generation.</p>
+<p><img src="images/high_level_AIE_HDL2.png" /></p>
+<p>Keeping the above five input design criteria in mind, we can set the
+parameters of the blocks accordingly as described below:</p>
+<section id="step-1-set-the-plio-bit-width-in-the-plio-block"
+class="level2">
+<h2>Step 1 Set the PLIO bit width in the PLIO block</h2>
 <p>Set the PLIO bit width to <strong>W</strong>.</p>
-<h2 id="step-2-set-parameters-of-the-aie-to-hdl-block">Step 2 Set parameters of the AIE to HDL block</h2>
-<h4 id="output-data-type">Output Data Type</h4>
-<p>Set the <em>Output Data Type</em> such that the output bit width is <strong>W</strong>.</p>
+</section>
+<section id="step-2-set-parameters-of-the-aie-to-hdl-block"
+class="level2">
+<h2>Step 2 Set parameters of the AIE to HDL block</h2>
+<section id="output-data-type" class="level4">
+<h4>Output Data Type</h4>
+<p>Set the <em>Output Data Type</em> such that the output bit width is
+<strong>W</strong>.</p>
 <ul>
-<li>If <strong>W</strong> is larger than the input bit width, the output should be unsigned.</li>
-<li>If <strong>W</strong> is eqaul to the input bit width, the output should have the same signedness of the input.</li>
-<li>Input bit width to the block cannot be larger than <strong>W</strong>. </li>
+<li>If <strong>W</strong> is larger than the input bit width, the output
+should be unsigned.</li>
+<li>If <strong>W</strong> is eqaul to the input bit width, the output
+should have the same signedness of the input.</li>
+<li>Input bit width to the block cannot be larger than
+<strong>W</strong>.</li>
 </ul>
-<h4 id="output-sample-time">Output Sample Time</h4>
-<p>Set the <em>Ouptut Sample Time</em> to <em>Inherit: Same as tready</em> (this is equivalent of setting this to <strong>T</strong>). </p>
-<h2 id="signal-period-into-the-block">Signal Period into the block</h2>
-<p>If the input rate into the block is larger than the output rate, eventually the internal buffers of the block will overflow and the simulation will stop. As such, the input period <strong>P</strong> should meet the following equation:</p>
-<p><img src="https://render.githubusercontent.com/render/math?math=P \geq  \frac{S\times T\times ii \times \text{(DT bit width)}}{W}"></p>
-<h2 id="step-3-set-parameters-of-the-gateway-in-axis-block">Step 3 Set parameters of the Gateway In, AXIS block</h2>
+</section>
+<section id="output-sample-time" class="level4">
+<h4>Output Sample Time</h4>
+<p>Set the <em>Ouptut Sample Time</em> to <em>Inherit: Same as
+tready</em> (this is equivalent of setting this to
+<strong>T</strong>).</p>
+</section>
+</section>
+<section id="signal-period-into-the-block" class="level2">
+<h2>Signal Period into the block</h2>
+<p>If the input rate into the block is larger than the output rate,
+eventually the internal buffers of the block will overflow and the
+simulation will stop. As such, the input period <strong>P</strong>
+should meet the following equation:</p>
+<img src="https://render.githubusercontent.com/render/math?math=P \geq  \frac{S\times T\times ii \times \text{(DT bit width)}}{W}">
+
+</section>
+<section id="step-3-set-parameters-of-the-gateway-in-axis-block"
+class="level2">
+<h2>Step 3 Set parameters of the Gateway In, AXIS block</h2>
 <ul>
 <li>Set <em>Output data type</em> to <strong>W</strong>.</li>
 <li>Set <em>Sample Time</em> to <strong>T</strong>.</li>
 </ul>
-<h1 id="setting-the-hdl-to-aie-block">Setting the HDL to AIE block</h1>
-<p>The image below depicts the components that are needed to connect an HDL design to an AI Engine subsystem. In setting this connection, we should keep few input design criteria in mind and set the parameters of the blocks accordingly. These input design criteria are:</p>
-<ol>
-<li>The bit width of the tdata signal line (<strong>W</strong>). This is the bit width of the data in programmable logic.</li>
-<li>HDL design sample time (<strong>T</strong>). This sample time determines the target clock rate for which the HDL design will be clocked in hardware.</li>
-<li>Input data type to the AI Engine kernel block (<strong>DT</strong>). This is determined by the AI Engine kernel.</li>
-<li>Number of samples in the input to the AI Engine kernel block (<strong>S</strong>). For an AI Engine kernel with a window input type, this is typically the size of the input window. For an AI Engine kernel with a stream input, this is typically the number of samples the AI Engine kernel consumes at every invocation.</li>
-<li>The period of all the input and output signals going into or out of the AI Engine subsystem (<strong>P</strong>). All the input and output signals of the AI Engine subsystem must have the same period.</li>
+</section>
+</section>
+<section id="setting-the-hdl-to-aie-block" class="level1">
+<h1>Setting the HDL to AIE block</h1>
+<p>The image below depicts the components that are needed to connect an
+HDL design to an AI Engine subsystem. In setting this connection, we
+should keep few input design criteria in mind and set the parameters of
+the blocks accordingly. These input design criteria are:</p>
+<ol type="1">
+<li>The bit width of the tdata signal line (<strong>W</strong>). This is
+the bit width of the data in programmable logic.</li>
+<li>HDL design sample time (<strong>T</strong>). This sample time
+determines the target clock rate for which the HDL design will be
+clocked in hardware.</li>
+<li>Input data type to the AI Engine kernel block (<strong>DT</strong>).
+This is determined by the AI Engine kernel.</li>
+<li>Number of samples in the input to the AI Engine kernel block
+(<strong>S</strong>). For an AI Engine kernel with a window input type,
+this is typically the size of the input window. For an AI Engine kernel
+with a stream input, this is typically the number of samples the AI
+Engine kernel consumes at every invocation.</li>
+<li>The period of all the input and output signals going into or out of
+the AI Engine subsystem (<strong>P</strong>). All the input and output
+signals of the AI Engine subsystem must have the same period.</li>
 </ol>
-<p><img src="images/high_level_HDL_AIE.png" alt="" /></p>
-<p>Knowing the five design criteria above we can set the parameters of the blocks accordingly as described below:</p>
-<h2 id="step-1-set-the-plio-bit-width-in-the-plio-block-1">Step 1 Set the PLIO bit width in the PLIO block</h2>
+<p><img src="images/high_level_HDL_AIE.png" /></p>
+<p>Knowing the five design criteria above we can set the parameters of
+the blocks accordingly as described below:</p>
+<section id="step-1-set-the-plio-bit-width-in-the-plio-block-1"
+class="level2">
+<h2>Step 1 Set the PLIO bit width in the PLIO block</h2>
 <p>Set the PLIO bit width to <strong>W</strong>.</p>
-<h2 id="step-2-set-parameters-of-the-hdl-to-aie-block">Step 2 Set parameters of the HDL to AIE block</h2>
+</section>
+<section id="step-2-set-parameters-of-the-hdl-to-aie-block"
+class="level2">
+<h2>Step 2 Set parameters of the HDL to AIE block</h2>
 <ul>
 <li>Set Output Data Type to <strong>DT</strong>.</li>
 <li>Set Output frame size to <strong>S</strong>.</li>
-<li>Set Output Sample Time to <strong>T</strong> x (bit width of <strong>DT</strong>)/(<strong>W</strong>) if this input is driving the AI Engine Subsystem period or to <strong>P</strong>/<strong>S</strong> if the period of the AI Engine subsystem (<strong>P</strong>) is determined by another input to AI Engine subsystem.</li>
+<li>Set Output Sample Time to <strong>T</strong> x (bit width of
+<strong>DT</strong>)/(<strong>W</strong>) if this input is driving the
+AI Engine Subsystem period or to <strong>P</strong>/<strong>S</strong>
+if the period of the AI Engine subsystem (<strong>P</strong>) is
+determined by another input to AI Engine subsystem.</li>
 </ul>
-<h2 id="step-3-set-the-gateway-out-axis-block">Step 3 Set the Gateway Out AXIS block</h2>
-<p>Set the Sample Period parameter to the same value as in the corresponding "Gateway In, AXI Stream" block. </p>
-<h1 id="examples">Examples</h1>
-<p>In this GitHub repository, you can find several examples in which the AIE to HDL and HDL to AIE blocks are being used:</p>
+</section>
+<section id="step-3-set-the-gateway-out-axis-block" class="level2">
+<h2>Step 3 Set the Gateway Out AXIS block</h2>
+<p>Set the Sample Period parameter to the same value as in the
+corresponding "Gateway In, AXI Stream" block.</p>
+</section>
+</section>
+<section id="examples" class="level1">
+<h1>Examples</h1>
+<p>In this GitHub repository, you can find several examples in which the
+AIE to HDL and HDL to AIE blocks are being used:</p>
 <ul>
-<li><a href="matlab:XmcExampleApi.getExample('FFT2D')">2D FFT (AI Engines + HDL/HLS) </a></li>
-<li><a href="matlab:XmcExampleApi.getExample('AIE_HDL')">Designs with both AI Engine and RTL blocks</a></li>
+<li><a href="matlab:XmcExampleApi.getExample('FFT2D')">2D
+FFT (AI Engines + HDL/HLS) </a></li>
+<li><a href="matlab:XmcExampleApi.getExample('AIE_HDL')">Designs
+with both AI Engine and RTL blocks</a></li>
 </ul>
 <hr />
 <p>Copyright 2020 Xilinx</p>
-<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
-you may not use this file except in compliance with the License.<br />
-You may obtain a copy of the License at</p>
-<pre><code>http://www.apache.org/licenses/LICENSE-2.0
-</code></pre>
-<p>Unless required by applicable law or agreed to in writing, software<br />
-distributed under the License is distributed on an "AS IS" BASIS,<br />
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
-See the License for the specific language governing permissions and<br />
+<p>Licensed under the Apache License, Version 2.0 (the "License"); you
+may not use this file except in compliance with the License. You may
+obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
 limitations under the License.</p>
-
-        </div>
-        <style type='text/css'>body {
-  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #111;
-  background-color: #fdfdfd;
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-feature-settings: "kern" 1;
-  -moz-font-feature-settings: "kern" 1;
-  -o-font-feature-settings: "kern" 1;
-  font-feature-settings: "kern" 1;
-  font-kerning: normal;
-  padding: 30px;
-}
-
-@media only screen and (max-width: 600px) {
-  body {
-    padding: 5px;
-  }
-
-  body > #content {
-    padding: 0px 20px 20px 20px !important;
-  }
-}
-
-body > #content {
-  margin: 0px;
-  max-width: 900px;
-  border: 1px solid #e1e4e8;
-  padding: 10px 40px;
-  padding-bottom: 20px;
-  border-radius: 2px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-hr {
-  color: #bbb;
-  background-color: #bbb;
-  height: 1px;
-  flex: 0 1 auto;
-  margin: 1em 0;
-  padding: 0;
-  border: none;
-}
-
-/**
- * Links
- */
-a {
-  color: #0366d6;
-  text-decoration: none; }
-  a:visited {
-    color: #0366d6; }
-  a:hover {
-    color: #0366d6;
-    text-decoration: underline; }
-
-pre {
-  background-color: #f6f8fa;
-  border-radius: 3px;
-  font-size: 85%;
-  line-height: 1.45;
-  overflow: auto;
-  padding: 16px;
-}
-
-/**
-  * Code blocks
-  */
-
-code {
-  background-color: rgba(27,31,35,.05);
-  border-radius: 3px;
-  font-size: 85%;
-  margin: 0;
-  word-wrap: break-word;
-  padding: .2em .4em;
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-}
-
-pre > code {
-  background-color: transparent;
-  border: 0;
-  display: inline;
-  line-height: inherit;
-  margin: 0;
-  overflow: visible;
-  padding: 0;
-  word-wrap: normal;
-  font-size: 100%;
-}
-
-
-/**
- * Blockquotes
- */
-blockquote {
-  margin-left: 30px;
-  margin-top: 0px;
-  margin-bottom: 16px;
-  border-left-width: 3px;
-  padding: 0 1em;
-  color: #828282;
-  border-left: 4px solid #e8e8e8;
-  padding-left: 15px;
-  font-size: 18px;
-  letter-spacing: -1px;
-  font-style: italic;
-}
-blockquote * {
-  font-style: normal !important;
-  letter-spacing: 0;
-  color: #6a737d !important;
-}
-
-/**
- * Tables
- */
-table {
-  border-spacing: 2px;
-  display: block;
-  font-size: 14px;
-  overflow: auto;
-  width: 100%;
-  margin-bottom: 16px;
-  border-spacing: 0;
-  border-collapse: collapse;
-}
-
-td {
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
-}
-
-th {
-  font-weight: 600;
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
-}
-
-tr {
-  background-color: #fff;
-  border-top: 1px solid #c6cbd1;
-}
-
-table tr:nth-child(2n) {
-  background-color: #f6f8fa;
-}
-
-/**
- * Others
- */
-
-img {
-  max-width: 100%;
-}
-
-p {
-  line-height: 24px;
-  font-weight: 400;
-  font-size: 16px;
-  color: #24292e; }
-
-ul {
-  margin-top: 0; }
-
-li {
-  color: #24292e;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5; }
-
-li + li {
-  margin-top: 0.25em; }
-
-* {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  color: #24292e; }
-
-a:visited {
-  color: #0366d6; }
-
-h1, h2, h3 {
-  border-bottom: 1px solid #eaecef;
-  color: #111;
-  /* Darker */ }</style>
-      </body>
-    </html>
+</section>
+</body>
+</html>

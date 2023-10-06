@@ -5,7 +5,7 @@ manage the sampling times across the two domains. This Quick Guide explains how 
 
 # Setting the AIE to HDL block
 
-The image below depicts the components that are needed to connect an AI Engine subsystem to an HDL desgin. In setting this connection, we should keep few input design criteria in mind and set the parameters of the blocks accordingly. These input design criteria are (refer to the image below):
+The image below shows how to connect an AI Engine subsystem to an HDL subsystem. To configure the desgin correctly, we should consider the following design settings (refer to the image below):
 
 1. **W**, the bit width of the tdata signal in the programmable logic.
 1. **T**, This sample time determines the target clock rate for which the HDL design will be clocked in hardware. For single clock designs, this will be the sample time set in the _Gateway In AXIS_ block. 
