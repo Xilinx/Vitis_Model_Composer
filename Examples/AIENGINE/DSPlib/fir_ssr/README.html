@@ -1,245 +1,98 @@
-
-
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-<title></title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="/proj/xcoswmktg/robg/git/markdown_to_html/style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
-<h1 id="using-dsplib-ai-engine-ssr-fir-block-to-achieve-4-gsps-throughput">Using DSPLib AI Engine SSR FIR block to achieve 4 Gsps throughput</h1>
-<html>    
-<script>
-function myFunction() {
-
-var path = document.location.pathname;
-var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-
-commandURI="matlab:XmcExampleApi.openExample('fir_ssr');"
-
-document.location=commandURI
-}
-</script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
-<p>This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block with a Super Sample Rate (SSR) of 4 in Vitis Model Composer to achieve a high throughput. We also compare the results to the Simulink FIR block for functional correctness.</p>
-<p>Each stream input to the AI Engine FIR block has a thoughput of close to 1 GSPS for a total of 4 GSPS. To achieve this throughput the following factors are in play:</p>
+<section
+id="using-dsplib-ai-engine-ssr-fir-block-to-achieve-4-gsps-throughput"
+class="level1">
+<h1>Using DSPLib AI Engine SSR FIR block to achieve 4 Gsps
+throughput</h1>
+<p>This example demonstrates using the AI Engine 'FIR Asymmetric Filter'
+block with a Super Sample Rate (SSR) of 4 in Vitis Model Composer to
+achieve a high throughput. We also compare the results to the Simulink
+FIR block for functional correctness.</p>
+<p>Each stream input to the AI Engine FIR block has a thoughput of close
+to 1 GSPS for a total of 4 GSPS. To achieve this throughput the
+following factors are in play:</p>
 <ul>
-<li>64 bit wide PLIO blocks on all the inputs and outputs, with a PL frequency of 500 MHz. This means two 16-bit complex inputs (64 bits total) can be transferred between AIE and PL through each PLIO during each clock cycle, for a total throughput of 1 GSPS per stream.</li>
-<li>A high value for the parameter "Input frame size" on the filter block, in this case 8192. Note this parameter is the sum of the signal sizes of all the four inputs. A larger value means at each invocation of the filter more samples will be processed, which reduces the total overhead we incur when we invoke the kernel, and hence a higher throughput. However, a higher value here will also translate to a higher latency. </li>
+<li>64 bit wide PLIO blocks on all the inputs and outputs, with a PL
+frequency of 500 MHz. This means two 16-bit complex inputs (64 bits
+total) can be transferred between AIE and PL through each PLIO during
+each clock cycle, for a total throughput of 1 GSPS per stream.</li>
+<li>A high value for the parameter "Input frame size" on the filter
+block, in this case 8192. Note this parameter is the sum of the signal
+sizes of all the four inputs. A larger value means at each invocation of
+the filter more samples will be processed, which reduces the total
+overhead we incur when we invoke the kernel, and hence a higher
+throughput. However, a higher value here will also translate to a higher
+latency.</li>
 </ul>
-<p><img height="200" src="./Images/fir.png"></p>
-<p><img height="300" src="./Images/throughput.png"></p>
-<h2 id="knowledge-nuggets">Knowledge nuggets</h2>
-<p><img width="18" height="18" src="../Images/bulb.png"> To see the estimated throughput, we are setting the Vitis Model Composer Hub block as below before pushing the <em>Generate</em> button:</p>
-<p><img height="300" src="./Images/hub.png"></p>
-<p><img width="18" height="18" src="../Images/bulb.png"> The input data is split over four ports, where each successive sample is sent to a different input port in a round-robin fashion.</p>
-<p><img width="18" height="18" src="../Images/bulb.png"> The number of AI Engines used is equal to SSR^2 * CASC_LEN (in this case 4^2*1=16)</p>
-<p><img src="Images/screen_shot.png" alt="" /></p>
-<h2 id="related-examples">Related Examples</h2>
+<img height="200" src="./Images/fir.png">
+
+<img height="300" src="./Images/throughput.png">
+
+<section id="knowledge-nuggets" class="level2">
+<h2>Knowledge nuggets</h2>
+<p><span class="emoji" data-emoji="bulb"></span> To see the estimated
+throughput, we are setting the Vitis Model Composer Hub block as below
+before pushing the <em>Generate</em> button:</p>
+<img height="300" src="./Images/hub.png">
+
+<p><span class="emoji" data-emoji="bulb"></span> The input data is
+split over four ports, where each successive sample is sent to a
+different input port in a round-robin fashion.</p>
+<p><span class="emoji" data-emoji="bulb"></span> The number of AI
+Engines used is equal to SSR^2 * CASC_LEN (in this case 4^2*1=16)</p>
+<p><img src="Images/screen_shot.png" /></p>
+</section>
+<section id="related-examples" class="level2">
+<h2>Related Examples</h2>
 <ul>
-<li><a href="matlab:XmcExampleApi.getExample('SingleStreamSSR_FIR')">This</a> is another example of a high throughput filter built from scratch instead of using the block from the Xilinx AI Engine DSP library.</li>
+<li><p><a href="matlab:XmcExampleApi.getExample('SingleStreamSSR_FIR')">This</a> is another
+example of a high throughput filter built from scratch instead of using
+the block from the AMD AI Engine DSP library.</p></li>
+<li><p><a href="matlab:XmcExampleApi.getExample('SingleStreamSSR_FIR_withPL')">This</a>
+is an example of an AI Engine/Programmable Logic heterogeneous design
+where the AI Engine is also built from scratch instead of using the
+block from the AMD AI Engine DSP library along with HDL blocks feeding
+the AI Engine array and receiving the filtered data back from the
+array.</p></li>
 </ul>
-<h2 id="-thisaiengine_plus_plaie_hdlsinglestreamssr_fir_withplreadmemd-is-an-example-of-an-ai-engineprogrammable-logic-heterogeneous-design-where-the-ai-engine-is-also-built-from-scratch-instead-of-using-the-block-from-the-xilinx-ai-engine-dsp-library-along-with-hdl-blocks-feeding-the-ai-engine-array-and-receiving-the-filtered-data-back-from-the-array">* <a href="matlab:XmcExampleApi.getExample('SingleStreamSSR_FIR_withPL')">This</a> is an example of an AI Engine/Programmable Logic heterogeneous design where the AI Engine is also built from scratch instead of using the block from the Xilinx AI Engine DSP library along with HDL blocks feeding the AI Engine array and receiving the filtered data back from the array.</h2>
+<hr />
 <p>Copyright 2022 Xilinx</p>
-<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
-you may not use this file except in compliance with the License.<br />
-You may obtain a copy of the License at</p>
-<pre><code>http://www.apache.org/licenses/LICENSE-2.0
-</code></pre>
-<p>Unless required by applicable law or agreed to in writing, software<br />
-distributed under the License is distributed on an "AS IS" BASIS,<br />
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
-See the License for the specific language governing permissions and<br />
+<p>Licensed under the Apache License, Version 2.0 (the "License"); you
+may not use this file except in compliance with the License. You may
+obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
 limitations under the License.</p>
-
-</div>
-<style type='text/css'>body {
-font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-color: #111;
-background-color: #fdfdfd;
--webkit-text-size-adjust: 100%;
--webkit-font-feature-settings: "kern" 1;
--moz-font-feature-settings: "kern" 1;
--o-font-feature-settings: "kern" 1;
-font-feature-settings: "kern" 1;
-font-kerning: normal;
-padding: 30px;
-}
-
-@media only screen and (max-width: 600px) {
-body {
-padding: 5px;
-}
-
-body > #content {
-padding: 0px 20px 20px 20px !important;
-}
-}
-
-body > #content {
-margin: 0px;
-max-width: 900px;
-border: 1px solid #e1e4e8;
-padding: 10px 40px;
-padding-bottom: 20px;
-border-radius: 2px;
-margin-left: auto;
-margin-right: auto;
-}
-
-hr {
-color: #bbb;
-background-color: #bbb;
-height: 1px;
-flex: 0 1 auto;
-margin: 1em 0;
-padding: 0;
-border: none;
-}
-
-/**
-* Links
-*/
-a {
-color: #0366d6;
-text-decoration: none; }
-a:visited {
-color: #0366d6; }
-a:hover {
-color: #0366d6;
-text-decoration: underline; }
-
-pre {
-background-color: #f6f8fa;
-border-radius: 3px;
-font-size: 85%;
-line-height: 1.45;
-overflow: auto;
-padding: 16px;
-}
-
-/**
-* Code blocks
-*/
-
-code {
-background-color: rgba(27,31,35,.05);
-border-radius: 3px;
-font-size: 85%;
-margin: 0;
-word-wrap: break-word;
-padding: .2em .4em;
-font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-}
-
-pre > code {
-background-color: transparent;
-border: 0;
-display: inline;
-line-height: inherit;
-margin: 0;
-overflow: visible;
-padding: 0;
-word-wrap: normal;
-font-size: 100%;
-}
-
-
-/**
-* Blockquotes
-*/
-blockquote {
-margin-left: 30px;
-margin-top: 0px;
-margin-bottom: 16px;
-border-left-width: 3px;
-padding: 0 1em;
-color: #828282;
-border-left: 4px solid #e8e8e8;
-padding-left: 15px;
-font-size: 18px;
-letter-spacing: -1px;
-font-style: italic;
-}
-blockquote * {
-font-style: normal !important;
-letter-spacing: 0;
-color: #6a737d !important;
-}
-
-/**
-* Tables
-*/
-table {
-border-spacing: 2px;
-display: block;
-font-size: 14px;
-overflow: auto;
-width: 100%;
-margin-bottom: 16px;
-border-spacing: 0;
-border-collapse: collapse;
-}
-
-td {
-padding: 6px 13px;
-border: 1px solid #dfe2e5;
-}
-
-th {
-font-weight: 600;
-padding: 6px 13px;
-border: 1px solid #dfe2e5;
-}
-
-tr {
-background-color: #fff;
-border-top: 1px solid #c6cbd1;
-}
-
-table tr:nth-child(2n) {
-background-color: #f6f8fa;
-}
-
-/**
-* Others
-*/
-
-img {
-max-width: 100%;
-}
-
-p {
-line-height: 24px;
-font-weight: 400;
-font-size: 16px;
-color: #24292e; }
-
-ul {
-margin-top: 0; }
-
-li {
-color: #24292e;
-font-size: 16px;
-font-weight: 400;
-line-height: 1.5; }
-
-li + li {
-margin-top: 0.25em; }
-
-* {
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-color: #24292e; }
-
-a:visited {
-color: #0366d6; }
-
-h1, h2, h3 {
-border-bottom: 1px solid #eaecef;
-color: #111;
-/* Darker */ }</style>
+</section>
+</section>
 </body>
 </html>
