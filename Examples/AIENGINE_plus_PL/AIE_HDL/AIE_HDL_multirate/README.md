@@ -9,11 +9,11 @@
 
 # Multirate Example
 
-***Version: Vitis™ 2023.1 and Matlab™ R2021a with Simulink™ and the DSP System Toolbox™***
+***Version: Vitis™ 2023.2 and Matlab™ R2021a with Simulink™ and the DSP System Toolbox™***
 
 ## Prerequisites
 
-This example presumes you have installed the Vitis and Vitis Model Composer tools and that you have a basic understanding of those tools.  If not, consider starting with the Vitis tutorials at <https://github.com/Xilinx/Vitis-Tutorials> and within that repository the Vitis Model Composer tutorial at <https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/AI_Engine_Development/Feature_Tutorials/10-aie-dsp-lib-model-composer>.
+This example presumes you have installed the Vitis and Vitis Model Composer tools and that you have a basic understanding of those tools.  If not, consider starting with the Vitis tutorials at <https://github.com/Xilinx/Vitis-Tutorials> and within that repository the Vitis Model Composer tutorial at <https://github.com/Xilinx/Vitis-Tutorials/tree/2023.2/AI_Engine_Development/Feature_Tutorials/10-aie-dsp-lib-model-composer>.
 
 ---
 
