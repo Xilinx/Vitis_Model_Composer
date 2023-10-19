@@ -8,7 +8,7 @@ The AIE-ML Memory tile is introduced in the AIE-ML architecture to significantly
 <img src="./images/AIE_ML.jpg" width="500"/>
 
 ## Imported graph code
-The screenshot below depicts the graph code we are importing using the AIE-Graph import block in Vitis Model Composer. 
+The screenshot below depicts the graph code [MultiGrpah.h](./src/MultiGraph.h) we are importing using the AIE-Graph import block in Vitis Model Composer. Here we are setting up two shared buffers, two for the input and one for the output.
 
 <img src="./images/AIE_ML_graph.jpg" width="800"/>
 
