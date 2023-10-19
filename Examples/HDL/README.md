@@ -61,7 +61,7 @@
  </tr>
  <tr>
  <td align="left">
-   <a href="./Digital_Filtering/SSR_FIR/README.md">High speed SSR FIR</a> <img src="../../Images/new.PNG" width="50">
+   <a href="./Digital_Filtering/SSR_FIR/README.md">High speed SSR FIR</a> 
  </td>
  <td> This reference design can be used as a starting design point when efficient implementations of very high data rate (over 1 Gsps) Single Rate FIRs are required.</td>
  <tr>
@@ -110,6 +110,13 @@
    <a href="./Floating_Point/2nd_order_Direct_Form_II/README.md">2nd-order Direct Form II implementation</a>
  </td>
  <td>This design shows two distinct FPGA implementations of a 2nd order IIR filter in Direct Form II, and compares them to the double precision Simulink IIR filter block.
+ </td>
+ </tr>
+<tr>
+ <td align="left">
+   <a href="./Floating_Point/3x3_Matrix_Determinant/README.md">3x3 Matrix Determinant</a> <img src="../../Images/new.PNG" width="50">
+ </td>
+ <td>This design demonstrates the calculation of the determinant of a 3x3 matrix with real, single precision floating point elements. It showcases the Black Box block for bringing hand-coded VHDL or Verilog code into Model Composer. It also shows the DSPFP32 for performing floating-point operations on Versal devices.
  </td>
  </tr>
  </table>

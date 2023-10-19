@@ -1,7 +1,0 @@
-s2mm_gmem_m_axi
-s2mm_control_s_axi
-s2mm_regslice_both
-s2mm_regslice_both
-s2mm_regslice_both
-s2mm_regslice_both
-s2mm

@@ -6,10 +6,18 @@ Within the Simulink environment, Vitis Model Composer offers a range of performa
 
 To learn more, visit the Vitis Model Composer [website](https://www.xilinx.com/products/design-tools/vitis/vitis-model-composer.html).
 
-# What's new in 2023.1?
-* Take a look at the latest [tutorial series](./Tutorials) on AI Engines. This set of tutorials provides an excellent introduction to AI Engines and guides you through the process of developing a DSP algorithm on AI Engines using Vitis Model Composer.
-* The new [Channelizer](./Examples/AIENGINE_plus_PL/AIE_HLS/Channelizer) example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices.
-* The [filtering in frequency domain]( /Examples/AIENGINE/Filtering_in_frequency_domain/) design showcases filtering in frequency domain in AI Engines and also shows how to increase the throughput using different techniques.
+# Where should you start?
+Are you interested in accelerating your development effort using Vitis Model Composer? Here is where to start:
+* Learn the [basics](/Tutorials/Simulink_Basics/README.md) of Simulink. To use Vitis Model Composer effectively, you need to understand the basics of Simulink, 
+a block diagram environment for multidomain simulation and model-based design.
+* Go over the [tutorials](/Tutorials/README.md). The tutorials will give you a solid understanding of how to use the tool.
+* Browse through many of the examples we have here. You can easily access these examples from within the tool. 
+
+
+# What's new in 2023.2?
+* Vitis Model Composer now supports importing AIE-ML graphs as a block. See [this example](./Examples/AIENGINE/Importing_AIE_blocks/AIE_ML_Graph_Import) of importing an AIE-ML graph and performing simulation.
+* The [3x3 Matrix Determinant example](./Examples/HDL/Floating_Point/3x3_Matrix_Determinant) showcases the Black Box block for bringing hand-coded VHDL or Verilog code into Model Composer. It also shows the DSPFP32 primitive block for performing floating-point operations on Versal devices.
+* The [Channelizer](./Examples/AIENGINE_plus_PL/AIE_HLS/Channelizer) example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices. In 2023.2, it is now supported for the hardware validation flow.
 
 # Examples
 
@@ -32,6 +40,7 @@ To learn more, visit the Vitis Model Composer [website](https://www.xilinx.com/p
 
 --------------
 Copyright 2022 Xilinx
+
 Copyright 2023 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
