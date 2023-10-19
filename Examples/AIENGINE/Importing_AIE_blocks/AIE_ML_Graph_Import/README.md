@@ -24,5 +24,27 @@ Later in the graph code we connect the two inputs of the graph to the inputs of 
 
 To import graph code as a block, we start by getting the _AIE Graph_ block from the Simulinlk library browser:
 
+<img src="./images/Library_browser.jpg" width="800"/>
+
+We then double click on the block and set the parameters as shown below and click **Import**. 
+
+<img src="./images/general_tab.jpg" width="600"/>
+
+In the next tab, we enter the values of the template parameters of the graph. Note that the graph we are importing is templatized with four template parameters. Once we enter the values for the template parameters we click **Build**:
+
+<img src="./images/Graph_class_tab.jpg" width="600"/>
+
+In the next tab, we set the size of the inputs and the output:
+
+<img src="./images/Function_tab.jpg" width="600"/>
+
+After clicking ok, the block is set to connect to other blocks in Simulink. 
+
+# Simulink design
+
+The image below depicts the Simulink design. Note that we are comparing the output of the graph block with the matrix multiply block in Simulink. 
+
+<img src="./images/AIE_ML_design.jpg" width="1000"/>
+
 
 
