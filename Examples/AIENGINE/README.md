@@ -24,6 +24,15 @@ In this example we import an AI Engine class kernel into Vitis Model Composer as
 In this example we import an AI Engine graph into Vitis Model Composer as a block.
 </td>
 </tr> 
+
+<tr>
+<td>
+<a href="./Importing_AIE_blocks/AIE_ML_Graph_Import/README.md">Importing an AIE-ML graph as a block</a>  <img src="../../Images/new.PNG" width="50">
+</td>
+<td>
+In this example we import a graph for AIE-ML devices into Vitis Model Composer as a block.
+</td>
+</tr> 
 </table>
 <br/>
 
