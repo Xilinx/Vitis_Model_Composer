@@ -12,7 +12,7 @@ Let's start by taking a closer look into the graph code. The picture below depic
 
 <img src="./images/top_graph.jpg" width="700"/>
 
-The screenshot below depicts the graph code [MultiGrpah.h](./src/MultiGraph.h) we are importing using the AIE-Graph import block in Vitis Model Composer. Here we are setting up three shared buffers, two for the input and one for the output.
+The screenshot below depicts the graph code [MultGrpah.h](./src/MultGraph.h) we are importing using the AIE-Graph import block in Vitis Model Composer. Here we are setting up three shared buffers, two for the input and one for the output.
 
 <img src="./images/AIE_ML_graph.jpg" width="800"/>
 
