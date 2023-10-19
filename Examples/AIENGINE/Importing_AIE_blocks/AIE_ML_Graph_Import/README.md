@@ -16,7 +16,7 @@ The screenshot below depicts the graph code [MultGrpah.h](./src/MultGraph.h) we 
 
 <img src="./images/AIE_ML_graph.jpg" width="800"/>
 
-Later in the graph code we connect the two inputs of the graph to the inputs of the two shared buffers and connect the outputs of these two shared buffers to the AI Engine kennel (highlighted in yellow and green). Likewise, in the output, we connect the output of the AI Engine kernels to the input of the output shared buffer and the output of the output shared buffer to the graph output (highlighted in blue).
+Later in the graph code we connect the two inputs of the graph to the inputs of the two shared buffers and connect the outputs of these two shared buffers to the AI Engine kennel (highlighted in yellow and green). Likewise, in the output, we connect the output of the AI Engine kernels to the input of the shared buffer and the output of the shared buffer to the graph output (highlighted in blue).
 
 <img src="./images/AIE_ML_graph2.jpg" width="800"/>
 
