@@ -20,4 +20,9 @@ Later in the graph code we connect the two inputs of the graph to the inputs of 
 
 <img src="./images/AIE_ML_graph2.jpg" width="800"/>
 
+## Importing the AIE Graph block into Vitis Model Composer
+
+To import graph code as a block, we start by getting the _AIE Graph_ block from the Simulinlk library browser:
+
+
 
