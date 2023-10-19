@@ -8,7 +8,12 @@ The AIE-ML Memory tile is introduced in the AIE-ML architecture to significantly
 <img src="./images/AIE_ML.jpg" width="500"/>
 
 ## Imported graph code
-The screenshot below depicts the graph code [MultiGrpah.h](./src/MultiGraph.h) we are importing using the AIE-Graph import block in Vitis Model Composer. Here we are setting up two shared buffers, two for the input and one for the output.
+Let's start by taking a closer look into the graph code. The screenshot below depicts the graph code [MultiGrpah.h](./src/MultiGraph.h) we are importing using the AIE-Graph import block in Vitis Model Composer. Here we are setting up two shared buffers, two for the input and one for the output.
 
 <img src="./images/AIE_ML_graph.jpg" width="800"/>
+
+Later in the graph code we connect the two inputs of the graph to the inputs of the two shared buffers and connect the outputs of these two shared buffers to the AI Engine kennel (highlighted in yellow and green). Likewise, in the output, we connect the output of the AI Engine kernels to the input of the output shared buffer and the output of the output shared buffer to the graph output (highlighted in blue).
+
+<img src="./images/AIE_ML_graph2.jpg" width="800"/>
+
 
