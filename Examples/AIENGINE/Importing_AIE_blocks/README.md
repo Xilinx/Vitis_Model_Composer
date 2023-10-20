@@ -10,6 +10,7 @@ You can import AIE Kernels or graphs into Model Composer as blocks. To do that y
 ## Examples
 Here we provide few examples on how to use these blocks to import AIE Kernels or graphs into Model Composer.
 
+- [Importing an AIE-ML graph as a block](AIE_ML_Graph_Import/README.md)
 - [Importing a kernel class as a block](AIE_Class_Kernel_FIR/README.md)
 - [Importing a graph as a block](AIE_Graph/README.md)
 
