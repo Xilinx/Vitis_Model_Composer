@@ -10,7 +10,7 @@ To learn more, visit the Vitis Model Composer [website](https://www.xilinx.com/p
 Are you interested in accelerating your development effort using Vitis Model Composer? Here is where to start:
 * Learn the [basics](/Tutorials/Simulink_Basics/README.md) of Simulink. To use Vitis Model Composer effectively, you need to understand the basics of Simulink, 
 a block diagram environment for multidomain simulation and model-based design.
-* Go over the [tutorials](/Tutorials/README.md). The tutorials will give you a solid understanding of how to use the tool.
+* Go over to the [tutorials](/Tutorials/README.md). The tutorials will give you a solid understanding of how to use the tool.
 * Browse through many of the examples we have here. You can easily access these examples from within the tool. 
 
 
