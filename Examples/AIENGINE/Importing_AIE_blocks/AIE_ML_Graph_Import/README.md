@@ -1,7 +1,7 @@
 # Importing AIE-ML graph into Vitis Model Composer as a block
 ## What is AI Engine-ML?
 The AI Engine-ML architecture is optimized for both ML and advanced signal processing.
-To learn more about the AIE-ML devices, refer to [this](https://docs.xilinx.com/r/en-US/am020-versal-aie-ml) documentation.
+To learn more about the AIE-ML devices, refer to [this documentation](https://docs.xilinx.com/r/en-US/am020-versal-aie-ml).
 
 The AIE-ML Memory tile is introduced in the AIE-ML architecture to significantly increase the on-chip memory inside the AIE-ML array. This new functional unit reduced the utilization of PL resources including block RAMs and URAMs. 
 
