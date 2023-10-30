@@ -70,9 +70,9 @@ Hardware Validation of Versal Adaptive SoC Design
 ### [Lab 7](./07-Export_to_Vitis/README.md)
 
 Export AI Engine Design from Vitis Model Composer to Vitis
- * Generate a Vitis AI Engine Component from the Vitis Model Composer AI Engine design
- * Integrate the generated component with PL and PS in a Vitis System Project
- * Run complete Vitis System Project consisting of AI Engine, PL, and PS in hardware emulation mode
+ * Generate kernel and graph code from the Vitis Model Composer AI Engine design
+ * Import the code into Vitis as an AI Engine component
+ * Import AI Engine compiled graph into a Vitis binary container
 
 ---
 
