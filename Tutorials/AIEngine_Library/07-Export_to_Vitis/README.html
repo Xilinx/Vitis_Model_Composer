@@ -55,10 +55,10 @@ project.</p>
 <p>AI Engine designs can be brought into Vitis in two different
 ways:</p>
 <ol type="1">
-<li><p><strong>AI Engine Component</strong>: Import the AI Engine kernel
-code, graph code, and data sources into the Vitis workspace. Use this
-approach when you expect to make changes to the AI Engine code after
-exporting from Vitis Model Composer.</p></li>
+<li><p><strong>AI Engine Component (Source Code)</strong>: Import the AI
+Engine kernel code, graph code, and data sources into the Vitis
+workspace. Use this approach when you expect to make changes to the AI
+Engine code after exporting from Vitis Model Composer.</p></li>
 <li><p><strong>Pre-built Binary</strong>: Import a compiled AI Engine
 graph (<code>libadf.a</code>) into a binary container. Use this approach
 when the design has been fully completed and validated in Vitis Model
@@ -78,11 +78,14 @@ combined with the PL data movers and PS host application.</p>
 <h3>Examine the AI Engine Design</h3>
 <p>Open and run the Vitis Model Composer testbench for the AI Engine
 part of the design.</p>
-<p>In MATLAB:</p>
+<p>In the MATLAB Command Window, execute the following commands:</p>
 <pre><code>open_system(&#39;aie_testbench&#39;);
 sim(&#39;aie_testbench&#39;);</code></pre>
-<p><img src="Images/model1.png" /></p>
-<p><img src="Images/model2.png" /></p>
+<blockquote>
+<p><strong>NOTE:</strong> The Simulink model requires MATLAB R2021a or
+later to open.</p>
+</blockquote>
+<p><img src="Images/model.png" /></p>
 <p>This model implements the AI Engine processing cascade using a FIR
 Interpolation block from the Vitis DSP Library and AIE Kernel blocks
 pointing to existing kernel source code. The output of simulating the AI
@@ -99,10 +102,10 @@ functionality, the AI Engine design can be exported to Vitis for
 integration into a larger project.</p>
 </section>
 </section>
-<section id="approach-1-ai-engine-component" class="level2">
-<h2>Approach 1: AI Engine Component</h2>
-<section id="generate-ai-engine-code" class="level3">
-<h3>Generate AI Engine Code</h3>
+<section id="approach-1-ai-engine-component-source-code" class="level2">
+<h2>Approach 1: AI Engine Component (Source Code)</h2>
+<section id="generate-ai-engine-source-code" class="level3">
+<h3>Generate AI Engine Source Code</h3>
 <p>Vitis Model Composer will generate AI Engine graph code from the
 design.</p>
 <ol type="1">
@@ -124,15 +127,16 @@ the graph code.</p>
 generated <code>code</code> folder:</p>
 <p><img src="Images/vmc3.png" /></p>
 <p>The generated code folder contains a folder called <code>ip</code>
-that contains subfolders for each AI Engine and HLS IP in the design.
-Each individual IP subfolder contains a <code>src</code> folder
-containing the IP's source code. In this design, the
-<code>ip/ai_engine/src</code> folder contains the AI Engine code we will
-bring into Vitis as a component. The <code>ip/ai_engine/data</code>
-folder contains input and reference output data files that can be used
-in AI Engine simulation and hardware validation. Vitis Model Composer
-also generates Makefiles for compiling and simulating the AI Engine
-design outside of Model Composer.</p>
+that contains a subfolder for the AI Engine IP. If this design had HLS
+IP, <code>ip</code> would also contain subfolders for each HLS IP. Each
+individual IP subfolder contains a <code>src</code> folder containing
+the IP's source code. In this design, the <code>ip/ai_engine/src</code>
+folder contains the AI Engine code we will bring into Vitis as a
+component. The <code>ip/ai_engine/data</code> folder contains input and
+reference output data files that can be used in AI Engine simulation and
+hardware validation. Vitis Model Composer also generates Makefiles for
+compiling and simulating the AI Engine design outside of Model
+Composer.</p>
 </section>
 <section id="create-ai-engine-component-in-vitis" class="level3">
 <h3>Create AI Engine Component in Vitis</h3>
@@ -266,7 +270,7 @@ design. The example below uses the VCK190 base platform.</p></li>
 <code>ai_engine</code> subsystem.</p></li>
 </ol>
 <p><img src="Images/vmc5.png" /></p>
-<ol start="3" type="1">
+<ol start="6" type="1">
 <li>Click <strong>Generate</strong>.</li>
 </ol>
 <p>Wait for code generation to complete.</p>
