@@ -67,6 +67,13 @@ Hardware Validation of Versal Adaptive SoC Design
  * Run hardware emulation to simulate the behavior of the Versal Adaptive SoC design including AI Engine, PL and PS
  * Download the hardware image to a VCK190 board and perform hardware validation
 
+### [Lab 7](./07-Export_to_Vitis/README.md)
+
+Export AI Engine Design from Vitis Model Composer to Vitis
+ * Generate kernel and graph code from the Vitis Model Composer AI Engine design
+ * Import the code into Vitis as an AI Engine component
+ * Import AI Engine compiled graph into a Vitis binary container
+
 ---
 
 &copy; Copyright 2023 Advanced Micro Devices, Inc.
