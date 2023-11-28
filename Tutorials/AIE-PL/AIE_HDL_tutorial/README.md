@@ -20,11 +20,12 @@ The Vitis Model Composer HDL block library performs cycle-accurate simulation, w
 
 2. Right-click on an empty part of the canvas. In the context menu that displays, ensure that the following options are selected:
 * **Sample Time Display -> All**
-* **Sample Time Display -> Timing Legend**
 * **Other Displays -> Signals & Ports -> Signal Dimensions**
 * **Other Displays -> Signals & Ports -> Port Data Types**.
 
 3. On the **Modeling tab**, select **Update Model**.
+
+4. Open the **Timing Legend** by pressing `Ctrl+J`.
 
 This model implements a simple passthrough design that sends integer data from the PL to the AI Engine and back.
 
@@ -36,9 +37,9 @@ The interfaces between the AI Engine and HDL parts of the design are initially i
 
 The Vitis Model Composer HDL block library performs cycle-accurate simulation. The sample times in Simulink will correlate with the sample times of the design running on the hardware. How they correlate is specified in the **Vitis Model Composer Hub** block, under the **HDL Clock Settings** tab.
 
-4. Double-click on the **Vitis Model Composer Hub** block.
+5. Double-click on the **Vitis Model Composer Hub** block.
 
-5. Select the **HDL_Subsystem** and the **HDL Clock Settings** tab.
+6. Select the **HDL_Subsystem** and the **HDL Clock Settings** tab.
 
 ![](./Images/vmchub.png)
 
@@ -50,7 +51,7 @@ For more information on how timing and clocks are modeled in Vitis Model Compose
 
 With that in mind, lets refer to the sample times in the Simulink model.
 
-6. From the top level of the model, double-click on the **HDL_Subsystem** to open it.
+7. From the top level of the model, double-click on the **HDL_Subsystem** to open it.
 
 ![](./Images/model2.png)
 
@@ -62,7 +63,7 @@ This HDL subsystem contains a simple FIFO block and AXI4-Stream input and output
 
 For more information, see [How AXI4-Stream Works](https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/How-AXI4-Stream-Works).
 
-7. Open the **Gateway In AXIS** and **Gateway Out AXIS** blocks and refer to the Sample Period parameter.
+8. Open the **Gateway In AXIS** and **Gateway Out AXIS** blocks and refer to the Sample Period parameter.
 
 ![](./Images/gateway_blocks.png)
 
@@ -80,17 +81,17 @@ Also note that the signal lines are all a single color, indicating a single samp
 
 Unlike the HDL block library, the Vitis Model Composer AI Engine blocks do not perform cycle-accurate simulation. In fact, the observed sample times in the Simulink model do not correspond to the AI Engine's hardware clock rate. 
 
-8. Return to the top-level `AIE_HDL` model and double-click the **AIE_Subsystem** to open it.
+9. Return to the top-level `AIE_HDL` model and double-click the **AIE_Subsystem** to open it.
 
 The AIE subsystem contains a single kernel that performs a simple passthrough. You can view the AIE kernel code in the `passthrough.cpp` file.
 
-9. Double-click on the **passthrough** block.
+10. Double-click on the **passthrough** block.
 
 ![](./Images/aie_kernel.png)
 
 In the function declaration, note that this kernel's input and output are `int32` values. Also note the `FRAME_LENGTH` parameter, set to 16, which also corresponds to the size of the input and output buffers.
 
-10. Close the **passthrough** block parameters and open the first **PLIO** block.
+11. Close the **passthrough** block parameters and open the first **PLIO** block.
 
 ![](./Images/plio.png)
 
@@ -114,19 +115,19 @@ As mentioned above, the HDL blocks perform cycle-accurate simulation while AI En
 
 These blocks translate between HDL and AI Engine data types. They also determine the Simulink sample rate of the AI Engine design, based on the HDL sample rate and the relationship between the HDL/AIE data types.
 
-11. Remove the **HDL to AIE Placeholder** subsystem.
+12. Remove the **HDL to AIE Placeholder** subsystem.
 
-12. Click an open area of the canvas, type `HDL to AIE`, and select the **HDL to AIE** block (or select the block from the Simulink Library Browser).
+13. Click an open area of the canvas, type `HDL to AIE`, and select the **HDL to AIE** block (or select the block from the Simulink Library Browser).
 
-13. Connect the **HDL to AIE** block where the placeholder block used to be.
+14. Connect the **HDL to AIE** block where the placeholder block used to be.
 
 ![](./Images/connection1.png)
 
-14. Double-click the **HDL to AIE** block to open its parameters.
+15. Double-click the **HDL to AIE** block to open its parameters.
 
 ![](./Images/hdl_aie_params1.png)
 
-15. Configure the block as follows:
+16. Configure the block as follows:
 
 * **Input data type:** `uint64` The HDL output signal is 64 bits wide. In Simulink, this is modeled as a `uint64`.
 * **Output data type:** `int32` The AI Engine kernel expects an `int32` input. On each HDL clock cycle, the HDL to AIE block will split the 64-bit input into 2 32-bit outputs at twice the rate.
@@ -144,9 +145,9 @@ These blocks translate between HDL and AI Engine data types. They also determine
 
 ![](./Images/hdl_aie_params2.png)
 
-16. Press **Apply** and **OK**.
+17. Press **Apply** and **OK**.
 
-17. Press `Ctrl+D` to update the model.
+18. Press `Ctrl+D` to update the model.
 
 The **HDL to AIE** block's sample times and output data types and dimensions are updated:
 
@@ -160,28 +161,28 @@ The **HDL to AIE** block's sample times and output data types and dimensions are
 
 The bridge from AIE to HDL is more straightforward. We only need to know the HDL subsystem's input data type and sample rate.
 
-18. Remove the **AIE to HDL Placeholder** subsystem.
+19. Remove the **AIE to HDL Placeholder** subsystem.
 
-19. Click an open area of the canvas, type `AIE to HDL`, and select the **AIE to HDL** block (or select the block from the Simulink Library Browser).
+20. Click an open area of the canvas, type `AIE to HDL`, and select the **AIE to HDL** block (or select the block from the Simulink Library Browser).
 
-20. Connect the **AIE to HDL** block where the placeholder block used to be.
+21. Connect the **AIE to HDL** block where the placeholder block used to be.
 
 ![](./Images/connection3.png)
 
-21. Double-click the **AIE to HDL** block to open its parameters.
+22. Double-click the **AIE to HDL** block to open its parameters.
 
 ![](./Images/aie_hdl_params1.png)
 
-22. Configure the block as follows:
+23. Configure the block as follows:
 
 * **Output Data Type:** `uint64` The HDL subsystem expects a 64-bit wide input, modeled in Simulink as a `uint64`. The AIE to HDL block will combine 2 subsequent `int32` inputs into a single `uint64` output.
 * **Output Sample Time:** `Inherit: Same as tready` The HDL subsystem will determine its own sample rate.
 
 ![](./Images/aie_hdl_params2.png)
 
-23. Press **Apply** and **OK**.
+24. Press **Apply** and **OK**.
 
-24. Press `Ctrl+D` to update the model.
+25. Press `Ctrl+D` to update the model.
 
 The **AIE to HDL** block's sample times and output data types and dimensions are updated:
 
@@ -196,6 +197,7 @@ The **AIE to HDL** block's sample times and output data types and dimensions are
 * HDL designs in Vitis Model Composer are cycle-accurate.
 * The **Sample Period**, **Simulink system seriod**, and **FPGA clock period** parameters are used to set the HDL sample rate.
 * AI Engine designs in Vitis Model Composer are not cycle-accurate.
+* The **PLIO** block defines the bit width and clock rate of the AIE-PL interface. This information is only used in the generated code and cycle-approximate SystemC simulation; it has no bearing on the Simulink simulation.
 * The **AIE to HDL** to **HDL to AIE** blocks translate between HDL and AI Engine data types. 
 * They also determine the Simulink sample rate of the AI Engine design, based on the HDL sample rate and the relationship between the HDL/AIE data types. 
 
@@ -216,6 +218,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
-<p align="center"><sup>XD058 | &copy; Copyright 2023 Advanced Micro Devices, Inc.</sup></p>
-
