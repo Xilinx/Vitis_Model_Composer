@@ -64,10 +64,10 @@ HLS_passthrough(hls::stream< int >& arg0, hls::stream< int >& arg1)
     #pragma HLS INTERFACE axis port=arg1
     #pragma HLS INTERFACE ap_ctrl_none port=return
     #pragma HLS dataflow
-    int stream_adapter[8];
+    int stream_adapter[32];
     #pragma HLS stream variable=stream_adapter depth=3
-    xmc::StreamAdapter1d<8>::readStream(arg0, stream_adapter);
-    xmc::StreamAdapter1d<8>::writeStream(arg1, stream_adapter);
+    xmc::StreamAdapter1d<32>::readStream(arg0, stream_adapter);
+    xmc::StreamAdapter1d<32>::writeStream(arg1, stream_adapter);
 }
 
 

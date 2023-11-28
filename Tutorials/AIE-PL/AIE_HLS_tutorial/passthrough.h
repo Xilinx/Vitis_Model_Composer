@@ -23,7 +23,7 @@
 #include <adf.h>
 
 template <int FRAME_LENGTH>
-void passthrough(adf::input_buffer<int32>& in, 
-                 adf::output_buffer<int32>& out);
+void passthrough(adf::input_buffer<cint32>& in, 
+                 adf::output_buffer<cint32>& out);
 
 #endif
