@@ -10,7 +10,7 @@ For more details on how to build this design and some of the theoretical aspect 
 <br/><br/>
 
 
-![](Images/DualStreamSSR.PNG)
+![](./Images/DualStreamSSR.png)
 
 ------------
 Copyright 2021 Xilinx
