@@ -6,7 +6,7 @@ samples per frame and a shift factor. The constructor for this class takes in th
 
 ## Knowledge nuggets
 
-:bulb: Note that the *AIE Class* block determines the class template parameters and the constructor parameters and builds up a mask with appropriate fields allowing you to specify the values for these parameters.
+:bulb: Note that the *AIE Class Kernel* block determines the class template parameters and the constructor parameters and builds up a mask with appropriate fields allowing you to specify the values for these parameters.
 
 :bulb: Note the class is defined in a namespace. The namespace is used to specify a fully qualified name in the block mask in the "Kernel class" field.
 
