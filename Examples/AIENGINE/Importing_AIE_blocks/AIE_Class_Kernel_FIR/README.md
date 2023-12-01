@@ -1,6 +1,6 @@
 # Importing a templatized class kernel as a block
 
-In this example we import a Finite Impulse Response (FIR) Filter as a block into Model Composer. 
+In this example we import a Finite Impulse Response (FIR) Filter as a block into Vitis Model Composer. 
 This filter is expressed as a class. Furthermore, this is a templatized class. The template parameters specify the number of 
 samples per frame and a shift factor. The constructor for this class takes in the filter taps.
 
