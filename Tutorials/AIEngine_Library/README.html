@@ -1,161 +1,303 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>README</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
-  <link rel="stylesheet" href="/proj/xcoswmktg/robg/git/markdown_to_html/style.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <table class="sphinxhide" width="100%">
- <tr width="100%">
-    <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
-    <a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
-    <a href="https://www.xilinx.com/products/design-tools/vitis/vitis-ai.html">See Vitis™ AI Development Environment on xilinx.com</a>
-    </td>
- </tr>
-</table>
+<html>    
+<script>
+function myFunction() {
 
-<section id="vitis-model-composer-for-ai-engine-tutorial-series"
-class="level1">
-<h1>Vitis Model Composer for AI Engine Tutorial Series</h1>
-<p>Vitis Model Composer enables the rapid simulation, exploration, and
-code generation of algorithms targeted for AI Engines from within the
-Simulink® environment. You can achieve this by importing AI Engine
-kernels and data-flow graphs into Vitis Model Composer as blocks and
-controlling the behavior of the kernels and graphs by configuring the
-block GUI parameters. Simulation results can be visualized by seamlessly
-connecting Simulink source and sink blocks with Vitis Model Composer AI
-Engine blocks.</p>
-<p>Vitis Model Composer provides a set of AI Engine library blocks for
-use within the Simulink environment. These include:</p>
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
+<tr width="100%">
+<td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
+<a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
+<a href="https://www.xilinx.com/products/design-tools/vitis/vitis-ai.html">See Vitis™ AI Development Environment on xilinx.com</a>
+</td>
+</tr>
+</table>
+<h1 id="vitis-model-composer-for-ai-engine-tutorial-series">Vitis Model Composer for AI Engine Tutorial Series</h1>
+<p>Vitis Model Composer enables the rapid simulation, exploration, and code generation of algorithms targeted for AI Engines from within the Simulink® environment. You can achieve this by importing AI Engine kernels and data-flow graphs into Vitis Model Composer as blocks and controlling the behavior of the kernels and graphs by configuring the block GUI parameters. Simulation results can be visualized by seamlessly connecting Simulink source and sink blocks with Vitis Model Composer AI Engine blocks.</p>
+<p>Vitis Model Composer provides a set of AI Engine library blocks for use within the Simulink environment. These include:</p>
 <ul>
-<li>Blocks to import kernels and graphs which can be targeted to the AI
-Engine portion of Versal® devices.</li>
-<li>Block to import HLS kernels which can be targeted to the PL portion
-of Versal devices.</li>
-<li>Blocks that support connection between the AI Engine and the Xilinx
-HDL blockset.</li>
+<li>Blocks to import kernels and graphs which can be targeted to the AI Engine portion of Versal® devices.</li>
+<li>Block to import HLS kernels which can be targeted to the PL portion of Versal devices.</li>
+<li>Blocks that support connection between the AI Engine and the Xilinx HDL blockset.</li>
 <li>Configurable AI Engine functions such as FIR, FFT, IFFT etc.</li>
 </ul>
-<p>Vitis Model Composer can be used to create complex systems targeting
-the PL (RTL and HLS blocksets) and the AI Engine array (AIE blockset) at
-the same time. The complete system can be simulated in Simulink, and the
-code generated (RTL for the PL and C++ graph for the AI Engine
-array).</p>
-<p><span class="emoji" data-emoji="warning">⚠️</span> The AI Engine Lab
-can be done only in a Linux environment.</p>
-<section id="overview" class="level2">
-<h2>Overview</h2>
-<p>This tutorial includes the following labs which introduce AI Engine
-support in Vitis Model Composer.</p>
-<section id="lab-1" class="level3">
-<h3><a href="matlab:XmcExampleApi.getExample('01-Introduction_to_Versal_and_AI_Engines')">Lab
-1</a></h3>
+<p>Vitis Model Composer can be used to create complex systems targeting the PL (RTL and HLS blocksets) and the AI Engine array (AIE blockset) at the same time. The complete system can be simulated in Simulink, and the code generated (RTL for the PL and C++ graph for the AI Engine array).</p>
+<p>:warning: The AI Engine Lab can be done only in a Linux environment.</p>
+<h2 id="overview">Overview</h2>
+<p>This tutorial includes the following labs which introduce AI Engine support in Vitis Model Composer.</p>
+<h3 id="lab-101-introduction_to_versal_and_ai_enginesreadmemd"><a href="matlab:XmcExampleApi.getExample('01-Introduction_to_Versal_and_AI_Engines')">Lab 1</a></h3>
 <p>Introduction to Versal Adaptive SoC and AI Engines</p>
 <ul>
 <li>Learn about the Versal Adaptive SoC architecture and AI Engines</li>
-<li>Install required software to compile and simulate AI Engine
-designs</li>
+<li>Install required software to compile and simulate AI Engine designs</li>
 <li>Simulate an example AI Engine design in Vitis Model Composer</li>
 </ul>
-</section>
-<section id="lab-2" class="level3">
-<h3><a href="matlab:XmcExampleApi.getExample('02-Build_and_Simulate_AI_Engine_Design')">Lab
-2</a></h3>
+<h3 id="lab-202-build_and_simulate_ai_engine_designreadmemd"><a href="matlab:XmcExampleApi.getExample('02-Build_and_Simulate_AI_Engine_Design')">Lab 2</a></h3>
 <p>Build and Simulate an AI Engine Design</p>
 <ul>
-<li>Construct a signal processing chain using AI Engine DSP library
-blocks</li>
+<li>Construct a signal processing chain using AI Engine DSP library blocks</li>
 <li>Generate a top-level graph</li>
 <li>Simulate the design using the AI Engine SystemC Simulator</li>
 </ul>
-</section>
-<section id="lab-3" class="level3">
-<h3><a href="matlab:XmcExampleApi.getExample('03-Import_Custom_AI_Engine_Code')">Lab 3</a></h3>
+<h3 id="lab-303-import_custom_ai_engine_codereadmemd"><a href="matlab:XmcExampleApi.getExample('03-Import_Custom_AI_Engine_Code')">Lab 3</a></h3>
 <p>Import Custom AI Engine Code</p>
 <ul>
-<li>Learn about AI Engine programming and study an AI Engine kernel
-function</li>
+<li>Learn about AI Engine programming and study an AI Engine kernel function </li>
 <li>Import the AI Engine kernel function into Vitis Model Composer</li>
-<li>Simulate the AI Engine kernel function and understand its execution
-within Vitis Model Composer</li>
+<li>Simulate the AI Engine kernel function and understand its execution within Vitis Model Composer</li>
 </ul>
-</section>
-<section id="lab-4" class="level3">
-<h3><a href="matlab:XmcExampleApi.getExample('04-AI_Engine_Code_Generation')">Lab 4</a></h3>
+<h3 id="lab-404-ai_engine_code_generationreadmemd"><a href="matlab:XmcExampleApi.getExample('04-AI_Engine_Code_Generation')">Lab 4</a></h3>
 <p>AI Engine Code Generation and Cycle-Approximate Simulation</p>
 <ul>
-<li>Generate AI Engine graph code from a Vitis Model Composer
-design</li>
+<li>Generate AI Engine graph code from a Vitis Model Composer design</li>
 <li>Simulate AI Engine design and review estimated throughput</li>
-<li>Automate building and simulation of AI Engine as part of a larger
-design</li>
+<li>Automate building and simulation of AI Engine as part of a larger design</li>
 </ul>
-</section>
-<section id="lab-5" class="level3">
-<h3><a href="matlab:XmcExampleApi.getExample('05-Vitis_Analyzer')">Lab 5</a></h3>
+<h3 id="lab-505-vitis_analyzerreadmemd"><a href="matlab:XmcExampleApi.getExample('05-Vitis_Analyzer')">Lab 5</a></h3>
 <p>View AI Engine Designs in Vitis Analyzer</p>
 <ul>
 <li>Widen PLIO width to increase design throughput</li>
 <li>Cascade FIR filter algorithm across multiple AIE kernels</li>
-<li>View detailed timing information in the Vitis Analyzer and calculate
-latency</li>
+<li>View detailed timing information in the Vitis Analyzer and calculate latency</li>
 </ul>
-</section>
-<section id="lab-6" class="level3">
-<h3><a href="matlab:XmcExampleApi.getExample('06-Hardware_Validation')">Lab 6</a></h3>
+<h3 id="lab-606-hardware_validationreadmemd"><a href="matlab:XmcExampleApi.getExample('06-Hardware_Validation')">Lab 6</a></h3>
 <p>Hardware Validation of Versal Adaptive SoC Design</p>
 <ul>
 <li>Generate a hardware image to perform validation</li>
-<li>Run hardware emulation to simulate the behavior of the Versal
-Adaptive SoC design including AI Engine, PL and PS</li>
-<li>Download the hardware image to a VCK190 board and perform hardware
-validation</li>
+<li>Run hardware emulation to simulate the behavior of the Versal Adaptive SoC design including AI Engine, PL and PS</li>
+<li>Download the hardware image to a VCK190 board and perform hardware validation</li>
 </ul>
-</section>
-<section id="lab-7" class="level3">
-<h3><a href="matlab:XmcExampleApi.getExample('07-Export_to_Vitis')">Lab 7</a></h3>
+<h3 id="lab-707-export_to_vitisreadmemd"><a href="matlab:XmcExampleApi.getExample('07-Export_to_Vitis')">Lab 7</a></h3>
 <p>Export AI Engine Design from Vitis Model Composer to Vitis</p>
 <ul>
-<li>Generate kernel and graph code from the Vitis Model Composer AI
-Engine design</li>
+<li>Generate kernel and graph code from the Vitis Model Composer AI Engine design</li>
 <li>Import the code into Vitis as an AI Engine component</li>
 <li>Import AI Engine compiled graph into a Vitis binary container</li>
 </ul>
 <hr />
-<p>© Copyright 2023 Advanced Micro Devices, Inc.</p>
-<p>Licensed under the Apache License, Version 2.0 (the "License"); you
-may not use this file except in compliance with the License. You may
-obtain a copy of the License at</p>
-<pre><code>    http://www.apache.org/licenses/LICENSE-2.0</code></pre>
-<p>Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
+<p>&copy; Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>    http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
 limitations under the License.</p>
 <p align="center"><sup>XD058 | &copy; Copyright 2023 Advanced Micro Devices, Inc.</sup></p>
 
-</section>
-</section>
-</section>
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
 </body>
 </html>

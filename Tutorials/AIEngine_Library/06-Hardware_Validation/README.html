@@ -1,348 +1,408 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>README</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
-  <link rel="stylesheet" href="/proj/xcoswmktg/robg/git/markdown_to_html/style.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <table class="sphinxhide" width="100%">
- <tr width="100%">
-    <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
-    <a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
-    <a href="https://www.xilinx.com/products/design-tools/vitis/vitis-ai.html">See Vitis™ AI Development Environment on xilinx.com</a>
-    </td>
- </tr>
-</table>
+<html>    
+<script>
+function myFunction() {
 
-<section id="lab-6-hardware-validation-of-versal-adaptive-soc-design"
-class="level1">
-<h1>Lab 6: Hardware Validation of Versal Adaptive SoC Design</h1>
-<p>This lab shows how to use Vitis Model Composer to perform validation
-of an AI Engine design running on Versal Adaptive SoC hardware.</p>
-<p>In Lab 5, we used cycle-approximate AI Engine simulation to simulate
-the behavior of the AIE kernels. This gave us confidence that the
-algorithm is functionally correct, but did not explore how the AI Engine
-interacts with the Programmable Logic (PL) and Processing System
-(PS).</p>
-<p>Hardware validation is an important next step to test the Versal
-Adaptive SoC design. Vitis Model Composer can be used to create a
-hardware image for either a physical board or a hardware emulation flow
-that simulates the full behavior of the Versal Adaptive SoC including AI
-Engine, PL and PS.</p>
-<p>When creating the hardware image, the input data samples that are fed
-into the design during simulation in Simulink are collected. Likewise,
-the output data samples from the design are also collected. The input
-and output data are packaged as part of the hardware image and
-downloaded to the hardware. The input data is fed into the design in
-hardware, the output data is collected and compared with the output data
-from simulation. This comparison is done by the PS in the device. Unless
-something is wrong, the result should match bit by bit with the result
-of the simulation because the simulation in Vitis Model Composer is
-bit-accurate. The hardware runs independently of Vitis Model Composer,
-and during the hardware run no information is communicated between Vitis
-Model Composer and the hardware.</p>
-<p><span class="emoji" data-emoji="warning">⚠️</span> This AI Engine Lab
-can be done only in a Linux environment.</p>
-<section id="procedure" class="level3">
-<h3>Procedure</h3>
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
+<tr width="100%">
+<td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
+<a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
+<a href="https://www.xilinx.com/products/design-tools/vitis/vitis-ai.html">See Vitis™ AI Development Environment on xilinx.com</a>
+</td>
+</tr>
+</table>
+<h1 id="lab-6-hardware-validation-of-versal-adaptive-soc-design">Lab 6: Hardware Validation of Versal Adaptive SoC Design</h1>
+<p>This lab shows how to use Vitis Model Composer to perform validation of an AI Engine design running on Versal Adaptive SoC hardware.</p>
+<p>In Lab 5, we used cycle-approximate AI Engine simulation to simulate the behavior of the AIE kernels. This gave us confidence that the algorithm is functionally correct, but did not explore how the AI Engine interacts with the Programmable Logic (PL) and Processing System (PS). </p>
+<p>Hardware validation is an important next step to test the Versal Adaptive SoC design. Vitis Model Composer can be used to create a hardware image for either a physical board or a hardware emulation flow that simulates the full behavior of the Versal Adaptive SoC including AI Engine, PL and PS. </p>
+<p>When creating the hardware image, the input data samples that are fed into the design<br />
+during simulation in Simulink are collected. Likewise, the output data samples from the design are<br />
+also collected. The input and output data are packaged as part of the hardware image and<br />
+downloaded to the hardware. The input data is fed into the design in hardware, the output data is<br />
+collected and compared with the output data from simulation. This comparison is done by the<br />
+PS in the device. Unless something is wrong, the result should match bit by bit with the<br />
+result of the simulation because the simulation in Vitis Model Composer is bit-accurate. The<br />
+hardware runs independently of Vitis Model Composer, and during the hardware run no<br />
+information is communicated between Vitis Model Composer and the hardware.</p>
+<p>:warning: This AI Engine Lab can be done only in a Linux environment.</p>
+<h3 id="procedure">Procedure</h3>
 <p>This lab has the following steps:</p>
 <ul>
-<li>In Step 1, you will configure the Vitis Model Composer Hub block to
-generate a hardware image to perform validation.</li>
-<li>In Step 2, you will run hardware emulation to simulate the behavior
-of the Versal Adaptive SoC design including AI Engine, PL and PS.</li>
-<li>In Step 3, you will download the hardware image to a VCK190 board
-and perform hardware validation.</li>
+<li>In Step 1, you will configure the Vitis Model Composer Hub block to generate a hardware image to perform validation.</li>
+<li>In Step 2, you will run hardware emulation to simulate the behavior of the Versal Adaptive SoC design including AI Engine, PL and PS.</li>
+<li>In Step 3, you will download the hardware image to a VCK190 board and perform hardware validation.</li>
 </ul>
-<p><span class="emoji" data-emoji="warning">⚠️</span> Steps 1 and 2 of
-this lab can be completed without hardware. Step 3 requires a Versal
-board such as the <a
-href="https://www.xilinx.com/products/boards-and-kits/vck190.html">VCK190</a>.</p>
-</section>
-<section id="step-1-configure-hardware-validation-flow" class="level2">
-<h2>Step 1: Configure Hardware Validation Flow</h2>
-<ol type="1">
-<li><p>Run the <em><strong>setupLab6</strong></em> script to initialize
-a working directory.</p></li>
+<p>:warning: Steps 1 and 2 of this lab can be completed without hardware. Step 3 requires a Versal board such as the <a href="https://www.xilinx.com/products/boards-and-kits/vck190.html">VCK190</a>.</p>
+<h2 id="step-1-configure-hardware-validation-flow">Step 1: Configure Hardware Validation Flow</h2>
+<ol>
+<li><p>Run the <strong><em>setupLab6</em></strong> script to initialize a working directory.</p></li>
 <li><p>Open the model <code>Lab6_Part1_Start.slx</code>.</p></li>
-<li><p>At the top level of the model, double-click the Model Composer
-Hub block.</p></li>
+<li><p>At the top level of the model, double-click the Model Composer Hub block.</p></li>
 <li><p>Click the <strong>Hardware Selection</strong> tab.</p></li>
 </ol>
 <p><img src="Images/Image01.png" alt="missing image" /></p>
-<ol start="5" type="1">
-<li><p>Click the '...' button to open the Device Chooser.</p></li>
+<ol start="5">
+<li><p>Click the '…' button to open the Device Chooser.</p></li>
 <li><p>Select the <strong>Platform</strong> tab.</p></li>
-<li><p>In the Platform drop-down, select <strong>Specify
-Platform</strong>.</p></li>
+<li><p>In the Platform drop-down, select <strong>Specify Platform</strong>.</p></li>
 </ol>
 <p><img src="Images/Image02.png" alt="missing image" /></p>
-<ol start="8" type="1">
+<ol start="8">
 <li>Click <strong>Browse</strong>.</li>
 </ol>
-<p>This is where you will specify the path to a <em>.xpfm</em> file that
-defines your <a
-href="https://docs.xilinx.com/r/en-US/ug1273-versal-acap-design/Platform-Based-Design-Flows">platform</a>.
-In this lab, we will use a <a
-href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html">Versal
-base platform</a> for the <a
-href="https://www.xilinx.com/products/boards-and-kits/vck190.html">VCK190</a>
-that has been provided with the Vitis installation.</p>
-<ol start="9" type="1">
-<li>Navigate to the folder where the Versal base platforms are
-installed. These are located within the Vitis tools installation, for
-example: <strong>/opt/Xilinx/Vitis/2023.1/base_platforms</strong>.</li>
+<p>This is where you will specify the path to a <em>.xpfm</em> file that defines your <a href="https://docs.xilinx.com/r/en-US/ug1273-versal-acap-design/Platform-Based-Design-Flows">platform</a>. In this lab, we will use a <a href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html">Versal base platform</a> for the <a href="https://www.xilinx.com/products/boards-and-kits/vck190.html">VCK190</a> that has been provided with the Vitis installation.</p>
+<ol start="9">
+<li>Navigate to the folder where the Versal base platforms are installed. These are located within the Vitis tools installation, for example: <strong>/opt/Xilinx/Vitis/2023.1/base_platforms</strong>.</li>
 </ol>
 <p><img src="Images/Image03.png" alt="missing image" /></p>
-<ol start="10" type="1">
-<li>Double-click on the <strong>xilinx_vck190_base_...</strong> folder,
-and then click the <strong>xilinx_vck190_base_....xpfm</strong>
-file.</li>
+<ol start="10">
+<li>Double-click on the <strong>xilinx<em>vck190</em>base<em>…</strong> folder, and then click the <strong>xilinx</em>vck190<em>base</em>….xpfm</strong> file.</li>
 </ol>
 <p><img src="Images/Image04.png" alt="missing image" /></p>
-<ol start="11" type="1">
+<ol start="11">
 <li>Click <strong>Open</strong>, then <strong>OK</strong>.</li>
 </ol>
-<p>The Hardware Selection tab populates with information about the
-selected platform.</p>
+<p>The Hardware Selection tab populates with information about the selected platform.</p>
 <p><img src="Images/Image05.png" alt="missing image" /></p>
-<ol start="12" type="1">
-<li><p>Select the <strong>Code Generation</strong> tab, the
-<strong>FIRchain</strong> subsystem, then <strong>AIE Hardware
-Flow</strong>.</p></li>
-<li><p>Click the checkbox to <strong>Generate Hardware Validation
-Code</strong>.</p></li>
+<ol start="12">
+<li><p>Select the <strong>Code Generation</strong> tab, the <strong>FIRchain</strong> subsystem, then <strong>AIE Hardware Flow</strong>.</p></li>
+<li><p>Click the checkbox to <strong>Generate Hardware Validation Code</strong>.</p></li>
 </ol>
 <p><img src="Images/Image06.png" alt="missing image" /></p>
-<p>The <strong>HW System Type</strong> provides two options:
-<strong>Baremetal</strong> or <strong>Linux</strong> flow.</p>
+<p>The <strong>HW System Type</strong> provides two options: <strong>Baremetal</strong> or <strong>Linux</strong> flow.</p>
 <ul>
-<li>With a <em>baremetal</em> environment, the PS application is
-compiled to run directly on the processor. The application must
-integrate and manage the AI Engine graph and PL kernels directly without
-the support of any operating system. AMD provides a standalone board
-support package (BSP), drivers, and libraries for applications to use to
-reduce development effort.</li>
-<li>With <em>Linux</em>, the PS application is compiled to run on a
-Linux operating system. AMD provides an ADF API to control control the
-AI Engine graph and the Xilinx Runtime (XRT) API to control PL
-kernels.</li>
+<li>With a <em>baremetal</em> environment, the PS application is compiled to run directly on the processor. The application must integrate and manage the AI Engine graph and PL kernels directly without the support of any operating system. AMD provides a standalone board support package (BSP), drivers, and libraries for applications to use to reduce development effort.</li>
+<li>With <em>Linux</em>, the PS application is compiled to run on a Linux operating system. AMD provides an ADF API to control control the AI Engine graph and the Xilinx Runtime (XRT) API to control PL kernels.</li>
 </ul>
-<p>For more details, refer to the <a
-href="https://docs.xilinx.com/r/en-US/ug1076-ai-engine-environment/Programming-the-PS-Host-Application">AI
-Engine Tools and Flows User Guide (UG1076)</a>. In either scenario,
-Vitis Model Composer automatically generates all required source code
-for the host application to execute the testbench and interact with the
-Adaptive SoC device. <strong>We will use Baremetal flow for this
-lab.</strong></p>
-<p><strong>Target</strong> has two options: <strong>hw</strong> or
-<strong>hw emu</strong>.</p>
+<p>For more details, refer to the <a href="https://docs.xilinx.com/r/en-US/ug1076-ai-engine-environment/Programming-the-PS-Host-Application">AI Engine Tools and Flows User Guide (UG1076)</a>. In either scenario, Vitis Model Composer automatically generates all required source code for the host application to execute the testbench and interact with the Adaptive SoC device. <strong>We will use Baremetal flow for this lab.</strong></p>
+<p><strong>Target</strong> has two options: <strong>hw</strong> or <strong>hw emu</strong>.</p>
 <ul>
-<li><em>hw</em> generates a binary image (for baremetal) or an SD card
-image (for Linux) with which to program the hardware.</li>
-<li><em>hw emu</em> generates simulation artifacts to perform Vitis
-hardware emulation. SystemC is used to simulate the AI Engine and PL
-kernels, and QEMU is used to simulate the PS application. Hardware
-emulation lets you obtain high-fidelity profiling data about the design
-as it would run on hardware, without having access to a physical
-board.</li>
+<li><em>hw</em> generates a binary image (for baremetal) or an SD card image (for Linux) with which to program the hardware.</li>
+<li><em>hw emu</em> generates simulation artifacts to perform Vitis hardware emulation. SystemC is used to simulate the AI Engine and PL kernels, and QEMU is used to simulate the PS application. Hardware emulation lets you obtain high-fidelity profiling data about the design as it would run on hardware, without having access to a physical board.</li>
 </ul>
-<p>For more information, see <a
-href="https://docs.xilinx.com/r/en-US/ug1076-ai-engine-environment/Simulating-an-AI-Engine-Graph-Application">Simulating
-an AI Engine Graph Application</a>.</p>
-<p><strong>If you do not have access to a board and/or would like to
-perform hardware emulation, select <em>hw emu</em> as the Target and
-proceed to Step 2.</strong></p>
-<p><strong>If you have access to a VCK190 evaluation board (or another
-Versal Adaptive SoC board), select <em>hw</em> as the Target and proceed
-to Step 3.</strong></p>
-</section>
-<section id="step-2-validation-using-hardware-emulation" class="level2">
-<h2>Step 2: Validation using Hardware Emulation</h2>
-<p>In this step, you will use Vitis hardware emulation to validate the
-design. As stated above, this simulates the AI Engine kernels, PL
-kernels, and PS application side-by-side. This allows you to gain
-confidence that the design will run on the actual hardware without
-requiring access to a board. However, running hardware emulation is
-slower than running the design on the board itself.</p>
-<ol type="1">
-<li><p>On the AIE Hardware Flow tab of the Vitis Model Composer Hub
-block, select <strong>Run hardware emulation after code
-generation</strong>.</p></li>
-<li><p>Click <strong>Generate</strong>.</p></li>
+<p>For more information, see <a href="https://docs.xilinx.com/r/en-US/ug1076-ai-engine-environment/Simulating-an-AI-Engine-Graph-Application">Simulating an AI Engine Graph Application</a>.</p>
+<p><strong>If you do not have access to a board and/or would like to perform hardware emulation, select <em>hw emu</em> as the Target and proceed to Step 2.</strong></p>
+<p><strong>If you have access to a VCK190 evaluation board (or another Versal Adaptive SoC board), select <em>hw</em> as the Target and proceed to Step 3.</strong></p>
+<h2 id="step-2-validation-using-hardware-emulation">Step 2: Validation using Hardware Emulation</h2>
+<p>In this step, you will use Vitis hardware emulation to validate the design. As stated above, this simulates the AI Engine kernels, PL kernels, and PS application side-by-side. This allows you to gain confidence that the design will run on the actual hardware without requiring access to a board. However, running hardware emulation is slower than running the design on the board itself.</p>
+<ol>
+<li><p>On the AIE Hardware Flow tab of the Vitis Model Composer Hub block, select <strong>Run hardware emulation after code generation</strong>.</p></li>
+<li><p>Click <strong>Generate</strong>. </p></li>
 </ol>
 <p><img src="Images/Image07.png" alt="missing image" /></p>
-<p>This will take a substantial amount of time as the entire design (AI
-Engine, PL, and PS) is compiled and synthesized. Alternatively, you can
-leave the <strong>Run hardware emulation after code generation</strong>
-option unchecked and Vitis Model Composer will only generate the AIE,
-PL, and host source code along with a script and makefile to perform
-hardware emulation outside of Vitis Model Composer.</p>
+<p>This will take a substantial amount of time as the entire design (AI Engine, PL, and PS) is compiled and synthesized. Alternatively, you can leave the <strong>Run hardware emulation after code generation</strong> option unchecked and Vitis Model Composer will only generate the AIE, PL, and host source code along with a script and makefile to perform hardware emulation outside of Vitis Model Composer.</p>
 <blockquote>
-<p>Note: To perform hardware emulation outside of Vitis Model Composer
-after the hardware validation code has been generated, run the script
-<code>./code_hw_emu/run_hw/src_ps/launch_hw_emu.sh</code>.</p>
+<p>Note: To perform hardware emulation outside of Vitis Model Composer after the hardware validation code has been generated, run the script <code>./code_hw_emu/run_hw/src_ps/launch_hw_emu.sh</code>.</p>
 </blockquote>
-<p>After hardware validation is complete, the result is displayed in the
-Progress window. The testbench indicates that all outputs match between
-the Simulink simulation and the hardware emulation.</p>
+<p>After hardware validation is complete, the result is displayed in the Progress window. The testbench indicates that all outputs match between the Simulink simulation and the hardware emulation.</p>
 <p><img src="Images/Image08.png" alt="missing image" /></p>
-</section>
-<section id="step-3-validation-on-hardware" class="level2">
-<h2>Step 3: Validation on Hardware</h2>
-<p>In this step, you will generate a BOOT.BIN binary hardware image,
-load it on the board, and perform hardware validation.</p>
-<ol type="1">
-<li>On the AIE Hardware Flow tab of the Vitis Model Composer Hub block,
-select <strong>Generate BOOT.BIN after code generation</strong>.</li>
+<h2 id="step-3-validation-on-hardware">Step 3: Validation on Hardware</h2>
+<p>In this step, you will generate a BOOT.BIN binary hardware image, load it on the board, and perform hardware validation.</p>
+<ol>
+<li>On the AIE Hardware Flow tab of the Vitis Model Composer Hub block, select <strong>Generate BOOT.BIN after code generation</strong>.</li>
 </ol>
 <p><img src="Images/Image09.png" alt="missing image" /></p>
-<ol start="2" type="1">
-<li>Click <strong>Generate</strong>.</li>
+<ol start="2">
+<li>Click <strong>Generate</strong>. </li>
 </ol>
-<p>This will take a substantial amount of time as the entire design (AI
-Engine, PL, and PS) is compiled and synthesized. Alternatively, you can
-leave the <strong>Generate BOOT.BIN after code generation</strong>
-option unchecked and Vitis Model Composer will only generate the AIE,
-PL, and host source code along with a script and makefile to build the
-boot image outside of Vitis Model Composer.</p>
-<p>After the binary image is generated, it is stored in the folder
-<code>./code_hw/run_hw/src_ps/BOOT.BIN</code>.</p>
+<p>This will take a substantial amount of time as the entire design (AI Engine, PL, and PS) is compiled and synthesized. Alternatively, you can leave the <strong>Generate BOOT.BIN after code generation</strong> option unchecked and Vitis Model Composer will only generate the AIE, PL, and host source code along with a script and makefile to build the boot image outside of Vitis Model Composer.</p>
+<p>After the binary image is generated, it is stored in the folder <code>./code_hw/run_hw/src_ps/BOOT.BIN</code>.</p>
 <p><img src="Images/Image10.png" alt="missing image" /></p>
-<p>We will now prepare the board and download the hardware image to it.
-This lab provides instructions specific to the VCK190.</p>
+<p>We will now prepare the board and download the hardware image to it. This lab provides instructions specific to the VCK190.</p>
 <blockquote>
-<p>Note: Here we are assuming the board is physically connected to a
-Windows machine and the BOOT.BIN is generated using Vitis Model Composer
-on a Linux machine. The Windows machine and Linux machine are networked
-together, and the <a
-href="https://docs.xilinx.com/r/en-US/ug908-vivado-programming-debugging/Connecting-to-a-Hardware-Target-Using-hw_server">AMD
-Hardware Server</a> is run on the Windows machine to route data between
-the board and the Linux machine.</p>
+<p>Note: Here we are assuming the board is physically connected to a Windows machine and the BOOT.BIN is generated using Vitis Model Composer on a Linux machine. The Windows machine and Linux machine are networked together, and the <a href="https://docs.xilinx.com/r/en-US/ug908-vivado-programming-debugging/Connecting-to-a-Hardware-Target-Using-hw_server">AMD Hardware Server</a> is run on the Windows machine to route data between the board and the Linux machine.</p>
 </blockquote>
-<ol start="3" type="1">
+<ol start="3">
 <li><p>Connect the power cable to the board.</p></li>
-<li><p>Connect a USB Micro cable between the Windows host machine and
-the USB JTAG connector on the target board. This cable is used for
-USB-to-serial transfer.</p></li>
-<li><p>Ensure that the SW1 switch is set to the JTAG boot mode and power
-on the VCK190 board using the power switch as shown in the following
-figure.</p>
-<p><img src="Images/board.png" /></p></li>
+<li><p>Connect a USB Micro cable between the Windows host machine and the USB JTAG connector on the target board. This cable is used for USB-to-serial transfer.</p></li>
+<li><p>Ensure that the SW1 switch is set to the JTAG boot mode and power on the VCK190 board using the power switch as shown in the following figure.</p>
+<p><img src="Images/board.png" alt="" /></p></li>
 </ol>
 <p>Once your board is set up, program the device as follows:</p>
-<ol start="6" type="1">
-<li><p>In Windows, click the search box on the taskbar and type Device
-Manager, then select Device Manager from the Menu.</p></li>
-<li><p>When the board is powered ON and connected to your machine
-through the USB interface, determine the COM ports that are between the
-VCK190 board and your computer from Windows Device Manager.</p>
-<p><img src="Images/device_manager.png" /></p></li>
-<li><p>Use a Terminal application (e.g. Teraterm or Putty) to open up
-COM port interfaces on these ports (COM4, COM5 and COM6 in the above
-case at 115200 baud rate). Note that only one of these terminals will
-print the output.</p>
-<p><img src="Images/putty.png" /></p>
+<ol start="6">
+<li><p>In Windows, click the search box on the taskbar and type Device Manager, then select Device Manager from the Menu.</p></li>
+<li><p>When the board is powered ON and connected to your machine through the USB interface, determine the COM ports that are between the VCK190 board and your computer from Windows Device Manager.</p>
+<p><img src="Images/device_manager.png" alt="" /></p></li>
+<li><p>Use a Terminal application (e.g. Teraterm or Putty) to open up COM port interfaces on these ports (COM4, COM5 and COM6 in the above case at 115200 baud rate). Note that only one of these terminals will print the output. </p>
+<p><img src="Images/putty.png" alt="" /></p></li>
+</ol>
 <blockquote>
 <p>Note: Ensure the Connection type is set to Serial.</p>
-</blockquote></li>
-<li><p>Run Hardware Server on Windows.</p>
-<blockquote>
-<p>Note : This step assumes that you have Hardware Server installed on
-your Windows machine as part of Vitis or Vivado Installation. If you do
-not have Hardware Server installed, please refer to the section <a
-href="#How-to-Install-Hardware-Server">How to Install Hardware
-Server</a>.</p>
 </blockquote>
-<p>Open Windows command prompt and provide complete path to
-<code>hw_server</code> application and hit <code>Enter</code>. You can
-see the hostname and port number as highlighted below.</p>
-<p><img src="Images/hw_server.png" /></p></li>
-<li><p>Launch XSDB and create a target connection to the host running
-the hw_server.</p>
-<p>a. On the Linux machine, open a new terminal and launch XSDB using
-the <code>xsdb</code> file from the Vitis installation directory as
-shown.</p>
-<pre><code>&lt;AMD Install Directory&gt;/Vitis/&lt;Version&gt;/bin/xsdb</code></pre>
+<ol start="9">
+<li>Run Hardware Server on Windows.</li>
+</ol>
+<blockquote>
+<p>Note : This step assumes that you have Hardware Server installed on your Windows machine as part of Vitis or Vivado Installation. If you do not have Hardware Server installed, please refer to the section <a href="#How-to-Install-Hardware-Server">How to Install Hardware Server</a>. </p>
+</blockquote>
+<p>Open Windows command prompt and provide complete path to <code>hw_server</code> application and hit <code>Enter</code>. You can see the hostname and port number as highlighted below.</p>
+<p><img src="Images/hw_server.png" alt="" /></p>
+<ol start="10">
+<li><p>Launch XSDB and create a target connection to the host running the hw_server.</p>
+<p>a. On the Linux machine, open a new terminal and launch XSDB using the <code>xsdb</code> file from the Vitis installation directory as shown.</p>
+<pre><code>  &lt;AMD Install Directory&gt;/Vitis/&lt;Version&gt;/bin/xsdb
+</code></pre>
 <p>b. From the XSDB prompt, run the following commands:</p>
-<pre><code> connect -url &lt;Hostname&gt;:&lt;Port_num&gt;
- ta 1</code></pre>
-<p>Note : You should use the hostname and port number as highlighted in
-Step 9. Do not prepend the hostname with 'TCP:'.</p>
-<p>c. From within the XSDB prompt, navigate to the directory where
-hardware device image has been generated.</p>
-<pre><code> cd &lt;lab work directory&gt;/code_hw/run_hw/src_ps</code></pre></li>
+<pre><code>   connect -url &lt;Hostname&gt;:&lt;Port_num&gt;
+ta 1
+</code></pre>
+<p>Note : You should use the hostname and port number as highlighted in Step 9. Do not prepend the hostname with 'TCP:'.</p>
+<p>c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. </p>
+<pre><code>   cd &lt;lab work directory&gt;/code_hw/run_hw/src_ps
+</code></pre>
+<pre><code>   
+</code></pre></li>
 <li><p>Program the device and run:</p>
 <p>a. From the XSDB prompt, run the following command:</p>
-<pre><code>device program BOOT.BIN</code></pre>
-<p>You will see following message in the XSDB prompt if the device
-program is successful.</p>
-<p><img src="Images/xsdb_prompt.png" /></p>
-<p>b. This will run the design on the board. In the Terminal
-application, you should see the log similar to the following. Here, the
-hardware results are compared with the golden results.</p>
+<pre><code>  device program BOOT.BIN
+</code></pre>
+<p>You will see following message in the XSDB prompt if the device program is successful.</p>
+<p><img src="Images/xsdb_prompt.png" alt="" /></p>
+<p>b. This will run the design on the board. In the Terminal application, you should see the log similar to the following. Here, the hardware results are compared with the golden results.</p>
 <pre><code>   ******************************** Test Results ********************************
-   ****** Model Composer and Hardware outputs match for all 40944 samples for output signal Out1 *******
-   ****** Test passed ********</code></pre>
+****** Model Composer and Hardware outputs match for all 40944 samples for output signal Out1 *******
+****** Test passed ********
+</code></pre>
 <p>c. To re-run the results, run the following commands:</p>
 <pre><code>    rst -system
-    device program BOOT.BIN</code></pre></li>
+device program BOOT.BIN
+</code></pre></li>
 </ol>
-</section>
-<section id="conclusion" class="level2">
-<h2>Conclusion</h2>
-<p>In this lab, you saw how to use Vitis Model Composer to generate a
-hardware image to perform validation, either via emulation or on a
-physical board.</p>
-</section>
-<section id="appendix-how-to-install-hardware-server" class="level2">
-<h2>Appendix: How to Install Hardware Server</h2>
-<p>The AMD Unified installer allows you to install multiple AMD tools
-using a single installer. Follow the steps below to install AMD Hardware
-Server on Windows.</p>
-<ol type="1">
-<li><p>Download the AMD Unified installer package and run the
-<code>xsetup.exe</code> file.</p></li>
-<li><p>In the Installer window, select 'Hardware Server' from the list
-of products.</p>
-<p><img src="Images/installer.png" /></p></li>
-<li><p>Click <code>Next</code> and complete the rest of the installation
-process.</p></li>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this lab, you saw how to use Vitis Model Composer to generate a hardware image to perform validation, either via emulation or on a physical board.</p>
+<h2 id="appendix-how-to-install-hardware-server">Appendix: How to Install Hardware Server</h2>
+<p>The AMD Unified installer allows you to install multiple AMD tools using a single installer. Follow the steps below to install AMD Hardware Server on Windows. </p>
+<ol>
+<li><p>Download the AMD Unified installer package and run the <code>xsetup.exe</code> file.</p></li>
+<li><p>In the Installer window, select 'Hardware Server' from the list of products.</p>
+<p><img src="Images/installer.png" alt="" /></p></li>
+<li><p>Click <code>Next</code> and complete the rest of the installation process. </p></li>
 </ol>
 <hr />
-<p>© Copyright 2023 Advanced Micro Devices, Inc.</p>
-<p>Licensed under the Apache License, Version 2.0 (the "License"); you
-may not use this file except in compliance with the License. You may
-obtain a copy of the License at</p>
-<pre><code>    http://www.apache.org/licenses/LICENSE-2.0</code></pre>
-<p>Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
+<p>&copy; Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>    http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
 limitations under the License.</p>
 <p align="center"><sup>XD058 | &copy; Copyright 2023 Advanced Micro Devices, Inc.</sup></p>
 
-</section>
-</section>
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
 </body>
 </html>

@@ -1,222 +1,146 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>README</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
-  <link rel="stylesheet" href="/proj/xcoswmktg/robg/git/markdown_to_html/style.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <table class="sphinxhide" width="100%">
- <tr width="100%">
-    <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
-    <a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
-    <a href="https://www.xilinx.com/products/design-tools/vitis/vitis-ai.html">See Vitis™ AI Development Environment on xilinx.com</a>
-    </td>
- </tr>
-</table>
+<html>    
+<script>
+function myFunction() {
 
-<section
-id="lab-7-export-ai-engine-design-from-vitis-model-composer-to-vitis"
-class="level1">
-<h1>Lab 7: Export AI Engine Design from Vitis Model Composer to
-Vitis</h1>
-<p>In this lab, we will show how to export an AI Engine design into a
-Vitis AI Engine component after it has been simulated and validated in
-Vitis Model Composer.</p>
-<p>In the early stages of the development cycle, it is critical to
-verify the functional behavior of the AI Engine kernels and graph. Vitis
-Model Composer is an ideal choice for testing and debugging at this
-level because of the speed of iteration and the high level of data
-visibility it provides the AI Engine developer.</p>
-<p>To run on Versal hardware, the finished AI Engine design must be
-linked to data movers running on the PL and a host application running
-on the PS. This linking step, as well as the subsequent packaging of the
-finished hardware image, can be accomplished via a Vitis system
-project.</p>
-<p>AI Engine designs can be brought into Vitis in two different
-ways:</p>
-<ol type="1">
-<li><p><strong>AI Engine Component</strong>: Import the AI Engine kernel
-code, graph code, and data sources into the Vitis workspace. Use this
-approach when you expect to make changes to the AI Engine code after
-exporting from Vitis Model Composer.</p></li>
-<li><p><strong>Pre-built Binary</strong>: Import a compiled AI Engine
-graph (<code>libadf.a</code>) into a binary container. Use this approach
-when the design has been fully completed and validated in Vitis Model
-Composer.</p></li>
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
+<tr width="100%">
+<td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
+<a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
+<a href="https://www.xilinx.com/products/design-tools/vitis/vitis-ai.html">See Vitis™ AI Development Environment on xilinx.com</a>
+</td>
+</tr>
+</table>
+<h1 id="lab-7-export-ai-engine-design-from-vitis-model-composer-to-vitis">Lab 7: Export AI Engine Design from Vitis Model Composer to Vitis</h1>
+<p>In this lab, we will show how to export an AI Engine design into a <br />
+Vitis AI Engine component after it has been simulated and validated in Vitis <br />
+Model Composer. </p>
+<p>In the early stages of the development cycle, it is critical to verify <br />
+the functional behavior of the AI Engine kernels and graph. Vitis Model <br />
+Composer is an ideal choice for testing and debugging at this level <br />
+because of the speed of iteration and the high level of data visibility it <br />
+provides the AI Engine developer.</p>
+<p>To run on Versal hardware, the finished AI Engine design must be linked <br />
+to data movers running on the PL and a host application running on the PS. <br />
+This linking step, as well as the subsequent packaging of the finished <br />
+hardware image, can be accomplished via a Vitis system project.</p>
+<p>AI Engine designs can be brought into Vitis in two different ways:</p>
+<ol>
+<li><p><strong>AI Engine Component</strong>: Import the AI Engine kernel code, graph code, and data sources into the Vitis workspace. Use this approach when you expect to make changes to the AI Engine code after exporting from Vitis Model Composer.</p></li>
+<li><p><strong>Pre-built Binary</strong>: Import a compiled AI Engine graph (<code>libadf.a</code>) into a binary container. Use this approach when the design has been fully completed and validated in Vitis Model Composer.</p></li>
 </ol>
 <p>This lab will demonstrate both approaches.</p>
-<section id="lab-system-design" class="level2">
-<h2>Lab System Design</h2>
+<h2 id="lab-system-design">Lab System Design</h2>
 <p>The design that will be used is shown in the following figure:</p>
-<p><img src="./Images/lab8_system_diagram.png" /></p>
-<p>The AI Engine part of the design, consisting of the Interpolator,
-Polarclip, and Classifier kernels, is simulated by and generated from
+<p><img src="./Images/lab8_system_diagram.png" alt="" /></p>
+<p>The AI Engine part of the design, consisting of the Interpolator, <br />
+Polarclip, and Classifier kernels, is simulated by and generated from <br />
 Vitis Model Composer.</p>
-<p>We will show how to export the AI Engine design to Vitis so it can be
-combined with the PL data movers and PS host application.</p>
-<section id="examine-the-ai-engine-design" class="level3">
-<h3>Examine the AI Engine Design</h3>
-<p>Open and run the Vitis Model Composer testbench for the AI Engine
-part of the design.</p>
+<p>We will show how to export the AI Engine design to Vitis so it can be combined with the PL data movers and PS host application.</p>
+<h3 id="examine-the-ai-engine-design">Examine the AI Engine Design</h3>
+<p>Open and run the Vitis Model Composer testbench for the AI Engine part of <br />
+the design.</p>
 <p>In MATLAB:</p>
-<pre><code>open_system(&#39;aie_testbench&#39;);
-sim(&#39;aie_testbench&#39;);</code></pre>
-<p><img src="Images/model1.png" /></p>
-<p><img src="Images/model2.png" /></p>
-<p>This model implements the AI Engine processing cascade using a FIR
-Interpolation block from the Vitis DSP Library and AIE Kernel blocks
-pointing to existing kernel source code. The output of simulating the AI
-Engine processing cascade is compared to a reference output. The AI
-Engine output is also displayed on a scope.</p>
+<pre><code>open_system('aie_testbench');
+sim('aie_testbench');
+</code></pre>
+<p><img src="Images/model1.png" alt="" /></p>
+<p><img src="Images/model2.png" alt="" /></p>
+<p>This model implements the AI Engine processing cascade using a FIR Interpolation block from the Vitis DSP Library and AIE Kernel <br />
+blocks pointing to existing kernel source code. The output of simulating the AI Engine processing cascade is <br />
+compared to a reference output. The AI Engine output is also displayed on a scope. </p>
 <blockquote>
-<p><strong>NOTE:</strong> To see how the input and reference output data
-are loaded into Vitis Model Composer, go to the <strong>Simulink
-toolstrip -&gt; Modeling -&gt; Model Settings -&gt; Model Properties
--&gt; Callbacks -&gt; PostLoadFcn</strong>.</p>
+<p><strong>NOTE:</strong> To see how the input and reference output data are loaded into Vitis Model Composer, go to the <strong>Simulink toolstrip -> Modeling -> Model Settings -> Model Properties -> Callbacks -> PostLoadFcn</strong>.</p>
 </blockquote>
-<p>After simulating the processing chain and verifying its
-functionality, the AI Engine design can be exported to Vitis for
-integration into a larger project.</p>
-</section>
-</section>
-<section id="approach-1-ai-engine-component" class="level2">
-<h2>Approach 1: AI Engine Component</h2>
-<section id="generate-ai-engine-code" class="level3">
-<h3>Generate AI Engine Code</h3>
-<p>Vitis Model Composer will generate AI Engine graph code from the
-design.</p>
-<ol type="1">
-<li><p>In the <code>aie_testbench</code> model, double-click on the
-<strong>Vitis Model Composer Hub</strong> block.</p></li>
-<li><p>Ensure that the Hub block is configured as follows for the
-<code>ai_engine</code> subsystem.</p></li>
+<p>After simulating the processing chain and verifying its functionality, the AI Engine design can be exported to Vitis for integration into a larger project.</p>
+<h2 id="approach-1-ai-engine-component">Approach 1: AI Engine Component</h2>
+<h3 id="generate-ai-engine-code">Generate AI Engine Code</h3>
+<p>Vitis Model Composer will generate AI Engine graph code from the design.</p>
+<ol>
+<li><p>In the <code>aie_testbench</code> model, double-click on the <strong>Vitis Model Composer Hub</strong> block.</p></li>
+<li><p>Ensure that the Hub block is configured as follows for the <code>ai_engine</code> subsystem. </p></li>
 </ol>
-<p><img src="Images/vmc1.png" /></p>
-<p>The <strong>Create Testbench</strong> option generates input and
-reference output data files for the Vitis AIE Simulator, in addition to
-the graph code.</p>
-<ol start="3" type="1">
+<p><img src="Images/vmc1.png" alt="" /></p>
+<p>The <strong>Create Testbench</strong> option generates input and reference output data files for the Vitis AIE Simulator, in addition to the graph code.</p>
+<ol start="3">
 <li>Click <strong>Generate</strong>.</li>
 </ol>
 <p>Wait for code generation to complete.</p>
-<p><img src="Images/vmc2.png" /></p>
-<p>After code generation is complete, explore the contents of the
-generated <code>code</code> folder:</p>
-<p><img src="Images/vmc3.png" /></p>
-<p>The generated code folder contains a folder called <code>ip</code>
-that contains subfolders for each AI Engine and HLS IP in the design.
-Each individual IP subfolder contains a <code>src</code> folder
-containing the IP's source code. In this design, the
-<code>ip/ai_engine/src</code> folder contains the AI Engine code we will
-bring into Vitis as a component. The <code>ip/ai_engine/data</code>
-folder contains input and reference output data files that can be used
-in AI Engine simulation and hardware validation. Vitis Model Composer
-also generates Makefiles for compiling and simulating the AI Engine
-design outside of Model Composer.</p>
-</section>
-<section id="create-ai-engine-component-in-vitis" class="level3">
-<h3>Create AI Engine Component in Vitis</h3>
-<p>Next, we will create a new Vitis workspace and add an AI Engine
-component to it.</p>
-<ol type="1">
+<p><img src="Images/vmc2.png" alt="" /></p>
+<p>After code generation is complete, explore the contents of the generated <code>code</code> folder:</p>
+<p><img src="Images/vmc3.png" alt="" /></p>
+<p>The generated code folder contains a folder called <code>ip</code> that contains subfolders for each AI Engine and HLS IP in the design. Each individual IP subfolder contains a <code>src</code> folder containing the IP's source code. In this design, the <code>ip/ai_engine/src</code> folder contains the AI Engine code we will bring into Vitis as a component. The <code>ip/ai_engine/data</code> folder contains input and reference output data files that can be used in AI Engine simulation and hardware validation. Vitis Model Composer also generates Makefiles for compiling and simulating the AI Engine design outside of Model Composer.</p>
+<h3 id="create-ai-engine-component-in-vitis">Create AI Engine Component in Vitis</h3>
+<p>Next, we will create a new Vitis workspace and add an AI Engine component to it.</p>
+<ol>
 <li><p>Open a Linux terminal in this lab directory.</p></li>
-<li><p>Configure your shell to run Vitis:
-<code>source (path to Xilinx installation)/Vitis/2023.2/settings64.sh</code>.</p></li>
+<li><p>Configure your shell to run Vitis: <code>source (path to Xilinx installation)/Vitis/2023.2/settings64.sh</code>.</p></li>
 <li><p>Start the Vitis IDE: <code>vitis -w work &amp;</code>.</p></li>
 </ol>
-<p>This creates a new folder called <code>work</code> in the current
-folder and opens it as a Vitis <em>workspace</em>. The Vitis Unified IDE
-opens to the Welcome page.</p>
-<ol start="4" type="1">
-<li>The Workspace panel on the left side identifies the
-<code>work</code> folder as the current workspace. The workspace is
-currently empty. Select <strong>Create AI Engine
-Component</strong>.</li>
+<p>This creates a new folder called <code>work</code> in the current folder and opens it as a Vitis <em>workspace</em>. The Vitis Unified IDE opens to the Welcome page.</p>
+<ol start="4">
+<li>The Workspace panel on the left side identifies the <code>work</code> folder as the current workspace. The workspace is currently empty. Select <strong>Create AI Engine Component</strong>.</li>
 </ol>
-<p><img src="Images/vitis2.png" /></p>
-<ol start="5" type="1">
-<li>Leave the component name and location as their defaults. Click
-<strong>Next</strong>.</li>
+<p><img src="Images/vitis2.png" alt="" /></p>
+<ol start="5">
+<li>Leave the component name and location as their defaults. Click <strong>Next</strong>.</li>
 </ol>
-<p><img src="Images/vitis3.png" /></p>
-<ol start="6" type="1">
-<li>Select the <strong>Add Folder</strong> button under Import
-Sources.</li>
+<p><img src="Images/vitis3.png" alt="" /></p>
+<ol start="6">
+<li>Select the <strong>Add Folder</strong> button under Import Sources.</li>
 </ol>
-<p><img src="Images/vitis4.png" /></p>
-<ol start="7" type="1">
-<li><p>Add the <code>src</code> folder from the AI Engine IP that you
-generated from Vitis Model Composer.</p></li>
-<li><p>Repeat the previous step to add the <code>data</code> folder from
-the generated AI Engine IP.</p></li>
+<p><img src="Images/vitis4.png" alt="" /></p>
+<ol start="7">
+<li><p>Add the <code>src</code> folder from the AI Engine IP that you generated from Vitis Model Composer.</p></li>
+<li><p>Repeat the previous step to add the <code>data</code> folder from the generated AI Engine IP.</p></li>
 </ol>
-<p>The AI Engine Component must have a top-level file that instantiates
-and runs the AI Engine graph. Vitis Model Composer generates this file
-for you as <code>(subsystem name).cpp</code> in the <code>src</code>
-folder.</p>
-<ol start="9" type="1">
-<li>Make sure the top-level file is <code>src/ai_engine.cpp</code>.
-Click <strong>Next</strong>.</li>
+<p>The AI Engine Component must have a top-level file that instantiates and runs the AI Engine graph. Vitis Model Composer generates this file for you as <code>(subsystem name).cpp</code> in the <code>src</code> folder.</p>
+<ol start="9">
+<li>Make sure the top-level file is <code>src/ai_engine.cpp</code>. Click <strong>Next</strong>.</li>
 </ol>
-<p><img src="Images/vitis5.png" /></p>
-<ol start="10" type="1">
-<li>Select a part, platform, or hardware design. In the screenshot
-below, the VCK190 base platform is selected. Click
-<strong>Next</strong>.</li>
+<p><img src="Images/vitis5.png" alt="" /></p>
+<ol start="10">
+<li>Select a part, platform, or hardware design. In the screenshot below, the VCK190 base platform is selected. Click <strong>Next</strong>.</li>
 </ol>
-<p><img src="Images/vitis6.png" /></p>
+<p><img src="Images/vitis6.png" alt="" /></p>
 <blockquote>
-<p><strong>NOTE:</strong> For information on custom platform creation,
-see <em>Vitis Platform Creation labs</em>.</p>
+<p><strong>NOTE:</strong> For information on custom platform creation, see <em>Vitis Platform Creation labs</em>.</p>
 </blockquote>
-<ol start="11" type="1">
+<ol start="11">
 <li>On the Summary screen, click <strong>Finish</strong>.</li>
 </ol>
 <p>The AI Engine Component is created in the Vitis workspace.</p>
-<p><img src="Images/vitis7.png" /></p>
+<p><img src="Images/vitis7.png" alt="" /></p>
 <blockquote>
-<p><strong>NOTE:</strong> If you make changes to the AI Engine design in
-Vitis Model Composer and re-generate code, update the Vitis component by
-copying the <code>data</code> and <code>src</code> folders into the
-component's folder in the Vitis workspace.</p>
+<p><strong>NOTE:</strong> If you make changes to the AI Engine design in Vitis Model Composer and re-generate code, update the Vitis component by copying the <code>data</code> and <code>src</code> folders into the component's folder in the Vitis workspace.</p>
 </blockquote>
-</section>
-<section id="configure-and-build-ai-engine-component" class="level3">
-<h3>Configure and Build AI Engine Component</h3>
-<p>Our AI Engine design in Vitis Model Composer was implemented using
-custom kernel code and blocks from the Model Composer AI Engine DSP
-Library. Before building the AI Engine component, it is necessary to add
-the kernel code's location to the component's include path.</p>
-<ol type="1">
-<li><p>Double-click the file <code>aiecompiler.cfg</code> in the AI
-Engine Component.</p></li>
-<li><p>Under Include Directory, click <strong>Add
-Item</strong>.</p></li>
-<li><p>Add this lab's folder (<code>07-Export_to_Vitis</code>) to the
-include path.</p></li>
-<li><p>Because our AI Engine design contains blocks from the Vitis Model
-Composer AI Engine DSP library, we must also add the following locations
-to the include path:</p></li>
+<h3 id="configure-and-build-ai-engine-component">Configure and Build AI Engine Component</h3>
+<p>Our AI Engine design in Vitis Model Composer was implemented using custom kernel code and blocks from the Model Composer AI Engine DSP Library. Before building the AI Engine component, it is necessary to add the kernel code's location to the component's include path.</p>
+<ol>
+<li><p>Double-click the file <code>aiecompiler.cfg</code> in the AI Engine Component.</p></li>
+<li><p>Under Include Directory, click <strong>Add Item</strong>.</p></li>
+<li><p>Add this lab's folder (<code>07-Export_to_Vitis</code>) to the include path.</p></li>
+<li><p>Because our AI Engine design contains blocks from the Vitis Model Composer AI Engine DSP library, we must also add the following locations to the include path:</p></li>
 </ol>
 <ul>
 <li><code>./xmc_aie_lib</code></li>
@@ -225,137 +149,277 @@ to the include path:</p></li>
 <li><code>(Model Composer install location)/tps/xf_dsp/L2/include/aie</code></li>
 </ul>
 <blockquote>
-<p><strong>NOTE:</strong> The Model Composer install location can be
-found by typing <code>xmcPathInfo</code> in the MATLAB Command
-Window.</p>
+<p><strong>NOTE:</strong> The Model Composer install location can be found by typing <code>xmcPathInfo</code> in the MATLAB Command Window.</p>
 </blockquote>
-<p><img src="Images/vitis8.png" /></p>
-<ol start="5" type="1">
-<li>To build the AI Engine Component, in the Flow Navigator select
-<strong>AIE Simulator/Hardware -&gt; Build</strong>.</li>
+<p><img src="Images/vitis8.png" alt="" /></p>
+<ol start="5">
+<li>To build the AI Engine Component, in the Flow Navigator select <strong>AIE Simulator/Hardware -> Build</strong>.</li>
 </ol>
-<p><img src="Images/vitis9.png" /></p>
-<p>After the build completes, confirm that
-<code>Build Finished successfully</code> appears in the Output console.
-The build outputs, including the <code>libadf.a</code>, are visible in
-the component workspace.</p>
-<p><img src="Images/vitis10.png" /></p>
-<p>You can now continue working with this component in Vitis, including
-simulation, debugging, and integrating with other components to build a
-system project.</p>
-</section>
-</section>
-<section id="approach-2-pre-built-binary" class="level2">
-<h2>Approach 2: Pre-built Binary</h2>
-<section id="generate-compiled-ai-engine-graph" class="level3">
-<h3>Generate Compiled AI Engine Graph</h3>
-<p>In addition to generating AI Engine graph code, Vitis Model Composer
-can also compile the code into a binary (<code>libadf.a</code>) by
-invoking the <code>aiecompiler</code>.</p>
-<ol type="1">
-<li><p>In the <code>aie_testbench</code> model, double-click on the
-<strong>Vitis Model Composer Hub</strong> block.</p></li>
+<p><img src="Images/vitis9.png" alt="" /></p>
+<p>After the build completes, confirm that <code>Build Finished successfully</code> appears in the Output console. The build outputs, including the <code>libadf.a</code>, are visible in the component workspace.</p>
+<p><img src="Images/vitis10.png" alt="" /></p>
+<p>You can now continue working with this component in Vitis, including simulation, debugging, and integrating with other components to build a system project.</p>
+<h2 id="approach-2-pre-built-binary">Approach 2: Pre-built Binary</h2>
+<h3 id="generate-compiled-ai-engine-graph">Generate Compiled AI Engine Graph</h3>
+<p>In addition to generating AI Engine graph code, Vitis Model Composer can also compile the code into a binary (<code>libadf.a</code>) by invoking the <code>aiecompiler</code>.</p>
+<ol>
+<li><p>In the <code>aie_testbench</code> model, double-click on the <strong>Vitis Model Composer Hub</strong> block.</p></li>
 <li><p>Click on the <strong>Hardware Selection</strong> tab.</p></li>
-<li><p>Use the Device Chooser to select a platform file to use for the
-design. The example below uses the VCK190 base platform.</p></li>
+<li><p>Use the Device Chooser to select a platform file to use for the design. The example below uses the VCK190 base platform.</p></li>
 </ol>
-<p><img src="Images/vmc4.png" /></p>
-<ol start="4" type="1">
+<p><img src="Images/vmc4.png" alt="" /></p>
+<ol start="4">
 <li><p>Return to the <strong>Code Generation</strong> tab.</p></li>
-<li><p>Ensure that the Hub block is configured as follows for the
-<code>ai_engine</code> subsystem.</p></li>
+<li><p>Ensure that the Hub block is configured as follows for the <code>ai_engine</code> subsystem. </p></li>
 </ol>
-<p><img src="Images/vmc5.png" /></p>
-<ol start="3" type="1">
+<p><img src="Images/vmc5.png" alt="" /></p>
+<ol start="3">
 <li>Click <strong>Generate</strong>.</li>
 </ol>
 <p>Wait for code generation to complete.</p>
-<p><img src="Images/vmc2.png" /></p>
-<p>After code generation is complete, a report shows what was generated
-and where it is located:</p>
-<p><img src="Images/vmc6.png" /></p>
-<p>In this lab, we will show how to bring the compiled AI Engine graph
-(<code>libadf.a</code>) into a Vitis system project.</p>
-</section>
-<section id="create-vitis-system-project" class="level3">
-<h3>Create Vitis System Project</h3>
-<p>First, create an example Vitis system project to use with the rest of
-this lab.</p>
-<ol type="1">
-<li><p>In Vitis, go to the <strong>File menu -&gt; New Component -&gt;
-System Project</strong>.</p></li>
-<li><p>Leave the project name and location as their defaults. Click
-<strong>Next</strong>.</p></li>
-<li><p>Select a platform, e.g. VCK190. Click
-<strong>Next</strong>.</p></li>
-<li><p>Specify the Embedded Component Paths for this system project,
-then click <strong>Next</strong>.</p></li>
+<p><img src="Images/vmc2.png" alt="" /></p>
+<p>After code generation is complete, a report shows what was generated and where it is located:</p>
+<p><img src="Images/vmc6.png" alt="" /></p>
+<p>In this lab, we will show how to bring the compiled AI Engine graph (<code>libadf.a</code>) into a Vitis system project.</p>
+<h3 id="create-vitis-system-project">Create Vitis System Project</h3>
+<p>First, create an example Vitis system project to use with the rest of this lab.</p>
+<ol>
+<li><p>In Vitis, go to the <strong>File menu -> New Component -> System Project</strong>.</p></li>
+<li><p>Leave the project name and location as their defaults. Click <strong>Next</strong>.</p></li>
+<li><p>Select a platform, e.g. VCK190. Click <strong>Next</strong>.</p></li>
+<li><p>Specify the Embedded Component Paths for this system project, then click <strong>Next</strong>.</p></li>
 </ol>
 <blockquote>
-<p>Leave the 3 fields (<strong>Kernel Image</strong>, <strong>Root
-FS</strong>, <strong>Sysroot</strong>) blank to build the system project
-for a baremetal flow.</p>
-<p>Optionally, you can specify the paths to these components to build
-the system project for Linux. An example is below:</p>
-<p><img src="Images/vitis13.png" /></p>
+<p>Leave the 3 fields (<strong>Kernel Image</strong>, <strong>Root FS</strong>, <strong>Sysroot</strong>) blank to build the system project for a baremetal flow.</p>
+<p>Optionally, you can specify the paths to these components to build the system project for Linux. An example is below:</p>
+<p><img src="Images/vitis13.png" alt="" /></p>
 </blockquote>
-<ol start="5" type="1">
+<ol start="5">
 <li>Click <strong>Finish</strong>.</li>
 </ol>
-<p>The Vitis system project is created in the workspace, and the system
-project settings open.</p>
-<p><img src="Images/vitis38.png" /></p>
-</section>
-<section id="add-pre-built-binary" class="level3">
-<h3>Add Pre-built Binary</h3>
-<p>Create a binary container in the system project and add the
-<code>libadf.a</code> generated by Vitis Model Composer to it.</p>
-<ol type="1">
-<li><p>Click the <strong>plus sign (+)</strong> next to Binary
-Containers.</p></li>
-<li><p>Click <strong>OK</strong> to create a new binary
-container.</p></li>
-<li><p>Next to <code>binary_container_1</code>, click on <strong>Add
-Pre-Built Binary</strong>. Select <strong>AIE Archive</strong>.</p></li>
-<li><p>Navigate to the <code>libadf.a</code> created from Vitis Model
-Composer in the previous section. Click <strong>Open</strong>.</p></li>
+<p>The Vitis system project is created in the workspace, and the system project settings open.</p>
+<p><img src="Images/vitis38.png" alt="" /></p>
+<h3 id="add-pre-built-binary">Add Pre-built Binary</h3>
+<p>Create a binary container in the system project and add the <code>libadf.a</code> generated by Vitis Model Composer to it.</p>
+<ol>
+<li><p>Click the <strong>plus sign (+)</strong> next to Binary Containers.</p></li>
+<li><p>Click <strong>OK</strong> to create a new binary container.</p></li>
+<li><p>Next to <code>binary_container_1</code>, click on <strong>Add Pre-Built Binary</strong>. Select <strong>AIE Archive</strong>.</p></li>
+<li><p>Navigate to the <code>libadf.a</code> created from Vitis Model Composer in the previous section. Click <strong>Open</strong>.</p></li>
 </ol>
-<p>The compiled AI Engine graph is now in the Vitis system project's
-binary container.</p>
-<p><img src="Images/vitis39.png" /></p>
-</section>
-</section>
-<section id="next-steps" class="level2">
-<h2>Next Steps</h2>
-<p>Now that the AI Engine design has been brought from Vitis Model
-Composer into Vitis, it can be combined with other PL components (HLS
-components, data movers, etc.) and a host application to build a
-complete Versal system design.</p>
-<p>To learn more about how to use a Vitis system project, see the <a
-href="https://gitenterprise.xilinx.com/swm/Vitis-Tutorials/blob/2023.2_next/AI_Engine_Development/AIE/Feature_Tutorials/05-AI-engine-versal-integration/unified-ide.md">AI
-Engine/Versal Integration tutorial</a>.</p>
-</section>
-<section id="conclusion" class="level2">
-<h2>Conclusion</h2>
-<p><strong>Congratulations!</strong> This concludes Lab 7 and the AI
-Engine tutorial series.</p>
-<p>In this lab, we showed two methods (AI Engine Component and pre-built
-binary) to export an AI Engine design from Vitis Model Composer to a
-Vitis system project.</p>
+<p>The compiled AI Engine graph is now in the Vitis system project's binary container.</p>
+<p><img src="Images/vitis39.png" alt="" /></p>
+<h2 id="next-steps">Next Steps</h2>
+<p>Now that the AI Engine design has been brought from Vitis Model Composer into Vitis, it can be combined with other PL components (HLS components, data movers, etc.) and a host application to build a complete Versal system design.</p>
+<p>To learn more about how to use a Vitis system project, see the <a href="https://gitenterprise.xilinx.com/swm/Vitis-Tutorials/blob/2023.2_next/AI_Engine_Development/AIE/Feature_Tutorials/05-AI-engine-versal-integration/unified-ide.md">AI Engine/Versal Integration tutorial</a>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p><strong>Congratulations!</strong> This concludes Lab 7 and the AI Engine tutorial series. </p>
+<p>In this lab, we showed two methods (AI Engine Component and pre-built binary) to export an AI Engine design from Vitis Model Composer to a Vitis system project.</p>
 <hr />
-<p>© Copyright 2023 Advanced Micro Devices, Inc.</p>
-<p>Licensed under the Apache License, Version 2.0 (the "License"); you
-may not use this file except in compliance with the License. You may
-obtain a copy of the License at</p>
-<pre><code>    http://www.apache.org/licenses/LICENSE-2.0</code></pre>
-<p>Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
+<p>&copy; Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>    http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
 limitations under the License.</p>
 <p align="center"><sup>XD058 | &copy; Copyright 2023 Advanced Micro Devices, Inc.</sup></p>
 
-</section>
-</section>
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
 </body>
 </html>
