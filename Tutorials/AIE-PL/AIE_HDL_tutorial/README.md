@@ -12,7 +12,7 @@
 
 This tutorial will explore how to model heterogeneous systems (consisting of AI Engine and PL components) in Vitis Model Composer.
 
-The Vitis Model Composer HDL block library performs cycle-accurate simulation, while the AI Engine library does not. This tutorial will show how to use the **AIE to HDL** and **HDL to AIE** blocks to connect the HDL and AIE simulation domains to accurately model how the AIE-PL interface will behave in hardware. 
+The Vitis Model Composer HDL block library performs cycle-accurate simulation, while the AI Engine library does functional simulation. This tutorial will show how to use the **AIE to HDL** and **HDL to AIE** blocks to connect the HDL and AIE simulation domains to accurately model how the AIE-PL interface will behave in hardware. 
 
 ## Review the Tutorial Model
 
