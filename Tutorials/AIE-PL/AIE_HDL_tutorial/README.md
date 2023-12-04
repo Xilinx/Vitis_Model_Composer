@@ -43,7 +43,7 @@ The Vitis Model Composer HDL block library performs cycle-accurate simulation. T
 
 ![](./Images/vmchub.png)
 
-The **FPGA clock period** and **Simulink system period** settings control how the Simulink sample times are reflected in the generated HDL code. When the **FPGA clock period** corresponds to the hardware clock rate, and **Simulink system period** is equal to the same value, then the sample times observed in Simulink will match those of the design running in hardware. In this case, the settings correspond to a FPGA clock rate of 500 MHz.
+The **FPGA clock period** and **Simulink system period** settings control how the Simulink sample times are reflected in the generated HDL code. When the **FPGA clock period** corresponds to the desired hardware clock rate, and **Simulink system period** is equal to the same value, then the sample times observed in Simulink will match those of the design running in hardware. In this case, the settings correspond to a FPGA clock rate of 500 MHz.
 
 For more information on these parameters, see the [Vitis Model Composer Hub documentation](https://docs.xilinx.com/r/en-US/ug1483-model-composer-sys-gen-user-guide/Vitis-Model-Composer-Hub). 
 
