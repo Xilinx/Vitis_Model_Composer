@@ -55,7 +55,7 @@ This sample rate is calculated by buffering the input signal (red color, rate of
 
 ![](./Images/HLS_passthrough1.png)
 
-The HLS Kernel's inputs and outputs are displayed. This function has a streaming `int32` input and output. When this function is implemented in hardware, it will have AXI4-Stream interfaces. For more information, see [How AXI4-Stream Works](https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/How-AXI4-Stream-Works). The function interfaces are determined from the kernel's source code.
+The HLS Kernel's inputs and outputs are displayed. This function has a streaming `int32` input and output. When this function is implemented in hardware, it will have AXI4-Stream interfaces. For more information, see [How AXI4-Stream Works](https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/How-AXI4-Stream-Works). The function interfaces are determined from the kernel's source code (see below).
 
 Also note that the HLS Kernel's output signal size is `32`. This means that on each invocation of the kernel function, it is expected to produce 32 `int32` values. This parameter must be specified by the user.
 
