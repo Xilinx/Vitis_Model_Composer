@@ -97,7 +97,7 @@ In the function declaration, note that this kernel's input and output are `int32
 
 The PLIO block defines the hardware interface between the AI Engine and the PL. 
 
-The **PLIO width** should match the bit width of the HDL subsystem's output. Here, **PLIO width** is `64`, which means that 2 `int32` values will be transferred from the PL to the AIE on each PL clock cycle. 
+The **PLIO width** should match the bit width of the HDL subsystem's AXI Stream output data signal. Here, **PLIO width** is `64`, which means that 2 `int32` values will be transferred from the PL to the AIE on each PL clock cycle.
 
 The **PLIO frequency** is 500 MHz, which matches the expected rate of our HDL subsystem (see above). 
 
@@ -141,7 +141,7 @@ These blocks translate between HDL and AI Engine data types. They also determine
 >
 >For example, if the HDL subsystem asserts `tvalid` every 4 HDL clock cycles, set the **Reduce output sample rate by a factor of** parameter to 4. 
 >
->If you do not do this, the **HDL to AIE** block will output a variable-size signal that is empty when there is no valid data. For more information, see the [Variable-Size Signals](https://github.com/Xilinx/Vitis_Model_Composer/tree/2023.2/QuickGuides/Variable_Size_Signals) Quick Guide.
+>If you do not do this, the **HDL to AIE** block will output a variable-size signal that is empty when there is no valid data and while technically there is nothing wrong with this, for analysis and viewing the signal on a scope, it is best to work with variable size signals that are full. For more information, see the [Variable-Size Signals](https://github.com/Xilinx/Vitis_Model_Composer/tree/2023.2/QuickGuides/Variable_Size_Signals) Quick Guide.
 
 ![](./Images/hdl_aie_params2.png)
 
