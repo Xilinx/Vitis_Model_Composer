@@ -49,7 +49,7 @@ According to the Timing Legend, the sample period of the HLS Kernel block is 64 
 
 ![](./Images/model2.png)
 
-This sample rate is calculated by buffering the input signal (red color, rate of 500 MHz) into vectors of 32 elements each. (500 MHz / 32 = 15.625 MHz) This calculated sample rate is used only for Simulink simulation and does not have any relationship to the design running on the hardware.
+This sample rate is calculated by buffering the input signal (red color, rate of 500 MHz) into vectors of 32 elements each (500 MHz / 32 = 15.625 MHz). This calculated sample rate is used only for Simulink simulation and is meant to match the targeted sample rates in hardware.
 
 5. Double-click on the **HLS_passthrough** block.
 
