@@ -12,7 +12,7 @@
 
 This tutorial will explore how to model heterogeneous systems (consisting of AI Engine and PL components) in Vitis Model Composer.
 
-This tutorial will show how to use the **AIE to HLS** and **HLS to AIE** blocks to connect the HLS and AIE simulation domains to accurately model how the AIE-PL interface will behave in hardware. 
+This tutorial will show how to use the **AIE to HLS** and **HLS to AIE** blocks to connect the HLS and AIE simulation domains and model a design with both AI Engines and PL blocks.
 
 ## Review the Tutorial Model
 
