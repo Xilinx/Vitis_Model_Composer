@@ -79,7 +79,7 @@ Also note that the signal lines are all a single color, indicating a single samp
 
 ## AIE Subsystem
 
-Unlike the HDL block library, the Vitis Model Composer AI Engine blocks do not perform cycle-accurate simulation. In fact, the observed sample times in the Simulink model do not correspond to the AI Engine's hardware clock rate. 
+Unlike the HDL block library, the Vitis Model Composer AI Engine blocks do not perform cycle-accurate simulation. In fact, the observed sample times in the Simulink model do not correspond to the AI Engine's hardware clock rate. Instead these blocks allow for functional or bit-accurate simulation. 
 
 9. Return to the top-level `AIE_HDL` model and double-click the **AIE_Subsystem** to open it.
 
