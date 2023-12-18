@@ -141,7 +141,7 @@ These blocks translate between HDL and AI Engine data types. They also determine
 >
 >For example, if the HDL subsystem asserts `tvalid` every 4 HDL clock cycles, set the **Reduce output sample rate by a factor of** parameter to 4. 
 >
->If you do not do this, the **HDL to AIE** block will output a variable-size signal that is empty when there is no valid data and while technically there is nothing wrong with this, for analysis and viewing the signal on a scope, it is best to work with variable size signals that are full. For more information, see the [Variable-Size Signals](https://github.com/Xilinx/Vitis_Model_Composer/tree/2023.2/QuickGuides/Variable_Size_Signals) Quick Guide.
+>If you do not do this, the **HDL to AIE** block will output a variable-size signal that is empty when there is no valid data. For analysis and viewing the signal on a scope, it is easier to work with variable-size signals that are full. For more information, see the [Variable-Size Signals](https://github.com/Xilinx/Vitis_Model_Composer/tree/2023.2/QuickGuides/Variable_Size_Signals) Quick Guide.
 
 ![](./Images/hdl_aie_params2.png)
 
