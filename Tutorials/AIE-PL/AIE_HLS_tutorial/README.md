@@ -41,6 +41,8 @@ In order to interface a PL kernel written in HLS with an AI Engine design, the P
 
 4. Focus on the **HLS_passthrough** block on the canvas.
 
+HERE THE COLOR DOES NOT MATCH THE SCREEN SHOT ABOVE. ALSO THE IMAGE IS MUSHED UP. 
+
 ![](./Images/HLS_passthrough2.png)
 
 The notations on the block canvas show that the HLS Kernel inputs and outputs vectors of length 32.
@@ -49,7 +51,7 @@ According to the Timing Legend, the sample period of the HLS Kernel block is 64 
 
 ![](./Images/model2.png)
 
-This sample rate is calculated by buffering the input signal (red color, rate of 500 MHz) into vectors of 32 elements each. (500 MHz / 32 = 15.625 MHz) This calculated sample rate is used only for Simulink simulation and does not have any relationship to the design running on the hardware.
+This sample rate is calculated by buffering the input signal (red color, rate of 500 MHz) into vectors of 32 elements each (500 MHz / 32 = 15.625 MHz). This calculated sample rate is used only for Simulink simulation and is meant to match the targeted sample rates in hardware.
 
 5. Double-click on the **HLS_passthrough** block.
 
