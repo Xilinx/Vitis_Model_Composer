@@ -12,7 +12,7 @@
 
 This tutorial will explore how to model heterogeneous systems (consisting of AI Engine and PL components) in Vitis Model Composer.
 
-This tutorial will show how to use the **AIE to HLS** and **HLS to AIE** blocks to connect the HLS and AIE simulation domains and model a design with both AI Engines and PL blocks.
+This tutorial will show how to use the **AIE to HLS** and **HLS to AIE** blocks to connect the HLS and AIE simulation domains to accurately model how the AIE-PL interface will behave in hardware. 
 
 ## Review the Tutorial Model
 
@@ -49,7 +49,7 @@ According to the Timing Legend, the sample period of the HLS Kernel block is 64 
 
 ![](./Images/model2.png)
 
-This sample rate is calculated by buffering the input signal (red color, rate of 500 MHz) into vectors of 32 elements each (500 MHz / 32 = 15.625 MHz). This calculated sample rate is used only for Simulink simulation and is meant to match the targeted sample rates in hardware.
+This sample rate is calculated by buffering the input signal (red color, rate of 500 MHz) into vectors of 32 elements each. (500 MHz / 32 = 15.625 MHz) This calculated sample rate is used only for Simulink simulation and does not have any relationship to the design running on the hardware.
 
 5. Double-click on the **HLS_passthrough** block.
 
