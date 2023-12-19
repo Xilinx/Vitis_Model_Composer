@@ -1,5 +1,4 @@
 
-
 <html>
 <head>
 <title></title>
@@ -12,9 +11,10 @@
 function myFunction() {
 
 var path = document.location.pathname;
-var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
 
-commandURI="matlab:XmcExampleApi.changeDirectory('05-Vitis_Analyzer');"
+commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
 
 document.location=commandURI
 }
@@ -131,7 +131,7 @@ adf::plio_64_bits,
 </ol>
 <p><img src="Images/Image12.png" alt="missing image" /></p>
 <p>This limits the throughput calculation to the area between the two cursors. In the figure above, the estimated throughput is 157 MSPS (your displayed value may vary slightly). The cascading of the FIR filter algorithm across multiple AI Engine kernels has increased our throughput. In the next step, we will see how this change has affected how the algorithm is implemented in the AI Engine.</p>
-<p>By combining multiple techniques: high throughput across the AIE-PL boundary, cascading the algorithm across multiple AI Engine tiles and Super Sample Rate (SSR) parallelism, it is possible to implement designs well in excess of 1 GSPS. One example is an <a href="https://github.com/Xilinx/Vitis_Model_Composer/blob/HEAD/Examples/AIENGINE/DSPlib/fir_ssr/README.html">AI Engine SSR FIR</a> that achieves 4 GSPS.</p>
+<p>By combining multiple techniques: high throughput across the AIE-PL boundary, cascading the algorithm across multiple AI Engine tiles and Super Sample Rate (SSR) parallelism, it is possible to implement designs well in excess of 1 GSPS. One example is an <a href="https://github.com/Xilinx/Vitis_Model_Composer/blob/HEAD/Examples/AIENGINE/DSPlib/fir_ssr/README.md">AI Engine SSR FIR</a> that achieves 4 GSPS.</p>
 <h2 id="step-3-use-vitis-analyzer-to-calculate-latency">Step 3: Use Vitis Analyzer to Calculate Latency</h2>
 <p>In addition to throughput, a key design metric for signal processing systems is latency. The AI Engine simulator can be configured to capture detailed timing information for display in Vitis Analyzer, which can be used to calculate latency.</p>
 <ol>
@@ -302,7 +302,7 @@ margin-bottom: 16px;
 border-left-width: 3px;
 padding: 0 1em;
 color: #828282;
-border-left: 4px solid #e8e8e8;
+border-left: 3px solid #e8e8e8;
 padding-left: 15px;
 font-size: 18px;
 letter-spacing: -1px;
@@ -381,9 +381,15 @@ color: #24292e; }
 a:visited {
 color: #0366d6; }
 
-h1, h2, h3 {
+h2, h3 {
 border-bottom: 1px solid #eaecef;
 color: #111;
-/* Darker */ }</style>
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
 </body>
 </html>

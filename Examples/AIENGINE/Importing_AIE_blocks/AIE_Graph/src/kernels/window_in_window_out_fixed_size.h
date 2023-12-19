@@ -19,7 +19,9 @@
 #define __ADD_KERNEL_H__
 
 #include <adf.h>
+#include "aie_api/aie.hpp"
 #define NUM_SAMPLES 16
-void add_kernel(input_window_int16 * inw1,input_window_int16 * inw2, output_window_int16 * outw); 
+void add_kernel(adf::input_buffer<int16> & restrict inw1,adf::input_buffer<int16> & restrict inw2, adf::output_buffer<int16> &  restrict outw);
+
 
 #endif //__ADD_KERNEL_H__

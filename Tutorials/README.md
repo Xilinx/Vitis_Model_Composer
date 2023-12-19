@@ -163,6 +163,15 @@ Hardware Validation of Versal Adaptive SoC Design
 </td>
 </tr> 
 
+<tr>
+<td>
+<a href="./AIEngine_Library/07-Export_to_Vitis/README.md">Lab 7</a>
+</td>
+<td>
+Export AI Engine Design from Vitis Model Composer to Vitis
+</td>
+</tr> 
+
 
 </table>
 
