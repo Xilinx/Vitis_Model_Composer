@@ -83,7 +83,6 @@ Note the following elements:
 * `#pragma HLS INTERFACE axis port=arg0`, `arg1`: These pragmas specify that the input and output should be implemented as AXI4-Streams in hardware.
 * `#pragma HLS INTERFACE ap_ctrl_none port=return`: This pragma states that the kernel should execute in free-running mode, i.e. not dependent on control signals.
 * `xmc::StreamAdapter1d<32>::writeStream(arg1, stream_adapter)`: The kernel writes 32 `int` values on each execution of the function.
-WE SHOULD TLAK ABOUT THE LINE ABOVE. THIS IS NOT STANDARD HLS CODE.
 
 These code elements fulfill some of the requirements for interfacing an HLS Kernel to an AI Engine graph, namely:
 * The kernel inputs and outputs should be implemented as AXI4-Streams.
