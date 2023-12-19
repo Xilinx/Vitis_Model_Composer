@@ -56,6 +56,7 @@ hardware image, can be accomplished via a Vitis system project.</p>
 <p>The AI Engine part of the design, consisting of the Interpolator, <br />
 Polarclip, and Classifier kernels, is simulated by and generated from <br />
 Vitis Model Composer.</p>
+
 <p>We will show how to export the AI Engine design to Vitis so it can be combined with the PL data movers and PS host application.</p>
 <h3 id="examine-the-ai-engine-design">Examine the AI Engine Design</h3>
 <p>Open and run the Vitis Model Composer testbench for the AI Engine part of <br />
@@ -69,9 +70,11 @@ sim('aie_testbench');
 <p>This model implements the AI Engine processing cascade using a FIR Interpolation block from the Vitis DSP Library and AIE Kernel <br />
 blocks pointing to existing kernel source code. The output of simulating the AI Engine processing cascade is <br />
 compared to a reference output. The AI Engine output is also displayed on a scope. </p>
+
 <blockquote>
 <p><strong>NOTE:</strong> To see how the input and reference output data are loaded into Vitis Model Composer, go to the <strong>Simulink toolstrip -> Modeling -> Model Settings -> Model Properties -> Callbacks -> PostLoadFcn</strong>.</p>
 </blockquote>
+
 <p>After simulating the processing chain and verifying its functionality, the AI Engine design can be exported to Vitis for integration into a larger project.</p>
 <h2 id="approach-1-ai-engine-component">Approach 1: AI Engine Component</h2>
 <h3 id="generate-ai-engine-code">Generate AI Engine Code</h3>
@@ -79,6 +82,7 @@ compared to a reference output. The AI Engine output is also displayed on a scop
 <ol>
 <li><p>In the <code>aie_testbench</code> model, double-click on the <strong>Vitis Model Composer Hub</strong> block.</p></li>
 <li><p>Ensure that the Hub block is configured as follows for the <code>ai_engine</code> subsystem. </p></li>
+
 </ol>
 <p><img src="Images/vmc1.png" alt="" /></p>
 <p>The <strong>Create Testbench</strong> option generates input and reference output data files for the Vitis AIE Simulator, in addition to the graph code.</p>
@@ -86,6 +90,7 @@ compared to a reference output. The AI Engine output is also displayed on a scop
 <li>Click <strong>Generate</strong>.</li>
 </ol>
 <p>Wait for code generation to complete.</p>
+
 <p><img src="Images/vmc2.png" alt="" /></p>
 <p>After code generation is complete, explore the contents of the generated <code>code</code> folder:</p>
 <p><img src="Images/vmc3.png" alt="" /></p>
@@ -93,6 +98,7 @@ compared to a reference output. The AI Engine output is also displayed on a scop
 <h3 id="create-ai-engine-component-in-vitis">Create AI Engine Component in Vitis</h3>
 <p>Next, we will create a new Vitis workspace and add an AI Engine component to it.</p>
 <ol>
+
 <li><p>Open a Linux terminal in this lab directory.</p></li>
 <li><p>Configure your shell to run Vitis: <code>source (path to Xilinx installation)/Vitis/2023.2/settings64.sh</code>.</p></li>
 <li><p>Start the Vitis IDE: <code>vitis -w work &amp;</code>.</p></li>
@@ -172,8 +178,10 @@ compared to a reference output. The AI Engine output is also displayed on a scop
 <li><p>Return to the <strong>Code Generation</strong> tab.</p></li>
 <li><p>Ensure that the Hub block is configured as follows for the <code>ai_engine</code> subsystem. </p></li>
 </ol>
+
 <p><img src="Images/vmc5.png" alt="" /></p>
 <ol start="3">
+
 <li>Click <strong>Generate</strong>.</li>
 </ol>
 <p>Wait for code generation to complete.</p>
