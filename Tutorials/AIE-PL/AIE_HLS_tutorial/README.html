@@ -60,74 +60,59 @@ document.location=commandURI
 <li>Focus on the <strong>HLS_passthrough</strong> block on the canvas.</li>
 </ol>
 <p><img src="./Images/HLS_passthrough2.png" alt="" /></p>
-<p>The notations on the block canvas show that the HLS Kernel inputs and outputs vectors of length 32.</p>
-<p>According to the Timing Legend, the sample period of the HLS Kernel block is 64 ns, corresponding to a sample rate of 15.625 MHz.</p>
+<p>The notations on the block canvas show that the HLS Kernel inputs and outputs vectors of length 8.</p>
+<p>According to the Timing Legend, the sample period of the HLS Kernel block is 16 ns, corresponding to a sample rate of 62.5 MHz.</p>
 <p><img src="./Images/model2.png" alt="" /></p>
-<p>This sample rate is calculated by buffering the input signal (red color, rate of 500 MHz) into vectors of 32 elements each. (500 MHz / 32 = 15.625 MHz) This calculated sample rate is used only for Simulink simulation and does not have any relationship to the design running on the hardware.</p>
+<p>This sample rate is calculated by buffering the input signal (green color, rate of 500 MHz) into vectors of 8 elements each. (500 MHz / 8 = 62.5 MHz) This calculated sample rate is used only for Simulink simulation and does not have any relationship to the design running on the hardware.</p>
 <ol start="5">
 <li>Double-click on the <strong>HLS_passthrough</strong> block.</li>
 </ol>
 <p><img src="./Images/HLS_passthrough1.png" alt="" /></p>
-<p>The HLS Kernel's inputs and outputs are displayed. This function has a streaming <code>int32</code> input and output. When this function is implemented in hardware, it will have AXI4-Stream interfaces. For more information, see <a href="https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/How-AXI4-Stream-Works">How AXI4-Stream Works</a>. The function interfaces are determined from the kernel's source code (see below).</p>
-<p>Also note that the HLS Kernel's output signal size is <code>32</code>. This means that on each invocation of the kernel function, it is expected to produce 32 <code>int32</code> values. This parameter must be specified by the user.</p>
+<p>The HLS Kernel's inputs and outputs are displayed. This function has a streaming <code>uint64_t</code> input and output. The function interfaces are determined from the kernel's source code (see below).</p>
+<p>Also note that the HLS Kernel's output signal size is <code>8</code>. This means that on each invocation of the kernel function, it is expected to produce 8 <code>uint64_t</code> values. This parameter must be specified by the user.</p>
 <p>We can confirm that the interfaces and output signal size are correct by studying the HLS kernel function's source code.</p>
 <ol start="6">
-<li>Open the file <code>HLS_passthrough.cpp</code> and study the function's source code. This function implements a simple passthrough that sends the input data to the output, 32 integer values at a time.</li>
+<li>Open the file <code>HLS_passthrough.cpp</code> and study the function's source code. This function implements a simple passthrough that sends the input data to the output.</li>
 </ol>
 <pre><code>void
-HLS_passthrough(hls::stream&lt; int &gt;&amp; arg0, hls::stream&lt; int &gt;&amp; arg1)
+HLS_passthrough(hls::stream&lt; uint64_t &gt;&amp; arg0, hls::stream&lt; uint64_t &gt;&amp; arg1)
 {
 #pragma HLS INTERFACE axis port=arg0
 #pragma HLS INTERFACE axis port=arg1
 #pragma HLS INTERFACE ap_ctrl_none port=return
 #pragma HLS dataflow
-int stream_adapter[32];
-#pragma HLS stream variable=stream_adapter depth=3
-xmc::StreamAdapter1d&lt;32&gt;::readStream(arg0, stream_adapter);
-xmc::StreamAdapter1d&lt;32&gt;::writeStream(arg1, stream_adapter);
+uint64_t data;
+data = arg0.read();
+arg1.write(data);
 }
 </code></pre>
-<p>Note the following elements:</p>
-<ul>
-<li><code>hls::stream&lt; int &gt;&amp; arg0, hls::stream&lt; int &gt;&amp; arg1</code>: The input and output are 32-bit integers implemented as <code>hls::stream</code>s.</li>
-<li><code>#pragma HLS INTERFACE axis port=arg0</code>, <code>arg1</code>: These pragmas specify that the input and output should be implemented as AXI4-Streams in hardware.</li>
-<li><code>#pragma HLS INTERFACE ap_ctrl_none port=return</code>: This pragma states that the kernel should execute in free-running mode, i.e. not dependent on control signals.</li>
-<li><code>xmc::StreamAdapter1d&lt;32&gt;::writeStream(arg1, stream_adapter)</code>: The kernel writes 32 <code>int</code> values on each execution of the function.</li>
-</ul>
-<p>These code elements fulfill some of the requirements for interfacing an HLS Kernel to an AI Engine graph, namely:</p>
-<ul>
-<li>The kernel inputs and outputs should be implemented as AXI4-Streams.</li>
-<li>The kernel should execute in free-running mode.</li>
-<li>The kernel should produce the number of outputs that is specified in the HLS Kernel block on each invocation of the function.</li>
-</ul>
-<p>Additional requirements to interface an HLS Kernel with an AI Engine graph are listed in <a href="https://docs.xilinx.com/r/en-US/ug1483-model-composer-sys-gen-user-guide/Design-Considerations">Design Considerations</a> in the Vitis Model Composer User Guide.</p>
+<p>Note the pragmas that define the <code>axis</code> interface on the input and output. When this function is implemented in hardware, it will have AXI4-Stream interfaces. This is a requirement for any PL component that interfaces with an AI Engine. For more information, see <a href="https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/How-AXI4-Stream-Works">How AXI4-Stream Works</a>.</p>
+<p>Additional requirements to interface an HLS Kernel with an AI Engine graph, specific to the Vitis Model Composer hardware validation flow, are listed in <a href="https://docs.xilinx.com/r/en-US/ug1483-model-composer-sys-gen-user-guide/Design-Considerations">Design Considerations</a> in the Vitis Model Composer User Guide.</p>
 <h2 id="aie-subsystem">AIE Subsystem</h2>
 <p>We saw above that the HLS Kernel sample rate displayed in Simulink does not correspond to the PL hardware clock rate. In a similar fashion, the observed sample times for the AI Engine blocks do not correspond to the AI Engine's hardware clock rate. In fact, in this Simulink model the HLS Kernel blocks and AI Engine subsystem have the same sample rate, despite the fact that in hardware the designs will be on different clocks.</p>
-<ol start="8">
+<ol start="7">
 <li>Return to the top-level <code>AIE_HLS</code> model and double-click the <strong>AIE_Subsystem</strong> to open it.</li>
 </ol>
 <p>The AIE subsystem contains a single kernel that performs a simple passthrough. You can view the AIE kernel code in the <code>passthrough.cpp</code> file.</p>
-<ol start="9">
+<ol start="8">
 <li>Double-click on the <strong>passthrough</strong> block.</li>
 </ol>
 <p><img src="./Images/aie_kernel.png" alt="" /></p>
-<p>In the function declaration, note that this kernel's input and output are <code>cint32</code> values. Also note the <code>FRAME_LENGTH</code> parameter, set to 16, which also corresponds to the size of the input and output buffers.</p>
-<ol start="10">
+<p>In the function declaration, note that this kernel's input and output are <code>cint16</code> values. Also note the <code>FRAME_LENGTH</code> parameter, set to 16, which also corresponds to the size of the input and output buffers.</p>
+<ol start="9">
 <li>Close the <strong>passthrough</strong> block parameters and open the first <strong>PLIO</strong> block.</li>
 </ol>
 <p><img src="./Images/plio.png" alt="" /></p>
 <p>The PLIO block defines the hardware interface between the AI Engine and the PL. </p>
-<p>The <strong>PLIO width</strong> determines how much data is transferred to the AI Engine on each PL clock cycle. For faster data transfer, this value can be a multiple of the bit width of the HLS kernel's output, as long as the AI Engine clock is fast enough to accomodate the transfer. Here, <strong>PLIO width</strong> is <code>64</code>, which means that 1 <code>cint32</code> value will be transferred from the PL to the AIE on each PL clock cycle. </p>
-<p>The <strong>PLIO frequency</strong> is 500 MHz, which matches the expected rate of our PL clock (see above). </p>
-<p>The combination of the PLIO width and frequency mean that the AI Engine effectively consumes <code>cint32</code> values at a rate of 500 MHz.</p>
+<p>The <strong>PLIO width</strong> determines how much data is transferred to the AI Engine on each PL clock cycle. This value should be identical to the bit width of the HLS kernel's output. Here, <strong>PLIO width</strong> is <code>64</code>, which means that 2 <code>cint16</code> values will be transferred from the PL to the AIE on each PL clock cycle. </p>
+<p>The <strong>PLIO frequency</strong> is 500 MHz, which matches the expected rate of our PL clock (see above). The combination of the PLIO width and frequency mean that the AI Engine effectively consumes 32-bit <code>cint16</code> values at a rate of 1 GHz.</p>
 <blockquote>
 <p><strong>IMPORTANT:</strong> The parameters specified in the PLIO block do not affect the functional simulation or observed sample times in Simulink. These parameters only affect the generated AI Engine graph code and how the design is simulated in the cycle-approximate <code>aiesimulator</code>.</p>
 </blockquote>
-<p>The second PLIO block is configured identically to transfer <code>cint32</code> values from AIE to PL at a rate of 500 MHz.</p>
+<p>The second PLIO block is configured identically to transfer <code>cint16</code> values from AIE to PL at a rate of 1 GHz.</p>
 <h2 id="interface-from-hls-to-aie">Interface From HLS to AIE</h2>
-<p>HLS Kernels and AI Engine kernels may operate on different data types and vector lengths. In these situations, the <strong>HLS to AIE</strong> and <strong>AIE to HLS</strong> blocks may be used to reformat the data to the necessary type and length without losing any information.</p>
+<p>HLS Kernels and AI Engine kernels may operate on different data types. For example, an HLS Kernel may generate <code>uint64</code> data while the AI Engine consumes <code>cint16</code> samples at twice the rate. In these situations, the <strong>HLS to AIE</strong> and <strong>AIE to HLS</strong> blocks may be used to reformat the data to the necessary type and length without losing any information.</p>
 <p><img src="./Images/connectors_hls.png" alt="" /></p>
-<p>For example, an HLS Kernel may operate on interleaved <code>int32</code> samples of real and imaginary data while the AI Engine expects a <code>cint32</code> data type (or vice versa).</p>
 <ol start="11">
 <li><p>Remove the <strong>HLS to AIE Placeholder</strong> subsystem.</p></li>
 <li><p>Click an open area of the canvas, type <code>HLS to AIE</code>, and select the <strong>HLS to AIE</strong> block (or select the block from the Simulink Library Browser).</p></li>
@@ -142,8 +127,8 @@ xmc::StreamAdapter1d&lt;32&gt;::writeStream(arg1, stream_adapter);
 <li>Configure the block as follows:</li>
 </ol>
 <ul>
-<li><strong>AIE Input Type:</strong> <code>cint32</code> The AI Engine kernel expects a <code>cint32</code> input.</li>
-<li><strong>Output Size:</strong> <code>16</code> The AI Engine kernel expects an input vector of length 16. Since the HLS Kernel output is of length 32, the HLS to AIE block will combine subsequent <code>int32</code> samples into a single <code>cint32</code> sample, without modifying or losing any data bits.</li>
+<li><strong>AIE Input Type:</strong> <code>cint16</code> The AI Engine kernel expects a <code>cint16</code> input.</li>
+<li><strong>Output Size:</strong> <code>16</code> The AI Engine kernel expects an input vector of length 16. Since the HLS Kernel output is of length 8, the HLS to AIE block will create 2 <code>cint16</code> output values from each <code>uint64</code> input value, without modifying or losing any data bits.</li>
 </ul>
 <p><img src="./Images/hls_aie_params2.png" alt="" /></p>
 <ol start="16">
@@ -153,8 +138,8 @@ xmc::StreamAdapter1d&lt;32&gt;::writeStream(arg1, stream_adapter);
 <p>The <strong>HLS to AIE</strong> block's sample times and output data types and dimensions are updated:</p>
 <p><img src="./Images/connection2.png" alt="" /></p>
 <ul>
-<li>The output sample rate (green color) is 15.625 MHz. This is the same sample rate as the HLS Kernel; the HLS to AIE block is single-rate.</li>
-<li>The output data type is <code>cint32</code>.</li>
+<li>The output sample rate (blue color) is 62.5 MHz. This is the same sample rate as the HLS Kernel; the HLS to AIE block is single-rate.</li>
+<li>The output data type is <code>cint16</code>.</li>
 <li>The output signal is a variable-sized signal with a maximum size of <code>16</code>.</li>
 </ul>
 <h2 id="interface-from-aie-to-hls">Interface From AIE to HLS</h2>
@@ -173,8 +158,8 @@ xmc::StreamAdapter1d&lt;32&gt;::writeStream(arg1, stream_adapter);
 <li>Configure the block as follows:</li>
 </ol>
 <ul>
-<li><strong>Output Data Type:</strong> <code>int32</code> The HLS Kernel expects a <code>int32</code> input. The AIE to HDL block will combine split each <code>cint32</code> input into subsequent <code>int32</code> outputs.</li>
-<li><strong>Output Size:</strong> <code>32</code> Because the input to the AIE to HDL block is a variable-size <code>cint32</code> vector with maximum length of 16, the <code>int32</code> output size must be at least 32.</li>
+<li><strong>Output Data Type:</strong> <code>uint64</code> The HLS Kernel expects a <code>uint64</code> input. The AIE to HDL block will combine 2 <code>cint16</code> inputs into a <code>uint64</code> output.</li>
+<li><strong>Output Size:</strong> <code>8</code> Because the input to the AIE to HDL block is a variable-size <code>cint16</code> vector with maximum length of 16, the <code>uint64</code> output size must be at least 8.</li>
 </ul>
 <p><img src="./Images/aie_hls_params2.png" alt="" /></p>
 <ol start="23">
@@ -184,16 +169,16 @@ xmc::StreamAdapter1d&lt;32&gt;::writeStream(arg1, stream_adapter);
 <p>The <strong>AIE to HLS</strong> block's sample times and output data types and dimensions are updated:</p>
 <p><img src="./Images/connection4.png" alt="" /></p>
 <ul>
-<li>The output sample rate (green color) is 15.625 MHz. This is the same sample rate as the AI Engine design; the AIE to HLS block is single-rate.</li>
-<li>The output data type is <code>int32</code>.</li>
-<li>The output signal is a variable-sized signal with a maximum size of <code>32</code>.</li>
+<li>The output sample rate (blue color) is 62.5 MHz. This is the same sample rate as the AI Engine design; the AIE to HLS block is single-rate.</li>
+<li>The output data type is <code>uint64</code>.</li>
+<li>The output signal is a variable-sized signal with a maximum size of <code>8</code>.</li>
 </ul>
 <h2 id="key-takeaways">Key Takeaways</h2>
 <ul>
 <li>AI Engine and HLS Kernel simulations in Vitis Model Composer are not cycle-accurate.</li>
 <li>The Simulink sample rates for AI Engine and HLS Kernel blocks are based on data flow, and do not correlate to hardware clock rates.</li>
 <li>The <strong>PLIO</strong> block defines the bit width and clock rate of the AIE-PL interface. This information is only used in the generated code and cycle-approximate SystemC simulation; it has no bearing on the Simulink simulation.</li>
-<li>The <strong>AIE to HLS</strong> to <strong>HDL to AIE</strong> blocks translate between HDL and AI Engine data types and vector lengths. </li>
+<li>The <strong>AIE to HLS</strong> and <strong>HLS to AIE</strong> blocks translate between HLS and AI Engine data types and vector lengths. </li>
 </ul>
 <hr />
 <p>&copy; Copyright 2023 Advanced Micro Devices, Inc.</p>

@@ -20,14 +20,14 @@
 #include <aie_api/aie_adf.hpp>
 
 template <int FRAME_LENGTH>
-void passthrough(adf::input_buffer<cint32>& in, 
-                 adf::output_buffer<cint32>& out) { 
+void passthrough(adf::input_buffer<cint16>& in, 
+                 adf::output_buffer<cint16>& out) { 
 
     // Pointers to 8-element vectors from input and output
     auto pi1 = aie::begin_vector_circular<8>(in);
     auto po1 = aie::begin_vector_circular<8>(out);  
 
-    aie::vector<cint32,8> data;
+    aie::vector<cint16,8> data;
 
     for (unsigned i = 0; i < FRAME_LENGTH/8; i++) {
         // Get 8 samples from input

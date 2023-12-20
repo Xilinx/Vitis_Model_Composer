@@ -59,7 +59,7 @@
 #include <hls_stream.h>
 extern "C" {
 void
-HLS_passthrough(hls::stream< int >& arg0, hls::stream< int >& arg1);
+HLS_passthrough(hls::stream< uint64_t >& arg0, hls::stream< uint64_t >& arg1);
 }
 #endif // ifndef HLS_H_
 

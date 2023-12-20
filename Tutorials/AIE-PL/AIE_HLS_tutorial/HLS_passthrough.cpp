@@ -50,7 +50,6 @@
 // PART OF THIS FILE AT ALL TIMES.
 // ==============================================================
 #include "HLS_passthrough.h"
-#include <StreamAdapters.h>
 
 /**
  * @brief HLS
@@ -58,16 +57,15 @@
  * @param arg1 direction=output protocol=Default length=8
  */
 void
-HLS_passthrough(hls::stream< int >& arg0, hls::stream< int >& arg1)
+HLS_passthrough(hls::stream< uint64_t >& arg0, hls::stream< uint64_t >& arg1)
 {
     #pragma HLS INTERFACE axis port=arg0
     #pragma HLS INTERFACE axis port=arg1
     #pragma HLS INTERFACE ap_ctrl_none port=return
     #pragma HLS dataflow
-    int stream_adapter[32];
-    #pragma HLS stream variable=stream_adapter depth=3
-    xmc::StreamAdapter1d<32>::readStream(arg0, stream_adapter);
-    xmc::StreamAdapter1d<32>::writeStream(arg1, stream_adapter);
+    uint64_t data;
+    data = arg0.read();
+    arg1.write(data);
 }
 
 
