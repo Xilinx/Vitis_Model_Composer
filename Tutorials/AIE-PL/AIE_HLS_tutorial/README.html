@@ -56,7 +56,7 @@ document.location=commandURI
 <blockquote>
 <p><strong>IMPORTANT:</strong> Vitis Model Composer also allows you to import HLS code into your design using the <code>xmcImportFunction</code>, or to build a design out of blocks from the HLS block library. <strong>These approaches are not supported for connecting an HLS design to the AI Engine.</strong> For a detailed discussion on the differences between these approaches and using the <strong>HLS Kernel</strong> block, see <a href="https://docs.xilinx.com/r/en-US/ug1483-model-composer-sys-gen-user-guide/Interconnecting-AI-Engines-and-HLS-Kernels">Interconnecting AI Engines and HLS Kernels</a> in the Vitis Model Compouser User Guide. </p>
 </blockquote>
-<ol start="4">
+<ol start="5">
 <li>Focus on the <strong>HLS_passthrough</strong> block on the canvas.</li>
 </ol>
 <p><img src="./Images/HLS_passthrough2.png" alt="" /></p>
@@ -64,14 +64,14 @@ document.location=commandURI
 <p>According to the Timing Legend, the sample period of the HLS Kernel block is 16 ns, corresponding to a sample rate of 62.5 MHz.</p>
 <p><img src="./Images/model2.png" alt="" /></p>
 <p>This sample rate is calculated by buffering the input signal (green color, rate of 500 MHz) into vectors of 8 elements each. (500 MHz / 8 = 62.5 MHz) This calculated sample rate is used only for Simulink simulation and does not have any relationship to the design running on the hardware.</p>
-<ol start="5">
+<ol start="6">
 <li>Double-click on the <strong>HLS_passthrough</strong> block.</li>
 </ol>
 <p><img src="./Images/HLS_passthrough1.png" alt="" /></p>
 <p>The HLS Kernel's inputs and outputs are displayed. This function has a streaming <code>uint64_t</code> input and output. The function interfaces are determined from the kernel's source code (see below).</p>
 <p>Also note that the HLS Kernel's output signal size is <code>8</code>. This means that on each invocation of the kernel function, it is expected to produce 8 <code>uint64_t</code> values. This parameter must be specified by the user.</p>
 <p>We can confirm that the interfaces and output signal size are correct by studying the HLS kernel function's source code.</p>
-<ol start="6">
+<ol start="7">
 <li>Open the file <code>HLS_passthrough.cpp</code> and study the function's source code. This function implements a simple passthrough that sends the input data to the output.</li>
 </ol>
 <pre><code>void
@@ -89,23 +89,25 @@ arg1.write(data);
 <p>Note the pragmas that define the <code>axis</code> interface on the input and output. When this function is implemented in hardware, it will have AXI4-Stream interfaces. This is a requirement for any PL component that interfaces with an AI Engine. For more information, see <a href="https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/How-AXI4-Stream-Works">How AXI4-Stream Works</a>.</p>
 <p>Additional requirements to interface an HLS Kernel with an AI Engine graph, specific to the Vitis Model Composer hardware validation flow, are listed in <a href="https://docs.xilinx.com/r/en-US/ug1483-model-composer-sys-gen-user-guide/Design-Considerations">Design Considerations</a> in the Vitis Model Composer User Guide.</p>
 <h2 id="aie-subsystem">AIE Subsystem</h2>
-<p>We saw above that the HLS Kernel sample rate displayed in Simulink does not correspond to the PL hardware clock rate. In a similar fashion, the observed sample times for the AI Engine blocks do not correspond to the AI Engine's hardware clock rate. In fact, in this Simulink model the HLS Kernel blocks and AI Engine subsystem have the same sample rate, despite the fact that in hardware the designs will be on different clocks.</p>
-<ol start="7">
+<p>Now let's examine the AI Engine subsystem.</p>
+<ol start="8">
 <li>Return to the top-level <code>AIE_HLS</code> model and double-click the <strong>AIE_Subsystem</strong> to open it.</li>
 </ol>
 <p>The AIE subsystem contains a single kernel that performs a simple passthrough. You can view the AIE kernel code in the <code>passthrough.cpp</code> file.</p>
-<ol start="8">
+<ol start="9">
 <li>Double-click on the <strong>passthrough</strong> block.</li>
 </ol>
 <p><img src="./Images/aie_kernel.png" alt="" /></p>
 <p>In the function declaration, note that this kernel's input and output are <code>cint16</code> values. Also note the <code>FRAME_LENGTH</code> parameter, set to 16, which also corresponds to the size of the input and output buffers.</p>
-<ol start="9">
+<ol start="10">
 <li>Close the <strong>passthrough</strong> block parameters and open the first <strong>PLIO</strong> block.</li>
 </ol>
 <p><img src="./Images/plio.png" alt="" /></p>
 <p>The PLIO block defines the hardware interface between the AI Engine and the PL. </p>
-<p>The <strong>PLIO width</strong> determines how much data is transferred to the AI Engine on each PL clock cycle. This value should be identical to the bit width of the HLS kernel's output. Here, <strong>PLIO width</strong> is <code>64</code>, which means that 2 <code>cint16</code> values will be transferred from the PL to the AIE on each PL clock cycle. </p>
-<p>The <strong>PLIO frequency</strong> is 500 MHz, which matches the expected rate of our PL clock (see above). The combination of the PLIO width and frequency mean that the AI Engine effectively consumes 32-bit <code>cint16</code> values at a rate of 1 GHz.</p>
+<p>The <strong>PLIO width</strong> determines how much data is transferred to the AI Engine on each PL clock cycle. This value should be identical to the bit width of the HLS kernel's output.</p>
+<p>The <strong>PLIO frequency</strong> is 500 MHz, which matches the expected rate of our PL clock (see above).</p>
+<p>64 bits of data will be transferred from the PL to the AI Engine shim at a rate of 500 MHz. This data is passed from the shim to the AI Engine array as a 32-bit wide AXI-Stream. As long as the AI Engine array is clocked at a rate of at least 1 GHz, there will be no loss of throughput when transferring data from PL to AI Engine.</p>
+<p>The combination of the PLIO width and frequency mean that the AI Engine effectively consumes 32-bit <code>cint16</code> values at a rate of 1 GHz.</p>
 <blockquote>
 <p><strong>IMPORTANT:</strong> The parameters specified in the PLIO block do not affect the functional simulation or observed sample times in Simulink. These parameters only affect the generated AI Engine graph code and how the design is simulated in the cycle-approximate <code>aiesimulator</code>.</p>
 </blockquote>
