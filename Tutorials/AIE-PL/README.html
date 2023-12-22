@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<h1 id="importing-a-templatized-class-kernel-as-a-block">Importing a templatized class kernel as a block</h1>
+<table class="sphinxhide" width="100%">
 <html>    
 <script>
 function myFunction() {
@@ -14,37 +14,43 @@ var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
 
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
 
 document.location=commandURI
 }
 </script>
 <noscript>Sorry, your browser does not support JavaScript!</noscript>
        
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
               
 </html>
-<p>In this example we import a Finite Impulse Response (FIR) Filter as a block into Vitis Model Composer. <br />
-This filter is expressed as a class. Furthermore, this is a templatized class. The template parameters specify the number of <br />
-samples per frame and a shift factor. The constructor for this class takes in the filter taps.</p>
-<h2 id="knowledge-nuggets">Knowledge nuggets</h2>
-<p><img width="18" height="18" src="../Images/bulb.png"> Note that the <em>AIE Class Kernel</em> block determines the class template parameters and the constructor parameters and builds up a GUI block mask with appropriate fields allowing you to specify the values for these parameters.</p>
-<p><img width="18" height="18" src="../Images/bulb.png"> Note the class is defined in a namespace. The namespace is used to specify a fully qualified name in the block mask in the "Kernel class" field.</p>
-<p><img width="18" height="18" src="../Images/bulb.png"> Note the usage of the PLIO block to specify the size and frequency of the PLIOs in the model.</p>
-<p><img width="18" height="18" src="../Images/bulb.png"> You can directly connect a variable size signal to a scope, display block, or a specturm analyzer. Or you can use the <em>Variable size signal to workspace</em> block to move the data to MATLAB workspace.</p>
-<p><img src="images/model_screen_shot.PNG" alt="" /></p>
+<tr width="100%">
+<td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
+<a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
+<a href="https://www.xilinx.com/products/design-tools/vitis/vitis-ai.html">See Vitis™ AI Development Environment on xilinx.com</a>
+</td>
+</tr>
+</table>
+<h1 id="vitis-model-composer-for-aie-pl-system-development">Vitis Model Composer for AIE-PL System Development</h1>
+<p>Vitis Model Composer can be used to create complex systems targeting the PL (HDL and HLS block libraries) and the AI Engine array (AI Engine block library) at the same time. The complete system can be simulated in Simulink, and the design exported to generated code (RTL for the PL and C++ graph for the AI Engine array) or to Vitis. The Hardware Validation flow can be used to reproduce the Simulink testbench running on the hardware.</p>
+<p>Vitis Model Composer simulates HDL designs in a cycle-accurate manner, while AIE and HLS simulation is functional only and does not provide cycle-accurate timing information. Because of this, Vitis Model Composer has interface blocks (<strong>AIE to HDL</strong>, <strong>HDL to AIE</strong>, <strong>AIE to HLS</strong>, <strong>HLS to AIE</strong>) that bridge between the simulation domains.</p>
+<p>These tutorials will give a greater understanding of how the different processing domains are modeled in Simulink. They will also explain how to configure the interface blocks to accurately model how the AIE and PL will interact in hardware.</p>
+<p>:warning: AI Engine development must be performed in a Linux environment.</p>
+<h3 id="connecting-ai-engine-and-hdl-subsystemsaie_hdl_tutorialreadmemd"><a href="matlab:XmcExampleApi.getExample('AIE_HDL_tutorial')">Connecting AI Engine and HDL Subsystems</a></h3>
+<h3 id="connecting-ai-engine-and-hls-subsystemsaie_hls_tutorialreadmemd"><a href="matlab:XmcExampleApi.getExample('AIE_HLS_tutorial')">Connecting AI Engine and HLS Subsystems</a></h3>
 <hr />
-<p>Copyright 2020 Xilinx</p>
+<p>&copy; Copyright 2023 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>
-<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+<pre><code>    http://www.apache.org/licenses/LICENSE-2.0
 </code></pre>
 <p>Unless required by applicable law or agreed to in writing, software<br />
 distributed under the License is distributed on an "AS IS" BASIS,<br />
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
 See the License for the specific language governing permissions and<br />
 limitations under the License.</p>
+<p align="center"><sup>XD058 | &copy; Copyright 2023 Advanced Micro Devices, Inc.</sup></p>
 
 </div>
 <style type='text/css'>body {
