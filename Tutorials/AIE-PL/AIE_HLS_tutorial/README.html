@@ -1,0 +1,391 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<table class="sphinxhide" width="100%">
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
+<tr width="100%">
+<td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
+<a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
+<a href="https://www.xilinx.com/products/design-tools/vitis/vitis-ai.html">See Vitis™ AI Development Environment on xilinx.com</a>
+</td>
+</tr>
+</table>
+<h1 id="connecting-ai-engine-and-hls-subsystems">Connecting AI Engine and HLS Subsystems</h1>
+<p>This tutorial will explore how to model heterogeneous systems (consisting of AI Engine and PL components) in Vitis Model Composer.</p>
+<p>This tutorial will show how to use the <strong>AIE to HLS</strong> and <strong>HLS to AIE</strong> blocks to connect the HLS and AIE simulation domains to accurately model how the AIE-PL interface will behave in hardware. </p>
+<h2 id="review-the-tutorial-model">Review the Tutorial Model</h2>
+<ol>
+<li><p>Open the model <code>AIE_HLS.slx</code>. </p></li>
+<li><p>Right-click on an empty part of the canvas. In the context menu that displays, ensure that the following options are selected:</p></li>
+</ol>
+<ul>
+<li><strong>Sample Time Display -> All</strong></li>
+<li><strong>Other Displays -> Signals & Ports -> Signal Dimensions</strong></li>
+<li><strong>Other Displays -> Signals & Ports -> Port Data Types</strong>.</li>
+</ul>
+<ol>
+<li><p>On the <strong>Modeling tab</strong>, select <strong>Update Model</strong>.</p></li>
+<li><p>Open the <strong>Timing Legend</strong> by pressing <code>Ctrl+J</code>.</p></li>
+</ol>
+<p>This model implements a simple passthrough design that sends integer data from the PL to the AI Engine and back.</p>
+<p><img src="./Images/model1.png" alt="" /></p>
+<p>The interfaces between the AI Engine and HLS parts of the design are initially implemented with placeholder blocks. In this tutorial, we will see how to replace these placeholders with the <strong>HLS to AIE</strong> and <strong>AIE to HLS</strong> blocks.</p>
+<h2 id="hls-kernel-block">HLS Kernel Block</h2>
+<p>In order to interface a PL kernel written in HLS with an AI Engine design, the PL kernel must be brought into Vitis Model Composer using the <strong>HLS Kernel</strong> block. This block lets you import HLS C/C++ code that is compiled and executed when simulating the Simulink model. The simulation of the HLS Kernel in Simulink is not cycle-accurate.</p>
+<blockquote>
+<p><strong>IMPORTANT:</strong> Vitis Model Composer also allows you to import HLS code into your design using the <code>xmcImportFunction</code>, or to build a design out of blocks from the HLS block library. <strong>These approaches are not supported for connecting an HLS design to the AI Engine.</strong> For a detailed discussion on the differences between these approaches and using the <strong>HLS Kernel</strong> block, see <a href="https://docs.xilinx.com/r/en-US/ug1483-model-composer-sys-gen-user-guide/Interconnecting-AI-Engines-and-HLS-Kernels">Interconnecting AI Engines and HLS Kernels</a> in the Vitis Model Compouser User Guide. </p>
+</blockquote>
+<ol start="5">
+<li>Focus on the <strong>HLS_passthrough</strong> block on the canvas.</li>
+</ol>
+<p><img src="./Images/HLS_passthrough2.png" alt="" /></p>
+<p>The notations on the block canvas show that the HLS Kernel inputs and outputs vectors of length 8.</p>
+<p>According to the Timing Legend, the sample period of the HLS Kernel block is 16 ns, corresponding to a sample rate of 62.5 MHz.</p>
+<p><img src="./Images/model2.png" alt="" /></p>
+<p>This sample rate is calculated by buffering the input signal (green color, rate of 500 MHz) into vectors of 8 elements each. (500 MHz / 8 = 62.5 MHz) This calculated sample rate is used only for Simulink simulation and does not have any relationship to the design running on the hardware.</p>
+<ol start="6">
+<li>Double-click on the <strong>HLS_passthrough</strong> block.</li>
+</ol>
+<p><img src="./Images/HLS_passthrough1.png" alt="" /></p>
+<p>The HLS Kernel's inputs and outputs are displayed. This function has a streaming <code>uint64_t</code> input and output. The function interfaces are determined from the kernel's source code (see below).</p>
+<p>Also note that the HLS Kernel's output signal size is <code>8</code>. This means that on each invocation of the kernel function, it is expected to produce 8 <code>uint64_t</code> values. This parameter must be specified by the user.</p>
+<p>We can confirm that the interfaces and output signal size are correct by studying the HLS kernel function's source code.</p>
+<ol start="7">
+<li>Open the file <code>HLS_passthrough.cpp</code> and study the function's source code. This function implements a simple passthrough that sends the input data to the output.</li>
+</ol>
+<pre><code>void
+HLS_passthrough(hls::stream&lt; uint64_t &gt;&amp; arg0, hls::stream&lt; uint64_t &gt;&amp; arg1)
+{
+#pragma HLS INTERFACE axis port=arg0
+#pragma HLS INTERFACE axis port=arg1
+#pragma HLS INTERFACE ap_ctrl_none port=return
+#pragma HLS dataflow
+uint64_t data;
+data = arg0.read();
+arg1.write(data);
+}
+</code></pre>
+<p>Note the pragmas that define the <code>axis</code> interface on the input and output. When this function is implemented in hardware, it will have AXI4-Stream interfaces. This is a requirement for any PL component that interfaces with an AI Engine. For more information, see <a href="https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/How-AXI4-Stream-Works">How AXI4-Stream Works</a>.</p>
+<p>Additional requirements to interface an HLS Kernel with an AI Engine graph, specific to the Vitis Model Composer hardware validation flow, are listed in <a href="https://docs.xilinx.com/r/en-US/ug1483-model-composer-sys-gen-user-guide/Design-Considerations">Design Considerations</a> in the Vitis Model Composer User Guide.</p>
+<h2 id="aie-subsystem">AIE Subsystem</h2>
+<p>Now let's examine the AI Engine subsystem.</p>
+<ol start="8">
+<li>Return to the top-level <code>AIE_HLS</code> model and double-click the <strong>AIE_Subsystem</strong> to open it.</li>
+</ol>
+<p>The AIE subsystem contains a single kernel that performs a simple passthrough. You can view the AIE kernel code in the <code>passthrough.cpp</code> file.</p>
+<ol start="9">
+<li>Double-click on the <strong>passthrough</strong> block.</li>
+</ol>
+<p><img src="./Images/aie_kernel.png" alt="" /></p>
+<p>In the function declaration, note that this kernel's input and output are <code>cint16</code> values. Also note the <code>FRAME_LENGTH</code> parameter, set to 16, which also corresponds to the size of the input and output buffers.</p>
+<ol start="10">
+<li>Close the <strong>passthrough</strong> block parameters and open the first <strong>PLIO</strong> block.</li>
+</ol>
+<p><img src="./Images/plio.png" alt="" /></p>
+<p>The PLIO block defines the hardware interface between the AI Engine and the PL. </p>
+<p>The <strong>PLIO width</strong> determines how much data is transferred to the AI Engine on each PL clock cycle. This value should be identical to the bit width of the HLS kernel's output.</p>
+<p>The <strong>PLIO frequency</strong> is 500 MHz, which matches the expected rate of our PL clock (see above).</p>
+<p>64 bits of data will be transferred from the PL to the AI Engine shim at a rate of 500 MHz. This data is passed from the shim to the AI Engine array as a 32-bit wide AXI-Stream. As long as the AI Engine array is clocked at a rate of at least 1 GHz, there will be no loss of throughput when transferring data from PL to AI Engine.</p>
+<p>The combination of the PLIO width and frequency mean that the AI Engine effectively consumes 32-bit <code>cint16</code> values at a rate of 1 GHz.</p>
+<blockquote>
+<p><strong>IMPORTANT:</strong> The parameters specified in the PLIO block do not affect the functional simulation or observed sample times in Simulink. These parameters only affect the generated AI Engine graph code and how the design is simulated in the cycle-approximate <code>aiesimulator</code>.</p>
+</blockquote>
+<p>The second PLIO block is configured identically to transfer <code>cint16</code> values from AIE to PL at a rate of 1 GHz.</p>
+<h2 id="interface-from-hls-to-aie">Interface From HLS to AIE</h2>
+<p>HLS Kernels and AI Engine kernels may operate on different data types. For example, an HLS Kernel may generate <code>uint64</code> data while the AI Engine consumes <code>cint16</code> samples at twice the rate. In these situations, the <strong>HLS to AIE</strong> and <strong>AIE to HLS</strong> blocks may be used to reformat the data to the necessary type and length without losing any information.</p>
+<p><img src="./Images/connectors_hls.png" alt="" /></p>
+<ol start="11">
+<li><p>Remove the <strong>HLS to AIE Placeholder</strong> subsystem.</p></li>
+<li><p>Click an open area of the canvas, type <code>HLS to AIE</code>, and select the <strong>HLS to AIE</strong> block (or select the block from the Simulink Library Browser).</p></li>
+<li><p>Connect the <strong>HLS to AIE</strong> block where the placeholder block used to be.</p></li>
+</ol>
+<p><img src="./Images/connection1.png" alt="" /></p>
+<ol start="14">
+<li>Double-click the <strong>HLS to AIE</strong> block to open its parameters.</li>
+</ol>
+<p><img src="./Images/hls_aie_params1.png" alt="" /></p>
+<ol start="15">
+<li>Configure the block as follows:</li>
+</ol>
+<ul>
+<li><strong>AIE Input Type:</strong> <code>cint16</code> The AI Engine kernel expects a <code>cint16</code> input.</li>
+<li><strong>Output Size:</strong> <code>16</code> The AI Engine kernel expects an input vector of length 16. Since the HLS Kernel output is of length 8, the HLS to AIE block will create 2 <code>cint16</code> output values from each <code>uint64</code> input value, without modifying or losing any data bits.</li>
+</ul>
+<p><img src="./Images/hls_aie_params2.png" alt="" /></p>
+<ol start="16">
+<li><p>Press <strong>Apply</strong> and <strong>OK</strong>.</p></li>
+<li><p>Press <code>Ctrl+D</code> to update the model.</p></li>
+</ol>
+<p>The <strong>HLS to AIE</strong> block's sample times and output data types and dimensions are updated:</p>
+<p><img src="./Images/connection2.png" alt="" /></p>
+<ul>
+<li>The output sample rate (blue color) is 62.5 MHz. This is the same sample rate as the HLS Kernel; the HLS to AIE block is single-rate.</li>
+<li>The output data type is <code>cint16</code>.</li>
+<li>The output signal is a variable-sized signal with a maximum size of <code>16</code>.</li>
+</ul>
+<h2 id="interface-from-aie-to-hls">Interface From AIE to HLS</h2>
+<p>The bridge from AIE to HLS functions in a similar way.</p>
+<ol start="18">
+<li><p>Remove the <strong>AIE to HLS Placeholder</strong> subsystem.</p></li>
+<li><p>Click an open area of the canvas, type <code>AIE to HLS</code>, and select the <strong>AIE to HLS</strong> block (or select the block from the Simulink Library Browser).</p></li>
+<li><p>Connect the <strong>AIE to HLS</strong> block where the placeholder block used to be.</p></li>
+</ol>
+<p><img src="./Images/connection3.png" alt="" /></p>
+<ol start="21">
+<li>Double-click the <strong>AIE to HLS</strong> block to open its parameters.</li>
+</ol>
+<p><img src="./Images/aie_hls_params1.png" alt="" /></p>
+<ol start="22">
+<li>Configure the block as follows:</li>
+</ol>
+<ul>
+<li><strong>Output Data Type:</strong> <code>uint64</code> The HLS Kernel expects a <code>uint64</code> input. The AIE to HDL block will combine 2 <code>cint16</code> inputs into a <code>uint64</code> output.</li>
+<li><strong>Output Size:</strong> <code>8</code> Because the input to the AIE to HDL block is a variable-size <code>cint16</code> vector with maximum length of 16, the <code>uint64</code> output size must be at least 8.</li>
+</ul>
+<p><img src="./Images/aie_hls_params2.png" alt="" /></p>
+<ol start="23">
+<li><p>Press <strong>Apply</strong> and <strong>OK</strong>.</p></li>
+<li><p>Press <code>Ctrl+D</code> to update the model.</p></li>
+</ol>
+<p>The <strong>AIE to HLS</strong> block's sample times and output data types and dimensions are updated:</p>
+<p><img src="./Images/connection4.png" alt="" /></p>
+<ul>
+<li>The output sample rate (blue color) is 62.5 MHz. This is the same sample rate as the AI Engine design; the AIE to HLS block is single-rate.</li>
+<li>The output data type is <code>uint64</code>.</li>
+<li>The output signal is a variable-sized signal with a maximum size of <code>8</code>.</li>
+</ul>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+<li>AI Engine and HLS Kernel simulations in Vitis Model Composer are not cycle-accurate.</li>
+<li>The Simulink sample rates for AI Engine and HLS Kernel blocks are based on data flow, and do not correlate to hardware clock rates.</li>
+<li>The <strong>PLIO</strong> block defines the bit width and clock rate of the AIE-PL interface. This information is only used in the generated code and cycle-approximate SystemC simulation; it has no bearing on the Simulink simulation.</li>
+<li>The <strong>AIE to HLS</strong> and <strong>HLS to AIE</strong> blocks translate between HLS and AI Engine data types and vector lengths. </li>
+</ul>
+<hr />
+<p>&copy; Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>    http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+</body>
+</html>

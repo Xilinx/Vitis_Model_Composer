@@ -27,7 +27,7 @@ hardware image, can be accomplished via a Vitis system project.
 
 AI Engine designs can be brought into Vitis in two different ways:
 
-1. **AI Engine Component**: Import the AI Engine kernel code, graph code, and data sources into the Vitis workspace. Use this approach when you expect to make changes to the AI Engine code after exporting from Vitis Model Composer.
+1. **AI Engine Component (Source Code)**: Import the AI Engine kernel code, graph code, and data sources into the Vitis workspace. Use this approach when you expect to make changes to the AI Engine code after exporting from Vitis Model Composer.
 
 2. **Pre-built Binary**: Import a compiled AI Engine graph (`libadf.a`) into a binary container. Use this approach when the design has been fully completed and validated in Vitis Model Composer.
 
@@ -50,15 +50,16 @@ We will show how to export the AI Engine design to Vitis so it can be combined w
 Open and run the Vitis Model Composer testbench for the AI Engine part of 
 the design.
 
-In MATLAB:
+In the MATLAB Command Window, execute the following commands:
 
 ```
 open_system('aie_testbench');
 sim('aie_testbench');
 ```
-![](Images/model1.png)
 
-![](Images/model2.png)
+>**NOTE:** The Simulink model requires MATLAB R2021a or later to open.
+
+![](Images/model.png)
 
 This model implements the AI Engine processing cascade using a FIR Interpolation block from the Vitis DSP Library and AIE Kernel 
 blocks pointing to existing kernel source code. The output of simulating the AI Engine processing cascade is 
@@ -68,9 +69,9 @@ compared to a reference output. The AI Engine output is also displayed on a scop
 
 After simulating the processing chain and verifying its functionality, the AI Engine design can be exported to Vitis for integration into a larger project.
 
-## Approach 1: AI Engine Component
+## Approach 1: AI Engine Component (Source Code)
 
-### Generate AI Engine Code
+### Generate AI Engine Source Code
 
 Vitis Model Composer will generate AI Engine graph code from the design.
 
@@ -92,7 +93,7 @@ After code generation is complete, explore the contents of the generated `code` 
 
 ![](Images/vmc3.png)
 
-The generated code folder contains a folder called `ip` that contains subfolders for each AI Engine and HLS IP in the design. Each individual IP subfolder contains a `src` folder containing the IP's source code. In this design, the `ip/ai_engine/src` folder contains the AI Engine code we will bring into Vitis as a component. The `ip/ai_engine/data` folder contains input and reference output data files that can be used in AI Engine simulation and hardware validation. Vitis Model Composer also generates Makefiles for compiling and simulating the AI Engine design outside of Model Composer.
+The generated code folder contains a folder called `ip` that contains a subfolder for the AI Engine IP. If this design had HLS IP, `ip` would also contain subfolders for each HLS IP. Each individual IP subfolder contains a `src` folder containing the IP's source code. In this design, the `ip/ai_engine/src` folder contains the AI Engine code we will bring into Vitis as a component. The `ip/ai_engine/data` folder contains input and reference output data files that can be used in AI Engine simulation and hardware validation. Vitis Model Composer also generates Makefiles for compiling and simulating the AI Engine design outside of Model Composer.
 
 ### Create AI Engine Component in Vitis
 
@@ -192,7 +193,7 @@ In addition to generating AI Engine graph code, Vitis Model Composer can also co
 
 ![](Images/vmc5.png)
 
-3. Click **Generate**.
+6. Click **Generate**.
 
 Wait for code generation to complete.
 
