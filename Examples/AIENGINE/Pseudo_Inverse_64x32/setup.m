@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Copyright 2022 AMD
+% Copyright 2022-2024 Advanced Micro Devices, Inc.
 %
 % Licensed under the Apache License, Version 2.0 (the "License");
 % you may not use this file except in compliance with the License.
@@ -14,8 +14,7 @@
 % limitations under the License.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-  read_complex_data('input', 'input.txt');
+input_data = xmcVitisRead('input.txt', 'cint16');
   
 MATMULT_INPUT_SAMPLES 	=	2048;
 MATMULT_OUTPUT_SAMPLES 	=	576;
@@ -32,15 +31,5 @@ TRIMULT_OUTPUT_SAMPLES 	=	1024;   %populating whole matrix
 MATMULT_RH_INPUT0_SAMPLES = 	TRIMULT_OUTPUT_SAMPLES;
 MATMULT_RH_INPUT1_SAMPLES =	MATMULT_INPUT_SAMPLES;
 MATMULT_RH_OUTPUT_SAMPLES =	MATMULT_INPUT_SAMPLES;
-  
-%% Other parameters
-%user_params
-% setenv("COMMSLIB_ROOT",'../../../../')
-% setenv("AIESRC_ROOT",'../')
-% setenv("DSPLIB_ROOT",xmcLibraryPath('get','dsplib'))
 
-%%Location constraints 
-% xoff = 0;
-% yoff = 0;
-% dir  = 1;
 
