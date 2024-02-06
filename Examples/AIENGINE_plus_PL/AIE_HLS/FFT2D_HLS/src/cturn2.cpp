@@ -48,9 +48,9 @@ void cturn2(hls::stream<std::complex<short>> &vin, hls::stream<std::complex<shor
 
   static short incr_cnt = 0; // col/row location for write/read
   static bool ping_pong = false; // ping or pong buffer indication
-  static std::complex<ap_int16> ping[MSIZE][MSIZE];
-  static std::complex<ap_int16> pong[MSIZE][MSIZE];
-  std::complex<ap_int16> vin_tmp[MSIZE], vout_tmp[MSIZE];
+  static std::complex<short> ping[MSIZE][MSIZE];
+  static std::complex<short> pong[MSIZE][MSIZE];
+  std::complex<short> vin_tmp[MSIZE], vout_tmp[MSIZE];
 
   // copy array of input data
   vin_tmp_cpy: for(short m=0; m < MSIZE; m++) {
