@@ -81,6 +81,9 @@ Click the **AI Engine** section. This reveals the following sub-sections:
     * **Input Window size (Number of samples)**: 2048
     * **Scale output down by 2**: Shift1
     * **Rounding mode**: Floor
+    * **Saturation mode**: Asymmetric
+    * **Number of decimator polyphases**: 1   
+    * **Number of cascade stages**: 1
 
     Click **Apply** and **OK**.
 
