@@ -81,6 +81,9 @@ Click the **AI Engine** section. This reveals the following sub-sections:
     * **Input Window size (Number of samples)**: 2048
     * **Scale output down by 2**: Shift1
     * **Rounding mode**: Floor
+    * **Saturation mode**: Asymmetric
+    * **Number of decimator polyphases**: 1   
+    * **Number of cascade stages**: 1
 
     Click **Apply** and **OK**.
 
@@ -135,6 +138,9 @@ Notice that before implementing the Decimation Filter the vector length was ``20
 | Input window size (Number of samples)	| 2048	| 1024	| 512	| 256 |
 | Scale output down by 2^	| Shift1	| Shift2	| Shift3	| ShiftCF |
 | Rounding mode	floor	| floor	| floor	| floor | floor |
+| Saturation mode	| Asymmetric	| Asymmetric	| Asymmetric	| Asymmetric |
+| Number of decimator polyphases 	| 1	| 1	| 1 | N/A |
+| Number of cascade stages	| 1	| 1	| 1	| 1 |
 
 3. Update the **Output Size** parameter of the **To Fixed Size** block to ``256``. The design should look like as follows:
 
