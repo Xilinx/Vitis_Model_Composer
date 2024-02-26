@@ -13,7 +13,7 @@ In Model Composer you can simulate designs with both AI Engine blocks and HLS Ke
 - [A design with both AI Engine and HLS Kernel blocks connected through interface blocks ](AIE_HLS_with_interface/README.md)
 - [A design with both AI Engine and HLS Kernel blocks connected directly ](AIE_HLS_without_interface/README.md)
 - [2D FFT design with both AI Engine and HLS Kernel blocks](FFT2D/README.md)
-- [200 MHz Transmit Chain](Tx_chain_200MHz/README.md)
+
 
 
 
