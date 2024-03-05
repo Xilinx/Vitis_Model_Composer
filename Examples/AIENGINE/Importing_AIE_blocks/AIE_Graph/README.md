@@ -1,9 +1,7 @@
 # Importing graph as a block
 
-In this example we import a simple graph as a block into Model Composer. When you import a graph into Model Composer using the AIE Graph 
-block, you need to create a .cpp file and instantiate the graph. You later have to specify this file in the block mask. For other 
-examples of importing a graph into Model Compsoer, including when the you have a templatized graph, take a look here. 
-
+In this example we import a simple graph as a block into Vitis Model Composer. When you import a graph into Vitis Model Composer using the AIE Graph 
+block, you need to create a .cpp file and instantiate the graph. You later have to specify this file in the block mask. 
 
 ## Knowledge nuggets
 
