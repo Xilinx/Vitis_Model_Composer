@@ -1,5 +1,4 @@
 
-
 <html>
 <head>
 <title></title>
@@ -12,9 +11,10 @@
 function myFunction() {
 
 var path = document.location.pathname;
-var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
 
-commandURI="matlab:XmcExampleApi.changeDirectory('AIEngine_Library');"
+commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
 
 document.location=commandURI
 }
@@ -85,6 +85,13 @@ document.location=commandURI
 <li>Generate a hardware image to perform validation</li>
 <li>Run hardware emulation to simulate the behavior of the Versal Adaptive SoC design including AI Engine, PL and PS</li>
 <li>Download the hardware image to a VCK190 board and perform hardware validation</li>
+</ul>
+<h3 id="lab-707-export_to_vitisreadmemd"><a href="matlab:XmcExampleApi.getExample('07-Export_to_Vitis')">Lab 7</a></h3>
+<p>Export AI Engine Design from Vitis Model Composer to Vitis</p>
+<ul>
+<li>Generate kernel and graph code from the Vitis Model Composer AI Engine design</li>
+<li>Import the code into Vitis as an AI Engine component</li>
+<li>Import AI Engine compiled graph into a Vitis binary container</li>
 </ul>
 <hr />
 <p>&copy; Copyright 2023 Advanced Micro Devices, Inc.</p>
@@ -203,7 +210,7 @@ margin-bottom: 16px;
 border-left-width: 3px;
 padding: 0 1em;
 color: #828282;
-border-left: 4px solid #e8e8e8;
+border-left: 3px solid #e8e8e8;
 padding-left: 15px;
 font-size: 18px;
 letter-spacing: -1px;
@@ -282,9 +289,15 @@ color: #24292e; }
 a:visited {
 color: #0366d6; }
 
-h1, h2, h3 {
+h2, h3 {
 border-bottom: 1px solid #eaecef;
 color: #111;
-/* Darker */ }</style>
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
 </body>
 </html>

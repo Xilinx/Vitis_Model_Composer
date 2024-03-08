@@ -33,11 +33,27 @@ public:
       add_kernel_0 = adf::kernel::create(add_kernel);
       adf::source(add_kernel_0) = "src/kernels/window_in_window_out_fixed_size.cc";
       adf::runtime<ratio>(add_kernel_0) = 0.9;
+       ///////////////////////
+//         inA1 = adf::input_plio::create("inputA1",adf::plio_128_bits,"data/inputA_128.txt",250);
+//         inB1 = adf::input_plio::create("inputB1",adf::plio_128_bits,"data/inputB_128.txt",250);
+//         outC1 = adf::output_plio::create("outputC1",adf::plio_128_bits,"data/outputCns_128_32b.txt",250);
+// 
+//         adf::connect(inA1.out[0],MMult1.inA);
+//         adf::connect(inB1.out[0],MMult1.inB);
+//         adf::connect(MMult1.outC,outC1.in[0]);
+       /////////////////////////
 
       // create nets to specify connections
-      adf::connect< adf::window<32> > net0 (In1, sync(add_kernel_0.in[0]));
-      adf::connect< adf::window<32> > net1 (In2, sync(add_kernel_0.in[1]));
-      adf::connect< adf::window<32> > net2 (sync(add_kernel_0.out[0]), Out1);
+      adf::connect net0 ( In1 , (add_kernel_0.in[0]) );
+      adf::connect net1 ( In2 , (add_kernel_0.in[1]) );
+      adf::connect net2 ( (add_kernel_0.out[0]) , Out1 );
+//       adf::connect< adf::buffer<32> > net0 (In1, sync(add_kernel_0.in[0]));
+//       adf::connect< adf::buffer<32> > net1 (In2, sync(add_kernel_0.in[1]));
+//       adf::connect< adf::buffer<32> > net2 (sync(add_kernel_0.out[0]), Out1);
+      dimensions(add_kernel_0.in[0]) = {16};
+      dimensions(add_kernel_0.in[1]) = {16};
+      dimensions(add_kernel_0.out[0]) = {16};
+
    }
 };
 

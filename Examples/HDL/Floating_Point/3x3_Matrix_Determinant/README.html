@@ -1,103 +1,254 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="3x3-matrix-determinant">3x3 Matrix Determinant</h1>
+<html>    
 <script>
 function myFunction() {
 
 var path = document.location.pathname;
-var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
 
-commandURI="matlab:XmcExampleApi.openExample('3x3_Matrix_Determinant');"
+commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
 document.location=commandURI
 }
 </script>
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>README</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
-  <link rel="stylesheet" href="/proj/xcoswmktg/robg/git/markdown_to_html/style.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-</head>
-<body>
-<section id="3x3-matrix-determinant" class="level1">
-    <h1>3x3 Matrix Determinant</h1>
-    <button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-<p>This design demonstrates the calculation of the determinant of a 3x3
-matrix with real, single precision floating point elements. It showcases
-the Black Box block for bringing hand-coded VHDL or Verilog code into
-Model Composer. It also shows the DSPFP32 for performing floating-point
-operations on Versal devices.</p>
-<section id="design" class="level2">
-<h2>Design</h2>
-<p><img src="images/screenshot.png" /></p>
-<p>The Simulink model implements the 3x3 Matrix Determinant in 3
-different ways, and compares them to each other:</p>
-<ol type="1">
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
+              
+</html>
+<p>This design demonstrates the calculation of the determinant of a 3x3 matrix with real, single precision floating point elements. It showcases the Black Box block for bringing hand-coded VHDL or Verilog code into Model Composer. It also shows the DSPFP32 for performing floating-point operations on Versal devices.</p>
+<h2 id="design">Design</h2>
+<p><img src="images/screenshot.png" alt="" /></p>
+<p>The Simulink model implements the 3x3 Matrix Determinant in 3 different ways, and compares them to each other:</p>
+<ol>
 <li>The MATLAB function <code>det(u)</code>.</li>
-<li>Basic Simulink blocks that decompose the determinant calculation
-into multiplication and addition operations.</li>
-<li>Model Composer blocks (including DSPFP32) for which HDL code can be
-generated.</li>
+<li>Basic Simulink blocks that decompose the determinant calculation into multiplication and addition operations.</li>
+<li>Model Composer blocks (including DSPFP32) for which HDL code can be generated.</li>
 </ol>
-<p>A second model is provided that replaces method 3 with a hand-coded
-VHDL implementation of the 3x3 matrix determinant. The VHDL is brought
-into Model Composer as a Black Box block.</p>
-<p><img src="images/blackbox.png" /></p>
-</section>
-<section id="mathematical-background" class="level2">
-<h2>Mathematical Background</h2>
-<p>Matrix determinant formulas can be defined recursively for matrices
-of increasing sizes. A 3x3 matrix determinant can be calculated using
-the equations below. These calculations require 9 multiplications and 5
-additions. These operations map directly into 9 DSPFP32 blocks on the
-hardware.</p>
-<p><img src="images/equations.png" /></p>
-</section>
-<section id="dspfp32-floating-point-block" class="level2">
-<h2>DSPFP32 Floating-Point Block</h2>
-<p>Vitis Model Composer's HDL library has a block that maps to a DSPFP32
-primitive. This primitive supports single-precision floating-point
-multiplication and addition operations. The DSPFP32 primitive maps to
-hardened DSP58s on Versal devices.</p>
-<p><img src="images/dspfp32.png" /></p>
-<p>The images below show the flow diagram of the DSPFP32 and the
-supported latency and throughput (on Versal) for independent multiply
-and add mode, follow by multiply-accumulate (MAC) mode:</p>
-<p><img src="images/multiply-add.png" /></p>
-<p><img src="images/mac.png" /></p>
-<p>9 instances of the DSPFP32 block are connected to implement the 3x3
-matrix determinant, as shown below:</p>
-</section>
-<section class="level2">
-<h2><img src="images/det3x3.png" /></h2>
+<p>A second model is provided that replaces method 3 with a hand-coded VHDL implementation of the 3x3 matrix determinant. The VHDL is brought into Model Composer as a Black Box block.</p>
+<p><img src="images/blackbox.png" alt="" /></p>
+<h2 id="mathematical-background">Mathematical Background</h2>
+<p>Matrix determinant formulas can be defined recursively for matrices of increasing sizes. A 3x3 matrix determinant can be calculated using the equations below. These calculations require 9 multiplications and 5 additions. These operations map directly into 9 DSPFP32 blocks on the hardware.</p>
+<p><img src="images/equations.png" alt="" /></p>
+<h2 id="dspfp32-floating-point-block">DSPFP32 Floating-Point Block</h2>
+<p>Vitis Model Composer's HDL library has a block that maps to a DSPFP32 primitive. This primitive supports single-precision floating-point multiplication and addition operations. The DSPFP32 primitive maps to hardened DSP58s on Versal devices.</p>
+<p><img src="images/dspfp32.png" alt="" /></p>
+<p>The images below show the flow diagram of the DSPFP32 and the supported latency and throughput (on Versal) for independent multiply and add mode, follow by multiply-accumulate (MAC) mode:</p>
+<p><img src="images/multiply-add.png" alt="" /></p>
+<p><img src="images/mac.png" alt="" /></p>
+<p>9 instances of the DSPFP32 block are connected to implement the 3x3 matrix determinant, as shown below:</p>
+<h2 id="imagesdet3x3png"><img src="images/det3x3.png" alt="" /></h2>
 <p>Copyright 2023 Advanced Micro Devices, Inc.</p>
-<p>Licensed under the Apache License, Version 2.0 (the "License"); you
-may not use this file except in compliance with the License. You may
-obtain a copy of the License at</p>
-<pre><code>http://www.apache.org/licenses/LICENSE-2.0</code></pre>
-<p>Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
 limitations under the License.</p>
-</section>
-</section>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
 </body>
 </html>

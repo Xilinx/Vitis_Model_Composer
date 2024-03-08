@@ -1,16 +1,16 @@
 # Importing a templatized class kernel as a block
 
-In this example we import a Finite Impulse Response (FIR) Filter as a block into Model Composer. 
+In this example we import a Finite Impulse Response (FIR) Filter as a block into Vitis Model Composer. 
 This filter is expressed as a class. Furthermore, this is a templatized class. The template parameters specify the number of 
 samples per frame and a shift factor. The constructor for this class takes in the filter taps.
 
 ## Knowledge nuggets
 
-:bulb: Note that the *AIE Class* block determines the class template parameters and the constructor parameters and builds up a mask with appropriate fields allowing you to specify the values for these parameters.
+:bulb: Note that the *AIE Class Kernel* block determines the class template parameters and the constructor parameters and builds up a GUI block mask with appropriate fields allowing you to specify the values for these parameters.
 
 :bulb: Note the class is defined in a namespace. The namespace is used to specify a fully qualified name in the block mask in the "Kernel class" field.
 
-:bulb: Note the usage of AIE Signal Spec block to specify the size and frequency of the PLIOs in the model.
+:bulb: Note the usage of the PLIO block to specify the size and frequency of the PLIOs in the model.
 
 :bulb: You can directly connect a variable size signal to a scope, display block, or a specturm analyzer. Or you can use the *Variable size signal to workspace* block to move the data to MATLAB workspace.
 
