@@ -1,3 +1,12 @@
+<table class="sphinxhide" width="100%">
+ <tr width="100%">
+    <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
+    <a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
+    <a href="https://www.xilinx.com/products/design-tools/vitis/vitis-model-composer.html">See Vitis™ Model Composer Development Environment on xilinx.com</a>
+    </td>
+ </tr>
+</table>
+
 # Multirate Example
 
 ***Version: Vitis™ 2023.2 and Matlab™ R2021a with Simulink™ and the DSP System Toolbox™***
@@ -10,7 +19,7 @@ This example presumes you have installed the Vitis and Vitis Model Composer tool
 
 ## Introduction
 
-If a Vitis Model Composer model with AIE and PL blocks has multiple clock domains, then there are some guidelines that should be followed for **structuring** and **constraining** the design.
+If a Vitis Model Composer model with AIE and PL blocks has multiple clock domains then there are some guidelines that should be followed for **structuring** and **constraining** the design.
 
 Open the example design "aie_firs_pl_multirate.slx" and note the key elements highlighted below:
 

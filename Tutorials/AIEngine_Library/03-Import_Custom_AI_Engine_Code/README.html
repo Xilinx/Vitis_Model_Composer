@@ -1,4 +1,5 @@
 
+
 <html>
 <head>
 <title></title>
@@ -11,10 +12,9 @@
 function myFunction() {
 
 var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
+commandURI="matlab:XmcExampleApi.changeDirectory('03-Import_Custom_AI_Engine_Code');"
 
 document.location=commandURI
 }
@@ -280,7 +280,7 @@ margin-bottom: 16px;
 border-left-width: 3px;
 padding: 0 1em;
 color: #828282;
-border-left: 3px solid #e8e8e8;
+border-left: 4px solid #e8e8e8;
 padding-left: 15px;
 font-size: 18px;
 letter-spacing: -1px;
@@ -359,15 +359,9 @@ color: #24292e; }
 a:visited {
 color: #0366d6; }
 
-h2, h3 {
+h1, h2, h3 {
 border-bottom: 1px solid #eaecef;
 color: #111;
-/* Darker */ }
-
-h1 {
-color: black;
-border-bottom: 1px solid #eaecef;
-}
-</style>
+/* Darker */ }</style>
 </body>
 </html>

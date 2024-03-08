@@ -106,7 +106,7 @@ Automatic Code Generation
 </tr>
 
 <tr>
-  <td align="center" colspan="2" style="bold" ><b>AI Engine Library</a></b>
+  <td align="center" colspan="2" style="bold" ><b>AI Engine Library</a></b> <img src="../Images/new.PNG" width="50">
 </tr>
 
 <tr>
@@ -163,36 +163,6 @@ Hardware Validation of Versal Adaptive SoC Design
 </td>
 </tr> 
 
-<tr>
-<td>
-<a href="./AIEngine_Library/07-Export_to_Vitis/README.md">Lab 7</a>
-</td>
-<td>
-Export AI Engine Design from Vitis Model Composer to Vitis <img src="../Images/new.PNG" width="50">
-</td>
-</tr> 
-
-<tr>
-  <td align="center" colspan="2" style="bold" ><b>AIE-PL System Development</a></b> <img src="../Images/new.PNG" width="50">
-</tr>
-
-<tr>
-<td>
-<a href="./AIE-PL/AIE_HDL_tutorial/README.md">Lab 1</a>
-</td>
-<td>
-Connecting AI Engine and HDL Subsystems
-</td>
-</tr> 
-
-<tr>
-<td>
-<a href="./AIE-PL/AIE_HLS_tutorial/README.md">Lab 2</a>
-</td>
-<td>
-Connecting AI Engine and HLS Subsystems
-</td>
-</tr> 
 
 </table>
 

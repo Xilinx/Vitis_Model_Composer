@@ -212,7 +212,7 @@ Once your board is set up, program the device as follows:
 
 ## Conclusion
 
-In this lab, you saw how to use Vitis Model Composer to generate a hardware image to perform validation, either via emulation or on a physical board.
+**Congratulations!** This concludes Lab 6 and the AI Engine tutorial series. In this lab, you saw how to use Vitis Model Composer to generate a hardware image to perform validation, either via emulation or on a physical board.
 
 ## Appendix: How to Install Hardware Server
 

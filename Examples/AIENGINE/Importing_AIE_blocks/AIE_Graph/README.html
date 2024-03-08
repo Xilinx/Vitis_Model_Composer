@@ -1,4 +1,5 @@
 
+
 <html>
 <head>
 <title></title>
@@ -11,10 +12,9 @@
 function myFunction() {
 
 var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('AIE_Graph');"
 
 document.location=commandURI
 }
@@ -24,10 +24,12 @@ document.location=commandURI
 <button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
               
 </html>
-<p>In this example we import a simple graph as a block into Vitis Model Composer. When you import a graph into Vitis Model Composer using the AIE Graph <br />
-block, you need to create a .cpp file and instantiate the graph. You later have to specify this file in the block mask. </p>
+<p>In this example we import a simple graph as a block into Model Composer. When you import a graph into Model Composer using the AIE Graph <br />
+block, you need to create a .cpp file and instantiate the graph. You later have to specify this file in the block mask. For other <br />
+examples of importing a graph into Model Compsoer, including when the you have a templatized graph, take a look here. </p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
 <p><img width="18" height="18" src="../Images/bulb.png"> Note the usage of the <em>Graph Search Paths</em> to specify the search paths.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> Note how you specify the platform in the .cpp file with this line <em>adf::simulation::platform<2,1> platform("~", "~", "~");</em>. The number of "~"s is equal to the total number of inputs and outputs.</p>
 <p><img src="images/graph_import.png" alt="" /></p>
 <hr />
 <p>Copyright 2020 Xilinx</p>
@@ -145,7 +147,7 @@ margin-bottom: 16px;
 border-left-width: 3px;
 padding: 0 1em;
 color: #828282;
-border-left: 3px solid #e8e8e8;
+border-left: 4px solid #e8e8e8;
 padding-left: 15px;
 font-size: 18px;
 letter-spacing: -1px;
@@ -224,15 +226,9 @@ color: #24292e; }
 a:visited {
 color: #0366d6; }
 
-h2, h3 {
+h1, h2, h3 {
 border-bottom: 1px solid #eaecef;
 color: #111;
-/* Darker */ }
-
-h1 {
-color: black;
-border-bottom: 1px solid #eaecef;
-}
-</style>
+/* Darker */ }</style>
 </body>
 </html>

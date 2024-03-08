@@ -1,4 +1,5 @@
 
+
 <html>
 <head>
 <title></title>
@@ -11,10 +12,9 @@
 function myFunction() {
 
 var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('AIE_HLS_with_interface');"
 
 document.location=commandURI
 }
@@ -24,7 +24,7 @@ document.location=commandURI
 <button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
               
 </html>
-<p>This example showcases a design containing both AI Engine blocks and Programmable Logic (HLS). We are using the <em>HLS Kernel</em> block to import an HLS kernel into Vitis Model Composer as a block. To connect the AI Engine blocks to the HLS kernel block, we use the <em>AIE to HLS</em> and <em>HLS to AIE</em> interface blocks if there is a data type mismatch, otherwise, we can connect the blocks directly (Refer to the example <a href="../AIE_HLS_without_interface/README.html">AIE HLS without interface</a>). </p>
+<p>This example showcases a design containing both AI Engine blocks and Programmable Logic (HLS). We are using the <em>HLS Kernel</em> block to import an HLS kernel into Vitis Model Composer as a block. To connect the AI Engine blocks to the HLS kernel block, we use the <em>AIE to HLS</em> and <em>HLS to AIE</em> interface blocks if there is a data type mismatch, otherwise, we can connect the blocks directly (Refer to the example <a href="matlab:XmcExampleApi.getExample('AIE_HLS_without_interface')">AIE HLS without interface</a>). </p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
 <p><img width="18" height="18" src="../Images/bulb.png"> In Vitis Model Composer, you can cosimulate HLS kernels and AI Engine blocks.</p>
 <p><img width="18" height="18" src="../Images/bulb.png"> The argument type for the HLS kernel should be hls::stream. The arguments can also be scalar or vector to model run-time parameter interfaces. </p>
@@ -146,7 +146,7 @@ margin-bottom: 16px;
 border-left-width: 3px;
 padding: 0 1em;
 color: #828282;
-border-left: 3px solid #e8e8e8;
+border-left: 4px solid #e8e8e8;
 padding-left: 15px;
 font-size: 18px;
 letter-spacing: -1px;
@@ -225,15 +225,9 @@ color: #24292e; }
 a:visited {
 color: #0366d6; }
 
-h2, h3 {
+h1, h2, h3 {
 border-bottom: 1px solid #eaecef;
 color: #111;
-/* Darker */ }
-
-h1 {
-color: black;
-border-bottom: 1px solid #eaecef;
-}
-</style>
+/* Darker */ }</style>
 </body>
 </html>

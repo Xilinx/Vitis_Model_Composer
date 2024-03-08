@@ -1,4 +1,5 @@
 
+
 <html>
 <head>
 <title></title>
@@ -11,10 +12,9 @@
 function myFunction() {
 
 var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
+commandURI="matlab:XmcExampleApi.changeDirectory('06-Hardware_Validation');"
 
 document.location=commandURI
 }
@@ -189,7 +189,7 @@ device program BOOT.BIN
 </code></pre></li>
 </ol>
 <h2 id="conclusion">Conclusion</h2>
-<p>In this lab, you saw how to use Vitis Model Composer to generate a hardware image to perform validation, either via emulation or on a physical board.</p>
+<p><strong>Congratulations!</strong> This concludes Lab 6 and the AI Engine tutorial series. In this lab, you saw how to use Vitis Model Composer to generate a hardware image to perform validation, either via emulation or on a physical board.</p>
 <h2 id="appendix-how-to-install-hardware-server">Appendix: How to Install Hardware Server</h2>
 <p>The AMD Unified installer allows you to install multiple AMD tools using a single installer. Follow the steps below to install AMD Hardware Server on Windows. </p>
 <ol>
@@ -315,7 +315,7 @@ margin-bottom: 16px;
 border-left-width: 3px;
 padding: 0 1em;
 color: #828282;
-border-left: 3px solid #e8e8e8;
+border-left: 4px solid #e8e8e8;
 padding-left: 15px;
 font-size: 18px;
 letter-spacing: -1px;
@@ -394,15 +394,9 @@ color: #24292e; }
 a:visited {
 color: #0366d6; }
 
-h2, h3 {
+h1, h2, h3 {
 border-bottom: 1px solid #eaecef;
 color: #111;
-/* Darker */ }
-
-h1 {
-color: black;
-border-bottom: 1px solid #eaecef;
-}
-</style>
+/* Darker */ }</style>
 </body>
 </html>

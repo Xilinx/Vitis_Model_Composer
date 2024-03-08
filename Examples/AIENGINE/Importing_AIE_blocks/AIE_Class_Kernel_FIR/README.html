@@ -1,4 +1,5 @@
 
+
 <html>
 <head>
 <title></title>
@@ -11,10 +12,9 @@
 function myFunction() {
 
 var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('AIE_Class_Kernel_FIR');"
 
 document.location=commandURI
 }
@@ -24,13 +24,13 @@ document.location=commandURI
 <button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
               
 </html>
-<p>In this example we import a Finite Impulse Response (FIR) Filter as a block into Vitis Model Composer. <br />
+<p>In this example we import a Finite Impulse Response (FIR) Filter as a block into Model Composer. <br />
 This filter is expressed as a class. Furthermore, this is a templatized class. The template parameters specify the number of <br />
 samples per frame and a shift factor. The constructor for this class takes in the filter taps.</p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
-<p><img width="18" height="18" src="../Images/bulb.png"> Note that the <em>AIE Class Kernel</em> block determines the class template parameters and the constructor parameters and builds up a GUI block mask with appropriate fields allowing you to specify the values for these parameters.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> Note that the <em>AIE Class</em> block determines the class template parameters and the constructor parameters and builds up a mask with appropriate fields allowing you to specify the values for these parameters.</p>
 <p><img width="18" height="18" src="../Images/bulb.png"> Note the class is defined in a namespace. The namespace is used to specify a fully qualified name in the block mask in the "Kernel class" field.</p>
-<p><img width="18" height="18" src="../Images/bulb.png"> Note the usage of the PLIO block to specify the size and frequency of the PLIOs in the model.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> Note the usage of AIE Signal Spec block to specify the size and frequency of the PLIOs in the model.</p>
 <p><img width="18" height="18" src="../Images/bulb.png"> You can directly connect a variable size signal to a scope, display block, or a specturm analyzer. Or you can use the <em>Variable size signal to workspace</em> block to move the data to MATLAB workspace.</p>
 <p><img src="images/model_screen_shot.PNG" alt="" /></p>
 <hr />
@@ -149,7 +149,7 @@ margin-bottom: 16px;
 border-left-width: 3px;
 padding: 0 1em;
 color: #828282;
-border-left: 3px solid #e8e8e8;
+border-left: 4px solid #e8e8e8;
 padding-left: 15px;
 font-size: 18px;
 letter-spacing: -1px;
@@ -228,15 +228,9 @@ color: #24292e; }
 a:visited {
 color: #0366d6; }
 
-h2, h3 {
+h1, h2, h3 {
 border-bottom: 1px solid #eaecef;
 color: #111;
-/* Darker */ }
-
-h1 {
-color: black;
-border-bottom: 1px solid #eaecef;
-}
-</style>
+/* Darker */ }</style>
 </body>
 </html>

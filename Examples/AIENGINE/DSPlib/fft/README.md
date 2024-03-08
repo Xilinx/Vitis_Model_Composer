@@ -1,6 +1,6 @@
 # Using DSPLib AI Engine FFT directly from the library browser
 
-This example demonstrates using the AI Engine FFT block in Vitis Model Composer and comparing the results to the Simulink FFT block. 
+This example demonestrates using the AI Engine FFT block in Model Composer and comparing the results to the Simulink FFT block. 
 
 ## Knowledge nuggets
 
@@ -8,12 +8,11 @@ This example demonstrates using the AI Engine FFT block in Vitis Model Composer 
 
 :bulb: Note the usage of the *To Fixed Size* block to convert a variable size signal to a fixed size signal. This is needed to compare the output of the AIE block to the output of the FFT block from Simulink (which is a fixed size signal). Note this is only valid if the variable size signal is fully packed. Otherwise, the *To fixed size* block will insert zeros when samples are missing. To make sure this is not the case, you can check the status output of the *To fixed Size* block. 
 
-![](images/FFT_ExampleModel.png)
+![](images/screenshot.PNG)
 
- DSPlib AI Engine FFT and Simulink FFT comparison for a complex sinusoidal input:
+Image below depicts the output of DSPlib AI Engine FFT for a complex sinusoidal input:
 
-![](images/FFT_Comparison.png)
-![](images/Error.png)
+![](images/dsplib_output.PNG)
 
 ------------
 Copyright 2020 Xilinx

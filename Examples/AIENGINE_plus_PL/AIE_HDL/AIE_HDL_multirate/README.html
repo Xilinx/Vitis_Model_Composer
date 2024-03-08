@@ -1,123 +1,236 @@
-
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-<title></title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="/proj/xcoswmktg/robg/git/markdown_to_html/style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
-<h1 id="multirate-example">Multirate Example</h1>
-<html>    
-<script>
-function myFunction() {
+<table class="sphinxhide" width="100%">
+ <tr width="100%">
+    <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
+    <a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
+    <a href="https://www.xilinx.com/products/design-tools/vitis/vitis-model-composer.html">See Vitis™ Model Composer Development Environment on xilinx.com</a>
+    </td>
+ </tr>
+</table>
 
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
-
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
-
-document.location=commandURI
-}
-</script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
-<p><strong><em>Version: Vitis™ 2023.2 and Matlab™ R2021a with Simulink™ and the DSP System Toolbox™</em></strong></p>
-<h2 id="prerequisites">Prerequisites</h2>
-<p>This example presumes you have installed the Vitis and Vitis Model Composer tools and that you have a basic understanding of those tools.  If not, consider starting with the Vitis tutorials at <a href="https://github.com/Xilinx/Vitis-Tutorials">https://github.com/Xilinx/Vitis-Tutorials</a> and within that repository the Vitis Model Composer tutorial at <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2023.2/AI_Engine_Development/Feature_Tutorials/10-aie-dsp-lib-model-composer">https://github.com/Xilinx/Vitis-Tutorials/tree/2023.2/AI_Engine_Development/Feature_Tutorials/10-aie-dsp-lib-model-composer</a>.</p>
+<section id="multirate-example" class="level1">
+<h1>Multirate Example</h1>
+<p><em><strong>Version: Vitis™ 2023.2 and Matlab™ R2021a with Simulink™
+and the DSP System Toolbox™</strong></em></p>
+<section id="prerequisites" class="level2">
+<h2>Prerequisites</h2>
+<p>This example presumes you have installed the Vitis and Vitis Model
+Composer tools and that you have a basic understanding of those tools.
+If not, consider starting with the Vitis tutorials at <a
+href="https://github.com/Xilinx/Vitis-Tutorials">https://github.com/Xilinx/Vitis-Tutorials</a>
+and within that repository the Vitis Model Composer tutorial at <a
+href="https://github.com/Xilinx/Vitis-Tutorials/tree/2023.2/AI_Engine_Development/Feature_Tutorials/10-aie-dsp-lib-model-composer">https://github.com/Xilinx/Vitis-Tutorials/tree/2023.2/AI_Engine_Development/Feature_Tutorials/10-aie-dsp-lib-model-composer</a>.</p>
 <hr />
-<h2 id="introduction">Introduction</h2>
-<p>If a Vitis Model Composer model with AIE and PL blocks has multiple clock domains, then there are some guidelines that should be followed for <strong>structuring</strong> and <strong>constraining</strong> the design.</p>
-<p>Open the example design "aie<em>firs</em>pl_multirate.slx" and note the key elements highlighted below:</p>
-<p><img src="images/BlockDiagramHighlighted.png" alt="Block Diagram" /></p>
-<p>Two <strong>SIMULATION SOURCES</strong> generate stimulus for simulation.  A manual switch toggles between a random signal source and a chirp signal.  The random source is best for viewing filter responses in the frequency domain while the chirp is best for viewing responses in the time domain.</p>
-<p>The <strong>AIE SUBSYSTEM</strong> includes two AIE blocks, both FIR filters from the Vitis Model Composer AIE DSP library.  Both filters receive the same input data.  One generates filtered output at the same sample rate as the input, while the second generates outputs at half the input rate (a decimate-by-two in DSP vernacular).</p>
-<p>Those two output paths, one at full rate and the other decimated, feed two separate <strong>AIE-TO-PL INTERFACES</strong> which translate AIE outputs into a format suitable for the <strong>PL SUBSYSTEM</strong> which in turn outputs to the <strong>SIMULATION SINKS</strong>.  The sinks include frequency domain spectrum analyzers and time domain scopes.</p>
-<p>These spectrum analyzers and scopes also receive inputs from the <strong>SIMULINK REFERENCE</strong> block which is a functionally equivalent model built exclusively from Simulink blocks.  This provides a reference to compare the double-precision floating point output of the Simulink model to the fixed-point output of the synthesizable model.</p>
-<p>Two <strong>UTILITY BLOCKS</strong> are also part of the design:  The first, the Simulink FDATool, is used to generate filter coefficients which are used by both AIE FIR filters as well as the Simulink reference filter.  The second, the Vitis Model Composer Hub, is used to constrain the design and control generation of output products.</p>
+</section>
+<section id="introduction" class="level2">
+<h2>Introduction</h2>
+<p>If a Vitis Model Composer model with AIE and PL blocks has multiple
+clock domains then there are some guidelines that should be followed for
+<strong>structuring</strong> and <strong>constraining</strong> the
+design.</p>
+<p>Open the example design "aie_firs_pl_multirate.slx" and note the key
+elements highlighted below:</p>
+<p><img src="images/BlockDiagramHighlighted.png"
+alt="Block Diagram" /></p>
+<p>Two <strong>SIMULATION SOURCES</strong> generate stimulus for
+simulation. A manual switch toggles between a random signal source and a
+chirp signal. The random source is best for viewing filter responses in
+the frequency domain while the chirp is best for viewing responses in
+the time domain.</p>
+<p>The <strong>AIE SUBSYSTEM</strong> includes two AIE blocks, both FIR
+filters from the Vitis Model Composer AIE DSP library. Both filters
+receive the same input data. One generates filtered output at the same
+sample rate as the input, while the second generates outputs at half the
+input rate (a decimate-by-two in DSP vernacular).</p>
+<p>Those two output paths, one at full rate and the other decimated,
+feed two separate <strong>AIE-TO-PL INTERFACES</strong> which translate
+AIE outputs into a format suitable for the <strong>PL SUBSYSTEM</strong>
+which in turn outputs to the <strong>SIMULATION SINKS</strong>. The
+sinks include frequency domain spectrum analyzers and time domain
+scopes.</p>
+<p>These spectrum analyzers and scopes also receive inputs from the
+<strong>SIMULINK REFERENCE</strong> block which is a functionally
+equivalent model built exclusively from Simulink blocks. This provides a
+reference to compare the double-precision floating point output of the
+Simulink model to the fixed-point output of the synthesizable model.</p>
+<p>Two <strong>UTILITY BLOCKS</strong> are also part of the design: The
+first, the Simulink FDATool, is used to generate filter coefficients
+which are used by both AIE FIR filters as well as the Simulink reference
+filter. The second, the Vitis Model Composer Hub, is used to constrain
+the design and control generation of output products.</p>
 <hr />
-<h2 id="structuring-the-model">Structuring the Model</h2>
-<p>The focus area for structuring is the PL portion of the model.  There are two specific requirements in terms of partitioning the design to support multiple rates:</p>
-<h3 id="the-pl-subsystem">The PL Subsystem</h3>
-<p>The first requirement is to partition the PL portion of the design into a single subsystem from the top-level.  To see that in this design double-click on the block "PL_Subsystem" to push into the PL subsystem:</p>
+</section>
+<section id="structuring-the-model" class="level2">
+<h2>Structuring the Model</h2>
+<p>The focus area for structuring is the PL portion of the model. There
+are two specific requirements in terms of partitioning the design to
+support multiple rates:</p>
+<section id="the-pl-subsystem" class="level3">
+<h3>The PL Subsystem</h3>
+<p>The first requirement is to partition the PL portion of the design
+into a single subsystem from the top-level. To see that in this design
+double-click on the block "PL_Subsystem" to push into the PL
+subsystem:</p>
 <p><img src="images/PLSubsystemCallout.png" alt="PL Subsystem" /></p>
-<p>Note that Simulink Inport blocks bring signals from the top-level model into this subsystem, and Simulink Outport blocks link outputs from the subsystem to the top-level.</p>
-<h3 id="the-subsystems-within-the-pl-subsystem">The Subsystems Within the PL Subsystem</h3>
-<p>The second structural requirement is that within the PL subsystem additional subsystems should be generated such that each subsystem contains a single clock domain.  In the example design there are two subystems (as shown in the image above), one for each of the two clock rates.  The subsystem "PL<em>subsystem</em>fullrate" runs at the full sample rate while the subsystem "PL<em>subsystem</em>decimated" runs at half that rate.  </p>
-<p>Push into the "PL<em>subsystem</em>fullrate" subsystem and note the following:</p>
-<p><img src="images/PLSubSubsystems.png" alt="PL Subsytem details" /></p>
+<p>Note that Simulink Inport blocks bring signals from the top-level
+model into this subsystem, and Simulink Outport blocks link outputs from
+the subsystem to the top-level.</p>
+</section>
+<section id="the-subsystems-within-the-pl-subsystem" class="level3">
+<h3>The Subsystems Within the PL Subsystem</h3>
+<p>The second structural requirement is that within the PL subsystem
+additional subsystems should be generated such that each subsystem
+contains a single clock domain. In the example design there are two
+subystems (as shown in the image above), one for each of the two clock
+rates. The subsystem "PL_subsystem_fullrate" runs at the full sample
+rate while the subsystem "PL_subsystem_decimated" runs at half that
+rate.</p>
+<p>Push into the "PL_subsystem_fullrate" subsystem and note the
+following:</p>
+<p><img src="images/PLSubSubsystems.png"
+alt="PL Subsytem details" /></p>
 <pre><code>(1) Gateway In blocks are located between the Simulink Inport blocks and the synthesizable PL blocks.
 
-(2) Gateway Out blocks are located between the synthesizable PL blocks and the Simulink Outport blocks.
-</code></pre>
-<p>Next, double-click on one of the Gateway In blocks (datain or valid) and note that</p>
+(2) Gateway Out blocks are located between the synthesizable PL blocks and the Simulink Outport blocks.</code></pre>
+<p>Next, double-click on one of the Gateway In blocks (datain or valid)
+and note that</p>
 <p><img src="images/GatewayIn.png" alt="Gateway in" /></p>
-<pre><code>(3) Each Gateway In must specify the data type (32-bit 2's complement integer in this case).
+<pre><code>(3) Each Gateway In must specify the data type (32-bit 2&#39;s complement integer in this case).
 
-(4) Each Gateway In must specify the clock period (5 ns in this case, specified as inverse of 200 MHz).
-</code></pre>
-<p>Finally, double-click on the Gateway Out block (dataout) and note that</p>
+(4) Each Gateway In must specify the clock period (5 ns in this case, specified as inverse of 200 MHz).</code></pre>
+<p>Finally, double-click on the Gateway Out block (dataout) and note
+that</p>
 <p><img src="images/GatewayOut.png" alt="Gateway out" /></p>
-<pre><code>(5) Each Gateway Out must specify options regarding data type propogation and pin mapping.  You do not need to specify the clock for these blocks since each output path inherits the clock from the logic which feeds it.
-</code></pre>
-<h3 id="the-aie-subsystem">The AIE Subsystem</h3>
-<p>Although the AIE portion of the design is not required to be in a subsystem it is still a good practice.  The key point to remember when working with the AIE portion is that it processes vectorized data, so within your Simulink model you will generally have vectorized data paths around the AIE.  </p>
-<p>If you drop a scope into the model then connect it to one of the AIE paths then it would not display the information in a usable format.  Instead each element of the vector is assigned to a different channel yielding a view such as the the following:</p>
+<pre><code>(5) Each Gateway Out must specify options regarding data type propogation and pin mapping.  You do not need to specify the clock for these blocks since each output path inherits the clock from the logic which feeds it.</code></pre>
+</section>
+<section id="the-aie-subsystem" class="level3">
+<h3>The AIE Subsystem</h3>
+<p>Although the AIE portion of the design is not required to be in a
+subsystem it is still a good practice. The key point to remember when
+working with the AIE portion is that it processes vectorized data, so
+within your Simulink model you will generally have vectorized data paths
+around the AIE.</p>
+<p>If you drop a scope into the model then connect it to one of the AIE
+paths then it would not display the information in a usable format.
+Instead each element of the vector is assigned to a different channel
+yielding a view such as the the following:</p>
 <p><img src="images/ScopeAIE.png" alt="Scope on AIE" /></p>
-<p>To correct this and display the AIE data properly on a scope do the following:</p>
+<p>To correct this and display the AIE data properly on a scope do the
+following:</p>
 <p><img src="images/ScopeFrameBased.png" alt="Scope Frame" /></p>
 <pre><code>(1) Double-click on the scope to open the scope panel.
 
 (2) Left-click on the gear icon to configure the scope.
 
-(3) Change the input processing from the default "Elements as channels (sample based)" to "Columns as channels (frame based)".
-</code></pre>
-<p>If all inputs to the scope are frame-based then this is the simplest approach.  </p>
-<p>If you need to mix sample-based and frame-based inputs then consider the approach utilized by the scope which captures the vectorized input signal:</p>
+(3) Change the input processing from the default &quot;Elements as channels (sample based)&quot; to &quot;Columns as channels (frame based)&quot;.</code></pre>
+<p>If all inputs to the scope are frame-based then this is the simplest
+approach.</p>
+<p>If you need to mix sample-based and frame-based inputs then consider
+the approach utilized by the scope which captures the vectorized input
+signal:</p>
 <p><img src="images/UnbufferAIE.png" alt="Unbuffer AIE" /></p>
-<p>The Simulink Unbuffer block converts the vectorized path into a sample based path which can be fed to the scope "Scope FIR In vs Out" for comparison to another sample based signal using the default "Elements as channels (sample based)" setting in the scope.</p>
-<p>Unlike the scope, the spectrum analyzer can process and display the vectorized format of the AIE signal paths without changing any options.</p>
+<p>The Simulink Unbuffer block converts the vectorized path into a
+sample based path which can be fed to the scope "Scope FIR In vs Out"
+for comparison to another sample based signal using the default
+"Elements as channels (sample based)" setting in the scope.</p>
+<p>Unlike the scope, the spectrum analyzer can process and display the
+vectorized format of the AIE signal paths without changing any
+options.</p>
 <hr />
-<h2 id="constraining-the-model">Constraining the Model</h2>
-<p>Once the multiple rates are established within PL subsystems you must constrain the clocks for those domains using the Vitis Model Composer Hub block.  The steps to do so are illustrated below:</p>
+</section>
+</section>
+<section id="constraining-the-model" class="level2">
+<h2>Constraining the Model</h2>
+<p>Once the multiple rates are established within PL subsystems you must
+constrain the clocks for those domains using the Vitis Model Composer
+Hub block. The steps to do so are illustrated below:</p>
 <p><img src="images/HubBlock.png" alt="Hub" /></p>
 <pre><code>(1) Double-click on the Model Composer Hub block.
 
-(2) Select "Code Generation".
+(2) Select &quot;Code Generation&quot;.
 
 (3) Select the PL subsystem.
 
-(4) Select the "HDL Clock Settings" tab.
+(4) Select the &quot;HDL Clock Settings&quot; tab.
 
-(5) Check the box to enable multiple clocks, then specify the number of clocks.  A corresponding number of tabs will then appear starting with  "Clock1".
+(5) Check the box to enable multiple clocks, then specify the number of clocks.  A corresponding number of tabs will then appear starting with  &quot;Clock1&quot;.
 
-(6) Select the tab for "Clock1" and note which PL subsystem the clock is associated with.  You may need to make the entire panel wider (by dragging the lower right corner) if the subsystem text box is not wide enough to display the name.
+(6) Select the tab for &quot;Clock1&quot; and note which PL subsystem the clock is associated with.  You may need to make the entire panel wider (by dragging the lower right corner) if the subsystem text box is not wide enough to display the name.
 
 (7) Enter the period for both the FPGA and Simulink clocks.  Note that the FPGA clock period is in nanoseconds, while the Simulink period is in seconds.  In the example here both are specified for the 100 MHz decimated clock.
 
-(8) Repeat for all other clock tabs ("Clock2" in this case).
+(8) Repeat for all other clock tabs (&quot;Clock2&quot; in this case).
 
-(9) Select "OK" when done.
-</code></pre>
+(9) Select &quot;OK&quot; when done.</code></pre>
 <p>At this point the design should be ready for simulation.</p>
 <hr />
-<h2 id="simulating-the-model">Simulating the Model</h2>
-<p>Multirate designs simulate in the same manner as single rate designs.</p>
-<p>With the model “aie<em>firs</em>pl_multirate.slx” open in Simulink, double-click on the switch associated with the simulation sources such that the switch points up to select the random signal source.  This will feed a Gaussian noise signal into the filters enabling a view of the filter response across the Nyquist band.</p>
-<h3 id="viewing-simulation-outputs">Viewing Simulation Outputs</h3>
-<p>Run the simulation and note that two instrumentation windows open automatically – the spectrum analyzer showing the PL frequency domain output, and the scope showing the PL time domain output.  These should appear as shown below:</p>
+</section>
+<section id="simulating-the-model" class="level2">
+<h2>Simulating the Model</h2>
+<p>Multirate designs simulate in the same manner as single rate
+designs.</p>
+<p>With the model “aie_firs_pl_multirate.slx” open in Simulink,
+double-click on the switch associated with the simulation sources such
+that the switch points up to select the random signal source. This will
+feed a Gaussian noise signal into the filters enabling a view of the
+filter response across the Nyquist band.</p>
+<section id="viewing-simulation-outputs" class="level3">
+<h3>Viewing Simulation Outputs</h3>
+<p>Run the simulation and note that two instrumentation windows open
+automatically – the spectrum analyzer showing the PL frequency domain
+output, and the scope showing the PL time domain output. These should
+appear as shown below:</p>
 <p><img src="images/Waveforms.png" alt="Waveforms" /></p>
-<p>Note that both the scope and the spectrum views have legends which show a PL output and a Simulink reference.  This allows you to overlay and compare the fixed-point output from the synthesizable AIE-PL design to the double-precision floating point output generated by the Simulink reference. Some tips for working in these viewers are</p>
+<p>Note that both the scope and the spectrum views have legends which
+show a PL output and a Simulink reference. This allows you to overlay
+and compare the fixed-point output from the synthesizable AIE-PL design
+to the double-precision floating point output generated by the Simulink
+reference. Some tips for working in these viewers are</p>
 <pre><code>(1) You can left-click or right-click on the waveform icons in the legends to display/hide each signal.  This can be useful when comparing the output to the expected output from the Simulink reference.
 
-(2) The horizontal and vertical zoom buttons are useful for viewing the outputs in more detail.
-</code></pre>
-<h3 id="viewing-multiple-clock-domains">Viewing Multiple Clock Domains</h3>
-<p>For multirate designs the Simulink option to view sample times can prove useful for visually verifying clock domains.  To enable this feature left-click the icon with two colored arrows then select “All” as shown below (search Simulink help for “viewing sample time” if your GUI is different):</p>
+(2) The horizontal and vertical zoom buttons are useful for viewing the outputs in more detail.</code></pre>
+</section>
+<section id="viewing-multiple-clock-domains" class="level3">
+<h3>Viewing Multiple Clock Domains</h3>
+<p>For multirate designs the Simulink option to view sample times can
+prove useful for visually verifying clock domains. To enable this
+feature left-click the icon with two colored arrows then select “All” as
+shown below (search Simulink help for “viewing sample time” if your GUI
+is different):</p>
 <p><img src="images/SampleTimeOption.png" alt="Time View" /></p>
-<p>The Simulink model will be updated (this can take several seconds or more) to visibly differentiate the clock domains in the design.  By selecting “All” the display will include annotations on signal paths (such as “D1” for discrete domain 1), different colors for the different domains, and a legend that correlates the annotations and colors to the frequencies/periods.  The example design should now appear as follows:</p>
+<p>The Simulink model will be updated (this can take several seconds or
+more) to visibly differentiate the clock domains in the design. By
+selecting “All” the display will include annotations on signal paths
+(such as “D1” for discrete domain 1), different colors for the different
+domains, and a legend that correlates the annotations and colors to the
+frequencies/periods. The example design should now appear as
+follows:</p>
 <p><img src="images/SampleTimeAnnotated.png" alt="Annotated View" /></p>
 <p>Tracing the now visible domains through the model shows</p>
 <pre><code>(1) The starting domain (blue) from the simulation sources to the AIE subsystem runs at 200 Msps, delivered as vectors of 256 elements.  The rate is thus 200 MHz / 256 = 781.25 kHz.
@@ -128,248 +241,96 @@ document.location=commandURI
 
 (4) The block “AIE_decimated” converts the 128-element vector into a 100 MHz path (green).
 
-(5) The two rates (red and green) track through the “PL_subsystems” block and are delivered as outputs.
-</code></pre>
-<p>At this point you now have the tools to structure and constrain a multirate design in Vitis Model Composer.  The remainder of this discussion will cover the functional aspects of this design then summarize the main points.</p>
-<h3 id="interpreting-frequency-domain-simulation-outputs">Interpreting Frequency Domain Simulation Outputs</h3>
-<p>The frequency domain output from the simulation run should correlate to the filter designed in the FDATool.  To see that, open the FDATool and compare the FDATool normalized frequency response to the full-rate spectrum output.</p>
+(5) The two rates (red and green) track through the “PL_subsystems” block and are delivered as outputs.</code></pre>
+<p>At this point you now have the tools to structure and constrain a
+multirate design in Vitis Model Composer. The remainder of this
+discussion will cover the functional aspects of this design then
+summarize the main points.</p>
+</section>
+<section id="interpreting-frequency-domain-simulation-outputs"
+class="level3">
+<h3>Interpreting Frequency Domain Simulation Outputs</h3>
+<p>The frequency domain output from the simulation run should correlate
+to the filter designed in the FDATool. To see that, open the FDATool and
+compare the FDATool normalized frequency response to the full-rate
+spectrum output.</p>
 <p><img src="images/FDA_Spec.png" alt="FDA Tool" /></p>
-<p>Since the input for all filters is 200 Msps the Nyquist frequency is 100 MHz, and the normalized 'wstop = 0.45' in the FDATool equates to a stop band at 45 MHz.  That is exactly what is shown in the spectrum output by both the full rate and decimated filter paths.</p>
-<p>If you experiment with the filter characteristics in the FDATool then keep the following points in mind:</p>
-<pre><code>(1) Filter coefficients are stored in the file "fwizdef.fda".
+<p>Since the input for all filters is 200 Msps the Nyquist frequency is
+100 MHz, and the normalized 'wstop = 0.45' in the FDATool equates to a
+stop band at 45 MHz. That is exactly what is shown in the spectrum
+output by both the full rate and decimated filter paths.</p>
+<p>If you experiment with the filter characteristics in the FDATool then
+keep the following points in mind:</p>
+<pre><code>(1) Filter coefficients are stored in the file &quot;fwizdef.fda&quot;.
 
 (2) If you save new coefficients from the FDATool then you should save them to that file to avoid having to change all references to the coefficients.
 
-(3) The decimated filter has a Nyquist frequency that is half that of the full-rate filter.  Any 'wstop' value greater than 0.5 will thus push the stop band outside of the decimating filter's Nyquist zone.
-</code></pre>
-<h3 id="interpreting-time-domain-simulation-outputs">Interpreting Time Domain Simulation Outputs</h3>
-<p>To view the filter responses in the time domain switch the simulation source to the chirp source (using the toggle switch).  Rerunning simulation should show the following:</p>
+(3) The decimated filter has a Nyquist frequency that is half that of the full-rate filter.  Any &#39;wstop&#39; value greater than 0.5 will thus push the stop band outside of the decimating filter&#39;s Nyquist zone.</code></pre>
+</section>
+<section id="interpreting-time-domain-simulation-outputs"
+class="level3">
+<h3>Interpreting Time Domain Simulation Outputs</h3>
+<p>To view the filter responses in the time domain switch the simulation
+source to the chirp source (using the toggle switch). Rerunning
+simulation should show the following:</p>
 <p><img src="images/ChirpScopes.png" alt="Chirp Scopes" /></p>
-<p>The simulation input (shown in yellow) shows the constant amplitude signal with increasing frequency (an up chirp) throughout the simulation run.  The filtered response shows the output tracking the input until the chirp frequency crosses the filter's pass band at which point attenuation steadily increases until the output appears flat in the stop band.</p>
-<p>A few points to remember when viewing time domain simulation outputs:</p>
+<p>The simulation input (shown in yellow) shows the constant amplitude
+signal with increasing frequency (an up chirp) throughout the simulation
+run. The filtered response shows the output tracking the input until the
+chirp frequency crosses the filter's pass band at which point
+attenuation steadily increases until the output appears flat in the stop
+band.</p>
+<p>A few points to remember when viewing time domain simulation
+outputs:</p>
 <pre><code>(1) Simulation runs using the random source will not be repeatible.  
 
 (2) Simulation runs using the chirp source will be repeatible.
 
 (3) The Simulink Reference is delay compensated so that reference outputs will be aligned in the time domain relative to the PL outputs.
 
-(4) The scope "Scope FIR In vs Out" compares the unfiltered input to the PL output.  The input path is not delay compensated so the signals will not be aligned in the time domain.
-</code></pre>
+(4) The scope &quot;Scope FIR In vs Out&quot; compares the unfiltered input to the PL output.  The input path is not delay compensated so the signals will not be aligned in the time domain.</code></pre>
 <hr />
-<h2 id="conclusion">Conclusion</h2>
-<p>If a Vitis Model Composer model with AIE and PL blocks has multiple clock domains then there are some guidelines that should be followed for structuring and constraining the design:</p>
-<p><img width="18" height="18" src="../Images/bulb.png"> The first requirement is to partition the PL portion of the design into a single subsystem from the top-level.</p>
-<p><img width="18" height="18" src="../Images/bulb.png"> The second structural requirement is that within the PL subsystem additional subsystems should be generated such that each subsystem contains a single clock domain.</p>
-<p><img width="18" height="18" src="../Images/bulb.png"> Once the multiple rates are established within PL subsystems you must constrain the clocks for those domains using the Vitis Model Composer Hub block.</p>
-<p><img width="18" height="18" src="../Images/bulb.png"> Multirate designs simulate in the same manner as single rate designs.</p>
-<p><img width="18" height="18" src="../Images/bulb.png"> The scope will not display vectorized AIE paths in a usable format unless you either change the default scope input processing to frame-based or use a Simulink Unbuffer block to convert the signal before connecting to the scope.</p>
-<p><img width="18" height="18" src="../Images/bulb.png"> The spectrum analyzer can process the vectorized format of the AIE signal paths.</p>
-<p><img width="18" height="18" src="../Images/bulb.png"> The Simulink option to view sample times is useful for interpreting clock domains within a model.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2>Conclusion</h2>
+<p>If a Vitis Model Composer model with AIE and PL blocks has multiple
+clock domains then there are some guidelines that should be followed for
+structuring and constraining the design:</p>
+<p><span class="emoji" data-emoji="bulb"></span> The first requirement
+is to partition the PL portion of the design into a single subsystem
+from the top-level.</p>
+<p><span class="emoji" data-emoji="bulb"></span> The second structural
+requirement is that within the PL subsystem additional subsystems should
+be generated such that each subsystem contains a single clock
+domain.</p>
+<p><span class="emoji" data-emoji="bulb"></span> Once the multiple
+rates are established within PL subsystems you must constrain the clocks
+for those domains using the Vitis Model Composer Hub block.</p>
+<p><span class="emoji" data-emoji="bulb"></span> Multirate designs
+simulate in the same manner as single rate designs.</p>
+<p><span class="emoji" data-emoji="bulb"></span> The scope will not
+display vectorized AIE paths in a usable format unless you either change
+the default scope input processing to frame-based or use a Simulink
+Unbuffer block to convert the signal before connecting to the scope.</p>
+<p><span class="emoji" data-emoji="bulb"></span> The spectrum analyzer
+can process the vectorized format of the AIE signal paths.</p>
+<p><span class="emoji" data-emoji="bulb"></span> The Simulink option
+to view sample times is useful for interpreting clock domains within a
+model.</p>
 <hr />
 <hr />
 <p>Copyright 2023 AMD</p>
-<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
-you may not use this file except in compliance with the License.<br />
-You may obtain a copy of the License at</p>
-<pre><code>http://www.apache.org/licenses/LICENSE-2.0
-</code></pre>
-<p>Unless required by applicable law or agreed to in writing, software<br />
-distributed under the License is distributed on an "AS IS" BASIS,<br />
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
-See the License for the specific language governing permissions and<br />
+<p>Licensed under the Apache License, Version 2.0 (the "License"); you
+may not use this file except in compliance with the License. You may
+obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
 limitations under the License.</p>
-
-</div>
-<style type='text/css'>body {
-font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-color: #111;
-background-color: #fdfdfd;
--webkit-text-size-adjust: 100%;
--webkit-font-feature-settings: "kern" 1;
--moz-font-feature-settings: "kern" 1;
--o-font-feature-settings: "kern" 1;
-font-feature-settings: "kern" 1;
-font-kerning: normal;
-padding: 30px;
-}
-
-@media only screen and (max-width: 600px) {
-body {
-padding: 5px;
-}
-
-body > #content {
-padding: 0px 20px 20px 20px !important;
-}
-}
-
-body > #content {
-margin: 0px;
-max-width: 900px;
-border: 1px solid #e1e4e8;
-padding: 10px 40px;
-padding-bottom: 20px;
-border-radius: 2px;
-margin-left: auto;
-margin-right: auto;
-}
-
-hr {
-color: #bbb;
-background-color: #bbb;
-height: 1px;
-flex: 0 1 auto;
-margin: 1em 0;
-padding: 0;
-border: none;
-}
-
-/**
-* Links
-*/
-a {
-color: #0366d6;
-text-decoration: none; }
-a:visited {
-color: #0366d6; }
-a:hover {
-color: #0366d6;
-text-decoration: underline; }
-
-pre {
-background-color: #f6f8fa;
-border-radius: 3px;
-font-size: 85%;
-line-height: 1.45;
-overflow: auto;
-padding: 16px;
-}
-
-/**
-* Code blocks
-*/
-
-code {
-background-color: rgba(27,31,35,.05);
-border-radius: 3px;
-font-size: 85%;
-margin: 0;
-word-wrap: break-word;
-padding: .2em .4em;
-font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-}
-
-pre > code {
-background-color: transparent;
-border: 0;
-display: inline;
-line-height: inherit;
-margin: 0;
-overflow: visible;
-padding: 0;
-word-wrap: normal;
-font-size: 100%;
-}
-
-
-/**
-* Blockquotes
-*/
-blockquote {
-margin-left: 30px;
-margin-top: 0px;
-margin-bottom: 16px;
-border-left-width: 3px;
-padding: 0 1em;
-color: #828282;
-border-left: 3px solid #e8e8e8;
-padding-left: 15px;
-font-size: 18px;
-letter-spacing: -1px;
-font-style: italic;
-}
-blockquote * {
-font-style: normal !important;
-letter-spacing: 0;
-color: #6a737d !important;
-}
-
-/**
-* Tables
-*/
-table {
-border-spacing: 2px;
-display: block;
-font-size: 14px;
-overflow: auto;
-width: 100%;
-margin-bottom: 16px;
-border-spacing: 0;
-border-collapse: collapse;
-}
-
-td {
-padding: 6px 13px;
-border: 1px solid #dfe2e5;
-}
-
-th {
-font-weight: 600;
-padding: 6px 13px;
-border: 1px solid #dfe2e5;
-}
-
-tr {
-background-color: #fff;
-border-top: 1px solid #c6cbd1;
-}
-
-table tr:nth-child(2n) {
-background-color: #f6f8fa;
-}
-
-/**
-* Others
-*/
-
-img {
-max-width: 100%;
-}
-
-p {
-line-height: 24px;
-font-weight: 400;
-font-size: 16px;
-color: #24292e; }
-
-ul {
-margin-top: 0; }
-
-li {
-color: #24292e;
-font-size: 16px;
-font-weight: 400;
-line-height: 1.5; }
-
-li + li {
-margin-top: 0.25em; }
-
-* {
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-color: #24292e; }
-
-a:visited {
-color: #0366d6; }
-
-h2, h3 {
-border-bottom: 1px solid #eaecef;
-color: #111;
-/* Darker */ }
-
-h1 {
-color: black;
-border-bottom: 1px solid #eaecef;
-}
-</style>
+</section>
+</section>
 </body>
 </html>

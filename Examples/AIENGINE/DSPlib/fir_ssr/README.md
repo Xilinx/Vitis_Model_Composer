@@ -2,7 +2,7 @@
 
 This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block with a Super Sample Rate (SSR) of 4 in Vitis Model Composer to achieve a high throughput. We also compare the results to the Simulink FIR block for functional correctness.
 
-Each stream input to the AI Engine FIR block has a throughput of close to 1 GSPS for a total of 4 GSPS. To achieve this throughput the following factors are in play:
+Each stream input to the AI Engine FIR block has a thoughput of close to 1 GSPS for a total of 4 GSPS. To achieve this throughput the following factors are in play:
 
 * 64 bit wide PLIO blocks on all the inputs and outputs, with a PL frequency of 500 MHz. This means two 16-bit complex inputs (64 bits total) can be transferred between AIE and PL through each PLIO during each clock cycle, for a total throughput of 1 GSPS per stream.
 * A high value for the parameter "Input frame size" on the filter block, in this case 8192. Note this parameter is the sum of the signal sizes of all the four inputs. A larger value means at each invocation of the filter more samples will be processed, which reduces the total overhead we incur when we invoke the kernel, and hence a higher throughput. However, a higher value here will also translate to a higher latency. 

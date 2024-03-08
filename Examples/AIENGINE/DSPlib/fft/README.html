@@ -1,4 +1,5 @@
 
+
 <html>
 <head>
 <title></title>
@@ -11,10 +12,9 @@
 function myFunction() {
 
 var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+commandURI="matlab:XmcExampleApi.openExample('fft');"
 
 document.location=commandURI
 }
@@ -24,14 +24,13 @@ document.location=commandURI
 <button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
               
 </html>
-<p>This example demonstrates using the AI Engine FFT block in Vitis Model Composer and comparing the results to the Simulink FFT block. </p>
+<p>This example demonestrates using the AI Engine FFT block in Model Composer and comparing the results to the Simulink FFT block. </p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
 <p><img width="18" height="18" src="../Images/bulb.png"> Note the usage of the <a href="https://www.mathworks.com/help/matlab/ref/setenv.html">environment varibale</a> in MATLAB to more easily set the paths in the AIE Graph block mask.</p>
 <p><img width="18" height="18" src="../Images/bulb.png"> Note the usage of the <em>To Fixed Size</em> block to convert a variable size signal to a fixed size signal. This is needed to compare the output of the AIE block to the output of the FFT block from Simulink (which is a fixed size signal). Note this is only valid if the variable size signal is fully packed. Otherwise, the <em>To fixed size</em> block will insert zeros when samples are missing. To make sure this is not the case, you can check the status output of the <em>To fixed Size</em> block. </p>
-<p><img src="images/FFT_ExampleModel.png" alt="" /></p>
-<p>DSPlib AI Engine FFT and Simulink FFT comparison for a complex sinusoidal input:</p>
-<p><img src="images/FFT_Comparison.png" alt="" /><br />
-<img src="images/Error.png" alt="" /></p>
+<p><img src="images/screenshot.PNG" alt="" /></p>
+<p>Image below depicts the output of DSPlib AI Engine FFT for a complex sinusoidal input:</p>
+<p><img src="images/dsplib_output.PNG" alt="" /></p>
 <hr />
 <p>Copyright 2020 Xilinx</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
@@ -148,7 +147,7 @@ margin-bottom: 16px;
 border-left-width: 3px;
 padding: 0 1em;
 color: #828282;
-border-left: 3px solid #e8e8e8;
+border-left: 4px solid #e8e8e8;
 padding-left: 15px;
 font-size: 18px;
 letter-spacing: -1px;
@@ -227,15 +226,9 @@ color: #24292e; }
 a:visited {
 color: #0366d6; }
 
-h2, h3 {
+h1, h2, h3 {
 border-bottom: 1px solid #eaecef;
 color: #111;
-/* Darker */ }
-
-h1 {
-color: black;
-border-bottom: 1px solid #eaecef;
-}
-</style>
+/* Darker */ }</style>
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 <html>
 <head>
 <title></title>
@@ -11,10 +10,10 @@
 function myFunction() {
 
 var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
 
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+
+commandURI="matlab:XmcExampleApi.openExample('Channelizer');"
 
 document.location=commandURI
 }
@@ -429,7 +428,7 @@ color: #111;
 /* Darker */ }
 
 h1 {
-color: black;
+color: green;
 border-bottom: 1px solid #eaecef;
 }
 </style>
