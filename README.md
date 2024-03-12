@@ -8,10 +8,11 @@ To learn more, visit the Vitis Model Composer [website](https://www.xilinx.com/p
 
 # Where should you start?
 Are you interested in accelerating your development effort using Vitis Model Composer? Here is where to start:
+* **Review the [supported operating systems and MATLAB releases](https://github.com/Xilinx/Vitis_Model_Composer/wiki/System-Requirements-for-Vitis-Model-Composer).**
 * Learn the [basics](/Tutorials/Simulink_Basics/README.md) of Simulink. To use Vitis Model Composer effectively, you need to understand the basics of Simulink, 
 a block diagram environment for multidomain simulation and model-based design.
 * Go over to the [tutorials](/Tutorials/README.md). The tutorials will give you a solid understanding of how to use the tool.
-* Browse through many of the examples we have here. You can easily access these examples from within the tool. 
+* Browse through many of the examples we have here. You can easily access these examples from within the tool. (**Note:** Many of the examples require the [DSP System Toolbox](https://www.mathworks.com/products/dsp-system.html).)
 
 
 # What's new in 2023.2?
@@ -41,7 +42,7 @@ a block diagram environment for multidomain simulation and model-based design.
 --------------
 Copyright 2022 Xilinx
 
-Copyright 2023 Advanced Micro Devices, Inc.
+Copyright 2023-2024 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
