@@ -14,7 +14,7 @@ inMat1=reshape(inMat(1:ROW/PLIO_NUM,:)',[],1);
 inMat2=reshape(inMat(ROW/PLIO_NUM+1:ROW/PLIO_NUM*2,:)',[],1);
 inMat3=reshape(inMat(ROW/PLIO_NUM*2+1:ROW,:)',[],1);
 
-out = sim("normalization_v4.slx");
+out = sim("normalization.slx");
 
 outMat1=reshape(simout1,128,[])';
 outMat2=reshape(simout2,128,[])';
