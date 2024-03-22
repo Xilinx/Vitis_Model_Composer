@@ -108,20 +108,20 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 
 16. Enter the platform component name `Design1_Platform` in the Component name field.
 
-<br><br><img src="Images/Step2/step16.png">
+<br><br><img src="Images/Step2/step16_.png">
 
 17. Users will now be presented with a drop down box to select the operating system and the processor will be auto-populated from the SDT. Tick the Generate boot artifacts box and proceed.
 <br><br><img src="Images/Step2/step17_.png">
 
 18. Click **Next**.
-<br><br><img src="Images/Step2/step18_.png">
+
 19. Click **Finish**.
 <br><br><img src="Images/Step2/step19_.png">
 
 20. Platform is created. Select the build icon in the flow view to build the platform.
 <br><br><img src="Images/Step2/step20_.png">
 
-20. Select the **Hello World** template and click **Finish**.
+21. Select the **Hello World** template and click **Finish**.
 
 21. Expand the **design_1_wrapper** container as shown to confirm the AXI4-Lite driver code is included in the project.
 <br><br><img src="Images/Step2/Step21.png">
