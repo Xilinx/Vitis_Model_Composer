@@ -58,11 +58,11 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 ## Step 2: Developing Software and Running it on the Zynq-7000 System
 
 1. Open the Vivado IDE:
-    - Click **Windows > Xilinx Design Tools > Vivado 2022.2.**
+    - Click **Windows > Vivado 2023.2.**
 <br><br>In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP Integrator, but this time you will create the design using a Tcl file, rather than the interactive process.
 
 2. Using the Tcl console as shown in the following figure:
-   - Type `cd C:\ug1498-model-composer-sys-gen-tutorial\HDL_Library\Lab6\IPI_Project` to change to the project directory.
+   - Type `cd C:\Xilinx\LAB6\IPI_Project` to change to the project directory.
    - Type source lab6_design.tcl to create the RTL design.
 
 > 📝 Note: If you have copied the tutorials to a different directory or changed the file names, you should update the Tcl file accordingly.
@@ -83,32 +83,45 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 
 8. Click **Finish** to export the hardware.
 
-9. Open the Vitis IDE:
-    - Click **Windows > Xilinx Design Tools > Vitis 2022.2.**
+9. Open the Vitis Unified IDE:
+    - Click **Windows > Vitis 2023.2.**
 
 10. Select the workspace space directory to store preferences and click Launch.
 
-11. From the Vitis IDE, select **Create Application Project**.
+11. From the Vitis IDE, select **Create Platform**.
+    <br><br>In the Vitis Classic flows, the platform was generated automatically when the XSA was input by the user. However, for Vitis Unified IDE, the user will need to manually create it.
+    <br><br><img src="Images/Step2/welcome_screen.PNG">
 
-12. Click **Next** in the Welcome page.
+12. From the Welcome Screen, select the Create Platform Component under Embedded Development. Or from the File menu, under New Component, Platform.
 
-13. Switch to the **Create a new platform from hardware(XSA)** tab and click **Browse** to create a custom platform from the XSA.
+
+13. Switch to the **Hardware Design** tab and click **Browse** to create a custom platform from the XSA.
 
 14. Navigate to **Lab6 > IPI_Project > project_1**, select **design_1_wrapper.xsa** and click **Open**
 
-15. Click **Next**.
+> 📝 Note: Users have two options: create a new platform using the XSA exported from Vivado or use an existing platform. We are creating a new platform from an existing XSA.
+
+
 <br><br><img src="Images/Step2/Step15.png">
 
-16. Enter the application project name `Des_Test` in the Application project name field.
+15. Click **Next**.
 
-17. In the Target processor section, select the processor **ps7_cortexa9_0** and click **Next**.
-<br><br><img src="Images/Step2/Step17.png">
+16. Enter the platform component name `Design1_Platform` in the Component name field.
+
+<br><br><img src="Images/Step2/step16_.png">
+
+17. Users will now be presented with a drop down box to select the operating system and the processor will be auto-populated from the SDT. Tick the Generate boot artifacts box and proceed.
+<br><br><img src="Images/Step2/step17_.png">
 
 18. Click **Next**.
 
-19. In the Domain page ensure the CPU selected is **ps7_cortexa9_0** and click **Next**.
+19. Click **Finish**.
+<br><br><img src="Images/Step2/step19_.png">
 
-20. Select the **Hello World** template and click **Finish**.
+20. Platform is created. Select the build icon in the flow view to build the platform.
+<br><br><img src="Images/Step2/step20_.png">
+
+21. Select the **Hello World** template and click **Finish**.
 
 21. Expand the **design_1_wrapper** container as shown to confirm the AXI4-Lite driver code is included in the project.
 <br><br><img src="Images/Step2/Step21.png">
