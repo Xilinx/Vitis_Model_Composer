@@ -90,10 +90,10 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 
 11. From the Vitis IDE, select **Create Platform**.
     <br><br>In the Vitis Classic flows, the platform was generated automatically when the XSA was input by the user. However, for Vitis Unified IDE, the user will need to manually create it.
-    <br><br>From the Welcome Screen, users can select the Create Platform Component under Embedded Development. Or from the File menu, under New Component, Platform.
     <br><br><img src="Images/Step2/welcome_screen.PNG">
 
-12. Click **Next** in the Welcome page.
+12. From the Welcome Screen, select the Create Platform Component under Embedded Development. Or from the File menu, under New Component, Platform.
+
 
 13. Switch to the **Hardware Design** tab and click **Browse** to create a custom platform from the XSA.
 
