@@ -95,21 +95,31 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 
 12. Click **Next** in the Welcome page.
 
-13. Switch to the **Create a new platform from hardware(XSA)** tab and click **Browse** to create a custom platform from the XSA.
+13. Switch to the **Hardware Design** tab and click **Browse** to create a custom platform from the XSA.
 
 14. Navigate to **Lab6 > IPI_Project > project_1**, select **design_1_wrapper.xsa** and click **Open**
 
-15. Click **Next**.
+> 📝 Note: Users have two options: create a new platform using the XSA exported from Vivado or use an existing platform. We are creating a new platform from an existing XSA.
+
+
 <br><br><img src="Images/Step2/Step15.png">
 
-16. Enter the application project name `Des_Test` in the Application project name field.
+15. Click **Next**.
 
-17. In the Target processor section, select the processor **ps7_cortexa9_0** and click **Next**.
-<br><br><img src="Images/Step2/Step17.png">
+16. Enter the platform component name `Design1_Platform` in the Component name field.
+
+<br><br><img src="Images/Step2/step16.png">
+
+17. Users will now be presented with a drop down box to select the operating system and the processor will be auto-populated from the SDT. Tick the Generate boot artifacts box and proceed.
+<br><br><img src="Images/Step2/step17_.png">
 
 18. Click **Next**.
+<br><br><img src="Images/Step2/step18_.png">
+19. Click **Finish**.
+<br><br><img src="Images/Step2/step19_.png">
 
-19. In the Domain page ensure the CPU selected is **ps7_cortexa9_0** and click **Next**.
+20. Platform is created. Select the build icon in the flow view to build the platform.
+<br><br><img src="Images/Step2/step20_.png">
 
 20. Select the **Hello World** template and click **Finish**.
 
