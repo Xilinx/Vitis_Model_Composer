@@ -42,7 +42,7 @@ The odd transient behavior at the beginning of the algorithm execution is what w
 
 6. Stop the model.
 
-## Debug the Code
+## Debugging the Code using GDB
 
 We will use the **gdb** debugger for C/C++ source code to debug the execution of the AI Engine kernel. First, let's look at the source code.
 
@@ -171,6 +171,32 @@ Now that we understand what's wrong with this code, we can exit gdb and fix the 
 12. Type `continue` to allow the Simulink model to finish execution.
 
 13. Type `quit` to exit gdb. Type `y` when asked if you want to detach the process.
+
+## Debugging the Code using Vitis 
+1. Run vmcLaunchVitisDebugger('detect_test') from the model directory on the MATLAB command window.
+![](images/step1.png)
+
+Note target id number and gdb path. This will be used in the step6.
+2.If there is an existing .vscode/launch.json file, the user will be asked to overwrite it. Click on 'Yes'.
+![](images/step2_2.png)
+
+3.vmcLaunchVitisDebugger('detect_test') function creates the required ".vscode/launch.json" file in the current directory and launches AMD Vitis Unified IDE for debugging AI Engine kernel code.
+![](images/step2.png)
+
+4.Click on Debug icon
+![](images/step3.png)
+
+5.click on settings icon next to 'Attach to PID' to open 'launch.json' file.
+![](images/step4.png)
+
+6.Make sure the target id and gdb path launch.json' file is same as we seen in the step1. 
+If it is not same please add the correct target id and gdb path in this file.
+![](images/step5.png)
+
+7.Open detectSingleWindow.cpp file and set a break point as shown below.
+![](images/step9.png)
+![](images/step6.png)
+![](images/step7.png)
 
 ## Fix The Bug
 
