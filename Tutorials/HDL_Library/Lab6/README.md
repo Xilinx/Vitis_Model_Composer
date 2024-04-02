@@ -104,11 +104,13 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 
 <br><br><img src="Images/Step2/Step15.png">
 
-15. Click **Next**.
 
-16. Enter the platform component name `Design1_Platform` in the Component name field.
+
+15. Enter the platform component name `Design1_Platform` in the Component name field.
 
 <br><br><img src="Images/Step2/step16_.png">
+
+16. Click **Next**.
 
 17. Users will now be presented with a drop down box to select the operating system and the processor will be auto-populated from the SDT. Tick the Generate boot artifacts box and proceed.
 <br><br><img src="Images/Step2/step17_.png">
@@ -119,34 +121,43 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 <br><br><img src="Images/Step2/step19_.png">
 
 20. Platform is created. Select the build icon in the flow view to build the platform.
+The platform will begin building in the background and we can move on to Create Application.
 <br><br><img src="Images/Step2/step20_.png">
 
-21. Select the **Hello World** template and click **Finish**.
+**Creating Application**
 
-21. Expand the **design_1_wrapper** container as shown to confirm the AXI4-Lite driver code is included in the project.
-<br><br><img src="Images/Step2/Step21.png">
+21. The user can view the available application templates from the Top menu by selecting View and Examples.
+This will show a list of available examples in the explorer view. We can select the Hello World example as shown below:
 
-22. Power up the ZC702 board to program the FPGA.
+<br><br><img src="Images/Step2/Creating_Application.png">
 
-23. Click **Xilinx > Program Device** and from the resulting window, click **Program**.
-<br><br> The Done LED (DS3) goes ON, on the FPGA board.
+22. Give application name as 'Des_Test' and click next.
+Select the target that was created and built above.
 
-24. Click **Window > Show View** and in the Show view window, type `Vitis`, select Vitis Serial Terminal and click **Open**.
-<br><br><img src="Images/Step2/Step24.png">
+<br><br><img src="Images/Step2/add_application_name.png">
+<br><br><img src="Images/Step2/Select_Platform_For_Application.png">
 
-25. To set up the terminal in the Vitis Serial Terminal view, click the + icon and perform the following:
-<br><br><img src="Images/Step2/Step25.png">
-    - Select the COM port to which the USB UART cable is connected. On Windows, if you are unsure, open the **Device Manager** and identify the port with the "Silicon Labs" driver under Ports (COM & LPT).
-    - Change the Baud Rate to 115200.
-    - Click **OK** to exit the Terminal Settings dialog box.
-    - Check that the terminal is connected by the message in tab title bar.
+23. Choose the existing domain that was created in the platform.
 
-26. Right-click the application project **Des_Test** in the Explorer view, select **Build Project**.
-<br><br> When this completes, you will see the message “Build Finished” in the console.
+<br><br><img src="Images/Step2/Choose_Domain.png">
 
-27. Right-click on application project **Des_Test**, select **Run As > Launch on Hardware.**
+**Build Application and Deploy on Target**
 
-28. Switch to the **Vitis Serial Terminal** tab and confirm that `Hello World` was received.
+24.  Power up the ZC702 board to program the FPGA.
+
+25. We are now ready to build our application Des_Test. To do this, select the Build icon in the Flow view.
+
+<br><br><img src="Images/Step2/application_build.png">
+
+26. Click **Vitis > Program Device** and from the resulting window, click **Program**.
+
+<br><br><img src="Images/Step2/program_device.png">
+<br><br><img src="Images/Step2/program_device_app.png">
+<br><br><img src="Images/Step2/programmed_device_.png">
+
+27. Click **Vitis > Program Flash**
+
+28. Switch to the terminal tab and confirm that `Hello World` was received.
 
 29. Expand the container `Des_Test` and then expand the container `src`.
 
@@ -156,15 +167,8 @@ This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integra
 
 32. Save the `helloworld.c` source code.
 
-33. Right-click application project `Des_Test` in the Explorer view, and select **Build Project**.
-<br><br> When this completes, you will see the message “Build Finished” in the console.
+33.Build the application.Once the build is successful then click on program device and program flash.
 
-34. Right-click again and select **Run As > Launch on Hardware.**
-
-> 📝 Note: If a window opens displaying the text “Run Session is already active”, click OK in that window.
-
-35. Review the results in the Vitis Serial Terminal tab (shown in the following figure).
-<br><br><img src="Images/Step2/Step35.jfif">
 
 ### Summary 
 
