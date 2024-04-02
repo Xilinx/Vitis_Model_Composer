@@ -40,7 +40,7 @@
 <ol start="6">
 <li>Stop the model.</li>
 </ol>
-<h2 id="debug-the-code">Debug the Code</h2>
+<h2 id="debugging-the-code-using-gdb">Debugging the Code using GDB</h2>
 <p>We will use the <strong>gdb</strong> debugger for C/C++ source code to debug the execution of the AI Engine kernel. First, let's look at the source code.</p>
 <ol>
 <li>Open the source file <code>detectSingleWindow.cpp</code>.</li>
@@ -149,6 +149,32 @@
 <li><p>Type <code>continue</code> to allow the Simulink model to finish execution.</p></li>
 <li><p>Type <code>quit</code> to exit gdb. Type <code>y</code> when asked if you want to detach the process.</p></li>
 </ol>
+<h2 id="debugging-the-code-using-vitis">Debugging the Code using Vitis</h2>
+<ol>
+<li>Run <code>vmcLaunchVitisDebugger('detect_test')</code> from the model directory on the MATLAB Command Window.</li>
+</ol>
+<p><img src="images/step1.png" alt="" /></p>
+<p>Note the GDB path and the process ID listed in the Command Window. They will be used in Step 5.</p>
+<p><code>vmcLaunchVitisDebugger</code> creates the required <code>.vscode/launch.json</code> file in the current directory and launches AMD Vitis IDE for debugging AI Engine kernel code.</p>
+<p><img src="images/ste2.png" alt="" /></p>
+<ol start="3">
+<li>Click on the <strong>Debug</strong> icon.</li>
+</ol>
+<p><img src="images/step3.png" alt="" /></p>
+<ol start="4">
+<li>Click on the <strong>Settings</strong> icon next to <strong>Attach to PID</strong> to open <code>launch.json</code> file.</li>
+</ol>
+<p><img src="images/step4.png" alt="" /></p>
+<ol start="5">
+<li>Make sure the GDB path and process ID listed in the <code>launch.json</code> file are the same as in Step 1. </li>
+</ol>
+<p><img src="images/step5.png" alt="" /></p>
+<ol start="6">
+<li>Open detectSingleWindow.cpp file and set a break point as shown below.</li>
+</ol>
+<p><img src="images/step9.png" alt="" /></p>
+<p><img src="images/step6.png" alt="" /></p>
+<p><img src="images/step7.png" alt="" /></p>
 <h2 id="fix-the-bug">Fix The Bug</h2>
 <p>We learned in the previous section that there is a bug in our code that zeros out the 2 accumulator buffers before execution begins. We can fix this error by advancing the memory pointer location on each loop iteration.</p>
 <ol>
@@ -163,7 +189,7 @@
 <h2 id="conclusion">Conclusion</h2>
 <p>In this example, you saw how to use gdb to debug source code that is running in Vitis Model Composer. This approach can be used with AI Engine and HLS C/C++ code.</p>
 <hr />
-<p>Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>Copyright 2023-2024 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>
