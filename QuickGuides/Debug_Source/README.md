@@ -173,29 +173,35 @@ Now that we understand what's wrong with this code, we can exit gdb and fix the 
 13. Type `quit` to exit gdb. Type `y` when asked if you want to detach the process.
 
 ## Debugging the Code using Vitis 
-1. Run vmcLaunchVitisDebugger('detect_test') from the model directory on the MATLAB command window.
+
+1. Run `vmcLaunchVitisDebugger('detect_test')` from the model directory on the MATLAB Command Window.
+
 ![](images/step1.png)
 
-Note target id number and gdb path. This will be used in the step6.
-2.If there is an existing .vscode/launch.json file, the user will be asked to overwrite it. Click on 'Yes'.
-![](images/step2_2.png)
+Note the GDB path and the process ID listed in the Command Window. They will be used in Step 5.
 
-3.vmcLaunchVitisDebugger('detect_test') function creates the required ".vscode/launch.json" file in the current directory and launches AMD Vitis Unified IDE for debugging AI Engine kernel code.
-![](images/step2.png)
+`vmcLaunchVitisDebugger` creates the required `.vscode/launch.json` file in the current directory and launches AMD Vitis IDE for debugging AI Engine kernel code.
 
-4.Click on Debug icon
+![](images/ste2.png)
+
+3. Click on the **Debug** icon.
+
 ![](images/step3.png)
 
-5.click on settings icon next to 'Attach to PID' to open 'launch.json' file.
+4. Click on the **Settings** icon next to **Attach to PID** to open `launch.json` file.
+
 ![](images/step4.png)
 
-6.Make sure the target id and gdb path launch.json' file is same as we seen in the step1. 
-If it is not same please add the correct target id and gdb path in this file.
+5. Make sure the GDB path and process ID listed in the `launch.json` file are the same as in Step 1. 
+
 ![](images/step5.png)
 
-7.Open detectSingleWindow.cpp file and set a break point as shown below.
+6. Open detectSingleWindow.cpp file and set a break point as shown below.
+
 ![](images/step9.png)
+
 ![](images/step6.png)
+
 ![](images/step7.png)
 
 ## Fix The Bug
@@ -217,7 +223,7 @@ The AI Engine kernel is rebuilt with the source code changes. We no longer see t
 In this example, you saw how to use gdb to debug source code that is running in Vitis Model Composer. This approach can be used with AI Engine and HLS C/C++ code.
 
 --------------
-Copyright 2023 Advanced Micro Devices, Inc.
+Copyright 2023-2024 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
