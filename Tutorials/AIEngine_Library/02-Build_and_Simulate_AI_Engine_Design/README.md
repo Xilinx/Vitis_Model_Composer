@@ -29,14 +29,21 @@ In this step, you will create a simple testbench for a block from the [AI Engine
 
 ![missing image](Images/Image_001.png)
 
-3. Select **Blank Model** to create a new canvas on which to design the Decimation Chain.And add Model Composer Hub block to the model.
+3. Select **Blank Model** to create a new canvas on which to design the Decimation Chain.
 
 ![missing image](Images/Image_002.png)
+
+4. Click on **Library Browser**.
+
+5. Find the **Vitis Model Composer Hub** block in the **AMD Toolbox -> AI Engine -> Tools** library.
+
 ![missing image](Images/step3_2.png)
+
+6. Drag and drop the **Vitis Model Composer Hub** block into the empty model.
 
 Perform the next step to automatically call the filter configuration script when opening the design or when you update it.
 
-4. Right-click in the canvas and select **Model Properties**:
+7. Right-click in the canvas and select **Model Properties**:
     * Click the **Callbacks** tab.
     * Click **PreLoadFcn** and type `CreateFilter;` in the edit window on the right.
     * Click **InitFcn** and type `CreateFilter;` in the edit window on the right.
@@ -46,7 +53,7 @@ Perform the next step to automatically call the filter configuration script when
 
 Save the model **CTRL+S** and assign the name **VMC_DecimationChain**.
 
-5. Click the **Library Browser** icon.
+8. Click the **Library Browser** icon.
 
 ![missing image](Images/Image_006.png)
 
@@ -65,17 +72,17 @@ Click the **AI Engine** section. This reveals the following sub-sections:
 * Tools
 * User-Defined functions
 
-6. Click the **DSP** sub-section. There are 2 sub-menu entries:
+9. Click the **DSP** sub-section. There are 2 sub-menu entries:
 - Buffer IO: which contains filter implementations using frame-based input and output.
 - Stream IO : which contains filter implementations using streaming input and output:
 
 
-7. Click the **Buffer IO** sub-section and place the **FIR Halfband Decimator** block in the canvas as shown in the following figure.
+10. Click the **Buffer IO** sub-section and place the **FIR Halfband Decimator** block in the canvas as shown in the following figure.
 
 ![missing image](Images/Image_007.png)
 
 
-8. Double-click the **AIE FIR Halfband Decimator** block to open the GUI. Populate the GUI with the following parameters :
+11. Double-click the **AIE FIR Halfband Decimator** block to open the GUI. Populate the GUI with the following parameters :
     * **Input/output data type**: cint16
     * **Filter coefficients data type**: int16
     * **Filter coefficients**: hb1_aie
@@ -89,28 +96,28 @@ Click the **AI Engine** section. This reveals the following sub-sections:
 
 Now create a data source to feed this filter.
 
-9. Create the following two blocks by clicking the canvas and typing the beginning of the name of the block. Then enter the given parameters:
+12. Create the following two blocks by clicking the canvas and typing the beginning of the name of the block. Then enter the given parameters:
 
 | Name to Type | Block Name to Select | Parameters |
 | :--- | :--- | :--- |
 | random   | Random Source  |  Source Type: Uniform <br> Minimum: -30000  <br> Maximum: 30000  <br>  Sample time: 1   <br> Samples per frame: 2048   <br> Complexity: complex|
 | cast  | Cast  | Output data type: int16  |
 
-10. Cascade the three blocks: **Random Source**, **Cast**, **AIE FIR Filter**.
+13. Cascade the three blocks: **Random Source**, **Cast**, **AIE FIR Filter**.
 
-11. The file ``ReferenceChain.slx`` contains the decimation chain using Simulink blocks. **Open** the file **ReferenceChain.slx**. Copy the block **HB1** over to your design.
+14. The file ``ReferenceChain.slx`` contains the decimation chain using Simulink blocks. **Open** the file **ReferenceChain.slx**. Copy the block **HB1** over to your design.
 
-12. Copy the small set of blocks (**To Fixed Size**, **Subtract**, **Scope**) to create the following design:
+15. Copy the small set of blocks (**To Fixed Size**, **Subtract**, **Scope**) to create the following design:
 
 ![missing image](Images/Image_009.png)
 
-13. In the Simulink toolstrip, set the **Stop Time** to ``5000`` and click **Run** to simulate the design. The FIR filter is compiled and the design is run. 
+16. In the Simulink toolstrip, set the **Stop Time** to ``5000`` and click **Run** to simulate the design. The FIR filter is compiled and the design is run. 
 
-14. Double-click the **Scope** block to view the simulation results. The Error scope should show a completely null difference.
+17. Double-click the **Scope** block to view the simulation results. The Error scope should show a completely null difference.
 
 ![missing image](Images/Image_009a.png)
 
-15. To gain more information about the signals traveling through the wires, update the following display parameters:
+18. To gain more information about the signals traveling through the wires, update the following display parameters:
     * Right-click the canvas and select **Other Displays --> Signals and Ports --> Signal Dimensions**.
     * Right-click the canvas and select **Other Displays --> Signals and Ports --> Port Data Types**.
     * Right-click the canvas and select **Sample Time Display --> all**.
@@ -191,7 +198,7 @@ AI Engine simulations within Simulink are bit-exact but do not provide timing in
 In the next lab, you will see how to bring in custom AI Engine kernel or graph code and simulate it with Vitis Model Composer.
 
 ---
-&copy; Copyright 2023 Advanced Micro Devices, Inc.
+&copy; Copyright 2023-2024 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
