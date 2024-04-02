@@ -51,6 +51,8 @@
 
 #include "xaxidma.h"
 #include "hdl_dut.h"
+#include "xparameters.h"
+
 
 /* DES Accelerator Test data */
 
@@ -227,7 +229,7 @@ int main()
 	/*
 	 * initialize DES core
 	 */
-	Status = hdl_dut_Initialize(&DES_inst, XPAR_LAB6_1_0_DEVICE_ID);
+	Status = hdl_dut_CfgInitialize(&DES_inst, XPAR_LAB6_1_0_BASEADDR);
 
 	if (Status == XST_FAILURE) {
 		print("DES core initialization FAILED\r\n");
@@ -238,7 +240,7 @@ int main()
 	/*
 	 * Initialize the DMA Driver
 	 */
-	AxiDmaCfgPtr = XAxiDma_LookupConfig(XPAR_AXI_DMA_DEVICE_ID);
+	AxiDmaCfgPtr = XAxiDma_LookupConfig(XPAR_XAXIDMA_0_BASEADDR);
 	Status = XAxiDma_CfgInitialize(&PL_AXI_DMA_Device, AxiDmaCfgPtr);
 	if (Status != XST_FAILURE) {
 		XAxiDma_IntrDisable(&PL_AXI_DMA_Device, XAXIDMA_IRQ_ALL_MASK, XAXIDMA_DEVICE_TO_DMA);

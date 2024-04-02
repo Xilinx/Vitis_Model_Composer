@@ -52,8 +52,16 @@ document.location=commandURI
 <li>Select <strong>Blank Model</strong> to create a new canvas on which to design the Decimation Chain.</li>
 </ol>
 <p><img src="Images/Image_002.png" alt="missing image" /></p>
-<p>Perform the next step to automatically call the filter configuration script when opening the design or when you update it.</p>
 <ol start="4">
+<li><p>Click on <strong>Library Browser</strong>.</p></li>
+<li><p>Find the <strong>Vitis Model Composer Hub</strong> block in the <strong>AMD Toolbox -> AI Engine -> Tools</strong> library.</p></li>
+</ol>
+<p><img src="Images/step3_2.png" alt="" /></p>
+<ol start="6">
+<li>Drag and drop the <strong>Vitis Model Composer Hub</strong> block into the empty model.</li>
+</ol>
+<p>Perform the next step to automatically call the filter configuration script when opening the design or when you update it.</p>
+<ol start="7">
 <li>Right-click in the canvas and select <strong>Model Properties</strong>:<ul>
 <li>Click the <strong>Callbacks</strong> tab.</li>
 <li>Click <strong>PreLoadFcn</strong> and type <code>CreateFilter;</code> in the edit window on the right.</li>
@@ -62,7 +70,7 @@ document.location=commandURI
 </ol>
 <p><img src="Images/Image_003.png" alt="missing image" /></p>
 <p>Save the model <strong>CTRL+S</strong> and assign the name <strong>VMC_DecimationChain</strong>.</p>
-<ol start="5">
+<ol start="8">
 <li>Click the <strong>Library Browser</strong> icon.</li>
 </ol>
 <p><img src="Images/Image_006.png" alt="missing image" /></p>
@@ -93,7 +101,7 @@ document.location=commandURI
 <li>Click the <strong>Buffer IO</strong> sub-section and place the <strong>FIR Halfband Decimator</strong> block in the canvas as shown in the following figure.</li>
 </ol>
 <p><img src="Images/Image_007.png" alt="missing image" /></p>
-<ol start="8">
+<ol start="11">
 <li><p>Double-click the <strong>AIE FIR Halfband Decimator</strong> block to open the GUI. Populate the GUI with the following parameters :</p>
 <ul>
 <li><strong>Input/output data type</strong>: cint16</li>
@@ -101,15 +109,12 @@ document.location=commandURI
 <li><strong>Filter coefficients</strong>: hb1_aie</li>
 <li><strong>Input Window size (Number of samples)</strong>: 2048</li>
 <li><strong>Scale output down by 2</strong>: Shift1</li>
-<li><strong>Rounding mode</strong>: Floor</li>
-<li><strong>Saturation mode</strong>: Asymmetric</li>
-<li><strong>Number of decimator polyphases</strong>: 1   </li>
-<li><strong>Number of cascade stages</strong>: 1</li></ul>
+<li><strong>Rounding mode</strong>: Floor</li></ul>
 <p>Click <strong>Apply</strong> and <strong>OK</strong>.</p></li>
 </ol>
 <p><img src="Images/Image_008.png" alt="missing image" /></p>
 <p>Now create a data source to feed this filter.</p>
-<ol start="9">
+<ol start="12">
 <li>Create the following two blocks by clicking the canvas and typing the beginning of the name of the block. Then enter the given parameters:</li>
 </ol>
 <table>
@@ -133,18 +138,18 @@ document.location=commandURI
 </tr>
 </tbody>
 </table>
-<ol start="10">
+<ol start="13">
 <li><p>Cascade the three blocks: <strong>Random Source</strong>, <strong>Cast</strong>, <strong>AIE FIR Filter</strong>.</p></li>
 <li><p>The file <code>ReferenceChain.slx</code> contains the decimation chain using Simulink blocks. <strong>Open</strong> the file <strong>ReferenceChain.slx</strong>. Copy the block <strong>HB1</strong> over to your design.</p></li>
 <li><p>Copy the small set of blocks (<strong>To Fixed Size</strong>, <strong>Subtract</strong>, <strong>Scope</strong>) to create the following design:</p></li>
 </ol>
 <p><img src="Images/Image_009.png" alt="missing image" /></p>
-<ol start="13">
+<ol start="16">
 <li><p>In the Simulink toolstrip, set the <strong>Stop Time</strong> to <code>5000</code> and click <strong>Run</strong> to simulate the design. The FIR filter is compiled and the design is run. </p></li>
 <li><p>Double-click the <strong>Scope</strong> block to view the simulation results. The Error scope should show a completely null difference.</p></li>
 </ol>
 <p><img src="Images/Image_009a.png" alt="missing image" /></p>
-<ol start="15">
+<ol start="18">
 <li>To gain more information about the signals traveling through the wires, update the following display parameters:<ul>
 <li>Right-click the canvas and select <strong>Other Displays --> Signals and Ports --> Signal Dimensions</strong>.</li>
 <li>Right-click the canvas and select <strong>Other Displays --> Signals and Ports --> Port Data Types</strong>.</li>
@@ -224,27 +229,6 @@ document.location=commandURI
 <td style="text-align:left;">floor</td>
 <td style="text-align:left;">floor</td>
 </tr>
-<tr>
-<td style="text-align:left;">Saturation mode</td>
-<td style="text-align:left;">Asymmetric</td>
-<td style="text-align:left;">Asymmetric</td>
-<td style="text-align:left;">Asymmetric</td>
-<td style="text-align:left;">Asymmetric</td>
-</tr>
-<tr>
-<td style="text-align:left;">Number of decimator polyphases</td>
-<td style="text-align:left;">1</td>
-<td style="text-align:left;">1</td>
-<td style="text-align:left;">1</td>
-<td style="text-align:left;">N/A</td>
-</tr>
-<tr>
-<td style="text-align:left;">Number of cascade stages</td>
-<td style="text-align:left;">1</td>
-<td style="text-align:left;">1</td>
-<td style="text-align:left;">1</td>
-<td style="text-align:left;">1</td>
-</tr>
 </tbody>
 </table>
 <ol start="3">
@@ -290,7 +274,7 @@ document.location=commandURI
 <p><strong>Congratulations!</strong> This concludes Lab 2. In this lab, you built a model of the decimation chain using blocks from the AI Engine DSP Library. You also used Simulink scopes to compare the AI Engine implementation of the design against a golden reference.</p>
 <p>In the next lab, you will see how to bring in custom AI Engine kernel or graph code and simulate it with Vitis Model Composer.</p>
 <hr />
-<p>&copy; Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>&copy; Copyright 2023-2024 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>
