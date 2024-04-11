@@ -1,5 +1,5 @@
 # Guide on how to move generated image files into hardware board
-This guide depends on the version of your Vitis Model Compsoer. If you are not sure what version of Vitis Model Composer you are using, simply type **_xmcBuildInfo_** in the MATLAB command window. This will return the version of Vitis Model Composer you are using. 
+This guide depends on the version of your Vitis Model Composer. If you are not sure what version of Vitis Model Composer you are using, simply type **_xmcBuildInfo_** in the MATLAB command window. This will return the version of Vitis Model Composer you are using. 
 
 ## 2022.1 onwards
 
@@ -12,7 +12,8 @@ https://github.com/Xilinx/Vitis_Model_Composer/blob/2021.2/QuickGuides/Running_B
 
 
 --------------
-Copyright 2020 Xilinx
+Copyright 2020-2022 Xilinx
+Copyright 2023-2024 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
