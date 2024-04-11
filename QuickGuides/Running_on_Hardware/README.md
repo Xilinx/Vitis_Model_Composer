@@ -3,7 +3,7 @@ This guide depends on the version of your Vitis Model Compsoer. If you are not s
 
 ## 2022.1 onwards
 
-https://github.com/Xilinx/Vitis_Model_Composer/blob/2022.1/QuickGuides/Running_on_Hardware/README.md
+https://github.com/Xilinx/Vitis_Model_Composer/blob/HEAD/QuickGuides/Running_on_Hardware/README.md
 
 ## 2021.2
 
