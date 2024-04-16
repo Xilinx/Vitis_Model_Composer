@@ -1,8 +1,8 @@
-COL=128;
+COL=256;
 ROW=384;
-K_COL=128;
-K_ROW=64;
 NUM=6;
+K_COL=COL;
+K_ROW=ROW/NUM;
 PLIO_NUM=3;
 
 buffer_tiling
