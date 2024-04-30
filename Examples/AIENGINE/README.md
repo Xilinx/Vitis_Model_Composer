@@ -9,10 +9,19 @@ Vitis Model Composer allows you to create AI Engine designs and generate code fo
 
 <tr>
 <td>
-<a href="./Importing_AIE_blocks/AIE_ML_Graph_Import/README.md">Importing an AIE-ML graph as a block</a>  <img src="../../Images/new.PNG" width="50">
+<a href="./Importing_AIE_blocks/AIE_ML_Graph_Import/README.md">Importing an AIE-ML graph as a block</a>  
 </td>
 <td>
 In this example we import a graph for AIE-ML devices (including memory tiles) into Vitis Model Composer as a block.
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="./Normalization/README.md">Normalization</a>  <img src="../../Images/new.PNG" width="50">
+</td>
+<td>
+2D normalization algorithm implemented on AIE-ML devices, using Shared Buffers on memory tiles and the bfloat16 data type.
 </td>
 </tr> 
 </table>
