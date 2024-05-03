@@ -1,6 +1,6 @@
 # Polyphase Channelizer
 
-***Version: Vitis Model Composer 2023.2***
+***Version: Vitis Model Composer 2024.1***
 
 ## Table of Contents
 
@@ -50,7 +50,7 @@ The figure below shows a block diagram of the polyphase channelizer. The polypha
 ![figure1](images/channelizer-block-diagram.png)
 *Polyphase Channelizer Block Diagram.*
 
-For a more detailed description of the implementation, refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2023.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in [Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials). 
+For a more detailed description of the implementation, refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2024.1/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in [Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials). 
 
 The remainder of this example will focus on how to bring the polyphase channelizer implementation into Vitis Model Composer and simulate it.
 
@@ -109,7 +109,7 @@ The polyphase filter and DFT implementation are implemented as separate AI Engin
 
 ![](images/AI_Engine.png)
 
-Each input and output stream has a 64-bit PLIO. This means that 2 `cint16` samples are transferred on each stream during each clock cycle. To achieve high throughput, the AI Engine design is implemented using a Super Sample Rate (SSR) parallel architecture. Refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2023.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in Vitis-Tutorials for further details on the parallel architecture.
+Each input and output stream has a 64-bit PLIO. This means that 2 `cint16` samples are transferred on each stream during each clock cycle. To achieve high throughput, the AI Engine design is implemented using a Super Sample Rate (SSR) parallel architecture. Refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2024.1/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in Vitis-Tutorials for further details on the parallel architecture.
 
 5. Double-click on the **m16_ssr8_filterbank_graph** block.
 
@@ -135,7 +135,7 @@ The PL portion of the polyphase channelizer design contains 3 IPs that perform t
 * Output Permute
 * Cyclic Shift Buffer
 
-These functions are explained in greater detail in [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2023.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer).
+These functions are explained in greater detail in [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2024.1/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer).
 
 These blocks are implemented in PL using HLS @ 625 MHz. With 2 samples transferred in each PL clock cycle, the AI Engine is able to operate at a rate of 1250 MHz.
 
@@ -225,7 +225,7 @@ This example showcased the following capabilities of Vitis Model Composer for Ve
 
 
 ------------
-Copyright (c) 2023-2024 Advanced Micro Devices, Inc.
+Copyright (c) 2024 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

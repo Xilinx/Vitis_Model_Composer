@@ -31,7 +31,7 @@ For this example, the following specifications are chosen:
 
 ## Design
 
-The Vitis Model Composer model imports the normalization design as AI Engine Kernel blocks. For a detailed description of the example design and its kernel functions, refer to the [AIE-ML Performance Analysis Tutorial](https://github.com/Xilinx/Vitis-Tutorials/tree/2023.2/AI_Engine_Development/AIE-ML/Feature_Tutorials/13-aie-ml-performance-analysis). The Vitis Model Composer example uses Version 4 of the normalization design.
+The Vitis Model Composer model imports the normalization design as AI Engine Kernel blocks. For a detailed description of the example design and its kernel functions, refer to the [AIE-ML Performance Analysis Tutorial](https://github.com/Xilinx/Vitis-Tutorials/tree/2024.1/AI_Engine_Development/AIE-ML/Feature_Tutorials/13-aie-ml-performance-analysis). The Vitis Model Composer example uses Version 4 of the normalization design.
 
 Here are the relevant features of the Vitis Model Composer model: 
 
