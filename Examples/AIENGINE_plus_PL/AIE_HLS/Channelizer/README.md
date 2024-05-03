@@ -1,6 +1,6 @@
 # Polyphase Channelizer
 
-***Version: Vitis Model Composer 2023.1***
+***Version: Vitis Model Composer 2023.2***
 
 ## Table of Contents
 
@@ -50,7 +50,7 @@ The figure below shows a block diagram of the polyphase channelizer. The polypha
 ![figure1](images/channelizer-block-diagram.png)
 *Polyphase Channelizer Block Diagram.*
 
-For a more detailed description of the implementation, refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/AI_Engine_Development/Design_Tutorials/04-Polyphase-Channelizer) in [Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials). 
+For a more detailed description of the implementation, refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2023.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in [Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials). 
 
 The remainder of this example will focus on how to bring the polyphase channelizer implementation into Vitis Model Composer and simulate it.
 
@@ -93,7 +93,7 @@ The inputs and outputs of the channelizer are 16 bits wide with 15 bits of fract
 
 Note also that the inputs and outputs are 4 elements wide. This is because 128 bits of data (4 complex `int16` samples) can be transferred to and from the design on each stream and sample.
 
-3. Double-click on the **Channelizer** subsystem.
+3. Double-click on the **DUT** subsystem.
 
 ![](images/Channelizer.png)
 
@@ -109,7 +109,7 @@ The polyphase filter and DFT implementation are implemented as separate AI Engin
 
 ![](images/AI_Engine.png)
 
-Each input and output stream has a 64-bit PLIO. This means that 2 `cint16` samples are transferred on each stream during each clock cycle. To achieve high throughput, the AI Engine design is implemented using a Super Sample Rate (SSR) parallel architecture. Refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/AI_Engine_Development/Design_Tutorials/04-Polyphase-Channelizer) in Vitis-Tutorials for further details on the parallel architecture.
+Each input and output stream has a 64-bit PLIO. This means that 2 `cint16` samples are transferred on each stream during each clock cycle. To achieve high throughput, the AI Engine design is implemented using a Super Sample Rate (SSR) parallel architecture. Refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2023.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in Vitis-Tutorials for further details on the parallel architecture.
 
 5. Double-click on the **m16_ssr8_filterbank_graph** block.
 
@@ -135,13 +135,13 @@ The PL portion of the polyphase channelizer design contains 3 IPs that perform t
 * Output Permute
 * Cyclic Shift Buffer
 
-These functions are explained in greater detail in [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2023.1/AI_Engine_Development/Design_Tutorials/04-Polyphase-Channelizer).
+These functions are explained in greater detail in [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2023.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer).
 
 These blocks are implemented in PL using HLS @ 625 MHz. With 2 samples transferred in each PL clock cycle, the AI Engine is able to operate at a rate of 1250 MHz.
 
 Each function is imported into Vitis Model Composer using the **HLS Kernel** block.
 
-8. Return up to the **Channelizer** subsystem.
+8. Return up to the **DUT** subsystem.
 
 9. Double-click on the **m16_ssr8_permute_fb_i_wrapper** block, which implements the Input Circular Buffer.
 
@@ -161,43 +161,46 @@ Optionally, you can double-click on the two remaining HLS Kernel blocks to obser
 
 ## Functional Verification
 
-A MATLAB script has been provided as a test bench to generate channelizer inputs, execute the Simulink model, and compare the Simulink model's implementation to the MATLAB golden reference implementation.
+The functional correctness of the channelizer can be evaluated by running the Simulink model.
 
-1. Open the `Channelizer.mlx` MATLAB script.
+1. Right-click the **Dashboard** block and select **Open in New Window**.
 
-2. On the MATLAB toolstrip, click **Run and Advance**: ![](images/RunAndAdvance.png)
+2. Arrange the model, dashboard, and scopes as desired.
 
-This executes the first 3 steps of the testbench: *Preparation*, *Initialize the Channelizer Model*, and *Create Testbench Stimulus*. The end result is that the channelizer is simulated in MATLAB, and reference input and output vectors are saved in the MATLAB workspace under the variable `channelizer`.
+3. Click **Run** on the Simulink toolstrip.
 
-3. On the MATLAB toolstrip, click **Run Section**: ![](images/RunSection.png)
+![](images/Model_Running.png)
 
-This executes the next step of the testbench, which is to run the Simulink model. The input streams are pulled from the workspace variable `channelizer` and the output streams are written to the workspace variable `out`.
+This model implements a 16-channel channelizer. The dashboard can be used to control the input signal to the channelizer. Each of the 16 channels can be configured in terms of:
 
-4. Wait until the Simulink model is finished executing before proceeding to the next step.
+* Enabled/Disabled
+* Modulation (QAM) Enabled/Disabled
+* Frequency Sweep Enabled/Disabled
+* Rate of the Frequency Sweep
 
-5. Click the code section labeled *Check Simulink Outputs against MATLAB Reference*, then click **Run Section**.
+The dashboard can also be used to select which channelizer outputs are displayed on each of the spectrum analyzers.
 
-This section compares the Simulink output and MATLAB reference for each stream. If the outputs match, this means the Simulink model (and therefore the AI Engine and HLS code implementations) match the MATLAB golden reference.
-
-![](images/Channel1.png) ![](images/Channel2.png)
+You can interact with the dashboard while the model is running and see how the channelizer adjusts to the input signal changes.
 
 ## Estimating Throughput
 
 Vitis Model Composer can call `aiesimulator` to simulate and plot the estimated throughput of the design.
 
-1. Open the `Channelizer.slx` model.
+1. Set the Simulink simulation **Stop Time** to `1e-5`.
 
-2. On the top level of the model, click the **Model Composer Hub** block.
+1. On the top level of the model, double-click the **Model Composer Hub** block.
 
-3. Select the **AIE** subsystem and ensure that the settings are as follows, especially that **Plot AIE Simulation Output** is enabled. Also note the AIE Compiler command line option to specify the PL clock rate. This information is used by the `aiesimulator` when calculating timing.
+2. Select the **AIE** subsystem and ensure that the settings are as follows, especially that **Plot AIE Simulation Output** is enabled. 
 
 ![](images/VMCHub1.png)
 
-4. Select the **Channelizer** subsystem and ensure that the settings are as follows:
+Also note the AIE Compiler command line option to specify the PL clock rate. This information is used by the `aiesimulator` when calculating timing.
+
+3. Select the **DUT** subsystem and ensure that the settings are as follows:
 
 ![](images/VMCHub2.png)
 
-5. Click **Generate**.
+4. Click **Generate**.
 
 After code generation, AIE simulation is performed. This is a cycle-approximate simulation that can be used to estimate throughput. The results are displayed in the Simulation Data Inspector. Note that the throughput on each of the 8 output streams is approximately 1250 MSPS. It takes 2 clock cycles for the 8 output streams to produce a 16-point DFT output. Therefore, the DFT updates at a rate of 625 MHz, for which the channelizer was designed. 
 
@@ -222,7 +225,7 @@ This example showcased the following capabilities of Vitis Model Composer for Ve
 
 
 ------------
-Copyright (c) 2023 Advanced Micro Devices, Inc.
+Copyright (c) 2023-2024 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

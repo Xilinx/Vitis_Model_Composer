@@ -37,7 +37,7 @@ In this step, you will create a simple testbench for a block from the [AI Engine
 
 5. Find the **Vitis Model Composer Hub** block in the **AMD Toolbox -> AI Engine -> Tools** library.
 
-![](Images/step3_2.png)
+![missing image](Images/step3_2.png)
 
 6. Drag and drop the **Vitis Model Composer Hub** block into the empty model.
 
