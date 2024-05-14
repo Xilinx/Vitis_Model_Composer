@@ -41,15 +41,16 @@ document.location=commandURI
 <p>For this example, the following specifications are chosen:</p>
 <ul>
 <li><code>COL</code>: <code>128</code></li>
-<li><code>ROW</code>: <code>1384</code></li>
+<li><code>ROW</code>: <code>384</code></li>
 <li>Data Type: <code>bfloat16</code></li>
 </ul>
 <h2 id="design">Design</h2>
 <p>The Vitis Model Composer model imports the normalization design as AI Engine Kernel blocks. For a detailed description of the example design and its kernel functions, refer to the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2024.1/AI_Engine_Development/AIE-ML/Feature_Tutorials/13-aie-ml-performance-analysis">AIE-ML Performance Analysis Tutorial</a>. The Vitis Model Composer example uses Version 4 of the normalization design.</p>
+<p><img src="./Images/model.png" alt="" /> </p>
 <p>Here are the relevant features of the Vitis Model Composer model: </p>
 <ul>
-<li>Design inputs and outputs are processed via the model callbacks. To view the callbacks, right-click on the design canvas, select <strong>Model Properties</strong>, then <strong>Callbacks</strong>.</li>
-<li>In the <code>PostLoadFcn</code> callback, tiling parameters for the shared buffers are defined in MATLAB structure arrays. For example, the tiling parameters for the input shared buffer are displayed below.</li>
+<li>Design inputs are provided via the model callbacks. To view the callbacks, right-click on the design canvas, select <strong>Model Properties</strong>, then <strong>Callbacks</strong>.</li>
+<li>In the <code>InitFcn</code> callback, tiling parameters for the shared buffers are defined in MATLAB structure arrays. For example, the tiling parameters for the input shared buffer are displayed below.</li>
 </ul>
 <pre><code>% Input Memtile, Write Access
 mtxA_w = [];
@@ -67,20 +68,11 @@ end
 </code></pre>
 <p>This shared buffer has 3 write (input) ports and 5 read (output) ports. The tiling parameters are stored in 3x1 and 5x1, respectively, MATLAB structure arrays. For more information on the format of the MATLAB structure, refer to the <a href="matlab:helpview(vmcHelp(name='Shared_Buffer',category='AIE'))">Shared Buffer</a> block help.</p>
 <ul>
-<li>Input data is initially stored in the MATLAB workspace. The data is then brought into the Simulink model, and the AI Engine design, via a <strong>RTP Source</strong> block. The <strong>RTP Source</strong> block outputs the workspace data for the first simulation time step, then goes empty for the remainder of the simulation. This keeps the AI Engine kernel's input buffer from overflowing. For more information, refer to the <a href="matlab:helpview(vmcHelp(name='RTP_Source',category='UTIL'))">RTP Source</a> block help.</li>
 <li>The AI Engine design inputs and outputs <code>bfloat16</code> floating-point data. The <strong>Convert To Bfloat16</strong> and <strong>Convert From Bfloat16</strong> blocks convert between the Simulink <code>single</code> data type and the <code>bfloat16</code> data type.</li>
 <li>Because this design has a feedback loop within the AI Engine subsystem, an <strong>Algebraic Loop Breaker</strong> block is needed to compile and run the model. For more information, see the <a href="matlab:helpview(vmcHelp(name='AlgebraicLoopBreaker',category='UTIL'))">Algebraic Loop Breaker</a> block help.</li>
-<li>The <strong>Variable Size Signal to Workspace</strong> block conveniently writes the AI Engine design outputs to the MATLAB workspace as vectors.</li>
-<li>The model's <code>StopFcn</code> callback retrieves the results from the MATLAB workspace, compares them to a reference output, and plots the results.</li>
 </ul>
 <p><img src="./Images/results.png" alt="" />   </p>
-<p>The following plots are shown:</p>
-<ul>
-<li><strong>Input Image:</strong> Input data to the AI Engine normalization algorithm.</li>
-<li><strong>Reference Output:</strong> Reference normalization output, calculated by the MATLAB command: <code>output = (input-mean(input,'all'))/std(input,1,'all')</code>.</li>
-<li><strong>Output Image:</strong> Output from the AI Engine normalization algorithm.</li>
-</ul>
-<p>The input and output data appear similar, but note the difference in the ranges. The mean error between the AI Engine implementation and the reference output is also displayed.</p>
+<p>The mean and variance of both the input and output signal are displayed. Note that the mean of the output signal is less than 1, and the variance of the output signal is 1. This is the result of the normalization algorithm.</p>
 <hr />
 <p>Copyright (c) 2024 Advanced Micro Devices, Inc.</p>
 
