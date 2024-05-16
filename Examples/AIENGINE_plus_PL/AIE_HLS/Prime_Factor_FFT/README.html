@@ -1,0 +1,249 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="prime-factor-fft-1008-on-aie-ml">Prime Factor FFT-1008 on AIE-ML</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
+              
+</html>
+<p>This example demonstrates a Prime Factor FFT algorithm on AIE-ML devices. It demonstrates the <strong>Shared Buffer</strong> block to access Memory Tiles on the AIE-ML array.</p>
+<h2 id="introduction">Introduction</h2>
+<p>The Prime Factor Algorithm (PFA) [<a href="https://en.wikipedia.org/wiki/Prime-factor_FFT_algorithm" title="Prime Factor FFT Algorithm">1</a>] is a Fast Fourier Transform (FFT) algorithm [<a href="https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Signal_Processing_and_Modeling/Fast_Fourier_Transforms_(Burrus)" title="Fast Fourier Transforms">2</a>] discovered by Good &amp; Thomas before the more popular Cooley-Tukey algorithm with some interesting properties. The PFA is another "divide and conquer" approach for computing a Discrete Fourier Transform (DFT) of size <code>N = N1 * N2</code> as a two-dimensional DFT of size <code>N1 X N2</code> as long as <code>N1</code> and <code>N2</code> are relatively prime (ie. share no common divisors). The smaller transforms of size <code>N1</code> and <code>N2</code> may be computed by some other technique, for example using the Winograd FFT Algorithm, or the PFA technique may be applied recursively again to both <code>N1</code> and <code>N2</code>. It turns out Versal AI Engines compute DFT with small dimensions <code>N &lt; 32</code> very efficiently using direct vector/matrix multiplication. Consequently, the PFA approach using DFT on the individual prime factors provides an efficient approach to the FFT on Versal AI Engines.</p>
+<p>A second advantage of the PFA approach is that unlike the popular Cooley-Tukey FFT, no extra multiplications by "twiddle factors" need be performed between stages. This fact falls out of the DFT factorization when <code>N1</code> and <code>N2</code> share no common factors. This provides a computational advantage compared to the more traditional Cooley-Tukey formulation, but the PFA incurs a drawback in that a complicated re-indexing or permutation of it's I/O samples is required. For Versal devices with both AI Engines and Programmable Logic (PL), however, this drawback is solved easily by leveraging the PL to implement these permutations as part of a custom data flow tailored to the PFA signal flow graph.</p>
+<p>An <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2024.1/AI_Engine_Development/AIE/Design_Tutorials/05-Prime-Factor-FFT">earlier tutorial</a> implemented a PFA-1008 transform on AIE architecture in the VC1902 device. This tutorial maps the PFA-1008 transform to AIE-ML architecture in the VE2802 device. Once again we map the short-length DFT-7, DFT-9 and DFT-16 transforms to AI Engine using vector-matrix DFT's but this time to the AIE-ML architecture. The intermediate "memory transpose" operations mapped earlier to the programmable logic (PL) are instead mapped here to the Memory Tiles contained in the AIE-ML array. This simplifies data flow and keeps most of the graph inside the the array. The input and output permutation blocks remain implemented in the PL as RTL obtained using VItis High Level Synthesis (HLS) from untimed C++ models. These cannot be mapped to Mem Tiles as they require a type of modulo addressing not supported by the Memory Tile buffer descriptors (BDs).</p>
+<h2 id="design-overview">Design Overview</h2>
+<p>The figure below shows a block diagram of a 3D PFA-1008 hardware design implemented in Versal using AI Engines and PL. The design targets a 1 Gsps throughput (SSR=1). AI Engines implement the three DFT kernels, specifically DFT-7, DFT-9 and DFT-16, using a vector-matrix multiplication approach. The design implements the matrix transpose kernels in the AI Engine array using Memory Tiles, and maps the I/O permutation blocks to PL using Vitis HLS.</p>
+<p><img src="Images/pfa-1008-block-diagram.png" alt="figure1" /></p>
+<p>More details on each kernel design, as well as MATLAB models for the same, can be found in the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2024.1/AI_Engine_Development/AIE-ML/Design_Tutorials/02-Prime-Factor-FFT">Vitis-Tutorials</a> repository.</p>
+<h2 id="simulink-model">Simulink Model</h2>
+<p>The Simulink model contains a testbench that provides input to the Prime Factor FFT algorithm and displays the output.</p>
+<p><img src="Images/model1.png" alt="figure1" /></p>
+<p>You can use any MATLAB code or Simulink blocks you want to generate input stimulus. In this design, the input consists of two tones (sine waves) and a linear frequency sweep.</p>
+<p><img src="Images/model5.png" alt="figure1" /></p>
+<p>The DUT itself consists of the AI Engine design, with HLS Kernels on the input and the output. The HLS Kernels perform the input and output permute operations, as depicted in the block diagram in the Design section above, in the PL.</p>
+<p><img src="Images/model2.png" alt="figure1" /></p>
+<p>The AI Engine design contains subsystems for each of the DFTs (DFT-7, DFT-9 and DFT-16). The <code>Transpose0</code> and <code>Transpose1</code> operations from the block diagram are performed using the <strong>Shared Buffer</strong> block.</p>
+<p><img src="Images/model3.png" alt="figure1" /></p>
+<p>With each DFT subsystem, each stage of the DFT is performed using an AI Engine kernel class defined in source code. These kernel classes are imported using the <strong>AIE Class Kernel</strong> block.</p>
+<p><img src="Images/model4.png" alt="figure1" /></p>
+<h2 id="simulation-results">Simulation Results</h2>
+<p>When the model runs, the scope displays the output of the FFT. The two tones and frequency sweep are visible. The X-axis displays the FFT bin number. Because the design uses a 1 GSPS sample rate, the signal frequency can be determined by <code>(Bin number / 1008) * 1e9</code>.</p>
+<p><img src="Images/results.png" alt="figure1" /></p>
+<h2 id="references">References</h2>
+<p>[<a href="https://en.wikipedia.org/wiki/Prime-factor_FFT_algorithm" title="Prime Factor FFT Algorithm">1</a>] Wikipedia, "<a href="[https://en.wikipedia.org/wiki/Prime-factor_FFT_algorithm]">Prime Factor FFT Algorithm</a>"</p>
+<p>[<a href="https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Signal_Processing_and_Modeling/Fast_Fourier_Transforms_(Burrus)" title="Fast Fourier Transforms">2</a>] C. Sidney Burrus, "<a href="[https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Signal_Processing_and_Modeling/Fast_Fourier_Transforms_(Burrus)]">Fast Fourier Transforms</a>"</p>
+<hr />
+<p>Copyright (c) 2024 Advanced Micro Devices, Inc.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+</body>
+</html>
