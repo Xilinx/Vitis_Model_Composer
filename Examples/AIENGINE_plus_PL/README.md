@@ -19,13 +19,21 @@ Versal AI Core devices are highly integrated, multicore compute platform that ca
 
 <tr>
 <td>
-<a href="./AIE_HLS/Channelizer/README.md">Polyphase Channelizer</a> <img src="../../Images/new.PNG" width="50">
+<a href="./AIE_HLS/Channelizer/README.md">Polyphase Channelizer</a> 
 </td>
 <td>
 This example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices. 
 </td>
 </tr> 
 
+<tr>
+<td>
+<a href="./AIE_HLS/Prime_Factor_FFT/README.md">Prime Factor FFT-1008</a> <img src="../../Images/new.PNG" width="50">
+</td>
+<td>
+This example demonstrates a Prime Factor FFT algorithm on AIE-ML devices. It demonstrates the Shared Buffer block to access Memory Tiles on the AIE-ML array.
+</td>
+</tr> 
  
 <tr>
 <td>
