@@ -37,7 +37,7 @@ In this step, you will create a simple testbench for a block from the [AI Engine
 
 5. Find the **Vitis Model Composer Hub** block in the **AMD Toolbox -> AI Engine -> Tools** library.
 
-![](Images/step3_2.png)
+![missing image](Images/step3_2.png)
 
 6. Drag and drop the **Vitis Model Composer Hub** block into the empty model.
 
@@ -198,7 +198,7 @@ AI Engine simulations within Simulink are bit-exact but do not provide timing in
 In the next lab, you will see how to bring in custom AI Engine kernel or graph code and simulate it with Vitis Model Composer.
 
 ---
-&copy; Copyright 2023-2024 Advanced Micro Devices, Inc.
+&copy; Copyright 2024 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

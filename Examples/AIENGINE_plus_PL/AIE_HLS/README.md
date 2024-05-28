@@ -16,7 +16,7 @@ In Model Composer you can simulate designs with both AI Engine blocks and HLS Ke
 - [2D FFT design with both AI Engine and HLS Kernel blocks](FFT2D/README.md)
 
 ------------
-Copyright 2023-2024 Advanced Micro Devices, Inc.
+Copyright 2024 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -1,0 +1,272 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="normalization-on-aie-ml-devices">Normalization on AIE-ML Devices</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
+              
+</html>
+<h2 id="introduction">Introduction</h2>
+<p>This example demonstrates normalization of a 2D data frame on AIE-ML devices.</p>
+<p>It demonstrates, in Vitis Model Composer, the following features of AIE-ML devices:</p>
+<ul>
+<li>Shared buffers for AIE-ML memory tiles</li>
+<li><code>bfloat16</code> data type</li>
+</ul>
+<h2 id="algorithm">Algorithm</h2>
+<p>This example targets z-score normalization that scales elements of a frame, making the frame output have the following distribution:</p>
+<p><img src="./Images/eqn1.png" alt="" /> </p>
+<p>Assume the input frame is a <code>COL * ROW</code> matrix (data is stored column first). For each element in a frame, it computes the corresponding element as:</p>
+<p><img src="./Images/eqn2.png" alt="" /> </p>
+<p>Where:</p>
+<p><img src="./Images/eqn3.png" alt="" /> </p>
+<p>For this example, the following specifications are chosen:</p>
+<ul>
+<li><code>COL</code>: <code>128</code></li>
+<li><code>ROW</code>: <code>384</code></li>
+<li>Data Type: <code>bfloat16</code></li>
+</ul>
+<h2 id="design">Design</h2>
+<p>The Vitis Model Composer model imports the normalization design as AI Engine Kernel blocks. For a detailed description of the example design and its kernel functions, refer to the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2024.1/AI_Engine_Development/AIE-ML/Feature_Tutorials/13-aie-ml-performance-analysis">AIE-ML Performance Analysis Tutorial</a>. The Vitis Model Composer example uses Version 4 of the normalization design.</p>
+<p><img src="./Images/model.png" alt="" /> </p>
+<p>Here are the relevant features of the Vitis Model Composer model: </p>
+<ul>
+<li>Design inputs are provided via the model callbacks. To view the callbacks, right-click on the design canvas, select <strong>Model Properties</strong>, then <strong>Callbacks</strong>.</li>
+<li>In the <code>InitFcn</code> callback, tiling parameters for the shared buffers are defined in MATLAB structure arrays. For example, the tiling parameters for the input shared buffer are displayed below.</li>
+</ul>
+<pre><code>% Input Memtile, Write Access
+mtxA_w = [];
+for i=0:2
+pattern = struct('buffer_dimension', [COL,ROW], 'tiling_dimension', [COL,ROW/PLIO_NUM], 'offset', [0,ROW/PLIO_NUM*i]);
+mtxA_w = [mtxA_w, pattern];
+end
+
+% Input Memtile, Read Access
+mtxA_r = [];
+for i=0:5
+pattern = struct('buffer_dimension', [COL,ROW], 'tiling_dimension', [K_COL,K_ROW], 'offset', [0,K_ROW*i])
+mtxA_r = [mtxA_r, pattern];
+end
+</code></pre>
+<p>This shared buffer has 3 write (input) ports and 5 read (output) ports. The tiling parameters are stored in 3x1 and 5x1, respectively, MATLAB structure arrays. For more information on the format of the MATLAB structure, refer to the <a href="matlab:helpview(vmcHelp(name='Shared_Buffer',category='AIE'))">Shared Buffer</a> block help.</p>
+<ul>
+<li>The AI Engine design inputs and outputs <code>bfloat16</code> floating-point data. The <strong>Convert To Bfloat16</strong> and <strong>Convert From Bfloat16</strong> blocks convert between the Simulink <code>single</code> data type and the <code>bfloat16</code> data type.</li>
+<li>Because this design has a feedback loop within the AI Engine subsystem, an <strong>Algebraic Loop Breaker</strong> block is needed to compile and run the model. For more information, see the <a href="matlab:helpview(vmcHelp(name='AlgebraicLoopBreaker',category='UTIL'))">Algebraic Loop Breaker</a> block help.</li>
+</ul>
+<p><img src="./Images/results.png" alt="" />   </p>
+<p>The mean and variance of both the input and output signal are displayed. Note that the mean of the output signal is less than 1, and the variance of the output signal is 1. This is the result of the normalization algorithm.</p>
+<hr />
+<p>Copyright (c) 2024 Advanced Micro Devices, Inc.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+</body>
+</html>
