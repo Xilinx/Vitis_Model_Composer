@@ -11,6 +11,7 @@ In Model Composer you can simulate designs with both AI Engine blocks and HLS Ke
 ## Examples
 - [Polyphase Channelizer](Channelizer/README.md)
 - [Prime Factor FFT-1008](Prime_Factor_FFT/README.md)
+- [64K-Pt IFFT @ 2 Gsps Using a 2D Architecture](IFFT64K_2D/README.md)
 - [A design with both AI Engine and HLS Kernel blocks connected through interface blocks ](AIE_HLS_with_interface/README.md)
 - [A design with both AI Engine and HLS Kernel blocks connected directly ](AIE_HLS_without_interface/README.md)
 - [A design with AI Engine blocks and an HLS Kernel block with a Run-time Parameter (RTP) ](AIE_HLS_clipper/README.md)

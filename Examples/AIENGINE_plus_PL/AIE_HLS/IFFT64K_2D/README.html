@@ -1,0 +1,248 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="64k-pt-ifft--2-gsps-using-a-2d-architecture">64K-Pt IFFT @ 2 Gsps Using a 2D Architecture</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
+              
+</html>
+<p>This example demonstrates a 2D architecture to implement large point transforms in the SSR &gt; 1 regime: specifically a 64K-pt IFFT @ 2 Gsps.</p>
+<p><strong><em>Version: Vitis Model Composer 2024.1</em></strong></p>
+<h2 id="introduction">Introduction</h2>
+<p>The <a href="https://docs.xilinx.com/r/en-US/Vitis_Libraries/dsp/index.html">Vitis DSP Library</a> currently implements the Fast Fourier Transform (FFT) using a Stockham algorithm. This algorithm computes the transform using a pair of buffers rather than the more popular in-place Cooley-Tukey approach, and maps more efficiently to the vector/SIMD architecture of the AI Engine. This approach yields excellent results, particularly for <code>N &lt; 4096</code> where the processing and storage requirements may be serviced by a single tile. In higher performance cases where sampling rates exceed 1 Gsps (ie. the SSR &gt; 1 regime), this Stockham approach continues to be feasible but leads to an excessive use of tile resources. A more efficient approach is needed for these high throughput use cases. </p>
+<p>A 1D FFT may be implemented on the AI Engine array using a 2D FFT algorithm with higher efficiency overall. This alternative "divide &amp; conquer" approach provides a better solution on the AI Engine array since it is less reliant on "butterfly routing" and we can break large <code>N</code> point sizes into much smaller factors of size <code>sqrt(N)</code>. This results in a significant reduction in AI Engine tile memory and overall usage of fewer compute tiles. </p>
+<p>The 2D architecture is not new to AI Engine. <a href="https://docs.xilinx.com/r/en-US/xapp1356-fft-ai-engine">XAPP1356</a> first explored its use several years ago to achieve 3.7 Gsps with 10 AI Engine tiles. In this tutorial, we explore using the 2D architecture to implement large point transforms in the SSR &gt; 1 regime: specifically a 64K-pt IFFT @ 2 Gsps.</p>
+<h2 id="design-overview">Design Overview</h2>
+<p>The figure below shows a block diagram of a 64k-point 2D IFFT hardware design implemented in Versal using AI Engines and PL. The design targets a throughput of 2 GSPS.</p>
+<p><img src="Images/ifft64k-block-diagram.png" alt="figure1" /></p>
+<p>The IFFT operation is performed by AI Engine kernels, 5 each for each data dimension. The results of the first dimension are transposed by an HLS kernel implemented in PL.</p>
+<p>More details on each kernel design, as well as MATLAB models for the same, can be found in the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2024.1/AI_Engine_Development/AIE/Design_Tutorials/12-IFFT64K-2D">Vitis-Tutorials</a> repository.</p>
+<h2 id="simulink-model">Simulink Model</h2>
+<p>The Simulink model contains a testbench that provides input to the IFFT algorithm and displays the output.</p>
+<p><img src="Images/model1.png" alt="figure1" /></p>
+<p>You can use any MATLAB code or Simulink blocks you want to generate input stimulus. In this design, the input consists of a single tone or a linear frequency sweep. The input can be selected using a switch.</p>
+<p><img src="Images/model5.png" alt="figure1" /></p>
+<p>The input signal is converted to frequency domain (using Simulink's FFT block) before being passed to the IFFT. The output of the IFFT should then be the original signal itself.</p>
+<p>The DUT itself consists of the AI Engine design, containing the 10 IFFT kernels, connected to an HLS Kernel. The HLS Kernel performs the transpose operation, as depicted in the block diagram in the Design section above, in the PL.</p>
+<p><img src="Images/model2.png" alt="figure1" /></p>
+<h2 id="simulation-results">Simulation Results</h2>
+<p>When the model runs, the scope displays the real and imaginary output of the IFFT, which is compared to the original input signal. </p>
+<p><img src="Images/results.png" alt="figure1" /></p>
+<h2 id="references">References</h2>
+<p>[1]: <a href="https://docs.xilinx.com/r/en-US/Vitis_Libraries/dsp/index.html">Vitis DSP Library</a></p>
+<p>[2]: <a href="https://docs.xilinx.com/r/en-US/xapp1356-fft-ai-engine">XAPP1356 Block-by-Block Configurable Fast Fourier Transform Implementation on AI Engine</a></p>
+<hr />
+<p>Copyright (c) 2024 Advanced Micro Devices, Inc.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+</body>
+</html>
