@@ -34,6 +34,15 @@ This example implements a high-speed channelizer design using a combination of A
 This example demonstrates a Prime Factor FFT algorithm on AIE-ML devices. It demonstrates the Shared Buffer block to access Memory Tiles on the AIE-ML array.
 </td>
 </tr> 
+
+<tr>
+<td>
+<a href="./AIE_HLS/IFFT64K_2D/README.md">64K-Pt IFFT @ 2 Gsps Using a 2D Architecture</a> <img src="../../Images/new.PNG" width="50">
+</td>
+<td>
+This example demonstrates a 2D architecture to implement large point transforms in the SSR > 1 regime.
+</td>
+</tr> 
  
 <tr>
 <td>
