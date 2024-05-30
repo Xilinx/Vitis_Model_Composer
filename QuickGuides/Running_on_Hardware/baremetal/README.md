@@ -63,13 +63,9 @@ Once your board is set up, program the device as follows:
     
       ![](images/xsdb_prompt.png)
 
-    b. This will run the design on the board. In the Terminal application, you should see the log similar to the following. Here, the hardware results are compared with the golden results.
-    
-    ```
-       ******************************** Test Results ********************************
-       ****** Model Composer and Hardware outputs match for all 40944 samples for output signal Out1 *******
-       ****** Test passed ********
-    ```
+    b. This will run the design on the board. We can observe the results in putty serial terminal.
+
+      ![](images/HW_testing_result.PNG)
        
     c. To re-run the results, run following commands:
     
