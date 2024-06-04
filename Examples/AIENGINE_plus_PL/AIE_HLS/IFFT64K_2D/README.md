@@ -28,11 +28,7 @@ The Simulink model contains a testbench that provides input to the IFFT algorith
 
 ![figure1](Images/model1.png)
 
-You can use any MATLAB code or Simulink blocks you want to generate input stimulus. In this design, the input consists of a single tone or a linear frequency sweep. The input can be selected using a switch.
-
-![figure1](Images/model5.png)
-
-The input signal is converted to frequency domain (using Simulink's FFT block) before being passed to the IFFT. The output of the IFFT should then be the original signal itself.
+You can use any MATLAB code or Simulink blocks you want to generate input stimulus. In this design, the input consists of a single tone. The input signal is converted to frequency domain (using Simulink's FFT block) before being passed to the IFFT. The output of the IFFT should then be the original signal itself.
 
 The DUT itself consists of the AI Engine design, containing the 10 IFFT kernels, connected to an HLS Kernel. The HLS Kernel performs the transpose operation, as depicted in the block diagram in the Design section above, in the PL.
 
