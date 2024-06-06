@@ -189,6 +189,13 @@ Using DSPLib AI Engine SSR FIR block to achieve 4 Gsps throughput.
  </td>
  <td> This design showcases filtering in frequency domain and also shows how to increase the throughput using different techniques.</td>
  </tr> 
+
+   <tr>
+ <td align="left">
+ <a href="./Farrow_Filter/README.md">Farrow Filter</a> <img src="../../Images/new.PNG" width="50">
+ </td>
+ <td> This example demonstrates a Vitis Model Composer testbench for a fractional delay Farrow filter.</td>
+ </tr> 
   
  </table>
 

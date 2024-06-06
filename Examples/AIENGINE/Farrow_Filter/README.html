@@ -1,0 +1,290 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="fractional-delay-farrow-filter">Fractional Delay Farrow Filter</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
+              
+</html>
+<p>This example demonstrates a Vitis Model Composer testbench for a fractional delay Farrow filter, implemented on AI Engines.</p>
+<h2 id="introduction">Introduction</h2>
+<p>A fractional delay filter is a common digital signal processing (DSP) algorithm found in many applications including digital receivers in modems and is required for timing synchronization.<br />
+Assuming you have a signal <code>x</code> sampled uniformly with a sampling frequency <code>Fs</code> (samples per second), this means samples exist at <code>x(n*Ts)</code> where <code>Ts=1/Fs</code> and <code>n</code> is an integer. Because the receiver timing is initially unknown, demodulating the signal at these intervals can result in inter-symbol interference due to samples not landing in the middle of the eye diagram.<br />
+This introduces the need for a fractional delay filter so samples can be produced at <code>x(n*Ts + u*Ts)</code> where <code>-0.5 &lt; u &lt; 0.5</code> is the unknown fractional delay parameter to be identified at the receiver. In some cases, this fractional delay is time-varying, for example, as <code>u(n*Ts)</code>, and so the time-recovered signal can be given as <code>x(n*Ts + u(n*Ts) * Ts)</code>. </p>
+<p>Reference [<a href="https://ieeexplore.ieee.org/document/221081">1</a>] provides some background on timing recovery in such systems. An efficient realization of a continuously variable fractional delay filter is shown by C. W. Farrow in [<a href="https://ieeexplore.ieee.org/document/15483">2</a>].</p>
+<h2 id="design-overview">Design Overview</h2>
+<p>We implement the 3rd order Farrow filter depicted in the following figure.</p>
+<p><img src="Images/farrow_3rd_order.png" alt="figure1" /></p>
+<p><em>Figure 1 - Farrow Filter with Polynomial Order p = 3</em></p>
+<p>More details on the Farrow filter design for AI Engines can be found in the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2024.1/AI_Engine_Development/AIE/Design_Tutorials/15-farrow_filter">Vitis-Tutorials</a> repository.</p>
+<p>The Farrow filter complies with the following requirements:</p>
+<table>
+<thead>
+<tr>
+<th>Requirements</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sampling rate</td>
+<td>1 Gsps</td>
+</tr>
+<tr>
+<td>I/O data type</td>
+<td><code>cint16</code></td>
+</tr>
+<tr>
+<td>Coefficients data type</td>
+<td><code>int16</code></td>
+</tr>
+<tr>
+<td>Delay input data type</td>
+<td><code>int16</code></td>
+</tr>
+</tbody>
+</table>
+<p>The filter achieves the following frequency and time domain responses.</p>
+<p><img src="Images/farrow_freq_response.png" alt="figure2" /></p>
+<p><em>Figure 2 - Farrow Filter with Polynomial Order p = 3 - Frequency Response</em></p>
+<p><img src="Images/farrow_time_domain.png" alt="figure3" /></p>
+<p><em>Figure 3 - Farrow Filter with Polynomial Order p = 3 - Time Domain Response</em></p>
+<p>The MATLAB script <code>study_farrow.m</code> to design the filter and produce these plots is provided for your reference.</p>
+<h2 id="simulink-model">Simulink Model</h2>
+<p>The Simulink model contains a testbench that provides input to the Farrow filter and compares it to the output.</p>
+<p><img src="Images/model1.png" alt="" /></p>
+<p>The DUT (AI Engine subsystem <strong>farrow</strong>) has two inputs. The first input is the signal to be filtered, and the second input is the fractional delay (-0.5 to 0.5). A slider allows you to change the fractional delay while the simulation is running. (The <strong>Delay</strong> subsystem converts the delay value to an <code>int32</code> for input to the DUT.)</p>
+<p>You can use any MATLAB code or Simulink blocks you want to generate input stimulus. In this design, the input consists a sine wave with data type <code>cint16</code>.</p>
+<h3 id="ai-engine-model">AI Engine Model</h3>
+<p>The AI Engine model consists of two imported AIE Class Kernels. The 64-bit PLIO blocks on each input and output mean that 2 <code>cint16</code> samples are transferred to and from the AI Engine on each clock cycle.</p>
+<p><img src="Images/model2.png" alt="" /></p>
+<p>The first kernel implements computes the four filter outputs (<code>y0</code>, <code>y1</code>, <code>y2</code>, <code>y3</code>) depicted in Figure 1 above. The second kernel computes the intermediate outputs <code>z1</code> and <code>z2</code> and the final output <code>y</code>.</p>
+<h2 id="simulation-results">Simulation Results</h2>
+<p>The nominal delay of the Farrow filter is approximately 3.5 samples. This is accounted for in the testbench with the <code>z^(-3)</code> delay placed on the input signal. When we run the testbench with delay = 0, we see a subsample delay between input and output.</p>
+<p><img src="Images/delay0.png" alt="" /></p>
+<p>Setting the delay to -0.5 or +0.5 produces the corresponding effect in the output signal.</p>
+<p>Delay = +0.5:</p>
+<p><img src="Images/delayplus.png" alt="" /></p>
+<p>Delay = -0.5:</p>
+<p><img src="Images/delayminus.png" alt="" /></p>
+<h2 id="hardware-validation">Hardware Validation</h2>
+<p>Using the <strong>Validate on Hardware</strong> tab of the <strong>Vitis Model Composer Hub</strong> block, the filter design can be validated on the VCK190 hardware or hardware emulation.</p>
+<p><img src="Images/hw_emu.png" alt="" /></p>
+<h2 id="references">References</h2>
+<p>[<a href="https://ieeexplore.ieee.org/document/221081">1</a>]: F. M. Gardner, "Interpolation in digital modems. I. Fundamentals," in IEEE Transactions on Communications, vol. 41, no. 3, pp. 501-507, March 1993, doi: 10.1109/26.221081.</p>
+<p>[<a href="https://ieeexplore.ieee.org/document/15483">2</a>]: C. W. Farrow, "A continuously variable digital delay element," 1988., IEEE International Symposium on Circuits and Systems, Espoo, Finland, 1988, pp. 2641-2645 vol.3, doi: 10.1109/ISCAS.1988.15483.</p>
+<hr />
+<p>Copyright (c) 2024 Advanced Micro Devices, Inc.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+</body>
+</html>
