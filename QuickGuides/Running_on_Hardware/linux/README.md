@@ -3,6 +3,7 @@ If you have a local vck190 evaluation board connected to your Windows machine, t
 # Hub block settings 
 
 Hub block parameters for linux hardware flow:
+Select Hardware system type linux here.
 
 ![](./images/Hubblock_settings_linux.PNG)
 
