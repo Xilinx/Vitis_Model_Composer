@@ -15,10 +15,11 @@ a block diagram environment for multidomain simulation and model-based design.
 * Browse through many of the examples we have here. You can easily access these examples from within the tool. (**Note:** Many of the examples require the [DSP System Toolbox](https://www.mathworks.com/products/dsp-system.html).)
 
 
-# What's new in 2023.2?
-* Vitis Model Composer now supports importing AIE-ML graphs as a block. See [this example](./Examples/AIENGINE/Importing_AIE_blocks/AIE_ML_Graph_Import) of importing an AIE-ML graph and performing simulation.
-* The [3x3 Matrix Determinant](./Examples/HDL/Floating_Point/3x3_Matrix_Determinant) example showcases the Black Box block for bringing hand-coded VHDL or Verilog code into Model Composer. It also shows the DSPFP32 primitive block for performing floating-point operations on Versal devices.
-* The [Channelizer](./Examples/AIENGINE_plus_PL/AIE_HLS/Channelizer) example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices. In 2023.2, it is now supported for the hardware validation flow.
+# What's new in 2024.1?
+* The [Normalization example](./Examples/AIENGINE/Normalization) showcases two features of the AIE-ML architecture: shared buffers on memory tiles, and the `bfloat16` data type.
+* See a [64K-pt IFFT at 2 GSPS](./Examples/AIENGINE_plus_PL/AIE_HLS/IFFT64K_2D) implemented in AI Engine using a 2D architecture.
+* Working with both AI Engines and PL? See the [tutorials](./Tutorials/AIE-PL/README.md) showing how to connect the block libraries in Vitis Model Composer.
+* MATLAB R2023a and R2023b are now supported by Vitis Model Composer.
 
 # Examples
 
@@ -40,9 +41,7 @@ a block diagram environment for multidomain simulation and model-based design.
 </p>
 
 --------------
-Copyright 2022 Xilinx
-
-Copyright 2023-2024 Advanced Micro Devices, Inc.
+Copyright 2024 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

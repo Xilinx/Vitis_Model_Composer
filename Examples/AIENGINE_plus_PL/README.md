@@ -19,13 +19,30 @@ Versal AI Core devices are highly integrated, multicore compute platform that ca
 
 <tr>
 <td>
-<a href="./AIE_HLS/Channelizer/README.md">Polyphase Channelizer</a> <img src="../../Images/new.PNG" width="50">
+<a href="./AIE_HLS/Channelizer/README.md">Polyphase Channelizer</a> 
 </td>
 <td>
 This example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices. 
 </td>
 </tr> 
 
+<tr>
+<td>
+<a href="./AIE_HLS/Prime_Factor_FFT/README.md">Prime Factor FFT-1008</a> <img src="../../Images/new.PNG" width="50">
+</td>
+<td>
+This example demonstrates a Prime Factor FFT algorithm on AIE-ML devices. It demonstrates the Shared Buffer block to access Memory Tiles on the AIE-ML array.
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="./AIE_HLS/IFFT64K_2D/README.md">64K-Pt IFFT @ 2 Gsps Using a 2D Architecture</a> <img src="../../Images/new.PNG" width="50">
+</td>
+<td>
+This example demonstrates a 2D architecture to implement large point transforms in the SSR > 1 regime.
+</td>
+</tr> 
  
 <tr>
 <td>
@@ -42,6 +59,15 @@ A design with both AI Engine and HLS Kernel blocks connected through interface b
 </td>
 <td>
 A design with both AI Engine and HLS Kernel blocks connected directly.
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="./AIE_HLS/AIE_HLS_clipper/README.md">AI Engines and HLS Kernel with RTP</a>
+</td>
+<td>
+A design with AI Engine blocks and an HLS Kernel block with a Run-time Parameter (RTP).
 </td>
 </tr>
 

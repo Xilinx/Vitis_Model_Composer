@@ -9,10 +9,19 @@ Vitis Model Composer allows you to create AI Engine designs and generate code fo
 
 <tr>
 <td>
-<a href="./Importing_AIE_blocks/AIE_ML_Graph_Import/README.md">Importing an AIE-ML graph as a block</a>  <img src="../../Images/new.PNG" width="50">
+<a href="./Importing_AIE_blocks/AIE_ML_Graph_Import/README.md">Importing an AIE-ML graph as a block</a>  
 </td>
 <td>
 In this example we import a graph for AIE-ML devices (including memory tiles) into Vitis Model Composer as a block.
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="./Normalization/README.md">Normalization</a>  <img src="../../Images/new.PNG" width="50">
+</td>
+<td>
+2D normalization algorithm implemented on AIE-ML devices, using Shared Buffers on memory tiles and the bfloat16 data type.
 </td>
 </tr> 
 </table>
@@ -179,6 +188,13 @@ Using DSPLib AI Engine SSR FIR block to achieve 4 Gsps throughput.
  <a href="./Filtering_in_frequency_domain/README.md">Filtering in frequency domain </a> <img src="../../Images/new.PNG" width="50">
  </td>
  <td> This design showcases filtering in frequency domain and also shows how to increase the throughput using different techniques.</td>
+ </tr> 
+
+   <tr>
+ <td align="left">
+ <a href="./Farrow_Filter/README.md">Farrow Filter</a> <img src="../../Images/new.PNG" width="50">
+ </td>
+ <td> This example demonstrates a Vitis Model Composer testbench for a fractional delay Farrow filter.</td>
  </tr> 
   
  </table>
