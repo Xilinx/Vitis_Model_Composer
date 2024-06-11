@@ -1,4 +1,4 @@
-# PL + AI Engine design Examples <a name="heterogeneous"></a>
+# PL + AI Engine Design Examples <a name="heterogeneous"></a>
 
 
 Versal AI Core devices are highly integrated, multicore compute platform that can adapt with evolving and diverse algorithms. These devices include both Programmable Logic (PL) and an AI Engine array. Vitis Model Composer provides a design environment, based on industry standard MATLAB and Simulink tools, to model and simulate designs with both PL and AI Engine components.
@@ -128,6 +128,15 @@ This design showcases a Super Sample Rate FIR filter to process a 4GSPS input st
 </td>
 <td>
 This design highlights best practices for working with multirate designs.  The example utilizes multirate AIE FIR filters to generate outputs in multiple clock domains which are then fed thru the PL.  The DSP aspects are discussed separately, so for designers not interested in filtering the discussion still provides useful information.
+</td>
+</tr>
+
+<tr> 
+<td>
+<a href="./AIE_HDL/multirate_filter_chain/README.md">Multirate Filter Chain</a>
+</td>
+<td>
+This design implements two decimation filters, one in AI Engine and the other in PL. See how to set the AI Engine sample time, PL Gateway block sample period, and the Simulink system period in the Model Composer Hub block to match the multirate behavior of your system.
 </td>
 </tr>
  
