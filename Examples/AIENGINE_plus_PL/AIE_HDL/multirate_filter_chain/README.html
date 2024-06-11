@@ -1,0 +1,267 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="multirate-filter-chain-example-model-using-both-ai-engines-and-programmable-logic-hdl">Multirate Filter Chain Example model using both AI Engines and Programmable Logic (HDL)</h1>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
+              
+</html>
+<p>In this section we showcase a Multirate Filter Chain design using both AI Engines and Programmable Logic.</p>
+<h2 id="knowledge-nuggets">Knowledge Nuggets</h2>
+<p><img width="18" height="18" src="../Images/bulb.png"> <em>AIE to HDL</em> blocks are needed for connectivity between AIE blocks and HDL blocks. </p>
+<p><img width="18" height="18" src="../Images/bulb.png"> Take care to set the AI Engine sample time, PL Gateway block sample period, and the Simulink system period in the Model Composer Hub block to match the multirate behavior of your system.</p>
+<h2 id="introduction">Introduction</h2>
+<p>This example consists of two decimation filters. The first is implemented in the AI Engine, and the second is implemented in PL.</p>
+<p><img src="./images/Filter_decimation_chain.PNG" alt="" /></p>
+<h2 id="simulink-model">Simulink Model</h2>
+<p>Open the example design <code>chain_complex.slx</code> and note the key elements explained below.</p>
+<p><img src="./images/multirate_filter_chain_design.png" alt="" /></p>
+<h3 id="input-sources">Input Sources</h3>
+<p>Two simulation sources generate stimulus for simulation. A manual switch toggles between a random signal source and a sinusoidal signal. Both sources have a sample period of 1 second and vector size of 128.</p>
+<p><img src="./images/Input_Source.png" alt="" /></p>
+<h3 id="combined-aiepl-subsystem">Combined AIE/PL Subsystem</h3>
+<p>The subsystem to be implemented on hardware consists of an AI Engine subsystem and a PL subsystem. Refer to the figure below to see how the <strong>AIE to HDL</strong> and <strong>HDL to AIE</strong> blocks are configured based on the sample rates in the model.</p>
+<p><img src="./images/filter_chain_DUT.png" alt="" /></p>
+<h3 id="ai-engine-subsystem">AI Engine Subsystem</h3>
+<p>A <strong>FIR Asymmetric Decimation Stream</strong> block (with decimation factor 2) is placed between the input source and the PL subsystem.</p>
+<p><img src="./images/Asymmetric_Decimation_Filter.png" alt="" /></p>
+<h3 id="pl-subsystem">PL Subsystem</h3>
+<p>According to above example design, the input sample period to the PL subsystem should be <code>(Input source sample period) * (Decimation Factor of AIE Asymmetric Decimation Stream)</code>.</p>
+<p>Because the input source sample period is 1 and the decimation factor of the AIE FIR is 2, set the sample time in the Gateway In AXIS block inside the PL subsystem to 2.</p>
+<p><img src="./images/Gateway_IN_AXIS_settings.png" alt="" /></p>
+<p><strong>NOTE:</strong> In the Hub block for the PL subsystem, we set the Simulink system period to 2 to match the input sample time for the PL subsystem.</p>
+<p><img src="./images/hubblock_settings.png" alt="" /></p>
+<h4 id="fir-compiler-72-block">FIR Compiler 7.2 Block</h4>
+<p>The FIR Compiler block needs to be configured as follows to implement a filter with a decimation factor of 2.</p>
+<p>On the <strong>Filter Specification</strong> tab, set the <strong>Decimation Rate Value</strong> to 2.</p>
+<p><img src="./images/Filter_Specification.png" alt="" /></p>
+<p>On the <strong>Channel Specification</strong> tab, set the following:</p>
+<ul>
+<li><strong>Number Of Paths:</strong> <code>2</code> (Two paths are selected for complex data. One path is for In-phase data; the other is for Quadrature data.)</li>
+<li><strong>Select Format:</strong> <code>Input_Sample_Period</code> (When Input Sample Period is selected, you can specify the number of clock cycles between input samples.)</li>
+<li><strong>Sample Period:</strong> <code>1</code> (Number of clock cycles between input or output samples).</li>
+</ul>
+<p><img src="./images/channel_specification.png" alt="" /></p>
+<h3 id="simulink-filter-chain-subsystem">Simulink Filter Chain Subsystem</h3>
+<p>In the Simulink golden reference design, two FIR decimation filters, each with decimation factor 2, are cascaded.</p>
+<p><img src="./images/simulink_filter_chain.png" alt="" /></p>
+<h2 id="results">Results</h2>
+<p>Output spectrum when input is complex random source:</p>
+<p><img src="./images/Filter_Output_Spectrum.PNG" alt="" /></p>
+<p>Output spectrum when input is complex sinusoidal signal:</p>
+<p><img src="./images/Filter_Output_SineWave_Spectrum.png" alt="" /></p>
+<hr />
+<p>Copyright (c) 2024 Advanced Micro Devices, Inc.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+</body>
+</html>

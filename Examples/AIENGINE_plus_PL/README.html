@@ -6,7 +6,7 @@
       </head>
       <body>
         <div id='content'>
-    <h1 id="pl--ai-engine-design-examples-a-nameheterogeneousa">PL + AI Engine design Examples <a name="heterogeneous"></a></h1>
+    <h1 id="pl--ai-engine-design-examples-a-nameheterogeneousa">PL + AI Engine Design Examples <a name="heterogeneous"></a></h1>
 <p>Versal AI Core devices are highly integrated, multicore compute platform that can adapt with evolving and diverse algorithms. These devices include both Programmable Logic (PL) and an AI Engine array. Vitis Model Composer provides a design environment, based on industry standard MATLAB and Simulink tools, to model and simulate designs with both PL and AI Engine components.</p>
 <p align="center">
   <img src="images/aie_plus_pl.png" align ="center" width = 70%>
@@ -26,14 +26,6 @@ This example implements a high-speed channelizer design using a combination of A
 </td>
 </tr> 
 
-<tr>
-<td>
-<a href="matlab:XmcExampleApi.getExample('Tx_chain_200MHz')">TX Chain 200MHz </a>
-</td>
-<td>
-This design showcases the Vitis Model Composer implementation of the Commslib example, TX chain 200MHz, which is part of the communications Library Early access program.
-</td>
-</tr> 
 
 <tr>
 <td>
@@ -109,6 +101,15 @@ This design showcases a Super Sample Rate FIR filter to process a 4GSPS input st
 </td>
 <td>
 This design highlights best practices for working with multirate designs.  The example utilizes multirate AIE FIR filters to generate outputs in multiple clock domains which are then fed thru the PL.  The DSP aspects are discussed separately, so for designers not interested in filtering the discussion still provides useful information.
+</td>
+</tr>
+
+<tr> 
+<td>
+<a href="matlab:XmcExampleApi.getExample('multirate_filter_chain')">Multirate Filter Chain</a>
+</td>
+<td>
+This design implements two decimation filters, one in AI Engine and the other in PL. See how to set the AI Engine sample time, PL Gateway block sample period, and the Simulink system period in the Model Composer Hub block to match the multirate behavior of your system.
 </td>
 </tr>
 
