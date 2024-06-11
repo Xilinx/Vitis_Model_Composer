@@ -59,11 +59,8 @@ specific platform. This hardware image can then be run on a board to verify whet
 </code></pre>
 <p>You will see following message in the XSDB prompt if the device program is successful.</p>
 <p><img src="images/xsdb_prompt.png" alt="" /></p>
-<p>b. This will run the design on the board. In the Terminal application, you should see the log similar to the following. Here, the hardware results are compared with the golden results.</p>
-<pre><code>   ******************************** Test Results ********************************
-   ****** Model Composer and Hardware outputs match for all 40944 samples for output signal Out1 *******
-   ****** Test passed ********
-</code></pre>
+<p>b. This will run the design on the board. We can observe the results in putty serial terminal.</p>
+<p><img src="images/HW_testing_result.PNG" alt="" /></p>
 <p>c. To re-run the results, run following commands:</p>
 <pre><code>    rst -system
     device program BOOT.BIN

@@ -17,6 +17,7 @@ a block diagram environment for multidomain simulation and model-based design.
 
 # What's new in 2024.1?
 * The [Normalization example](./Examples/AIENGINE/Normalization) showcases two features of the AIE-ML architecture: shared buffers on memory tiles, and the `bfloat16` data type.
+* See a [64K-pt IFFT at 2 GSPS](./Examples/AIENGINE_plus_PL/AIE_HLS/IFFT64K_2D) implemented in AI Engine using a 2D architecture.
 * Working with both AI Engines and PL? See the [tutorials](./Tutorials/AIE-PL/README.md) showing how to connect the block libraries in Vitis Model Composer.
 * MATLAB R2023a and R2023b are now supported by Vitis Model Composer.
 

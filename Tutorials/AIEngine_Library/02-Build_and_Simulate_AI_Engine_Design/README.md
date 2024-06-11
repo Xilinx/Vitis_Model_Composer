@@ -89,6 +89,7 @@ Click the **AI Engine** section. This reveals the following sub-sections:
     * **Input Window size (Number of samples)**: 2048
     * **Scale output down by 2**: Shift1
     * **Rounding mode**: Floor
+    * **Saturation mode**: 0-None
 
     Click **Apply** and **OK**.
 
@@ -142,7 +143,8 @@ Notice that before implementing the Decimation Filter the vector length was ``20
 | Filter Length	| N/A | N/A	| N/A | length(cfi) |
 | Input window size (Number of samples)	| 2048	| 1024	| 512	| 256 |
 | Scale output down by 2^	| Shift1	| Shift2	| Shift3	| ShiftCF |
-| Rounding mode	floor	| floor	| floor	| floor | floor |
+| Rounding mode	| floor	| floor	| floor | floor |
+| Saturation mode | 0-None | 0-None | 0-None | 0-None |
 
 3. Update the **Output Size** parameter of the **To Fixed Size** block to ``256``. The design should look like as follows:
 
