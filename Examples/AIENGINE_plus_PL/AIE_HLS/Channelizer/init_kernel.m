@@ -8,3 +8,5 @@ twidC0 = int16(twidC0*2^15);
 twidC1 = int16(twidC1*2^15);
 twidD0 = int16(twidD0*2^15);
 twidD1 = int16(twidD1*2^15);
+
+taps_init;
