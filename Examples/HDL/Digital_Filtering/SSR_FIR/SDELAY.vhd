@@ -1,3 +1,5 @@
+-- Copyright (C) 2024, Advanced Micro Devices, Inc.
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.ALL;

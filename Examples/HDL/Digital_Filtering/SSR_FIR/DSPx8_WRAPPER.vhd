@@ -1,4 +1,6 @@
 -- DSP48E1/DSP48E2/DSP58 Wrapper for SysGen use
+-- Copyright (C) 2024, Advanced Micro Devices, Inc.
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 
