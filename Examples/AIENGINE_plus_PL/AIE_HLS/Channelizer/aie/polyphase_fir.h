@@ -56,8 +56,8 @@ private:
 
 public:
   // Constructor:
-  polyphase_fir( TT_COEFF (&taps0_i)[NUM_POLY*TAPS_PER_PHASE],
-                 TT_COEFF (&taps1_i)[NUM_POLY*TAPS_PER_PHASE] );
+  polyphase_fir( int16 (&taps0_i)[64],
+                 int16 (&taps1_i)[64] );
 
   // Run (Intrinsics Version):
   void run_i( input_stream<TT_DATA>* __restrict sig_i,

@@ -25,8 +25,8 @@
 // ------------------------------------------------------------
 
 template<unsigned PATTERN,unsigned NSAMP>
-polyphase_fir<PATTERN,NSAMP>::polyphase_fir( TT_COEFF (&taps0_i)[NUM_POLY*TAPS_PER_PHASE],
-                                             TT_COEFF (&taps1_i)[NUM_POLY*TAPS_PER_PHASE] )
+polyphase_fir<PATTERN,NSAMP>::polyphase_fir( int16 (&taps0_i)[64],
+                                             int16 (&taps1_i)[64] )
 : taps0( taps0_i ), taps1( taps1_i ),
   state0(aie::zeros<TT_DATA,TAPS_PER_PHASE>()), state1(aie::zeros<TT_DATA,TAPS_PER_PHASE>())
 {
