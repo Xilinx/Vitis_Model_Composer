@@ -14,7 +14,7 @@ After completing this lab, you will be able to:
 This lab has four primary parts:
 
 **Step 1**
-<br><ul>Review an existing Simulink design using the Xilinx® FIR Compiler block, and review the final gate level results in Vivado.</ul>
+<br><ul>Review an existing Simulink design using the AMD® FIR Compiler block, and review the final gate level results in Vivado.</ul>
 
 **Step 2**
 <br><ul>Use over-sampling to create a more efficient design.</ul>
@@ -30,7 +30,7 @@ This lab has four primary parts:
 In this step, you learn the basic operation of Vitis Model Composer and how to synthesize a Simulink design into an FPGA.
 
 1. Invoke Vitis Model Composer. 
-   - On Windows systems, select **Windows > Xilinx Design Tools > Vitis Model Composer 2021.2.**
+   - On Windows systems, select **Windows > AMD Design Tools > Vitis Model Composer 2024.1.**
    - On Linux systems, type `model_composer` at the command prompt.
 
 2. Navigate to the Lab1 folder: <samp> \HDL_Library\Lab1. </samp> 
@@ -63,7 +63,7 @@ In this step, you learn the basic operation of Vitis Model Composer and how to s
 
 <ul><img src="Images/Step1/Creating_a_Design_in_FPGA/Step5.png"></ul>
 
-6. Expand the **Xilinx Toolbox > HDL** menu, select **DSP**, **Non AXI-S** then select **Digital FIR Filter.**
+6. Expand the **AMD Toolbox > HDL** menu, select **DSP**, **Non AXI-S** then select **Digital FIR Filter.**
 
 7. Right-click the **Digital FIR Filter** block and select **Add block to model Lab1_1**
 
@@ -72,7 +72,7 @@ In this step, you learn the basic operation of Vitis Model Composer and how to s
   You can define the filter coefficients for the Digital FIR Filter block by accessing the block attributes–double-click the <b>Digital FIR Filter</b> block to view these–or, as in this case, they can be defined using the FDATool.
 </ul>
 
-8. From Xilinx Toolbox > HDL > Tools, select FDATool and add it to the Lab1_1 design.
+8. From AMD Toolbox > HDL > Tools, select FDATool and add it to the Lab1_1 design.
 <br>An FPGA design requires three important aspects to be defined:
    - The input ports
    - The output ports
@@ -88,7 +88,7 @@ In this step, you learn the basic operation of Vitis Model Composer and how to s
 
 10. Similarly, from the same menu, add a Gateway Out block to the design.
 
-11. From the Utilites menu, under the Code Generation menu, add the Vitis Model Composer Hub token used to define the FPGA technology.
+11. From the Utilites menu, under the Code Generation menu, add the Vitis Model Composer Hub block used to define the FPGA technology.
 
 12. Finally, make a copy of one of the existing Spectrum Analyzer blocks, and rename the instance to Spectrum Analyzer HDL by clicking the instance name label and editing the text.
 
@@ -100,7 +100,7 @@ The next part of the design process is to configure the HDL blocks.
 
 ### Configure the HDL Blocks
 
-The first task is to define the coefficients of the new filter. For this task you will use the Xilinx block version of FDATool that you just added in step 8 above. 
+The first task is to define the coefficients of the new filter. For this task you will use the AMD block version of FDATool that you just added in step 8 above. 
 
 
 1. Double click on the FDATool block and review the existing Frequency and Magnitude specifications.
@@ -131,7 +131,7 @@ The first task is to define the coefficients of the new filter. For this task yo
 
 <br><br>In an FPGA, the design operates at a specific clock rate and using a specific number of bits to represent the data values.
 <br><br>The transition between the continuous time used in the standard Simulink environment and the discrete time of the FPGA hardware environment is determined by defining the sample rate of the Gateway In blocks. This determines how often the continuous input waveform is sampled. This sample rate is automatically propagated to other blocks in the design by Vitis Model Composer. In a similar manner, the number of bits used to represent the data is defined in the Gateway In block and also propagated through the system.
-<br><br>Although not used in this tutorial, some HDL blocks enable rate changes and bit-width changes, up or down, as part of this automatic propagation. More details on these blocks are found in the *Vitis Model Composer User Guide* ([UG1483](https://docs.xilinx.com/r/2021.2-English/ug1483-model-composer-sys-gen-user-guide/Revision-History)).
+<br><br>Although not used in this tutorial, some HDL blocks enable rate changes and bit-width changes, up or down, as part of this automatic propagation.
 <br><br>Both of these attributes (rate and bit width) determine the degree of accuracy with which the continuous time signal is represented. Both of these attributes also have an impact on the size, performance, and hence cost of the final hardware.
 <br><br>Vitis Model Composer allows you to use the Simulink environment to define, simulate, and review the impact of these attributes.
 
@@ -147,71 +147,59 @@ The first task is to define the coefficients of the new filter. For this task yo
 10. Click **OK** to close the Gateway In Properties Editor.
 <br>This now allows us to use accurate sample rate and bit-widths to accurately verify the hardware.
 
-13. Create a subsystem that inlcudes the Gateway blocks and the Digital FIR Filter. Call the subsystem, HDL_filter. 
+11. Create a subsystem that inlcudes the Gateway blocks and the Digital FIR Filter. Call the subsystem, HDL_filter. 
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-1.png" width=600px; height=auto></ul>
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step11-2.png" width=600px; height=auto></ul>
 
-14. Double-click the **Vitis Model Composer Hub** token to open the Properties Editor. Click on the "Code Generation" icon on the top, and then click the HDL_filter subsystem on the left. 
+12. Double-click the **Vitis Model Composer Hub** block.
+
+13. On the **Hardware Selection** tab, click the **Select Hardware** button and choose an FPGA device. 
+
+14. Click on the "Code Generation" icon on the top, and then click the HDL_filter subsystem on the left. 
 <ul><img src="Images/Step1/Configure_HDL_Blocks/hub_block_hdl_filter.png" width=600px; height=auto></ul>
 
 <br>Because the input port is sampled at 20 MHz to adequately represent the data, you must define the clock rate of the FPGA and the Simulink sample period to be at least 20 MHz.
 
-15. Select the HDL Clock Settings tab:
+15. Select the **Settings** tab:
 	 - Specify an FPGA clock period of 50 ns (1/20 MHz).
 	 - Specify a Simulink system period of 1/20e6 seconds.
 <ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=600px; height=auto></ul>
 
-16. Select the HDL Analysis tab:
-	- For the Perform Analysis selection select **Post Synthesis** .
-	- For the Analyzer Type selection select **Resource**. This option gives the resource utilization details after completion.
+16. Click **Apply** in the Hub Block.
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/hdl_analysis.png" width=600px; height=auto></ul>
-
-17. Click **OK** to exit the Hub Block.
-
-16. <p> Click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png"> to simulate the design and view the results, as shown in the following figure. Because the new design is cycle and bit accurate, simulation might take longer to complete than before.</p>
+17. <p> Click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png"> to simulate the design and view the results, as shown in the following figure. Because the new design is cycle and bit accurate, simulation might take longer to complete than before.</p>
 <ul><img src="Images/Step1/Configure_HDL_Blocks/Step16.png">
 <br> The results are shown above, on the right hand side (in the Spectrum Analyzer HDL window), and differ slightly from the original design (shown on the left in the Spectrum Analyzer FDA Tool window). This is due to the quantization and sampling effect inherent when a continuous time system is described in discrete time hardware.
 <br>The final step is to implement this design in hardware. This process will synthesize everything contained between the Gateway In and Gateway Out blocks into a hardware description. This description of the design is output in the Verilog or VHDL Hardware Description Language (HDL). This process is controlled by the Vitis Model Composer Hub.
 </ul>
 
-17. Double-click the **Vitis Model Composer Hub** block to open the Properties Editor.
-
-18. You can click on **Hardware Selection** and choose a device. For now, use the default device.
-
-19. Click on **Code Generation**, then clik on **HDL_filter** on the left. Make sure the **Compilation Type** is set to **IP Catalog**. This ensures the output is in IP Catalog format. Also, use the default Hardware description language, VHDL.
+18. In the Model Composer Hub block, select the **Export** tab. Make sure the **Export Type** is set to **IP Catalog**. This ensures the output is in IP Catalog format. Also, use the default Hardware description language, VHDL.
 
 <ul><img src="Images/Step1/Configure_HDL_Blocks/IP_catalog_selection.png" width=600px; height=auto></ul>
 
-20. Click **Generate** to compile the design into hardware.
-<br>The compilation process transforms the design captured in Simulink blocks into an industry standard Register Transfer Level (RTL) design description. The RTL design can be synthesized into a hardware design. A Resource Analyzer window appears when the hardware design description has been generated.
+19. Click **Export** to compile the design into hardware.
 
-<ul><img src="Images/Step1/Configure_HDL_Blocks/Step20-1.png"><br>
-<br> The Compilation status dialog box also appears. <br>
-<br><img src="Images/Step1/Configure_HDL_Blocks/Step20-2.png">
-</ul>
+The compilation process transforms the design captured in Simulink blocks into an industry standard Register Transfer Level (RTL) design description. The RTL design can be synthesized into a hardware design. 
 
-21. Click **OK** to dismiss the Compilation status dialog box.
+<img src="Images/Step1/Configure_HDL_Blocks/Step20-2.png">
 
-22. Click **OK** to dismiss the Resource Analyzer window.
+20. Click **OK** to dismiss the Compilation status dialog box.
 
 The final step in the design process is to create the hardware and review the results.
 
 ### Review the Results
 
-The output from design compilation process is written to the netlist directory. This directory contains three subdirectories:
+The output from design compilation process is written to the `netlist/ip/HDL_filter/src` directory. This directory contains three subdirectories:
 
 <samp>sysgen</samp>
 <br><ul> This contains the RTL design description written in the industry standard VHDL format. This is provided for users experienced in hardware design who wish to view the detailed results. </ul>
 
 <samp>ip</samp>
-<br><ul> This directory contains the design IP, captured in Xilinx IP catalog format, which is used to transfer the design into the Xilinx Vivado. <em>Lab 5: Using AXI Interfaces and IP Integrator</em>, presented later in this tutorial, explains in detail how to transfer your design IP into the Vivado for implementation in an FPGA
+<br><ul> This directory contains the design IP, captured in AMD IP catalog format, which is used to transfer the design into the AMD Vivado. <em>Lab 5: Using AXI Interfaces and IP Integrator</em>, presented later in this tutorial, explains in detail how to transfer your design IP into the Vivado for implementation in an FPGA
  </ul>
 
 <samp>ip_catalog</samp>
 <br><ul> This directory contains an example Vivado project with the design IP already included. This project is provided only as a means of quick analysis. </ul>
-
-The previous Resource Analyzer: Lab1_1 figure shows the summary of resources used after the design is synthesized. You can also review the results in hardware by using the example Vivado project in the ip_catalog directory.
 
 >**Important: The Vivado project provided in the ip_catalog directory does not contain top-level I/O buffers. The results of synthesis provide a very good estimate of the final design results; however, the results from this project cannot be used to create the final FPGA.**
 
@@ -224,65 +212,63 @@ In this step you will see how an FPGA can be used to create a more optimized ver
 
 1. At the command prompt, type ```open Lab1_2.slx.```
 
-2. From your Simulink project worksheet, select Simulation > Run or click the Run simulation button <img width="18" height="18" src="Images/Step1/Configure_HDL_Blocks/runemoji.png">.
-
-3. Double-click the Vitis Model Composer Hub to open the Properties Editor.
+2. Double-click the Vitis Model Composer Hub to open the Properties Editor.
 
 <ul> As noted in Step 1, the design requires a minimum sample frequency of 18 MHz and it is currently set to 20 MHz (a 50 ns FPGA clock period). <br>
   <br><ul><img src="Images/Step1/Configure_HDL_Blocks/clock_settings.png" width=600px; height=auto></ul> <br>
   <br>The frequency at which an FPGA device can be clocked easily exceeds 20 MHz. Running the FPGA at a much higher clock frequency will allow Vitis Model Composer to use the same hardware resources to compute multiple intermediate results.
 </ul>
 
-4. Double-click the **FDATool** instance to open the Properties Editor.
+3. Double-click the **FDATool** instance to open the Properties Editor.
 
-5. Click the **Filter Coefficients** button <img src = "Images/Step2/filter_coefficient_button.png"> to view the filter coefficients
+4. Click the **Filter Coefficients** button <img src = "Images/Step2/filter_coefficient_button.png"> to view the filter coefficients
 <ul><img src="Images/Step2/Step5.png"><br>
 <br>This shows the filter uses 11 symmetrical coefficients. This requires a minimum of six multiplications. This is indeed what is shown at the end of the previous section where the final hardware is using six DSP48 components. DSP48 is the FPGA resource used to perform a multiplication.
 <br>The current design samples the input at a rate of 20 MHz. If the input is sampled at 6 times the current frequency, it is possible to perform all calculations using a single multiplier.
 </ul>
 
-6. Close the FDATool Properties Editor.
+5. Close the FDATool Properties Editor.
 
-7. You will now replace some of the attributes of this design with workspace variables. First, you need to define some workspace variables.
+You will now replace some of the attributes of this design with workspace variables. First, you need to define some workspace variables.
 
-8. In the MATLAB Command Window:
+6. In the MATLAB Command Window:
    - Enter ```num_bits = 16```
    - Enter ```bin_pt = 14```
 
 <ul><img src="Images/Step2/Step8.png"></ul>
 
-9. In design Lab1_2, double-click the HDL_filter subssytem, and then double click the **Gateway In** block to open the Properties Editor.
+7. In design Lab1_2, double-click the HDL_filter subssytem, and then double click the **Gateway In** block to open the Properties Editor.
 
-10. In the Fixed-Point Precision section, replace 16 with ```num_bits``` and replace 14 with ```bin_pt```, as shown in the following figure.
+8. In the Fixed-Point Precision section, replace 16 with ```num_bits``` and replace 14 with ```bin_pt```, as shown in the following figure.
 
 <ul><img src="Images/Step2/gateway_in_settings.png" width=600px; height=auto></ul>
 
-11. Click **OK** to save and exit the Properties Editor. 
-<br> In the Vitis Model Composer Hub update the sampling frequency to 120 MHz (6 * 20 MHz) in this way:
+9. Click **OK** to save and exit the Properties Editor. 
+
+10. In the Vitis Model Composer Hub update the sampling frequency to 120 MHz (6 * 20 MHz) in this way:
 	 - Click on Code Generation, on the right side of the window click on HDL_filter.
-	 - Select the HDL Clock Settings tab. 
+	 - Select the Settings tab. 
 	 - Specify an FPGA clock period of 8.33 ns (1/120 MHz).
   	 - Specify a Simulink system period of 1/120e6 seconds.
-	 - Select the HDL Analysis Settings tab.
-	 - From the Perform analysis menu, select <b>Post Synthesis</b> and from Analyzer type menu, select <b>Resource</b> as shown in the following figure. This option gives the resource utilization details after completion. 
+	 - Select the Analyze tab.
+	 - From the Perform Analysis menu, select <b>Post Synthesis</b> and from Analysis Type menu, select <b>Resource</b>. This option gives the resource utilization details after completion. 
    
 > 📝 Note:  In order to see accurate results from the Resource Analyzer Window, it is recommended to specify a new target directory rather than use the current working directory.
 
 <ul><img src="Images/Step2/clock_settings_2.png" width=600px; height=auto></ul>
 
-12. Click **Generate** to compile the design into a hardware description.
+11. Click **Analyze** to compile the design into a hardware description.
 
-<ul>In this case, the message appearing in the Diagnostic Viewer can be dismissed as you are purposely clocking the design above the sample rate to allow resource sharing and reduce resources. Close the Diagnostic Viewer window.</ul>
-
-13. When generation completes, click **OK** to dismiss the Compilation status dialog box.
+12. When generation completes, click **OK** to dismiss the Compilation status dialog box.
 
 <ul> The Resource Analyzer window opens when the generation completes, giving a good estimate of the final design results after synthesis as shown in the following figure.<br> <br> The hardware design now uses only a single DSP48 resource (a single multiplier) and compared to the results at the end of the Configure the HDL Blocks section, the resources used are significantly lower. <br>
 <br><img src="Images/Step2/Step13.png"></ul>
 
-14. Click **OK** to dismiss the Resource Analyzer window.
-15. Click **OK** to dismiss the Vitis Model Composer Hub block. 
+13. Click **OK** to dismiss the Resource Analyzer window.
 
-Exit the <samp>Lab1_2.slx</samp> Simulink worksheet.
+14. Click **OK** to dismiss the Vitis Model Composer Hub block. 
+
+Exit the <samp>Lab1_2.slx</samp> Simulink model.
 
 ## Step 3: Creating a Design using Discrete Components
 
@@ -302,7 +288,7 @@ This discrete filter operates in this way:<br>
 2. Double click on the HDL_filter to open the subsystem.
 
 3. Click the Library Browser button <img width="18" height="18" src="Images/Step3/libaryBrowserButton.png"> in the Simulink toolbar to open the Simulink Library Browser.
-   - Expand the Xilinx Blockset menu.
+   - Expand the AMD Toolbox menu.
    - As shown in the following figure, select the **Sources** section in the HDL library, then right-click **Counter** to add this component to the design.
 <br><br><img src = "Images/Step3/Step2.png"><br><br>
    - Select the **Memory** section and then **Non AXI-S** and add a ROM to the design.
@@ -347,29 +333,26 @@ The final step is to compile the design into a hardware description and synthesi
 
 11. Double-click the **Vitis Model Composer Hub** block to open the Properties Editor and select the HDL_filter subsystem on the left.
 
-12. From the HDL Settings tab, make sure the Compilation Type is IP catalog.
-
-13. From the HDL Analysis tab select **Post Synthesis** for _Perfrom Analysis_ and for _Analysis Type_ select **Resource**. This option gives the resource utilization details after completion.
-
+12. From the Analyze tab select **Post Synthesis** for _Perform Analysis_ and for _Analysis Type_ select **Resource**. This option gives the resource utilization details after completion.
 
 > 🖊️ Note: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.
 
-14. Click Generate to compile the design into a hardware description. After generation finishes, it displays the resource utilization in the Resource Analyzer window.
+13. Click Analyze to compile the design into a hardware description. After generation finishes, it displays the resource utilization in the Resource Analyzer window.
 <br><br><img src = "Images/Step3/Step14.png"><br><br>
 The design now uses fewer FPGA hardware resources than either of the versions designed with the Digital FIR Filter macro.
 
-15. Click OK to dismiss the Resource Analyzer window.
+14. Click OK to dismiss the Resource Analyzer window.
 
-16. Click OK to dismiss the Compilation status dialog box.
+15. Click OK to dismiss the Compilation status dialog box.
 
-17. Click OK to dismiss the Vitis Model Composer Hub.
+16. Click OK to dismiss the Vitis Model Composer Hub.
 
-18. Exit the `Lab1_3.slx` worksheet.
+17. Close the `Lab1_3.slx` model.
 
 
 ## Step 4: Creating a Design using Discrete Components
 
-In this step, you will learn how hardware-efficient fixed-point types can be used to create a design which meets the required specification but is more efficient in resources, and understand how to use Xilinx HDL Blocksets to analyze these systems.
+In this step, you will learn how hardware-efficient fixed-point types can be used to create a design which meets the required specification but is more efficient in resources, and understand how to use AMD HDL Blocksets to analyze these systems.
 
 This step has two primary parts:
    - In Part 1, you will review and synthesize a design using floating-point data types.
@@ -412,21 +395,20 @@ The final step is to synthesize this design into hardware.
 
 10. Double-click the **Vitis Model Composer Hub** block to open the Properties Editor. Click on the FIR subsystem on the left.
 
-11. On the _HDL Settings_ tab, make sure the _Compilation Type_ is IP Catalog.
+11. On the Analyze tab, under _Perform Analysis_ select **Post Synthesis** and from the _Analyzer Type_ menu select **Resource**. This option gives the resource utilization details after completion.
 
-12. On the HDL Analysis tab, under _Perform Analysis_ select **Post Synthesis** and from the _Analyzer Type_ menu select **Resource**. This option gives the resource utilization details after completion.
-
-13. Click **Generate** to compile the design into a hardware description. After completion, it generates the resource utilization in Resource Analyzer window as shown in the following figure.
+12. Click **Analyze** to compile the design into a hardware description. After completion, it generates the resource utilization in Resource Analyzer window as shown in the following figure.
 <br><br><img src = "Images/Step4/Part1/Step13.png"><br><br>
 
-14. Click **OK** to dismiss the Compilation status dialog box.
-15. Click **OK** to dismiss the Vitis Model Composer Hub.<br>
-<br>You implemented this same filter in Step 1 using fixed-point data types. When compared to the synthesis results from that implementation – the initial results from this step are shown in the following figure and you can see this current version of the design is using a large amount of registers (FF), BRAMs, LUTs, and DSP resources (Xilinx dedicated multiplier/add units).
+13. Click **OK** to dismiss the Compilation status dialog box.
+
+14. Click **OK** to dismiss the Vitis Model Composer Hub.<br>
+<br>You implemented this same filter in Step 1 using fixed-point data types. When compared to the synthesis results from that implementation – the initial results from this step are shown in the following figure and you can see this current version of the design is using a large amount of registers (FF), BRAMs, LUTs, and DSP resources (AMD dedicated multiplier/add units).
 <br><br><img src = "Images/Step1/Configure_HDL_Blocks/Step20-1.png"><br><br>
 Maintaining the full accuracy of floating-point types is an ideal implementation but implementing full floating-point accuracy requires a significant amount of hardware.
 <br><br>For this particular design, the entire range of the floating-point types is not required. The design is using considerably more resources than what is required. In the next part, you will learn how to compare designs with different data types inside the Simulink environment.
 
-16. Exit the <samp>Lab1_4_1.slx</samp> Simulink worksheet.
+15. Close the <samp>Lab1_4_1.slx</samp> Simulink model.
 
 ### Part 2: Designing with Fixed-Point Data Types
 
@@ -457,7 +439,7 @@ Taking into account the positive and negative values of the coefficients the max
 
 8. In the edit field, type `Reinterpret`.
 
-9. Click the **Reinterpret** component from **Xilinx Toolbox/HDL** library to add it to the design.
+9. Click the **Reinterpret** component from **AMD Toolbox/HDL** library to add it to the design.
 
 10. Repeat the previous three steps for these components: 
     - Convert
@@ -519,29 +501,27 @@ The final step is to synthesize this design into hardware.</ul>
 
 26. Select the FIR-Fixed-Point subsystem on the left.
 
-27. On the HDL Settings tab, ensure the Compilation Type is IP catalog.
-
-28. On the HDL Analysis tab, under Perform Analysis select **Post Synthesis** and from Analysis Type menu select Resource. This option gives the resource utilization details after completion.
+27. On the Analyze tab, under Perform Analysis select **Post Synthesis** and from Analysis Type menu select Resource. This option gives the resource utilization details after completion.
 
 > 🖊️ Note: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.
 
-29. Click **Generate** to compile the design into a hardware description. After completion, it generates the resource utilization in Resource Analyzer window as shown in the following figure.
+28. Click **Analyze** to compile the design into a hardware description. After completion, it generates the resource utilization in Resource Analyzer window as shown in the following figure.
 <br><br><img src = "Images/Step4/Part2/Step28.png"><br><br>
 
-30. Click **OK** to dismiss the Compilation status dialog box.
+29. Click **OK** to dismiss the Compilation status dialog box.
 
-31. Click **OK** to dismiss the Vitis Model Composer property editor.<br>
+30. Click **OK** to dismiss the Vitis Model Composer property editor.<br>
 Notice, as compared to the results in Step 1, these results show approximately:
     - 55% less registers 
     - 90% less LUTs
     - 66% less DSP48s
 
-32. Exit Vivado.
-32. Exit the <samp>Lab1_4_2.slx</samp> worksheet.
+31. Exit Vivado.
+32. Close the <samp>Lab1_4_2.slx</samp> model.
 
 ### Summary
 
-In this lab, you learned how to use the Vitis Model Composer HDL blockset to create a design in the Simulink environment and synthesize the design in hardware which can be implemented on a Xilinx FPGA. You learned the benefits of quickly creating your design using a Xilinx Digital FIR Filter block and how the design could be improved with the use of over-sampling.
+In this lab, you learned how to use the Vitis Model Composer HDL blockset to create a design in the Simulink environment and synthesize the design in hardware which can be implemented on an AMD FPGA. You learned the benefits of quickly creating your design using an AMD Digital FIR Filter block and how the design could be improved with the use of over-sampling.
 
 You also learned how floating-point types provide a high degree of accuracy but cost many more resources to implement in an FPGA and how the Vitis Model Composer HDL blockset can be used to both implement a design using more efficient fixed-point data types and compensate for any loss of accuracy caused by using fixed-point types.
 
@@ -557,7 +537,7 @@ The following solution directory contains the final Vitis Model Composer (`*.slx
 ```
 
 --------------
-Copyright 2022 Xilinx
+Copyright 2024 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
