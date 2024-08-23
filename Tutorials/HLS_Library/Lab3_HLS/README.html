@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<h1 id="lab-3-debugging-imported-cc-code-using-gdb-debugger">Lab 3: Debugging Imported C/C++-Code Using GDB Debugger</h1>
+<h1 id="lab-3-debugging-imported-cc-code-using-gdb-debugger">Lab 3: Debugging Imported C/C++ Code Using GDB Debugger</h1>
 <html>    
 <script>
 function myFunction() {
@@ -24,12 +24,10 @@ document.location=commandURI
 <button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
               
 </html>
-<p>Model Composer provides the ability to debug <code>C/C++</code> code that has been <br />
-imported as a block using the <code>xmcImportFunction</code> command, <br />
-while simulating the entire design in Simulink® .</p>
+<p>Model Composer provides the ability to debug <code>C/C++</code> code that has been imported as a block using the <code>xmcImportFunction</code> command, while simulating the entire design in Simulink®.</p>
 <p>The debug flow in Vitis Model Composer is as follows:</p>
 <ol>
-<li>Specify the debug tool using the xmcImportFunctionSettings command.</li>
+<li>Specify the debug tool using the <code>xmcImportFunctionSettings</code> command.</li>
 <li>Launch the debugging tool.</li>
 <li>Add a breakpoint in the imported function.</li>
 <li>Attach to the MATLAB® process.</li>
@@ -46,28 +44,29 @@ while simulating the entire design in Simulink® .</p>
 <ol>
 <li>Type the following at the MATLAB command prompt:</li>
 </ol>
-<pre><code>xmcOpenExamples();
+<pre><code>xmcOpenExamples;
 </code></pre>
-<ol start="2">
-<li><p>Press <strong>Enter</strong>. A window opens to specify the folder location to download the examples from GitHub.<br />
-<br><br><img src="Images/Step1/Step2.png"></p></li>
-<li><p>Click <strong>Open</strong> after choosing the location. Once the download completes, the HTML page opens.</p></li>
-<li><p>Click <strong>HLS Examples</strong> under heading Table of Contents. This redirects you to the list of HLS Examples as shown. </p></li>
-<li><p>Click the <strong>Optical Flow</strong>. A description of the example displays.<br />
-<br><br><img src="Images/Step1/Step5.png"></p></li>
-<li><p>Click Click <strong>Open Design</strong> at the top left corner. This opens the example design.<br />
-<br><br><img src="Images/Step1/Step7.png"></p></li>
-<li><p>Right-click on the <strong>Lucas-Kanade</strong> subsystem and select <strong>Mask > Look Under Mask</strong> to observe the calculating-roots block.<br />
-<br><br><img src="Images/Step1/Step9-1.png"></p></li>
+<ol start="4">
+<li><p>Under <strong>Examples</strong>, click <strong>HLS</strong> under heading Table of Contents. </p></li>
+<li><p>Click the <strong>Optical Flow</strong>. A description of the example displays.</p></li>
 </ol>
+<p><img src="Images/Step1/Step5.png" alt="" /></p>
+<ol start="6">
+<li>Click Click <strong>Open Design</strong> at the top left corner. This opens the example design.</li>
+</ol>
+<p><img src="Images/Step1/Step7.png" alt="" /></p>
+<ol start="7">
+<li>Right-click on the <strong>Lucas-Kanade</strong> subsystem and select <strong>Mask > Look Under Mask</strong> to observe the calculating-roots block.</li>
+</ol>
+<p><img src="Images/Step1/Step9-1.png" alt="" /></p>
 <blockquote>
 <p> <strong>Note:</strong> This block has been generated using the <code>xmcImportFunction</code> feature. Its function declaration can be seen by double-clicking on the block.</p>
 </blockquote>
-<ul><br><br><img src="Images/Step1/Step9-2.png"></ul>
+<p><img src="Images/Step1/Step9-2.png" alt="" /></p>
 <ol start="8">
-<li>To view the function definition of <code>calculating_roots</code>, navigate to the current folder in the MATLAB window and double-click on <samp> calculating_roots.h </samp>.<br />
-<br><br><img src="Images/Step1/Step10.png"></li>
+<li>To view the function definition of <code>calculating_roots</code>, navigate to the current folder in the MATLAB window and double-click on <code>calculating_roots.h</code>.</li>
 </ol>
+<p><img src="Images/Step1/Step10.png" alt="" /></p>
 <p>The setup is now ready for you to debug your <code>C/C++</code> code. In the next step, you will see how to debug the code using GDB tool debugger.</p>
 <h2 id="step-2-debugging-cc-code-using-gdb-debugger">Step 2: Debugging C/C++ Code Using GDB Debugger</h2>
 <ol>
@@ -79,41 +78,51 @@ while simulating the entire design in Simulink® .</p>
 <p>⭐ <strong>Tip</strong>: You can restore the release build environment, using the <code>release</code> value of the <code>build</code> option: <code>xmcImportFunctionSettings('build','release')</code>.</p>
 </blockquote>
 <ol start="2">
-<li><p>Press Enter to see the applied settings in command window, as shown in the following figure.<br />
-<br><br><img src="Images/Step2/Step2.png"><br />
-<br><br> Note the gdb link that you will use to invoke the debugger tool, and the MATLAB process ID that you will use to attach the process to the debugger.</p></li>
-<li><p>Click on the <strong>gdb</strong> link, to invoke the terminal and launch gdb.<br />
-<br><br><img src="Images/Step2/Step3.png"></p></li>
-<li><p>At the terminal, use the following command to specify the breakpoint in the <samp> calculating_roots.h </samp> file where you want the code to stop executing. Press <strong>Enter</strong> to run the command.</p></li>
+<li>Press Enter to see the applied settings in command window, as shown in the following figure.</li>
+</ol>
+<p><img src="Images/Step2/Step2.png" alt="" /></p>
+<p>Note the gdb link that you will use to invoke the debugger tool, and the MATLAB process ID that you will use to attach the process to the debugger.</p>
+<ol start="3">
+<li>Click on the <strong>gdb</strong> link, to invoke the terminal and launch gdb.</li>
+</ol>
+<p><img src="Images/Step2/Step3.png" alt="" /></p>
+<ol start="4">
+<li>At the terminal, use the following command to specify the breakpoint in the <code>calculating_roots.h</code> file where you want the code to stop executing. Press <strong>Enter</strong> to run the command.</li>
 </ol>
 <pre><code>(gdb) break calculating_roots.h:53 
 </code></pre>
 <blockquote>
 <p> <strong>Note</strong>: The “53” in the above command, tells the GDB debugger to stop the simulation at line 53 of your program.</p>
 </blockquote>
-<ul><br><br><img src="Images/Step2/Step4.png"></ul>
+<p><img src="Images/Step2/Step4.png" alt="" /></p>
 <ol start="5">
-<li><p>Once the command runs, you can see a pending breakpoint in the terminal. This is shown in the following figure.<br />
-<br><br><img src="Images/Step2/Step5.png"><br />
-<br><br>If you see any questions from GDB, answer “yes” and press Enter.</p></li>
-<li><p>To attach the MATLAB process to the GDB debugger, type the following:</p></li>
+<li>Once the command runs, you can see a pending breakpoint in the terminal. This is shown in the following figure.</li>
+</ol>
+<p><img src="Images/Step2/Step5.png" alt="" /></p>
+<p>If you see any questions from GDB, answer “yes” and press Enter.</p>
+<ol start="6">
+<li>To attach the MATLAB process to the GDB debugger, type the following:</li>
 </ol>
 <pre><code>(gdb) attach &lt;process_ID&gt; 
 </code></pre>
-<ul> Enter the <process ID you saw in step 2. For example “15972”. As soon as the MATLAB process is attached, the MATLAB application gets frozen and becomes unresponsive. 
-<br><br><img src="Images/Step2/Step6.png"> </ul>
+<p>Enter the &lt;process ID you saw in step 2. For example “15972”. As soon as the MATLAB process is attached, the MATLAB application gets frozen and becomes unresponsive. </p>
+<p><img src="Images/Step2/Step6.png" alt="" /></p>
 <blockquote>
 <p> <strong>Note</strong> : During the debug process, if prompted to press 'c' to continue, type 'c' and hit Enter.</p>
 </blockquote>
 <ol start="7">
-<li><p>Type <code>cont</code> in the terminal.<br />
-<br><br><img src="Images/Step2/Step7.png"></p></li>
-<li><p>Now go to the Simulink® model and run the simulation by clicking the <strong>Run</strong> button.<br />
-<br><br><img src="Images/Step2/Step8.png"></p></li>
-<li><p>The model takes some time to initialize. As the simulation starts, you see the simulation come to the breakpoint at line 53 in the terminal window.<br />
-<br><br><img src="Images/Step2/Step9.png"><br />
-<br><br>Now, type the command list to view the lines of code around line 53.</p></li>
+<li>Type <code>cont</code> in the terminal.</li>
 </ol>
+<p><img src="Images/Step2/Step7.png" alt="" /></p>
+<ol start="8">
+<li>Now go to the Simulink® model and run the simulation by clicking the <strong>Run</strong> button.</li>
+</ol>
+<p><img src="Images/Step2/Step8.png" alt="" /></p>
+<ol start="9">
+<li>The model takes some time to initialize. As the simulation starts, you see the simulation come to the breakpoint at line 53 in the terminal window.</li>
+</ol>
+<p><img src="Images/Step2/Step9.png" alt="" /></p>
+<p>Now, type the command list to view the lines of code around line 53.</p>
 <pre><code>(gdb) list
 </code></pre>
 <ol start="10">
@@ -143,11 +152,11 @@ $1 = 421
 <h3 id="conclusion">Conclusion</h3>
 <p>In this lab, you learned:</p>
 <ul>
-<li>How to use a third party debugger (GDB debugger) and control the debug mode using xmcImportFunctionSettings.</li>
+<li>How to use a third party debugger (GDB debugger) and control the debug mode using <code>xmcImportFunctionSettings</code>.</li>
 <li>How to debug source code associated with your custom blocks using the GDB debugger, while leveraging the stimulus vectors from Simulink.</li>
 </ul>
 <hr />
-<p>Copyright 2022 Xilinx</p>
+<p>Copyright 2024 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>
