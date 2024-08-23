@@ -1,0 +1,3 @@
+relativeroot=/group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component
+original_argv=--mode hls --package --config /group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/hls_config.cfg --work_dir MedianFilter 
+

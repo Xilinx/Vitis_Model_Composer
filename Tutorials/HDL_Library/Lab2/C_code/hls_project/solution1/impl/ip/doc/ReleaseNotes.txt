@@ -1,0 +1,6 @@
+
+Family       : kintex7
+Device       : xc7k325t
+Package      : -fbg676
+Speed Grade  : -3
+Clock Period : 10

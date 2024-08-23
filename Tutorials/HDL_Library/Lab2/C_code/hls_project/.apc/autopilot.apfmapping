@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
-  <source>
-    <originFiles name="MedianFilter.cpp" path="C:\Users\viswanad\Documents\Model_Composer\2021.1\tutorial\ug1498-vitis-model-composer-tutorial\HDL_Library\Lab2\C_code\MedianFilter.cpp"/>
-  </source>
-  <testbench>
-    <originFiles name="TestMedianFilter.cpp" path="C:\Users\viswanad\Documents\Model_Composer\2021.1\tutorial\ug1498-vitis-model-composer-tutorial\HDL_Library\Lab2\C_code\TestMedianFilter.cpp"/>
-  </testbench>
-</autopilotfilemapping:AutoPilotFileMapping>

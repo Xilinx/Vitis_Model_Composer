@@ -1,0 +1,54 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Fri Aug 23 16:14:58 2024
+# Process ID: 52005
+# Current directory: /group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/impl/ip
+# Command line: vivado -notrace -mode batch -source run_ippack.tcl
+# Log file: /group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/impl/ip/vivado.log
+# Journal file: /group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/impl/ip/vivado.jou
+# Running On        :xcorobg40x
+# Platform          :CentOS
+# Operating System  :CentOS Linux release 7.9.2009 (Core)
+# Processor Detail  :AMD EPYC 7302 16-Core Processor
+# CPU Frequency     :2994.061 MHz
+# CPU Physical cores:8
+# CPU Logical cores :8
+# Host memory       :67370 MB
+# Swap memory       :8589 MB
+# Total Virtual     :75960 MB
+# Available Virtual :51346 MB
+#-----------------------------------------------------------
+Sourcing tcl script '/home/robg/.Xilinx/Vivado/Vivado_init.tcl'
+345 Beta devices matching pattern found, 345 enabled.
+enable_beta_device: Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1622.652 ; gain = 113.016 ; free physical = 12331 ; free virtual = 48603
+source run_ippack.tcl -notrace
+INFO: calling package_hls_ip ip_types=vitis sysgen json_file=/group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/hls_data.json outdir=/group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/impl/ip srcdir=/group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls sort_interfaces_ports=false
+INFO: Copied 1 ipmisc file(s) to /group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/impl/ip/misc
+INFO: Copied 1 verilog file(s) to /group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/impl/ip/hdl/verilog
+INFO: Copied 1 vhdl file(s) to /group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/impl/ip/hdl/vhdl
+WARNING: [Common 17-1496] Vivado tclapp support version doesn't have install/uninstall hooks. Please update support using ::tclapp::update_support command.
+WARNING: [Common 17-1496] Vivado tclapp support version doesn't have install/uninstall hooks. Please update support using ::tclapp::update_support command.
+WARNING: [Common 17-1496] Vivado tclapp support version doesn't have install/uninstall hooks. Please update support using ::tclapp::update_support command.
+WARNING: [Common 17-1496] Vivado tclapp support version doesn't have install/uninstall hooks. Please update support using ::tclapp::update_support command.
+WARNING: [Common 17-1496] Vivado tclapp support version doesn't have install/uninstall hooks. Please update support using ::tclapp::update_support command.
+WARNING: [Common 17-1496] Vivado tclapp support version doesn't have install/uninstall hooks. Please update support using ::tclapp::update_support command.
+INFO: Import ports from HDL: /group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/impl/ip/hdl/vhdl/MedianFilter.vhd (MedianFilter)
+INFO: Add clock interface ap_clk
+INFO: Add reset interface ap_rst
+INFO: Add ap_ctrl interface ap_ctrl
+INFO: Add data interface row1
+INFO: Add data interface row2
+INFO: Add data interface row3
+INFO: Add data interface V
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/proj/xbuilds/SWIP/2024.1_0522_2023/installs/lin64/Vivado/2024.1/data/ip'.
+INFO: Calling post_process_vitis to specialize IP
+INFO: Calling post_process_sysgen to specialize IP
+Generating sysgen info xml from json file
+INFO: Created IP /group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/impl/ip/component.xml
+INFO: Created IP archive /group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/impl/ip/xilinx_com_hls_MedianFilter_1_0.zip
+INFO: [Common 17-206] Exiting Vivado at Fri Aug 23 16:15:29 2024...
