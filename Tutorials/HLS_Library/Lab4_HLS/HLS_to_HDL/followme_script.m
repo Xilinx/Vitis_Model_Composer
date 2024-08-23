@@ -22,13 +22,13 @@ frame_width = v.Width;
 save video_handle v
 
 %% Section 2: Creating a HDL solution from a HLS design.
-% model composer allows you to export a HLS design as a block into HDL. The result of
+% Model Composer allows you to export a HLS design as a block into HDL. The result of
 % exporting a design from Model Composer HLS to HDL is a 'solution' folder
 % that you will import to the HDL design using Vitis HLS block in HDL Library.
 
 % Execute the following commands in Model Composer, or open the
 % MoC_design.slx, go to the compiler block and press 'Generate'. Creating a
-% SysGen IP from a system in Model Composer may take several minutes.
+% Model Composer IP from a system may take several minutes.
 open_system('HLS_design');
 xmcGenerate('HLS_design');
 
