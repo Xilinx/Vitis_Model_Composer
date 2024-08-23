@@ -128,7 +128,8 @@ The end result is that this function takes frames of data, multiplies the frame 
 
 ![missing image](Images/Image_018.png)
 
-3. Click **Import**. A new window displays. **FRAME_LENGTH** is the template parameter. Set its value to ``256`` because at this stage (after 3 decimation stages) each data frame has 256 samples. The input and output ports also have the same size: ``256`` samples.  Click **OK**.
+3. Click **Import**. A new window displays. Set the buffer size of the inputs and outputs to 256 (in samples).
+**FRAME_LENGTH** is the template parameter. Set its value to ``256`` because at this stage (after 3 decimation stages) each data frame has 256 samples.Click **OK**.
 
 ![missing image](Images/Image_019.png)
 
