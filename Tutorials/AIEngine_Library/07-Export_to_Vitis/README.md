@@ -81,9 +81,9 @@ Vitis Model Composer will generate AI Engine graph code from the design.
 
 ![](Images/vmc1.png)
 
-The **Create Testbench** option generates input and reference output data files for the Vitis AIE Simulator, in addition to the graph code.
+The **Generate Testbench** option generates input and reference output data files for the Vitis AIE Simulator, in addition to the graph code.
 
-3. Click **Generate**.
+3. Click **Export**.
 
 Wait for code generation to complete.
 
