@@ -47,20 +47,23 @@ document.location=commandURI
 <li><p>Run the <strong><em>setupLab4</em></strong> script to initialize a working directory.</p></li>
 <li><p>Open the model <code>Lab4_Start.slx</code>.</p></li>
 <li><p>Select the four AIE FIR Filters and the FreqShift block and type <strong><em>Ctrl+G</em></strong> to group them in a subsystem. Assign a new name: <strong>FIRchain</strong>.</p></li>
-<li><p>Click the canvas and type <strong><em>model co</em></strong>. Select the Vitis Model Composer Hub block.</p></li>
 <li><p>Double-click the Model Composer Hub block. </p></li>
 <li><p>On the <strong>Hardware Selection</strong> tab, click the <strong>…</strong> button next to Select Hardware to open the Device Chooser.</p></li>
 <li><p>Type <strong><em>xcvc1902</em></strong> into the Search box.</p></li>
 <li><p>Select the first device on the list (beginning with <strong><em>xcvc1902</em></strong>) and click <strong>OK</strong>.</p></li>
-<li><p>Back in the Vitis Model Composer Hub block, on the Code Generation tab, select the FIRchain subsystem and set the following parameters on the AIE Settings tab:</p>
-<ul>
-<li>Check <strong>Create testbench</strong>.</li>
-<li>Check <strong>Run cycle-approximate AIE Simulation after code generation</strong>.</li>
-<li>Check <strong>Plot AIE Simulation Output and Estimate Throughput</strong>.</li></ul></li>
+<li><p>Back in the Vitis Model Composer Hub block, on the Code Generation tab, select the FIRchain subsystem. </p></li>
+<li><p>And then go to Export tab, select <strong>Generate testbench</strong>.</p></li>
 <li><p>Click <strong>Apply</strong>.</p></li>
-<li><p>Click <strong>Generate</strong>.</p></li>
+<li><p>Go to Analyze tab, click <strong>Analyze</strong>.</p></li>
 </ol>
-<p>The Simulink model is run to generate the testbench, then the AI Engine graph code is generated and compiled. The source code can be viewed in <code>./code/src_aie/FIRchain.h</code>.</p>
+<p><img src="Images/vmc1.png" alt="missing image" /></p>
+<p><img src="Images/vmc2.png" alt="missing image" /></p>
+<ol start="12">
+<li>Select ** View AIE Simulation output and throughput** after code generation to view cycle-approximate AIE Simulation data.</li>
+</ol>
+<p><img src="Images/vmc4.png" alt="missing image" /></p>
+<p>The Simulink model is run to generate the testbench, then the AI Engine graph code is generated and compiled. </p>
+<p>The source code can be viewed in <code>./code/ip/FIRchain/src/FIRchain.h</code>.</p>
 <p>Let's review this code:</p>
 <pre><code class="C++ language-C++">#ifndef __XMC_FIRCHAIN_H__
 #define __XMC_FIRCHAIN_H__
