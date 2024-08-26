@@ -39,13 +39,20 @@ In this step, you will generate and review graph code for the decimation filter 
 
 8. Back in the Vitis Model Composer Hub block, on the Code Generation tab, select the FIRchain subsystem. 
     
-9. And then select Export tab, select **Generate testbench**.
+9. And then go to Export tab, select **Generate testbench**.
 
 10. Click **Apply**.
 
-11. Click **Export**.
+11. Go to Analyze tab, click **Analyze**.
 
 ![missing image](Images/vmc1.png)
+
+![missing image](Images/vmc2.png)
+
+12. Select ** View AIE Simulation output and throughput** after code generation to view cycle-approximate AIE Simulation data.
+
+![missing image](Images/vmc4.png)
+
 
 The Simulink model is run to generate the testbench, then the AI Engine graph code is generated and compiled. 
 
