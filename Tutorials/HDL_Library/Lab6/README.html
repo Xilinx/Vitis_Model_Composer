@@ -24,11 +24,11 @@ document.location=commandURI
 <button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
               
 </html>
-<p>In this lab, you will learn how to export your Vivado® design with Vitis Model Composer HDL IP to a software environment and use driver files created by Vitis Model Composer to quickly implement your project on a Xilinx® evaluation board, running hardware with software in the same design.</p>
+<p>In this lab, you will learn how to export your Vivado® design with Vitis Model Composer HDL IP to a software environment and use driver files created by Vitis Model Composer to quickly implement your project on an AMD evaluation board, running hardware with software in the same design.</p>
 <h3 id="objectives">Objectives</h3>
 <p>After completing this lab, you will have learned:</p>
 <ul>
-<li>How to export your Vivado design with Vitis Model Composer HDL IP to a software environment ( Vitis™ software platform).</li>
+<li>How to export your Vivado design with Vitis Model Composer HDL IP to a software environment (Vitis™ software platform).</li>
 <li>How Vitis Model Composer automatically creates software driver files for AXI4-Lite interfaces.</li>
 <li>How to integrate the Vitis Model Composer driver files into your software application.</li>
 </ul>
@@ -39,34 +39,38 @@ document.location=commandURI
 <li>In Step 2, you will export your Vivado design to a Vitis software environment and run it on a board.</li>
 </ul>
 <h2 id="step-1-review-the-axi4-lite-interface-drivers">Step 1: Review the AXI4-Lite Interface Drivers</h2>
-<p>In this step you review how AXI4-Lite interface drivers are provided when a design with an AXI4-Lite interface is saved.<br />
-This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integrator.</p>
+<p>In this step you review how AXI4-Lite interface drivers are provided when a design with an AXI4-Lite interface is saved. This exercise uses the same design as Lab 5: Using AXI Interfaces and IP Integrator.</p>
 <ol>
 <li><p>Invoke Vitis Model Composer and use the <strong>Current Folder</strong> browser to change the directory to: <code>\HDL_Library\Lab6</code>.</p></li>
-<li><p>At the command prompt, type open Lab6_1.slx. This opens the design as shown in the following figure.<br />
-<img src="Images/Step1/Step2.png"><br />
-This design uses a number of AXI interfaces. These interfaces were reviewed in Lab 5: Using AXI Interfaces and IP Integrator and the review is repeated here with additional details on the AXI4-Lite register addressing.</p>
-<ul>
-<li>Using AXI interfaces allows a design exported to the Vivado IP Catalog to be efficiently integrated into a larger system using IP integrator.</li>
-<li>It is not a requirement for designs exported to the IP Catalog to use AXI interfaces. The design uses the following AXI interfaces:<ul>
-<li>An AXI4-Stream interface is used for ports <code>s_axis_source_*</code>. All Gateway In and Out signals are prefixed with same name (<code>s_axis_source_</code>) ensuring they are grouped into the same interface. The suffix for all ports are valid AXI4-Stream interface signal names (<code>tvalid</code>, <code>tlast</code>, and <code>tdata</code>).</li></ul></li></ul></li>
+<li><p>At the command prompt, type open Lab6_1.slx. This opens the design as shown in the following figure.</p></li>
+</ol>
+<p><img src="Images/Step1/Step2.png" alt="" /></p>
+<p>This design uses a number of AXI interfaces. These interfaces were reviewed in Lab 5: Using AXI Interfaces and IP Integrator and the review is repeated here with additional details on the AXI4-Lite register addressing.</p>
+<p>Using AXI interfaces allows a design exported to the Vivado IP Catalog to be efficiently integrated into a larger system using IP integrator. It is not a requirement for designs exported to the IP Catalog to use AXI interfaces. </p>
+<p>An AXI4-Stream interface is used for ports <code>s_axis_source_*</code>. All Gateway In and Out signals are prefixed with same name (<code>s_axis_source_</code>) ensuring they are grouped into the same interface. The suffix for all ports are valid AXI4-Stream interface signal names (<code>tvalid</code>, <code>tlast</code>, and <code>tdata</code>).</p>
+<ol start="3">
 <li><p>Double-click <strong>Gateway In</strong> decrypt (or any of <strong>reset</strong>, <strong>Keys[63:32]</strong>, <strong>Keys[31:0]</strong>, <strong>parity_err</strong>).</p></li>
 <li><p>In the Properties Editor select the <strong>Implementation</strong> tab.</p></li>
-<li><p>Confirm the Interface is specified as AXI4-Lite in the Interface options.<br />
-Also note how the address of this port may be automatically assigned (as the current setting of <strong>Auto assign address offset</strong> indicates), or the address may be manually specified.</p></li>
-<li><p>Click <strong>OK</strong> to exit the Properties Editor.<br />
-Details on simulating the design are provided in the canvas notes. For this exercise, you will concentrate on exporting the design to the Vivado IP catalog and use the IP in an existing design.</p></li>
-<li><p>In the Model Composer Hub block, select <strong>Generate</strong> to generate a design in IP Catalog format.</p></li>
-<li><p>Click <strong>OK</strong> to dismiss the Compilation status dialog box.</p></li>
-<li><p>Click <strong>OK</strong> to dismiss the Model Composer Hub.</p></li>
-<li><p>In the file system, navigate to the directory <samp> \HDL<em>Library\Lab6\IPI</em>Project\ip\drivers\HDL<em>DUT</em>v1_0\src </samp> and view the driver files.<br />
-The driver files for the AXI4-Lite interface are automatically created by Vitis Model Composer when it saves a design in IP Catalog format.</p></li>
-<li><p>Open file <samp> hdl<em>dut</em>hw.h </samp> to review which addresses the ports in the AXI4-Lite interface were automatically assigned.<br />
-<img src="Images/Step1/Step11.png"></p></li>
-<li><p>Open file <samp> hdl_dut.c </samp> to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown in the following figure.<br />
-<img src="Images/Step1/Step12.png"><br />
-The driver files are automatically included when the Vitis Model Composer design is added to the IP Catalog. The procedure for adding a Vitis Model Composer design to the IP Catalog is detailed in Lab 5: Using AXI Interfaces and IP Integrator. In the next step, you will implement the design.</p></li>
+<li><p>Confirm the Interface is specified as AXI4-Lite in the Interface options. Also note how the address of this port may be automatically assigned (as the current setting of <strong>Auto assign address offset</strong> indicates), or the address may be manually specified.</p></li>
+<li><p>Click <strong>OK</strong> to exit the Properties Editor.</p></li>
 </ol>
+<p>Details on simulating the design are provided in the canvas notes. For this exercise, you will concentrate on exporting the design to the Vivado IP catalog and use the IP in an existing design.</p>
+<ol start="7">
+<li><p>In the Model Composer Hub block, select <strong>Export</strong> from the Export tab to generate a design in IP Catalog format.</p></li>
+<li><p>Click <strong>OK</strong> to dismiss the Progress dialog box.</p></li>
+<li><p>Click <strong>OK</strong> to dismiss the Model Composer Hub.</p></li>
+<li><p>In the file system, navigate to the directory <code>./Lab6/netlist/ip/HDL_DUT/src/ip/drivers/HDL_DUT_v1_0/src</code> and view the driver files.</p></li>
+</ol>
+<p>The driver files for the AXI4-Lite interface are automatically created by Vitis Model Composer when it saves a design in IP Catalog format.</p>
+<ol start="11">
+<li>Open file <code>hdl_dut_hw.h</code> to review which addresses the ports in the AXI4-Lite interface were automatically assigned.</li>
+</ol>
+<p><img src="Images/Step1/Step11.png" alt="" /></p>
+<ol start="12">
+<li>Open file <code>hdl_dut.c</code> to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown in the following figure.</li>
+</ol>
+<p><img src="Images/Step1/Step12.png" alt="" /></p>
+<p>The driver files are automatically included when the Vitis Model Composer design is added to the IP Catalog. The procedure for adding a Vitis Model Composer design to the IP Catalog is detailed in Lab 5: Using AXI Interfaces and IP Integrator. In the next step, you will implement the design.</p>
 <h2 id="step-2-developing-software-and-running-it-on-the-zynq-7000-system">Step 2: Developing Software and Running it on the Zynq-7000 System</h2>
 <ol>
 <li><p>Open the Vivado IDE:</p>
@@ -76,76 +80,82 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 <li><p>Using the Tcl console as shown in the following figure:</p></li>
 </ol>
 <ul>
-<li>Type <code>cd C:\Xilinx\LAB6\IPI_Project</code> to change to the project directory.</li>
+<li>Type <code>cd IPI_Project</code> to change to the project directory.</li>
 <li>Type source lab6_design.tcl to create the RTL design.</li>
 </ul>
 <blockquote>
 <p> Note: If you have copied the tutorials to a different directory or changed the file names, you should update the Tcl file accordingly.</p>
 </blockquote>
-<ul><img src="Images/Step2/Step2.jfif"></ul>
+<p><img src="Images/Step2/Step2.jfif" alt="" /></p>
 <ol start="3">
 <li><p>Click <strong>Open Implemented Design</strong> in the Flow Navigator pane.</p></li>
 <li><p>From the Vivado IDE main menu select <strong>File > Export > Export Hardware</strong>.</p></li>
-<li><p>Click <strong>Next</strong> in the Export Hardware Platform page.<br />
-<img src="Images/Step2/Step5.png"></p></li>
-<li><p>Select the <strong>Include Bitstream</strong> option in the Output page and click Next.<br />
-<img src="Images/Step2/Step6.png"></p></li>
+<li><p>Click <strong>Next</strong> in the Export Hardware Platform page.</p></li>
+</ol>
+<p><img src="Images/Step2/Step5.png" alt="" /></p>
+<ol start="6">
+<li>Select the <strong>Include Bitstream</strong> option in the Output page and click Next.</li>
+</ol>
+<p><img src="Images/Step2/Step6.png" alt="" /></p>
+<ol start="7">
 <li><p>Leave the <strong>XSA file name</strong> and the <strong>Export to</strong> fields at the default setting and click <strong>Next</strong>.</p></li>
 <li><p>Click <strong>Finish</strong> to export the hardware.</p></li>
 <li><p>Open the Vitis Unified IDE:</p>
 <ul>
 <li>Click <strong>Windows > Vitis 2024.1.</strong></li></ul></li>
 <li><p>Select the workspace space directory to store preferences and click Launch.</p></li>
-<li><p>From the Vitis IDE, select <strong>Create Platform</strong>.<br />
-In the Vitis Classic flows, the platform was generated automatically when the XSA was input by the user. However, for Vitis Unified IDE, the user will need to manually create it.<br />
-<img src="Images/Step2/welcome_screen.PNG"></p></li>
+<li><p>From the Vitis IDE, select <strong>Create Platform</strong>.</p></li>
+</ol>
+<p>In the Vitis Classic flows, the platform was generated automatically when the XSA was input by the user. However, for Vitis Unified IDE, the user will need to manually create it.</p>
+<p><img src="Images/Step2/welcome_screen.PNG" alt="" /></p>
+<ol start="12">
 <li><p>From the Welcome Screen, select the Create Platform Component under Embedded Development. Or from the File menu, under New Component, Platform.</p></li>
 <li><p>Enter the platform component name <code>Design1_Platform</code> in the Component name field.</p></li>
 </ol>
-<p><img src="Images/Step2/step16_.png"></p>
+<p><img src="Images/Step2/step16_.png" alt="" /></p>
 <ol start="14">
 <li><p>Click <strong>Next</strong>.</p></li>
 <li><p>Confirm the operating system and the processor are selected according to the image below. Enable the <strong>Generate boot artifacts</strong> checkbox.</p></li>
 </ol>
-<p><img src="Images/Step2/step17_.png"></p>
+<p><img src="Images/Step2/step17_.png" alt="" /></p>
 <ol start="16">
 <li><p>Click <strong>Next</strong>.</p></li>
 <li><p>Click <strong>Finish</strong>.</p></li>
 </ol>
-<p><img src="Images/Step2/step19_.png"></p>
+<p><img src="Images/Step2/step19_.png" alt="" /></p>
 <ol start="18">
-<li>Platform is created. Select the build icon in the flow view to build the platform.<br />
-The platform will begin building in the background and we can move on to Create Application.</li>
+<li>Platform is created. Select the build icon in the flow view to build the platform.</li>
 </ol>
-<p><img src="Images/Step2/step20_.png"></p>
+<p>The platform will begin building in the background and we can move on to Create Application.</p>
+<p><img src="Images/Step2/step20_.png" alt="" /></p>
 <p><strong>Creating Application</strong></p>
 <ol start="19">
-<li>The user can view the available application templates from the Top menu by selecting View and Examples.<br />
-This will show a list of available examples in the explorer view. We can select the Hello World example as shown below:</li>
+<li>The user can view the available application templates from the Top menu by selecting View and Examples.</li>
 </ol>
-<p><img src="Images/Step2/Creating_Application.png"></p>
+<p>This will show a list of available examples in the explorer view. We can select the Hello World example as shown below:</p>
+<p><img src="Images/Step2/Creating_Application.png" alt="" /></p>
 <ol start="20">
-<li>Give application name as 'Des_Test' and click next.<br />
-Select the target that was created and built above.</li>
+<li>Give application name as 'Des_Test' and click next.</li>
 </ol>
-<p><img src="Images/Step2/add_application_name.png"><br />
-<img src="Images/Step2/Select_Platform_For_Application.png"></p>
+<p>Select the target that was created and built above.</p>
+<p><img src="Images/Step2/add_application_name.png" alt="" /></p>
+<p><img src="Images/Step2/Select_Platform_For_Application.png" alt="" /></p>
 <ol start="21">
 <li>Choose the existing domain that was created in the platform.</li>
 </ol>
-<p><img src="Images/Step2/Choose_Domain.png"></p>
+<p><img src="Images/Step2/Choose_Domain.png" alt="" /></p>
 <p><strong>Build Application and Deploy on Target</strong></p>
 <ol start="22">
 <li><p>Power up the ZC702 board to program the FPGA.</p></li>
 <li><p>We are now ready to build our application Des_Test. To do this, select the Build icon in the Flow view.</p></li>
 </ol>
-<p><img src="Images/Step2/application_build.png"></p>
+<p><img src="Images/Step2/application_build.png" alt="" /></p>
 <ol start="24">
 <li>Click <strong>Vitis > Program Device</strong> and from the resulting window, click <strong>Program</strong>.</li>
 </ol>
-<p><img src="Images/Step2/program_device.png"><br />
-<img src="Images/Step2/program_device_app.png"><br />
-<img src="Images/Step2/programmed_device_.png"></p>
+<p><img src="Images/Step2/program_device.png" alt="" /><br />
+<img src="Images/Step2/program_device_app.png" alt="" /><br />
+<img src="Images/Step2/programmed_device_.png" alt="" /></p>
 <ol start="25">
 <li><p>Click <strong>Vitis > Program Flash</strong></p></li>
 <li><p>Switch to the terminal tab and confirm that <code>Hello World</code> was received.</p></li>
