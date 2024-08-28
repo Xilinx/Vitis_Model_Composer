@@ -63,15 +63,17 @@ Note that the input and output of the AIE subsystem are complex 16-bit integers.
 
 ![missing image](Images/Image04.png)
 
-Setting the PLIO width to 128 bits effectively transfers four samples of data between the PL and AI Engine on every clock cycle of the PL.
+Setting the PLIO width to 64 bits effectively transfers two samples of data between the PL and AI Engine on every clock cycle of the PL.
 
 In the generated graph code, Vitis Model Composer will insert 64-bit PLIOs on the input and output ports. In the generated Makefile to run the ``aiesimulator``, the PL will be configured execute at a clock rate of 500 MHz.
 
 13. At the top level of the model, double-click the Model Composer Hub block and select the FIRchain subsystem.
 
-14. Click **Generate**.
+14. Click **Analyze**.
 
-After code generation and AI Engine simulation completes, the Simulation Data Inspector appears.
+After code generation completes click on **View AIE simulation output and throughput**, then the Simulation Data Inspector appears.
+
+![missing image](Images/vmc_aie_simulation.png)
 
 15. In the Simulation Data Inspector window, select the **Out1** signal from the Inspect menu.
 
@@ -81,7 +83,7 @@ After code generation and AI Engine simulation completes, the Simulation Data In
 
 ![missing image](Images/Image06.png)
 
-This limits the throughput calculation to the area between the two cursors. In the figure above, the estimated throughput is 124 MSPS (your displayed value may vary slightly). This approximately satisfies our expected throughput of at least 125 MSPS.
+This limits the throughput calculation to the area between the two cursors. In the figure above, the estimated throughput is 125 MSPS. This satisfies our expected throughput of at least 125 MSPS.
 
 We can see the affects of adding the PLIO block in the generated graph code (`FIRchain.h`):
 
