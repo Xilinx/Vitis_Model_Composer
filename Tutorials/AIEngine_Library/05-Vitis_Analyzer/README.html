@@ -69,20 +69,21 @@ document.location=commandURI
 </ol>
 <p>Note that the input and output of the AIE subsystem are complex 16-bit integers.</p>
 <p><img src="Images/Image04.png" alt="missing image" /></p>
-<p>Setting the PLIO width to 128 bits effectively transfers four samples of data between the PL and AI Engine on every clock cycle of the PL.</p>
+<p>Setting the PLIO width to 64 bits effectively transfers two samples of data between the PL and AI Engine on every clock cycle of the PL.</p>
 <p>In the generated graph code, Vitis Model Composer will insert 64-bit PLIOs on the input and output ports. In the generated Makefile to run the <code>aiesimulator</code>, the PL will be configured execute at a clock rate of 500 MHz.</p>
 <ol start="13">
 <li><p>At the top level of the model, double-click the Model Composer Hub block and select the FIRchain subsystem.</p></li>
-<li><p>Click <strong>Generate</strong>.</p></li>
+<li><p>Click <strong>Analyze</strong>.</p></li>
 </ol>
-<p>After code generation and AI Engine simulation completes, the Simulation Data Inspector appears.</p>
+<p>After code generation completes click on <strong>View AIE simulation output and throughput</strong>, then the Simulation Data Inspector appears.</p>
+<p><img src="Images/vmc_aie_simulation.png" alt="missing image" /></p>
 <ol start="15">
 <li><p>In the Simulation Data Inspector window, select the <strong>Out1</strong> signal from the Inspect menu.</p></li>
 <li><p>Select the Cursor icon from the toolbar, then select <strong>Two Cursors</strong>. <img src="Images/Image05.png" alt="missing image" /></p></li>
 <li><p>Position the cursors at the beginning of the first and third signal frames, as shown below.</p></li>
 </ol>
 <p><img src="Images/Image06.png" alt="missing image" /></p>
-<p>This limits the throughput calculation to the area between the two cursors. In the figure above, the estimated throughput is 124 MSPS (your displayed value may vary slightly). This approximately satisfies our expected throughput of at least 125 MSPS.</p>
+<p>This limits the throughput calculation to the area between the two cursors. In the figure above, the estimated throughput is 125 MSPS. This satisfies our expected throughput of at least 125 MSPS.</p>
 <p>We can see the affects of adding the PLIO block in the generated graph code (<code>FIRchain.h</code>):</p>
 <pre><code>  In1 = adf::input_plio::create("In1",
 adf::plio_64_bits,
