@@ -24,7 +24,7 @@ document.location=commandURI
 <button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
               
 </html>
-<p>In this lab, you learn how to verify the functionality of your designs by simulating in Simulink® to ensure that your Vitis Model Composer design is correct when you implement the design in your target Xilinx® device.</p>
+<p>In this lab, you learn how to verify the functionality of your designs by simulating in Simulink® to ensure that your Vitis Model Composer design is correct when you implement the design in your target AMD device.</p>
 <h3 id="objectives">Objectives</h3>
 <p>After completing this lab, you will be able to:</p>
 <ul>
@@ -41,108 +41,104 @@ document.location=commandURI
 <ol>
 <li><p>Invoke Vitis Model Composer.</p>
 <ul>
-<li>On Windows systems select <strong>Windows > Xilinx Design Tools > Vitis Model Composer 2022.2.</strong></li>
+<li>On Windows systems select <strong>Windows > AMD Design Tools > Vitis Model Composer 2024.1.</strong></li>
 <li>On Linux systems, type <code>model_composer</code> at the command prompt.</li></ul></li>
-<li><p>Navigate to the Lab3 folder: <samp>\HDL_Library\Lab3.</samp><br />
-<br><br>You can view the directory contents in the MATLAB® Current Folder browser, or type ls at the command line prompt.</p></li>
-<li><p>Open the Lab3 design using one of the following:</p>
-<ul>
-<li>At the MATLAB command prompt, type open <code>Lab3.slx</code></li>
-<li>Double-click Lab3.slx in the Current Folder browser.<br />
-<br><br> The Lab3 design opens, as shown in the following figure.<br />
-<br><br><img src="Images/Step1/Part1/Step3.png"><br />
-Note that this design differs from the previous labs in that all of the HDL blocks are placed inside a subsystem (<strong>HDL_DUT</strong>) while the Vitis Model Composer Hub block remains at the top level of the model. Going forward, this is a recommended approach for architecting your model using Vitis Model Composer.</li></ul></li>
-<li><p>From the Simulink Toolstrip, click the Run button to simulate the design.</p></li>
+<li><p>Navigate to the Lab3 folder: <code>\HDL_Library\Lab3.</code></p></li>
 </ol>
-<blockquote>
-<p> <strong>Note</strong>:  In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.</p>
-</blockquote>
-<ol start="5">
+<p>You can view the directory contents in the MATLAB® Current Folder browser, or type ls at the command line prompt.</p>
+<ol start="3">
+<li>Open the Lab3 design using one of the following:<ul>
+<li>At the MATLAB command prompt, type <code>open Lab3.slx</code></li>
+<li>Double-click Lab3.slx in the Current Folder browser.</li></ul></li>
+</ol>
+<p>The Lab3 design opens, as shown in the following figure.</p>
+<p><img src="Images/Step1/Part1/Step3.png" alt="" /></p>
+<p>Note that this design differs from the previous labs in that all of the HDL blocks are placed inside a subsystem (<strong>HDL_DUT</strong>) while the Vitis Model Composer Hub block remains at the top level of the model. Going forward, this is a recommended approach for architecting your model using Vitis Model Composer.</p>
+<ol start="4">
+<li><p>From the Simulink Toolstrip, click the Run button to simulate the design.</p></li>
 <li><p>Double-click the <strong>Vitis Model Composer Hub</strong> block to open the Properties Editor.</p></li>
-<li><p>Select the <strong>HDL_DUT</strong> subsystem on the left, then the <strong>HDL Analysis</strong> tab.</p></li>
-<li><p>From the Perform Analysis menu, select <strong>Post Synthesis</strong> and from Analyzer type menu select <strong>Timing</strong> as shown in the following figure.<br />
-<br><br><img src="Images/Step1/Part1/Step7.png"></p></li>
-<li><p>In the Model Composer Hub dialog box, click Generate.<br />
-<br><br>When you generate, the following occurs:</p>
+<li><p>Select the <strong>HDL_DUT</strong> subsystem on the left, then the <strong>Analyze</strong> tab.</p></li>
+<li><p>From the Perform Analysis menu, select <strong>Post Synthesis</strong> and from Analyzer type menu select <strong>Timing</strong> as shown in the following figure.</p></li>
+</ol>
+<p><img src="Images/Step1/Part1/Step7.png" alt="" /></p>
+<ol start="8">
+<li>In the Model Composer Hub dialog box, click <strong>Analyze</strong>.</li>
+</ol>
+<p>When you generate, the following occurs:</p>
 <ul>
 <li>Vitis Model Composer generates the required files for the selected compilation target. For timing analysis Vitis Model Composer invokes Vivado in the background for the design project, and passes design timing constraints to Vivado.</li>
 <li>Depending on your selection for Perform Analysis (Post Synthesis or Post Implementation), the design runs in Vivado through synthesis or through implementation.</li>
 <li>After the Vivado tools run is completed, timing paths information is collected and saved in a specific file format from the Vivado timing database.</li>
-<li>Vitis Model Composer processes the timing information and displays a Timing Analyzer table with timing paths information as shown in the following figure.<br />
-<br><br><img src="Images/Step1/Part1/Step8.png"></li></ul></li>
-<li><p>In the timing analyzer table:</p>
-<ul>
-<li>Paths with lowest slack values display, with the worst slack showing at the top and increasing toward the bottom.</li>
-<li>Paths with timing violations have a negative slack and display in red.</li></ul></li>
-<li><p>Cross probe from the Timing Analyzer table to the Simulink model by clicking any path in the Timing Analyzer table, which highlights the corresponding Vitis Model Composer HDL blocks in the model. This allows you to troubleshoot timing violations by analyzing the path on which they occur.</p></li>
-<li><p>When you cross probe, you see the corresponding path as shown in the following figure.</p></li>
-<li><p>Blocks with timing violations are highlighted in red.<br />
-<br><br><img src="Images/Step1/Part1/Step12.png"></p></li>
-<li><p>Double-click the second path in the Timing Analyzer table and cross-probe, the corresponding highlighted path in green which indicates no timing violation.<br />
-<br><br><img src="Images/Step1/Part1/Step13-1.png"><br />
-<br><br> If you close the Timing Analyzer sometime later you might want to relaunch the Timing Analyzer table using the existing timing analyzer results for the model. A Launch button is provided under the HDL Analysis tab of the Model Composer Hub dialog box. This will only work if you already ran timing analysis on the Simulink model.<br />
-<br><br><img src="Images/Step1/Part1/Step13-2.png"></p></li>
+<li>Vitis Model Composer processes the timing information and displays a Timing Analyzer table with timing paths information as shown in the following figure.</li>
+</ul>
+<p><img src="Images/Step1/Part1/Step8.png" alt="" /></p>
+<p>In the timing analyzer table, paths with lowest slack values display, with the worst slack showing at the top and increasing toward the bottom. Paths with timing violations have a negative slack and display in red.</p>
+<ol start="9">
+<li>Cross probe from the Timing Analyzer table to the Simulink model by clicking any path in the Timing Analyzer table, which highlights the corresponding Vitis Model Composer HDL blocks in the model. This allows you to troubleshoot timing violations by analyzing the path on which they occur.</li>
 </ol>
-<blockquote>
-<p> <strong>Note</strong>: If you relaunch the Timing Analyzer window, make sure that the Analysis Type field is set to Timing. The table that opens will display the results stored in the Code Directory specified in the Model Composer Hub dialog box, regardless of the option selected for Perform Analysis (Post Synthesis or Post Implementation).</p>
-</blockquote>
+<p>When you cross probe, you see the corresponding path as shown in the following figure. Blocks with timing violations are highlighted in red.</p>
+<p><img src="Images/Step1/Part1/Step12.png" alt="" /></p>
+<ol start="10">
+<li>Double-click the second path in the Timing Analyzer table and cross-probe, the corresponding highlighted path in green which indicates no timing violation.</li>
+</ol>
+<p><img src="Images/Step1/Part1/Step13-1.png" alt="" /></p>
+<p>If you close the Timing Analyzer sometime later you might want to relaunch the Timing Analyzer table using the existing timing analyzer results for the model. To do this, simply click <strong>Analyze</strong> in the Model Composer Hub block again. The table that opens will display the results stored in the Target Directory specified in the Model Composer Hub dialog box, regardless of the option selected for Perform Analysis (Post Synthesis or Post Implementation).</p>
 <h3 id="troubleshooting-timing-violations">Troubleshooting Timing Violations</h3>
 <p>Inserting some registers in the combinational path might give better timing results and might help overcome timing violations if any. This can be done by changing latency of the combinational blocks as explained in the following.</p>
 <ol>
-<li><p>Click the violated path from the Timing Analyzer window which opens the violated path as shown in the following figure.<br />
-<br><br><img src="Images/Step1/Part2/Step1.png"></p></li>
-<li><p>Double-click the Mult block to open the Multiplier block parameters window as shown in the following figure.<br />
-<br><br><img src="Images/Step1/Part2/Step2.png"></p></li>
-<li><p>Under Basic tab, change the latency from 1 to 2 and click <strong>OK</strong>.</p></li>
-<li><p>Double-click the <strong>Model Composer Hub</strong> block, ensure that the Analyzer Type is Timing and click <strong>Generate</strong>.</p></li>
-<li><p>After the generation completes, it opens the timing Analyzer table as shown in the following figure. Observe the status pass at the top-right corner. It indicates there are no timing violated paths in the design.<br />
-<br><br><img src="Images/Step1/Part2/Step5.png"></p></li>
+<li>Click the violated path from the Timing Analyzer window which opens the violated path as shown in the following figure.</li>
 </ol>
+<p><img src="Images/Step1/Part2/Step1.png" alt="" /></p>
+<ol start="2">
+<li>Double-click the Mult block to open the Multiplier block parameters window as shown in the following figure.</li>
+</ol>
+<p><img src="Images/Step1/Part2/Step2.png" alt="" /></p>
+<ol start="3">
+<li><p>Under Basic tab, change the latency from 1 to 2 and click <strong>OK</strong>.</p></li>
+<li><p>Double-click the <strong>Model Composer Hub</strong> block, ensure that the Analysis Type is Timing and click <strong>Analyze</strong>.</p></li>
+</ol>
+<p>After the generation completes, it opens the timing Analyzer table as shown in the following figure. Observe the status pass at the top-right corner. It indicates there are no timing violated paths in the design.</p>
+<p><img src="Images/Step1/Part2/Step5.png" alt="" /></p>
 <blockquote>
-<p> <strong>Note</strong>: <br><br />
-a. For quicker timing analysis iterations, post-synthesis analysis is preferred over post-implementation analysis. <br><br />
+<p> <strong>Note</strong>: <br />
+a. For quicker timing analysis iterations, post-synthesis analysis is preferred over post-implementation analysis. <br />
 b. Changing the latency of the block might increase the number of resources which can be seen using Step 2: Resource Analysis in Vitis Model Composer.</p>
 </blockquote>
 <h2 id="step-2-resource-analysis-in-vitis-model-composer">Step 2: Resource Analysis in Vitis Model Composer</h2>
-<p>In this step we use same design, <samp>Lab3.slx</samp>, used for Step 1 but we are going to perform Resource Analysis.</p>
+<p>In this step we use same design, <code>Lab3.slx</code>, used for Step 1 but we are going to perform Resource Analysis.</p>
 <blockquote>
-<p>⭐ <strong>Tip</strong>: Resource Analysis can be performed whenever you generate any of the following compilation types: <br></p>
+<p>⭐ <strong>Tip</strong>: Resource Analysis can be performed whenever you generate any of the following compilation types: </p>
 <ul>
-<li>IP catalog <br></li>
-<li>Hardware Co-Simulation <br></li>
-<li>Synthesized Checkpoint <br></li>
-<li>HDL Netlist <br></li>
+<li>IP catalog </li>
+<li>Hardware Co-Simulation </li>
+<li>Synthesized Checkpoint </li>
+<li>HDL Netlist </li>
 </ul>
 </blockquote>
 <ol>
-<li>Double-click the <strong>Model Composer Hub</strong> block in the Simulink model. On the HDL Settings tab, ensure that one of the Compilation Types listed above is selected.</li>
+<li><p>Double-click the <strong>Model Composer Hub</strong> block in the Simulink model. On the HDL Settings tab, ensure that one of the Compilation Types listed above is selected.</p></li>
+<li><p>In the Analyze tab, set the Perform Analysis field to <strong>Post Synthesis</strong> and Analysis Type type field to <strong>Resource</strong>.</p></li>
 </ol>
+<p><img src="Images/Step2/Step2.png" alt="" /></p>
 <blockquote>
 <p> <strong>Note</strong>: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.</p>
 </blockquote>
-<ol start="2">
-<li><p>In the HDL Analysis tab, set the Perform Analysis field to <strong>Post Synthesis</strong> and Analysis Type type field to <strong>Resource</strong>.<br />
-<br><br><img src="Images/Step2/Step2.png"></p></li>
-<li><p>In the Model Composer Hub dialog box, click <strong>Generate</strong><br />
-<br><br>Model Composer processes the resource utilization data and displays a Resource Analyzer window with resource utilization information.<br />
-<br><br><img src="Images/Step2/Step3.png"><br />
-<br><br>Each column heading (for example, BRAMs, DSPs, or LUTs) in the window shows the total number of each type of resources available in the Xilinx device for which you are targeting your design. The rest of the window displays a hierarchical listing of each subsystem and block in the design, with the count of these resource types.</p></li>
-<li><p>You can cross probe from the Resource Analyzer window to the Simulink model by clicking a block or subsystem name in the Resource Analyzer window, which highlights the corresponding Vitis Model Composer HDL block or subsystem in the model.<br />
-<br><br>Cross probing is useful to identify blocks and subsystems that are implemented using a particular type of resource.</p></li>
-<li><p>The block you have selected in the window will be highlighted yellow and outlined in red.</p></li>
+<ol start="3">
+<li>In the Model Composer Hub dialog box, click <strong>Analyze</strong>.</li>
 </ol>
-<!-- <br><br><img src="Images/Step2/Step5.png"> -->
-<ol start="6">
-<li>If the block or subsystem you have selected in the window is within an upper-level subsystem, then the parent subsystem is highlighted in red in addition to the underlying block as shown in the following figure.<br />
-<br><br><img src="Images/Step2/Step6.png"></li>
-</ol>
+<p>Model Composer processes the resource utilization data and displays a Resource Analyzer window with resource utilization information.</p>
+<p><img src="Images/Step2/Step3.png" alt="" /></p>
+<p>Each column heading (for example, BRAMs, DSPs, or LUTs) in the window shows the total number of each type of resources available in the AMD device for which you are targeting your design. The rest of the window displays a hierarchical listing of each subsystem and block in the design, with the count of these resource types.</p>
+<p>You can cross probe from the Resource Analyzer window to the Simulink model by clicking a block or subsystem name in the Resource Analyzer window, which highlights the corresponding Vitis Model Composer HDL block or subsystem in the model.</p>
+<p>Cross probing is useful to identify blocks and subsystems that are implemented using a particular type of resource. The block you have selected in the window will be highlighted yellow and outlined in red. If the block or subsystem you have selected in the window is within an upper-level subsystem, then the parent subsystem is highlighted in red in addition to the underlying block as shown in the following figure.</p>
+<p><img src="Images/Step2/Step6.png" alt="" /></p>
 <blockquote>
-<p>❗❗ <strong>Important</strong>: If the Resource Analyzer window or the Timing Analyzer window opens and no information is displayed in the window (table cells are empty), double-click the Model Composer Hub block and set the Code Directory to a new directory, that is, a directory that has not been used before. Then run the analysis again.</p>
+<p>❗❗ <strong>Important</strong>: If the Resource Analyzer window or the Timing Analyzer window opens and no information is displayed in the window (table cells are empty), double-click the Model Composer Hub block and set the Target Directory to a new directory, that is, a directory that has not been used before. Then run the analysis again.</p>
 </blockquote>
 <h2 id="summary">Summary</h2>
 <p>In this lab you learned how to use timing and resource analysis inside Model Composer which, in turn, invokes Vivado synthesis to collect the information for the analysis. You also learned how to identify timing violated paths and to troubleshoot them for simple designs.</p>
 <hr />
-<p>Copyright 2022 Xilinx</p>
+<p>Copyright 2024 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

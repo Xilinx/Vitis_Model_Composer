@@ -59,7 +59,7 @@ This lab has the following steps:
 
 This is where you will specify the path to a *.xpfm* file that defines your [platform](https://docs.xilinx.com/r/en-US/ug1273-versal-acap-design/Platform-Based-Design-Flows). In this lab, we will use a [Versal base platform](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html) for the [VCK190](https://www.xilinx.com/products/boards-and-kits/vck190.html) that has been provided with the Vitis installation.
 
-9. Navigate to the folder where the Versal base platforms are installed. These are located within the Vitis tools installation, for example: **/opt/Xilinx/Vitis/2023.1/base_platforms**.
+9. Navigate to the folder where the Versal base platforms are installed. These are located within the Vitis tools installation, for example: **/opt/Xilinx/Vitis/2024.1/base_platforms**.
 
 ![missing image](Images/Image03.png)
 
@@ -73,9 +73,9 @@ The Hardware Selection tab populates with information about the selected platfor
 
 ![missing image](Images/Image05.png)
 
-12. Select the **Code Generation** tab, the **FIRchain** subsystem, then **AIE Hardware Flow**.
+12. Select the **Code Generation** tab, the **FIRchain** subsystem.
 
-13. Click the checkbox to **Generate Hardware Validation Code**.
+13. And then select **Validate On Hardware**.
 
 ![missing image](Images/Image06.png)
 
@@ -101,9 +101,9 @@ For more information, see [Simulating an AI Engine Graph Application](https://do
 
 In this step, you will use Vitis hardware emulation to validate the design. As stated above, this simulates the AI Engine kernels, PL kernels, and PS application side-by-side. This allows you to gain confidence that the design will run on the actual hardware without requiring access to a board. However, running hardware emulation is slower than running the design on the board itself.
 
-1. On the AIE Hardware Flow tab of the Vitis Model Composer Hub block, select **Run hardware emulation after code generation**.
+1. On the Validate On Hardware tab of the Vitis Model Composer Hub block, select target as **hw_emu** and then select **Run hardware emulation after code generation**.
 
-2. Click **Generate**. 
+2. Click **Validate**. 
 
 ![missing image](Images/Image07.png)
 
@@ -119,11 +119,11 @@ After hardware validation is complete, the result is displayed in the Progress w
 
 In this step, you will generate a BOOT.BIN binary hardware image, load it on the board, and perform hardware validation.
 
-1. On the AIE Hardware Flow tab of the Vitis Model Composer Hub block, select **Generate BOOT.BIN after code generation**.
+1. On the Validate On Hardware tab of the Vitis Model Composer Hub block, select **Generate BOOT.BIN after code generation**.
 
 ![missing image](Images/Image09.png)
 
-2. Click **Generate**. 
+2. Click **Validate**. 
 
 This will take a substantial amount of time as the entire design (AI Engine, PL, and PS) is compiled and synthesized. Alternatively, you can leave the **Generate BOOT.BIN after code generation** option unchecked and Vitis Model Composer will only generate the AIE, PL, and host source code along with a script and makefile to build the boot image outside of Vitis Model Composer.
 

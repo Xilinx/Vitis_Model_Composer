@@ -20,4 +20,5 @@ This Single Rate SSR FIR reference design illustrates a number of advanced Vitis
 
 This design only works in Vivado 2022.1 or later.
 
-
+--------------
+Copyright (C) 2024 Advanced Micro Devices, Inc.

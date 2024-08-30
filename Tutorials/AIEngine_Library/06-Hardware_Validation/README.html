@@ -72,7 +72,7 @@ information is communicated between Vitis Model Composer and the hardware.</p>
 </ol>
 <p>This is where you will specify the path to a <em>.xpfm</em> file that defines your <a href="https://docs.xilinx.com/r/en-US/ug1273-versal-acap-design/Platform-Based-Design-Flows">platform</a>. In this lab, we will use a <a href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html">Versal base platform</a> for the <a href="https://www.xilinx.com/products/boards-and-kits/vck190.html">VCK190</a> that has been provided with the Vitis installation.</p>
 <ol start="9">
-<li>Navigate to the folder where the Versal base platforms are installed. These are located within the Vitis tools installation, for example: <strong>/opt/Xilinx/Vitis/2023.1/base_platforms</strong>.</li>
+<li>Navigate to the folder where the Versal base platforms are installed. These are located within the Vitis tools installation, for example: <strong>/opt/Xilinx/Vitis/2024.1/base_platforms</strong>.</li>
 </ol>
 <p><img src="Images/Image03.png" alt="missing image" /></p>
 <ol start="10">
@@ -85,8 +85,8 @@ information is communicated between Vitis Model Composer and the hardware.</p>
 <p>The Hardware Selection tab populates with information about the selected platform.</p>
 <p><img src="Images/Image05.png" alt="missing image" /></p>
 <ol start="12">
-<li><p>Select the <strong>Code Generation</strong> tab, the <strong>FIRchain</strong> subsystem, then <strong>AIE Hardware Flow</strong>.</p></li>
-<li><p>Click the checkbox to <strong>Generate Hardware Validation Code</strong>.</p></li>
+<li><p>Select the <strong>Code Generation</strong> tab, the <strong>FIRchain</strong> subsystem.</p></li>
+<li><p>And then select <strong>Validate On Hardware</strong>.</p></li>
 </ol>
 <p><img src="Images/Image06.png" alt="missing image" /></p>
 <p>The <strong>HW System Type</strong> provides two options: <strong>Baremetal</strong> or <strong>Linux</strong> flow.</p>
@@ -106,8 +106,8 @@ information is communicated between Vitis Model Composer and the hardware.</p>
 <h2 id="step-2-validation-using-hardware-emulation">Step 2: Validation using Hardware Emulation</h2>
 <p>In this step, you will use Vitis hardware emulation to validate the design. As stated above, this simulates the AI Engine kernels, PL kernels, and PS application side-by-side. This allows you to gain confidence that the design will run on the actual hardware without requiring access to a board. However, running hardware emulation is slower than running the design on the board itself.</p>
 <ol>
-<li><p>On the AIE Hardware Flow tab of the Vitis Model Composer Hub block, select <strong>Run hardware emulation after code generation</strong>.</p></li>
-<li><p>Click <strong>Generate</strong>. </p></li>
+<li><p>On the Validate On Hardware tab of the Vitis Model Composer Hub block, select target as <strong>hw_emu</strong> and then select <strong>Run hardware emulation after code generation</strong>.</p></li>
+<li><p>Click <strong>Validate</strong>. </p></li>
 </ol>
 <p><img src="Images/Image07.png" alt="missing image" /></p>
 <p>This will take a substantial amount of time as the entire design (AI Engine, PL, and PS) is compiled and synthesized. Alternatively, you can leave the <strong>Run hardware emulation after code generation</strong> option unchecked and Vitis Model Composer will only generate the AIE, PL, and host source code along with a script and makefile to perform hardware emulation outside of Vitis Model Composer.</p>
@@ -119,11 +119,11 @@ information is communicated between Vitis Model Composer and the hardware.</p>
 <h2 id="step-3-validation-on-hardware">Step 3: Validation on Hardware</h2>
 <p>In this step, you will generate a BOOT.BIN binary hardware image, load it on the board, and perform hardware validation.</p>
 <ol>
-<li>On the AIE Hardware Flow tab of the Vitis Model Composer Hub block, select <strong>Generate BOOT.BIN after code generation</strong>.</li>
+<li>On the Validate On Hardware tab of the Vitis Model Composer Hub block, select <strong>Generate BOOT.BIN after code generation</strong>.</li>
 </ol>
 <p><img src="Images/Image09.png" alt="missing image" /></p>
 <ol start="2">
-<li>Click <strong>Generate</strong>. </li>
+<li>Click <strong>Validate</strong>. </li>
 </ol>
 <p>This will take a substantial amount of time as the entire design (AI Engine, PL, and PS) is compiled and synthesized. Alternatively, you can leave the <strong>Generate BOOT.BIN after code generation</strong> option unchecked and Vitis Model Composer will only generate the AIE, PL, and host source code along with a script and makefile to build the boot image outside of Vitis Model Composer.</p>
 <p>After the binary image is generated, it is stored in the folder <code>./code_hw/run_hw/src_ps/BOOT.BIN</code>.</p>

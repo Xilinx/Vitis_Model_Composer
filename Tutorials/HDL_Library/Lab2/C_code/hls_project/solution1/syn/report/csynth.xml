@@ -1,11 +1,11 @@
 <profile>
     <ReportVersion>
-        <Version>2021.1</Version>
+        <Version>2024.1</Version>
     </ReportVersion>
     <UserAssignments>
         <unit>ns</unit>
-        <ProductFamily>virtexuplus</ProductFamily>
-        <Part>xcvu11p-flga2577-1-e</Part>
+        <ProductFamily>kintex7</ProductFamily>
+        <Part>xc7k325t-fbg676-3</Part>
         <TopModelName>MedianFilter</TopModelName>
         <TargetClockPeriod>10.00</TargetClockPeriod>
         <ClockUncertainty>2.70</ClockUncertainty>
@@ -16,36 +16,41 @@
         <PipelineType>yes</PipelineType>
         <SummaryOfTimingAnalysis>
             <unit>ns</unit>
-            <EstimatedClockPeriod>6.654</EstimatedClockPeriod>
+            <EstimatedClockPeriod>6.756</EstimatedClockPeriod>
         </SummaryOfTimingAnalysis>
         <SummaryOfOverallLatency>
             <unit>clock cycles</unit>
-            <Best-caseLatency>1</Best-caseLatency>
-            <Average-caseLatency>1</Average-caseLatency>
-            <Worst-caseLatency>1</Worst-caseLatency>
-            <Best-caseRealTimeLatency>10.000 ns</Best-caseRealTimeLatency>
-            <Average-caseRealTimeLatency>10.000 ns</Average-caseRealTimeLatency>
-            <Worst-caseRealTimeLatency>10.000 ns</Worst-caseRealTimeLatency>
+            <Best-caseLatency>2</Best-caseLatency>
+            <Average-caseLatency>2</Average-caseLatency>
+            <Worst-caseLatency>2</Worst-caseLatency>
+            <Best-caseRealTimeLatency>20.000 ns</Best-caseRealTimeLatency>
+            <Average-caseRealTimeLatency>20.000 ns</Average-caseRealTimeLatency>
+            <Worst-caseRealTimeLatency>20.000 ns</Worst-caseRealTimeLatency>
             <PipelineInitiationInterval>1</PipelineInitiationInterval>
-            <PipelineDepth>2</PipelineDepth>
+            <PipelineDepth>3</PipelineDepth>
             <Interval-min>1</Interval-min>
             <Interval-max>1</Interval-max>
         </SummaryOfOverallLatency>
+        <SummaryOfViolations>
+            <IssueType>-</IssueType>
+            <ViolationType>-</ViolationType>
+            <SourceLocation>../../MedianFilter.cpp:45</SourceLocation>
+        </SummaryOfViolations>
     </PerformanceEstimates>
     <AreaEstimates>
         <Resources>
-            <FF>74</FF>
-            <LUT>451</LUT>
+            <FF>115</FF>
+            <LUT>527</LUT>
             <BRAM_18K>0</BRAM_18K>
             <DSP>0</DSP>
             <URAM>0</URAM>
         </Resources>
         <AvailableResources>
-            <BRAM_18K>4032</BRAM_18K>
-            <DSP>9216</DSP>
-            <FF>2592000</FF>
-            <LUT>1296000</LUT>
-            <URAM>960</URAM>
+            <BRAM_18K>890</BRAM_18K>
+            <DSP>840</DSP>
+            <FF>407600</FF>
+            <LUT>203800</LUT>
+            <URAM>0</URAM>
         </AvailableResources>
     </AreaEstimates>
     <InterfaceSummary>
@@ -177,8 +182,9 @@
         </RtlPorts>
     </InterfaceSummary>
     <RTLDesignHierarchy>
-        <TopModule MAX_DEPTH="1">
+        <TopModule MAX_DEPTH="2">
             <ModuleName>MedianFilter</ModuleName>
+            <BindInstances>icmp_ln10_fu_129_p2 select_ln10_fu_135_p3 sortBuffer_6_fu_143_p3 icmp_ln10_1_fu_151_p2 sortBuffer_8_fu_157_p3 select_ln10_3_fu_165_p3 icmp_ln10_2_fu_173_p2 select_ln10_4_fu_179_p3 sortBuffer_7_fu_187_p3 icmp_ln11_fu_195_p2 sortBuffer_11_fu_201_p3 select_ln11_1_fu_209_p3 icmp_ln11_1_fu_217_p2 sortBuffer_10_fu_223_p3 sortBuffer_9_fu_231_p3 icmp_ln11_2_fu_239_p2 select_ln11_4_fu_245_p3 select_ln11_5_fu_253_p3 icmp_ln12_fu_261_p2 select_ln12_fu_267_p3 sortBuffer_15_fu_275_p3 icmp_ln12_1_fu_283_p2 sortBuffer_13_fu_289_p3 select_ln12_3_fu_297_p3 icmp_ln12_2_fu_305_p2 sortBuffer_12_fu_311_p3 select_ln12_5_fu_319_p3 icmp_ln13_fu_327_p2 select_ln13_fu_333_p3 icmp_ln13_1_fu_341_p2 select_ln13_1_fu_347_p3 icmp_ln13_2_fu_355_p2 sortBuffer_16_fu_361_p3 sortBuffer_14_fu_369_p3 icmp_ln14_fu_377_p2 sortBuffer_19_fu_383_p3 icmp_ln14_1_fu_391_p2 sortBuffer_17_fu_395_p3 icmp_ln14_2_fu_401_p2 select_ln14_2_fu_405_p3 icmp_ln15_fu_411_p2 select_ln15_fu_416_p3 icmp_ln15_1_fu_423_p2 select_ln15_1_fu_429_p3 sortBuffer_18_fu_437_p3 icmp_ln15_2_fu_445_p2 select_ln15_3_fu_450_p3 icmp_ln16_fu_457_p2 V</BindInstances>
         </TopModule>
     </RTLDesignHierarchy>
     <ModuleInformation>
@@ -189,43 +195,101 @@
                     <TargetClockPeriod>10.00</TargetClockPeriod>
                     <ClockUncertainty>2.70</ClockUncertainty>
                     <TargetInitiationInterval>1</TargetInitiationInterval>
-                    <EstimatedClockPeriod>6.654</EstimatedClockPeriod>
+                    <EstimatedClockPeriod>6.756</EstimatedClockPeriod>
                 </SummaryOfTimingAnalysis>
                 <SummaryOfOverallLatency>
-                    <Best-caseLatency>1</Best-caseLatency>
-                    <Average-caseLatency>1</Average-caseLatency>
-                    <Worst-caseLatency>1</Worst-caseLatency>
-                    <Best-caseRealTimeLatency>10.000 ns</Best-caseRealTimeLatency>
-                    <Average-caseRealTimeLatency>10.000 ns</Average-caseRealTimeLatency>
-                    <Worst-caseRealTimeLatency>10.000 ns</Worst-caseRealTimeLatency>
+                    <Best-caseLatency>2</Best-caseLatency>
+                    <Average-caseLatency>2</Average-caseLatency>
+                    <Worst-caseLatency>2</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>20.000 ns</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>20.000 ns</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>20.000 ns</Worst-caseRealTimeLatency>
                     <PipelineInitiationInterval>1</PipelineInitiationInterval>
-                    <PipelineDepth>2</PipelineDepth>
+                    <PipelineDepth>3</PipelineDepth>
                     <PipelineType>yes</PipelineType>
                 </SummaryOfOverallLatency>
+                <SummaryOfViolations>
+                    <IssueType>-</IssueType>
+                    <ViolationType>-</ViolationType>
+                    <SourceLocation>../../MedianFilter.cpp:45</SourceLocation>
+                </SummaryOfViolations>
             </PerformanceEstimates>
             <AreaEstimates>
                 <Resources>
-                    <FF>74</FF>
-                    <AVAIL_FF>2592000</AVAIL_FF>
+                    <FF>115</FF>
+                    <AVAIL_FF>407600</AVAIL_FF>
                     <UTIL_FF>~0</UTIL_FF>
-                    <LUT>451</LUT>
-                    <AVAIL_LUT>1296000</AVAIL_LUT>
+                    <LUT>527</LUT>
+                    <AVAIL_LUT>203800</AVAIL_LUT>
                     <UTIL_LUT>~0</UTIL_LUT>
                     <BRAM_18K>0</BRAM_18K>
-                    <AVAIL_BRAM>4032</AVAIL_BRAM>
+                    <AVAIL_BRAM>890</AVAIL_BRAM>
                     <UTIL_BRAM>0</UTIL_BRAM>
                     <DSP>0</DSP>
-                    <AVAIL_DSP>9216</AVAIL_DSP>
+                    <AVAIL_DSP>840</AVAIL_DSP>
                     <UTIL_DSP>0</UTIL_DSP>
                     <URAM>0</URAM>
-                    <AVAIL_URAM>960</AVAIL_URAM>
+                    <AVAIL_URAM>0</AVAIL_URAM>
                     <UTIL_URAM>0</UTIL_URAM>
                 </Resources>
             </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln10_fu_129_p2" SOURCE="../../MedianFilter.cpp:10" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln10" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln10_fu_135_p3" SOURCE="../../MedianFilter.cpp:10" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln10" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_6_fu_143_p3" SOURCE="../../MedianFilter.cpp:10" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_6" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln10_1_fu_151_p2" SOURCE="../../MedianFilter.cpp:10" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln10_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_8_fu_157_p3" SOURCE="../../MedianFilter.cpp:10" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_8" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln10_3_fu_165_p3" SOURCE="../../MedianFilter.cpp:10" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln10_3" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln10_2_fu_173_p2" SOURCE="../../MedianFilter.cpp:10" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln10_2" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln10_4_fu_179_p3" SOURCE="../../MedianFilter.cpp:10" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln10_4" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_7_fu_187_p3" SOURCE="../../MedianFilter.cpp:10" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_7" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln11_fu_195_p2" SOURCE="../../MedianFilter.cpp:11" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln11" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_11_fu_201_p3" SOURCE="../../MedianFilter.cpp:11" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_11" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln11_1_fu_209_p3" SOURCE="../../MedianFilter.cpp:11" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln11_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln11_1_fu_217_p2" SOURCE="../../MedianFilter.cpp:11" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln11_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_10_fu_223_p3" SOURCE="../../MedianFilter.cpp:11" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_10" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_9_fu_231_p3" SOURCE="../../MedianFilter.cpp:11" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_9" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln11_2_fu_239_p2" SOURCE="../../MedianFilter.cpp:11" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln11_2" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln11_4_fu_245_p3" SOURCE="../../MedianFilter.cpp:11" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln11_4" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln11_5_fu_253_p3" SOURCE="../../MedianFilter.cpp:11" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln11_5" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln12_fu_261_p2" SOURCE="../../MedianFilter.cpp:12" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln12" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln12_fu_267_p3" SOURCE="../../MedianFilter.cpp:12" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln12" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_15_fu_275_p3" SOURCE="../../MedianFilter.cpp:12" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_15" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln12_1_fu_283_p2" SOURCE="../../MedianFilter.cpp:12" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln12_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_13_fu_289_p3" SOURCE="../../MedianFilter.cpp:12" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_13" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln12_3_fu_297_p3" SOURCE="../../MedianFilter.cpp:12" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln12_3" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln12_2_fu_305_p2" SOURCE="../../MedianFilter.cpp:12" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln12_2" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_12_fu_311_p3" SOURCE="../../MedianFilter.cpp:12" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_12" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln12_5_fu_319_p3" SOURCE="../../MedianFilter.cpp:12" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln12_5" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln13_fu_327_p2" SOURCE="../../MedianFilter.cpp:13" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln13" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln13_fu_333_p3" SOURCE="../../MedianFilter.cpp:13" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln13" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln13_1_fu_341_p2" SOURCE="../../MedianFilter.cpp:13" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln13_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln13_1_fu_347_p3" SOURCE="../../MedianFilter.cpp:13" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln13_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln13_2_fu_355_p2" SOURCE="../../MedianFilter.cpp:13" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln13_2" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_16_fu_361_p3" SOURCE="../../MedianFilter.cpp:13" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_16" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_14_fu_369_p3" SOURCE="../../MedianFilter.cpp:13" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_14" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln14_fu_377_p2" SOURCE="../../MedianFilter.cpp:14" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln14" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_19_fu_383_p3" SOURCE="../../MedianFilter.cpp:14" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_19" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln14_1_fu_391_p2" SOURCE="../../MedianFilter.cpp:14" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln14_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_17_fu_395_p3" SOURCE="../../MedianFilter.cpp:14" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_17" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln14_2_fu_401_p2" SOURCE="../../MedianFilter.cpp:14" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln14_2" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln14_2_fu_405_p3" SOURCE="../../MedianFilter.cpp:14" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln14_2" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln15_fu_411_p2" SOURCE="../../MedianFilter.cpp:15" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln15" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln15_fu_416_p3" SOURCE="../../MedianFilter.cpp:15" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln15" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln15_1_fu_423_p2" SOURCE="../../MedianFilter.cpp:15" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln15_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln15_1_fu_429_p3" SOURCE="../../MedianFilter.cpp:15" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln15_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="sortBuffer_18_fu_437_p3" SOURCE="../../MedianFilter.cpp:15" STORAGESUBTYPE="" URAM="0" VARIABLE="sortBuffer_18" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln15_2_fu_445_p2" SOURCE="../../MedianFilter.cpp:15" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln15_2" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln15_3_fu_450_p3" SOURCE="../../MedianFilter.cpp:15" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln15_3" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln16_fu_457_p2" SOURCE="../../MedianFilter.cpp:16" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln16" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="V" SOURCE="../../MedianFilter.cpp:16" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln16" VISIBLE="false"/>
+            </BindNodes>
         </Module>
     </ModuleInformation>
     <FIFOInformation/>
-    <UserConfigCommands/>
+    <UserConfigCommands>
+        <config_export format="sysgen"/>
+    </UserConfigCommands>
     <Args>
         <Arg ArgName="row1" index="0" direction="in" srcType="unsigned char" srcSize="8">
             <hwRefs>
@@ -333,17 +397,17 @@
     </Interfaces>
     <ReportHWInterface>
         <section name="HW Interfaces" level="0">
-            <item name="REGISTER">
-                <table isCollapsed="0">
-                    <keys size="3">Interface, Mode, Bitwidth</keys>
-                    <column name="V">ap_none, 8</column>
-                    <column name="row1">ap_none, 8</column>
-                    <column name="row2">ap_none, 8</column>
-                    <column name="row3">ap_none, 8</column>
+            <item name="Other Ports">
+                <table>
+                    <keys size="4">Port, Mode, Direction, Bitwidth</keys>
+                    <column name="V">ap_vld, out, 8</column>
+                    <column name="row1">ap_none, in, 8</column>
+                    <column name="row2">ap_none, in, 8</column>
+                    <column name="row3">ap_none, in, 8</column>
                 </table>
             </item>
             <item name="TOP LEVEL CONTROL">
-                <table isCollapsed="0">
+                <table>
                     <keys size="3">Interface, Type, Ports</keys>
                     <column name="ap_clk">clock, ap_clk</column>
                     <column name="ap_rst">reset, ap_rst</column>
@@ -355,7 +419,7 @@
     <ReportSWInterface>
         <section name="SW I/O Information" level="0">
             <item name="Top Function Arguments">
-                <table isCollapsed="1">
+                <table>
                     <keys size="3">Argument, Direction, Datatype</keys>
                     <column name="row1">in, unsigned char</column>
                     <column name="row2">in, unsigned char</column>
@@ -364,8 +428,8 @@
                 </table>
             </item>
             <item name="SW-to-HW Mapping">
-                <table isCollapsed="1">
-                    <keys size="3">Argument, HW Name, HW Type</keys>
+                <table>
+                    <keys size="3">Argument, HW Interface, HW Type</keys>
                     <column name="row1">row1, port</column>
                     <column name="row2">row2, port</column>
                     <column name="row3">row3, port</column>
@@ -375,8 +439,12 @@
             </item>
         </section>
     </ReportSWInterface>
-    <ReportBurst>
-        <section name="M_AXI Burst Information" level="0"/>
-    </ReportBurst>
+    <ResolutionUrl key="ZZZ">docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&amp;url=ug1448-hls-guidance&amp;resourceid=ZZZ.html</ResolutionUrl>
+    <PragmaReport>
+        <Pragma type="pipeline" location="../../MedianFilter.cpp:45" status="valid" parentFunction="medianfilter" variable="" isDirective="0" options="II=1"/>
+    </PragmaReport>
+    <AutoPragmaReport>
+        <AutoPragma type="array_partition" parentFunction="medianfilter" options="dim=1 type=complete  variable=_ZZ12MedianFilterhhhPhE17pixelWindowBuffer" pragmaLocId="../../MedianFilter.cpp:49:0" srcPragmaType="pipeline" srcPragmaLoc="../../MedianFilter.cpp:45" srcPragmaSource="pragma" srcIsDirective="0" variable="MedianFilter(unsigned char, unsigned char, unsigned char, unsigned char*)::pixelWindowBuffer" varLoc=""/>
+    </AutoPragmaReport>
 </profile>
 

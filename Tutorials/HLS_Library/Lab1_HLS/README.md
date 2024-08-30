@@ -15,11 +15,11 @@ In this step you see how Vitis Model Composer fits into the Simulink environment
 
 ### Access the HLS Library
 
-Vitis Model Composer provides an HLS Library for use within the Simulink environment You can access these from within the Simulink Library Browser:
+Vitis Model Composer provides an HLS Library for use within the Simulink environment. You can access these from within the Simulink Library Browser:
 
 1. At the MATLAB command prompt, type: `slLibraryBrowser`
 
-2. In the browser, navigate to the HLS library in the Xilinx Toolbox .
+2. In the browser, navigate to the HLS library in the AMD Toolbox .
 <img src="./Images/Step1/Step2.png">
 The HLS blocks are organized into subcategories based on functionality. Spend a few minutes navigating through the sub-libraries and familiarizing yourself with the available blocks.
 
@@ -36,14 +36,15 @@ Sobel edge detection is a classical algorithm in the field of image and video pr
 
 ### Implementing Algorithms in Vitis Model Composer
 
-1. In the MATLAB Current Folder, navigate to <samp> \HLS_Library\Lab1\Section1. </samp>
+1. In the MATLAB Current Folder, navigate to ` \HLS_Library\Lab1\Section1. `
 
-2. Double-click the <samp> Sobel_Edge_Detection_start.slx </samp> model.
-<br><br> This model already contains source and sink blocks to stream video files as input directly into your algorithm and view the results. The model also contains some of the needed HLS blocks required for this section. Note the difference in appearance for the HLS blocks in the design versus the Simulink blocks.
+2. Double-click the `Sobel_Edge_Detection_start.slx` model.
 
-3. Double-click **Sobeledge_lib.slx** library model and drag the SobelFilter_XMC block into the area labeled Convolve Image Frame with Sobel Kernel and Compute Gradient as shown in the following figure and connect the input of this block to the output of the From Multimedia File block.
+This model already contains source and sink blocks to stream video files as input directly into your algorithm and view the results. The model also contains some of the needed HLS blocks required for this section. Note the difference in appearance for the HLS blocks in the design versus the Simulink blocks.
 
-4. Select the **GradientMag_XMC** block from the <samp> Sobeledge_lib.slx </samp> file and drag it into the model, and connect the X and Y outputs of the Sobel Filter block to the input of this block.
+3. Double-click `Sobeledge_lib.slx` library model and drag the SobelFilter_XMC block into the area labeled Convolve Image Frame with Sobel Kernel and Compute Gradient as shown in the following figure and connect the input of this block to the output of the From Multimedia File block.
+
+4. Select the **GradientMag_XMC** block from the ` Sobeledge_lib.slx ` file and drag it into the model, and connect the X and Y outputs of the Sobel Filter block to the input of this block.
 
 5. Connect the rest of the blocks to complete the algorithm as shown in the following figure.
 
@@ -55,18 +56,18 @@ Sobel edge detection is a classical algorithm in the field of image and video pr
 <br><br><img src="Images/Step2/Part2/Step6.png">
 <br><br> One way to assess the simulation performance of the algorithm is to check the video frame rate of the simulation. Do the following:
 
-7. Add the Frame Rate Display block from the Simulink Computer Vision System Toolbox (under the Sinks category) and connect it to the output of the algorithm as shown in the following figure.
+7. Add the Frame Rate Display block from the Simulink Computer Vision Toolbox (under the Sinks category) and connect it to the output of the algorithm as shown in the following figure.
 
 8. Simulate the model again to see the number of video frames processed per second.
 <br><br><img src="Images/Step2/Part2/Step8.png">
 
 9. Try changing the input video through the From Multimedia File block by double-clicking the block and changing the File Name field to select a different video. Notice that changing the video resolution in the Source block does not require any structural modifications to the algorithm itself.
 
-> 📝 **Note:** You must stop simulation before you can change the input file. Also, the .mp4 files in the MATLAB vision data tool box directory are not supported.
+> 📝 **Note:** You must stop simulation before you can change the input file. MP4 files are not supported.
 
 ## Step 3: Work with Data Types
 
-In this step, you become familiar with the supported Data Types for Vitis Model Composer and conversion from floating to fixed-point types.
+In this step, you become familiar with the supported data types for Vitis Model Composer and conversion from floating to fixed-point types.
 
 This exercise has two primary parts, and one optional part:
  * Review a simple floating-point algorithm using Vitis Model Composer.
@@ -74,9 +75,9 @@ This exercise has two primary parts, and one optional part:
 
 ### Work with Native Simulink Data Types
 
-1. In the MATLAB Current Folder, navigate to the <samp>HLS_Library\Lab1\Section2 </samp> folder.
+1. In the MATLAB Current Folder, navigate to the `HLS_Library\Lab1\Section2 ` folder.
 
-2. Double-click **ColorSpace_Conversion.slx** to open the design.
+2. Double-click **Colorspace_Conversion.slx** to open the design.
 <br><br>This is a Color Space conversion design, built with basic Vitis Model Composer blocks, that performs a RGB to YCbCr conversion.
 
 3. Update the model (**Ctrl+D**) and observe that the Data Types, Signal Dimensions and Sample Times from the Source blocks in Simulink all propagate through the Vitis Model Composer blocks. Note that the design uses single precision floating point data types.
@@ -85,11 +86,11 @@ This exercise has two primary parts, and one optional part:
 
 ### Convert Data Types
 
-To convert the previous design to use Xilinx Fixed Point types:
+To convert the previous design to use AMD Fixed Point types:
 
 > 📝 **Note:** Fixed point representation helps to achieve optimal resource usage and performance for a usually acceptable trade-off in precision, depending on the dataset/algorithm.
 
-1. Double-click **ColorSpace_Conversion_fixed_start.slx** in the Current Folder to open the design.
+1. Double-click **Colorspace_Conversion_fixed_start.slx** in the Current Folder to open the design.
 
 2. Open the **HLS** library in the Simulink Library Browser.
 
@@ -118,15 +119,15 @@ To convert the previous design to use Xilinx Fixed Point types:
 <ul>
 <br><br>Ensure you do this for all the Constant and Gain blocks in the design. Update the model (Ctrl+D) and observe the fixed point data types being propagated along with automatic bit growth in gain blocks and adder trees in the design as shown in the following figure:
 <br><br><img src="Images/Step3/Part1/Step6.jfif">
-<br><br>T he general format used to display the Xilinx fixed point data types is as follows:
-<br><br> <samp> x_[u/s]fix[wl]_En[fl] </samp>
+<br><br>T he general format used to display the AMD fixed point data types is as follows:
+<br><br> ` x_[u/s]fix[wl]_En[fl] `
 <br><br> <b>u</b>: Unsigned
 <br><br> <b>s</b>: Signed
 <br><br> <b>wl</b>: Word Length
 <br><br> <b>fl</b>: Fractional Length
-<br><br> For example, <samp> x_sfix16_En8 </samp> represents a signed fixed point number with Word Length=16 and Fractional Length=8.
+<br><br> For example, ` x_sfix16_En8 ` represents a signed fixed point number with Word Length=16 and Fractional Length=8.
 
-You can view a completed version of the design here: <samp> HLS_Library\Lab1\Section2\solution\Colorspace_Conversion_fixed.slx </samp>
+You can view a completed version of the design here: ` HLS_Library\Lab1\Section2\solution\Colorspace_Conversion_fixed.slx `
 </ul>
 
 ### Convert Data Types (Alternative)
@@ -147,7 +148,7 @@ Vitis Model Composer supports Data Type Expressions that make it easier to chang
 >> FDataType = 'x_sfix8_En6'
 >> InputDataType = 'x_ufix8_En6'
 ```
-<ul><samp>'x_sfix8_En6' </samp> represents a signed fixed point number with Word Length 8 and Fractional Length 6.
+<ul>`'x_sfix8_En6' ` represents a signed fixed point number with Word Length 8 and Fractional Length 6.
 <br><br>Now update the model (<b>Ctrl+D</b>) and observe how the fixed-point data types have changed in the design.</ul>
 
 5. Simulate the model and observe the results from the design. Try further changing `InputDataType` and `FDataType` variables through command line and iterate through multiple word lengths and fractional lengths. See the Additional Details section below for information on specifying rounding and overflow modes.
@@ -209,15 +210,15 @@ In this lab, you learned:
  * How to work with different data types.
  * How to use the Data Type Conversion block to control the conversion between data types, including floating-point to fixed-point data types.
 
-> 📝 **Note**: Vitis Model Composer supports the same floating and integer data types as Simulink blocks and also supports Xilinx fixed point data types.
+> 📝 **Note**: Vitis Model Composer supports the same floating and integer data types as Simulink blocks and also supports AMD fixed point data types.
 
 The following solution directories contain the final Vitis Model Composer files for this lab:
- * <samp> \HLS_Library\Lab1\Section1\solution </samp>
- * <samp> \HLS_Library\Lab1\Section2\solution </samp>
+ * ` \HLS_Library\Lab1\Section1\solution `
+ * ` \HLS_Library\Lab1\Section2\solution `
 
 
 --------------
-Copyright 2022 Xilinx
+Copyright 2024 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -4,7 +4,7 @@ Click [here](./Simulink_Basics/README.md) to learn what you need to know about S
 
 # Vitis Model Composer Tutorials
 
-These tutorials take users through the design methodology and programming model for developing algorithms in Vitis Model Composer for AMD/Xilinx devices including Versal devices with AI Engines.
+These tutorials take users through the design methodology and programming model for developing algorithms in Vitis Model Composer for AMD devices, including Versal devices with AI Engines.
 
 <table style="width:100%">
 <tr>
@@ -71,7 +71,7 @@ Using a Vitis Model Composer HDL Design with a Zynq-7000 SoC
 
 <tr>
 <td>
-<a href="./HLS_Library/Lab1/README.md">Lab 1</a>
+<a href="./HLS_Library/Lab1_HLS/README.md">Lab 1</a>
 </td>
 <td>
 Introduction to Model Composer HLS Library
@@ -80,7 +80,7 @@ Introduction to Model Composer HLS Library
  
 <tr>
 <td>
-<a href="./HLS_Library/Lab2/README.md">Lab 2</a>
+<a href="./HLS_Library/Lab2_HLS/README.md">Lab 2</a>
 </td>
 <td>
 Importing Code into Vitis Model Composer
@@ -89,7 +89,7 @@ Importing Code into Vitis Model Composer
  
 <tr>
 <td>
-<a href="./HLS_Library/Lab3/README.md">Lab 3</a>
+<a href="./HLS_Library/Lab3_HLS/README.md">Lab 3</a>
 </td>
 <td>
 Debugging Imported C/C++-Code Using GDB Debugger
@@ -98,7 +98,7 @@ Debugging Imported C/C++-Code Using GDB Debugger
 
 <tr> 
 <td>
-<a href="./HLS_Library/Lab4/README.md">Lab 4</a>
+<a href="./HLS_Library/Lab4_HLS/README.md">Lab 4</a>
 </td>
 <td>
 Automatic Code Generation

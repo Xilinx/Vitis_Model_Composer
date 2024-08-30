@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Fri Aug 23 16:14:58 2024
+# Process ID: 52005
+# Current directory: /group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/impl/ip
+# Command line: vivado -notrace -mode batch -source run_ippack.tcl
+# Log file: /group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/impl/ip/vivado.log
+# Journal file: /group/xcoswmktg2/robg/git/vmc_examples/Vitis_Model_Composer/Tutorials/HDL_Library/Lab2/C_code/hls_project/hls_component/MedianFilter/hls/impl/ip/vivado.jou
+# Running On        :xcorobg40x
+# Platform          :CentOS
+# Operating System  :CentOS Linux release 7.9.2009 (Core)
+# Processor Detail  :AMD EPYC 7302 16-Core Processor
+# CPU Frequency     :2994.061 MHz
+# CPU Physical cores:8
+# CPU Logical cores :8
+# Host memory       :67370 MB
+# Swap memory       :8589 MB
+# Total Virtual     :75960 MB
+# Available Virtual :51346 MB
+#-----------------------------------------------------------
+source run_ippack.tcl -notrace
