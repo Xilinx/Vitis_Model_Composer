@@ -71,7 +71,7 @@ Inserting some registers in the combinational path might give better timing resu
 1. Click the violated path from the Timing Analyzer window which opens the violated path as shown in the following figure.
 <br><br><img src="Images/Step1/Part2/Step1.png">
 
-2. Double-click the Mult block to open the Multiplier block parameters window as shown in the following figure.
+2. Double-click the `coef` block to open the Single Port RAM block parameters window as shown in the following figure.
 <br><br><img src="Images/Step1/Part2/Step2.png">
 
 3. Under Basic tab, change the latency from 1 to 2 and click **OK**.
