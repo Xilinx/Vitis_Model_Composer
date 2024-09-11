@@ -79,7 +79,7 @@ Inserting some registers in the combinational path might give better timing resu
 
 ![](Images/Step1/Part2/Step1.png)
 
-2. Double-click the Mult block to open the Multiplier block parameters window as shown in the following figure.
+2. Double-click the `coef` block to open the Single Port RAM block parameters window as shown in the following figure.
 
 ![](Images/Step1/Part2/Step2.png)
 
