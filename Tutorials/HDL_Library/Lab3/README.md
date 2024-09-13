@@ -99,13 +99,15 @@ After the generation completes, it opens the timing Analyzer table as shown in t
 
 In this step we use same design, `Lab3.slx`, used for Step 1 but we are going to perform Resource Analysis.
 
-> ⭐ **Tip**: Resource Analysis can be performed whenever you generate any of the following compilation types: 
-> * IP catalog 
-> * Hardware Co-Simulation 
-> * Synthesized Checkpoint 
-> * HDL Netlist 
+> ⭐ **Tip**: Resource Analysis can be performed whenever you generate any of the following export types: <br>
+> * IP catalog <br>
+> * Hardware Co-Simulation <br>
+> * Synthesized Checkpoint <br>
+> * HDL Netlist <br>
 
-1. Double-click the **Model Composer Hub** block in the Simulink model. On the HDL Settings tab, ensure that one of the Compilation Types listed above is selected.
+1. Double-click the **Model Composer Hub** block in the Simulink model. On the Export tab, ensure that one of the Export Types listed above is selected.
+
+![](Images/Step2/Step1.png)
 
 2. In the Analyze tab, set the Perform Analysis field to **Post Synthesis** and Analysis Type type field to **Resource**.
 

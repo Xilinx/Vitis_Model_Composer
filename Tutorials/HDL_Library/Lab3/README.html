@@ -107,17 +107,20 @@ b. Changing the latency of the block might increase the number of resources whic
 <h2 id="step-2-resource-analysis-in-vitis-model-composer">Step 2: Resource Analysis in Vitis Model Composer</h2>
 <p>In this step we use same design, <code>Lab3.slx</code>, used for Step 1 but we are going to perform Resource Analysis.</p>
 <blockquote>
-<p>⭐ <strong>Tip</strong>: Resource Analysis can be performed whenever you generate any of the following compilation types: </p>
+<p>⭐ <strong>Tip</strong>: Resource Analysis can be performed whenever you generate any of the following export types: <br></p>
 <ul>
-<li>IP catalog </li>
-<li>Hardware Co-Simulation </li>
-<li>Synthesized Checkpoint </li>
-<li>HDL Netlist </li>
+<li>IP catalog <br></li>
+<li>Hardware Co-Simulation <br></li>
+<li>Synthesized Checkpoint <br></li>
+<li>HDL Netlist <br></li>
 </ul>
 </blockquote>
 <ol>
-<li><p>Double-click the <strong>Model Composer Hub</strong> block in the Simulink model. On the HDL Settings tab, ensure that one of the Compilation Types listed above is selected.</p></li>
-<li><p>In the Analyze tab, set the Perform Analysis field to <strong>Post Synthesis</strong> and Analysis Type type field to <strong>Resource</strong>.</p></li>
+<li>Double-click the <strong>Model Composer Hub</strong> block in the Simulink model. On the Export tab, ensure that one of the Export Types listed above is selected.</li>
+</ol>
+<p><img src="Images/Step2/Step1.png" alt="" /></p>
+<ol start="2">
+<li>In the Analyze tab, set the Perform Analysis field to <strong>Post Synthesis</strong> and Analysis Type type field to <strong>Resource</strong>.</li>
 </ol>
 <p><img src="Images/Step2/Step2.png" alt="" /></p>
 <blockquote>
