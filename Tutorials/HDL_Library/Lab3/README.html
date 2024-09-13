@@ -129,12 +129,10 @@ b. Changing the latency of the block might increase the number of resources whic
 <br><br>Each column heading (for example, BRAMs, DSPs, or LUTs) in the window shows the total number of each type of resources available in the Xilinx device for which you are targeting your design. The rest of the window displays a hierarchical listing of each subsystem and block in the design, with the count of these resource types.</p></li>
 <li><p>You can cross probe from the Resource Analyzer window to the Simulink model by clicking a block or subsystem name in the Resource Analyzer window, which highlights the corresponding Vitis Model Composer HDL block or subsystem in the model.<br />
 <br><br>Cross probing is useful to identify blocks and subsystems that are implemented using a particular type of resource.</p></li>
-<li><p>The block you have selected in the window will be highlighted yellow and outlined in red.</p></li>
-</ol>
-<!-- <br><br><img src="Images/Step2/Step5.png"> -->
-<ol start="6">
-<li>If the block or subsystem you have selected in the window is within an upper-level subsystem, then the parent subsystem is highlighted in red in addition to the underlying block as shown in the following figure.<br />
-<br><br><img src="Images/Step2/Step6.png"></li>
+<li><p>The block you have selected in the window will be highlighted yellow and outlined in red.<br />
+<br><br><img src="Images/Step2/Step5.png"></p></li>
+<li><p>If the block or subsystem you have selected in the window is within an upper-level subsystem, then the parent subsystem is highlighted in red in addition to the underlying block as shown in the following figure.<br />
+<br><br><img src="Images/Step2/Step6.png"></p></li>
 </ol>
 <blockquote>
 <p>❗❗ <strong>Important</strong>: If the Resource Analyzer window or the Timing Analyzer window opens and no information is displayed in the window (table cells are empty), double-click the Model Composer Hub block and set the Code Directory to a new directory, that is, a directory that has not been used before. Then run the analysis again.</p>
