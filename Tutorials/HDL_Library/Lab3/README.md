@@ -108,7 +108,7 @@ In this step we use same design, <samp>Lab3.slx</samp>, used for Step 1 but we a
 <br><br>Cross probing is useful to identify blocks and subsystems that are implemented using a particular type of resource.
 
 5. The block you have selected in the window will be highlighted yellow and outlined in red.
-<!-- <br><br><img src="Images/Step2/Step5.png"> -->
+<br><br><img src="Images/Step2/Step5.png">
 
 6. If the block or subsystem you have selected in the window is within an upper-level subsystem, then the parent subsystem is highlighted in red in addition to the underlying block as shown in the following figure.
 <br><br><img src="Images/Step2/Step6.png">
