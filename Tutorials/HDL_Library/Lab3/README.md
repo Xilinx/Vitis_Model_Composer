@@ -38,8 +38,8 @@ Note that this design differs from the previous labs in that all of the HDL bloc
 7. From the Perform Analysis menu, select **Post Synthesis** and from Analyzer type menu select **Timing** as shown in the following figure.
 <br><br><img src="Images/Step1/Part1/Step7.png">
 
-8. In the Model Composer Hub dialog box, click Generate.
-<br><br>When you generate, the following occurs:
+8. In the Model Composer Hub dialog box, click Analyze.
+<br><br>When you analyze, the following occurs:
     - Vitis Model Composer generates the required files for the selected compilation target. For timing analysis Vitis Model Composer invokes Vivado in the background for the design project, and passes design timing constraints to Vivado.
     - Depending on your selection for Perform Analysis (Post Synthesis or Post Implementation), the design runs in Vivado through synthesis or through implementation.
     - After the Vivado tools run is completed, timing paths information is collected and saved in a specific file format from the Vivado timing database.
@@ -107,10 +107,10 @@ In this step we use same design, <samp>Lab3.slx</samp>, used for Step 1 but we a
 4. You can cross probe from the Resource Analyzer window to the Simulink model by clicking a block or subsystem name in the Resource Analyzer window, which highlights the corresponding Vitis Model Composer HDL block or subsystem in the model.
 <br><br>Cross probing is useful to identify blocks and subsystems that are implemented using a particular type of resource.
 
-5. The block you have selected in the window will be highlighted yellow and outlined in red.
+5. The block you have selected in the window will be highlighted yellow.
 <br><br><img src="Images/Step2/Step5.png">
 
-6. If the block or subsystem you have selected in the window is within an upper-level subsystem, then the parent subsystem is highlighted in red in addition to the underlying block as shown in the following figure.
+6. If the block or subsystem you have selected in the window is within an upper-level subsystem, then the parent subsystem is highlighted in yellow in addition to the underlying block as shown in the following figure.
 <br><br><img src="Images/Step2/Step6.png">
 
 > ❗❗ **Important**: If the Resource Analyzer window or the Timing Analyzer window opens and no information is displayed in the window (table cells are empty), double-click the Model Composer Hub block and set the Code Directory to a new directory, that is, a directory that has not been used before. Then run the analysis again.
@@ -121,16 +121,10 @@ In this step we use same design, <samp>Lab3.slx</samp>, used for Step 1 but we a
 In this lab you learned how to use timing and resource analysis inside Model Composer which, in turn, invokes Vivado synthesis to collect the information for the analysis. You also learned how to identify timing violated paths and to troubleshoot them for simple designs.
 
 --------------
-Copyright 2022 Xilinx
+Copyright 2024 Advanced Micro Devices, Inc.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
     http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
