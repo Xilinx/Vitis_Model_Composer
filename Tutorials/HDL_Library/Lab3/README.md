@@ -84,20 +84,22 @@ Inserting some registers in the combinational path might give better timing resu
 
 In this step we use same design, <samp>Lab3.slx</samp>, used for Step 1 but we are going to perform Resource Analysis.
 
-> ⭐ **Tip**: Resource Analysis can be performed whenever you generate any of the following compilation types: <br>
+> ⭐ **Tip**: Resource Analysis can be performed whenever you generate any of the following export types: <br>
 > * IP catalog <br>
 > * Hardware Co-Simulation <br>
 > * Synthesized Checkpoint <br>
 > * HDL Netlist <br>
 
-1. Double-click the **Model Composer Hub** block in the Simulink model. On the HDL Settings tab, ensure that one of the Compilation Types listed above is selected.
+1. Double-click the **Model Composer Hub** block in the Simulink model. On the Export tab, ensure that one of the Export Types listed above is selected.
+<br><br><img src="Images/Step2/Step1.png">
+
 
 > 📝 **Note**: In order to see accurate results from Resource Analyzer Window it is recommended to specify a new target directory rather than use the current working directory.
 
-2. In the HDL Analysis tab, set the Perform Analysis field to **Post Synthesis** and Analysis Type type field to **Resource**.
+2. In the Analyze tab, set the Perform Analysis field to **Post Synthesis** and Analysis Type type field to **Resource**.
 <br><br><img src="Images/Step2/Step2.png">
 
-3. In the Model Composer Hub dialog box, click **Generate**
+3. Click **Analyze**
 <br><br>Model Composer processes the resource utilization data and displays a Resource Analyzer window with resource utilization information.
 <br><br><img src="Images/Step2/Step3.png">
 <br><br>Each column heading (for example, BRAMs, DSPs, or LUTs) in the window shows the total number of each type of resources available in the Xilinx device for which you are targeting your design. The rest of the window displays a hierarchical listing of each subsystem and block in the design, with the count of these resource types.
