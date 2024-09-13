@@ -52,17 +52,11 @@ Note that this design differs from the previous labs in that all of the HDL bloc
 
 10. Cross probe from the Timing Analyzer table to the Simulink model by clicking any path in the Timing Analyzer table, which highlights the corresponding Vitis Model Composer HDL blocks in the model. This allows you to troubleshoot timing violations by analyzing the path on which they occur.
 
-11. When you cross probe, you see the corresponding path as shown in the following figure.
-
-12. Blocks with timing violations are highlighted in red.
 <br><br><img src="Images/Step1/Part1/Step12.png">
 
-13. Double-click the second path in the Timing Analyzer table and cross-probe, the corresponding highlighted path in green which indicates no timing violation.
+11. Double-click the second path in the Timing Analyzer table and cross-probe, the corresponding highlighted path in green which indicates no timing violation.
 <br><br><img src="Images/Step1/Part1/Step13-1.png">
-<br><br> If you close the Timing Analyzer sometime later you might want to relaunch the Timing Analyzer table using the existing timing analyzer results for the model. A Launch button is provided under the HDL Analysis tab of the Model Composer Hub dialog box. This will only work if you already ran timing analysis on the Simulink model.
-<br><br><img src="Images/Step1/Part1/Step13-2.png">
 
-> 📝 **Note**: If you relaunch the Timing Analyzer window, make sure that the Analysis Type field is set to Timing. The table that opens will display the results stored in the Code Directory specified in the Model Composer Hub dialog box, regardless of the option selected for Perform Analysis (Post Synthesis or Post Implementation).
 
 ### Troubleshooting Timing Violations
 
@@ -71,7 +65,7 @@ Inserting some registers in the combinational path might give better timing resu
 1. Click the violated path from the Timing Analyzer window which opens the violated path as shown in the following figure.
 <br><br><img src="Images/Step1/Part2/Step1.png">
 
-2. Double-click the Mult block to open the Multiplier block parameters window as shown in the following figure.
+2. Double-click the coef block to open the Single Port RAM block parameters window as shown in the following figure.
 <br><br><img src="Images/Step1/Part2/Step2.png">
 
 3. Under Basic tab, change the latency from 1 to 2 and click **OK**.
