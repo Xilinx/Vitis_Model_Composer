@@ -4,38 +4,12 @@ Vitis Model Composer allows you to create AI Engine designs and generate code fo
 
 <table style="width:100%">
 <tr>
-  <td align="center" colspan="2" style="bold"><b>AIE-ML Examples</b></td>
-</tr>
-
-<tr>
-<td>
-<a href="./Importing_AIE_blocks/AIE_ML_Graph_Import/README.md">Importing an AIE-ML graph as a block</a>  
-</td>
-<td>
-In this example we import a graph for AIE-ML devices (including memory tiles) into Vitis Model Composer as a block.
-</td>
-</tr> 
-
-<tr>
-<td>
-<a href="./Normalization/README.md">Normalization</a>  <img src="../../Images/new.PNG" width="50">
-</td>
-<td>
-2D normalization algorithm implemented on AIE-ML devices, using Shared Buffers on memory tiles and the bfloat16 data type.
-</td>
-</tr> 
-</table>
-<br/>
-
-
-<table style="width:100%">
-<tr>
   <td align="center" colspan="2" style="bold" ><b><a href="./Importing_AIE_blocks/README.md">Importing Kernels and Graphs into Model Composer</a></b>
 </tr>
 
 <tr>
 <td>
-<a href="./Importing_AIE_blocks/AIE_Class_Kernel_FIR/README.md">Importing a kernel class as a block</a>
+<a href="./Importing_AIE_blocks/AIE_Class_Kernel_FIR/README.md">Importing a kernel class as a block                      </a>
 </td>
 <td>
 In this example we import an AI Engine class kernel into Vitis Model Composer as a block.
@@ -48,6 +22,15 @@ In this example we import an AI Engine class kernel into Vitis Model Composer as
 </td>
 <td>
 In this example we import an AI Engine graph into Vitis Model Composer as a block.
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="./Importing_AIE_blocks/AIE_ML_Graph_Import/README.md">Importing an AIE-ML graph as a block</a>  <img src="../../Images/new.PNG" width="50">
+</td>
+<td>
+In this example we import a graph for AIE-ML devices (including memory tiles) into Vitis Model Composer as a block.
 </td>
 </tr> 
 </table>
