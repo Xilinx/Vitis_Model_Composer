@@ -195,7 +195,7 @@ Now that we understand what's wrong with this code, we can exit gdb and fix the 
 
 ![](images/step5.png)
 
-6. Click on **Attach to PID**.
+6. Click on **Start Debugging** icon as shown below to attach to PID.
 
 ![](images/step6.png)
 
