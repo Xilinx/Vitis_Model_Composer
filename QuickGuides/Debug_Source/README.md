@@ -174,13 +174,12 @@ Now that we understand what's wrong with this code, we can exit gdb and fix the 
 
 ## Debugging the Code using Vitis 
 
-1. Run `vmcLaunchVitisDebugger('detect_test')` from the model directory on the MATLAB Command Window.
+1. Run `vmcLaunchVitisDebugger` from the model directory on the MATLAB Command Window and make sure to open `detect_test.slx` model before running this command.
 
 ![](images/step1.png)
 
-Note the GDB path and the process ID listed in the Command Window. They will be used in Step 5.
 
-`vmcLaunchVitisDebugger` creates the required `.vscode/launch.json` file in the current directory and launches AMD Vitis IDE for debugging AI Engine kernel code.
+2. `vmcLaunchVitisDebugger` creates the required `_ide/launch.json` file in the current directory and launches AMD Vitis Unified IDE for debugging AI Engine kernel code.
 
 ![](images/ste2.png)
 
@@ -192,17 +191,27 @@ Note the GDB path and the process ID listed in the Command Window. They will be 
 
 ![](images/step4.png)
 
-5. Make sure the GDB path and process ID listed in the `launch.json` file are the same as in Step 1. 
+5. Type `feature getpid` in the MATLAB command window to display process ID and make sure the process ID listed in the `launch.json` file is also same. 
 
 ![](images/step5.png)
 
-6. Open detectSingleWindow.cpp file and set a break point as shown below.
-
-![](images/step9.png)
+6. Click on **Attach to PID**.
 
 ![](images/step6.png)
 
 ![](images/step7.png)
+
+7. After attaching to PID, open detectSingleWindow.cpp file to set a break point as shown below.
+
+![](images/step8.png)
+
+![](images/step9.png)
+
+8. Run the `detect_test.slx` model after setting break point.
+
+9. Break point hitting at line 82 as shown in debug console. 
+
+![](images/step10.png)
 
 ## Fix The Bug
 
