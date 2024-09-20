@@ -40,122 +40,14 @@
 <ol start="6">
 <li>Stop the model.</li>
 </ol>
-<h2 id="debugging-the-code-using-gdb">Debugging the Code using GDB</h2>
-<p>We will use the <strong>gdb</strong> debugger for C/C++ source code to debug the execution of the AI Engine kernel. First, let's look at the source code.</p>
-<ol>
-<li>Open the source file <code>detectSingleWindow.cpp</code>.</li>
-</ol>
-<p>The bulk of the AI Engine kernel's processing is contained within a <code>for</code> loop:</p>
-<pre><code>for (size_t ctr=0; ctr&lt;NUMSAMPLES/8; ctr++)
-    chess_prepare_for_pipelining
-    chess_loop_range(NUMSAMPLES/8,)
-{
-    pWin = window_readincr_v&lt;8&gt;(iwinPower);
-    if (mode)
-    {
-        mWin0 = *mem0in;
-        accWin0.from_vector(mWin0,0);
-        accWin0 = aie::add(accWin0, pWin);
-        *mem0out = accWin0.to_vector&lt;int32&gt;(0);           
-        if (count == 1 &amp;&amp; !prevmode)
-        {
-            mWin1 = *mem1in;
-            mWin1 = aie::downshift(mWin1,m_bit_avg);
-            window_writeincr(owinDetect, mWin1);
-            (*mem1out) = pWinZero;
-        }
-    } else {
-        mWin1 = *mem1in;
-        accWin0.from_vector(mWin1,0);
-        accWin0 = aie::add(accWin0, pWin);
-        *mem1out = accWin0.to_vector&lt;int32&gt;(0);          
-        if (count == 1 &amp;&amp; !prevmode)
-        {
-            mWin0 = *mem0in;
-            mWin0 = aie::downshift(mWin0,m_bit_avg); 
-            window_writeincr(owinDetect, mWin0);
-            (*mem0out) = pWinZero;
-        }
-    }
-    mem1out++;
-    mem0out++;
-    mem0in++;
-    mem1in++;
-}
-</code></pre>
-<p>This kernel iterates over frames of 2048 samples, 8 samples at a time, while computing the moving average of the past 32 samples. The output of the kernel is the moving average.</p>
-<p>There is also an initialization function that prepares variables for function execution. A <code>for</code> loop clears two buffers that will be used for accumulation:</p>
-<pre><code>for (int ctr=0; ctr &lt; NUMSAMPLES/8; ctr++)
-{
-    *clearMem0 = pWinZero;
-    *clearMem1 = pWinZero;
-}
-</code></pre>
-<p>We would expect the accumulator buffers to be zeroed out at the beginning of execution, so the AI Engine kernel should output all zeros initially. For some reason, this loop is not operating as expected. We can set breakpoints and debug this loop using gdb.</p>
-<p>Initialize the <strong>gdb</strong> debugger from within Vitis Model Composer:</p>
-<ol start="2">
-<li>Type the following in the MATLAB Command Window: <code>xmcImportFunctionSettings('build','debug')</code>.</li>
-</ol>
-<p>The following output appears in the Command Window:</p>
-<p><img src="images/command.png" alt="" /></p>
-<p>Note the MATLAB process ID; we will need this information later.</p>
-<ol start="3">
-<li>Click the hyperlink to open <strong>gdb</strong>.</li>
-</ol>
-<p>A terminal window will open to the gdb prompt:</p>
-<p><img src="images/gdb0.png" alt="" /></p>
-<p><strong>NOTE:</strong> If the hyperlink doesn't work, execute the following command from any terminal window: <code>gdb -ex "handle SIGSEGV nostop noprint" -ex "set breakpoint pending on"</code>.</p>
-<p>This guide will show some of the most useful gdb commands, but you may also refer to a <a href="https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf">cheat sheet</a>.</p>
-<ol start="4">
-<li><p>Set a breakpoint in the AI Engine code at the beginning of the line <code>*clearMem0 = pWinZero;</code> by typing the following command:</p>
-<p><code>break detectSingleWindow.cpp:82</code></p></li>
-</ol>
-<div class="noteBox">The `break` command has the syntax `break (source file name):(line number)`.</div>
-<ol start="5">
-<li><p>Attach gdb to the MATLAB process. In place of (process ID), use the process ID from step 2 above.</p>
-<p><code>attach (process ID)</code></p></li>
-</ol>
-<p>Once you do this, your MATLAB session will freeze because gdb is now controlling its execution. It may take a moment for the gdb prompt to return.</p>
-<ol start="6">
-<li>Continue MATLAB's execution by typing <code>continue</code> at the gdb prompt.</li>
-</ol>
-<p>MATLAB is now responsive. Now that we've added a breakpoint to our AI Engine code and attached the MATLAB process to gdb, we are ready to run the Simulink model.</p>
-<ol start="7">
-<li>In the <code>detect_test.slx</code> model, click <strong>Run</strong>.</li>
-</ol>
-<p>After the model compiles but before it begins simulating, the AI Engine kernel's <code>init</code> function is invoked. gdb halts execution when the breakpoint is reached.</p>
-<p><img src="images/gdb1.png" alt="" /></p>
-<p>To make debugging easier, we can display the source code alongside the gdb prompt and execution status.</p>
-<ol start="8">
-<li>Press <code>Ctrl+X</code>, followed by 'A'.</li>
-</ol>
-<p><img src="images/gdb2.png" alt="" /></p>
-<p>Now we can clearly see where the execution has paused within the code. We can also use gdb to look at variable values, such as the location of the <code>clearMem0</code> and <code>clearMem1</code> pointers.</p>
-<ol start="9">
-<li><p>Type the following commands:</p>
-<p><code>display clearMem0</code><br />
-<code>display clearMem1</code></p></li>
-</ol>
-<p><img src="images/gdb3.png" alt="" /></p>
-<p>The <code>display</code> commands will show the variable values every time you step forward in the execution. We will use the <code>next</code> command to step to the next line of the code (without advancing into any subfunctions).</p>
-<ol start="10">
-<li>Type the <code>next</code> command at least 3 times.</li>
-</ol>
-<p><img src="images/gdb4.png" alt="" /></p>
-<p>This advances execution through one iteration of the <code>for</code> loop. The interesting thing here is that the pointer locations <code>clearMem0</code> and <code>clearMem1</code> do not change. As a result, this <code>for</code> loop will repeatedly write zeros to the first location in each buffer. This is not the intended behavior. We need to iterate (increase) the pointer on each iteration of the loop so that the entire buffer is full of zeros. </p>
-<p>Now that we understand what's wrong with this code, we can exit gdb and fix the code.</p>
-<ol start="11">
-<li><p>Type <code>clear 1</code> to remove the breakpoint from the code.</p></li>
-<li><p>Type <code>continue</code> to allow the Simulink model to finish execution.</p></li>
-<li><p>Type <code>quit</code> to exit gdb. Type <code>y</code> when asked if you want to detach the process.</p></li>
-</ol>
 <h2 id="debugging-the-code-using-vitis">Debugging the Code using Vitis</h2>
 <ol>
-<li>Run <code>vmcLaunchVitisDebugger('detect_test')</code> from the model directory on the MATLAB Command Window.</li>
+<li>Run <code>vmcLaunchVitisDebugger</code> from the model directory on the MATLAB Command Window and make sure to open <code>detect_test.slx</code> model before running this command.</li>
 </ol>
 <p><img src="images/step1.png" alt="" /></p>
-<p>Note the GDB path and the process ID listed in the Command Window. They will be used in Step 5.</p>
-<p><code>vmcLaunchVitisDebugger</code> creates the required <code>.vscode/launch.json</code> file in the current directory and launches AMD Vitis IDE for debugging AI Engine kernel code.</p>
+<ol start="2">
+<li><code>vmcLaunchVitisDebugger</code> creates the required <code>_ide/launch.json</code> file in the current directory and launches AMD Vitis Unified IDE for debugging AI Engine kernel code.</li>
+</ol>
 <p><img src="images/ste2.png" alt="" /></p>
 <ol start="3">
 <li>Click on the <strong>Debug</strong> icon.</li>
@@ -166,15 +58,24 @@
 </ol>
 <p><img src="images/step4.png" alt="" /></p>
 <ol start="5">
-<li>Make sure the GDB path and process ID listed in the <code>launch.json</code> file are the same as in Step 1. </li>
+<li>Type <code>feature getpid</code> in the MATLAB command window to display process ID and make sure the process ID listed in the <code>launch.json</code> file is also same. </li>
 </ol>
 <p><img src="images/step5.png" alt="" /></p>
 <ol start="6">
-<li>Open detectSingleWindow.cpp file and set a break point as shown below.</li>
+<li>Click on <strong>Start Debugging</strong> icon as shown below to attach to PID.</li>
 </ol>
-<p><img src="images/step9.png" alt="" /></p>
 <p><img src="images/step6.png" alt="" /></p>
 <p><img src="images/step7.png" alt="" /></p>
+<ol start="7">
+<li>After attaching to PID, open detectSingleWindow.cpp file to set a break point as shown below.</li>
+</ol>
+<p><img src="images/step8.png" alt="" /></p>
+<p><img src="images/step9.png" alt="" /></p>
+<ol start="8">
+<li><p>Run the <code>detect_test.slx</code> model after setting break point.</p></li>
+<li><p>Break point hitting at line 82 as shown in debug console. </p></li>
+</ol>
+<p><img src="images/step10.png" alt="" /></p>
 <h2 id="fix-the-bug">Fix The Bug</h2>
 <p>We learned in the previous section that there is a bug in our code that zeros out the 2 accumulator buffers before execution begins. We can fix this error by advancing the memory pointer location on each loop iteration.</p>
 <ol>
