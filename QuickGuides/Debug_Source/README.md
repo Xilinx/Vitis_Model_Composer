@@ -49,37 +49,35 @@ The odd transient behavior at the beginning of the algorithm execution is what w
 ![](images/step1.png)
 
 
-2. `vmcLaunchVitisDebugger` creates the required `_ide/launch.json` file in the current directory and launches AMD Vitis Unified IDE for debugging AI Engine kernel code.
+`vmcLaunchVitisDebugger` creates the required `_ide/launch.json` file in the current directory and launches AMD Vitis Unified IDE for debugging AI Engine kernel code.
 
-![](images/ste2.png)
-
-3. Click on the **Debug** icon.
+2. Click on the **Debug** icon.
 
 ![](images/step3.png)
 
-4. Click on the **Settings** icon next to **Attach to PID** to open `launch.json` file.
+3. Click on the **Settings** icon next to **Attach to PID** to open `launch.json` file.
 
 ![](images/step4.png)
 
-5. Type `feature getpid` in the MATLAB command window to display process ID and make sure the process ID listed in the `launch.json` file is also same. 
+4. Type `feature getpid` in the MATLAB command window to display process ID and make sure the process ID listed in the `launch.json` file is also same. 
 
 ![](images/step5.png)
 
-6. Click on **Start Debugging** icon as shown below to attach to PID.
+5. Click on **Start Debugging** icon as shown below to attach to PID.
 
 ![](images/step6.png)
 
 ![](images/step7.png)
 
-7. After attaching to PID, open detectSingleWindow.cpp file to set a break point as shown below.
+6. After attaching to PID, open detectSingleWindow.cpp file to set a break point as shown below.
 
 ![](images/step8.png)
 
 ![](images/step9.png)
 
-8. Run the `detect_test.slx` model after setting break point.
+7. Run the `detect_test.slx` model after setting break point.
 
-9. Break point hitting at line 82 as shown in debug console. 
+8. Break point hitting at line 82 as shown in debug console. 
 
 ![](images/step10.png)
 

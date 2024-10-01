@@ -45,33 +45,30 @@
 <li>Run <code>vmcLaunchVitisDebugger</code> from the model directory on the MATLAB Command Window and make sure to open <code>detect_test.slx</code> model before running this command.</li>
 </ol>
 <p><img src="images/step1.png" alt="" /></p>
+<p><code>vmcLaunchVitisDebugger</code> creates the required <code>_ide/launch.json</code> file in the current directory and launches AMD Vitis Unified IDE for debugging AI Engine kernel code.</p>
 <ol start="2">
-<li><code>vmcLaunchVitisDebugger</code> creates the required <code>_ide/launch.json</code> file in the current directory and launches AMD Vitis Unified IDE for debugging AI Engine kernel code.</li>
-</ol>
-<p><img src="images/ste2.png" alt="" /></p>
-<ol start="3">
 <li>Click on the <strong>Debug</strong> icon.</li>
 </ol>
 <p><img src="images/step3.png" alt="" /></p>
-<ol start="4">
+<ol start="3">
 <li>Click on the <strong>Settings</strong> icon next to <strong>Attach to PID</strong> to open <code>launch.json</code> file.</li>
 </ol>
 <p><img src="images/step4.png" alt="" /></p>
-<ol start="5">
+<ol start="4">
 <li>Type <code>feature getpid</code> in the MATLAB command window to display process ID and make sure the process ID listed in the <code>launch.json</code> file is also same. </li>
 </ol>
 <p><img src="images/step5.png" alt="" /></p>
-<ol start="6">
+<ol start="5">
 <li>Click on <strong>Start Debugging</strong> icon as shown below to attach to PID.</li>
 </ol>
 <p><img src="images/step6.png" alt="" /></p>
 <p><img src="images/step7.png" alt="" /></p>
-<ol start="7">
+<ol start="6">
 <li>After attaching to PID, open detectSingleWindow.cpp file to set a break point as shown below.</li>
 </ol>
 <p><img src="images/step8.png" alt="" /></p>
 <p><img src="images/step9.png" alt="" /></p>
-<ol start="8">
+<ol start="7">
 <li><p>Run the <code>detect_test.slx</code> model after setting break point.</p></li>
 <li><p>Break point hitting at line 82 as shown in debug console. </p></li>
 </ol>
