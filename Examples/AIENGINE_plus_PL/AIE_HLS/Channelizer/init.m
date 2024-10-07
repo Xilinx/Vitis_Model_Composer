@@ -1,5 +1,11 @@
-load twid.mat
+%% Basic parameters
+N = 1024*2;
+Ts = 16*(7/4)/8.75e9;
+ch_filt_coef = rcosdesign(0.22,4,28,'normal');
+ch_filt_coef = 28 * ch_filt_coef / sum(ch_filt_coef(:));
 
+%% Twiddle factors
+load twid.mat
 twidA0 = int16(twidA0*2^15);
 twidA1 = int16(twidA1*2^15);
 twidB0 = int16(twidB0*2^15);
@@ -9,33 +15,33 @@ twidC1 = int16(twidC1*2^15);
 twidD0 = int16(twidD0*2^15);
 twidD1 = int16(twidD1*2^15);
 
-N = 1024*2;
-
-R = repmat(0:28:N*28-1,4,1);
-
-I1 = reshape([14 7 28 21]'*ones(1,N) + R,[],1);
-I2 = reshape([13 6 27 20]'*ones(1,N) + R,[],1);
-I3 = reshape([12 5 26 19]'*ones(1,N) + R,[],1);
-I4 = reshape([11 4 25 18]'*ones(1,N) + R,[],1);
-I5 = reshape([10 3 24 17]'*ones(1,N) + R,[],1);
-I6 = reshape([9  2 23 16]'*ones(1,N) + R,[],1);
-I7 = reshape([8  1 22 15]'*ones(1,N) + R,[],1);
-
-ch0 = 1;
-ch1 = 1;
-ch2 = 1;
-ch3 = 1;
-ch4 = 1;
-ch5 = 1;
-ch6 = 1;
-ch7 = 1;
-ch8 = 1;
-ch9 = 1;
-ch10 = 1;
-ch11 = 1;
-ch12 = 1;
-ch13 = 1; 
-ch14 = 1;
-ch15 = 1;
-
+%% Filter taps
 taps_init;
+
+%% Dashboard controls
+% enable individual subchannels
+ch0_en = 0; ch1_en = 1; ch2_en = 1; ch3_en = 0;
+ch4_en = 0; ch5_en = 1; ch6_en = 1; ch7_en = 0;
+ch8_en = 0; ch9_en = 0; ch10_en = 0; ch11_en = 0; 
+ch12_en = 0; ch13_en = 0; ch14_en = 0; ch15_en = 0;
+
+% enable QAM modulation on subchannel
+ch0_qam = 0; ch1_qam = 0; ch2_qam = 0; ch3_qam = 0; 
+ch4_qam = 0; ch5_qam = 1; ch6_qam = 1; ch7_qam = 0;
+ch8_qam = 0; ch9_qam = 0; ch10_qam = 0; ch11_qam = 0;
+ch12_qam = 0; ch13_qam = 0; ch14_qam = 0; ch15_qam = 0;
+
+% enable frequency sweep on subchannel
+ch0_swp = 0; ch1_swp = 0; ch2_swp = 0; ch3_swp = 0; 
+ch4_swp = 0; ch5_swp = 0; ch6_swp = 0; ch7_swp = 0; 
+ch8_swp = 0; ch9_swp = 0; ch10_swp = 0; ch11_swp = 0;
+ch12_swp = 0; ch13_swp = 0; ch14_swp = 0; ch15_swp = 0;
+
+% set sweep rate on subchannels
+swp_rate0 = 0; swp_rate1 = 0; swp_rate2 = 0; swp_rate3 = 0;
+swp_rate4 = 0; swp_rate5 = 0; swp_rate6 = 0; swp_rate7 = 0;
+swp_rate8 = 0; swp_rate9 = 0; swp_rate10 = 0; swp_rate11 = 0;
+swp_rate12 = 0; swp_rate13 = 0; swp_rate14 = 0; swp_rate15 = 0;
+
+% select subbands to display on spectrum analyzers
+spec1_ch = 1; spec2_ch = 2; spec3_ch = 5; spec4_ch = 6;
