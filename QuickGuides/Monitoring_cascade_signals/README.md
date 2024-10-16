@@ -1,9 +1,10 @@
 # Monitoring cascade signals in an AIE Engine design
 
-In a Versal-AIE device, data from one AI Engine can be forwarded to another by using cascade streams. In AIE each stream is 384 bit wide. In AIE-ML a cascade steam is 512 bit wide. In other words, in one clock cycles, we can transfer 384 bit data from one AIE tile to a neighboring tile in an AIE device.
+In a Versal-AIE device, data from one AI Engine can be forwarded to another by using cascade streams. In AIE each cascade stream is 384 bit wide. In other words, in one clock cycles, we can transfer 384 bit data from one AIE tile to a neighboring tile in an AIE device. In an AIE-ML device a cascade steam is 512 bit wide.
 
-In Vitis Model Composer, you can import a kernel with cascade input and output ports using the AIE Kenel block and easily moniotr the cascade signsl for debugging purposes. 
+In Vitis Model Composer, you can import a kernel with cascade input and output ports using the AIE Kenel block and easily monitor the cascade signal for debugging purposes. 
 
+## Example
 The kernel code below takes in an input buffer of 64 int8 samples and produces a cascade signal of int8 values. 
 
 ```
@@ -25,7 +26,8 @@ void dmover0(adf::input_buffer<int8,adf::extents<adf::inherited_extent>>& in,
 
 ```
 
-The screen shot below depicts the kernel above imported as an AI Engine block for an AIE-ML device. 
+The screen shot below depicts the kernel above imported as an AI Engine block for an AIE-ML device. The kernel accepts a buffer of size 64 (set by the parameter on the kernel block mask) and produces a cascade output of 64 int8 samples (also set by another parameter on the kernel block mask). As you see, you can connect the output to a display block and monitor the cascade signal. Likewise, you can connect it to a scope block or to an AMD "Variable Size Signal to Workspace" block.
+
 ![image](https://github.com/user-attachments/assets/a60e4f65-ca5d-4003-89d1-f0948c66964a)
 
 
