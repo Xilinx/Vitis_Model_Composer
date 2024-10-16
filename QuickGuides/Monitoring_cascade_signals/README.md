@@ -18,11 +18,16 @@ void dmover0(adf::input_buffer<int8,adf::extents<adf::inherited_extent>>& in,
              output_cascade<int8>* out)
 {
 	auto inIter=aie::begin_vector<LANE>(in);
-  aie::vector<int8, LANE>  value;
-  writeincr(out,value );
+  	aie::vector<int8, LANE>  value;
+	value = inIter++;
+  	writeincr(out,value );
 }
 
 ```
+
+The screen shot below depicts the kernel above imported as an AI Engine block for an AIE-ML device. 
+![image](https://github.com/user-attachments/assets/a60e4f65-ca5d-4003-89d1-f0948c66964a)
+
 
 
 
