@@ -38,6 +38,9 @@ The screen shot below depicts the kernel above imported as an AI Engine block fo
 
 The case above uses 64 lanes for an int8 cascade. This maximizes the throughput. For AIE-ML, you can also use a lane size of 16 or 32 for int8 cascade signal. The AIE Kernel block only allows an output size of 64 or multiples of 64 for an AIE ML device and a cascade signal of int8 data type. In such a case, when monitoring the cascade signal, in case of a 32 lane, only the first 32 samples are valid and in case of a 16 lane, only the first 16 samples are valid. However, the consuming kernel should take in all the 64 samples to produce an output. 
 
+> If the size of the cascade signal alowable by the block is larger than the number of lanes, only the first number of samples equal to the number of lanes are valid. However the consuming kernel should receive all the samples.  
+
+
 ## Example
 
 Let's look into another example similar to the one above but with cint32 data types and two lanes. This is a total of 128 bits and as such it does not use the entire cascade bitwidth. 
@@ -64,7 +67,6 @@ The screen shot below depicts the kernel above imported as an AI Engine block fo
 ![image](https://github.com/user-attachments/assets/2a06185a-d588-4a3d-a7c9-29f9ded5614d)
 
 
-> If the size of the cascade signal alowable by the block is larger than the number of lanes, only the first number of samples equal to the number of lanes are valid. However the consuming kernel should receive all the samples.  
 
 
 
