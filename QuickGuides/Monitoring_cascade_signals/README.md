@@ -64,7 +64,7 @@ The screen shot below depicts the kernel above imported as an AI Engine block fo
 ![image](https://github.com/user-attachments/assets/2a06185a-d588-4a3d-a7c9-29f9ded5614d)
 
 
-> If the size of the cascade signal alowable by the block is larger than the number of lanes, only the first number of samples equal to the number of lanes are valid. 
+> If the size of the cascade signal alowable by the block is larger than the number of lanes, only the first number of samples equal to the number of lanes are valid. However the consuming kernel should receive all the samples.  
 
 
 
