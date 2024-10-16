@@ -34,8 +34,33 @@ The screen shot below depicts the kernel above imported as an AI Engine block fo
   In this example, we are fully utilizing the entire cascade signal width (512 bits for an AIE ML) device, to pass the largest amount of data from one AIE Kernel to another AIE Kernel in one clock cycle, getting the highest throughput.
 </div>
 
-## 
+## Cases where we don't use the entire cascade width
 
+The case above uses 64 lanes for an int8 cascade. This maximizes the throughput. For AIE-ML, you can also use a lane size of 16 or 32 for int8 cascade signal. The AIE Kernel block only allows an output size of 64 or multiples of 64 for an AIE ML device and a cascade signal of int8 data type. In such a case, when monitoring the cascade signal, in case of a 32 lane, only the first 32 samples are valid and in case of a 16 lane, only the first 16 samples are valid. However, the consuming kernel should take in all the 64 samples to produce an output. 
 
+## Example
+
+Let's look into another example similar to the one above but with cint32 data types and two lanes. This is a total of 128 bits and as such it does not use the entire cascade bitwidth. 
+
+```
+#include "k_cascade_cint32.h"
+
+#include "aie_api/aie.hpp"
+#include "aie_api/aie_adf.hpp"
+
+const uint8_t LANE = 2;
+
+void dmover0(adf::input_buffer<cint32,adf::extents<adf::inherited_extent>>& in,
+             output_cascade<cint32>* out)
+{
+	auto inIter=aie::begin_vector<LANE>(in);
+  	aie::vector<cint32, LANE>  value;
+	value = *inIter++;
+  	writeincr(out,value );
+}
+```
+The screen shot below depicts the kernel above imported as an AI Engine block for an AIE-ML device. The kernel accepts a buffer of size 2 (set by the parameter on the kernel block mask) and produces a cascade output of 8 cint32 samples (also set by another parameter on the kernel block mask). In this case, only the first two samples are valid. 
+
+![image](https://github.com/user-attachments/assets/ae185fe5-d4c5-4aec-a14e-d4b49fb3cb7a)
 
 
