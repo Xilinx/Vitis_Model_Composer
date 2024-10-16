@@ -30,9 +30,9 @@ The screen shot below depicts the kernel above imported as an AI Engine block fo
 
 ![image](https://github.com/user-attachments/assets/a60e4f65-ca5d-4003-89d1-f0948c66964a)
 
-<div class="noteBox">
-  In this example, we are fully utilizing the entire cascade signal width (512 bits for an AIE ML) device, to pass the largest amount of data from one AIE Kernel to another AIE Kernel in one clock cycle, getting the highest throughput.
-</div>
+
+> In this example, we are fully utilizing the entire cascade signal width (512 bits for an AIE ML) device, to pass the largest amount of data from one AIE Kernel to another AIE Kernel in one clock cycle, getting the highest throughput.
+
 
 ## Cases where we don't use the entire cascade width
 
@@ -61,6 +61,12 @@ void dmover0(adf::input_buffer<cint32,adf::extents<adf::inherited_extent>>& in,
 ```
 The screen shot below depicts the kernel above imported as an AI Engine block for an AIE-ML device. The kernel accepts a buffer of size 2 (set by the parameter on the kernel block mask) and produces a cascade output of 8 cint32 samples (also set by another parameter on the kernel block mask). In this case, only the first two samples are valid. 
 
-![image](https://github.com/user-attachments/assets/ae185fe5-d4c5-4aec-a14e-d4b49fb3cb7a)
+![image](https://github.com/user-attachments/assets/2a06185a-d588-4a3d-a7c9-29f9ded5614d)
+
+
+> If the size of the cascade signal alowable by the block is larger than the number of lanes, only the first number of samples equal to the number of lanes are valid. 
+
+
+
 
 
