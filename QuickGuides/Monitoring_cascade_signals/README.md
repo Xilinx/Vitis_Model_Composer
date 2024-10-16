@@ -30,8 +30,11 @@ The screen shot below depicts the kernel above imported as an AI Engine block fo
 
 ![image](https://github.com/user-attachments/assets/a60e4f65-ca5d-4003-89d1-f0948c66964a)
 
+<div class="noteBox">
+  In this example, we are fully utilizing the entire cascade signal width (512 bits for an AIE ML) device, to pass the largest amount of data from one AIE Kernel to another AIE Kernel in one clock cycle, getting the highest throughput.
+</div>
 
-
+## 
 
 
 
