@@ -1,0 +1,227 @@
+
+    <html>
+      <head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+      <body>
+        <div id='content'>
+    <h1 id="monitoring-cascade-signals-in-an-ai-engine-design">Monitoring Cascade Signals in an AI Engine Design</h1>
+<p>In a Versal-AIE device, data from one AI Engine can be forwarded to another by using cascade streams. Each cascade stream is 384 bits wide for AIE devices or 512 bits wide for AIE-ML devices. </p>
+<p>In Vitis Model Composer, you can import a kernel with cascade input and output ports using the AIE Kenel block and easily monitor the cascade signal for debugging purposes. </p>
+<p>The kernel code below takes in an input buffer of 2 <code>cint32</code> samples and produces a cascade signal of 2 <code>cint32</code> values. This is a total of 128 bits and as such it does not use the entire cascade bitwidth. </p>
+<pre><code>#include "k_cascade_cint32.h"
+
+#include "aie_api/aie.hpp"
+#include "aie_api/aie_adf.hpp"
+
+const uint8_t LANE = 2;
+
+void dmover0(adf::input_buffer&lt;cint32,adf::extents&lt;adf::inherited_extent&gt;&gt;&amp; in,
+             output_cascade&lt;cint32&gt;* out)
+{
+    auto inIter=aie::begin_vector&lt;LANE&gt;(in);
+      aie::vector&lt;cint32, LANE&gt;  value;
+    value = *inIter++;
+      writeincr(out,value );
+}
+</code></pre>
+<p>The screen shot below depicts the kernel above imported as an AI Engine block for an AIE-ML device. </p>
+<p><img src="images/example2.png" alt="" /></p>
+<p>Note that even though the kernel only processes 2 <code>cint32</code> samples (128 bits) per clock cycle, the output cascade signal size must be set to 8 <code>cint32</code> samples (512 bits). This is because the AIE Kernel requires the signal size to be set to a multiple of 8 for <code>cint32</code> data.</p>
+<p>In such a case, when monitoring the cascade signal, only some of the samples will be valid - for a design with <code>N</code> data lanes, the first <code>N</code> samples of the cascade signal will be valid. However, the consuming kernel should take in all the samples to produce an output.</p>
+
+        </div>
+        <style type='text/css'>body {
+  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #111;
+  background-color: #fdfdfd;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 5px;
+  }
+
+  body > #content {
+    padding: 0px 20px 20px 20px !important;
+  }
+}
+
+body > #content {
+  margin: 0px;
+  max-width: 900px;
+  border: 1px solid #e1e4e8;
+  padding: 10px 40px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr {
+  color: #bbb;
+  background-color: #bbb;
+  height: 1px;
+  flex: 0 1 auto;
+  margin: 1em 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+ * Links
+ */
+a {
+  color: #0366d6;
+  text-decoration: none; }
+  a:visited {
+    color: #0366d6; }
+  a:hover {
+    color: #0366d6;
+    text-decoration: underline; }
+
+pre {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+/**
+  * Code blocks
+  */
+
+code {
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  word-wrap: break-word;
+  padding: .2em .4em;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+  background-color: transparent;
+  border: 0;
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  word-wrap: normal;
+  font-size: 100%;
+}
+
+
+/**
+ * Blockquotes
+ */
+blockquote {
+  margin-left: 30px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  border-left-width: 3px;
+  padding: 0 1em;
+  color: #828282;
+  border-left: 3px solid #e8e8e8;
+  padding-left: 15px;
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+blockquote * {
+  font-style: normal !important;
+  letter-spacing: 0;
+  color: #6a737d !important;
+}
+
+/**
+ * Tables
+ */
+table {
+  border-spacing: 2px;
+  display: block;
+  font-size: 14px;
+  overflow: auto;
+  width: 100%;
+  margin-bottom: 16px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+th {
+  font-weight: 600;
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+/**
+ * Others
+ */
+
+img {
+  max-width: 100%;
+}
+
+p {
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #24292e; }
+
+ul {
+  margin-top: 0; }
+
+li {
+  color: #24292e;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5; }
+
+li + li {
+  margin-top: 0.25em; }
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #24292e; }
+
+a:visited {
+  color: #0366d6; }
+
+h2, h3 {
+  border-bottom: 1px solid #eaecef;
+  color: #111;
+  /* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+      </body>
+    </html>
