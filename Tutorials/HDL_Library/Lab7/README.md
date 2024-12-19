@@ -6,15 +6,15 @@ In this lab, you will learn how to verify the functionality of HDL FIR Compiler 
 
 After completing this lab, you will be able to:
 
-* Configure FIR Compiler as an Interpolator or Decimator with Integer or Fixed-Fractional rate change.
-
 * Configure FIR Compiler as a singe rate filter.
 
-* Choose correct hardware oversampling specification format in order to get required output sample rate.
+* Configure FIR Compiler as an Interpolator or Decimator with Integer or Fixed-Fractional rate change.
+
+* Choose correct hardware oversampling specification format in order to get the required output sample rate.
 
 ### Procedure 
 
-This lab has four primary parts:
+This lab has five primary parts:
 
 * In Step 1 you will learn how to configure FIR Compiler as a single rate filter.
 
@@ -142,9 +142,12 @@ You can observe the output sample rate displayed at the bottom toolstrip of spec
 
 29. Double click on FDA Tool, change Fs from 100 to 50, click on design filter and close FDA Tool.
 
-30. Run the design to to observe the FIR Compiler output signal sample rate is updated to 50MHz as shown below:
+30. Run the design, now you observe the FIR Compiler output sample rate is updated to 50MHz as shown below:
 
 ![](Images/step1_14.png) 
+
+## Step 2: Configure FIR Compiler as an interpolator
+
 
 ## Summary
 
