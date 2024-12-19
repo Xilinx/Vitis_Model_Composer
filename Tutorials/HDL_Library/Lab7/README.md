@@ -42,7 +42,7 @@ You can view the directory contents in the MATLAB® Current Folder browser, or t
 
 Lab7_1 opens as shown in figure below:
 
-![](Images/Step1/Lab7_1.png)
+![](Images/Lab7_1.png)
 
 Input to the design: 
 
@@ -57,11 +57,11 @@ Double click on FDA tool to observe the settings.
 
 4. From the Simulink Toolstrip, click on simulink library browser and then AMD Toolbox---> HDL---> DSP---> AXI-S.
 
-![](Images/Step1/step1_1.png)
+![](Images/step1_1.png)
 
 5. Right click on FIR Compiler 7.2 to add this block to the model as shown below:
 
-![](Images/Step1/step1_2.png)
+![](Images/step1_2.png)
 
 6. Double click on FIR Compiler and add `double(xlfda_numerator(strcat(bdroot,'/FDATool')))` to cofficient vector field under Filter Coefficients.
 
@@ -71,21 +71,21 @@ You could also define the coefficients as a variable in the MATLAB workspace and
 
 7. Select filter type as `Single_Rate` under filter specification field as shown below:
 
-![](Images/Step1/step1_3.png)
+![](Images/step1_3.png)
 
 8. Go to Channel Specification tab and make sure `Maximum_Possible` format is selected under Hardware Oversampling Specification.
 
-![](Images/Step1/step1_4.png)
+![](Images/step1_4.png)
 
 9. Go to the Implementation tab and select Coefficient Options as shown in figure below:
 
-![](Images/Step1/step1_5.png)
+![](Images/step1_5.png)
 
 10. Connect Gateway In block to data_tdata_real port of FIR Compiler.
 
 11. Connect Gateway Out blocks to tready, tvalid and tdata as shown in figure below:
 
-![](Images/Step1/step1_6.png)
+![](Images/step1_6.png)
 
 12. Left click on canvas and drag mouse to select FIR Compiler, Gateway In and Gateway Out blocks.
 
@@ -93,11 +93,11 @@ You could also define the coefficients as a variable in the MATLAB workspace and
 
 14. Subsystem will be created as shown below:
 
-![](Images/Step1/step1_7.png)
+![](Images/step1_7.png)
 
 15. Rename the Substem as HDL_DUT and connect the input and output ports as shown in figure below:
 
-![](Images/Step1/step1_8.png)
+![](Images/step1_8.png)
 
 16. Double click on Vitis Model Composer Hub block, swich to code generation tab and select HDL_DUT.
 
@@ -105,9 +105,9 @@ You could also define the coefficients as a variable in the MATLAB workspace and
 
 18. Run the design and observe the FIR Compiler output signals displayed in the scope and spectrum analyzer as shown below:
 
-![](Images/Step1/step1_9.png)
+![](Images/step1_9.png)
 
-![](Images/Step1/step1_10.png)
+![](Images/step1_10.png)
 
 19. Input to FIR Compiler has two signals (1 MHz and 5 MHz) but the output has only one signal (1 MHz).
 
@@ -116,13 +116,13 @@ You could also define the coefficients as a variable in the MATLAB workspace and
 21. Double click on FDA tool, change the passband (Fpass) from 2 to 5 and the stopband (Fstop) from 4 to 10 and then click on Design Filter. 
     Now the filter coefficients are generated with Fpass = 5MHz and Fstop = 10 MHz.
 
-![](Images/Step1/step1_11.png)
+![](Images/step1_11.png)
 
 22. Run the design again to observe the FIR Compiler output signals.
 
 23. Now you can see two signals (with 1MHz and 5MHz) at the FIR Compiler output:
 
-![](Images/Step1/step1_12.png) 
+![](Images/step1_12.png) 
 
 You can observe the output sample rate displayed at the bottom toolstrip of spectrum analyzer.
  
@@ -132,7 +132,7 @@ You can observe the output sample rate displayed at the bottom toolstrip of spec
 
 25. Double click on each input signal (including random source) and change the Sample time from 1/100e6 to 1/50e6 as shown below:
 
-![](Images/Step1/step1_13.png) 
+![](Images/step1_13.png) 
 
 26. Double click on HDL_DUT subsystem, select Gateway In block and double click to change sample period to 1/50e6 and then click Apply. 
 
@@ -144,7 +144,7 @@ You can observe the output sample rate displayed at the bottom toolstrip of spec
 
 30. Run the design to to observe the FIR Compiler output signal sample rate is updated to 50MHz as shown below:
 
-![](Images/Step1/step1_14.png) 
+![](Images/step1_14.png) 
 
 ## Summary
 
