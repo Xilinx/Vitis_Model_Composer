@@ -146,7 +146,7 @@ You can observe the output sample rate displayed at the bottom toolstrip of spec
 
 ![](Images/step1_14.png) 
 
-## Step 2: Configure FIR Compiler as an interpolator
+## Step 2: Configure FIR Compiler as an Interpolator
 
 1. Double-click Lab7_2.slx in the Current Folder browser.
 
@@ -154,28 +154,34 @@ You can observe the output sample rate displayed at the bottom toolstrip of spec
 
 ![](Images/step2_1.png) 
 
-3. Double click on HDL_DUT subsystem, add FIR Compiler 7.2 block here (copy paste from Lab7_1.slx).
+3. Double click on input signal and make sure the sample time is 1/20e6.
+
+4. Double click on HDL_DUT subsystem, add FIR Compiler 7.2 block here (copy paste from Lab7_1.slx).
 
 ![](Images/step2_2.png) 
 
 ![](Images/step2_3.png) 
 
-4. Double click on FIR Compiler block, change the filter specification settings as shown below:
+5. Double click on FIR Compiler block, change the filter specification settings as shown below:
 
 **Filter Type**: Interpolation
+
 **Rate Change Type**: Integer
+
 **Interpolation Rate Value**: 5
 
-5. Switch to channel specification tab, change the hardware oversampling specification settings as shown below:
+6. Switch to channel specification tab, change the hardware oversampling specification settings as shown below:
 
 **Select Format**: Input_Sample_Period
+
 **Sample Period**: 5
 
-6. Click Apply and OK.
+7. Click **Apply** and **OK**.
 
-7. Formula for Sample Period if 'Input_Sampling_Period' format is selected:
+8. Formula for computing Sample Period value if **Input_Sampling_Period** format is selected:
 
  Sample Period = {(Input Sampling Period /Simulink System Period)/number of input channels}
+ 
  Sample Period = (50ns/10ns)/(1) = 5.
 
 <div class="noteBox">
@@ -184,44 +190,47 @@ When you select Input_Sampling_Period format, here sample period indicates numbe
 
 ![](Images/step2_4.png)
 
-8. Add constant block to the design, double click on this block and select output type as Boolean. 
+9. Add constant block to the design, double click on this block and select output type as Boolean. 
 
 ![](Images/step2_5.png)
 
-9. Check Sampled constant and enter sample period value 1/20e6 as shown below:
+10. Check Sampled constant and enter sample period value 1/20e6 as shown below:
 
 ![](Images/step2_6.png)
 
-10. Click Apply and OK.
+11. Click **Apply** and **OK**.
 
-11. Connect input and output ports of FIR Compiler as shown below:
+12. Connect input and output ports of FIR Compiler as shown below:
 
 ![](Images/step2_7.png)
 
-12. Go one level up and double click on Vitis Model Composer Hub block, swich to code generation tab and select HDL_DUT.
+13. Go one level up and double click on Vitis Model Composer Hub block, swich to code generation tab and select HDL_DUT.
 
-13. Make sure FPGA Clock Period(ns) is set to 10, and Simulink System Period is set to 1/100e6 or 10e-9.
+14. Make sure FPGA Clock Period(ns) is set to 10, and Simulink System Period is set to 1/100e6 or 10e-9.
 
-14. The formula to compute Simulink System Period is explained below:
+15. The formula to compute Simulink System Period is explained below:
 
-Input Sample Rate: 20MHz (Input Sample Period: 1/20MHz = 50ns)
-Expected Output Sample Rate: (Input Sample Rate) * (Rate change value) = 20MHz * 5 = 100 MHz  
-Output Sample Period: 1/100MHz = 10ns
+**Input Sample Rate**: 20MHz (Input Sample Period: 1/20MHz = 50ns)
+
+**Expected Output Sample Rate**: (Input Sample Rate) * (Rate change value) = 20MHz * 5 = 100 MHz  
+
+**Output Sample Period**: 1/100MHz = 10ns
 
 Simulink System Period value in the hub block should be the greatest common divisor(gcd) of all the sample periods that appear in the model.
 
 gcd(Input Sample Period, Output Sample Period) = gcd(50,10) = 10.
+
 Simulink System Period in the Hub block: (10e-9) : 10ns 
 
-15. Click Apply and OK.
+16. Click **Apply** and **OK**.
 
-16. Run the design again to observe the FIR Compiler output signals.
+17. Run the design again to observe the FIR Compiler output signals.
 
 ![](Images/step2_8.png)
 
-17. Input sample rate to the filter is 20 MHz and expected output sample rate is 100MHz (Interpolation with rate change factor: 5).
+18. Input sample rate to the filter is 20 MHz and expected output sample rate is 100MHz (Interpolation with rate change value: 5).
 
-18. Observe the output sample rate in the spectrum analyzer, it should be 100MHz.
+19. Observe the output sample rate in the spectrum analyzer, it should be 100MHz.
 
 ![](Images/step2_9.png)
 
@@ -229,19 +238,23 @@ Simulink System Period in the Hub block: (10e-9) : 10ns
 We can also select any existing hardware oversampling specification format for this design, if we select Output_Sampling_Period format, then sample period indicates number of clock cycles between two output samples.
 </div>
 
-19. Double click on FIR Compiler block, Switch to channel specification tab, change the hardware oversampling specification settings as shown below:
+20. Double click on FIR Compiler block, Switch to the channel specification tab, change the hardware oversampling specification settings as shown below:
 
 **Select Format**: Output_Sample_Period
+
 **Sample Period**: 1
 
-20. Click Apply and OK.
+21. Click **Apply** and **OK**.
 
-21. Formula for Sample Period if 'Output_Sampling_Period' format is selected:
+22. Formula for Sample Period if **Output_Sampling_Period** format is selected:
 
- Sample Period = {(Expected Output Sampling Period / Simulink System Period)/number of input channels}
- Sample Period = (10ns/10ns)/(1) = 1.
+ **Sample Period** = {(Expected Output Sampling Period / Simulink System Period)/number of input channels}
 
-22. Run the design, we should have the same FIR Compiler output response with this format also.
+ **Sample Period** = (10ns/10ns)/(1) = 1.
+
+23. Run the design, we should have the same FIR Compiler output response with this format also.
+
+## Step 3: Configure FIR Compiler as a Decimator
 
 
 ## Summary
