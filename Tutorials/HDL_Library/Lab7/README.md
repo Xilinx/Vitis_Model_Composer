@@ -6,25 +6,25 @@ In this lab, you will learn how to verify the functionality of HDL FIR Compiler 
 
 After completing this lab, you will be able to:
 
-* Configure FIR Compiler as a singe rate filter.
+* Configure **FIR Compiler** as a **singe rate filter**.
 
-* Configure FIR Compiler as an Interpolator or Decimator with Integer or Fixed-Fractional rate change.
+* Configure **FIR Compiler** as an **Interpolator** and a **Decimator** with Integer or Fixed-Fractional rate change.
 
-* Choose correct hardware oversampling specification format in order to get the required output sample rate.
+* Choose correct **hardware oversampling specification** settings in order to get the required output sample rate.
 
 ### Procedure 
 
 This lab has five primary parts:
 
-* In Step 1 you will learn how to configure FIR Compiler as a **single rate filter**.
+* In Step 1 you will learn how to configure **FIR Compiler** as a **single rate filter**.
 
-* In Step 2 Configure FIR Compiler as an **interpolator**.
+* In Step 2 Configure **FIR Compiler** as an **interpolator**.
 
-* In Step 3 Configure FIR Compiler as a **decimator**.
+* In Step 3 Configure **FIR Compiler** as a **decimator**.
 
-* In Step 4 FIR Compiler with Hardware Oversampling Specification format: **Hardware Oversampling Rate**.
+* In Step 4 **FIR Compiler** with Hardware Oversampling Specification format: **Hardware Oversampling Rate**.
 
-* In Step 5 Configure FIR Compiler with **fixed-fractional rate change**.
+* In Step 5 Configure **FIR Compiler** with **fixed-fractional rate change**.
 
 ## Step 1: Configure FIR Compiler as a Single rate filter
 
@@ -68,8 +68,8 @@ Double click on **FDA tool** to observe the settings.
 
 6. Double click on FIR Compiler and add `double(xlfda_numerator(strcat(bdroot,'/FDATool')))` to cofficient vector field under Filter Coefficients.
 
-[!NOTE] 
-You could also define the coefficients as a variable in the MATLAB workspace and specify the variable name in this field.
+> [!NOTE] 
+> You could also define the coefficients as a variable in the MATLAB workspace and specify the variable name in this field.
 
 7. Select filter type as `Single_Rate` under filter specification field as shown below:
 
@@ -234,8 +234,8 @@ gcd(Input Sample Period, Output Sample Period) = gcd(50,10) = 10.
 
 ![](Images/step2_9.png)
 
-[!NOTE] 
-We can also select any existing hardware oversampling specification format for this design, if we select **Output_Sampling_Period** format, then sample period indicates number of clock cycles between two output samples.
+> [!NOTE] 
+> We can also select any existing hardware oversampling specification format for this design, if we select **Output_Sampling_Period** format, then sample period indicates number of clock cycles between two output samples.
 
 20. Double click on FIR Compiler block, Switch to the channel specification tab, change the hardware oversampling specification settings as shown below:
 
