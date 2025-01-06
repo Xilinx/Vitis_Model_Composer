@@ -247,7 +247,7 @@ gcd(Input Sample Period, Output Sample Period) = gcd(50,10) = 10.
 
 23. Run the design, we should have the same FIR Compiler output response with this format also.
 
-## Step 3: Interpolator with Fixed-Fractional rate change
+## Step 3: FIR Compiler with a Fixed-Fractional rate change
 
 1. Double-click **Lab7_3.slx** in the Current Folder browser.
 
