@@ -6,19 +6,21 @@ In this lab, you will learn how to verify the functionality of HDL FIR Compiler 
 
 After completing this lab, you will be able to:
 
-* Configure **FIR Compiler** as a **singe rate filter**.
+* Configure **FIR Compiler** as a **Single Rate Filter**.
 
-* Configure **FIR Compiler** as an **Interpolator** and a **Decimator** with Integer or Fixed-Fractional rate change.
+* Configure **FIR Compiler** as an **Interpolator** with Integer or Fixed-Fractional rate change.
+ 
+* **Decimator** with Integer or Fixed-Fractional rate change.
 
 ### Procedure 
 
 This lab has three primary parts:
 
-* In Step 1 you will learn how to configure **FIR Compiler** as a **single rate filter**.
+* In Step 1 you will learn how to configure **FIR Compiler** as a **Single Rate Filter**.
 
 * In Step 2 Configure **FIR Compiler** as an **Interpolator** with **Integer** rate change.
 
-* In Step 3 Configure **FIR Compiler** with **fixed-fractional rate change**.
+* In Step 3 **FIR Compiler** with **fixed-fractional rate change**.
 
 ## Step 1: Configure FIR Compiler as a Single rate filter
 
@@ -255,7 +257,7 @@ gcd(Input Sample Period, Output Sample Period) = gcd(50,10) = 10.
 
 ![](Images/step3_1.png) 
 
-3. Add Sine Wave as an input:
+3. Add a Sine Wave as an input:
 
   - Double click on canvas and type sine 
   - Select sine wave to add it to the design
