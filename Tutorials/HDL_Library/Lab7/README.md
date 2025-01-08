@@ -52,13 +52,13 @@ FDA tool is added to the design to generate filter coefficients.
 
 Fitler coefficients with **passband**: Fpass = 2 MHz and **stopband**:  Fstop = 4 MHz are generated.
 
-Double click on **FDA tool** to observe the settings.
+Double click on **FDA tool** to observe the settings and then close the window.
 
-4. From the Simulink Toolstrip, click on simulink library browser and then AMD Toolbox---> HDL---> DSP---> AXI-S.
+4. From the Simulink Toolstrip, click on library browser and then go to AMD Toolbox---> HDL---> DSP---> AXI-S and scroll down to find FIR Compiler 7.2 block.
 
 ![](Images/step1_1.png)
 
-5. Right click on FIR Compiler 7.2 to add this block to the model as shown below:
+5. Right click on **FIR Compiler 7.2** and click on **add block to model Lab7_1** to add this block to the model as shown below:
 
 ![](Images/step1_2.png)
 
@@ -79,7 +79,7 @@ Double click on **FDA tool** to observe the settings.
 
 ![](Images/step1_5.png)
 
-10. Connect Gateway In block to **data_tdata_real** port of FIR Compiler.
+10. Click **Apply** and **OK**, connect Gateway In block to **data_tdata_real** port of FIR Compiler.
 
 11. Connect Gateway Out blocks to **tready**, **tvalid** and **tdata** as shown in figure below:
 
@@ -93,54 +93,58 @@ Double click on **FDA tool** to observe the settings.
 
 ![](Images/step1_7.png)
 
-15. Rename the Substem as **HDL_DUT** and connect the input and output ports as shown in figure below:
+15. Rename the Subsystem as **HDL_DUT**, double click on it and change the output port numbers from 1,2,3 to 3,2,1.
+
+16. Go one level up, connect the input and output ports as shown in figure below:
 
 ![](Images/step1_8.png)
 
-16. Double click on **Vitis Model Composer Hub block**, swich to the code generation tab and select **HDL_DUT**.
+17. Double click on **Vitis Model Composer Hub block**, swich to the code generation tab and select **HDL_DUT**.
 
-17. Go to settings tab set **FPGA Clock Period(ns)** to 10 and **Simulink System Period** to 1/100e6, click **Apply**.
+18. Go to settings tab, set **FPGA Clock Period(ns)** to 10 and **Simulink System Period** to 1/100e6, click **Apply** and **OK**.
 
-18. Run the design and observe the FIR Compiler output signals displayed in the **scope** and **spectrum analyzer** as shown below:
+19. Run the design and observe the FIR Compiler output signals displayed in the **scope** and **spectrum analyzer** as shown below:
 
 ![](Images/step1_9.png)
 
 ![](Images/step1_10.png)
 
-19. Input to FIR Compiler has two signals (**1 MHz** and **5 MHz**) but the output has only one signal (**1 MHz**).
+20. Input to FIR Compiler has two signals (**1 MHz** and **5 MHz**) but the output has only one signal (**1 MHz**).
 
-20. The signal with **5 MHz** is attenuated because it is falling in the stopband of the filter.
+21. The signal with **5 MHz** is attenuated because it is falling in the stopband of the filter.
 
-21. Double click on **FDA tool**, change the passband (**Fpass**) from 2 to 5 and the stopband (**Fstop**) from 4 to 10 and then click on **Design Filter**. 
+22. Double click on **FDA tool**, change the passband (**Fpass**) from 2 to 5 and the stopband (**Fstop**) from 4 to 10 and then click on **Design Filter**. 
     Now the **filter coefficients** are generated with Fpass = 5MHz and Fstop = 10 MHz.
 
 ![](Images/step1_11.png)
 
-22. Run the design again to observe the FIR Compiler output signals.
+23. Close the FDA tool, run the design again to observe the FIR Compiler output signals.
 
-23. Now you can see two signals (with **1MHz** and **5MHz**) at the FIR Compiler output:
+24. Now you can see two signals (with **1MHz** and **5MHz**) at the FIR Compiler output:
 
 ![](Images/step1_12.png) 
 
 You can observe the output sample rate displayed at the bottom toolstrip of spectrum analyzer.
  
-24. Input sample rate to filter is **100 MHz** and output sample rate is also **100 MHz**. There is no rate change applied for the filter because we configured FIR Compiler as a **single rate filter**.
+25. Input sample rate to filter is **100 MHz** and output sample rate is also **100 MHz**. There is no rate change applied for the filter because we configured FIR Compiler as a **single rate filter**.
 
-### Updating the design with sampling rate 50 MHz:
+### Updating the design with a sampling rate of 50 MHz:
 
-25. Double click on each input signal (including random source) and change the Sample time from **1/100e6** to **1/50e6** as shown below:
+26. Double click on each input signal (including random source) and change the Sample time from **1/100e6** to **1/50e6** as shown below:
 
 ![](Images/step1_13.png) 
 
-26. Double click on **HDL_DUT** subsystem, select **Gateway In block** and double click to change sample period to **1/50e6** and then click **Apply**. 
+27. Click **Apply** and **OK**.
 
-27. Go one level up and double click on **Vitis Model Composer Hub** block, swich to **code generation** tab and select **HDL_DUT**.
+28. Double click on **HDL_DUT** subsystem, select **Gateway In block** and double click to change sample period to **1/50e6** and then click **Apply**. 
 
-28. Change **FPGA Clock Period(ns)** from 10 to 20, and **Simulink System Period** from 1/100e6 to 1/50e6, click **Apply**.
+29. Go one level up and double click on **Vitis Model Composer Hub** block, swich to **code generation** tab and select **HDL_DUT**.
 
-29. Double click on **FDA Tool**, change **Fs** from 100 to 50, click on **design filter** and close FDA Tool.
+30. Change **FPGA Clock Period(ns)** from 10 to 20, and **Simulink System Period** from 1/100e6 to 1/50e6, click **Apply**.
 
-30. Run the design, now you observe the FIR Compiler output sample rate is updated to **50MHz** as shown below:
+31. Double click on **FDA Tool**, change **Fs** from 100 to 50, click on **design filter** and close FDA Tool.
+
+32. Run the design, now you can observe the FIR Compiler output sample rate is updated to **50MHz** as shown below:
 
 ![](Images/step1_14.png) 
 
