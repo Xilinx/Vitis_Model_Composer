@@ -1,9 +1,11 @@
 %% Basic parameters
-N = 1; 
+N = 1024; 
 NSAMP = 8192;
 Ts = 16*(7/4)/8.75e9;
 ch_filt_coef = rcosdesign(0.22,4,28,'normal');
 ch_filt_coef = 28 * ch_filt_coef / sum(ch_filt_coef(:));
+randph = 2*pi*rand(16,1);
+nvar = 0.01;
 
 %% Twiddle factors
 load twid.mat
