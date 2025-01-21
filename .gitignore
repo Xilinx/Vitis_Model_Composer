@@ -5,3 +5,6 @@ slprj/
 .Xil/
 *.slx.autosave
 *.slx.r*
+.nfs*
+netlist/
+Thumbs*
