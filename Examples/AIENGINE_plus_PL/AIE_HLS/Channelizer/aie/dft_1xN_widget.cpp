@@ -1,18 +1,8 @@
-// /**********
-// © Copyright 2022 Advanced Micro Devices (AMD), Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// Copyright (C) 2023, Advanced Micro Devices, Inc. All rights reserved.
+// SPDX-License-Identifier: MIT
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-// **********/
+// Author: Mark Rollins
 
 #include <adf.h>
 #include <aie_api/aie.hpp>
@@ -27,8 +17,8 @@
 // Constructor
 // ------------------------------------------------------------
 
-template<class TT_DATA,class TT_COEFF,class TT_ACC,unsigned NSAMP>
-dft_1xN_input<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::dft_1xN_input( TT_COEFF (&coeff0_i)[8], TT_COEFF (&coeff1_i)[8] )
+template<class TT_DATA,class TT_COEFF,unsigned NSAMP>
+dft_1xN_input<TT_DATA,TT_COEFF,NSAMP>::dft_1xN_input( TT_COEFF (&coeff0_i)[8], TT_COEFF (&coeff1_i)[8] )
   : coeff0( coeff0_i ), coeff1( coeff1_i )
 {
   aie::set_rounding(aie::rounding_mode::positive_inf);
@@ -39,10 +29,10 @@ dft_1xN_input<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::dft_1xN_input( TT_COEFF (&coeff0_i
 // Run
 // ------------------------------------------------------------
 
-template<class TT_DATA,class TT_COEFF,class TT_ACC,unsigned NSAMP>
-void dft_1xN_input<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::run_input( input_stream<TT_DATA>* __restrict sig0_i,
+template<class TT_DATA,class TT_COEFF,unsigned NSAMP>
+void dft_1xN_input<TT_DATA,TT_COEFF,NSAMP>::run_input( input_stream<TT_DATA>* __restrict sig0_i,
                                                               input_stream<TT_DATA>* __restrict sig1_i,
-                                                              output_stream<TT_ACC>* __restrict acc_o )
+                                                              output_cascade<cacc48>* __restrict acc_o )
 
 {
   // Iterator to access DFT coefficients:
@@ -56,8 +46,8 @@ void dft_1xN_input<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::run_input( input_stream<TT_DA
   aie::vector<TT_COEFF,16> buff_coeff = aie::zeros<TT_COEFF,16>();
 
   // Declare accumulator:
-  aie::accum<TT_ACC,4> accA;    // Output for 1st DFT
-  aie::accum<TT_ACC,4> accB;    // Output for 2nd DFT
+  aie::accum<cacc48,4> accA;    // Output for 1st DFT
+  aie::accum<cacc48,4> accB;    // Output for 2nd DFT
 
   // Loop over some number of samples:
   for ( unsigned rr=0; rr < NSAMP/4; rr++)
@@ -72,11 +62,11 @@ void dft_1xN_input<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::run_input( input_stream<TT_DA
     // --> aie::sliding_mul_ops<Lanes,Points,CoeffStep,DataStepX,DataStepY,CoeffType,DataType,AccumTag>
     //         ::mul(coeff,coeff_start,data,data_start)
     // --> Note: use coeff for input samples, use data for DFT coefficients (assume stored in row-major order)
-    accA = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,TT_ACC>::mul(     buff_sig,0,buff_coeff,0);
-    accA = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,TT_ACC>::mac(accA,buff_sig,4,buff_coeff,8);
+    accA = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,cacc48>::mul(     buff_sig,0,buff_coeff,0);
+    accA = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,cacc48>::mac(accA,buff_sig,4,buff_coeff,8);
     writeincr(acc_o,accA);
-    accB = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,TT_ACC>::mul(     buff_sig,2,buff_coeff,0);
-    accB = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,TT_ACC>::mac(accB,buff_sig,6,buff_coeff,8);
+    accB = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,cacc48>::mul(     buff_sig,2,buff_coeff,0);
+    accB = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,cacc48>::mac(accB,buff_sig,6,buff_coeff,8);
     writeincr(acc_o,accB);
   } // rr
 }
@@ -89,8 +79,8 @@ void dft_1xN_input<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::run_input( input_stream<TT_DA
 // Constructor
 // ------------------------------------------------------------
 
-template<class TT_DATA,class TT_COEFF,class TT_ACC,unsigned NSAMP>
-dft_1xN_middle<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::dft_1xN_middle( TT_COEFF (&coeff0_i)[8], TT_COEFF (&coeff1_i)[8] )
+template<class TT_DATA,class TT_COEFF,unsigned NSAMP>
+dft_1xN_middle<TT_DATA,TT_COEFF,NSAMP>::dft_1xN_middle( TT_COEFF (&coeff0_i)[8], TT_COEFF (&coeff1_i)[8] )
   : coeff0( coeff0_i ), coeff1( coeff1_i )
 {
   aie::set_rounding(aie::rounding_mode::positive_inf);
@@ -101,11 +91,11 @@ dft_1xN_middle<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::dft_1xN_middle( TT_COEFF (&coeff0
 // Run
 // ------------------------------------------------------------
 
-template<class TT_DATA,class TT_COEFF,class TT_ACC,unsigned NSAMP>
-void dft_1xN_middle<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::run_middle( input_stream<TT_DATA>* __restrict sig0_i,
+template<class TT_DATA,class TT_COEFF,unsigned NSAMP>
+void dft_1xN_middle<TT_DATA,TT_COEFF,NSAMP>::run_middle( input_stream<TT_DATA>* __restrict sig0_i,
                                                                 input_stream<TT_DATA>* __restrict sig1_i,
-                                                                input_stream<TT_ACC>* __restrict acc_i,
-                                                                output_stream<TT_ACC>* __restrict acc_o  )
+                                                                input_cascade<cacc48>* __restrict acc_i,
+                                                                output_cascade<cacc48>* __restrict acc_o  )
 {
   // Iterator to access DFT coefficients:
   auto it0 = aie::cbegin_vector_circular<8,8,aie_dm_resource::a>( coeff0 );
@@ -118,8 +108,8 @@ void dft_1xN_middle<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::run_middle( input_stream<TT_
   aie::vector<TT_COEFF,16> buff_coeff = aie::zeros<TT_COEFF,16>();
 
   // Declare accumulator:
-  aie::accum<TT_ACC,4> accA;    // Output for 1st DFT
-  aie::accum<TT_ACC,4> accB;    // Output for 2nd DFT
+  aie::accum<cacc48,4> accA;    // Output for 1st DFT
+  aie::accum<cacc48,4> accB;    // Output for 2nd DFT
 
   // Loop over some number of samples:
   for ( unsigned rr=0; rr < NSAMP/4; rr++)
@@ -135,12 +125,12 @@ void dft_1xN_middle<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::run_middle( input_stream<TT_
     //         ::mul(coeff,coeff_start,data,data_start)
     // --> Note: use coeff for input samples, use data for DFT coefficients (assume stored in row-major order)
     accA = readincr_v4(acc_i);
-    accA = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,TT_ACC>::mac(accA,buff_sig,0,buff_coeff,0);
-    accA = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,TT_ACC>::mac(accA,buff_sig,4,buff_coeff,8);
+    accA = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,cacc48>::mac(accA,buff_sig,0,buff_coeff,0);
+    accA = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,cacc48>::mac(accA,buff_sig,4,buff_coeff,8);
     writeincr(acc_o,accA);
     accB = readincr_v4(acc_i);
-    accB = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,TT_ACC>::mac(accB,buff_sig,2,buff_coeff,0);
-    accB = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,TT_ACC>::mac(accB,buff_sig,6,buff_coeff,8);
+    accB = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,cacc48>::mac(accB,buff_sig,2,buff_coeff,0);
+    accB = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,cacc48>::mac(accB,buff_sig,6,buff_coeff,8);
     writeincr(acc_o,accB);
   } // rr
 }
@@ -153,8 +143,8 @@ void dft_1xN_middle<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::run_middle( input_stream<TT_
 // Constructor
 // ------------------------------------------------------------
 
-template<class TT_DATA,class TT_COEFF,class TT_ACC,unsigned NSAMP>
-dft_1xN_output<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::dft_1xN_output( TT_COEFF (&coeff0_i)[8], TT_COEFF (&coeff1_i)[8] )
+template<class TT_DATA,class TT_COEFF,unsigned NSAMP>
+dft_1xN_output<TT_DATA,TT_COEFF,NSAMP>::dft_1xN_output( TT_COEFF (&coeff0_i)[8], TT_COEFF (&coeff1_i)[8] )
   : coeff0( coeff0_i ), coeff1( coeff1_i )
 {
   aie::set_rounding(aie::rounding_mode::positive_inf);
@@ -166,10 +156,10 @@ dft_1xN_output<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::dft_1xN_output( TT_COEFF (&coeff0
 // Run
 // ------------------------------------------------------------
 
-template<class TT_DATA,class TT_COEFF,class TT_ACC,unsigned NSAMP>
-void dft_1xN_output<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::run_output( input_stream<TT_DATA>* __restrict sig0_i,
+template<class TT_DATA,class TT_COEFF,unsigned NSAMP>
+void dft_1xN_output<TT_DATA,TT_COEFF,NSAMP>::run_output( input_stream<TT_DATA>* __restrict sig0_i,
                                                                 input_stream<TT_DATA>* __restrict sig1_i,
-                                                                input_stream<TT_ACC>* __restrict acc_i,
+                                                                input_cascade<cacc48>* __restrict acc_i,
                                                                 output_stream<TT_DATA>* __restrict sig0_o,
                                                                 output_stream<TT_DATA>* __restrict sig1_o )
 {
@@ -184,8 +174,8 @@ void dft_1xN_output<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::run_output( input_stream<TT_
   aie::vector<TT_COEFF,16> buff_coeff = aie::zeros<TT_COEFF,16>();
 
   // Declare accumulator:
-  aie::accum<TT_ACC,4> accA;    // Output for 1st DFT
-  aie::accum<TT_ACC,4> accB;    // Output for 2nd DFT
+  aie::accum<cacc48,4> accA;    // Output for 1st DFT
+  aie::accum<cacc48,4> accB;    // Output for 2nd DFT
 
   // Loop over some number of samples:
   for ( unsigned rr=0; rr < NSAMP/4; rr++)
@@ -201,13 +191,13 @@ void dft_1xN_output<TT_DATA,TT_COEFF,TT_ACC,NSAMP>::run_output( input_stream<TT_
     //         ::mul(coeff,coeff_start,data,data_start)
     // --> Note: use coeff for input samples, use data for DFT coefficients (assume stored in row-major order)
     accA = readincr_v4(acc_i);
-    accA = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,TT_ACC>::mac(accA,buff_sig,0,buff_coeff,0);
-    accA = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,TT_ACC>::mac(accA,buff_sig,4,buff_coeff,8);
+    accA = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,cacc48>::mac(accA,buff_sig,0,buff_coeff,0);
+    accA = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,cacc48>::mac(accA,buff_sig,4,buff_coeff,8);
     writeincr<aie_stream_resource_out::a>(sig0_o,accA.template to_vector<TT_DATA>( BIT_SHIFT ));
 
     accB = readincr_v4(acc_i);
-    accB = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,TT_ACC>::mac(accB,buff_sig,2,buff_coeff,0);
-    accB = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,TT_ACC>::mac(accB,buff_sig,6,buff_coeff,8);
+    accB = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,cacc48>::mac(accB,buff_sig,2,buff_coeff,0);
+    accB = aie::sliding_mul_ops<4,2,1,4,1,TT_DATA,TT_COEFF,cacc48>::mac(accB,buff_sig,6,buff_coeff,8);
     writeincr<aie_stream_resource_out::b>(sig1_o,accB.template to_vector<TT_DATA>( BIT_SHIFT ));
   } // rr
 }
