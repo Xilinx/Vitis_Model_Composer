@@ -1,6 +1,6 @@
 # Lab 7: Implement Filters using FIR Compiler Block
 
-In this lab, you will learn how to configure the FIR Compiler block in Vitis Model Composer. In particular, achieving the expected filter result requires you to set the both block parameters and the Vitis Model Composer **Simulink System Period** setting correctly. This tutorial will show you how to do this.
+In this lab, you will learn how to configure the FIR Compiler block in Vitis Model Composer. In particular, achieving the expected filter result requires you to set both the **FIR block** parameters and the Vitis Model Composer Simulink System Period settings in the **Hub block** correctly. This tutorial will show you how to do this.
 
 ### Objectives
 
@@ -42,7 +42,9 @@ The **FDATool** block is added to the design to generate coefficients for a lowp
 
 ![](Images/step1_2.png)
 
-6. Double click on FIR Compiler and add `double(xlfda_numerator(strcat(bdroot,'/FDATool')))` to cofficient vector field under Filter Coefficients.
+6. Double click on FIR Compiler and add the following command to the cofficient vector field to use filter coefficients generated from the FDATool. 
+
+`double(xlfda_numerator(strcat(bdroot,'/FDATool')))` 
 
 > [!NOTE] 
 > You could also define the coefficients as a variable in the MATLAB workspace and specify the variable name in this field.
@@ -51,9 +53,12 @@ The **FDATool** block is added to the design to generate coefficients for a lowp
 
 ![](Images/step1_3.png)
 
-8. Go to Channel Specification tab and make sure `Maximum_Possible` format is selected under Hardware Oversampling Specification.
+8. Switch to the **Channel Specification** tab and select `Maximum_Possible` format under hardware oversampling specification as shown below:
 
 ![](Images/step1_4.png)
+
+> [!NOTE] 
+> When **Maximum_Possible** format is selected, there is an automatic input handshaking, so s_data_tvalid port is not exposed here.
 
 9. Go to the **Implementation** tab and configure the **Coefficient Options** as shown below:
 
@@ -77,17 +82,29 @@ The **FDATool** block is added to the design to generate coefficients for a lowp
 
 ![](Images/step1_7.png)
 
-15. Rename the Subsystem as **HDL_DUT** double click on it and change the output port numbers from 1,2,3 to 3,2,1.
+15. Rename the Subsystem as **HDL_DUT**. 
 
-16. Go one level up, connect the input and output ports as shown in figure below:
+16. Connect the input and output ports as shown in figure below:
 
 ![](Images/step1_8.png)
 
 17. Double click on the **Vitis Model Composer Hub** block, switch to the **Code Generation** tab and select **HDL_DUT**.
 
-18. On the **Settings** tab, set **FPGA Clock Period(ns)** to `10` and **Simulink System Period** to `1/100e6`. Click **Apply** and **OK**.
+18. On the **Settings** tab, set **FPGA Clock Period(ns)** to `10` and **Simulink System Period(sec)** to `1/100e6` or `10e-9`, the formula to compute **Simulink System Period** is explained below:
 
-19. Run the design and observe the FIR Compiler output signals displayed in the **Scope** and **Spectrum Analyzer** as shown below:
+* **Input Sample Rate**: 100MHz (Input Sample Period: 1/100MHz = 10ns)
+* **Expected Output Sample Rate**: 100MHz (There is no rate change applied for the filter because we configured FIR Compiler as a **single rate filter**)
+* **Output Sample Period**: 1/100MHz = 10ns
+
+The **Simulink System Period** value should be the greatest common divisor(gcd) of all the sample periods that appear in the model.
+
+`gcd(Input Sample Period, Output Sample Period) = gcd(10,10) = 10`
+
+**Simulink System Period** in the Hub block: (10e-9) : 10ns 
+
+19. Click **Apply** and **OK**.
+
+20. Run the design and observe the FIR Compiler output signals displayed in the **Scope** and **Spectrum Analyzer** as shown below:
 
 ![](Images/step1_9.png)
 
@@ -95,37 +112,48 @@ The **FDATool** block is added to the design to generate coefficients for a lowp
 
 The input to the FIR has two signals (**1 MHz** and **5 MHz**), but the output has only one signal (**1 MHz**). The signal with **5 MHz** is attenuated because it is falling in the stopband of the filter.
 
-20. Double click on **FDATool**, change the passband (**Fpass**) from 2 to 5 and the stopband (**Fstop**) from 4 to 10 and then click on **Design Filter**. 
+21. Double click on **FDATool**, change the passband (**Fpass**) from 2 to 5 and the stopband (**Fstop**) from 4 to 10 and then click on **Design Filter**. 
     
 Now the filter coefficients are generated with Fpass = 5MHz and Fstop = 10 MHz.
 
 ![](Images/step1_11.png)
 
-21. Close the **FDATool** and run the design again to observe the FIR Compiler output signals.
+22. Close the **FDATool** and run the design again to observe the FIR Compiler output signals.
 
 Now you can see two signals (with **1MHz** and **5MHz**) at the FIR Compiler output:
 
 ![](Images/step1_12.png) 
 
-You can observe the output sample rate displayed at the bottom toolstrip of spectrum analyzer. The input sample rate is **100 MHz** and the output sample rate is also **100 MHz**. There is no rate change applied for the filter because we configured FIR Compiler as a **single rate filter**.
+You can observe the output sample rate displayed at the bottom toolstrip of spectrum analyzer. The input sample rate is **100 MHz** and the output sample rate is also **100 MHz**. 
+
 
 ### Updating the design with a sampling rate of 50 MHz:
 
-22. Double click on each input signal (including random source) and change the Sample time from **1/100e6** to **1/50e6** as shown below:
+23. Double click on each input signal (including random source) and change the Sample time from **1/100e6** to **1/50e6** as shown below:
 
 ![](Images/step1_13.png) 
 
-23. Click **Apply** and **OK**.
+24. Click **Apply** and **OK**.
 
-24. Double click on the **HDL_DUT** subsystem, then double click the **Gateway In** block. Change sample period to **1/50e6** and then click **Apply**. 
+25. Double click on the **HDL_DUT** subsystem, then double click the **Gateway In** block. Change sample period to **1/50e6** and then click **Apply**. 
 
-25. Go one level up and double click on **Vitis Model Composer Hub** block. Select the **HDL_DUT** subsystem.
+26. Go one level up and double click on **Vitis Model Composer Hub** block. Select the **HDL_DUT** subsystem.
 
-26. Change **FPGA Clock Period(ns)** from 10 to 20, and **Simulink System Period** from 1/100e6 to 1/50e6, click **Apply**.
+27. Change **FPGA Clock Period(ns)** from 10 to 20, and **Simulink System Period** from 1/100e6 to 1/50e6 or 20e-9, Simulink System Period computation is explained below:
 
-27. Double click on **FDATool**, change **Fs** from 100 to 50, click on **Design Filter** and close FDA Tool.
+* **Input Sample Rate**: 50MHz (Input Sample Period: 1/50MHz = 20ns)
+* **Expected Output Sample Rate**: 50MHz 
+* **Output Sample Period**: 1/50MHz = 20ns
 
-28. Run the design. Now you can observe the FIR Compiler output sample rate is updated to **50MHz** as shown below:
+`gcd(Input Sample Period, Output Sample Period) = gcd(20,20) = 20`
+
+**Simulink System Period** in the Hub block: (20e-9) : 20ns 
+
+28. Click **Apply** and **OK**.
+
+29. Double click on **FDATool**, change **Fs** from 100 to 50, click on **Design Filter** and close FDA Tool.
+
+30. Run the design. Now you can observe the FIR Compiler output sample rate is updated to **50MHz** as shown below:
 
 ![](Images/step1_14.png) 
 
@@ -160,6 +188,8 @@ Lab7_2 opens as shown in figure below:
 
 When you select **Input_Sampling_Period** format, the **Sample Period** parameter indicates the number of clock cycles between two input samples.
 
+![](Images/step2_4.PNG)
+
 The formula for computing the Sample Period for a given input rate and Simulink system rate is: 
 
 ```
@@ -167,9 +197,16 @@ Sample Period = {(Input Sampling Period /Simulink System Period)/number of input
  
 Sample Period = (50ns/10ns)/(1) = 5.
 ```
-Calculation of the Simulink System Period will be explained below.
 
-![](Images/step2_4.PNG)
+**Simulink System Period** Computation is explained below:
+
+* **Input Sample Rate**: 20MHz (Input Sample Period: 1/20MHz = 50ns)
+* **Expected Output Sample Rate**: (Input Sample Rate) * (Rate change value) = 20MHz * 5 = 100 MHz  
+* **Output Sample Period**: 1/100MHz = 10ns
+
+`gcd(Input Sample Period, Output Sample Period) = gcd(50,10) = 10`
+
+**Simulink System Period** in the Hub block: (10e-9) : 10ns 
 
 7. Add a **Constant** block to the design. Double click on this block and select output type as Boolean. 
 
@@ -187,19 +224,7 @@ Calculation of the Simulink System Period will be explained below.
 
 11. Go one level up and double click on the **Vitis Model Composer Hub** block. Select **HDL_DUT**.
 
-12. Make sure **FPGA Clock Period(ns)** is set to `10`, and **Simulink System Period** is set to `1/100e6` or `10e-9`.
-
-The formula to compute **Simulink System Period** is explained below:
-
-* **Input Sample Rate**: 20MHz (Input Sample Period: 1/20MHz = 50ns)
-* **Expected Output Sample Rate**: (Input Sample Rate) * (Rate change value) = 20MHz * 5 = 100 MHz  
-* **Output Sample Period**: 1/100MHz = 10ns
-
-The **Simulink System Period** value should be the greatest common divisor(gcd) of all the sample periods that appear in the model.
-
-`gcd(Input Sample Period, Output Sample Period) = gcd(50,10) = 10`
-
-**Simulink System Period** in the Hub block: (10e-9) : 10ns 
+12. Make sure **FPGA Clock Period(ns)** is set to `10`, and **Simulink System Period** is set to `1/100e6` or `10e-9` in the hub block.
 
 13. Click **Apply** and **OK**.
 
@@ -212,7 +237,9 @@ The input sample rate to the filter is 20 MHz and the expected output sample rat
 ![](Images/step2_9.png)
 
 > [!NOTE] 
-> We can also select any existing hardware oversampling specification format for this design, if we select **Output_Sampling_Period** format, then sample period indicates number of clock cycles between two output samples.
+> We can also select any existing hardware oversampling specification format for this design.
+
+### Updating FIR Compiler block settings to use Output_Sample_Period format:
 
 15. Double click on FIR Compiler block. Switch to the **Channel Specification** tab. Change the **Hardware Oversampling** specification settings as shown below:
 
@@ -221,7 +248,7 @@ The input sample rate to the filter is 20 MHz and the expected output sample rat
 
 16. Click **Apply** and **OK**.
 
-When you select **Input_Sampling_Period** format, the **Sample Period** parameter indicates the number of clock cycles between two output samples.
+When you select **Output_Sampling_Period** format, the **Sample Period** parameter indicates the number of clock cycles between two output samples.
 
 ```
 Sample Period = {(Expected Output Sampling Period / Simulink System Period)/number of input channels}
@@ -280,9 +307,9 @@ This design has an input with 50MHz sample rate. The expected output sample rate
 
 12. Go one level up and double click on Vitis Model Composer Hub block. Select **HDL_DUT**.
 
-13. Set **FPGA Clock Period(ns)** to `4`, and **Simulink System Period** to `1/250e6` or `4e-9`.
+13. Set **FPGA Clock Period(ns)** to `4`, and **Simulink System Period** to `1/250e6` or `4e-9` in the hub block.
 
-Simulink System Period is set based on the formula as explained in step2 of this Lab.
+Simulink System Period is set based on the formula as explained in step1 and step2 of this Lab.
 
 ```
 gcd(Input Sample Period, Output Sample Period) = gcd(20,16) = 4.
@@ -303,32 +330,33 @@ gcd(Input Sample Period, Output Sample Period) = gcd(20,16) = 4.
 
 ### Updating the design to configure FIR Compiler as a Decimator:
 
-20. Open **HDL_DUT**, double click on **FIR Compiler 7.2** block and change the **Filter Type** to Decimator.
+17. Open **HDL_DUT**, double click on **FIR Compiler 7.2** block and change the **Filter Type** to Decimator.
 
-21. Change **Interpolation Rate Value** to `4` and **Decimation Rate Value** to `5`.
+18. Change **Interpolation Rate Value** to `4` and **Decimation Rate Value** to `5`.
 
-22. Click **Apply** and **OK**.
+19. Click **Apply** and **OK**.
 
-23. Double click on **Gateway In** block and make sure **Sample Period** is set to `1/50e6`. Click **OK**.
+20. Double click on **Gateway In** block and make sure **Sample Period** is set to `1/50e6`. Click **OK**.
 
 This design has an input with 50MHz sample rate. The expected output sample rate is calculated as shown below:
 
-**Input Sample Rate**: 50MHz (Input Sample Period: 1/50MHz = 20ns)
-**Expected Output Sample Rate**: (Input Sample Rate) * (Rate change value) = 50MHz * (4/5) = 40MHz (Output Sample Period: 1/40MHz = 25ns).
+* **Input Sample Rate**: 50MHz (Input Sample Period: 1/50MHz = 20ns)
 
-25. Go one level up and double click on **Vitis Model Composer Hub** block. Select **HDL_DUT**.
+* **Expected Output Sample Rate**: (Input Sample Rate) * (Rate change value) = 50MHz * (4/5) = 40MHz (Output Sample Period: 1/40MHz = 25ns).
 
-26. Set **FPGA Clock Period(ns)** to `5`, and **Simulink System Period** to `1/200e6` or `5e-9` (`gcd(20,25) = 5`).
+21. Go one level up and double click on **Vitis Model Composer Hub** block. Select **HDL_DUT**.
 
-27. Click **Apply** and **OK**.
+22. Set **FPGA Clock Period(ns)** to `5`, and **Simulink System Period** to `1/200e6` or `5e-9` (`gcd(20,25) = 5`) in the hub block.
 
-28. Double click on **FDATool**, set **Fs** to 200, click on **Design Filter** and close it.
+23. Click **Apply** and **OK**.
 
-29. Run the design to observe the FIR Compiler output signals.
+24. Double click on **FDATool**, set **Fs** to 200, click on **Design Filter** and close it.
+
+25. Run the design to observe the FIR Compiler output signals.
 
 ![](Images/step3_7.png)
 
-30. Observe the output sample rate in the Spectrum Analyzer; it should be 40 MHz.
+26. Observe the output sample rate in the Spectrum Analyzer; it should be 40 MHz.
 
 ![](Images/step3_8.png)
 
