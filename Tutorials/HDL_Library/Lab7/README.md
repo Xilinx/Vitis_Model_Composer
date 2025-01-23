@@ -32,8 +32,6 @@ The design input consists of two sine waves with frequencies **1 MHz** and **5 M
 
 The **FDATool** block is added to the design to generate coefficients for a lowpass filter. Double-click on the **FDATool** block to observe the settings and then close the window.
 
-![](Images/fdatool.png)
-
 4. From the Simulink Toolstrip, click on **Library Browser** and then go to **AMD Toolbox->HDL->DSP->AXI-S** and scroll down to find the FIR Compiler 7.2 block.
 
 ![](Images/step1_1.png)
@@ -90,7 +88,7 @@ The **FDATool** block is added to the design to generate coefficients for a lowp
 
 17. Double click on the **Vitis Model Composer Hub** block, switch to the **Code Generation** tab and select **HDL_DUT**.
 
-18. On the **Settings** tab, set **FPGA Clock Period(ns)** to `10` and **Simulink System Period(sec)** to `1/100e6` or `10e-9`, the formula to compute **Simulink System Period** is explained below:
+18. On the **Settings** tab of hub block, set **FPGA Clock Period(ns)** to `10` and **Simulink System Period(sec)** to `1/100e6` or `10e-9`, the formula to compute **Simulink System Period** is explained below:
 
 * **Input Sample Rate**: 100MHz (Input Sample Period: 1/100MHz = 10ns)
 * **Expected Output Sample Rate**: 100MHz (There is no rate change applied for the filter because we configured FIR Compiler as a **single rate filter**)
