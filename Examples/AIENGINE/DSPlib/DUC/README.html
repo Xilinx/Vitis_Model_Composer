@@ -26,15 +26,14 @@ document.location=commandURI
 </html>
 <h2 id="introduction">Introduction</h2>
 <p>This example demonstrates a Digital Upconversion (DUC) algorithm implemented on AI Engine (AIE) devices.</p>
+<p>See also the <a href="matlab:XmcExampleApi.getExample('HDL_DUC')">DUC implemented on Programmable Logic</a>.</p>
 <h2 id="algorithm">Algorithm</h2>
 <p>The DUC design consists of multi-stage finite impulse rate (FIR) filters, a direct digital synthesizer (DDS) and a mixer. </p>
 <p><img src="./Images/duc_block_diagram.png" alt="" /> </p>
 <p>The DUC specification is as follows:</p>
 <ul>
-<li>The input is a complex data input (I/Q) sample, which can be a QAM symbol, and the output is a continuous stream of real sample.</li>
-<li>The output rate of the DUC (Fo) is set to the processing clock rate (Fclk). The relationship from the input symbol rate (Fb) to the output rate is: Fo = 16 * Fb = Fclk.</li>
-<li>4 stages of FIR filter, with interpolation ratio of 2 in each stage and the overall interpolation ratio of 16.</li>
-<li>The first stage is a 64 tap square raised root cosine (SRRC) filter, and the next three stage filters are half-band (HB) interpolate by 2 FIR filter. </li>
+<li>4 stages of FIR filter, with interpolation ratio of 2 in each stage and an overall interpolation ratio of 16.</li>
+<li>The first stage is a 64 tap square raised root cosine (SRRC) filter, and the next three stage filters are half-band (HB) interpolate-by-2 FIR filters. </li>
 </ul>
 <h2 id="example-model">Example Model</h2>
 <p>The example model compares a Simulink implementation of the DUC with two AI Engine implementations, one using Buffer interfaces between kernels, the other using Stream interfaces.</p>

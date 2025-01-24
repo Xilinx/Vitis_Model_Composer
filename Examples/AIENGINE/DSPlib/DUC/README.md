@@ -4,6 +4,8 @@
 
 This example demonstrates a Digital Upconversion (DUC) algorithm implemented on AI Engine (AIE) devices.
 
+See also the [DUC implemented on Programmable Logic](https://github.com/Xilinx/Vitis_Model_Composer/tree/2024.2/Examples/HDL/Digital_Filtering/README.md).
+
 ## Algorithm
 
 The DUC design consists of multi-stage finite impulse rate (FIR) filters, a direct digital synthesizer (DDS) and a mixer. 
@@ -11,10 +13,8 @@ The DUC design consists of multi-stage finite impulse rate (FIR) filters, a dire
 ![](./Images/duc_block_diagram.png) 
 
 The DUC specification is as follows:
-* The input is a complex data input (I/Q) sample, which can be a QAM symbol, and the output is a continuous stream of real sample.
-* The output rate of the DUC (Fo) is set to the processing clock rate (Fclk). The relationship from the input symbol rate (Fb) to the output rate is: Fo = 16 * Fb = Fclk.
-* 4 stages of FIR filter, with interpolation ratio of 2 in each stage and the overall interpolation ratio of 16.
-* The first stage is a 64 tap square raised root cosine (SRRC) filter, and the next three stage filters are half-band (HB) interpolate by 2 FIR filter. 
+* 4 stages of FIR filter, with interpolation ratio of 2 in each stage and an overall interpolation ratio of 16.
+* The first stage is a 64 tap square raised root cosine (SRRC) filter, and the next three stage filters are half-band (HB) interpolate-by-2 FIR filters. 
 
 ## Example Model
 
