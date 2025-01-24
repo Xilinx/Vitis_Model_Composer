@@ -26,6 +26,7 @@ document.location=commandURI
 </html>
 <h2 id="introduction">Introduction</h2>
 <p>This example demonstrates a Digital Upconversion (DUC) algorithm implemented on Programmable Logic using AMD IP blocks.</p>
+<p>See also the <a href="matlab:XmcExampleApi.getExample('DUC')">DUC implemented on AI Engine devices</a>.</p>
 <h2 id="algorithm">Algorithm</h2>
 <p>The DUC design consists of multi-stage finite impulse rate (FIR) filters, a direct digital synthesizer (DDS) and a mixer. </p>
 <p><img src="./Images/duc_block_diagram.png" alt="" /> </p>
@@ -37,21 +38,24 @@ document.location=commandURI
 <h2 id="example-model">Example Model</h2>
 <p>The example model compares a Simulink implementation of the DUC with an HDL implementation.</p>
 <p><img src="./Images/model.png" alt="" /> </p>
-<p>The input to both designs is a 1 MHz complex sinusoid with a sample rate of 25 MSPS.</p>
+<p>The input to both designs is white noise with a sample rate of 50 MSPS.</p>
 <p><img src="./Images/input_signal.png" alt="" /> </p>
 <h3 id="simulink-reference-design">Simulink Reference Design</h3>
 <p>In the reference design, the 4 filter stages are implemented with Simulink's <strong>FIR Interpolation</strong> block.</p>
 <p><img src="./Images/simulink_reference.png" alt="" /> </p>
 <p>The <strong>Gain</strong> blocks between each stage control bit growth and ensure that the input to each filter is 32 bits.</p>
-<p>The floating-point coefficients for each filter are stored in the MATLAB variables  <code>srrc</code>, <code>hb1</code>, <code>hb2</code>, and <code>hb3</code>. </p>
 <h3 id="pl-duc-design">PL DUC Design</h3>
-<p>The PL design is implemented using the FIR Compiler, DDS Compiler, and Complex Multiplier blocks from the <strong>HDL/DSP/AXI-S</strong> library.</p>
+<p>The filters in the PL design are implemented using the FIR Compiler block from the <strong>HDL/DSP/AXI-S</strong> library.</p>
 <p><img src="./Images/pl_model.png" alt="" /> </p>
 <p>The <strong>Shift</strong> blocks between each stage control bit growth and ensure that the input to each filter is 17 bits.</p>
-<p>The fixed-point coefficients for each filter are stored in the MATLAB variables  <code>srrc_coeff</code>, <code>hb1_coeff</code>, <code>hb2_coeff</code>, and <code>hb3_coeff</code>. The coefficients are quantized to fit in the 17 bit coefficient width specified by the FIR Compiler blocks. Refer to <code>coeffs_scaling.m</code> to see the original (Simulink floating-point) coefficients and how they are quantized to 17 bits for PL implementation.</p>
+<p>The mixer is implemented using:</p>
+<ul>
+<li>DDS Compiler block to implement a complex sinusoid.</li>
+<li>DSP58 blocks to implement a complex multiply operation. 4 DSP58s are arranged in cascade to achieve high performance and close timing at 800 MHz.</li>
+</ul>
 <h2 id="results">Results</h2>
 <h3 id="duc-output">DUC Output</h3>
-<p>The DUC upconverts the 1 MHz complex sinusoid with a sample rate of 25 MSPS to a 80 MHz signal with a sample rate of 400 MSPS. The PL implementation is compared to the Simulink golden reference model.</p>
+<p>The DUC upconverts the white noise input to center it on 80 MHz with a bandwidth of 50 MHz. The sample rate of the output signal is 800 MSPS. The PL implementation is compared to the Simulink golden reference model. Note the raised noise floor of the PL implementation compared to the Simulink floating-point golden reference.</p>
 <p><img src="./Images/duc_output.png" alt="" /> </p>
 <h3 id="hardware-implementation">Hardware Implementation</h3>
 <p>In the <strong>Vitis Model Composer Hub</strong> block, the selected hardware is a Versal VCK190 evaluation platform. This board contains a Versal AI Core <code>xcvc1902-vsva2197-2MP-e-S</code> part with <code>-2MP</code> speed grade.</p>
@@ -61,7 +65,7 @@ document.location=commandURI
 <h3 id="timing-closure">Timing Closure</h3>
 <p>To determine whether or not the design will meet timing, run Timing Analysis from the <strong>Analyze</strong> tab. After running Vivado Synthesis and Implementation, the <strong>Timing Analyzer</strong> window will display the post implementation critical paths of the design.</p>
 <p><img src="./Images/timing_analyzer.png" alt="" /> </p>
-<p>The analysis indicates the most critical path fails to meet 800 MHz timing by 10 ps. This effectively meets timing due to conservative timing estimates in the speed files that describe the Versal AI Core device.</p>
+<p>The analysis indicates the design meets timing at 800 MHz.</p>
 <h3 id="resource-utilization">Resource Utilization</h3>
 <p>To determine the FPGA resources the design will use, run Resource Analysis from the <strong>Analyze</strong> tab. After running Vivado Synthesis and Implementation, the <strong>Resource Analyzer</strong> window will show the various resources (URAM, BRAM, DSP, LUT, registers) used by each component of the design.</p>
 <p><img src="./Images/resource_analyzer.png" alt="" /> </p>

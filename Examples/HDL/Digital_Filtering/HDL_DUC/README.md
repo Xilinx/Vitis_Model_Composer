@@ -4,6 +4,8 @@
 
 This example demonstrates a Digital Upconversion (DUC) algorithm implemented on Programmable Logic using AMD IP blocks.
 
+See also the [DUC implemented on AI Engine devices](https://github.com/Xilinx/Vitis_Model_Composer/tree/2024.2/Examples/AIENGINE/DSPlib/DUC).
+
 ## Algorithm
 
 The DUC design consists of multi-stage finite impulse rate (FIR) filters, a direct digital synthesizer (DDS) and a mixer. 
@@ -20,7 +22,7 @@ The example model compares a Simulink implementation of the DUC with an HDL impl
 
 ![](./Images/model.png) 
 
-The input to both designs is a 1 MHz complex sinusoid with a sample rate of 25 MSPS.
+The input to both designs is white noise with a sample rate of 50 MSPS.
 
 ![](./Images/input_signal.png) 
 
@@ -32,23 +34,24 @@ In the reference design, the 4 filter stages are implemented with Simulink's **F
 
 The **Gain** blocks between each stage control bit growth and ensure that the input to each filter is 32 bits.
 
-The floating-point coefficients for each filter are stored in the MATLAB variables  `srrc`, `hb1`, `hb2`, and `hb3`. 
-
 ### PL DUC Design
 
-The PL design is implemented using the FIR Compiler, DDS Compiler, and Complex Multiplier blocks from the **HDL/DSP/AXI-S** library.
+The filters in the PL design are implemented using the FIR Compiler block from the **HDL/DSP/AXI-S** library.
 
 ![](./Images/pl_model.png) 
 
 The **Shift** blocks between each stage control bit growth and ensure that the input to each filter is 17 bits.
 
-The fixed-point coefficients for each filter are stored in the MATLAB variables  `srrc_coeff`, `hb1_coeff`, `hb2_coeff`, and `hb3_coeff`. The coefficients are quantized to fit in the 17 bit coefficient width specified by the FIR Compiler blocks. Refer to `coeffs_scaling.m` to see the original (Simulink floating-point) coefficients and how they are quantized to 17 bits for PL implementation.
+The mixer is implemented using:
+
+* DDS Compiler block to implement a complex sinusoid.
+* DSP58 blocks to implement a complex multiply operation. 4 DSP58s are arranged in cascade to achieve high performance and close timing at 800 MHz.
 
 ## Results
 
 ### DUC Output
 
-The DUC upconverts the 1 MHz complex sinusoid with a sample rate of 25 MSPS to a 80 MHz signal with a sample rate of 400 MSPS. The PL implementation is compared to the Simulink golden reference model.
+The DUC upconverts the white noise input to center it on 80 MHz with a bandwidth of 50 MHz. The sample rate of the output signal is 800 MSPS. The PL implementation is compared to the Simulink golden reference model. Note the raised noise floor of the PL implementation compared to the Simulink floating-point golden reference.
 
 ![](./Images/duc_output.png) 
 
@@ -68,7 +71,7 @@ To determine whether or not the design will meet timing, run Timing Analysis fro
 
 ![](./Images/timing_analyzer.png) 
 
-The analysis indicates the most critical path fails to meet 800 MHz timing by 10 ps. This effectively meets timing due to conservative timing estimates in the speed files that describe the Versal AI Core device.
+The analysis indicates the design meets timing at 800 MHz.
 
 ### Resource Utilization
 
