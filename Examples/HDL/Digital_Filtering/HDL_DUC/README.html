@@ -53,6 +53,8 @@ document.location=commandURI
 <li>DDS Compiler block to implement a complex sinusoid.</li>
 <li>DSP58 blocks to implement a complex multiply operation. 4 DSP58s are arranged in cascade to achieve high performance and close timing at 800 MHz.</li>
 </ul>
+<p><img src="./Images/mixer.png" alt="" /> </p>
+<p><img src="./Images/cascade.png" alt="" /> </p>
 <h2 id="results">Results</h2>
 <h3 id="duc-output">DUC Output</h3>
 <p>The DUC upconverts the white noise input to center it on 80 MHz with a bandwidth of 50 MHz. The sample rate of the output signal is 800 MSPS. The PL implementation is compared to the Simulink golden reference model. Note the raised noise floor of the PL implementation compared to the Simulink floating-point golden reference.</p>

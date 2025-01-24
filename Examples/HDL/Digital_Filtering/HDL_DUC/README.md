@@ -47,6 +47,10 @@ The mixer is implemented using:
 * DDS Compiler block to implement a complex sinusoid.
 * DSP58 blocks to implement a complex multiply operation. 4 DSP58s are arranged in cascade to achieve high performance and close timing at 800 MHz.
 
+![](./Images/mixer.png) 
+
+![](./Images/cascade.png) 
+
 ## Results
 
 ### DUC Output
