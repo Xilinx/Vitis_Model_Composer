@@ -137,7 +137,7 @@ You can observe the output sample rate displayed at the bottom toolstrip of spec
 
 26. Go one level up and double click on **Vitis Model Composer Hub** block. Select the **HDL_DUT** subsystem.
 
-27. Change **FPGA Clock Period(ns)** from 10 to 20, and **Simulink System Period** from 1/100e6 to 1/50e6 or 20e-9, Simulink System Period computation is explained below:
+27. Change the **Simulink System Period** from 1/100e6 to 1/50e6 or 20e-9, Simulink System Period computation is explained below:
 
 * **Input Sample Rate**: 50MHz (Input Sample Period: 1/50MHz = 20ns)
 * **Expected Output Sample Rate**: 50MHz 
@@ -159,7 +159,7 @@ You can observe the output sample rate displayed at the bottom toolstrip of spec
 
 1. Double-click **Lab7_2.slx** in the Current Folder browser.
 
-Lab7_2 opens as shown in figure below:
+Lab7_2 opens as shown in the figure below:
 
 ![](Images/step2_1.png) 
 
@@ -184,7 +184,7 @@ Lab7_2 opens as shown in figure below:
 
 6. Click **Apply** and **OK**.
 
-When you select **Input_Sampling_Period** format, the **Sample Period** parameter indicates the number of clock cycles between two input samples.
+When you select **Input_Sampling_Period** format, the **Sample Period** parameter indicates the number of Simulink System Periods between two input samples.
 
 ![](Images/step2_4.PNG)
 
@@ -232,8 +232,6 @@ Sample Period = (50ns/10ns)/(1) = 5.
 
 The input sample rate to the filter is 20 MHz and the expected output sample rate is 100MHz (Interpolation with rate change value: 5). Observe the output sample rate in the spectrum analyzer, it should be 100MHz.
 
-![](Images/step2_9.png)
-
 > [!NOTE] 
 > We can also select any existing hardware oversampling specification format for this design.
 
@@ -246,7 +244,7 @@ The input sample rate to the filter is 20 MHz and the expected output sample rat
 
 16. Click **Apply** and **OK**.
 
-When you select **Output_Sampling_Period** format, the **Sample Period** parameter indicates the number of clock cycles between two output samples.
+When you select **Output_Sampling_Period** format, the **Sample Period** parameter indicates the number of Simulink System Periods between two output samples.
 
 ```
 Sample Period = {(Expected Output Sampling Period / Simulink System Period)/number of input channels}
@@ -305,7 +303,7 @@ This design has an input with 50MHz sample rate. The expected output sample rate
 
 12. Go one level up and double click on Vitis Model Composer Hub block. Select **HDL_DUT**.
 
-13. Set **FPGA Clock Period(ns)** to `4`, and **Simulink System Period** to `1/250e6` or `4e-9` in the hub block.
+13. Set **Simulink System Period** to `1/250e6` or `4e-9` in the hub block.
 
 Simulink System Period is set based on the formula as explained in step1 and step2 of this Lab.
 
@@ -344,7 +342,7 @@ This design has an input with 50MHz sample rate. The expected output sample rate
 
 21. Go one level up and double click on **Vitis Model Composer Hub** block. Select **HDL_DUT**.
 
-22. Set **FPGA Clock Period(ns)** to `5`, and **Simulink System Period** to `1/200e6` or `5e-9` (`gcd(20,25) = 5`) in the hub block.
+22. Set **Simulink System Period** to `1/200e6` or `5e-9` (`gcd(20,25) = 5`) in the hub block.
 
 23. Click **Apply** and **OK**.
 
