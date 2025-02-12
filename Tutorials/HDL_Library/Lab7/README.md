@@ -44,8 +44,7 @@ The **FDATool** block is added to the design to generate coefficients for a lowp
 
 `double(xlfda_numerator(strcat(bdroot,'/FDATool')))` 
 
-> [!NOTE] 
-> You could also define the coefficients as a variable in the MATLAB workspace and specify the variable name in this field.
+> **NOTE:** You could also define the coefficients as a variable in the MATLAB workspace and specify the variable name in this field.
 
 7. Select filter type as `Single_Rate` under filter specification field as shown below:
 
@@ -55,8 +54,7 @@ The **FDATool** block is added to the design to generate coefficients for a lowp
 
 ![](Images/step1_4.png)
 
-> [!NOTE] 
-> When **Maximum_Possible** format is selected, there is an automatic input handshaking, so s_data_tvalid port is not exposed here.
+> **NOTE:** When **Maximum_Possible** format is selected, there is an automatic input handshaking, so s_data_tvalid port is not exposed here.
 
 9. Go to the **Implementation** tab and configure the **Coefficient Options** as shown below:
 
@@ -88,7 +86,7 @@ The **FDATool** block is added to the design to generate coefficients for a lowp
 
 17. Double click on the **Vitis Model Composer Hub** block, switch to the **Code Generation** tab and select **HDL_DUT**.
 
-18. On the **Settings** tab of hub block, set **FPGA Clock Period(ns)** to `10` and **Simulink System Period(sec)** to `1/100e6` or `10e-9`, the formula to compute **Simulink System Period** is explained below:
+18. On the **Settings** tab of Hub block, set **FPGA Clock Period(ns)** to `10` and **Simulink System Period(sec)** to `1/100e6` or `10e-9`, the formula to compute **Simulink System Period** is explained below:
 
 * **Input Sample Rate**: 100MHz (Input Sample Period: 1/100MHz = 10ns)
 * **Expected Output Sample Rate**: 100MHz (There is no rate change applied for the filter because we configured FIR Compiler as a **single rate filter**)
@@ -222,7 +220,7 @@ Sample Period = (50ns/10ns)/(1) = 5.
 
 11. Go one level up and double click on the **Vitis Model Composer Hub** block. Select **HDL_DUT**.
 
-12. Make sure **FPGA Clock Period(ns)** is set to `10`, and **Simulink System Period** is set to `1/100e6` or `10e-9` in the hub block.
+12. Make sure **FPGA Clock Period(ns)** is set to `10`, and **Simulink System Period** is set to `1/100e6` or `10e-9` in the Hub block.
 
 13. Click **Apply** and **OK**.
 
@@ -232,8 +230,7 @@ Sample Period = (50ns/10ns)/(1) = 5.
 
 The input sample rate to the filter is 20 MHz and the expected output sample rate is 100MHz (Interpolation with rate change value: 5). Observe the output sample rate in the spectrum analyzer, it should be 100MHz.
 
-> [!NOTE] 
-> We can also select any existing hardware oversampling specification format for this design.
+> **NOTE:** We can also select any existing hardware oversampling specification format for this design.
 
 ### Updating FIR Compiler block settings to use Output_Sample_Period format:
 
@@ -303,9 +300,9 @@ This design has an input with 50MHz sample rate. The expected output sample rate
 
 12. Go one level up and double click on Vitis Model Composer Hub block. Select **HDL_DUT**.
 
-13. Set **Simulink System Period** to `1/250e6` or `4e-9` in the hub block.
+13. Set **Simulink System Period** to `1/250e6` or `4e-9` in the Hub block.
 
-Simulink System Period is set based on the formula as explained in step1 and step2 of this Lab.
+Simulink System Period is set based on the formula as explained in Step 1 and Step 2 of this Lab.
 
 ```
 gcd(Input Sample Period, Output Sample Period) = gcd(20,16) = 4.
@@ -342,7 +339,7 @@ This design has an input with 50MHz sample rate. The expected output sample rate
 
 21. Go one level up and double click on **Vitis Model Composer Hub** block. Select **HDL_DUT**.
 
-22. Set **Simulink System Period** to `1/200e6` or `5e-9` (`gcd(20,25) = 5`) in the hub block.
+22. Set **Simulink System Period** to `1/200e6` or `5e-9` (`gcd(20,25) = 5`) in the Hub block.
 
 23. Click **Apply** and **OK**.
 
