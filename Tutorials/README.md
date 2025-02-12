@@ -64,6 +64,15 @@ Using AXI Interfaces and IP Integrator
 Using a Vitis Model Composer HDL Design with a Zynq-7000 SoC
 </td>
  </tr>
+
+<tr> 
+<td>
+<a href="./HDL_Library/Lab7/README.md">Lab 7</a>
+</td>
+<td>
+Implement Filters using FIR Compiler Block <img src="../Images/new.PNG" width="50">
+</td>
+ </tr>
  
 <tr>
   <td align="center" colspan="2" style="bold" ><b>HLS Library</a></b>
@@ -164,7 +173,7 @@ Hardware Validation of Versal Adaptive SoC Design
 </tr> 
 
 <tr>
-  <td align="center" colspan="2" style="bold" ><b>AIE-PL System Development</a></b> <img src="../Images/new.PNG" width="50">
+  <td align="center" colspan="2" style="bold" ><b>AIE-PL System Development</a></b> 
 </tr>
 
 <tr>
