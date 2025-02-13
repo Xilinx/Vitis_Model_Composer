@@ -26,7 +26,7 @@ document.location=commandURI
 </html>
 <h2 id="introduction">Introduction</h2>
 <p>This example demonstrates a Digital Upconversion (DUC) algorithm implemented on AI Engine (AIE) devices.</p>
-<p>See also the <a href="matlab:XmcExampleApi.getExample('HDL_DUC')">DUC implemented on Programmable Logic</a>.</p>
+<p>See also the <a href="https://github.com/Xilinx/Vitis_Model_Composer/tree/2024.2/Examples/HDL/Digital_Filtering/README.md">DUC implemented on Programmable Logic</a>.</p>
 <h2 id="algorithm">Algorithm</h2>
 <p>The DUC design consists of multi-stage finite impulse rate (FIR) filters, a direct digital synthesizer (DDS) and a mixer. </p>
 <p><img src="./Images/duc_block_diagram.png" alt="" /> </p>
@@ -59,25 +59,52 @@ document.location=commandURI
 <p>To run cycle-approximate AIE simulation and display the calculated throughput, use the <strong>Analyze</strong> tab in the <strong>Vitis Model Composer Hub</strong> block.</p>
 <p><img src="./Images/throughput.png" alt="" /> </p>
 <h3 id="latency">Latency</h3>
-<p>The latency of the AI Engine design can be viewed in the Vitis Analyzer. Select the AI Engine's input and output (use <strong>Shift+Click</strong> to select multiple signals), right-click and select <strong>Compute Latency</strong>.</p>
+<p>The latency of the AI Engine design can be viewed in Vitis Model Composer. Select the AI Engine's input and output (use <strong>Shift+Click</strong> to select multiple signals), right-click and select <strong>Compute Latency</strong>.</p>
 <h4 id="buffer">Buffer</h4>
 <p><img src="./Images/latency_buffer.png" alt="" /></p>
 <h4 id="streaming">Streaming</h4>
 <p>Focusing on the Last Latency (indicating steady state operation of the DUC), the streaming implementation has lower latency than the buffer implementation.</p>
 <p><img src="./Images/latency_stream.png" alt="" /></p>
 <h3 id="resource-utilization">Resource Utilization</h3>
-<p>The buffer and streaming implementations differ in resource utilization. The differences are apparent in the graph view and resource utilization reports, which can be viewed in Vitis Analyzer. </p>
+<p>The buffer and streaming implementations differ in resource utilization. The differences are apparent in the graph view and resource utilization reports, which can be viewed in Vitis Analyzer. To open Vitis Analyzer from Vitis Model Composer, use the <strong>Open Vitis Analyzer</strong> button on the Analyze tab of the Vitis Model Composer Hub block.</p>
 <h4 id="buffer-1">Buffer</h4>
-<p>Each filter and the mixer are implemented on their own AI Engine kernel. This could be viewed as an inefficiency, given that some of the kernels have low runtime ratios and could be combined onto a single kernel. (View the runtime ratios on the <strong>Kernels</strong> tab in Vitis Analyzer.) You could specify lower runtime ratios for each kernel as AI Engine constraints, and this information would be used by the AI Engine compiler.</p>
-<p><img src="./Images/graph_buffer.png" alt="" /></p>
-<p><img src="./Images/kernels_buffer.png" alt="" />   </p>
-<p>This implementation of the DUC uses 5 AI Engine tiles.</p>
+<p>According to the Vitis Analyzer, the buffer implementation of the DUC uses 5 AI Engine tiles.</p>
 <p><img src="./Images/resource_buffer.png" alt="" /></p>
+<p>The <strong>Graph</strong> tab provides a graphical representation of the AI Engine kernels and how they are connected.</p>
+<p><img src="./Images/graph_buffer.png" alt="" /></p>
+<p>The <strong>Kernels</strong> subtab lists each kernel, including its runtime ratio and which AI Engine tile to which it is assigned.</p>
+<p><img src="./Images/kernels_buffer.png" alt="" />   </p>
+<p><em>Runtime ratio</em> is a parameter that describes how much of a tile's computational power that a kernel will use. A kernel with runtime ratio of 1.0 will use all of the tile's computational power, leaving no room for other kernels. To save space in the AI Engine array, you can combine kernels with low runtime ratios into a single AIE tile.</p>
+<p>In the kernel list above, <code>FIR_HB1</code> and <code>FIR_HB2</code> have low runtime ratios that together do not add up to 1.0. As a result, the AI Engine Compiler has placed both kernels onto the same tile (24,1). The runtime ratio of each kernel can be specified as a constraint to help the compiler place the design optimally. </p>
+<p>To specify the kernels' runtime ratio in Vitis Model Composer:</p>
+<ol>
+<li>Double-click on the <strong>FIR Interpolation</strong> block labeled <code>FIR_SRRC</code>.</li>
+</ol>
+<p><img src="./Images/step1.png" alt="" />  </p>
+<ol start="2">
+<li>On the Constraints tab, select <strong>Open Constraints Editor</strong>.</li>
+<li>If you are prompted to initialize the model, click <strong>Continue</strong>.</li>
+</ol>
+<p><img src="./Images/step3.png" alt="" /></p>
+<ol start="4">
+<li>From the list, select <code>filter.m_firKernels[0]</code> under <code>FIR SRRC</code>.</li>
+</ol>
+<p><img src="./Images/step4.png" alt="" /></p>
+<ol start="5">
+<li>Specify the runtime ratio in the box labeled <code>adf::runtime&lt;ratio&gt;</code>.</li>
+</ol>
+<p><img src="./Images/step5.png" alt="" /></p>
+<ol start="6">
+<li>Repeat this process for other filter kernels in the list, if desired.</li>
+<li>Click <strong>Apply</strong> and <strong>OK</strong> to close the Constraints Window.</li>
+</ol>
 <h4 id="streaming-1">Streaming</h4>
 <p>This implementation has 4 cascade stages on the 1st interpolation filter and 2 cascade stages on the 2nd filter.</p>
 <p><img src="./Images/graph_stream.png" alt="" /> </p>
 <p><img src="./Images/kernels_stream.png" alt="" /> </p>
-<p>This cascaded, streaming implementation of the DUC uses 13 AI Engine tiles.</p>
+<p>The number of cascade stages is specified on each filter block: </p>
+<p><img src="./Images/cascade_stages.png" alt="" /> </p>
+<p>This cascaded, streaming implementation of the DUC uses 13 AI Engine tiles. As mentioned above, the increased resource utilization comes with decreased latency.</p>
 <p><img src="./Images/resource_stream.png" alt="" /> </p>
 <h2 id="conclusion">Conclusion</h2>
 <p>The AI Engine DSP Library, accessible in Vitis Model Composer, can be used to quickly experiment with different architectures for various signal processing algorithms, including Digital Upconversion (DUC).</p>

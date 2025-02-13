@@ -64,7 +64,7 @@ To run cycle-approximate AIE simulation and display the calculated throughput, u
 
 ### Latency
 
-The latency of the AI Engine design can be viewed in the Vitis Analyzer. Select the AI Engine's input and output (use **Shift+Click** to select multiple signals), right-click and select **Compute Latency**.
+The latency of the AI Engine design can be viewed in Vitis Model Composer. Select the AI Engine's input and output (use **Shift+Click** to select multiple signals), right-click and select **Compute Latency**.
 
 #### Buffer
 
@@ -78,19 +78,47 @@ Focusing on the Last Latency (indicating steady state operation of the DUC), the
 
 ### Resource Utilization
 
-The buffer and streaming implementations differ in resource utilization. The differences are apparent in the graph view and resource utilization reports, which can be viewed in Vitis Analyzer. 
+The buffer and streaming implementations differ in resource utilization. The differences are apparent in the graph view and resource utilization reports, which can be viewed in Vitis Analyzer. To open Vitis Analyzer from Vitis Model Composer, use the **Open Vitis Analyzer** button on the Analyze tab of the Vitis Model Composer Hub block.
 
 #### Buffer
 
-Each filter and the mixer are implemented on their own AI Engine kernel. This could be viewed as an inefficiency, given that some of the kernels have low runtime ratios and could be combined onto a single kernel. (View the runtime ratios on the **Kernels** tab in Vitis Analyzer.) You could specify lower runtime ratios for each kernel as AI Engine constraints, and this information would be used by the AI Engine compiler.
+According to the Vitis Analyzer, the buffer implementation of the DUC uses 5 AI Engine tiles.
+
+![](./Images/resource_buffer.png)
+
+The **Graph** tab provides a graphical representation of the AI Engine kernels and how they are connected.
 
 ![](./Images/graph_buffer.png)
 
+The **Kernels** subtab lists each kernel, including its runtime ratio and which AI Engine tile to which it is assigned.
+
 ![](./Images/kernels_buffer.png)   
 
-This implementation of the DUC uses 5 AI Engine tiles.
+*Runtime ratio* is a parameter that describes how much of a tile's computational power that a kernel will use. A kernel with runtime ratio of 1.0 will use all of the tile's computational power, leaving no room for other kernels. To save space in the AI Engine array, you can combine kernels with low runtime ratios into a single AIE tile.
 
-![](./Images/resource_buffer.png)
+In the kernel list above, `FIR_HB1` and `FIR_HB2` have low runtime ratios that together do not add up to 1.0. As a result, the AI Engine Compiler has placed both kernels onto the same tile (24,1). The runtime ratio of each kernel can be specified as a constraint to help the compiler place the design optimally. 
+
+To specify the kernels' runtime ratio in Vitis Model Composer:
+
+1. Double-click on the **FIR Interpolation** block labeled `FIR_SRRC`.
+
+![](./Images/step1.png)  
+
+2. On the Constraints tab, select **Open Constraints Editor**.
+3. If you are prompted to initialize the model, click **Continue**.
+
+![](./Images/step3.png)
+
+4. From the list, select `filter.m_firKernels[0]` under `FIR SRRC`.
+
+![](./Images/step4.png)
+
+5. Specify the runtime ratio in the box labeled `adf::runtime<ratio>`.
+
+![](./Images/step5.png)
+
+6. Repeat this process for other filter kernels in the list, if desired.
+7. Click **Apply** and **OK** to close the Constraints Window.
 
 #### Streaming
 
@@ -100,7 +128,11 @@ This implementation has 4 cascade stages on the 1st interpolation filter and 2 c
 
 ![](./Images/kernels_stream.png) 
 
-This cascaded, streaming implementation of the DUC uses 13 AI Engine tiles.
+The number of cascade stages is specified on each filter block: 
+
+![](./Images/cascade_stages.png) 
+
+This cascaded, streaming implementation of the DUC uses 13 AI Engine tiles. As mentioned above, the increased resource utilization comes with decreased latency.
 
 ![](./Images/resource_stream.png) 
 
