@@ -138,26 +138,35 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <p>The model shows the partitioning of the design between the AI Engine and PL. The channelizer input enters the input permute HLS Kernel at the upper-left, then proceeds into the AI Engine for polyphase filter processing. The polyphase filter output is routed back to the PL for the output permute and cyclic shift operations. The cyclic shift output is routed back to the AI Engine for the DFT operation, from which the output exits the channelizer.</p>
 <p>Note the use of <strong>AIE to HLS</strong> and <strong>HLS to AIE</strong> blocks before and after the HLS kernels. The HLS kernels' inputs and outputs are 128 bits wide, so these blocks convert between a 4-element <code>cint16</code> vector (recognized by the AI Engine) and a single <code>uint128</code> value.</p>
 <h3 id="ai-engine-implementation">AI Engine Implementation</h3>
-<p>The polyphase filter and DFT implementation are implemented as separate AI Engine graphs. The graph code for each has been brought in to Vitis Model Composer using the <strong>AIE Graph</strong> block.</p>
+<p>The polyphase filter and DFT are implemented as separate AI Engine subsystems. Inside each subsystem, each kernel has been brought in to Vitis Model Composer using the <strong>AIE Class Kernel</strong> block.</p>
 <ol start="4">
 <li>Double-click on the <strong>AIE</strong> subsystem.</li>
 </ol>
 <p><img src="images/AI_Engine.png" alt="" /></p>
 <p>Each input and output stream has a 64-bit PLIO. This means that 2 <code>cint16</code> samples are transferred on each stream during each clock cycle. To achieve high throughput, the AI Engine design is implemented using a Super Sample Rate (SSR) parallel architecture. Refer to <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer">Polyphase Channelizer</a> in Vitis-Tutorials for further details on the parallel architecture.</p>
 <ol start="5">
-<li>Double-click on the <strong>m16<em>ssr8</em>filterbank_graph</strong> block.</li>
+<li>Double-click on the <strong>m16<em>ssr8</em>dft</strong> subsystem.</li>
 </ol>
-<p><img src="images/AIE_Graph_Function.png" alt="" /></p>
-<p>Note that each output has a Signal size of 4 <code>cint16</code> samples. This means that the kernel's output will be available to Simulink once 4 samples are available in the kernel's output buffer.</p>
+<p><img src="images/Subsystem_DFT.png" alt="" /></p>
+<p>Each <strong>AIE Class Kernel</strong> block represents a kernel that will execute on its own AI Engine tile. The design consists of a 4x4 array of tiles. Each tile performs two [1x2] x [2x4] operations over two cycles. Each row of tiles passes its computed outputs to the tile below in the same column using the cascade stream. For more details, refer to <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer#discrete-fourier-transform-design">Vitis-Tutorials</a>.</p>
 <ol start="6">
+<li>Double-click on the <strong>run_inputA</strong> block.</li>
+</ol>
+<p><img src="images/AIE_Class_Kernel_Function.png" alt="" /></p>
+<p>The <strong>Function Declaration</strong> indicates that this block executes the <code>run_input</code> function, with two stream inputs and one cascade output. </p>
+<p>The <strong>Signal size</strong> of the cascade output must be set by the user. Signal Size is a block mask property associated with each stream or cascade output of an imported AI Engine block. This property is used only in Simulink simulation and is not reflected in the generated code. This value is always set as samples and not bytes. For more information, see <a href="https://github.com/Xilinx/Vitis_Model_Composer/tree/2024.2/QuickGuides/Setting_Signal_Size">Setting Signal Size</a>.</p>
+<p>In this case, the <strong>Signal size</strong> parameter is set to 8 times the number of samples processed, reflecting the SSR=8 nature of the algorithm.</p>
+<ol start="7">
+<li>Click on the <strong>Kernel Class</strong> tab.</li>
+</ol>
+<p><img src="images/AIE_Class_Kernel_Kernel_Class.png" alt="" /></p>
+<p>The kernel has template parameters for the input data type, coefficient data type, and the total number of samples of the DFT. The filter coefficients are passed as parameters to the kernel class constructor. The coefficient values are stored in the MATLAB workspace variables <code>twidA0</code> and <code>twidA1</code>.</p>
+<ol start="8">
 <li>Click on the <strong>General</strong> tab.</li>
 </ol>
-<p><img src="images/AIE_Graph_General.png" alt="" /></p>
-<p>This tab provides the path to the AI Engine graph code for the polyphase channelizer's filter bank. Click the <img src="images/Edit.png" alt="" /> icon next to the path to view the graph source code.</p>
-<ol start="7">
-<li>Click <strong>Cancel</strong> to close the window without making changes.</li>
-</ol>
-<p>Optionally, you can double-click on the <strong>m16<em>ssr8</em>dft_graph</strong> block to observe that it is configured similarly to the filter bank.</p>
+<p><img src="images/AIE_Class_Kernel_General.png" alt="" /></p>
+<p>Here is where the kernel header and source code files, and the kernel function, are specified.</p>
+<p>Optionally, you can also double-click on the other kernels in the DFT to observe how they are configured. You can also double-click on the <strong>m16<em>ssr8</em>filterbank</strong> subsystem to observe its structure.</p>
 <h3 id="programmable-logic-pl-implementation">Programmable Logic (PL) Implementation</h3>
 <p>The PL portion of the polyphase channelizer design contains 3 IPs that perform the following functions:</p>
 <ul>
@@ -173,7 +182,7 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <li><p>Double-click on the <strong>m16<em>ssr8</em>permute<em>fb</em>i_wrapper</strong> block, which implements the Input Circular Buffer.</p></li>
 </ol>
 <p><img src="images/HLS_Kernel_Function.png" alt="" /></p>
-<p>Note that each output has a Signal size of 1 uint128 sample. As mentioned earlier, this corresponds to 4 cint16 samples. </p>
+<p>Note that each output has a Signal size of N uint128 sample. As mentioned earlier, this corresponds to N*4 cint16 samples. </p>
 <ol start="10">
 <li>Click on the <strong>General</strong> tab.</li>
 </ol>
@@ -205,18 +214,17 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <ol>
 <li><p>Set the Simulink simulation <strong>Stop Time</strong> to <code>1e-5</code>.</p></li>
 <li><p>On the top level of the model, double-click the <strong>Model Composer Hub</strong> block.</p></li>
-<li><p>Select the <strong>AIE</strong> subsystem and ensure that the settings are as follows, especially that <strong>Plot AIE Simulation Output</strong> is enabled. </p></li>
+<li><p>Select the <strong>AIE</strong> subsystem, then click on the <strong>Analyze</strong> tab. Ensure that the settings are as follows. </p></li>
 </ol>
 <p><img src="images/VMCHub1.png" alt="" /></p>
-<p>Also note the AIE Compiler command line option to specify the PL clock rate. This information is used by the <code>aiesimulator</code> when calculating timing.</p>
-<ol start="3">
-<li>Select the <strong>DUT</strong> subsystem and ensure that the settings are as follows:</li>
-</ol>
-<p><img src="images/VMCHub2.png" alt="" /></p>
 <ol start="4">
-<li>Click <strong>Generate</strong>.</li>
+<li>Click <strong>Analyze</strong>.</li>
 </ol>
-<p>After code generation, AIE simulation is performed. This is a cycle-approximate simulation that can be used to estimate throughput. The results are displayed in the Simulation Data Inspector. Note that the throughput on each of the 8 output streams is approximately 1250 MSPS. It takes 2 clock cycles for the 8 output streams to produce a 16-point DFT output. Therefore, the DFT updates at a rate of 625 MHz, for which the channelizer was designed. </p>
+<p>After code generation, AIE simulation is performed. This is a cycle-approximate simulation that can be used to estimate throughput. </p>
+<ol start="5">
+<li>When AIE simulation is complete, click <strong>View AIE Simulation output and throughput</strong>.</li>
+</ol>
+<p>The results are displayed in the Simulation Data Inspector. Note that the throughput on each of the 8 output streams is approximately 1250 MSPS. It takes 2 clock cycles for the 8 output streams to produce a 16-point DFT output. Therefore, the DFT updates at a rate of 625 MHz, for which the channelizer was designed. </p>
 <h2 id="imagesthroughputpng"><img src="images/Throughput.png" alt="" /></h2>
 <h2 id="conclusion">Conclusion</h2>
 <p>This example showcased the following capabilities of Vitis Model Composer for Versal development:</p>
