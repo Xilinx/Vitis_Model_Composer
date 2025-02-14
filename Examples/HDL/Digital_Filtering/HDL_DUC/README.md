@@ -32,7 +32,7 @@ In the reference design, the 4 filter stages are implemented with Simulink's **F
 
 ![](./Images/simulink_reference.png) 
 
-The **Gain** blocks between each stage control bit growth and ensure that the input to each filter is 32 bits.
+The **Gain** blocks between each stage control the range of the filter output and ensure that the next stage's filter will not saturate.
 
 ### PL DUC Design
 
@@ -40,12 +40,12 @@ The filters in the PL design are implemented using the FIR Compiler block from t
 
 ![](./Images/pl_model.png) 
 
-The **Shift** blocks between each stage control bit growth and ensure that the input to each filter is 17 bits.
+The **Shift** blocks accomplish what the **Gain** blocks did in the Simulink reference design; they control the range of the filter output and ensure that the next stage's filter will not saturate.
 
 The mixer is implemented using:
 
 * DDS Compiler block to implement a complex sinusoid.
-* DSP58 blocks to implement a complex multiply operation. 4 DSP58s are arranged in cascade to achieve high performance and close timing at 800 MHz.
+* DSP58 blocks to implement a complex multiply operation. DSP58 is the dedicated DSP element on Versal devices, containing evolved functionality over the DSP48 while maintaining backwards compatibility. In this design, 4 DSP58s are arranged in cascade to achieve high performance and close timing at 800 MHz.
 
 ![](./Images/mixer.png) 
 
@@ -71,7 +71,11 @@ Also note on the **Code Generation->Settings** tab that the design is configured
 
 ### Timing Closure
 
-To determine whether or not the design will meet timing, run Timing Analysis from the **Analyze** tab. After running Vivado Synthesis and Implementation, the **Timing Analyzer** window will display the post implementation critical paths of the design.
+To determine whether or not the design will meet timing, run Timing Analysis from the **Analyze** tab. 
+
+![](./Images/hub3.png) 
+
+After running Vivado Synthesis and Implementation, the **Timing Analyzer** window will display the post implementation critical paths of the design.
 
 ![](./Images/timing_analyzer.png) 
 
@@ -79,7 +83,11 @@ The analysis indicates the design meets timing at 800 MHz.
 
 ### Resource Utilization
 
-To determine the FPGA resources the design will use, run Resource Analysis from the **Analyze** tab. After running Vivado Synthesis and Implementation, the **Resource Analyzer** window will show the various resources (URAM, BRAM, DSP, LUT, registers) used by each component of the design.
+To determine the FPGA resources the design will use, run Resource Analysis from the **Analyze** tab. 
+
+![](./Images/hub4.png) 
+
+After running Vivado Synthesis and Implementation, the **Resource Analyzer** window will show the various resources (URAM, BRAM, DSP, LUT, registers) used by each component of the design.
 
 ![](./Images/resource_analyzer.png) 
 
