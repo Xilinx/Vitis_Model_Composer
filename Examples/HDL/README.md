@@ -61,6 +61,11 @@
  </tr>
  <tr>
  <td align="left">
+   <a href="./Digital_Filtering/HDL_DUC/README.md">Digital Upconverter (DUC)</a> 
+ </td>
+ <td> This example demonstrates a Digital Upconversion (DUC) algorithm implemented on Programmable Logic using AMD IP blocks. The DUC design consists of multi-stage finite impulse rate (FIR) filters, a direct digital synthesizer (DDS) and a mixer.</td>
+ <tr>
+ <td align="left">
    <a href="./Digital_Filtering/SSR_FIR/README.md">High speed SSR FIR</a> 
  </td>
  <td> This reference design can be used as a starting design point when efficient implementations of very high data rate (over 1 Gsps) Single Rate FIRs are required.</td>
