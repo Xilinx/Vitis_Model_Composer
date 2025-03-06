@@ -314,7 +314,7 @@ Max Error: 256
  
 `dd if=sd_card.img of=/dev/mmcblk0`
 
-13. Type `sync`
+13. Type `sync`.
 
 14. Now switch back to the 2nd terminal and type `exit` (It will exit from the xsdb).
 
@@ -322,7 +322,15 @@ Max Error: 256
 
 16. Now switch back to 1st terminal and type `connect com0`.
 
-17. Now go to the 2nd terminal and type `xsdb` and then type the below commands as shown in the figure below:
+17. Now go to the 2nd terminal and type `xsdb` and then type `conn`. 
+
+18. Run the below commands in a sequence as shown in the figure below:
+
+ ta 1
+ mwr -force 0xF1260200 0xE100
+ mrd -force 0xF1260200
+ after 2000
+ mwr -force 0xF126031C 0x8
 
 ![figure1](Images/hwtest6.PNG)
 
@@ -330,12 +338,12 @@ Max Error: 256
 
 19. Mount the memory location and then change the current directory by using the below commands.
 
-![figure1](Images/hwtest7.PNG)
-
-20. Type `ls` and run the executable file from the list as shown in the below image.
-
-![figure1](Images/hwtest8.PNG)
+`mount /dev/mmcblk0p1 /mnt`
  
+`cd /mnt/`
+
+20. Type `ls` and run the executable file from the list by using the command `./embedded_exec.sh`.
+
 21. It should print the test result as shown in the below image:
 
 ![figure1](Images/hwtest9.png)
