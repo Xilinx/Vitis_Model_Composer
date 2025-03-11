@@ -25,7 +25,7 @@ document.location=commandURI
               
 </html>
 <p>This example demonstrates a 2D architecture to implement large point transforms in the SSR &gt; 1 regime: specifically a 64K-pt IFFT @ 2 Gsps.</p>
-<p><strong><em>Version: Vitis Model Composer 2024.2</em></strong></p>
+<p><strong><em>Version: Vitis Model Composer 2025.1</em></strong></p>
 <h2 id="introduction">Introduction</h2>
 <p>The <a href="https://docs.xilinx.com/r/en-US/Vitis_Libraries/dsp/index.html">Vitis DSP Library</a> currently implements the Fast Fourier Transform (FFT) using a Stockham algorithm. This algorithm computes the transform using a pair of buffers rather than the more popular in-place Cooley-Tukey approach, and maps more efficiently to the vector/SIMD architecture of the AI Engine. This approach yields excellent results, particularly for <code>N &lt; 4096</code> where the processing and storage requirements may be serviced by a single tile. In higher performance cases where sampling rates exceed 1 Gsps (ie. the SSR &gt; 1 regime), this Stockham approach continues to be feasible but leads to an excessive use of tile resources. A more efficient approach is needed for these high throughput use cases. </p>
 <p>A 1D FFT may be implemented on the AI Engine array using a 2D FFT algorithm with higher efficiency overall. This alternative "divide &amp; conquer" approach provides a better solution on the AI Engine array since it is less reliant on "butterfly routing" and we can break large <code>N</code> point sizes into much smaller factors of size <code>sqrt(N)</code>. This results in a significant reduction in AI Engine tile memory and overall usage of fewer compute tiles. </p>
@@ -48,7 +48,7 @@ document.location=commandURI
 <p>[1]: <a href="https://docs.xilinx.com/r/en-US/Vitis_Libraries/dsp/index.html">Vitis DSP Library</a></p>
 <p>[2]: <a href="https://docs.xilinx.com/r/en-US/xapp1356-fft-ai-engine">XAPP1356 Block-by-Block Configurable Fast Fourier Transform Implementation on AI Engine</a></p>
 <hr />
-<p>Copyright (c) 2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 
 </div>
 <style type='text/css'>body {
