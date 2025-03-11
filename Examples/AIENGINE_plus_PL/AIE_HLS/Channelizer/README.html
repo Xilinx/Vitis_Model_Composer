@@ -24,7 +24,7 @@ document.location=commandURI
 <button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
               
 </html>
-<p><strong><em>Version: Vitis Model Composer 2024.2</em></strong></p>
+<p><strong><em>Version: Vitis Model Composer 2025.1</em></strong></p>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#introduction">Introduction</a></li>
@@ -123,50 +123,45 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <p>When this occurs, the model generates the desired number of active channels and positions them in randomly chosen carrier locations. Each signal is modeled as filtered Gaussian noise for simplicity. The model displays the impulse response of the prototype channelizer filter computed for the given system parameters in the top left plot. The bottom left plot shows this same filter in the frequency domain in red along with the actual signal to be extracted by the channelizer in blue. The top right plot shows the input spectrum to the channelizer along with the active carriers and their index labels. The bottom right plot shows the extracted channels at baseband in the time domain, where the blue signals are the channelizer inputs (delayed by the known group delay of the channelizer) and the red signals are the channelizer outputs.</p>
 <h2 id="simulink-model">Simulink Model</h2>
 <p>To aid in simulation and verification, the AI Engine graph code and HLS kernel code are brought into Vitis Model Composer, which enables functional simulation of the AI Engine and PL components together.</p>
-<p>The <code>aie</code> and <code>hls</code> folders contain separate Simulink models for evaluating and studying the operation of each AI Engine graph and HLS kernel in isolation. In particular, the <code>Channelizer_DFT_testbench</code> model can be used to observe the permutation on the input and output streams to and from the AI Engine DFT implementation.</p>
 <ol>
 <li><p>Open the Simulink model <code>Channelizer.slx</code>.</p></li>
 <li><p>Press <strong>Ctrl+D</strong> to update the model and display signal dimensions and data types.</p></li>
 </ol>
 <p><img src="images/Model.png" alt="" /></p>
-<p>The inputs and outputs of the channelizer are 16 bits wide with 15 bits of fractional precision. The floating-point channelizer inputs from the MATLAB workspace are scaled by 2^15 and converted to an <code>int16</code> data type. The channelizer outputs are scaled by 2^-15 to convert back to floating-point precision before being written to the MATLAB workspace.</p>
-<p>Note also that the inputs and outputs are 4 elements wide. This is because 128 bits of data (4 complex <code>int16</code> samples) can be transferred to and from the design on each stream and sample.</p>
+<p>The inputs and outputs of the channelizer are 16 bits wide with 15 bits of fractional precision. The floating-point channelizer inputs from the Simulink model are scaled by 2^15 and converted to an <code>int16</code> data type. The channelizer outputs are scaled by 2^-15 to convert back to floating-point precision before being plotted on the Simulink scopes.</p>
 <ol start="3">
 <li>Double-click on the <strong>DUT</strong> subsystem.</li>
 </ol>
 <p><img src="images/Channelizer.png" alt="" /></p>
-<p>The model shows the partitioning of the design between the AI Engine and PL. The channelizer input enters the input permute HLS Kernel at the upper-left, then proceeds into the AI Engine for polyphase filter processing. The polyphase filter output is routed back to the PL for the output permute and cyclic shift operations. The cyclic shift output is routed back to the AI Engine for the DFT operation, from which the output exits the channelizer.</p>
+<p>The model shows the partitioning of the design between the AI Engine and PL. The channelizer input enters the input permute HLS Kernel at the left, then proceeds into the AI Engine for polyphase filter processing. The polyphase filter output is routed back to the PL for the output permute and cyclic shift operations. The cyclic shift output is routed back to the AI Engine for the DFT operation, from which the output exits the channelizer.</p>
 <p>Note the use of <strong>AIE to HLS</strong> and <strong>HLS to AIE</strong> blocks before and after the HLS kernels. The HLS kernels' inputs and outputs are 128 bits wide, so these blocks convert between a 4-element <code>cint16</code> vector (recognized by the AI Engine) and a single <code>uint128</code> value.</p>
 <h3 id="ai-engine-implementation">AI Engine Implementation</h3>
 <p>The polyphase filter and DFT are implemented as separate AI Engine subsystems. Inside each subsystem, each kernel has been brought in to Vitis Model Composer using the <strong>AIE Class Kernel</strong> block.</p>
 <ol start="4">
-<li>Double-click on the <strong>AIE</strong> subsystem.</li>
-</ol>
-<p><img src="images/AI_Engine.png" alt="" /></p>
-<p>Each input and output stream has a 64-bit PLIO. This means that 2 <code>cint16</code> samples are transferred on each stream during each clock cycle. To achieve high throughput, the AI Engine design is implemented using a Super Sample Rate (SSR) parallel architecture. Refer to <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer">Polyphase Channelizer</a> in Vitis-Tutorials for further details on the parallel architecture.</p>
-<ol start="5">
-<li>Double-click on the <strong>m16<em>ssr8</em>dft</strong> subsystem.</li>
+<li>Double-click on the <strong>aie_dft</strong> subsystem.</li>
 </ol>
 <p><img src="images/Subsystem_DFT.png" alt="" /></p>
-<p>Each <strong>AIE Class Kernel</strong> block represents a kernel that will execute on its own AI Engine tile. The design consists of a 4x4 array of tiles. Each tile performs two [1x2] x [2x4] operations over two cycles. Each row of tiles passes its computed outputs to the tile below in the same column using the cascade stream. For more details, refer to <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer#discrete-fourier-transform-design">Vitis-Tutorials</a>.</p>
-<ol start="6">
+<p>Each input and output stream has a 64-bit PLIO. This means that 2 <code>cint16</code> samples are transferred on each stream during each clock cycle. To achieve high throughput, the AI Engine design is implemented using a Super Sample Rate (SSR) parallel architecture. </p>
+<p>Each <strong>AIE Class Kernel</strong> block represents a kernel that will execute on its own AI Engine tile. The design consists of a 4x4 array of tiles. Each tile performs two [1x2] x [2x4] operations over two cycles. Each row of tiles passes its computed outputs to the tile below in the same column using the cascade stream.</p>
+<p>Refer to <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer">Polyphase Channelizer</a> in Vitis-Tutorials for further details on the parallel architecture.</p>
+<ol start="5">
 <li>Double-click on the <strong>run_inputA</strong> block.</li>
 </ol>
 <p><img src="images/AIE_Class_Kernel_Function.png" alt="" /></p>
 <p>The <strong>Function Declaration</strong> indicates that this block executes the <code>run_input</code> function, with two stream inputs and one cascade output. </p>
 <p>The <strong>Signal size</strong> of the cascade output must be set by the user. Signal Size is a block mask property associated with each stream or cascade output of an imported AI Engine block. This property is used only in Simulink simulation and is not reflected in the generated code. This value is always set as samples and not bytes. For more information, see <a href="https://github.com/Xilinx/Vitis_Model_Composer/tree/2024.2/QuickGuides/Setting_Signal_Size">Setting Signal Size</a>.</p>
 <p>In this case, the <strong>Signal size</strong> parameter is set to 8 times the number of samples processed, reflecting the SSR=8 nature of the algorithm.</p>
-<ol start="7">
+<ol start="6">
 <li>Click on the <strong>Kernel Class</strong> tab.</li>
 </ol>
 <p><img src="images/AIE_Class_Kernel_Kernel_Class.png" alt="" /></p>
 <p>The kernel has template parameters for the input data type, coefficient data type, and the total number of samples of the DFT. The filter coefficients are passed as parameters to the kernel class constructor. The coefficient values are stored in the MATLAB workspace variables <code>twidA0</code> and <code>twidA1</code>.</p>
-<ol start="8">
+<ol start="7">
 <li>Click on the <strong>General</strong> tab.</li>
 </ol>
 <p><img src="images/AIE_Class_Kernel_General.png" alt="" /></p>
 <p>Here is where the kernel header and source code files, and the kernel function, are specified.</p>
-<p>Optionally, you can also double-click on the other kernels in the DFT to observe how they are configured. You can also double-click on the <strong>m16<em>ssr8</em>filterbank</strong> subsystem to observe its structure.</p>
+<p>Optionally, you can also double-click on the other kernels in the DFT to observe how they are configured. You can also double-click on the <strong>aie_filterbank</strong> subsystem to observe its structure.</p>
 <h3 id="programmable-logic-pl-implementation">Programmable Logic (PL) Implementation</h3>
 <p>The PL portion of the polyphase channelizer design contains 3 IPs that perform the following functions:</p>
 <ul>
@@ -214,7 +209,7 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <ol>
 <li><p>Set the Simulink simulation <strong>Stop Time</strong> to <code>1e-5</code>.</p></li>
 <li><p>On the top level of the model, double-click the <strong>Model Composer Hub</strong> block.</p></li>
-<li><p>Select the <strong>AIE</strong> subsystem, then click on the <strong>Analyze</strong> tab. Ensure that the settings are as follows. </p></li>
+<li><p>Select the <strong>aie_combined</strong> subsystem, then click on the <strong>Analyze</strong> tab. Ensure that the settings are as follows. </p></li>
 </ol>
 <p><img src="images/VMCHub1.png" alt="" /></p>
 <ol start="4">
@@ -238,7 +233,7 @@ gate arrays (FPGAs). This example implements a high-speed channelizer design usi
 <h2 id="references">References</h2>
 <p>[<a href="https://ieeexplore.ieee.org/document/1193158" title="Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications, F.J. Harris et. al.">1</a>] F.J. Harris et. al., "<a href="https://ieeexplore.ieee.org/document/1193158">Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications</a>", IEEE Transactions on Microwave Theory and Techniques, Vol. 51, No. 4, April 2003.</p>
 <hr />
-<p>Copyright (c) 2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>
