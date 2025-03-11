@@ -7,7 +7,7 @@
  </tr>
 </table>
 
-# Lab 6: Hardware Validation of Versal Adaptive SoC Design
+# Hardware Validation of Versal Adaptive SoC Design
 
 This lab shows how to use Vitis Model Composer to perform validation of an AI Engine design running on Versal Adaptive SoC hardware.
 
@@ -37,9 +37,9 @@ This lab has the following steps:
 
 ## Step 1: Configure Hardware Validation Flow
 
-1. Run the ***setupLab6*** script to initialize a working directory.
+1. Run the ***setupLab*** script to initialize a working directory.
 
-2. Open the model ``Lab6_Part1_Start.slx``.
+2. Open the model ``Part1_Start.slx``.
 
 3. At the top level of the model, double-click the Model Composer Hub block.
 

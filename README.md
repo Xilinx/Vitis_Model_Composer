@@ -16,7 +16,7 @@ a block diagram environment for multidomain simulation and model-based design.
 
 
 # What's new in 2024.2?
-* Export AI Engine and PL subsystems as a [Vitis Subsystem (VSS)](./Tutorials/AIE-PL/Export_to_Vitis).
+* Export AI Engine and PL subsystems as a [Vitis Subsystem (VSS)](./Tutorials/Hardware/Export_to_Vitis).
 * The [Filtering in Frequency Domain](./Examples/AIENGINE/Filtering_in_frequency_domain) example shows how to increase AI Engine throughput using different techniques.
 * Working with both AI Engines and PL? See the [tutorials](./Tutorials/AIE-PL/README.md) showing how to connect the block libraries in Vitis Model Composer.
 
