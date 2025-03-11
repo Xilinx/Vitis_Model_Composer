@@ -219,7 +219,7 @@ This target creates an `sd_card.img` that can be loaded onto a board, in this ca
 The `Makefile` contained in this folder invokes other Makefiles in the project to build each component, then link and package the overall platform.
 
 >**NOTE:** To build the Vitis project, make sure you have completed the following steps:
-> 1. [Configure your environment](https://docs.amd.com/r/en-US/ug1393-vitis-application-acceleration/Setting-Up-the-Vitis-Environment) to run Vitis.
+> 1. [Configure your environment](https://docs.amd.com/r/en-US/ug1742-vitis-release-notes/Setting-Up-the-Environment-to-Run-the-Vitis-Software-Platform) to run Vitis.
 > 2. Set the `PLATFORM_REPO_PATHS` environment variable to point to the `base_platforms` folder inside the Vitis installation directory.
 > 3. Download and install the [Common Images for Embedded Vitis Platforms](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2024-2.html).
 > 4. Set the environment variable `COMMON_IMAGE_VERSAL` to the full path where you have downloaded the common images.
