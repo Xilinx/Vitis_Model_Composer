@@ -1,6 +1,6 @@
 # Polyphase Channelizer
 
-***Version: Vitis Model Composer 2024.2***
+***Version: Vitis Model Composer 2025.1***
 
 ## Table of Contents
 
@@ -81,23 +81,19 @@ When this occurs, the model generates the desired number of active channels and 
 
 To aid in simulation and verification, the AI Engine graph code and HLS kernel code are brought into Vitis Model Composer, which enables functional simulation of the AI Engine and PL components together.
 
-The `aie` and `hls` folders contain separate Simulink models for evaluating and studying the operation of each AI Engine graph and HLS kernel in isolation. In particular, the `Channelizer_DFT_testbench` model can be used to observe the permutation on the input and output streams to and from the AI Engine DFT implementation.
-
 1. Open the Simulink model `Channelizer.slx`.
 
 2. Press **Ctrl+D** to update the model and display signal dimensions and data types.
 
 ![](images/Model.png)
 
-The inputs and outputs of the channelizer are 16 bits wide with 15 bits of fractional precision. The floating-point channelizer inputs from the MATLAB workspace are scaled by 2^15 and converted to an `int16` data type. The channelizer outputs are scaled by 2^-15 to convert back to floating-point precision before being written to the MATLAB workspace.
-
-Note also that the inputs and outputs are 4 elements wide. This is because 128 bits of data (4 complex `int16` samples) can be transferred to and from the design on each stream and sample.
+The inputs and outputs of the channelizer are 16 bits wide with 15 bits of fractional precision. The floating-point channelizer inputs from the Simulink model are scaled by 2^15 and converted to an `int16` data type. The channelizer outputs are scaled by 2^-15 to convert back to floating-point precision before being plotted on the Simulink scopes.
 
 3. Double-click on the **DUT** subsystem.
 
 ![](images/Channelizer.png)
 
-The model shows the partitioning of the design between the AI Engine and PL. The channelizer input enters the input permute HLS Kernel at the upper-left, then proceeds into the AI Engine for polyphase filter processing. The polyphase filter output is routed back to the PL for the output permute and cyclic shift operations. The cyclic shift output is routed back to the AI Engine for the DFT operation, from which the output exits the channelizer.
+The model shows the partitioning of the design between the AI Engine and PL. The channelizer input enters the input permute HLS Kernel at the left, then proceeds into the AI Engine for polyphase filter processing. The polyphase filter output is routed back to the PL for the output permute and cyclic shift operations. The cyclic shift output is routed back to the AI Engine for the DFT operation, from which the output exits the channelizer.
 
 Note the use of **AIE to HLS** and **HLS to AIE** blocks before and after the HLS kernels. The HLS kernels' inputs and outputs are 128 bits wide, so these blocks convert between a 4-element `cint16` vector (recognized by the AI Engine) and a single `uint128` value.
 
@@ -105,19 +101,17 @@ Note the use of **AIE to HLS** and **HLS to AIE** blocks before and after the HL
 
 The polyphase filter and DFT are implemented as separate AI Engine subsystems. Inside each subsystem, each kernel has been brought in to Vitis Model Composer using the **AIE Class Kernel** block.
 
-4. Double-click on the **AIE** subsystem.
-
-![](images/AI_Engine.png)
-
-Each input and output stream has a 64-bit PLIO. This means that 2 `cint16` samples are transferred on each stream during each clock cycle. To achieve high throughput, the AI Engine design is implemented using a Super Sample Rate (SSR) parallel architecture. Refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in Vitis-Tutorials for further details on the parallel architecture.
-
-5. Double-click on the **m16_ssr8_dft** subsystem.
+4. Double-click on the **aie_dft** subsystem.
 
 ![](images/Subsystem_DFT.png)
 
-Each **AIE Class Kernel** block represents a kernel that will execute on its own AI Engine tile. The design consists of a 4x4 array of tiles. Each tile performs two [1x2] x [2x4] operations over two cycles. Each row of tiles passes its computed outputs to the tile below in the same column using the cascade stream. For more details, refer to [Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer#discrete-fourier-transform-design).
+Each input and output stream has a 64-bit PLIO. This means that 2 `cint16` samples are transferred on each stream during each clock cycle. To achieve high throughput, the AI Engine design is implemented using a Super Sample Rate (SSR) parallel architecture. 
 
-6. Double-click on the **run_inputA** block.
+Each **AIE Class Kernel** block represents a kernel that will execute on its own AI Engine tile. The design consists of a 4x4 array of tiles. Each tile performs two [1x2] x [2x4] operations over two cycles. Each row of tiles passes its computed outputs to the tile below in the same column using the cascade stream.
+
+Refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in Vitis-Tutorials for further details on the parallel architecture.
+
+5. Double-click on the **run_inputA** block.
    
 ![](images/AIE_Class_Kernel_Function.png)
 
@@ -127,19 +121,19 @@ The **Signal size** of the cascade output must be set by the user. Signal Size i
 
 In this case, the **Signal size** parameter is set to 8 times the number of samples processed, reflecting the SSR=8 nature of the algorithm.
 
-7. Click on the **Kernel Class** tab.
+6. Click on the **Kernel Class** tab.
 
 ![](images/AIE_Class_Kernel_Kernel_Class.png)
 
 The kernel has template parameters for the input data type, coefficient data type, and the total number of samples of the DFT. The filter coefficients are passed as parameters to the kernel class constructor. The coefficient values are stored in the MATLAB workspace variables `twidA0` and `twidA1`.
 
-8. Click on the **General** tab.
+7. Click on the **General** tab.
 
 ![](images/AIE_Class_Kernel_General.png)
 
 Here is where the kernel header and source code files, and the kernel function, are specified.
 
-Optionally, you can also double-click on the other kernels in the DFT to observe how they are configured. You can also double-click on the **m16_ssr8_filterbank** subsystem to observe its structure.
+Optionally, you can also double-click on the other kernels in the DFT to observe how they are configured. You can also double-click on the **aie_filterbank** subsystem to observe its structure.
 
 ### Programmable Logic (PL) Implementation
 
@@ -202,9 +196,9 @@ Vitis Model Composer can call `aiesimulator` to simulate and plot the estimated 
 
 1. Set the Simulink simulation **Stop Time** to `1e-5`.
 
-1. On the top level of the model, double-click the **Model Composer Hub** block.
+2. On the top level of the model, double-click the **Model Composer Hub** block.
 
-2. Select the **AIE** subsystem, then click on the **Analyze** tab. Ensure that the settings are as follows. 
+3. Select the **aie_combined** subsystem, then click on the **Analyze** tab. Ensure that the settings are as follows. 
 
 ![](images/VMCHub1.png)
 
@@ -237,7 +231,7 @@ This example showcased the following capabilities of Vitis Model Composer for Ve
 
 
 ------------
-Copyright (c) 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

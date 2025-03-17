@@ -2,7 +2,7 @@
 
 This example demonstrates a 2D architecture to implement large point transforms in the SSR > 1 regime: specifically a 64K-pt IFFT @ 2 Gsps.
 
-***Version: Vitis Model Composer 2024.2***
+***Version: Vitis Model Composer 2025.1***
 
 ## Introduction
 
@@ -48,4 +48,4 @@ When the model runs, the scope displays the real and imaginary output of the IFF
 
 ------------
 
-Copyright (c) 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.
