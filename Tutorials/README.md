@@ -70,10 +70,10 @@ Using a Vitis Model Composer HDL Design with a Zynq-7000 SoC
 <a href="./HDL_Library/Lab7/README.md">Lab 7</a>
 </td>
 <td>
-Implement Filters using FIR Compiler Block <img src="../Images/new.PNG" width="50">
+Implement Filters using FIR Compiler Block
 </td>
- </tr>
- 
+</tr>
+
 <tr>
   <td align="center" colspan="2" style="bold" ><b>HLS Library</a></b>
 </tr>
@@ -164,16 +164,7 @@ View AI Engine Designs in Vitis Analyzer
 </tr> 
  
 <tr>
-<td>
-<a href="./AIEngine_Library/06-Hardware_Validation/README.md">Lab 6</a>
-</td>
-<td>
-Hardware Validation of Versal Adaptive SoC Design
-</td>
-</tr> 
-
-<tr>
-  <td align="center" colspan="2" style="bold" ><b>AIE-PL System Development</a></b> 
+  <td align="center" colspan="2" style="bold" ><b>AIE-PL System Development</a></b> <img src="../Images/new.PNG" width="50">
 </tr>
 
 <tr>
@@ -195,19 +186,33 @@ Connecting AI Engine and HLS Subsystems
 </tr>
 
 <tr>
+  <td align="center" colspan="2" style="bold" ><b>Running On Hardware</a></b> 
+</tr>
+
+<tr>
 <td>
-<a href="./AIE-PL/Export_to_Vitis/README.md">Lab 3</a>
+<a href="./Hardware/Hardware_Validation/README.md">Lab 1</a>
+</td>
+<td>
+Hardware Validation of Versal Adaptive SoC Design
+</td>
+</tr> 
+
+<tr>
+<td>
+<a href="./Hardware/Export_to_Vitis/README.md">Lab 2</a>
 </td>
 <td>
 Export Design from Vitis Model Composer to Vitis <img src="../Images/new.PNG" width="50">
 </td>
-</tr>  
+</tr>
 
 </table>
 
 --------------
 Copyright 2022 Xilinx
-Copyright 2023-2024 Advanced Micro Devices, Inc.
+
+Copyright 2023-2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

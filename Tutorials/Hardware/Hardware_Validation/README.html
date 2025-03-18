@@ -31,7 +31,7 @@ document.location=commandURI
 </td>
 </tr>
 </table>
-<h1 id="lab-6-hardware-validation-of-versal-adaptive-soc-design">Lab 6: Hardware Validation of Versal Adaptive SoC Design</h1>
+<h1 id="hardware-validation-of-versal-adaptive-soc-design">Hardware Validation of Versal Adaptive SoC Design</h1>
 <p>This lab shows how to use Vitis Model Composer to perform validation of an AI Engine design running on Versal Adaptive SoC hardware.</p>
 <p>In Lab 5, we used cycle-approximate AI Engine simulation to simulate the behavior of the AIE kernels. This gave us confidence that the algorithm is functionally correct, but did not explore how the AI Engine interacts with the Programmable Logic (PL) and Processing System (PS). </p>
 <p>Hardware validation is an important next step to test the Versal Adaptive SoC design. Vitis Model Composer can be used to create a hardware image for either a physical board or a hardware emulation flow that simulates the full behavior of the Versal Adaptive SoC including AI Engine, PL and PS. </p>
@@ -55,8 +55,8 @@ information is communicated between Vitis Model Composer and the hardware.</p>
 <p>:warning: Steps 1 and 2 of this lab can be completed without hardware. Step 3 requires a Versal board such as the <a href="https://www.xilinx.com/products/boards-and-kits/vck190.html">VCK190</a>.</p>
 <h2 id="step-1-configure-hardware-validation-flow">Step 1: Configure Hardware Validation Flow</h2>
 <ol>
-<li><p>Run the <strong><em>setupLab6</em></strong> script to initialize a working directory.</p></li>
-<li><p>Open the model <code>Lab6_Part1_Start.slx</code>.</p></li>
+<li><p>Run the <strong><em>setupLab</em></strong> script to initialize a working directory.</p></li>
+<li><p>Open the model <code>Part1_Start.slx</code>.</p></li>
 <li><p>At the top level of the model, double-click the Model Composer Hub block.</p></li>
 <li><p>Click the <strong>Hardware Selection</strong> tab.</p></li>
 </ol>
