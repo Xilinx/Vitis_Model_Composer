@@ -1,7 +1,7 @@
 # Single Stream SSR FIR with PL
 This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we consider latencies within the kernels, which are implemented into the FIFO's included in AXI-Stream Interconnect(PL).
 
-For more details on the design of the FIR kernels click [here](https://github.com/Xilinx/Vitis-Tutorials/blob/master/AI_Engine_Development/Design_Tutorials/02-super_sampling_rate_fir/SingleStreamSSR). 
+For more details on the design of the FIR kernels click [here](https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/02-super_sampling_rate_fir). 
 
 
 <img src="images/SingleStreamSSR_withPL.PNG" alt="Single Stream SSR with PL" width="800">
