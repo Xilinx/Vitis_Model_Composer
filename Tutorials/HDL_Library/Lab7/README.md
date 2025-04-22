@@ -22,7 +22,7 @@ You can view the directory contents in the MATLAB® Current Folder browser, or t
 
 3. Open the Lab7 design using one of the following:
     - At the MATLAB command prompt, type `open Lab7_1.slx`
-    - Double-click **Lab6_1.slx** in the Current Folder browser.
+    - Double-click **Lab7_1.slx** in the Current Folder browser.
 
 `Lab7_1` opens as shown in figure below:
 
