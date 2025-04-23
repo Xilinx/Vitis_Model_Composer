@@ -14,5 +14,5 @@ For more details on how to build this design and some of the theoretical aspects
 
 ------------
 
-Copyright (c) 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 

@@ -38,7 +38,7 @@ The images below show the flow diagram of the DSPFP32 and the supported latency 
 
 ![](images/det3x3.png)
 ------------
-Copyright 2023 Advanced Micro Devices, Inc.
+Copyright (c) 2023 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

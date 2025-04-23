@@ -18,7 +18,8 @@ The picture below depicts the output of a Dynamic Point FFT block with a 128 poi
 ![](images/output.png)
 
 --------------
-Copyright 2022 Xilinx
+
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

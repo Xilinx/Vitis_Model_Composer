@@ -76,8 +76,8 @@ Once your board is set up, program the device as follows:
     
 # How to Install Hardware Server
 
-Xilinx Unified installer allows you to install multiple Xilinx tools using the single installer. Follow the steps below to install Hardware server in windows machine. 
-1. Download the Xilinx Unified installer package and run the ```xsetup.exe``` file.
+AMD Unified installer allows you to install multiple AMD tools using the single installer. Follow the steps below to install Hardware server in windows machine. 
+1. Download the AMD Unified installer package and run the ```xsetup.exe``` file.
 2. In the Installer window, select 'Hardware Server' from the list of products.
 
    ![](images/installer.PNG)
@@ -86,7 +86,8 @@ Xilinx Unified installer allows you to install multiple Xilinx tools using the s
    
 
 --------------
-Copyright 2020 Xilinx
+
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

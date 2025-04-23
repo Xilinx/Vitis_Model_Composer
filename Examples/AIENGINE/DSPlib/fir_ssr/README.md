@@ -32,7 +32,8 @@ Each stream input to the AI Engine FIR block has a throughput of close to 1 GSPS
 * [This](../../../AIENGINE_plus_PL/AIE_HDL/SingleStreamSSR_FIR_withPL/README.md) is an example of an AI Engine/Programmable Logic heterogeneous design where the AI Engine is also built from scratch instead of using the block from the AMD AI Engine DSP library along with HDL blocks feeding the AI Engine array and receiving the filtered data back from the array.
 
 ------------
-Copyright 2022 Xilinx
+
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

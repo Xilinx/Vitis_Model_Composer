@@ -358,7 +358,7 @@ This design has an input with 50MHz sample rate. The expected output sample rate
 In this lab, you learned how to configure the FIR Compiler block and Simulink System Period to implement single-rate and multi-rate FIR filters.
 
 --------------
-Copyright 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

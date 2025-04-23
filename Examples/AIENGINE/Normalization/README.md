@@ -65,4 +65,4 @@ This shared buffer has 3 write (input) ports and 5 read (output) ports. The tili
 The mean and variance of both the input and output signal are displayed. Note that the mean of the output signal is less than 1, and the variance of the output signal is 1. This is the result of the normalization algorithm.
 
 ------------
-Copyright (c) 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.

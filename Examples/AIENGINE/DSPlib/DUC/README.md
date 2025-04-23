@@ -141,4 +141,4 @@ This cascaded, streaming implementation of the DUC uses 13 AI Engine tiles. As m
 The AI Engine DSP Library, accessible in Vitis Model Composer, can be used to quickly experiment with different architectures for various signal processing algorithms, including Digital Upconversion (DUC).
 
 ------------
-Copyright (c) 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.

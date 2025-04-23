@@ -8,5 +8,5 @@ For more details on the design of the FIR kernels click [here](https://github.co
 
 ------------
 
-Copyright (c) 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 

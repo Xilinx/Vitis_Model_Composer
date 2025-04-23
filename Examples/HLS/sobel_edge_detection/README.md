@@ -1,7 +1,7 @@
 # Sobel Edge Detection
-This example demonestrates an implemntation of sobel edge detection algorithm in Xilinx Model Composer.
+This example demonestrates an implementation of sobel edge detection algorithm in Vitis Model Composer.
 
-This example uses the following Mathworks toolboxes.  
+This example uses the following MathWorks toolboxes.  
 * [MATLAB Computer Vision System Toolbox](https://www.mathworks.com/products/computer-vision.html)  
 * [DSP System Toolbox](https://www.mathworks.com/products/dsp-system.html)
 
@@ -12,7 +12,7 @@ Sobel Edge Detection algorithm calculates the gradient of the image intensity in
 
 
 ------------
-Copyright 2020 Xilinx
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

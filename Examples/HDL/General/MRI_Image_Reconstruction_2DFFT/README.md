@@ -27,7 +27,8 @@ Buffer the incoming data in an rectangular array with P rows and Q columns. For 
 
 ![](Images/2DFFT_CornerTurn.jpg)
 ------------
-Copyright 2020 Xilinx
+
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

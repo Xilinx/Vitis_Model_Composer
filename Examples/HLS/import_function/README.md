@@ -3,7 +3,7 @@ This is a set of simple examples to demonstrate importing C/C++ functions into M
 
 ## Importing C/C++ code as custom blocks
 
-Model Composer lets you import C or C++ code to create new blocks that can be added to a library for use in models along side other Xilinx Model Composer blocks. This feature lets you build custom block libraries for use in Model Composer. Xilinx Model Composer provides the xmcImportFunction command, for use from the MATLAB command line, to let you specify functions defined in source and header files to import into Model Composer and create Model Composer blocks or block library
+Model Composer lets you import C or C++ code to create new blocks that can be added to a library for use in models along side other Vitis Model Composer blocks. This feature lets you build custom block libraries for use in Model Composer. Vitis Model Composer provides the xmcImportFunction command, for use from the MATLAB command line, to let you specify functions defined in source and header files to import into Model Composer and create Model Composer blocks or block library
 
 ## How to use this example?
 
@@ -19,7 +19,8 @@ Each category has multiple simple examples to help you quickly familiarize yours
 ![](Images/import_function.png)
 
 ------------
-Copyright 2020 Xilinx
+
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

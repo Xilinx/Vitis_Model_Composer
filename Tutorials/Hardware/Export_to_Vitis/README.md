@@ -272,5 +272,5 @@ Max Error: 256
 
 ---
 
-&copy; Copyright 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 

@@ -173,7 +173,7 @@ You can also export any signal to the MATLAB workspace for more complex analysis
 
 5. Stop the simulation if it is still running.
 6. Click on the canvas and type ``variable size``.
-7. Select **Variable Size Signal to Workspace** from the **Xilinx Toolbox --> AI Engine --> Tools** library.
+7. Select **Variable Size Signal to Workspace** from the **AMD Toolbox --> AI Engine --> Tools** library.
 8. Connect the block to the output of the FIR Symmetric filter.
 
 ![missing image](Images/Image_015.png)
@@ -200,7 +200,7 @@ AI Engine simulations within Simulink are bit-exact but do not provide timing in
 In the next lab, you will see how to bring in custom AI Engine kernel or graph code and simulate it with Vitis Model Composer.
 
 ---
-&copy; Copyright 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -216,4 +216,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-<p align="center"><sup>XD058 | &copy; Copyright 2023 Advanced Micro Devices, Inc.</sup></p>

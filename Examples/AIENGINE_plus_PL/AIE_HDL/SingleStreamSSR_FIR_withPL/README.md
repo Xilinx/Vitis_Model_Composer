@@ -7,8 +7,8 @@ For more details on the design of the FIR kernels click [here](https://github.co
 <img src="images/SingleStreamSSR_withPL.PNG" alt="Single Stream SSR with PL" width="800">
 
 ------------
-Copyright 2020-2022 Xilinx
-Copyright 2022-2024 Advanced Micro Devices, Inc.
+
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

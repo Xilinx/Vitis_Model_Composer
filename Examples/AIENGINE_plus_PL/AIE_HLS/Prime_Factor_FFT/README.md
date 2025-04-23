@@ -57,4 +57,4 @@ When the model runs, the scope displays the output of the FFT. The two tones and
 
 ------------
 
-Copyright (c) 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.
