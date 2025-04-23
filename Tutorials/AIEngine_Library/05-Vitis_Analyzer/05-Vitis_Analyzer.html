@@ -6,7 +6,7 @@
 </head>
 <body>
 <table class="sphinxhide" width="100%">
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:bold">Open Lab Directory</a>
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
 
 <script>
 var a = document.getElementById('openlink');
@@ -126,7 +126,7 @@ adf::plio_64_bits,
 </ol>
 <p><img src="Images/Image12.png" alt="missing image" /></p>
 <p>This limits the throughput calculation to the area between the two cursors. In the figure above, the estimated throughput is 157 MSPS (your displayed value may vary slightly). The cascading of the FIR filter algorithm across multiple AI Engine kernels has increased our throughput. In the next step, we will see how this change has affected how the algorithm is implemented in the AI Engine.</p>
-<p>By combining multiple techniques: high throughput across the AIE-PL boundary, cascading the algorithm across multiple AI Engine tiles and Super Sample Rate (SSR) parallelism, it is possible to implement designs well in excess of 1 GSPS. One example is an <a href="https://github.com/Xilinx/Vitis_Model_Composer/blob/HEAD/Examples/AIENGINE/DSPlib/fir_ssr/README.md">AI Engine SSR FIR</a> that achieves 4 GSPS.</p>
+<p>By combining multiple techniques: high throughput across the AIE-PL boundary, cascading the algorithm across multiple AI Engine tiles and Super Sample Rate (SSR) parallelism, it is possible to implement designs well in excess of 1 GSPS. One example is an <a href="matlab:XmcExampleApi.getExample('fir_ssr')">AI Engine SSR FIR</a> that achieves 4 GSPS.</p>
 <h2 id="step-3-use-vitis-analyzer-to-calculate-latency">Step 3: Use Vitis Analyzer to Calculate Latency</h2>
 <p>In addition to throughput, a key design metric for signal processing systems is latency. The AI Engine simulator can be configured to capture detailed timing information for display in Vitis Analyzer, which can be used to calculate latency.</p>
 <ol>

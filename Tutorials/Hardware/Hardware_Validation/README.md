@@ -59,7 +59,7 @@ This lab has the following steps:
 
 This is where you will specify the path to a *.xpfm* file that defines your [platform](https://docs.xilinx.com/r/en-US/ug1273-versal-acap-design/Platform-Based-Design-Flows). In this lab, we will use a [Versal base platform](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html) for the [VCK190](https://www.xilinx.com/products/boards-and-kits/vck190.html) that has been provided with the Vitis installation.
 
-9. Navigate to the folder where the Versal base platforms are installed. These are located within the Vitis tools installation, for example: **/opt/Xilinx/Vitis/2024.2/base_platforms**.
+9. Navigate to the folder where the Versal base platforms are installed. These are located within the Vitis tools installation, for example: **/opt/Xilinx/Vitis/2025.1/base_platforms**.
 
 ![missing image](Images/Image03.png)
 

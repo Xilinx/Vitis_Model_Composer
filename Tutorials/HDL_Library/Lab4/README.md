@@ -23,7 +23,7 @@ This lab has three primary parts:
 In this step you will review a design in which different parts of the design operate at different data rates and partition the design into subsystems to be implemented in different clock domains.
 
 1. Invoke Vitis Model Composer:
-    - On Windows systems select **Windows > AMD Design Tools > Vitis Model Composer 2024.2.**
+    - On Windows systems select **Windows > AMD Design Tools > Vitis Model Composer 2025.1.**
     - On Linux systems, type `model_composer` at the command prompt.
 
 2. Navigate to the Lab4 folder: `\HDL_Library\Lab4.`
