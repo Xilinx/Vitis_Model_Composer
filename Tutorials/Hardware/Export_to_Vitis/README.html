@@ -1,0 +1,449 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="export-design-from-vitis-model-composer-to-vitis">Export Design from Vitis Model Composer to Vitis</h1>
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+
+<script>
+var a = document.getElementById('openlink');
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
+
+commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
+
+a.href = commandURI;
+</script>
+<p>This tutorial will show how to export a heterogeneous design (AI Engine + PL) to Vitis as a Vitis Subsystem (VSS).</p>
+<h2 id="what-is-a-vitis-subsystem">What is a Vitis Subsystem?</h2>
+<p>A Vitis Subsystem (VSS) is a platform-independent reusable design unit, or <em>component</em>, with customizable AIE and PL content, that is integrated into a larger system through Vitis tools.</p>
+<p>For more information, see <a href="https://docs.amd.com/r/en-US/ug1701-vitis-accelerated-embedded/Linking-the-System">Embedded Design Development Using Vitis User Guide (UG1701)</a>. </p>
+<h2 id="tutorial-design">Tutorial Design</h2>
+<p>This tutorial uses the example design 64K-Pt IFFT @ 2 Gsps Using a 2D Architecture.</p>
+<p>The figure below shows a block diagram of a 64k-point 2D IFFT hardware design implemented in Versal using AI Engines and PL. The design targets a throughput of 2 GSPS.</p>
+<p><img src="Images/ifft64k-block-diagram.png" alt="figure" /></p>
+<p>The IFFT operation is performed by AI Engine kernels, 5 each for each data dimension. The results of the first dimension are transposed by an HLS kernel implemented in PL. The IFFT of the second dimension is then performed in the AI Engine.</p>
+<blockquote>
+<p><strong>NOTE:</strong> The DMA Source and DMA Sink blocks in the PL, shown in the diagram above, will be provided as part of the platform and not the Vitis Subsystem in this tutorial.</p>
+</blockquote>
+<p>For more details on the design, refer to the <a href="matlab:XmcExampleApi.getExample('IFFT64K_2D')">Vitis Model Composer example</a> and the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2025.1/AI_Engine_Development/AIE/Design_Tutorials/12-IFFT64K-2D">Design Example from Vitis-Tutorials</a>.</p>
+<p>Open the model <code>IFFT64K_2D.slx</code> and examine the <code>DUT</code> subsystem, which contains an HLS Kernel and an AI Engine subsystem.</p>
+<p><img src="Images/model2.png" alt="figure" /></p>
+<p>The signals entering and exiting the AI Engine are of <code>cint32</code> data type (64 bits wide). The PLIO blocks inside the AI Engine subsystem configure the PLIO width to 64 bits. This means that in hardware, one <code>cint32</code> sample will be transferred across each stream on every PL clock cycle. You could potentially increase the PLIO width to 128 bits, so that 2 samples are transferred on each PL clock cycle.</p>
+<p>When the model runs, the scope displays the real and imaginary output of the IFFT, which is compared to the original input signal. </p>
+<p><img src="Images/results.png" alt="figure1" /></p>
+<h2 id="export-dut-as-vitis-subsystem">Export DUT as Vitis Subsystem</h2>
+<p>A Vitis Subsystem has the following constituent parts:</p>
+<ul>
+<li>Compiled AI Engine application (libadf.a), if the design uses the AI Engine</li>
+<li>Compiled AMD object files (.xo) for any PL kernels in the design</li>
+<li>System configuration (.cfg) file describing how the AI Engine graph and PL kernels are to be connected</li>
+</ul>
+<p>To export the Vitis Model Composer IFFT design as a VSS:</p>
+<ol>
+<li><p>Double-click the <strong>Vitis Model Composer Hub</strong> block.</p></li>
+<li><p>Select the <strong>DUT</strong> subsystem and the <strong>Export</strong> tab.</p></li>
+<li><p>Select an <strong>Export Type</strong> of <strong>Vitis Subsystem</strong>.</p></li>
+</ol>
+<p><img src="Images/hub1.png" alt="figure1" /></p>
+<p>The default configuration is to use the entire AI Engine array for the generated design. You can also specify <strong>Enable array partition</strong> to target the generated design to specific columns in the AIE array. This is useful if the generated AIE graph is to be combined with other graphs later on. For more information see <a href="https://docs.amd.com/r/en-US/ug1076-ai-engine-environment/Compile-AI-Engine-Graph-for-Independent-Partitions">Compile AI Engine Graph for Independent Partitions</a> in the <em>AI Engine Tools and Flows User Guide (UG1076)</em>.</p>
+<ol start="4">
+<li>Click <strong>Export</strong>.</li>
+</ol>
+<p>Vitis Model Composer generates the constituent parts of the VSS listed above, and it also invokes the Vitis linker (<code>v++</code>) to generate a Vitis Subsystem. This will take a few minutes.</p>
+<p><img src="Images/progress1.png" alt="figure1" /></p>
+<p>After code generation is complete, the products can be viewed in the <code>code</code> folder.</p>
+<p><img src="Images/folders1.png" alt="figure1" /></p>
+<ul>
+<li>The <code>ip</code> folder contains subfolders for each subsystem (AI Engine or HLS Kernel) in the design.<ul>
+<li><code>AIE</code> contains the generated code and libadf.a for the AI Engine subsystem.</li>
+<li><code>ifft_transpose</code> contains the generated code and compiled kernel (.xo) for the transpose HLS Kernel.</li></ul></li>
+<li>The <code>vss</code> folder contains the files used to generate the Vitis Subsystem.<ul>
+<li>The <code>DUT</code> folder contains the VSS itself. <strong>This folder contains the files necessary to use the VSS with the Vitis linker.</strong> The libadf.a and .xo are copied here, along with a <code>DUT.vss</code> file providing information about the VSS.</li></ul></li>
+</ul>
+<p>In the next section, we will link and package this VSS with an existing Vitis platform.</p>
+<h2 id="integrating-the-vss-with-vitis-platform">Integrating the VSS with Vitis Platform</h2>
+<p>A Vitis platform is comprised of a base hardware design and optional system software (e.g. operating system and bootloaders) that target a specific device. </p>
+<p>The platform hardware design is encapsulated in an XSA container built in Vivado, with annotations that indicate potential attachment points used by Vitis tools to integrate additional design components including Vitis Subsystems (VSS), compiled AI Engine graphs, HLS and RTL kernels.&nbsp;</p>
+<p>So far in this tutorial we have generated a Vitis Subsystem from Model Composer. In the rest of the tutorial, we will show how to integrate the generated Vitis Subsystem along with data movers to the platform hardware and add system software to create a working HW image that takes in input test vectors and compare the hardware output with reference data. To do that we need:</p>
+<ul>
+<li>Data movers (implemented in HLS code targeting the PL) to move data between the AI Engine and memory.<ul>
+<li><code>hls_src/ifft_dma_src</code>, <code>hls_src/ifft_dma_sink</code></li></ul></li>
+<li>Test input and reference output waveforms, contained in Vitis data files.<ul>
+<li><code>data/sig_i.txt</code>, <code>data/sig_o.txt</code></li></ul></li>
+<li>Host application to exercise the DUT with the test input waveform and compare the output to the reference output.<ul>
+<li><code>ps_apps/host.cpp</code></li></ul></li>
+<li>System configuration file describing how the data movers are to be connected to the DUT.<ul>
+<li><code>vitis/system.cfg</code></li></ul></li>
+<li>Makefiles to build the platform from sources.</li>
+</ul>
+<p>To see how to integrate the VSS, we will highlight 3 aspects of the platform: the host application, the system configuration file, and how the Vitis linker and packager are invoked in the Makefile.</p>
+<h3 id="host-application">Host Application</h3>
+<p>Open <code>ps_apps/host.cpp</code> to view the host application source code.</p>
+<p>The host application is responsible for loading and starting the AI Engine graph and the PL data movers. Because the VSS contains the AI Engine graph, the host application must reflect the graph name contained in the VSS.</p>
+<p>Find the section of code labeled <strong>Load and Run AIE graph</strong>.</p>
+<pre><code>// ------------------------------------------------------------
+// Load and Run AIE graph
+// ------------------------------------------------------------
+
+auto my_graph  = xrt::graph(my_device, xclbin_uuid, "mygraph");
+std::cout &lt;&lt; STR_PASSED &lt;&lt; "auto my_graph  = xrt::graph(my_device, xclbin_uuid, \"mygraph\")" &lt;&lt; std::endl;
+
+my_graph.reset();
+std::cout &lt;&lt; STR_PASSED &lt;&lt; "my_graph.reset()" &lt;&lt; std::endl;
+
+my_graph.run(NUM_ITER);
+std::cout &lt;&lt; STR_PASSED &lt;&lt; "my_graph.run( NUM_ITER=" &lt;&lt; NUM_ITER &lt;&lt; " )" &lt;&lt; std::endl;
+</code></pre>
+<p>This code calls the XRT API to load and run the AIE graph. The name of the graph, <strong>mygraph</strong>, comes from the generated AI Engine source code (see <code>code/ip/AIE/src/AIE.cpp</code>). <strong>mygraph</strong> is a default name provided by Vitis Model Composer.</p>
+<h3 id="system-configuration-file">System Configuration File</h3>
+<p>Open <code>vitis/system.cfg</code> to view the system configuration file.</p>
+<p>Normally, this file instantiates all the PL kernels in the design. However, because the transpose kernel is provided in the VSS, only the data mover PL kernels are instantiated here.</p>
+<pre><code># ------------------------------------------------------------
+# HLS PL Kernels:
+# ------------------------------------------------------------
+
+# Sources/Sinks Data Movers to/from LPDDR/PL:
+nk = ifft_dma_src_wrapper:1:dma_src
+nk = ifft_dma_snk_wrapper:1:dma_snk
+</code></pre>
+<p>This file also describes connectivity between the PL kernels and the AI Engine. However, because connections within the DUT are handled by the VSS, this file only contains connections that occur between the VSS (DUT), data movers, and DDR.</p>
+<pre><code># ------------------------------------------------------------
+# AXI Stream Connections (PL to AIE)
+# ------------------------------------------------------------
+
+# LPDDR to PL DMA SOURCE:
+sp=dma_src.mem:LPDDR
+
+# PL DMA Source to AIE:
+sc = dma_src.sig_o_0:ai_engine_0.In1
+sc = dma_src.sig_o_1:ai_engine_0.In2
+sc = dma_src.sig_o_2:ai_engine_0.In3
+sc = dma_src.sig_o_3:ai_engine_0.In4
+sc = dma_src.sig_o_4:ai_engine_0.In5
+
+# AIE TO PL DMA SINK:
+sc = ai_engine_0.Out1:dma_snk.sig_i_0
+sc = ai_engine_0.Out2:dma_snk.sig_i_1
+sc = ai_engine_0.Out3:dma_snk.sig_i_2
+sc = ai_engine_0.Out4:dma_snk.sig_i_3
+sc = ai_engine_0.Out5:dma_snk.sig_i_4
+
+# PL DMA SINK to LPDDR
+sp=dma_snk.mem:LPDDR
+</code></pre>
+<p>The AI Engine port names (<code>In1</code>, <code>Out</code>, etc.) come from the generated AI Engine source code (and ultimately the Simulink model), which can be viewed at <code>code/ip/AIE/src/AIE.h</code>.</p>
+<h3 id="linking-and-packaging">Linking and Packaging</h3>
+<p>Open the file <code>vitis/Makefile</code>. This file automates invoking the Vitis toolchain (<code>v++</code>) to link and package the platform.</p>
+<p>Find the <code>${BUILD_DIR}/${XSA}</code> target, which invokes the Vitis linker.</p>
+<pre><code>${BUILD_DIR}/${XSA}: ${XO} ${SYSTEM_CFG}
+cd ${BUILD_DIR} &amp;&amp; \
+v++ --link --debug --save-temps \
+--target ${TARGET} \
+--platform ${PLATFORM} \
+$(addprefix --config ../, ${SYSTEM_CFG}) \
+$(addprefix ../, ${XO}) \
+$(addprefix ../, ${VSS}) \
+--output ${XSA} \
+2&gt;&amp;1 | tee vpp_link.log
+</code></pre>
+<p>This target invokes <code>v++</code> using the <code>--link</code> option, and specifies a target (<code>hw</code> or <code>hw_emu</code>) and platform (<code>xilinx_vck190_base_202420_1</code> in this case). The linker takes the system configuration file, data mover PL kernels, and VSS as inputs to produce an XSA. The inputs to the linker are specified in the Makefile as follows:</p>
+<pre><code>XO              := ../hls_src/ifft_dma_src/ifft_dma_src_wrapper.xo \
+../hls_src/ifft_dma_snk/ifft_dma_snk_wrapper.xo
+VSS        := ../code/vss/DUT/DUT.vss
+SYSTEM_CFG      := system.cfg
+</code></pre>
+<p>Note that the VSS is pulled from the <code>code</code> folder you generated earlier from Vitis Model Composer.</p>
+<p>The <code>${SD_CARD}</code> target invokes the Vitis packager.</p>
+<pre><code>${SD_CARD}: ${BUILD_DIR}/${XSA} ${PS_EXE} ${KERNEL_IMAGE} ${ROOTFS} ${STIMULUS_IO}
+cd ${BUILD_DIR} &amp;&amp; \
+v++ --package --debug --save-temps \
+--target ${TARGET} \
+--platform ${PLATFORM} \
+--package.out_dir ${SD_CARD} \
+--package.boot_mode=sd \
+--package.image_format=ext4 \
+--package.kernel_image=${KERNEL_IMAGE} \
+--package.rootfs=${ROOTFS}  \
+--package.defer_aie_run \
+${XSA} \
+$(addprefix ../, ${VSS}) \
+$(addprefix --package.sd_file=../, ${PS_EXE}) \
+$(addprefix --package.sd_file=../,${STIMULUS_IO}) \
+$(addprefix --package.sd_file=../,embedded_exec.sh) \
+2&gt;&amp;1 | tee vpp_pack.log
+</code></pre>
+<p>This target creates an <code>sd_card.img</code> that can be loaded onto a board, in this case a VCK190. The packager takes as inputs the VSS and the XSA that was generated by the linker.</p>
+<h2 id="building-and-running-the-project-for-hardware-emulation">Building and Running the Project for Hardware Emulation</h2>
+<p>The <code>Makefile</code> contained in this folder invokes other Makefiles in the project to build each component, then link and package the overall platform.</p>
+<blockquote>
+<p><strong>NOTE:</strong> To build the Vitis project, make sure you have completed the following steps:</p>
+<ol>
+<li><a href="https://docs.amd.com/r/en-US/ug1393-vitis-application-acceleration/Setting-Up-the-Vitis-Environment">Configure your environment</a> to run Vitis.</li>
+<li>Set the <code>PLATFORM_REPO_PATHS</code> environment variable to point to the <code>base_platforms</code> folder inside the Vitis installation directory.</li>
+<li>Download and install the <a href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2024-2.html">Common Images for Embedded Vitis Platforms</a>.</li>
+<li>Set the environment variable <code>COMMON_IMAGE_VERSAL</code> to the full path where you have downloaded the common images.</li>
+</ol>
+</blockquote>
+<ol>
+<li>Run <code>make all TARGET=hw_emu</code> in this folder in a terminal window to build and package the project for hardware emulation.</li>
+</ol>
+<p>The build process will take some time. When complete, the outputs will appear in a new folder named <code>package</code>.</p>
+<p><img src="Images/folders2.png" alt="figure1" /></p>
+<p>In addition to the <code>sd_card.img</code>, a script <code>launch_hw_emu.sh</code> is created to automate launching of the hardware emulator.</p>
+<ol start="2">
+<li>From within the <code>package</code> folder, launch hardware emulation as follows: <code>./launch_hw_emu.sh -run-app embedded_exec.sh</code>.</li>
+</ol>
+<p>The emulator will start, and the hardware image will boot into Linux. The contents of the SD card image are displayed, and the <code>vitis/embedded_exec.sh</code> script will automatically run to launch the host application.</p>
+<pre><code>versal-rootfs-common-20242:/mnt# INFO:Running embedded_exec.sh
+Run app command sent to console
+ls
+BOOT.BIN          a.xclbin          embedded_exec.sh  sig_i.txt
+Image             boot.scr          host.exe          sig_o.txt
+versal-rootfs-common-20242:/mnt# ./embedded_exec.sh
+</code></pre>
+<p>As the host application runs, status messages are printed to the display as the AI Engine graph and PL kernels start. Eventually the host application will wait while the kernels execute:</p>
+<pre><code>INFO:    Waiting for kernels to end...
+</code></pre>
+<p>It will take several minutes for the kernels to execute in hardware emulation. When the kernels finish, the host application will compare the DUT output to the golden reference on a sample-by-sample basis. If the results match, the simulation will pass.</p>
+<pre><code>ss: 65532  Gld: 8388273 -12839  Act: 8388273 -12839  Err: 0 0
+ss: 65533  Gld: 8388344 -9502  Act: 8388344 -9502  Err: 0 0
+ss: 65534  Gld: 8388390 -6419  Act: 8388390 -6419  Err: 0 0
+ss: 65535  Gld: 8388462 -3082  Act: 8388462 -3082  Err: 0 0
+Level: 16384
+Max Error: 256
+
+--- PASSED ---
+</code></pre>
+<h2 id="building-and-running-the-project-for-hardware">Building and Running the Project for Hardware</h2>
+<ol>
+<li><p>Run <code>make all TARGET=hw</code> in a Vitis terminal window to build and package the project for the target.</p></li>
+<li><p>The build process will take some time. When complete, the outputs will appear in a new folder named <code>package</code>. An sd_card.img file is generated by Vitis for testing this design on the board.</p></li>
+</ol>
+<p><img src="Images/hwtest2.png" alt="figure1" /></p>
+<ol start="3">
+<li>A new folder named <code>build_hw</code> will appear under <code>vitis</code> after completion of hardware build:</li>
+</ol>
+<p><img src="Images/hwtest3.png" alt="figure1" /></p>
+<ol start="4">
+<li>Prerequisites:</li>
+</ol>
+<ul>
+<li>An sd_card.img file generated by Vitis</li>
+<li>VCK190 Evaluation board</li>
+<li>System Controller SD Card: may already be available with the board and plugged in.</li>
+<li>VCK190 SD card: may already be available with the board. This is the card, where you will write the sd_card.img file generated for your design.</li>
+<li>Connect uSD card to your laptop. If your laptop does not come with a uSD card reader slot, an USB-to-uSD card-reader may be used, assuming laptop has a USB port</li>
+<li>For board setup and establish a connection to a serial device by selecting “Serial”, please refer to <a href="matlab:XmcExampleApi.getExample('linux')">Running on Hardware</a>.</li>
+</ul>
+<ol start="4">
+<li><p>Turn on board power by switching SW13 on and observe the terminal emulator. If everything goes well, boot messages should be displayed.</p></li>
+<li><p>After Linux has booted, from TeraTerm terminal emulator window, type 'cd /run/media/mmcblk0p1' and hit Enter. Within this directory do an 'ls' to check the contents: it should have the BOOT.BIN, embedded_exec.sh, data directory containing the data files among others.</p></li>
+<li><p>Run the executable file from the list by using the command <code>./embedded_exec.sh</code>.</p></li>
+<li><p>It should print the test result as shown in the below image:</p></li>
+</ol>
+<p><img src="Images/hwtest9.png" alt="figure1" /></p>
+<h2 id="conclusion">Conclusion</h2>
+<p><strong>Congratulations!</strong> In this tutorial, you saw how to export a heterogeneous design (AI Engine + PL) to Vitis as a Vitis Subsystem (VSS) and build a complete design targeting the board.</p>
+<hr />
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+</body>
+</html>
