@@ -58,7 +58,8 @@ The images below shows an input frame and output frame to the algorithm.
 ![](Images/output_video_frame.png)
 
 ------------
-Copyright 2020 Xilinx
+
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="importing-aie-ml-graph-into-vitis-model-composer-as-a-block">Importing AIE-ML graph into Vitis Model Composer as a block</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,14 +17,8 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <h2 id="what-is-ai-engine-ml">What is AI Engine-ML?</h2>
 <p>The AI Engine-ML architecture is optimized for both ML and advanced signal processing.<br />
 To learn more about the AIE-ML devices, refer to <a href="https://docs.xilinx.com/r/en-US/am020-versal-aie-ml">this documentation</a>.</p>

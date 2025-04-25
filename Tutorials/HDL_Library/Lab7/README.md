@@ -13,7 +13,7 @@ After completing this lab, you will be able to configure the **FIR Compiler** bl
 ## Step 1: Configure FIR Compiler as a Single rate filter
 
 1. Invoke Vitis Model Composer.
-    - On Windows systems select **Windows > AMD Design Tools > Vitis Model Composer 2024.2.**
+    - On Windows systems select **Windows > AMD Design Tools > Vitis Model Composer 2025.1.**
     - On Linux systems, type `model_composer` at the command prompt.
 
 2. Navigate to the Lab7 folder: `\HDL_Library\Lab7.`
@@ -358,7 +358,7 @@ This design has an input with 50MHz sample rate. The expected output sample rate
 In this lab, you learned how to configure the FIR Compiler block and Simulink System Period to implement single-rate and multi-rate FIR filters.
 
 --------------
-Copyright 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -6,24 +6,19 @@
 </head>
 <body>
 <table class="sphinxhide" width="100%">
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
 
 commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
-              
-</html>
 <tr width="100%">
 <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
 <a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
@@ -72,7 +67,7 @@ information is communicated between Vitis Model Composer and the hardware.</p>
 </ol>
 <p>This is where you will specify the path to a <em>.xpfm</em> file that defines your <a href="https://docs.xilinx.com/r/en-US/ug1273-versal-acap-design/Platform-Based-Design-Flows">platform</a>. In this lab, we will use a <a href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html">Versal base platform</a> for the <a href="https://www.xilinx.com/products/boards-and-kits/vck190.html">VCK190</a> that has been provided with the Vitis installation.</p>
 <ol start="9">
-<li>Navigate to the folder where the Versal base platforms are installed. These are located within the Vitis tools installation, for example: <strong>/opt/Xilinx/Vitis/2024.2/base_platforms</strong>.</li>
+<li>Navigate to the folder where the Versal base platforms are installed. These are located within the Vitis tools installation, for example: <strong>/opt/Xilinx/Vitis/2025.1/base_platforms</strong>.</li>
 </ol>
 <p><img src="Images/Image03.png" alt="missing image" /></p>
 <ol start="10">
@@ -153,7 +148,7 @@ information is communicated between Vitis Model Composer and the hardware.</p>
 <li>Run Hardware Server on Windows.</li>
 </ol>
 <blockquote>
-<p>Note : This step assumes that you have Hardware Server installed on your Windows machine as part of Vitis or Vivado Installation. If you do not have Hardware Server installed, please refer to the section <a href="#How-to-Install-Hardware-Server">How to Install Hardware Server</a>. </p>
+<p>Note : This step assumes that you have Hardware Server installed on your Windows machine as part of Vitis or Vivado Installation. If you do not have Hardware Server installed, please refer to the section <a href="#appendix-how-to-install-hardware-server">How to Install Hardware Server</a>. </p>
 </blockquote>
 <p>Open Windows command prompt and provide complete path to <code>hw_server</code> application and hit <code>Enter</code>. You can see the hostname and port number as highlighted below.</p>
 <p><img src="Images/hw_server.png" alt="" /></p>
@@ -199,7 +194,7 @@ device program BOOT.BIN
 <li><p>Click <code>Next</code> and complete the rest of the installation process. </p></li>
 </ol>
 <hr />
-<p>&copy; Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>
@@ -210,7 +205,6 @@ distributed under the License is distributed on an "AS IS" BASIS,<br />
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
 See the License for the specific language governing permissions and<br />
 limitations under the License.</p>
-<p align="center"><sup>XD058 | &copy; Copyright 2023 Advanced Micro Devices, Inc.</sup></p>
 
 </div>
 <style type='text/css'>body {

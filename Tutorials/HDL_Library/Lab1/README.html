@@ -6,24 +6,19 @@
 </head>
 <body>
 <h1 id="lab-1-introduction-to-vitis-model-composer-hdl-library">Lab 1: Introduction to Vitis Model Composer HDL Library</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
 
 commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
-              
-</html>
 <p>In this lab, you will learn how to use the Vitis Model Composer HDL library to specify a design in Simulink® and synthesize the design into an FPGA. This tutorial uses a standard FIR filter and demonstrates how Vitis Model Composer provides you the design options that allow you to control the fidelity of the final FPGA hardware.</p>
 <h4 id="objectives">Objectives</h4>
 <p>After completing this lab, you will be able to:</p>
@@ -48,7 +43,7 @@ document.location=commandURI
 <li>Invoke Vitis Model Composer. </li>
 </ol>
 <ul>
-<li>On Windows systems, select <strong>Windows > AMD Design Tools > Vitis Model Composer 2024.2.</strong></li>
+<li>On Windows systems, select <strong>Windows > AMD Design Tools > Vitis Model Composer 2025.1.</strong></li>
 <li>On Linux systems, type <code>model_composer</code> at the command prompt.</li>
 </ul>
 <ol>
@@ -507,7 +502,7 @@ Notice, as compared to the results in Step 1, these results show approximately:<
 <pre><code>/HDL_Library/Lab1/solution
 </code></pre>
 <hr />
-<p>Copyright 2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

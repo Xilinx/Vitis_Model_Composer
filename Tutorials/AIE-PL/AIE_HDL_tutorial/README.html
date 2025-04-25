@@ -6,24 +6,19 @@
 </head>
 <body>
 <table class="sphinxhide" width="100%">
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
 
 commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
-              
-</html>
 <tr width="100%">
 <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
 <a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
@@ -136,7 +131,7 @@ document.location=commandURI
 <p><strong>When would you reduce the output sample rate?</strong></p>
 <p>If the HDL subsystem does not produce valid data on every clock cycle, the AI Engine subsystem will operate at a reduced rate. The <strong>Reduce output sample rate</strong> parameter allows the <strong>HDL to AIE</strong> block to model this behavior.</p>
 <p>For example, if the HDL subsystem asserts <code>tvalid</code> every 4 HDL clock cycles, set the <strong>Reduce output sample rate by a factor of</strong> parameter to 4. </p>
-<p>If you do not do this, the <strong>HDL to AIE</strong> block will output a variable-size signal that is empty when there is no valid data. For analysis and viewing the signal on a scope, it is easier to work with variable-size signals that are full. For more information, see the <a href="https://github.com/Xilinx/Vitis_Model_Composer/tree/2024.2/QuickGuides/Variable_Size_Signals">Variable-Size Signals</a> Quick Guide.</p>
+<p>If you do not do this, the <strong>HDL to AIE</strong> block will output a variable-size signal that is empty when there is no valid data. For analysis and viewing the signal on a scope, it is easier to work with variable-size signals that are full. For more information, see the <a href="matlab:XmcExampleApi.getExample('Variable_Size_Signals')">Variable-Size Signals</a> Quick Guide.</p>
 </blockquote>
 <p><img src="./Images/hdl_aie_params2.png" alt="" /></p>
 <ol start="17">
@@ -191,7 +186,7 @@ document.location=commandURI
 <li>They also determine the Simulink sample rate of the AI Engine design, based on the HDL sample rate and the relationship between the HDL/AIE data types. </li>
 </ul>
 <hr />
-<p>&copy; Copyright 2023 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

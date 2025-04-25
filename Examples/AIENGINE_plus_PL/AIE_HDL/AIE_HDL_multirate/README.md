@@ -1,10 +1,10 @@
 # Multirate Example
 
-***Version: Vitis™ 2024.2 and MATLAB™ R2023a with Simulink™ and the DSP System Toolbox™***
+***Version: Vitis™ 2025.1 and MATLAB™ R2024a with Simulink™ and the DSP System Toolbox™***
 
 ## Prerequisites
 
-This example presumes you have installed the Vitis and Vitis Model Composer tools and that you have a basic understanding of those tools.  If not, consider starting with the Vitis tutorials at <https://github.com/Xilinx/Vitis-Tutorials> and within that repository the Vitis Model Composer tutorial at <https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Feature_Tutorials/10-aie-dsp-lib-model-composer>.
+This example presumes you have installed the Vitis and Vitis Model Composer tools and that you have a basic understanding of those tools.  If not, consider starting with the Vitis tutorials at <https://github.com/Xilinx/Vitis-Tutorials> and within that repository the Vitis Model Composer tutorial at <https://github.com/Xilinx/Vitis-Tutorials/tree/2025.1/AI_Engine_Development/AIE/Feature_Tutorials/10-aie-dsp-lib-model-composer>.
 
 ---
 
@@ -223,7 +223,8 @@ If a Vitis Model Composer model with AIE and PL blocks has multiple clock domain
 ---
 
 ------------
-Copyright 2023 AMD
+
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

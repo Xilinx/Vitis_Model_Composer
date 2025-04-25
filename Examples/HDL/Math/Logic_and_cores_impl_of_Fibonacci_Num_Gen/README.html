@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="logic-and-cores-fibonacci-number-generator">Logic and Cores Fibonacci Number Generator</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,18 +17,12 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>This design is a logic and cores implementation of a Fibonacci number generator. That is, given a non-negative integer n, it computes the recursively defined sequence x<em>0 = 1, x</em>1 = 1, … , x<em>n = x</em>{n-2} + x_{n-1}.</p>
 <p>This design should be compared to sysgenFIBONACCI_synth which implements the same computation in a more software-centric way. The two designs are functionally equivalent, and use the same amount of FPGA resources.</p>
 <h2 id="imagesscreen_shotpng"><img src="images/screen_shot.PNG" alt="" /></h2>
-<p>Copyright 2020 Xilinx</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

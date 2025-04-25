@@ -10,7 +10,8 @@ Chris H. Dick, "Design and implementation of high-performance FPGA signal proces
 ![](images/screen_shot.PNG)
 
 ------------
-Copyright 2020 Xilinx
+
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

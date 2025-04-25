@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="high-speed-ssr-fir">High Speed SSR FIR</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,15 +17,9 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
-<p>This reference design can be used as a starting design point when efficient implementations of very high data rate (over 1 Gsps) Single Rate FIRs are required. This PL based design can be used in any modern Xilinx device - 7-Series/UltraScale/UltraScale+/Versal. <br />
+<p>This reference design can be used as a starting design point when efficient implementations of very high data rate (over 1 Gsps) Single Rate FIRs are required. This PL based design can be used in any modern AMD device - 7-Series/UltraScale/UltraScale+/Versal. <br />
 <br/><br/></p>
 <p align="center">
 <img src="Images/SSR_FIR_screen_shot.PNG" align ="center" width = 90%>
@@ -42,7 +37,7 @@ This Single Rate SSR FIR reference design illustrates a number of advanced Vitis
 </ul>
 <p>This design only works in Vivado 2022.1 or later.</p>
 <hr />
-<p>Copyright (C) 2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 
 </div>
 <style type='text/css'>body {

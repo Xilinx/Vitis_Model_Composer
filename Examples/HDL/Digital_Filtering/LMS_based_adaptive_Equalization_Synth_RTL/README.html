@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="lms-based-adaptive-equalization-synthesizable-rtl">LMS-based adaptive equalization (Synthesizable RTL)</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,14 +17,8 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>This design shows how to use the MCode block to create fully synthesizable register transfer level (RTL) designs in Model Composer. The design was derived directly from the sysgenFSE.mdl demonstration design, replacing non-RTL blocks by MCode block equivalents. RTL targets are particularly useful when single source must target different FPGA families. This design shows a T/2 adaptive Fractionally Spaced Equalizer (FSE) operating on a 16-QAM data source with noise and filtering introduced in the channel model. Virtex-II dedicated multipliers are used in the complex multipliers blocks in order to provide high speed and resource utilization of the FPGA device.</p>
 <p>The DHAT scope provides an X-Y plot of the I and Q filter outputs from within the FSE. As the simulation progresses, these symbols will converge as the error is reduced. The magnitude of the filter coefficients is shown in a vector scope as well. Increasing the simulation duration will allow better visualization of the adaptive FSE effects on the filter output.</p>
 <p><img src="images/screen_shot.PNG" alt="" /></p>
@@ -31,7 +26,7 @@ document.location=commandURI
 <p>J.R. Treichler, I. Fijalkow, and C.R. Johnson, Jr. "Fractionally Spaced Equalizers" IEEE Signal Processing Magazine, May 1996, pp. 65-81.</p>
 <p>Chris H. Dick, "Design and implementation of high-performance FPGA signal processing datapaths for software-defined radios" VMEbus Systems, August 2001.</p>
 <hr />
-<p>Copyright 2020 Xilinx</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

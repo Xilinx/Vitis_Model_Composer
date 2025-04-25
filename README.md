@@ -15,7 +15,7 @@ a block diagram environment for multidomain simulation and model-based design.
 * Browse through many of the examples we have here. You can easily access these examples from within the tool. (**Note:** Many of the examples require the [DSP System Toolbox](https://www.mathworks.com/products/dsp-system.html).)
 
 
-# What's new in 2024.2?
+# What's new in 2025.1?
 * Export AI Engine and PL subsystems as a [Vitis Subsystem (VSS)](./Tutorials/Hardware/Export_to_Vitis).
 * The [Filtering in Frequency Domain](./Examples/AIENGINE/Filtering_in_frequency_domain) example shows how to increase AI Engine throughput using different techniques.
 * Working with both AI Engines and PL? See the [tutorials](./Tutorials/AIE-PL/README.md) showing how to connect the block libraries in Vitis Model Composer.
@@ -40,7 +40,7 @@ a block diagram environment for multidomain simulation and model-based design.
 </p>
 
 --------------
-Copyright 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

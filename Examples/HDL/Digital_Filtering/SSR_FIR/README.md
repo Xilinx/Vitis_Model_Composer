@@ -1,6 +1,6 @@
 # High Speed SSR FIR
 
-This reference design can be used as a starting design point when efficient implementations of very high data rate (over 1 Gsps) Single Rate FIRs are required. This PL based design can be used in any modern Xilinx device - 7-Series/UltraScale/UltraScale+/Versal. 
+This reference design can be used as a starting design point when efficient implementations of very high data rate (over 1 Gsps) Single Rate FIRs are required. This PL based design can be used in any modern AMD device - 7-Series/UltraScale/UltraScale+/Versal. 
 <br/><br/>
 
  <p align="center">
@@ -21,4 +21,4 @@ This Single Rate SSR FIR reference design illustrates a number of advanced Vitis
 This design only works in Vivado 2022.1 or later.
 
 --------------
-Copyright (C) 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.

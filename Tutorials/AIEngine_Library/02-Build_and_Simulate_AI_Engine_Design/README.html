@@ -6,24 +6,19 @@
 </head>
 <body>
 <table class="sphinxhide" width="100%">
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
 
 commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
-              
-</html>
 <tr width="100%">
 <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
 <a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
@@ -262,7 +257,7 @@ document.location=commandURI
 <ol start="5">
 <li>Stop the simulation if it is still running.</li>
 <li>Click on the canvas and type <code>variable size</code>.</li>
-<li>Select <strong>Variable Size Signal to Workspace</strong> from the <strong>Xilinx Toolbox --> AI Engine --> Tools</strong> library.</li>
+<li>Select <strong>Variable Size Signal to Workspace</strong> from the <strong>AMD Toolbox --> AI Engine --> Tools</strong> library.</li>
 <li>Connect the block to the output of the FIR Symmetric filter.</li>
 </ol>
 <p><img src="Images/Image_015.png" alt="missing image" /></p>
@@ -282,7 +277,7 @@ document.location=commandURI
 <p><strong>Congratulations!</strong> This concludes Lab 2. In this lab, you built a model of the decimation chain using blocks from the AI Engine DSP Library. You also used Simulink scopes to compare the AI Engine implementation of the design against a golden reference.</p>
 <p>In the next lab, you will see how to bring in custom AI Engine kernel or graph code and simulate it with Vitis Model Composer.</p>
 <hr />
-<p>&copy; Copyright 2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>
@@ -293,7 +288,6 @@ distributed under the License is distributed on an "AS IS" BASIS,<br />
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
 See the License for the specific language governing permissions and<br />
 limitations under the License.</p>
-<p align="center"><sup>XD058 | &copy; Copyright 2023 Advanced Micro Devices, Inc.</sup></p>
 
 </div>
 <style type='text/css'>body {

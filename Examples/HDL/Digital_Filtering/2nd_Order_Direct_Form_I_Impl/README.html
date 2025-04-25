@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="2nd-order-direct-form-i-implementation">2nd-order Direct Form I implementation</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,14 +17,8 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>This design example shows two distinct FPGA implementations of a 2nd order IIR filter in Direct Form I, and compares them to the double precision Simulink IIR filter block.</p>
 <p>IIR_Cmult is implemented using constant coefficient multipliers implemented in LUTs,</p>
 <p>IIR_mult is implemented using embedded multipliers.</p>
@@ -31,7 +26,7 @@ document.location=commandURI
 <p>All the variables such as data width, coefficient width, Sample period, and coefficient values are initialized in the sysgenIIR_PreLoadFcn.m file. The default setting use 12 bit data and coefficients</p>
 <p><img src="images/screen_shot.PNG" alt="" /></p>
 <hr />
-<p>Copyright 2020 Xilinx</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

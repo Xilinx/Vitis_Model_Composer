@@ -29,7 +29,7 @@ void dmover0(adf::input_buffer&lt;cint32,adf::extents&lt;adf::inherited_extent&g
 <p>Note that even though the kernel only processes 2 <code>cint32</code> samples (128 bits) per clock cycle, the output cascade signal size must be set to 8 <code>cint32</code> samples (512 bits). This is because the AIE Kernel requires the signal size to be set to a multiple of 8 for <code>cint32</code> data.</p>
 <p>In such a case, when monitoring the cascade signal, only some of the samples will be valid - for a design with <code>N</code> data lanes, the first <code>N</code> samples of the cascade signal will be valid. However, the consuming kernel should take in all the samples to produce an output.</p>
 <hr />
-<p>Copyright 2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

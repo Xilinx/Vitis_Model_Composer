@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="pseudo-inverse-64x32">Pseudo Inverse 64x32</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,14 +17,8 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>This example implements a Pseudo Inverse for a 64x32 matrix. The Pseudo Inverse is computed as <img src="Images/eq1.png" height=20>.</p>
 <p><img src="Images/pinv_64x32.PNG" alt="" /></p>
 <p>On AI Engine, Pseudo Inverse is implemented as a sub-graph using the following kernels:</p>
@@ -46,8 +41,7 @@ document.location=commandURI
 <li><code>matmul_right_herm</code>: Computes the final result of Pseudo Inverse: <img src="Images/eq3.png" height=20>.</li>
 </ul>
 <hr />
-<p>Copyright 2021 Xilinx<br />
-Copyright 2022-2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

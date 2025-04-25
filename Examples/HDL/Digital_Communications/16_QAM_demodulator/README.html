@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="16-qam-demodulator">16-QAM demodulator</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,21 +17,15 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>This design implements an equalized 16-QAM demodulator for use in a software defined radio. The receiver architecture provides subsystems that demonstrate adaptive channel equalization and carrier tracking on a random QAM data source.</p>
 <p>In addition to the Model Composer HDL demodulator components, the model includes Simulink subsystems that introduce channel effects and Doppler content into the data source. Scopes are provided at important nodes for analysis purposes. The operation of receiver is best illustrated with a long simulation duration, so that the points in the de-rotated constellation have sufficient time to converge.</p>
 <p>Additional information on software radios can be found at:</p>
 <p>Chris H. Dick, "Design and implementation of high-performance FPGA signal processing datapaths for software-defined radios" VMEbus Systems, August 2001<br />
 <img src="images/screen_shot.PNG" alt="" /></p>
 <hr />
-<p>Copyright 2020 Xilinx</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

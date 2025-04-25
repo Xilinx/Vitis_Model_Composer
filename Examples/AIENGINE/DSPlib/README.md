@@ -1,6 +1,6 @@
 # Using AI Engine functions from DSPlib
 
-DSPlib is a library of commonly used DSP functions optimized for AI Engines. To facilitate the use of these functions in a design, Vitis Model Composer provides different DSPlib functions as blocks within the Xilinx Toolbox/AI Engine library. You can conveniently drag and drop one of these blocks into your model from the Simulink Library browser and configure the block.
+DSPlib is a library of commonly used DSP functions optimized for AI Engines. To facilitate the use of these functions in a design, Vitis Model Composer provides different DSPlib functions as blocks within the AMD Toolbox/AI Engine library. You can conveniently drag and drop one of these blocks into your model from the Simulink Library browser and configure the block.
 
 Here we demonstrate how you can use these functions in Vitis Model Composer.
 
@@ -24,7 +24,7 @@ Here you see examples for FIR,FFT and Matrix Multiply functions.
 - [Digital Upconversion (DUC)](DUC/README.md) using FIR interpolator blocks
 
 --------------
-Copyright 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
