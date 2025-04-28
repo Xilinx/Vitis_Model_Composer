@@ -6,24 +6,19 @@
 </head>
 <body>
 <h1 id="lab-2-importing-code-into-a-vitis-model-composer-hdl-design">Lab 2: Importing Code into a Vitis Model Composer HDL Design</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
 
 commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
-              
-</html>
 <h2 id="objectives">Objectives</h2>
 <p>After completing this lab, you will be able to:</p>
 <ul>
@@ -226,7 +221,7 @@ matched = 0;
 <li><code>\HDL_Library\Lab2\M_code\solution</code></li>
 </ul>
 <hr />
-<p>Copyright 2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

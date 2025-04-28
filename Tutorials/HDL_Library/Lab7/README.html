@@ -6,24 +6,19 @@
 </head>
 <body>
 <h1 id="lab-7-implement-filters-using-fir-compiler-block">Lab 7: Implement Filters using FIR Compiler Block</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
 
 commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
-              
-</html>
 <p>In this lab, you will learn how to configure the FIR Compiler block in Vitis Model Composer. In particular, achieving the expected filter result requires you to set both the <strong>FIR block</strong> parameters and the Vitis Model Composer Simulink System Period settings in the <strong>Hub block</strong> correctly. This tutorial will show you how to do this.</p>
 <h3 id="objectives">Objectives</h3>
 <p>After completing this lab, you will be able to configure the <strong>FIR Compiler</strong> block as a:</p>
@@ -36,7 +31,7 @@ document.location=commandURI
 <ol>
 <li><p>Invoke Vitis Model Composer.</p>
 <ul>
-<li>On Windows systems select <strong>Windows > AMD Design Tools > Vitis Model Composer 2024.2.</strong></li>
+<li>On Windows systems select <strong>Windows > AMD Design Tools > Vitis Model Composer 2025.1.</strong></li>
 <li>On Linux systems, type <code>model_composer</code> at the command prompt.</li></ul></li>
 <li><p>Navigate to the Lab7 folder: <code>\HDL_Library\Lab7.</code></p></li>
 </ol>
@@ -331,7 +326,7 @@ Sample Period = (10ns/10ns)/(1) = 1.
 <h2 id="summary">Summary</h2>
 <p>In this lab, you learned how to configure the FIR Compiler block and Simulink System Period to implement single-rate and multi-rate FIR filters.</p>
 <hr />
-<p>Copyright 2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

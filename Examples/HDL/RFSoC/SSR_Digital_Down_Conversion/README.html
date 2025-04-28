@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="programmatic-digital-down-converter-using-ssr">Programmatic Digital Down converter using SSR</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,20 +17,14 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>This design implements a digital down converter that reduces the sampling rate of the input signal to match the desired output sampling rate. In this example we go from 1.5GSPS to 187.5MSPS.</p>
 <p>There are two steps in this design. The first step is to tune to the desired frequency of interest using the Numerical Controlled Oscillator (NCO) to generate sin and cosine values for the desired output frequency.</p>
 <p>The second step is to down sample the data by configuring the FIR (Vector) block as a decimation filter with a decimation value of '2'. Decimation happens in 3 stages, from 1.5GSPS to 750 MSPS to 375MSPS, and finally to 187.5MSPS.</p>
 <p>In this case the SSR parameter is set to 3. This lets 3 data samples to process per PL clock cycle. </p>
 <h2 id="imagesscreen_shotpng"><img src="images/screen_shot.PNG" alt="" /></h2>
-<p>Copyright 2020 Xilinx</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

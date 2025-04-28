@@ -6,24 +6,19 @@
 </head>
 <body>
 <h1 id="lab-4-working-with-multi-rate-systems">Lab 4: Working with Multi-Rate Systems</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
 
 commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
-              
-</html>
 <p>In this lab exercise, you will learn how to efficiently implement designs with multiple data rates using multiple clock domains.</p>
 <h3 id="objectives">Objectives</h3>
 <p>After completing this lab, you will be able to:</p>
@@ -44,7 +39,7 @@ document.location=commandURI
 <ol>
 <li><p>Invoke Vitis Model Composer:</p>
 <ul>
-<li>On Windows systems select <strong>Windows > AMD Design Tools > Vitis Model Composer 2024.2.</strong></li>
+<li>On Windows systems select <strong>Windows > AMD Design Tools > Vitis Model Composer 2025.1.</strong></li>
 <li>On Linux systems, type <code>model_composer</code> at the command prompt.</li></ul></li>
 <li><p>Navigate to the Lab4 folder: <code>\HDL_Library\Lab4.</code></p></li>
 <li><p>At the command prompt, type open <code>Lab4_1.slx.</code></p></li>
@@ -247,7 +242,7 @@ gain_control_clk : in std_logic;
 <li>The final results from Step 3 are provided in file <code>Lab4_3_sol.slx</code></li>
 </ul>
 <hr />
-<p>Copyright 2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

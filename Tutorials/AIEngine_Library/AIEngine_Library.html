@@ -12,10 +12,9 @@
 var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
+var filename = path.substring(path.lastIndexOf('/')+1, path.lastIndexOf('.')); 
 
-commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
+commandURI="matlab:XmcExampleApi.changeDirectory('" + filename + "');"
 
 a.href = commandURI;
 </script>

@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="importing-fir-filter-into-model-composer">Importing FIR Filter into Model Composer</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,14 +17,8 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>Model Composer allows users to import C/C++ code as a block. You can simulate the imported block along with other blocks in your design and also export it to one of the target types. In this example, we import a symmetric FIR filter developed in C++ into Model Composer as a block.</p>
 <p>This example also uses the following MathWorks toolbox:</p>
 <ul>
@@ -50,11 +45,11 @@ document.location=commandURI
 #pragma XMC SUPPORTS_STREAMING
 void fir_sym (ap_fixed&lt;17,3,AP_TRN,AP_WRAP&gt; din[100], ap_fixed&lt;17,3,AP_TRN, AP_WRAP&gt; dout[100]);
 </code></pre>
-<p>Note the three pragmas right before the declaration of the function. This is the only modification to the original C++ code to import it to Model Composer. Here we specify which parameter is the input to the block and which parameter is the output of the block. The third pragma indicates the fir_sym function is a steaming function. This means the function processes the input as they come in and does not require random access to the input data. This will result in a more efficient hardware implementation on the device. Please refer to the Vitis Model Composer user guide (UG1483) for more details. As you explore the FIR code, you would notice that there are other pragmas in the code. These pragmas are inserted by the developer of the C++ code to optimize the implementation of this algorithm on Xilinx devices. Model Composer will take advantage of these pragmas but will not modify or add to them.</p>
+<p>Note the three pragmas right before the declaration of the function. This is the only modification to the original C++ code to import it to Model Composer. Here we specify which parameter is the input to the block and which parameter is the output of the block. The third pragma indicates the fir_sym function is a steaming function. This means the function processes the input as they come in and does not require random access to the input data. This will result in a more efficient hardware implementation on the device. Please refer to the Vitis Model Composer user guide (UG1483) for more details. As you explore the FIR code, you would notice that there are other pragmas in the code. These pragmas are inserted by the developer of the C++ code to optimize the implementation of this algorithm on AMD devices. Model Composer will take advantage of these pragmas but will not modify or add to them.</p>
 <p>ap_fixed is High Level Synthesis (HLS) notation to specify a fixed point number. To learn more about HLS, refer to Vitis HLS reference manual (UG1399).</p>
 <p>The fourth argument is a cell array listing all the needed files to compile the function and the fifth argument is another cell array that specifies the include files.</p>
 <hr />
-<p>Copyright 2020 Xilinx</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

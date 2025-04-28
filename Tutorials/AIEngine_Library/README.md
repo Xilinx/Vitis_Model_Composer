@@ -14,7 +14,7 @@ Vitis Model Composer enables the rapid simulation, exploration, and code generat
 Vitis Model Composer provides a set of AI Engine library blocks for use within the Simulink environment. These include:
  * Blocks to import kernels and graphs which can be targeted to the AI Engine portion of Versal® devices.
  * Block to import HLS kernels which can be targeted to the PL portion of Versal devices.
- * Blocks that support connection between the AI Engine and the Xilinx HDL blockset.
+ * Blocks that support connection between the AI Engine and the AMD HDL blockset.
  * Configurable AI Engine functions such as FIR, FFT, IFFT etc.
 
 Vitis Model Composer can be used to create complex systems targeting the PL (RTL and HLS blocksets) and the AI Engine array (AIE blockset) at the same time. The complete system can be simulated in Simulink, and the code generated (RTL for the PL and C++ graph for the AI Engine array).
@@ -69,7 +69,7 @@ Hardware Validation of Versal Adaptive SoC Design
 
 ---
 
-&copy; Copyright 2023 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -85,4 +85,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-<p align="center"><sup>XD058 | &copy; Copyright 2023 Advanced Micro Devices, Inc.</sup></p>

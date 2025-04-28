@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="single-stream-ssr-fir-with-pl">Single Stream SSR FIR with PL</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,20 +17,13 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>This design showcases a Super Sample Rate FIR filter to process a 4GSPS input stream. In this design we consider latencies within the kernels, which are implemented into the FIFO's included in AXI-Stream Interconnect(PL).</p>
-<p>For more details on the design of the FIR kernels click <a href="https://github.com/Xilinx/Vitis-Tutorials/blob/master/AI_Engine_Development/Design_Tutorials/02-super_sampling_rate_fir/SingleStreamSSR">here</a>. </p>
+<p>For more details on the design of the FIR kernels click <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2025.1/AI_Engine_Development/AIE/Design_Tutorials/02-super_sampling_rate_fir">here</a>. </p>
 <p><img src="images/SingleStreamSSR_withPL.PNG" alt="Single Stream SSR with PL" width="800"></p>
 <hr />
-<p>Copyright 2020-2022 Xilinx<br />
-Copyright 2022-2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

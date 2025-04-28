@@ -6,24 +6,19 @@
 </head>
 <body>
 <h1 id="lab-6-using-a-vitis-model-composer-hdl-design-with-a-zynq-7000-soc">Lab 6: Using a Vitis Model Composer HDL Design with a Zynq-7000 SoC</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
 
 commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
-              
-</html>
 <p>In this lab, you will learn how to export your Vivado® design with Vitis Model Composer HDL IP to a software environment and use driver files created by Vitis Model Composer to quickly implement your project on an AMD evaluation board, running hardware with software in the same design.</p>
 <h3 id="objectives">Objectives</h3>
 <p>After completing this lab, you will have learned:</p>
@@ -75,7 +70,7 @@ document.location=commandURI
 <ol>
 <li><p>Open the Vivado IDE:</p>
 <ul>
-<li>Click <strong>Windows > Vivado 2024.2.</strong><br />
+<li>Click <strong>Windows > Vivado 2025.1.</strong><br />
 In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP Integrator, but this time you will create the design using a Tcl file, rather than the interactive process.</li></ul></li>
 <li><p>Using the Tcl console as shown in the following figure:</p></li>
 </ol>
@@ -102,7 +97,7 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 <li><p>Click <strong>Finish</strong> to export the hardware.</p></li>
 <li><p>Open the Vitis Unified IDE:</p>
 <ul>
-<li>Click <strong>Windows > Vitis 2024.2.</strong></li></ul></li>
+<li>Click <strong>Windows > Vitis 2025.1.</strong></li></ul></li>
 <li><p>Select the workspace space directory to store preferences and click Launch.</p></li>
 <li><p>From the Vitis IDE, select <strong>Create Platform</strong>.</p></li>
 </ol>
@@ -170,7 +165,7 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 <p>The following solutions directory contains the final Vitis Model Composer (<code>*.slx</code>) files for this lab. The solutions directory does not contain the IP output from Vitis Model Composer, the files and directories generated when the Vivado IDE is executed, or the Vitis workspace.</p>
 <p><code>\HDL_Library\Lab6\solution</code></p>
 <hr />
-<p>Copyright 2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

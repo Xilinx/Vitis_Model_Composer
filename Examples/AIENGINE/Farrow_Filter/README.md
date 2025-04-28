@@ -18,7 +18,7 @@ We implement the 3rd order Farrow filter depicted in the following figure.
 
 *Figure 1 - Farrow Filter with Polynomial Order p = 3*
 
-More details on the Farrow filter design for AI Engines can be found in the [Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/15-farrow_filter) repository.
+More details on the Farrow filter design for AI Engines can be found in the [Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials/tree/2025.1/AI_Engine_Development/AIE/Design_Tutorials/15-farrow_filter) repository.
 
 The Farrow filter complies with the following requirements:
 
@@ -91,4 +91,4 @@ Using the **Validate on Hardware** tab of the **Vitis Model Composer Hub** block
 
 ------------
 
-Copyright (c) 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.

@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="prime-factor-fft-1008-on-aie-ml">Prime Factor FFT-1008 on AIE-ML</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,23 +17,17 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>This example demonstrates a Prime Factor FFT algorithm on AIE-ML devices. It demonstrates the <strong>Shared Buffer</strong> block to access Memory Tiles on the AIE-ML array.</p>
 <h2 id="introduction">Introduction</h2>
 <p>The Prime Factor Algorithm (PFA) [<a href="https://en.wikipedia.org/wiki/Prime-factor_FFT_algorithm" title="Prime Factor FFT Algorithm">1</a>] is a Fast Fourier Transform (FFT) algorithm [<a href="https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Signal_Processing_and_Modeling/Fast_Fourier_Transforms_(Burrus)" title="Fast Fourier Transforms">2</a>] discovered by Good &amp; Thomas before the more popular Cooley-Tukey algorithm with some interesting properties. The PFA is another "divide and conquer" approach for computing a Discrete Fourier Transform (DFT) of size <code>N = N1 * N2</code> as a two-dimensional DFT of size <code>N1 X N2</code> as long as <code>N1</code> and <code>N2</code> are relatively prime (ie. share no common divisors). The smaller transforms of size <code>N1</code> and <code>N2</code> may be computed by some other technique, for example using the Winograd FFT Algorithm, or the PFA technique may be applied recursively again to both <code>N1</code> and <code>N2</code>. It turns out Versal AI Engines compute DFT with small dimensions <code>N &lt; 32</code> very efficiently using direct vector/matrix multiplication. Consequently, the PFA approach using DFT on the individual prime factors provides an efficient approach to the FFT on Versal AI Engines.</p>
 <p>A second advantage of the PFA approach is that unlike the popular Cooley-Tukey FFT, no extra multiplications by "twiddle factors" need be performed between stages. This fact falls out of the DFT factorization when <code>N1</code> and <code>N2</code> share no common factors. This provides a computational advantage compared to the more traditional Cooley-Tukey formulation, but the PFA incurs a drawback in that a complicated re-indexing or permutation of it's I/O samples is required. For Versal devices with both AI Engines and Programmable Logic (PL), however, this drawback is solved easily by leveraging the PL to implement these permutations as part of a custom data flow tailored to the PFA signal flow graph.</p>
-<p>An <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/05-Prime-Factor-FFT">earlier tutorial</a> implemented a PFA-1008 transform on AIE architecture in the VC1902 device. This tutorial maps the PFA-1008 transform to AIE-ML architecture in the VE2802 device. Once again we map the short-length DFT-7, DFT-9 and DFT-16 transforms to AI Engine using vector-matrix DFT's but this time to the AIE-ML architecture. The intermediate "memory transpose" operations mapped earlier to the programmable logic (PL) are instead mapped here to the Memory Tiles contained in the AIE-ML array. This simplifies data flow and keeps most of the graph inside the the array. The input and output permutation blocks remain implemented in the PL as RTL obtained using VItis High Level Synthesis (HLS) from untimed C++ models. These cannot be mapped to Mem Tiles as they require a type of modulo addressing not supported by the Memory Tile buffer descriptors (BDs).</p>
+<p>An <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2025.1/AI_Engine_Development/AIE/Design_Tutorials/05-Prime-Factor-FFT">earlier tutorial</a> implemented a PFA-1008 transform on AIE architecture in the VC1902 device. This tutorial maps the PFA-1008 transform to AIE-ML architecture in the VE2802 device. Once again we map the short-length DFT-7, DFT-9 and DFT-16 transforms to AI Engine using vector-matrix DFT's but this time to the AIE-ML architecture. The intermediate "memory transpose" operations mapped earlier to the programmable logic (PL) are instead mapped here to the Memory Tiles contained in the AIE-ML array. This simplifies data flow and keeps most of the graph inside the the array. The input and output permutation blocks remain implemented in the PL as RTL obtained using VItis High Level Synthesis (HLS) from untimed C++ models. These cannot be mapped to Mem Tiles as they require a type of modulo addressing not supported by the Memory Tile buffer descriptors (BDs).</p>
 <h2 id="design-overview">Design Overview</h2>
 <p>The figure below shows a block diagram of a 3D PFA-1008 hardware design implemented in Versal using AI Engines and PL. The design targets a 1 Gsps throughput (SSR=1). AI Engines implement the three DFT kernels, specifically DFT-7, DFT-9 and DFT-16, using a vector-matrix multiplication approach. The design implements the matrix transpose kernels in the AI Engine array using Memory Tiles, and maps the I/O permutation blocks to PL using Vitis HLS.</p>
 <p><img src="Images/pfa-1008-block-diagram.png" alt="figure1" /></p>
-<p>More details on each kernel design, as well as MATLAB models for the same, can be found in the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE-ML/Design_Tutorials/02-Prime-Factor-FFT">Vitis-Tutorials</a> repository.</p>
+<p>More details on each kernel design, as well as MATLAB models for the same, can be found in the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2025.1/AI_Engine_Development/AIE-ML/Design_Tutorials/02-Prime-Factor-FFT">Vitis-Tutorials</a> repository.</p>
 <h2 id="simulink-model">Simulink Model</h2>
 <p>The Simulink model contains a testbench that provides input to the Prime Factor FFT algorithm and displays the output.</p>
 <p><img src="Images/model1.png" alt="figure1" /></p>
@@ -51,7 +46,7 @@ document.location=commandURI
 <p>[<a href="https://en.wikipedia.org/wiki/Prime-factor_FFT_algorithm" title="Prime Factor FFT Algorithm">1</a>] Wikipedia, "<a href="[https://en.wikipedia.org/wiki/Prime-factor_FFT_algorithm]">Prime Factor FFT Algorithm</a>"</p>
 <p>[<a href="https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Signal_Processing_and_Modeling/Fast_Fourier_Transforms_(Burrus)" title="Fast Fourier Transforms">2</a>] C. Sidney Burrus, "<a href="[https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Signal_Processing_and_Modeling/Fast_Fourier_Transforms_(Burrus)]">Fast Fourier Transforms</a>"</p>
 <hr />
-<p>Copyright (c) 2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 
 </div>
 <style type='text/css'>body {

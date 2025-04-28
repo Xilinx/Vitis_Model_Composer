@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="multi-channel-folded-implementation">Multi-channel, folded implementation</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,14 +17,8 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>This design demonstrates how multiple IIR filters can be implemented using a single time-shared second-order section (biquad). Specifically, 15 distinct IIR filters, each consisting of four cascaded biquads, are realized in a "folded" architecture that uses a single hardware biquad. Hardware folding is a technique to time-multiplex many algorithm operations onto a single functional unit (e.g. adder, multiplier). For low sample rate applications like audio and control, the required silicon area can be much reduced by time-sharing the hardware resources.</p>
 <p>In this design, the several individual folding techniques are employed:</p>
 <p>the biquad is time-multiplexed among fifteen channels<br />
@@ -31,7 +26,7 @@ the biquad is time-multiplexed among four cascade stages for each channel<br />
 the biquad is implemented using two multipliers and a single adder instead of the straightforward 5 multipliers and 4 adders (a biquad output is calculated in every 5 system clock cycles).<br />
 The maximum clock frequency for the top-level design is device dependent. The speed for each channel (4-cascade-stage IIR filter) is maximum clock frequency for the FPGA( MHz) / (15 channels<em>4 biquads/channel</em>5 clks/biquad).</p>
 <h2 id="imagesscreen_shotpng"><img src="images/screen_shot.PNG" alt="" /></h2>
-<p>Copyright 2020 Xilinx</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

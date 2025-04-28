@@ -50,7 +50,7 @@ The figure below shows a block diagram of the polyphase channelizer. The polypha
 ![figure1](images/channelizer-block-diagram.png)
 *Polyphase Channelizer Block Diagram.*
 
-For a more detailed description of the implementation, refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in [Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials). 
+For a more detailed description of the implementation, refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2025.1/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in [Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials). 
 
 The remainder of this example will focus on how to bring the polyphase channelizer implementation into Vitis Model Composer and simulate it.
 
@@ -109,7 +109,7 @@ Each input and output stream has a 64-bit PLIO. This means that 2 `cint16` sampl
 
 Each **AIE Class Kernel** block represents a kernel that will execute on its own AI Engine tile. The design consists of a 4x4 array of tiles. Each tile performs two [1x2] x [2x4] operations over two cycles. Each row of tiles passes its computed outputs to the tile below in the same column using the cascade stream.
 
-Refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in Vitis-Tutorials for further details on the parallel architecture.
+Refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2025.1/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in Vitis-Tutorials for further details on the parallel architecture.
 
 5. Double-click on the **run_inputA** block.
    
@@ -117,7 +117,7 @@ Refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/
 
 The **Function Declaration** indicates that this block executes the `run_input` function, with two stream inputs and one cascade output. 
 
-The **Signal size** of the cascade output must be set by the user. Signal Size is a block mask property associated with each stream or cascade output of an imported AI Engine block. This property is used only in Simulink simulation and is not reflected in the generated code. This value is always set as samples and not bytes. For more information, see [Setting Signal Size](https://github.com/Xilinx/Vitis_Model_Composer/tree/2024.2/QuickGuides/Setting_Signal_Size).
+The **Signal size** of the cascade output must be set by the user. Signal Size is a block mask property associated with each stream or cascade output of an imported AI Engine block. This property is used only in Simulink simulation and is not reflected in the generated code. This value is always set as samples and not bytes. For more information, see [Setting Signal Size](https://github.com/Xilinx/Vitis_Model_Composer/tree/2025.1/QuickGuides/Setting_Signal_Size/README.md).
 
 In this case, the **Signal size** parameter is set to 8 times the number of samples processed, reflecting the SSR=8 nature of the algorithm.
 
@@ -143,7 +143,7 @@ The PL portion of the polyphase channelizer design contains 3 IPs that perform t
 * Output Permute
 * Cyclic Shift Buffer
 
-These functions are explained in greater detail in [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2024.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer).
+These functions are explained in greater detail in [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2025.1/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer).
 
 These blocks are implemented in PL using HLS @ 625 MHz. With 2 samples transferred in each PL clock cycle, the AI Engine is able to operate at a rate of 1250 MHz.
 

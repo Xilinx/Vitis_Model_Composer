@@ -6,24 +6,19 @@
 </head>
 <body>
 <h1 id="lab-5-using-axi-interfaces-and-ip-integrator">Lab 5: Using AXI Interfaces and IP Integrator</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
 
 commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
-              
-</html>
 <p>In this lab, you will learn how AXI interfaces are implemented using Vitis Model Composer. </p>
 <p>You will save the design in IP Catalog format and use the resulting IP in the Vivado® IP integrator environment. </p>
 <p>Then you will see how IP integrator enhances your productively by supplying connection assistance when you use AXI interfaces.</p>
@@ -72,7 +67,7 @@ document.location=commandURI
 </ol>
 <p>The design has been written in IP catalog format to the directory <code>./netlist.</code> You will now import this IP into the Vivado IP catalog and use the IP in an existing example project.</p>
 <ol start="6">
-<li><p>Open the Vivado IDE using <strong>Windows > AMD Design Tools > Vivado 2024.2.</strong></p></li>
+<li><p>Open the Vivado IDE using <strong>Windows > AMD Design Tools > Vivado 2025.1.</strong></p></li>
 <li><p>Click <strong>Create Project</strong>.</p></li>
 <li><p>Click <strong>Next</strong>.</p></li>
 <li><p>Enter <code>/Lab5/IPI_Project</code> for the Project Location</p></li>
@@ -187,7 +182,7 @@ document.location=commandURI
 <pre><code>\HDL_Library\Lab5\solution
 </code></pre>
 <hr />
-<p>Copyright 2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="2d-dwt-filter">2D DWT filter</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,18 +17,12 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>The test bench for this wavelet design consists of a processor and behavioral models for a pair of external, dual-port memories. The two memories are initialized with the pixel values of a grayscale image. The pixels from the initial image are interleaved into the two banks in a column first indexing strategy. If the image contained a checkerboard of black and white pixels, then all of the black pixels will end up in the one bank, and all of the white pixels in the other. The processor includes a memory controller that schedules the reads and writes to memory, and an image processing filter kernel that computes the 2D DWT decomposition of the image. The processor has been configured to compute two levels of decomposition on a 64 x 64 pixel image. The computation is done "in place" in the single image memory space, and the initial pixel ordering is preserved throughout.</p>
 <p>A full color version of the design would easily fit in the same part as only the DWT datapath would require replication (the memory control could remain unchanged).</p>
 <h2 id="imagesscreen_shotpng"><img src="images/screen_shot.PNG" alt="" /></h2>
-<p>Copyright 2020 Xilinx</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

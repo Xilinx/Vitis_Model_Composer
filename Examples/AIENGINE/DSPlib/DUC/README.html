@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="digital-upconversion-duc">Digital Upconversion (DUC)</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,17 +17,11 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <h2 id="introduction">Introduction</h2>
 <p>This example demonstrates a Digital Upconversion (DUC) algorithm implemented on AI Engine (AIE) devices.</p>
-<p>See also the <a href="https://github.com/Xilinx/Vitis_Model_Composer/tree/2024.2/Examples/HDL/Digital_Filtering/README.md">DUC implemented on Programmable Logic</a>.</p>
+<p>See also the <a href="matlab:XmcExampleApi.getExample('HDL_DUC')">DUC implemented on Programmable Logic</a>.</p>
 <h2 id="algorithm">Algorithm</h2>
 <p>The DUC design consists of multi-stage finite impulse rate (FIR) filters, a direct digital synthesizer (DDS) and a mixer. </p>
 <p><img src="./Images/duc_block_diagram.png" alt="" /> </p>
@@ -109,7 +104,7 @@ document.location=commandURI
 <h2 id="conclusion">Conclusion</h2>
 <p>The AI Engine DSP Library, accessible in Vitis Model Composer, can be used to quickly experiment with different architectures for various signal processing algorithms, including Digital Upconversion (DUC).</p>
 <hr />
-<p>Copyright (c) 2024 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 
 </div>
 <style type='text/css'>body {

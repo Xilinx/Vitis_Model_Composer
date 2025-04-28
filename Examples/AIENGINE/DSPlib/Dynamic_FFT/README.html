@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="ai-engine-dynamic-point-fft">AI Engine Dynamic Point FFT</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,14 +17,8 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>The AI Engine Dynamic Point FFT block in Vitis Model Composer allows taking FFT of different sizes (up to a maximum FFT size) of the input frame. The FFT size is determined by a header that is appended to every input frame. This example showcases the use of this block.</p>
 <p><img src="images/screen_shot.png" alt="" /></p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
@@ -33,7 +28,7 @@ document.location=commandURI
 <p>The picture below depicts the output of a Dynamic Point FFT block with a 128 point FFT, an input frame size of 2048 random inputs, and max fft size of 1024.</p>
 <p><img src="images/output.png" alt="" /></p>
 <hr />
-<p>Copyright 2022 Xilinx</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

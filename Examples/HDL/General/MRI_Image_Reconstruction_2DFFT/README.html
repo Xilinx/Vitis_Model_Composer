@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="two-dimensional-fft-using-corner-turning-technique-for-mri-sagittal-image-reconstruction">Two Dimensional FFT using Corner Turning Technique for MRI Sagittal Image Reconstruction</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,14 +17,8 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <h2 id="introduction">Introduction</h2>
 <p>Magnetic Resonance Imaging (MRI) is a medical diagnostic tool used to reveal anatomical details in greater detail than an X-ray. MRI image reconstruction is the process of reconstructing the image from MRI data. The MRI machine collects data in the spatial frequency domain (also referred to as K-space), and this data is then conditioned and processed to create the spatial image that can be meaningfully inspected. An important step of this image reconstruction is performing a two dimensional FFT on the input data. This demo focuses entirely on this particular step of the image reconstruction process.</p>
 <h2 id="mri-input-data-and-reconstructed-image-output">MRI Input Data and Reconstructed Image Output</h2>
@@ -41,7 +36,7 @@ document.location=commandURI
 <p>##### 1) Read jth column from the memory<br />
 ##### 2) FFT of Q samples</p>
 <h2 id="images2dfft_cornerturnjpg"><img src="Images/2DFFT_CornerTurn.jpg" alt="" /></h2>
-<p>Copyright 2020 Xilinx</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

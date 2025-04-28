@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="filtering-in-frequency-domain">Filtering in Frequency Domain</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,14 +17,8 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>In the frequency domain, the filtering operation involves the multiplication of the Fourier transform of the input and the Fourier transform of the <br />
 impulse response followed by an inverse Fourier transform.<br />
 As the length of the impulse response increases, the frequency-domain filtering technique becomes more efficient compared to time-domain filtering.</p>

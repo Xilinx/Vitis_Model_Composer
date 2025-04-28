@@ -66,7 +66,7 @@ The driver files are automatically included when the Vitis Model Composer design
 ## Step 2: Developing Software and Running it on the Zynq-7000 System
 
 1. Open the Vivado IDE:
-    - Click **Windows > Vivado 2024.2.**
+    - Click **Windows > Vivado 2025.1.**
 In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP Integrator, but this time you will create the design using a Tcl file, rather than the interactive process.
 
 2. Using the Tcl console as shown in the following figure:
@@ -94,7 +94,7 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 8. Click **Finish** to export the hardware.
 
 9. Open the Vitis Unified IDE:
-    - Click **Windows > Vitis 2024.2.**
+    - Click **Windows > Vitis 2025.1.**
 
 10. Select the workspace space directory to store preferences and click Launch.
 
@@ -185,7 +185,7 @@ The following solutions directory contains the final Vitis Model Composer (`*.sl
 `\HDL_Library\Lab6\solution`
 
 --------------
-Copyright 2024 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

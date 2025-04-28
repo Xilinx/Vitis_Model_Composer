@@ -6,24 +6,19 @@
 </head>
 <body>
 <table class="sphinxhide" width="100%">
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
 
 commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
-              
-</html>
 <tr width="100%">
 <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>AI Engine Development</h1>
 <a href="https://www.xilinx.com/products/design-tools/vitis.html">See Vitis™ Development Environment on xilinx.com</br></a>
@@ -39,7 +34,7 @@ document.location=commandURI
 <h3 id="connecting-ai-engine-and-hdl-subsystemsaie_hdl_tutorialreadmemd"><a href="matlab:XmcExampleApi.getExample('AIE_HDL_tutorial')">Connecting AI Engine and HDL Subsystems</a></h3>
 <h3 id="connecting-ai-engine-and-hls-subsystemsaie_hls_tutorialreadmemd"><a href="matlab:XmcExampleApi.getExample('AIE_HLS_tutorial')">Connecting AI Engine and HLS Subsystems</a></h3>
 <hr />
-<p>&copy; Copyright 2023-2025 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 
 </div>
 <style type='text/css'>body {

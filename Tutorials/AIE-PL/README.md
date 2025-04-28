@@ -23,4 +23,4 @@ These tutorials will give a greater understanding of how the different processin
 
 ---
 
-&copy; Copyright 2023-2025 Advanced Micro Devices, Inc.
+Copyright (c) 2025 Advanced Micro Devices, Inc.

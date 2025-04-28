@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1 id="2d-fft-using-both-ai-engines-and-programmable-logic-hdl">2D FFT using both AI Engines and Programmable Logic (HDL)</h1>
-<html>    
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
 <script>
-function myFunction() {
+var a = document.getElementById('openlink');
 
 var path = document.location.pathname;
 var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
@@ -16,14 +17,8 @@ var directory = directory1.substring(directory1.lastIndexOf('/')+1);
 
 commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
-document.location=commandURI
-}
+a.href = commandURI;
 </script>
-<noscript>Sorry, your browser does not support JavaScript!</noscript>
-       
-<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
-              
-</html>
 <p>In this section we showcase a 2D-FFT design using both AI Engines and Programmable Logic.<br />
 Two 1D FFTs are implemented on AI Engiens and a transpose operation is implemented using HDL blocks on the programmable logic.</p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
@@ -33,7 +28,7 @@ Two 1D FFTs are implemented on AI Engiens and a transpose operation is implement
 <img src="images/fft_2d_AIE_HDL_screen_shot.png">
 </p>
 <hr />
-<p>Copyright 2020 Xilinx</p>
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>
