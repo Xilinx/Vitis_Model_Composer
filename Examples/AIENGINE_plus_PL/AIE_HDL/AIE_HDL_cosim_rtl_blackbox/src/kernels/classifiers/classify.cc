@@ -26,34 +26,29 @@ using namespace adf;
 
 void classifier
 (
-    input_stream_cint16 * input,
+    input_stream<cint16>* input,
     output_buffer<int32> & __restrict outputw
 ) {
     const unsigned output_samples =  CLASSIFIER_OUTPUT_SAMPLES ;
     auto OutIter = aie::begin(outputw);
 
     for (unsigned l=0;l<CLASSIFIER_OUTPUT_SAMPLES;l++) {
-    #ifdef __chess__
 
-      int32 from_stream = get_ss(0);
-      cint16 sample = *(cint16 *)&from_stream;
-
-    #else
       cint16 sample = readincr(input);
-    #endif
+
       if (sample.real >= 0) {
-	if (sample.imag > 0)
-	   *OutIter++ = 0;
-        else
-	   *OutIter++ = 1;
-      }
-      else {
-	if (sample.imag > 0)
-	   *OutIter++ = 2;
-        else
-	   *OutIter++ = 3;
-      }
-    }
+	    if (sample.imag > 0)
+	       *OutIter++ = 0;
+            else
+	       *OutIter++ = 1;
+          }
+          else {
+	    if (sample.imag > 0)
+	       *OutIter++ = 2;
+            else
+	       *OutIter++ = 3;
+          }
+        }
 }
 
 
