@@ -1,6 +1,23 @@
-# HDL Examples<a name="HDL_Examles"></a>
+# HDL Examples<a name="HDL_Examples"></a>
 
-### AXI_IP Examples
+### High Performance IP
+
+<table style="width:100%">
+ <tr>
+ <td width="35%" align="center"><b>Topic</b>
+ <td width="65%" align="center"><b>Description</b>
+ </tr>
+ <tr>
+ <td align="left">
+   <a href="./High_Performance/SSR_FFT/README.md">SSR FFT Fixed Point</a> <br>
+   <a href="./High_Performance/SSR_FFT_Float/README.md">SSR FFT Floating Point</a>
+ </td>
+ <td>This example offers a Vitis Model Composer testbench for a Super Sample Rate (SSR) FFT with a systolic architecture to process multiple input samples every clock cycle.
+ </td>
+ </tr>
+ </table>
+
+### AXI IP Examples
 
 <table style="width:100%">
  <tr>
@@ -210,7 +227,7 @@
  </table>
 
 --------------
-Copyright (c) 2021 Xilinx
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
