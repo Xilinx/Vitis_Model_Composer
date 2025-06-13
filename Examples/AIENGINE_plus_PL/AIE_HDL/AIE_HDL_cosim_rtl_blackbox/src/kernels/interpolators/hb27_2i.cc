@@ -1,25 +1,14 @@
-///////////////////////////////////////////////////////////////////////////
-// Copyright 2020 Xilinx
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-///////////////////////////////////////////////////////////////////////////
-
+/*
+Copyright (C) 2023, Advanced Micro Devices, Inc. All rights reserved.
+SPDX-License-Identifier: X11
+*/
 
 #include <adf.h>
-#include "../../include.h"
-#include "../../kernels.h"
-
 #include <aie_api/aie.hpp>
+#include "../../include.h"
+using namespace adf;
+using namespace aie;
+
 /*
 // 27-tap FIR and 2x up-sampling
 Interpolation rate:     2x
@@ -33,64 +22,79 @@ Outputs:                o0 = c0*(d0+d13) + c2*(d1+d12) + c4*(d2+d11) + c6*(d3+d1
                         o3 = c13*d8
                         ...
 offset: 3
+
 */
 
-//static int16_t chess_storage(%chess_alignof(v16int16)) coeffs_27_i [INTERPOLATOR27_COEFFICIENTS] = {33, -158, 0, 0, 491, -1214, 2674, 0, 0, -5942, 20503, 32767, 0, 0, 0, 0};
-
+alignas(32) static int16_t  coeffs_27_i [] = {33, -158,491, -1214, 2674, -5942, 20503, 0, 32767, 0, 0, 0, 0, 0, 0, 0};
 
 void fir_27t_sym_hb_2i
 (
 	input_buffer<cint16,adf::extents<adf::inherited_extent>,adf::margin<INTERPOLATOR27_COEFFICIENTS>>  & __restrict cb_input,
 	output_buffer<cint16> & __restrict cb_output)
-{
+	{
+		const int shift = 0 ;
+		const unsigned output_samples = cb_output.size();
 
-  const int shift = 0 ;	
-   const unsigned output_samples = INTERPOLATOR27_OUTPUT_SAMPLES ;
-  
-  v32cint16 sbuff = undef_v32cint16();
-  
-  const unsigned LSIZE = (output_samples / 8 /2 );
-  v16int16 coe = *(v16int16*)coeffs_27_i;
+		vector<cint16,32> sbuff;
+		vector<cint16,8> p,q;
 
-  auto InIter = aie::begin_vector<8>(cb_input);
-  auto OutIter = aie::begin_vector<8> (cb_output);
+		const unsigned LSIZE = (output_samples / 8 /2 );
+		vector<int16,16> coe = load_v<16>(coeffs_27_i);
 
-  sbuff = upd_w(sbuff, 0, *InIter++);
+		// Define the operator
+		constexpr unsigned Lanes=8, Points=14, CoeffStep=1, DataStepX=1, DataStepY=1;
 
-  v8cacc48 acc0 = undef_v8cacc48();
-  v8cacc48 acc1 = undef_v8cacc48();
+		using mul_ops = aie::sliding_mul_sym_ops<Lanes, Points, CoeffStep, DataStepX, DataStepY, int16, cint16>;
+		using center_ops = aie::sliding_mul_ops<Lanes, 2, CoeffStep, DataStepX, DataStepY, int16, cint16>;
 
-  const int sft = shift+15;
 
-  for ( unsigned l=0; l<LSIZE; ++l )
-    chess_prepare_for_pipelining
-    chess_loop_range(8,)
-    {
+		auto InIter = aie::begin_vector<8>(cb_input);
+		auto OutIter = aie::begin_vector<8> (cb_output);
 
-    sbuff = upd_w(sbuff, 1, *InIter++);
+		sbuff.insert(0, *InIter++);
+		sbuff.insert(1, *InIter++);
 
-    acc0 = upd_hi(acc0, mul4(    sbuff, 10, 0x3210, 1, coe, 8,0x0000,1) ); //d10..d13
+		accum<cacc48,8> acc0,acc1;
 
-    sbuff = upd_w(sbuff, 2, *InIter++);
+		const int sft = shift+15;
 
-    acc0 = upd_lo(acc0,  mul4_sym(    sbuff, 7,0x3210,1, 12, coe, 4,0x0000,1) ); //d7..d15
-    acc0 = upd_lo(acc0,  mac4_sym(ext_lo(acc0), sbuff, 3,0x3210,1, 16, coe, 0,0x0000,1) ); //d3..d19 //sym could be 12
-    
-    InIter = InIter-2;
+		for ( unsigned l=0; l<LSIZE/4; ++l )
+		chess_prepare_for_pipelining
+		chess_loop_range(8,)
+		{
+			sbuff.insert( 2, *InIter++);
 
-    acc1 = upd_hi(acc1,  mul4(    sbuff, 14, 0x3210, 1, coe, 8,0x0000,1) ); //d14..d17
+			acc0 = mul_ops::mul_sym(coe,0,sbuff, 3,16);
+			acc1 = center_ops::mul(coe,8,sbuff,10);
+			 std::tie(p,q) = interleave_zip(acc0.to_vector<cint16>(sft),acc1.to_vector<cint16>(sft),1);
+			*OutIter++ = p;
+			*OutIter++ = q;
 
-    acc1 = upd_lo(acc1, mul4_sym( sbuff, 7,0x3210,1, 20, coe, 0,0x0000,1) ); //d7..d23
-    
-    sbuff = upd_w(sbuff, 0, *InIter++); 
+			sbuff.insert( 3, *InIter++);
 
-    acc1 = upd_lo(acc1, mac4_sym(ext_lo(acc1),    sbuff, 11,0x3210,1, 16, coe, 4,0x0000,1) ); //d11..d19
-    
-    *OutIter++ = srsI(acc0, sft);
-    *OutIter++ = srsI(acc1, sft);
+			acc0 = mul_ops::mul_sym(coe,0,sbuff, 11,24);
+			acc1 = center_ops::mul(coe,8,sbuff,18);
+			std::tie(p,q) = interleave_zip(acc0.to_vector<cint16>(sft),acc1.to_vector<cint16>(sft),1);
+			*OutIter++ = p;
+			*OutIter++ = q;
 
-    }
- 
-  *InIter++;
+			sbuff.insert( 0, *InIter++);
 
-}
+			acc0 = mul_ops::mul_sym(coe,0,sbuff, 19,0);
+			acc1 = center_ops::mul(coe,8,sbuff,26);
+			std::tie(p,q) = interleave_zip(acc0.to_vector<cint16>(sft),acc1.to_vector<cint16>(sft),1);
+			*OutIter++ = p;
+			*OutIter++ = q;
+
+			sbuff.insert( 1, *InIter++);
+
+			acc0 = mul_ops::mul_sym(coe,0,sbuff, 27,8);
+			acc1 = center_ops::mul(coe,8,sbuff,2);
+			std::tie(p,q) = interleave_zip(acc0.to_vector<cint16>(sft),acc1.to_vector<cint16>(sft),1);
+			*OutIter++ = p;
+			*OutIter++ = q;
+
+
+		}
+
+	}
