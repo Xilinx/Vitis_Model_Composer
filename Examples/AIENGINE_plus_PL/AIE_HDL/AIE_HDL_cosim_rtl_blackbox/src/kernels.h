@@ -20,7 +20,7 @@
 #include <adf.h>
 #include <aie_api/aie.hpp>
 using namespace adf;
- void classifier(input_stream<cint16>* input, 
+ void classifier(input_stream_cint16 * input, 
                   output_buffer<int32> & __restrict outputw);
 
 
