@@ -54,72 +54,74 @@ void cos_sin_mag (
 
    const ap_int32 rotation_sin_lut[64]={-32442,-4613,-23155,23186,-30796,11197,-9520,31355,-32579,3515,-16736,28172,-27092,18433,-1509,32733,-32764,-538,-20088,25888,-29162,14944,-5542,32296,-31888,7544,-13098,30037,-24586,21662,2578,32666,-32666,-2578,-21662,24586,-30037,13098,-7544,31888,-32296,5542,-14944,29162,-25888,20088,538,32764,-32733,1509,-18433,27092,-28172,16736,-3515,32579,-31355,9520,-11197,30796,-23186,23155,4613,32442} ;
 
-   ap_int32 sign_I,sign_Q,X_step,Y_step,abs_I,abs_Q, rotation_index, flag;
-   ap_int32 next_X_step,next_Y_step ;
+   ap_int32 sign_I[256],sign_Q[256],X_step[256],Y_step[256],abs_I[256],abs_Q[256], rotation_index, flag;
+   ap_int32 next_X_step[256],next_Y_step[256];
+     
+   for(short k=0; k < 256; k++) {
 
-   sign_I = ( x_I >> 16 ) & 0x1 ;
-   sign_Q = ( x_Q >> 16 ) & 0x1 ;
-   if (sign_I > 0 ) {
-      abs_I = ~(x_I)+1 ;
+   sign_I[k] = ( x_I[k] >> 16 ) & 0x1 ;
+   sign_Q[k] = ( x_Q[k] >> 16 ) & 0x1 ;
+   if (sign_I[k] > 0 ) {
+      abs_I[k] = ~(x_I[k])+1 ;
    } else {
-       abs_I = x_I ;
+       abs_I[k] = x_I[k] ;
    }
 
-   if (sign_Q > 0 ) {
-      abs_Q = ~(x_Q)+1 ;
+   if (sign_Q[k] > 0 ) {
+      abs_Q[k] = ~(x_Q[k])+1 ;
    } else {
-       abs_Q = x_Q ;
+       abs_Q[k] = x_Q[k] ;
    }
    // Invert the signs now, positive =1, needed for later calc ??
    //sign_I = 1-sign_I;
    //sign_Q = 1-sign_Q;
-   X_step = abs_Q + abs_I ;
+   X_step[k] = abs_Q[k] + abs_I[k] ;
    flag = 0 ;
    // if its in second octant
-   if ( abs_I <= abs_Q ) {
-      Y_step = abs_I - abs_Q ;
+   if ( abs_I[k] <= abs_Q[k] ) {
+      Y_step[k] = abs_I[k] - abs_Q[k] ;
       flag=1;
    } else {
-      Y_step = abs_Q - abs_I ;
+      Y_step[k] = abs_Q[k] - abs_I[k] ;
    }
 
    rotation_index = 1;
    for(ap_int32 i = 1;i<nsteps;i++) {
-       if (Y_step >= 0) {
+       if (Y_step[k] >= 0) {
           rotation_index = rotation_index + (1<<i);
-          next_X_step = X_step + (Y_step>>i);
-          next_Y_step = Y_step - (X_step>>i);
+          next_X_step[k] = X_step[k] + (Y_step[k]>>i);
+          next_Y_step[k] = Y_step[k] - (X_step[k]>>i);
        } else {
-          next_X_step = X_step - (Y_step>>i) ;
-          next_Y_step = Y_step + (X_step>>i) ;
+          next_X_step[k] = X_step[k] - (Y_step[k]>>i) ;
+          next_Y_step[k] = Y_step[k] + (X_step[k]>>i) ;
        }
-       X_step = next_X_step;
-       Y_step = next_Y_step;
+       X_step[k] = next_X_step[k];
+       Y_step[k] = next_Y_step[k];
    }
 
-
+   ap_int32 mag[256];
    //mag = floor(X_step*P_fixed/norm);
-   ap_int32 mag = X_step*P_fixed;
-   *magout = mag>>SHIFT_BITS;
+   mag[k] = X_step[k]*P_fixed;
+   *magout = mag[k]>>SHIFT_BITS;
 
  if (flag) {
-       if (sign_I) {
-         *cos_fixed = -rotation_sin_lut[rotation_index];
+       if (sign_I[k]) {
+         *cos_fixed= -rotation_sin_lut[rotation_index];
        } else {
          *cos_fixed = rotation_sin_lut[rotation_index];
        }
-       if (sign_Q) {
+       if (sign_Q[k]) {
          *sin_fixed = -rotation_cos_lut[rotation_index];
        } else {
          *sin_fixed = rotation_cos_lut[rotation_index];
        }
    } else {
-       if (sign_I) {
+       if (sign_I[k]) {
          *cos_fixed = -rotation_cos_lut[rotation_index];
        } else {
-         *cos_fixed = rotation_cos_lut[rotation_index];
+         *cos_fixed= rotation_cos_lut[rotation_index];
        }
-       if (sign_Q) {
+       if (sign_Q[k]) {
          *sin_fixed = -rotation_sin_lut[rotation_index];
        } else {
          *sin_fixed = rotation_sin_lut[rotation_index];
@@ -127,7 +129,7 @@ void cos_sin_mag (
    }
 
 }
-
+}
 
 void polar_clip(hls::stream<ap_axis<32, 0, 0, 0> > &in_sample, hls::stream<ap_axis<32, 0, 0, 0> > &out_sample) {
 //#pragma HLS PIPELINE II=1
@@ -143,17 +145,18 @@ void polar_clip(hls::stream<ap_axis<32, 0, 0, 0> > &in_sample, hls::stream<ap_ax
 
   //sample = readincr(in);
   //sample = in.read();
-  short value_real, value_imag;
-  short value_real_1, value_imag_1;
+  short value_real[256], value_imag[256];
+  short value_real_1[256], value_imag_1[256];
 
-  value_real = short(in_x.data & 0xFFFF); //sample.real;
-  value_imag = short((in_x.data >> 16) & 0xFFFF); // sample.imag;
+  for(short m=0; m < 256; m++) {
+  value_real[m] = short(in_x.data[m] & 0xFFFF); //sample.real;
+  value_imag[m] = short((in_x.data[m] >> 16) & 0xFFFF); // sample.imag;
 
  // printf( "-[KERNEL]: Inside the kernel input  real and imag respectively  %d %d \n",(int) value_real, (int)value_imag);
 
 
-  value_real_1 = short(in_x.data & 0xFFFF); //(ap_int32) sample.real;
-  value_imag_1 = short((in_x.data >> 16) & 0xFFFF); // (ap_int32) sample.imag;
+  value_real_1[m] = short(in_x.data[m] & 0xFFFF); //(ap_int32) sample.real;
+  value_imag_1[m] = short((in_x.data[m] >> 16) & 0xFFFF); // (ap_int32) sample.imag;
 
  // printf( "-[KERNEL]: Inside the kernel input  real and imag respectively  %d %d \n",(int) value_real_1, (int)value_imag_1);
 
@@ -161,42 +164,43 @@ void polar_clip(hls::stream<ap_axis<32, 0, 0, 0> > &in_sample, hls::stream<ap_ax
 
   //std::cerr << "Received " << value.real << " + " << value.imag  << "j\n";
   //double ph = atan2((double)value.imag,(double)value.real) ;
-  ap_int32 value_real_sq, value_imag_sq, mag_sq;
-  ap_int32 res_real, res_imag;
+  ap_int32 value_real_sq[256], value_imag_sq[256], mag_sq[256];
+  ap_int32 res_real[256], res_imag[256];
 
-  value_real_sq = value_real * value_real;
-  value_imag_sq = value_imag * value_imag;
-  mag_sq = value_real_sq + value_imag_sq;
+  value_real_sq[m] = value_real[m] * value_real[m];
+  value_imag_sq[m] = value_imag[m] * value_imag[m];
+  mag_sq[m] = value_real_sq[m] + value_imag_sq[m];
 
   //double mag = sqrt(double(mag_sq)) ;
 
   ap_int32 magout,cs_fixed_real,cs_fixed_imag;
 
-  cos_sin_mag(value_real_1,value_imag_1,&magout,&cs_fixed_real,&cs_fixed_imag);
+  cos_sin_mag(value_real_1[m],value_imag_1[m],&magout,&cs_fixed_real,&cs_fixed_imag);
 
  // printf("[KERNEL]: real and imaginary After CORDIC %d  %d \n",(int)cs_fixed_real ,(int) cs_fixed_imag );
 
-  if(mag_sq>CFR_THRESHOLD*CFR_THRESHOLD){
+  if(mag_sq[m]>CFR_THRESHOLD*CFR_THRESHOLD){
 
-     res_real = (ap_int32)cs_fixed_real*(magout-CFR_THRESHOLD);
-     res_imag = (ap_int32)cs_fixed_imag*(magout-CFR_THRESHOLD);
+     res_real[m] = (ap_int32)cs_fixed_real[m]*(magout-CFR_THRESHOLD);
+     res_imag[m] = (ap_int32)cs_fixed_imag[m]*(magout-CFR_THRESHOLD);
     // printf("[KERNEL]: real and imaginary after threshold %d  %d \n",(int)res_real ,(int) res_imag );
 
-	 ovalue.real = (short) (res_real & 0xFFFF);
-     ovalue.imag = (short) (res_imag & 0xFFFF);
+	 ovalue.real[m] = (short) (res_real[m] & 0xFFFF);
+     ovalue.imag[m] = (short) (res_imag[m] & 0xFFFF);
     // printf("[KERNEL]: real and imaginary after threshold %d  %d \n",(int)ovalue.real ,(int) ovalue.imag );
 
   }else {
-     ovalue.real = 0 ;
-     ovalue.imag = 0 ;
+     ovalue.real[m] = 0 ;
+     ovalue.imag[m] = 0 ;
   }
 
 
-  out_x.data = ( (( ((short)ovalue.real) & 0x0000FFFF) << 0) | (( ((short)ovalue.imag) & 0x0000FFFF) << 16) );
+  out_x.data[m] = ( (( ((short)ovalue.real[m]) & 0x0000FFFF) << 0) | (( ((short)ovalue.imag[m]) & 0x0000FFFF) << 16) );
 
 //  printf("[KERNEL}: real and imaginary at Output %d  %d \n",(int)ovalue.real ,(int) ovalue.imag );
 
   //****out_x.keep_all();
   out_sample.write(out_x);
 };
+}
 //}
