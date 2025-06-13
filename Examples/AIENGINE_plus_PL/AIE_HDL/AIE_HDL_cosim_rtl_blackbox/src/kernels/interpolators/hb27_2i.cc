@@ -37,11 +37,10 @@ offset: 3
 
 //static int16_t chess_storage(%chess_alignof(v16int16)) coeffs_27_i [INTERPOLATOR27_COEFFICIENTS] = {33, -158, 0, 0, 491, -1214, 2674, 0, 0, -5942, 20503, 32767, 0, 0, 0, 0};
 
-using namespace adf;
-static int16_t chess_storage(%chess_alignof(v16int16)) coeffs_27_i [INTERPOLATOR27_COEFFICIENTS] = {33, -158,491, -1214, 2674, -5942, 20503, 0, 32767};
- 
-void fir_27t_sym_hb_2i(       
-	input_buffer<cint16> & __restrict cb_input,
+
+void fir_27t_sym_hb_2i
+(
+	input_buffer<cint16,adf::extents<adf::inherited_extent>,adf::margin<INTERPOLATOR27_COEFFICIENTS>>  & __restrict cb_input,
 	output_buffer<cint16> & __restrict cb_output)
 {
 
