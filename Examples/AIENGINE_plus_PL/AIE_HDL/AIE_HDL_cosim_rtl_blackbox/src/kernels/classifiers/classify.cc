@@ -21,8 +21,8 @@
 using namespace adf;
 
 void classifier(input_stream_cint16 * input, 
-                output_buffer<int32> & __restrict output
-){
+                output_buffer<int32> & __restrict output)
+{
     
     const unsigned output_samples =  CLASSIFIER_OUTPUT_SAMPLES ;
     auto OutIter = aie::begin(output);

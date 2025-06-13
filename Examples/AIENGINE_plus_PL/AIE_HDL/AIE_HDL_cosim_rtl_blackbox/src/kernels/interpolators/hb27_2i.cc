@@ -27,21 +27,6 @@ offset: 3
 
 alignas(32) static int16_t  coeffs_27_i [] = {33, -158,491, -1214, 2674, -5942, 20503, 0, 32767, 0, 0, 0, 0, 0, 0, 0};
 
-// void fir_27t_sym_hb_2i
-// (       
-// 	input_window_cint16 * cb_input,
-// 	output_window_cint16 * cb_output)
-// {
-//   cint16 t1;
-//   for(int i =0;i<INTERPOLATOR27_OUTPUT_SAMPLES/2;i++)
-//   {
-//     t1 = window_readincr(cb_input);
-//     window_writeincr(cb_output,t1);
-//     window_writeincr(cb_output,t1);
-//   }
-
-// }
-
 void fir_27t_sym_hb_2i
 (
 	input_buffer<cint16,adf::extents<adf::inherited_extent>,adf::margin<INTERPOLATOR27_COEFFICIENTS>>  & __restrict cb_input,
