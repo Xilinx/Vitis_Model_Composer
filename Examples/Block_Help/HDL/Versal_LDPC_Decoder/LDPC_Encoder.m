@@ -53,7 +53,7 @@ encodedBits = ldpcEncode(infoBits, cfgEnc);
 modSignal = 1 - 2 * encodedBits;
 
 % Add AWGN noise
-EbN0dB = 15;       % Eb/N0
+EbN0dB = 20;       % Eb/N0
 R = 1/3;           % code rate
 M = 2;             % BPSK
 snr = EbN0dB + 10*log10(R*log2(M));
