@@ -67,19 +67,19 @@ As our discussion focuses on designing with AIEs the overlap and save input and 
 
 Using the Model Composer Simulation Data Inspector the throughput is a consistent 392Msps per AIE path:
 
-<img src="./ThroughputPerAIEPath.png" width="600">
+<img src="./Images/ThroughputPerAIEPath.png" width="600">
 
 To obtain >2Gsps we require ceil (2Gsps/392Msps/2) = 11 copies of a single path.  Please remember we divided the sample rate of a single path by 2 because 50% of the output samples need to be discarded.
 
 We added some constraints for Vitis (i.e.: {'--xlopt=2', '--Xmapper=BufferOptLevel7'} to improve the buffering optimization and Vitis indicates the following resources are used:
 
-<img src="./ResourceUtilization.png" width="600">
+<img src="./Images/ResourceUtilization.png" width="600">
 
 The graph level connectivity shows what we expect: 
 
-<img src="./GraphLevelConnection.png" width="600">
+<img src="./Images/GraphLevelConnection.png" width="600">
 
 While the array view shows that 22 compute engines are required for computation, only subsections of each data memory are utilized:
 
-<img src="./DataMemoryUtilization.png" width="600">
+<img src="./Images/DataMemoryUtilization.png" width="600">
 
