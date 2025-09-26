@@ -1,5 +1,3 @@
-clc;
-clear all;
 N = 256; % Number of coarse points (2^TP_COARSE_BITS)
 max_val = (2^15)-1; % Scaling for int16 (32767)
 x = (0:N-1) / N; % Normalized domain points from 0 to 1
