@@ -1,0 +1,274 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="filtering-in-frequency-domain">Filtering in Frequency Domain</h1>
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
+<script>
+var a = document.getElementById('openlink');
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+
+a.href = commandURI;
+</script>
+<p>This example implements a 129-tap, &gt;2.0 GSPS filter on AI Engines, using a frequency domain filtering approach.</p>
+<h2 id="algorithm">Algorithm</h2>
+<p>Time domain filtering involves convolution (i.e.: multiply and add operations).  In the time domain if the signal and the filter length are both of length <em>N</em>, we can say the arithmetic complexity is of order N<sup>2</sup>.  </p>
+<p>Convolution in the time domain is equivalent to multiplication in the frequency domain implying that FFTs can be used to perform filtering.  <strong>Frequency domain filtering is used to improve filtering efficiency as N becomes larger.</strong>  Typically, the critical threshold for efficiency improvements based on the filter order N is somewhere between 32 and 64 taps.   Below the threshold, time domain convolution is more efficient while above the threshold frequency domain filtering is more efficient</p>
+<p>The disadvantage to filtering in the frequency domain is the latency incurred by the processing time of the FFT &amp; IFFT.  The advantage is as the number of filter taps increases frequency domain filtering becomes more efficient compared to using a convolution approach in the time domain.</p>
+<p>There are multiple approaches to use an FFT to perform fast filtering in the frequency domain.  One approach is the overlap and save method.  In the overlap and save method it is the input that is overlapped and, therefore, must be saved.  This method has also been called overlap and discard because the overlapping portion of the output blocks are discarded.  In practice it is best to select M as the first power of 2 plus 1 that is larger than the minimum desired filter order and then set N = 2*(M-1).  This corresponds to an FFT size of N and the blocks of data will contain N/2 samples.  It is worth noting that if *½* of the output FFT samples will be discarded, then the output sample rate is correspondingly <em>½</em> of the input sample rate per path for the resulting frequency domain FIR implementation.  </p>
+<h2 id="simulink-golden-reference">Simulink Golden Reference</h2>
+<p>Although Simulink provides a frequency domain FIR the functionally equivalent model can be created from lower level functional blocks i.e.:</p>
+<p><img src="./Images/algorithm.png" alt="" /> </p>
+<p>The time domain filter coefficients can be run through an FFT to derive the frequency domain coefficients.  Buffer blocks and selector blocks can assist in performing the functionality of overlapping the input data and discarding the unnecessary FFT output samples.</p>
+<p>After a single path is developed and validated, in a practical application increasing the throughput is a simple exercise in replicating the single path to achieve the desired throughput.</p>
+<h2 id="aie-design">AIE Design</h2>
+<p>In this case the goal is to perform M=129 tap, &gt;2Gsps frequency domain filtering using N=256 point Fourier Transforms.<br />
+A time domain FIR that uses 3 real multipliers to build a complex multiplier would require 3 * 129 = 387 Real MACs/output sample while the FFTs, complex multiply, &amp; iFFT require 42 real multiplies.  For this example, the frequency domain filter is 387/42 = 9.2x more efficient.<br />
+A custom, 256-point FFT was implemented using 4 stages of a aie::fft<em>dit</em>r4_stage radix 4 FFT function call using the ibuff and tbuff memory scratchpads to pass data between radix 4 function calls:  </p>
+<pre><code>aie::fft_dit_r4_stage&lt;64&gt;(ibuff, tw4a_1, tw4a_0, tw4a_2, FFT_PTS, SHIFT_FFT, SHIFT_FFT, FFTn, tbuff);
+aie::fft_dit_r4_stage&lt;16&gt;(tbuff, tw4b_1, tw4b_0, tw4b_2, FFT_PTS, SHIFT_FFT, SHIFT_FFT, FFTn, ibuff);
+aie::fft_dit_r4_stage&lt; 4&gt;(ibuff, tw4c_1, tw4c_0, tw4c_2, FFT_PTS, SHIFT_FFT, SHIFT_FFT, FFTn, tbuff);
+aie::fft_dit_r4_stage&lt; 1&gt;(tbuff, tw4d_1, tw4d_0, tw4d_2, FFT_PTS, SHIFT_FFT, SHIFT_FFT, FFTn, ibuff);
+</code></pre>
+<p>The cint16 coefficient look up table and multiply operation was integrated into the AIE FFT as a simple for loop:</p>
+<pre><code>// complex FIR coeffs array
+alignas(aie::vector_decl_align) const cint16 coeff[256] = { {16383,0},…};
+aie::accum&lt;cacc48,4&gt; acc; // accumulator register
+auto pCoeff = aie::cbegin_vector&lt;4&gt;(coeff); // setup pointer to coeff
+
+// complex filtering loop
+for (unsigned lp=0; lp&lt;32; lp++) // process 32*4*2=256 samples
+chess_prepare_for_pipelining
+{ 
+FFT_data = *pI++; // 32 bit complex data * 4 = 256 bits
+coeff_data = *pCoeff++; // 16 bit complex data * 4 = 128 bits
+acc = aie::mul(FFT_data, coeff_data);
+writeincr(sig_o, acc); // write out 4, cacc48 samples
+
+FFT_data = *pI++;
+coeff_data = *pCoeff++;
+acc = aie::mul(FFT_data, coeff_data);
+writeincr(sig_o, acc);
+} // end of lp for loop
+</code></pre>
+<p>By using the cascade connection between the FFT and iFFT adjacent AIEs are guaranteed, and a cacc48 bit connection is established directly between the FFT AIE &amp; iFFT AIE to improve throughput and reduce latency (as compared to using an axi buffer or axi stream connection):  </p>
+<p><img src="./Images/design.png" alt="" /> </p>
+<p>As our discussion focuses on designing with AIEs the overlap and save input and data output discard is better left to PL implementation which is left as an exercise for the PL designer.</p>
+<h2 id="simulation-results">Simulation Results</h2>
+<p>Using the Model Composer Simulation Data Inspector the throughput is a consistent 392 Msps per AIE path:</p>
+<p><img src="./Images/ThroughputPerAIEPath.png" alt="" /> </p>
+<p>To obtain &gt;2Gsps we require ceil (2Gsps/392Msps/2) = 11 copies of a single path.  Please remember we divided the sample rate of a single path by 2 because 50% of the output samples need to be discarded.</p>
+<p>We added some constraints for Vitis (i.e.: {'--xlopt=2', '--Xmapper=BufferOptLevel7'} to improve the buffering optimization and Vitis indicates the following resources are used:</p>
+<p><img src="./Images/ResourceUtilization.png" alt="" /> </p>
+<p>The graph level connectivity shows what we expect: </p>
+<p><img src="./Images/GraphLevelConnection.png" alt="" /> </p>
+<p>While the array view shows that 22 compute engines are required for computation, only subsections of each data memory are utilized:</p>
+<p><img src="./Images/DataMemoryUtilization.png" alt="" /> </p>
+<h2 id="summary">Summary</h2>
+<p>We can easily compare the AIE simulation results to a Simulink reference model, perform quantization, and ascertain the number of parallel paths to meet targeted throughput requirements using VMC.  We used the AIE API to create custom source code for a FFT + complex multiply, iFFT and established a direct cascade connection between the functions that guarantees colocation of AIEs for each data path.  The cascades maintain a fast 48 bit * 2 data between the FFT + complex multiply and iFFT.  For a 129 tap, &gt;2Gsps FIR a total 22 AIE compute engines were used.</p>
+<hr />
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+</body>
+</html>
