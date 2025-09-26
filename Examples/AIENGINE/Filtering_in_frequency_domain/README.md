@@ -1,124 +1,99 @@
 # Filtering in Frequency Domain
 
-In the frequency domain, the filtering operation involves the multiplication of the Fourier transform of the input and the Fourier transform of the 
-impulse response followed by an inverse Fourier transform.
-As the length of the impulse response increases, the frequency-domain filtering technique becomes more efficient compared to time-domain filtering.
+This example implements a 129-tap, >2.0 GSPS filter on AI Engines, using a frequency domain filtering approach.
 
-## The Algorithm
+## Algorithm
 
-This example uses the Overlap-Save method. The diagram below depicts this algorithm at a high level:
+Time domain filtering involves convolution (i.e.: multiply and add operations).  In the time domain if the signal and the filter length are both of length *N*, we can say the arithmetic complexity is of order N<sup>2</sup>.  
 
-<img src="./Images/high_level.png" width="600">
+Convolution in the time domain is equivalent to multiplication in the frequency domain implying that FFTs can be used to perform filtering.  **Frequency domain filtering is used to improve filtering efficiency as N becomes larger.**  Typically, the critical threshold for efficiency improvements based on the filter order N is somewhere between 32 and 64 taps.   Below the threshold, time domain convolution is more efficient while above the threshold frequency domain filtering is more efficient
 
-The input stream is divided into overlapping segments of size FFT_SIZE, where each segment has an overlap of TAP_NUM samples (see image in the design section). FFT_SIZE represents the length of the FFT, while TAP_NUM is the length of the FIR filter. To process each segment, the FFT of the segment is multiplied by the FFT of the FIR numerator, both of length FFT_SIZE. The resulting product undergoes an inverse fast Fourier transform (IFFT), and the last FFT_SIZE – TAP_NUM samples are directed to the output. Any remaining samples are discarded.
+The disadvantage to filtering in the frequency domain is the latency incurred by the processing time of the FFT & IFFT.  The advantage is as the number of filter taps increases frequency domain filtering becomes more efficient compared to using a convolution approach in the time domain.
+ 
+There are multiple approaches to use an FFT to perform fast filtering in the frequency domain.  One approach is the overlap and save method.  In the overlap and save method it is the input that is overlapped and, therefore, must be saved.  This method has also been called overlap and discard because the overlapping portion of the output blocks are discarded.  In practice it is best to select M as the first power of 2 plus 1 that is larger than the minimum desired filter order and then set N = 2*(M-1).  This corresponds to an FFT size of N and the blocks of data will contain N/2 samples.  It is worth noting that if *½* of the output FFT samples will be discarded, then the output sample rate is correspondingly *½* of the input sample rate per path for the resulting frequency domain FIR implementation.  
 
-For this specific implementation, FFT_SIZE is 128, and the TAP_NUM is 32. The input is provided in 96-sample frames, where the sum of the input frame size and the filter size equals the FFT length.
 
-To obtain the coefficients for the time domain and filter domain for this implementation, we use a MATLAB script called `test_tap32_fft128.m`.
+## Simulink Golden Reference
 
-## The Design
 
-![](./Images/design.png)
+Although Simulink provides a frequency domain FIR the functionally equivalent model can be created from lower level functional blocks i.e.:
 
-This design uses the _AIE Kernel_ block to import the Overlap-Save kernel and uses the _AIE Class Kernel_ block to import the kernel that applies the frequency domain coefficinets.
+![](./Images/algorithm.png) 
 
-The definition of the Overlap-Save kernel is shown below:
+
+The time domain filter coefficients can be run through an FFT to derive the frequency domain coefficients.  Buffer blocks and selector blocks can assist in performing the functionality of overlapping the input data and discarding the unnecessary FFT output samples.
+ 
+After a single path is developed and validated, in a practical application increasing the throughput is a simple exercise in replicating the single path to achieve the desired throughput.
+
+
+## AIE Design
+
+In this case the goal is to perform M=129 tap, >2Gsps frequency domain filtering using N=256 point Fourier Transforms.
+A time domain FIR that uses 3 real multipliers to build a complex multiplier would require 3 * 129 = 387 Real MACs/output sample while the FFTs, complex multiply, & iFFT require 42 real multiplies.  For this example, the frequency domain filter is 387/42 = 9.2x more efficient.
+A custom, 256-point FFT was implemented using 4 stages of a aie::fft_dit_r4_stage radix 4 FFT function call using the ibuff and tbuff memory scratchpads to pass data between radix 4 function calls:  
 
 ```
-template <int NUM_OF_FRAMES>
-void __attribute__ ((noinline)) overlap_save(adf::input_buffer<cint16,adf::extents<adf::inherited_extent>, adf::margin<TAP_NUM>> & restrict win_i,
-                                                   adf::output_buffer<cint16> & restrict win_o )
-{
-    auto win_ot = aie::begin_vector<8>( win_o );
-    auto win_it = aie::begin_vector<8>( win_i );
+aie::fft_dit_r4_stage<64>(ibuff, tw4a_1, tw4a_0, tw4a_2, FFT_PTS, SHIFT_FFT, SHIFT_FFT, FFTn, tbuff);
+aie::fft_dit_r4_stage<16>(tbuff, tw4b_1, tw4b_0, tw4b_2, FFT_PTS, SHIFT_FFT, SHIFT_FFT, FFTn, ibuff);
+aie::fft_dit_r4_stage< 4>(ibuff, tw4c_1, tw4c_0, tw4c_2, FFT_PTS, SHIFT_FFT, SHIFT_FFT, FFTn, tbuff);
+aie::fft_dit_r4_stage< 1>(tbuff, tw4d_1, tw4d_0, tw4d_2, FFT_PTS, SHIFT_FFT, SHIFT_FFT, FFTn, ibuff);
 
-    for ( unsigned int jj=0; jj < NUM_OF_FRAMES; jj++) 
-    {
-            // Loop over input window, copy to output window:
-            for ( unsigned int ll=0; ll < (WIN_SIZE + TAP_NUM) / 8; ll++)
-                chess_loop_range(4,)
-                chess_prepare_for_pipelining
-            {
-                aie::vector<cint16, 8> w = *win_it++;
-                *win_ot++ = w;
-            }
+```
+The cint16 coefficient look up table and multiply operation was integrated into the AIE FFT as a simple for loop:
 
-        win_it -= TAP_NUM/8;
-    }
+```
+// complex FIR coeffs array
+alignas(aie::vector_decl_align) const cint16 coeff[256] = { {16383,0},…};
+aie::accum<cacc48,4> acc; // accumulator register
+auto pCoeff = aie::cbegin_vector<4>(coeff); // setup pointer to coeff
 
-}
+ // complex filtering loop
+ for (unsigned lp=0; lp<32; lp++) // process 32*4*2=256 samples
+ chess_prepare_for_pipelining
+ { 
+        FFT_data = *pI++; // 32 bit complex data * 4 = 256 bits
+        coeff_data = *pCoeff++; // 16 bit complex data * 4 = 128 bits
+        acc = aie::mul(FFT_data, coeff_data);
+        writeincr(sig_o, acc); // write out 4, cacc48 samples
+        
+        FFT_data = *pI++;
+        coeff_data = *pCoeff++;
+        acc = aie::mul(FFT_data, coeff_data);
+        writeincr(sig_o, acc);
+   } // end of lp for loop
 ```
 
-The kernel uses an input buffer of size WIN_SIZE = 96, as specified in the block mask, along with a margin of TAP_NUM = 32 samples. The template parameter, NUM_OF_FRAMES, defaults to one, and the purpose for requiring it will be explained later when discussing design throughput. The margin is utilized in situations where an algorithm requires a certain number of samples from the previous frame. In this scenario, every 128-sample output block comprises a 96-sample input frame and 32 samples from the previous input frame. The process by which the Overlap-save algorithm produces output blocks of 128 samples is depicted in the following image:
+By using the cascade connection between the FFT and iFFT adjacent AIEs are guaranteed, and a cacc48 bit connection is established directly between the FFT AIE & iFFT AIE to improve throughput and reduce latency (as compared to using an axi buffer or axi stream connection):  
 
-<img src="./Images/overlap_save.png" width="600">
+![](./Images/design.png) 
 
-Note the second class that applies the filter coefficients is using a non-default constructor to initialize a static array with the frequency domain filter coefficients. The image below depicts the block mask where the filter coefficients are passed to the constructor. 
-
-<img src="./Images/constructor.png" width="600">
-
-## Simulation results
-
-In this design, we are comparing the output of the frequency domain filtering using the AI Engine blocks with the FIR block from MathWorks DSP System Toolbox. 
-
-<img src="./Images/simulink_design.png" width="900">
-
-The output of the spectrum analyzer is shown below. As you can see, the spectra of the two paths are almost completely overlapping. 
-
-<img src="./Images/spectrum.png" width="500">
-
-## Throughput
-
-It is easy to estimate the throughput of this design in Vitis Model Composer. You need to generate code and run the cycle-approximate AI Engine simulation from the Hub block. The Hub block configuration is shown below:
-
-<img src="./Images/hub.png" width="500">
-
-After running the cycle-approximate AI Engine simulation, the Simulink Data Inspector will pop up and you will see the output signal and the estimated throughput:
-
-<img src="./Images/throughput_1.png" width="500">
-
-### Increasing throughput by using more AI Engine cores
-The estimated throughput of 326 MHz is limited by the FFT blocks. To increase the throughput, you can increase the value of the Number of Cascade Length parameters of the FFT and IFFT blocks. This spreads the FFT operation over more than one AI Engine tile and will result in a throughput increase. The results for Number of Cascade Length of 2 and 4 are shown below:
-
-| Cascade length| Throughput(MSPS)|
-| ------------- |:-------------:|
-|1  | 326|
-|2|451|
-|3|500|
-|4|500|
-
-Note that increasing the cascade length beyond 3 is no longer increasing the thoughput. To increase the throughput furthur, we need to inlcresae the PLIO width
-
-### Increasing throughput by increasing the PLIO width
-The PLIO width can be configured to 32, 64, or 128. In this example, the PLIO width has been set to 32 and the PLIO frequency has been set to 500MHz. This implies that the AI Engine will receive data from the PL at a maximum rate of 500 MSPS, with each sample being 32 bits. Consequently, the maximum throughput is limited to 500 MSPS (see the table above). However, if we increase the PLIO width to 64, while maintaining the PLIO frequency at 500MHz, the PL can send data to the AI Engine at a rate of 500 MSPS with each sample being 64 bits. This means the AI Engine can process incoming 32-bit data at 1GSPS, potentially achieving a throughput of 1GSPS.
-
-*Here are the new throughput numbers with a PLIO width of 64:*
-
-| Cascade length| Throughput(MSPS)|
-| ------------- |:-------------:|
-|1  | 326|
-|2|454|
-|3|549|
-|4|718|
-
-### Increasing throughput by increasing the number of frames fed to the FFT blocks
-
-Increasing the value of the Input Window Size parameter of the FFT/IFFT blocks can boost the throughput. By setting this parameter as an integer multiple of the FFT size, multiple FFT iterations can be performed on a given input window, generating multiple iterations of output samples. This reduces the number of times the kernel needs to be triggered to process a given number of input data samples, resulting in lower overheads during kernel triggering and an overall increase in throughput.
-
-To increase the number of frames that are supplied to the FFT blocks, you can set the variable NUM_OF_FRAMES to an integer value in the MATLAB command window. The default value for this variable is one.
-
-The table below illustrates the impact on throughput as we increase the number of input frames for a PLIO of 64 and cascade lengths of 4:
-
-| Number of frames| Throughput(MSPS)|
-| ------------- |:-------------:|
-|1  | 718|
-|2|874|
-|4|976|
-|8|1000|
-
-By employing the mentioned techniques to boost the throughput, we have achieved a 1GSPS throughput. However, this comes at the cost of higher resource usage due to the increased cascade length and increased design latency resulting from the higher number of frames. 
+As our discussion focuses on designing with AIEs the overlap and save input and data output discard is better left to PL implementation which is left as an exercise for the PL designer.
 
 
+## Simulation Results
 
+Using the Model Composer Simulation Data Inspector the throughput is a consistent 392 Msps per AIE path:
 
+![](./Images/ThroughputPerAIEPath.png) 
 
+To obtain >2Gsps we require ceil (2Gsps/392Msps/2) = 11 copies of a single path.  Please remember we divided the sample rate of a single path by 2 because 50% of the output samples need to be discarded.
+
+We added some constraints for Vitis (i.e.: {'--xlopt=2', '--Xmapper=BufferOptLevel7'} to improve the buffering optimization and Vitis indicates the following resources are used:
+
+![](./Images/ResourceUtilization.png) 
+
+The graph level connectivity shows what we expect: 
+
+![](./Images/GraphLevelConnection.png) 
+
+While the array view shows that 22 compute engines are required for computation, only subsections of each data memory are utilized:
+
+![](./Images/DataMemoryUtilization.png) 
+
+## Summary
+
+We can easily compare the AIE simulation results to a Simulink reference model, perform quantization, and ascertain the number of parallel paths to meet targeted throughput requirements using VMC.  We used the AIE API to create custom source code for a FFT + complex multiply, iFFT and established a direct cascade connection between the functions that guarantees colocation of AIEs for each data path.  The cascades maintain a fast 48 bit * 2 data between the FFT + complex multiply and iFFT.  For a 129 tap, >2Gsps FIR a total 22 AIE compute engines were used.
+
+------------
+
+Copyright (c) 2025 Advanced Micro Devices, Inc.
