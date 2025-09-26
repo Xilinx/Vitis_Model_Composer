@@ -15,7 +15,7 @@ There are multiple approaches to use an FFT to perform fast filtering in the fre
 Although Simulink provides a frequency domain FIR the functionally equivalent model can be created from lower level functional blocks i.e.:
 
 
-<img src="./Images/algorithm.png" width="600">
+<img src="./Images/algorithm.png" width="800">
 
 The time domain filter coefficients can be run through an FFT to derive the frequency domain coefficients.  Buffer blocks and selector blocks can assist in performing the functionality of overlapping the input data and discarding the unnecessary FFT output samples.
  
@@ -58,7 +58,7 @@ The cint16 coefficient look up table and multiply operation was integrated into 
 
 By using the cascade connection between the FFT and iFFT adjacent AIEs are guaranteed, and a cacc48 bit connection is established directly between the FFT AIE & iFFT AIE to improve throughput and reduce latency (as compared to using an axi buffer or axi stream connection):  
 
-<img src="./Images/design.png" width="600">
+<img src="./Images/design.png" width="800">
 
 As our discussion focuses on designing with AIEs the overlap and save input and data output discard is better left to PL implementation which is left as an exercise for the PL designer.
 
@@ -67,7 +67,7 @@ As our discussion focuses on designing with AIEs the overlap and save input and 
 
 Using the Model Composer Simulation Data Inspector the throughput is a consistent 392Msps per AIE path:
 
-<img src="./Images/ThroughputPerAIEPath.png" width="600">
+<img src="./Images/ThroughputPerAIEPath.png" width="800">
 
 To obtain >2Gsps we require ceil (2Gsps/392Msps/2) = 11 copies of a single path.  Please remember we divided the sample rate of a single path by 2 because 50% of the output samples need to be discarded.
 
