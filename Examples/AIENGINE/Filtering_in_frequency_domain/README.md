@@ -1,6 +1,6 @@
 # Filtering in Frequency Domain
 
-Time domain filtering involves convolution (i.e.: multiply and add operations).  In the time domain if the signal and the filter length are both of length-N, we can say the arithmetic complexity is of order N<sup>2</sup>.  
+Time domain filtering involves convolution (i.e.: multiply and add operations).  In the time domain if the signal and the filter length are both of length *N*, we can say the arithmetic complexity is of order N<sup>2</sup>.  
 
 Convolution in the time domain is equivalent to multiplication in the frequency domain implying that FFTs can be used to perform filtering.  Frequency domain filtering is used to improve filtering efficiency as N becomes larger.  Typically, the critical threshold for efficiency improvements based on the filter order N is somewhere between 32 and 64 taps.   Below the threshold, time domain convolution is more efficient while above the threshold frequency domain filtering is more efficient
 
