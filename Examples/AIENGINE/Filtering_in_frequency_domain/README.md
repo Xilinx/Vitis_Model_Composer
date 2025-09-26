@@ -83,3 +83,6 @@ While the array view shows that 22 compute engines are required for computation,
 
 <img src="./Images/DataMemoryUtilization.png" width="600">
 
+## Summary
+
+We can easily compare the AIE simulation results to a Simulink reference model, perform quantization, and ascertain the number of parallel paths to meet targeted throughput requirements using VMC.  We used the AIE API to create custom source code for a FFT + complex multiply, iFFT and established a direct cascade connection between the functions that guarantees colocation of AIEs for each data path.  The cascades maintain a fast 48 bit * 2 data between the FFT + complex multiply and iFFT.  For a 129 tap, >2Gsps FIR a total 22 AIE compute engines were used.
