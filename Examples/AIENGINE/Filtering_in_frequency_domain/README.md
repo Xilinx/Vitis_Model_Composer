@@ -14,8 +14,8 @@ There are multiple approaches to use an FFT to perform fast filtering in the fre
 
 Although Simulink provides a frequency domain FIR the functionally equivalent model can be created from lower level functional blocks i.e.:
 
+![](./Images/algorithm.png) 
 
-<img src="./Images/algorithm.png" width="800">
 
 The time domain filter coefficients can be run through an FFT to derive the frequency domain coefficients.  Buffer blocks and selector blocks can assist in performing the functionality of overlapping the input data and discarding the unnecessary FFT output samples.
  
@@ -25,25 +25,28 @@ After a single path is developed and validated, in a practical application incre
 ## The Design
 
 In this case the goal is to perform M=129 tap, >2Gsps frequency domain filtering using N=256 point Fourier Transforms.
-A time domain FIR that uses 3 real multipliers to build a complex multiplier would require 3*129=387 Real MACs/output sample while the FFTs, complex multiply, & iFFT require 42 real multiplies.  For this example, the frequency domain filter is 387/42 = 9.2x more efficient.
+A time domain FIR that uses 3 real multipliers to build a complex multiplier would require 3 * 129 = 387 Real MACs/output sample while the FFTs, complex multiply, & iFFT require 42 real multiplies.  For this example, the frequency domain filter is 387/42 = 9.2x more efficient.
 A custom, 256-point FFT was implemented using 4 stages of a aie::fft_dit_r4_stage radix 4 FFT function call using the ibuff and tbuff memory scratchpads to pass data between radix 4 function calls:  
 
+```
   aie::fft_dit_r4_stage<64>(ibuff, tw4a_1, tw4a_0, tw4a_2, FFT_PTS, SHIFT_FFT, SHIFT_FFT, FFTn, tbuff);
   aie::fft_dit_r4_stage<16>(tbuff, tw4b_1, tw4b_0, tw4b_2, FFT_PTS, SHIFT_FFT, SHIFT_FFT, FFTn, ibuff);
   aie::fft_dit_r4_stage< 4>(ibuff, tw4c_1, tw4c_0, tw4c_2, FFT_PTS, SHIFT_FFT, SHIFT_FFT, FFTn, tbuff);
   aie::fft_dit_r4_stage< 1>(tbuff, tw4d_1, tw4d_0, tw4d_2, FFT_PTS, SHIFT_FFT, SHIFT_FFT, FFTn, ibuff);
 
+```
 The cint16 coefficient look up table and multiply operation was integrated into the AIE FFT as a simple for loop:
 
+```
 // complex FIR coeffs array
-  alignas(aie::vector_decl_align) const cint16 coeff[256] = { {16383,0},…};
-  aie::accum<cacc48,4> acc; // accumulator register
-  auto pCoeff = aie::cbegin_vector<4>(coeff); // setup pointer to coeff
+alignas(aie::vector_decl_align) const cint16 coeff[256] = { {16383,0},…};
+aie::accum<cacc48,4> acc; // accumulator register
+auto pCoeff = aie::cbegin_vector<4>(coeff); // setup pointer to coeff
 
-  // complex filtering loop...
-  for (unsigned lp=0; lp<32; lp++) // process 32*4*2=256 samples
-    chess_prepare_for_pipelining
-    { 
+ // complex filtering loop
+ for (unsigned lp=0; lp<32; lp++) // process 32*4*2=256 samples
+ chess_prepare_for_pipelining
+ { 
         FFT_data = *pI++; // 32 bit complex data * 4 = 256 bits
         coeff_data = *pCoeff++; // 16 bit complex data * 4 = 128 bits
         acc = aie::mul(FFT_data, coeff_data);
@@ -53,12 +56,12 @@ The cint16 coefficient look up table and multiply operation was integrated into 
         coeff_data = *pCoeff++;
         acc = aie::mul(FFT_data, coeff_data);
         writeincr(sig_o, acc);
-        
-    } // end of lp for loop
+   } // end of lp for loop
+```
 
 By using the cascade connection between the FFT and iFFT adjacent AIEs are guaranteed, and a cacc48 bit connection is established directly between the FFT AIE & iFFT AIE to improve throughput and reduce latency (as compared to using an axi buffer or axi stream connection):  
 
-<img src="./Images/design.png" width="800">
+![](./Images/design.png) 
 
 As our discussion focuses on designing with AIEs the overlap and save input and data output discard is better left to PL implementation which is left as an exercise for the PL designer.
 
@@ -67,21 +70,21 @@ As our discussion focuses on designing with AIEs the overlap and save input and 
 
 Using the Model Composer Simulation Data Inspector the throughput is a consistent 392Msps per AIE path:
 
-<img src="./Images/ThroughputPerAIEPath.png" width="800">
+![](./Images/ThroughputPerAIEPath.png) 
 
 To obtain >2Gsps we require ceil (2Gsps/392Msps/2) = 11 copies of a single path.  Please remember we divided the sample rate of a single path by 2 because 50% of the output samples need to be discarded.
 
 We added some constraints for Vitis (i.e.: {'--xlopt=2', '--Xmapper=BufferOptLevel7'} to improve the buffering optimization and Vitis indicates the following resources are used:
 
-<img src="./Images/ResourceUtilization.png" width="600">
+![](./Images/ResourceUtilization.png) 
 
 The graph level connectivity shows what we expect: 
 
-<img src="./Images/GraphLevelConnection.png" width="600">
+![](./Images/GraphLevelConnection.png) 
 
 While the array view shows that 22 compute engines are required for computation, only subsections of each data memory are utilized:
 
-<img src="./Images/DataMemoryUtilization.png" width="600">
+![](./Images/DataMemoryUtilization.png) 
 
 ## Summary
 
