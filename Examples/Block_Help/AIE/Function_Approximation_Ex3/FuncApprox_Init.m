@@ -1,5 +1,3 @@
-clc;
-clear all;
 N = 256; % Number of coarse points (2^TP_COARSE_BITS)
 max_val = (2^15)-1; % Maximum value for int16 (32767)
 x = ((-N/2):(N/2)-1) / N; % -0.5 to 0.5
