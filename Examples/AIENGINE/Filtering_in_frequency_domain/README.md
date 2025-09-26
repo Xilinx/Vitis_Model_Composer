@@ -1,12 +1,12 @@
 # Filtering in Frequency Domain
 
-Time domain filtering involves convolution (i.e.: multiply and add operations).  In the time domain if the signal and the filter length are both of length-N, we can say the arithmetic complexity is of order N2.  
+Time domain filtering involves convolution (i.e.: multiply and add operations).  In the time domain if the signal and the filter length are both of length-N, we can say the arithmetic complexity is of order N<sup>2</sup>.  
 
-Convolution in the time domain is equivalent to multiplication in the frequency domain implying that FFTs can be used to perform filtering.  Frequency domain filtering is used to improve filtering efficiency as N becomes larger.  Typically, the critical threshold for efficiency improvements based on the filter order N is somewhere between 32 and 64 taps.   Below the threshold time domain convolution is more efficient while above the threshold frequency domain filtering is more efficient
+Convolution in the time domain is equivalent to multiplication in the frequency domain implying that FFTs can be used to perform filtering.  Frequency domain filtering is used to improve filtering efficiency as N becomes larger.  Typically, the critical threshold for efficiency improvements based on the filter order N is somewhere between 32 and 64 taps.   Below the threshold, time domain convolution is more efficient while above the threshold frequency domain filtering is more efficient
 
 The disadvantage to filtering in the frequency domain is the latency incurred by the processing time of the FFT & IFFT.  The advantage is as the number of filter taps increases frequency domain filtering becomes more efficient compared to using a convolution approach in the time domain.
  
-There are multiple approaches to use an FFT to perform fast filtering in the frequency domain.  One approach is the overlap and save method.  In the overlap and save method it is the input that is overlapped and, therefore, must be saved.  This method has also been called overlap and discard because the overlapping portion of the output blocks are discarded.  In practice it is best to select M as the first power of 2 plus 1 that is larger than the minimum desired filter order and then set N=2*(M-1).  This corresponds to an FFT size of N and the blocks of data will contain N/2 samples.  It is worth noting that if ½ the output FFT samples will be discarded, the output sample rate is correspondingly ½ the input sample rate per path for the resulting frequency domain FIR implementation.  
+There are multiple approaches to use an FFT to perform fast filtering in the frequency domain.  One approach is the overlap and save method.  In the overlap and save method it is the input that is overlapped and, therefore, must be saved.  This method has also been called overlap and discard because the overlapping portion of the output blocks are discarded.  In practice it is best to select M as the first power of 2 plus 1 that is larger than the minimum desired filter order and then set N = 2*(M-1).  This corresponds to an FFT size of N and the blocks of data will contain N/2 samples.  It is worth noting that if *½* of the output FFT samples will be discarded, then the output sample rate is correspondingly *½* of the input sample rate per path for the resulting frequency domain FIR implementation.  
 
 
 ## The Algorithm
@@ -68,7 +68,7 @@ As our discussion focuses on designing with AIEs the overlap and save input and 
 
 ## Simulation results
 
-Using the Model Composer Simulation Data Inspector the throughput is a consistent 392Msps per AIE path:
+Using the Model Composer Simulation Data Inspector the throughput is a consistent 392 Msps per AIE path:
 
 ![](./Images/ThroughputPerAIEPath.png) 
 
