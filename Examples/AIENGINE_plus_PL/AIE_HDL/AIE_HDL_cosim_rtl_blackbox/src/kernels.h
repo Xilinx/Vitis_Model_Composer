@@ -20,12 +20,13 @@
 #include <adf.h>
 #include <aie_api/aie.hpp>
 using namespace adf;
- void classifier(input_stream<cint16>* input, 
+ void classifier(input_stream_cint16 * input, 
                   output_buffer<int32> & __restrict outputw);
 
 
- void fir_27t_sym_hb_2i(       
-	input_buffer<cint16> & __restrict cb_input,
+void fir_27t_sym_hb_2i
+(
+	input_buffer<cint16,adf::extents<adf::inherited_extent>,adf::margin<16>>  & __restrict cb_input,
 	output_buffer<cint16> & __restrict cb_output);
 
 			

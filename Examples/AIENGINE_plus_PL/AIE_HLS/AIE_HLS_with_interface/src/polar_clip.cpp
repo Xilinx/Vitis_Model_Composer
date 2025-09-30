@@ -19,6 +19,7 @@
 
 #define CFR_THRESHOLD (11626)
 #define SIGN(x) (x>0 ? 0.5 : -0.5)
+#define INPUT_SAMPLE_SIZE 256
 
 #include <ap_int.h>
 #include <hls_stream.h>
@@ -134,7 +135,7 @@ void polar_clip(hls::stream<ap_axis<32, 0, 0, 0> > &in_sample, hls::stream<ap_ax
 #pragma HLS INTERFACE ap_ctrl_none port=return
 #pragma HLS INTERFACE axis port=out_sample
 #pragma HLS INTERFACE axis port=in_sample
-
+  for (int i =0;i<INPUT_SAMPLE_SIZE;i++){
   //std::cerr << "Waiting for a value" << "\n";
   ap_cint16 sample;
 
@@ -199,4 +200,4 @@ void polar_clip(hls::stream<ap_axis<32, 0, 0, 0> > &in_sample, hls::stream<ap_ax
   //****out_x.keep_all();
   out_sample.write(out_x);
 };
-//}
+};
