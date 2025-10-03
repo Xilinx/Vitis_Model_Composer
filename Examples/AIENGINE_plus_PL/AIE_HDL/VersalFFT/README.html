@@ -1,0 +1,283 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="versal-fft">Versal FFT</h1>
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
+<script>
+var a = document.getElementById('openlink');
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+
+a.href = commandURI;
+</script>
+<p>In this example, we will show how to use the Cooley-Tukey algorithm to implement a high performance (low latency, high sample rate) FFT that takes advantage of both the AI Engine and Programmmable Logic (PL) of Versal devices.</p>
+<p>Two FFT example designs are included using Vitis Model Composer: <br />
+1) a <strong>9.12 GSPS</strong> <code>cint16</code>, 32K point FFT comprised of 16, 2K point AIE FFTs and a PL based SSR=16, 16-point PL FFT. <br />
+2) a <strong>18.24 GSPS</strong> <code>cfloat</code>, 32K point FFT comprised of 32, 1K point AIE FFTs and a PL based SSR=32, 32-point PL FFT.</p>
+<h2 id="algorithm">Algorithm</h2>
+<p>The Cooley-Tukey algorithm is a common Fast Fourier Transform algorithm. It re-expresses the discrete Fourier transform (DFT) of an arbitrary composite size N=P*Q<br />
+in terms of P DFTs of sizes Q and Q DFTs of size P. To learn more refer to <a href="https://en.wikipedia.org/wiki/Cooley%E2%80%93Tukey_FFT_algorithm">this</a> Wikipedia page.</p>
+<p>The image below shows an overview of the operations needed for Cooley-Tukey algorithm. </p>
+<p><img src="images/overview.png" alt="Cooley-Tukey FFT Algorithm" width="800"></p>
+<p>As the image demonstrates, the algorithm is going through the following steps:</p>
+<ol>
+<li>Arrange data in a PxQ matrix.</li>
+<li>Take Q point FFT along the rows.</li>
+<li>Multiply the result with twiddle factors.</li>
+<li>Take P point FFT along the columns.</li>
+<li>Read the matrix in a row-wise manner.</li>
+</ol>
+<p>The N point DFT can be replaced by as many as P,Q-point row FFTs and Q,P-point column FFTs. By using exactly P,Q point row FFTs and Q,P point column FFTs you maximize the sample rate and eliminate the need for 2/3 of the transposes as shown below for a 16-point example.</p>
+<p><img src="images/16pt_dft.png" alt="" /></p>
+<p>If you map the P,Q point row FFTs and complex rotation to Versal AIEs and the Q,P point FFTs to PL, we have a <strong>simple, flexible and efficient recipe</strong> for implementing a high performance, lower latency, hybrid FFT where the possible output sample rate = (the number of P parallel paths) * (slowest P, Q-point row FFT path sample rate) = P*z Msps.  </p>
+<p>Instead of using 4,4-point column FFTs a single, PL based SSR FFT can be used to process the parallel row FFT data.  If the PL clock is 2x (or greater than) that of the output sample rate for the P parallel AIE FFT paths then you can use a SSR=Q/2 (assuming we can close timing in the PL), P point column FFT to save resources.  If the output PL clock rate is 4x (or greater than) that of the output sample rate for the P parallel AIE paths then you can use SSR=Q/4 P point column FFT, etc. to save resources.  </p>
+<p>The number of AIE row FFTs must be carefully chosen or you could run out of PLIO for multiple parallel instances.  For larger point size FFTs either increase the point size of the Q-point row FFTs or the number of rows (i.e.: P).  For example, if you need a 128K point FFT you could use 32, 8K-point row FFTs and a 32-point column FFT. </p>
+<h2 id="design">Design</h2>
+<p>The Versal FFT design can be simulated using Vitis Model Composer. The design is divided into two parts:</p>
+<ol>
+<li><strong>AI Engine Design</strong>: The first part of the algorithm (row FFTs and complex rotation) is implemented in the AI Engines using the AI Engine library blocks.</li>
+<li><strong>HDL Design</strong>: The second part of the algorithm (column FFT and transpose operation) is implemented in the Programmable Logic using the HDL library blocks.</li>
+</ol>
+<p>The AI Engine implementation for the fixed-point design is shown below:</p>
+<p><img src="images/ai_engine.png" alt="AI Engine Implementation" /></p>
+<p>As shown in the image above, the AI Engine implementation is divided into the following steps:</p>
+<ol>
+<li>16 FFTs of size 2048 are performed. The FFT block is part of the AMD AI Engine DSP library.</li>
+<li>Complex rotation is performed by multiplying the output of the FFTs by twiddle factors. Here we are using the <em>AIE Kernel block</em> to import AI Engine kernel code into Vitis Model Composer as a block. The twiddle multiplies are implemented in the <code>exp_calc_fixed</code>/<code>exp_calc_float</code> C++ source code files.</li>
+</ol>
+<p>The HDL implementation for the fixed-point design is shown below:</p>
+<p><img src="images/hdl.png" alt="HDL Implementation" /></p>
+<p>First, the logic in the <code>extract_re_and_im</code> subsystem packs the 16 incoming AXI streams from the AI Engine into an HDL vector. Then, the <strong>Vector FFT</strong> block performs the SSR=16, 16-point FFT. The 16, <code>cint16</code> outputs of the Vector FFT are packed into a scalar, 512-bit wide signal for input to the transpose operation, which is implemented as an <strong>HDL Black Box</strong>.</p>
+<p>The AI Engine and PL implementations for the floating point design are architected similarly. </p>
+<h2 id="results">Results</h2>
+<h3 id="pl">PL</h3>
+<p>The PL clock frequency, stored in the variable <code>clk_freq</code>, is 570 MHz. This value is specified in the <strong>HDL Clock Settings</strong> panel of the Vitis Model Compoer Hub block:</p>
+<p><img src="images/pl_freq.png" alt="" /></p>
+<p>It is also specified in each PLIO block of the AI Engine design. Note also that the PLIO is 64 bits wide:</p>
+<p><img src="images/plio.png" alt="" /></p>
+<p>The Hub block's <strong>Analyze</strong> tab can be used to run timing and resource analysis on the design, post Vivado synthesis and/or implementation. This shows that the design closes timing at 570 MHz:</p>
+<p><img src="images/pl_timing.png" alt="" /></p>
+<p>This corresponds to an overall throughput of <strong>9.12 GSPS</strong> for SSR=16, and <strong>18.24 GSPS</strong> for SSR=32. </p>
+<p>The SSR=16 design uses the following PL resources:</p>
+<p><img src="images/pl_resources.png" alt="" /></p>
+<h3 id="ai-engine">AI Engine</h3>
+<p>To do timing analysis on the AI Engine design, we need to run cycle-approximate AIE simulation from the <strong>Analyze</strong> tab of the Vitis Model Composer Hub block. The AIE simulation output matches the Simulink output for each channel.</p>
+<p><img src="images/aie_analyze.png" alt="" /></p>
+<p>The throughput of each AI Engine output channel can be viewed by clicking <strong>View AIE simulation output and throughput</strong>:</p>
+<p><img src="images/aie_throughput.png" alt="" /></p>
+<p>In order to accurately calculate the throughput, we need to add cursors around the output data burst. Once we do this, it shows that each AI Engine channel's throughput is 1140 MSPS. The AI Engine operates on 1 <code>cint16</code> sample per clock cycle, so this is well within the capabilities (clock rate of 1250 MHz) of the VCK190 evaluation board we are using. Keep in mind that 64 bits of data (2 <code>cint16</code> samples) are transferred to the PL on each PL clock cycle, so an AIE throughput of 1140 MSPS corresponds to a PL clock rate of 570 MHz. </p>
+<p>The AI Engine resource utilization can be found by clicking <strong>Open Vitis Analyzer</strong>.</p>
+<p><strong>SSR=16:</strong></p>
+<p><img src="images/aie_resources.png" alt="" /></p>
+<p>The SSR=16 design uses 16 input PLIO channels, 16 output PLIO channels, and a total of 55 AI Engine tiles (16 for AI Engine kernels, 39 for buffers or interconnects).</p>
+<p><strong>SSR=32:</strong></p>
+<p><img src="images/aie_resources_32.png" alt="" /></p>
+<p>The SSR=32 design uses 32 input PLIO channels, 32 output PLIO channels, and a total of 127 AI Engine tiles (95 for AI Engine kernels, 32 for buffers or interconnects).</p>
+<p>The reason AIE kernel usage did not scale linearly with SSR is that in the SSR=32 design, extra cascaded kernels were added to the row FFTs to achieve the desired throughput. The <strong>Number of cascade stages</strong> parameter in each AIE FFT block is set to 3:</p>
+<p><img src="images/cascade_stages.png" alt="" /></p>
+<hr />
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+</body>
+</html>

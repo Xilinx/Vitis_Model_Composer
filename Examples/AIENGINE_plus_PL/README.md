@@ -104,6 +104,15 @@ Design with HDL and AI Engine blocks
 Design with imported RTL and AI Engine blocks.
 </td>
 </tr>
+
+<tr>
+<td>
+<a href="./AIE_HDL/VersalFFT/README.md">Versal FFT</a>
+</td>
+<td>
+This design shows a Cooley-Tukey algorithm to implement a high performance (low latency, high sample rate) FFT that takes advantage of both the AI Engine and Programmmable Logic (PL) of Versal devices.
+</td>
+</tr> 
  
 <td>
 <a href="./AIE_HDL/FFT2D/README.md">2D FFT</a>
