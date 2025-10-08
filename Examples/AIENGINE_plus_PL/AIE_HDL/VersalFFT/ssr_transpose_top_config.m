@@ -14,39 +14,32 @@ function ssr_transpose_top_config(this_block)
   parent = get_param(this_block.blockName,'Parent');
   maskParamNameValuePairs = get_param(parent, 'MaskWSVariables');
   % now step through each MASK to get the name and the evaluated value
-  % for i=1:length(maskParamNameValuePairs)
-  % %     if (strcmpi(maskParamNameValuePairs(i).Name, 'SSR'))
-  %         SSR = maskParamNameValuePairs(i).Value;
-  %     end
-  %     if (strcmpi(maskParamNameValuePairs(i).Name, 'MEM_STYLE'))
-  %         MEM_STYLE = maskParamNameValuePairs(i).Value;
-  %     end
-  %     if (strcmpi(maskParamNameValuePairs(i).Name, 'M'))
-  %         M = maskParamNameValuePairs(i).Value;
-  %     end
-  %     if (strcmpi(maskParamNameValuePairs(i).Name, 'N'))
-  %         N = maskParamNameValuePairs(i).Value;
-  %     end
-  %     if (strcmpi(maskParamNameValuePairs(i).Name, 'DATA_WIDTH'))
-  %         DATA_WIDTH = maskParamNameValuePairs(i).Value;
-  %     end
-  % end
-  % 
-  % 
+  for i=1:length(maskParamNameValuePairs)
+      if (strcmpi(maskParamNameValuePairs(i).Name, 'SSR'))
+          SSR = maskParamNameValuePairs(i).Value;
+      end
+      if (strcmpi(maskParamNameValuePairs(i).Name, 'MEM_STYLE'))
+          MEM_STYLE = maskParamNameValuePairs(i).Value;
+      end
+      if (strcmpi(maskParamNameValuePairs(i).Name, 'M'))
+          M = maskParamNameValuePairs(i).Value;
+      end
+      if (strcmpi(maskParamNameValuePairs(i).Name, 'N'))
+          N = maskParamNameValuePairs(i).Value;
+      end
+      if (strcmpi(maskParamNameValuePairs(i).Name, 'DATA_WIDTH'))
+          DATA_WIDTH = maskParamNameValuePairs(i).Value;
+      end
+  end
+
+
   maskParamNameValuePairs = get_param(this_block.blockName, 'MaskWSVariables');
   for i=1:length(maskParamNameValuePairs)
       if (strcmpi(maskParamNameValuePairs(i).Name, 'sim_method'))
           sim_method = maskParamNameValuePairs(i).Value;
       end
   end
-
-  % read in workspace variables needed to support parameterizable transpose
-SSR = evalin("base",'SSR');
-MEM_STYLE = evalin("base", 'MEM_STYLE');
-M = evalin("base",'M');
-N = evalin("base",'N1');
-DATA_WIDTH = evalin("base",'DATA_WIDTH');
-
+    
   % Vitis Model Composer has to assume that your entity  has a combinational feed through; 
   %   if it  doesn't, then comment out the following line:
   %this_block.tagAsCombinational;
@@ -99,7 +92,7 @@ DATA_WIDTH = evalin("base",'DATA_WIDTH');
   this_block.addGeneric('N','INTEGER',num2str(N));
   this_block.addGeneric('DATA_WIDTH','INTEGER',num2str(DATA_WIDTH));
   this_block.addGeneric('MEM_STYLE','INTEGER',num2str(MEM_STYLE));
-  this_block.addGeneric('SIM_METHOD','INTEGER',num2str(sim_method)); 
+  this_block.addGeneric('SIM_METHOD','INTEGER',num2str(sim_method));
 
     
   %this_block.addGeneric('STYLE','STRING','"auto"');
@@ -119,8 +112,8 @@ DATA_WIDTH = evalin("base",'DATA_WIDTH');
   % NOTE: vmcwrapper File is required to handle non std
   % logic port data types like SIGNED,UNSIGNED,BOOLEAN etc.
 
-    this_block.addFile('ssr_transpose.vhd')
-    this_block.addFile('ssr_transpose_top.vhd')
+
+    this_block.addFile('ssr_transpose_all.vhd')
     return;
 
 
@@ -152,14 +145,14 @@ function setup_as_single_rate(block,clkname,cename)
 
 % This function converts the matlab array to VHDL array Style 
 % and this is valid only in case of generic parameters. 
-% function arrayHDLType = convertArrayType(inArr) 
-% arrayHDLType = '';
-% for i=1:length(inArr)
-%     if (i == 1)
-%         arrayHDLType = [arrayHDLType '(' num2str(inArr(i))]; 
-%     elseif (i == length(inArr)) 
-%         arrayHDLType = [arrayHDLType ',' num2str(inArr(i)) ')']; 
-%     else 
-%         arrayHDLType = [arrayHDLType ',' num2str(inArr(i))]; 
-%     end 
-% end 
+function arrayHDLType = convertArrayType(inArr) 
+arrayHDLType = '';
+for i=1:length(inArr)
+    if (i == 1)
+        arrayHDLType = [arrayHDLType '(' num2str(inArr(i))]; 
+    elseif (i == length(inArr)) 
+        arrayHDLType = [arrayHDLType ',' num2str(inArr(i)) ')']; 
+    else 
+        arrayHDLType = [arrayHDLType ',' num2str(inArr(i))]; 
+    end 
+end 

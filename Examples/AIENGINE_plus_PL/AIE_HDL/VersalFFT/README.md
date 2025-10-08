@@ -3,8 +3,8 @@
 In this example, we will show how to use the Cooley-Tukey algorithm to implement a high performance (low latency, high sample rate) FFT that takes advantage of both the AI Engine and Programmmable Logic (PL) of Versal devices.
 
 Two FFT example designs are included using Vitis Model Composer: 
-1) a **9.12 GSPS** `cint16`, 32K point FFT comprised of 16, 2K point AIE FFTs and a PL based SSR=16, 16-point PL FFT. 
-2) a **18.24 GSPS** `cfloat`, 32K point FFT comprised of 32, 1K point AIE FFTs and a PL based SSR=32, 32-point PL FFT.
+1) a **9 GSPS** `cint16`, 32K point FFT comprised of 16, 2K point AIE FFTs and a PL based SSR=16, 16-point PL FFT. 
+2) a **18 GSPS** `cfloat`, 32K point FFT comprised of 32, 1K point AIE FFTs and a PL based SSR=32, 32-point PL FFT.
 
 ## Algorithm
 
@@ -33,6 +33,15 @@ Instead of using 4,4-point column FFTs a single, PL based SSR FFT can be used to
 
 The number of AIE row FFTs must be carefully chosen or you could run out of PLIO for multiple parallel instances.  For larger point size FFTs either increase the point size of the Q-point row FFTs or the number of rows (i.e.: P).  For example, if you need a 128K point FFT you could use 32, 8K-point row FFTs and a 32-point column FFT. 
 
+There are two examples provided to facilitate how the design works: 
+
+1. a 32K fixed point FFT 
+2. a 32K floating point FFT  
+
+The fixed point uses 2K-point row FFTs by 16-point column FFTs while the floating-point version has 1K-point row FFTs by 32-point column FFTs.  Please note as part of the fixed point FFT example is a detailed Simulink model that demonstrates how to create the complex rotation coefficients for an N point FFT based on the row index.
+
+![](images/simulink_complexrot.png)
+
 ## Design
 
 The Versal FFT design can be simulated using Vitis Model Composer. The design is divided into two parts:
@@ -55,31 +64,31 @@ The HDL implementation for the fixed-point design is shown below:
 
 First, the logic in the `extract_re_and_im` subsystem packs the 16 incoming AXI streams from the AI Engine into an HDL vector. Then, the **Vector FFT** block performs the SSR=16, 16-point FFT. The 16, `cint16` outputs of the Vector FFT are packed into a scalar, 512-bit wide signal for input to the transpose operation, which is implemented as an **HDL Black Box**.
 
+The SSR transpose operation is a unique implementation that only requires ½ the memory resources compared to a traditional ping-pong buffer approach.  The transpose block gives the user the option to trade memory resources using the Memory Style option:
+
+![Transpose Block Parameters](images/transpose_gui.png)
+
+where the memory options are: 
+*	4 - ULTRA 
+*	0 - AUTO 
+*	1 - BRAM 
+*	5 – MIXED
+
 The AI Engine and PL implementations for the floating point design are architected similarly. 
 
 ## Results
 
-### PL
+### Fixed Point FFT Results (2K point row AIE FFTs x 16 point, SSR=16 PL FFT)
 
-The PL clock frequency, stored in the variable `clk_freq`, is 570 MHz. This value is specified in the **HDL Clock Settings** panel of the Vitis Model Compoer Hub block:
+#### PL
 
-![](images/pl_freq.png)
+The SSR=16 PL design closes timing with a 570MHz clock and with the transpose targeting URAM requires the following resources:
 
-It is also specified in each PLIO block of the AI Engine design. Note also that the PLIO is 64 bits wide:
+![](images/results_pl_fixed.png)
 
-![](images/plio.png)
+Because the SSR=16, 16 point FFT can process 16 samples at a 570MHz, we need to verify that the AIE FFTs can process data at a minimum of 570Msps / path (for 16 paths). The overall sample rate then is ~570Msps*16=~9Gsps.
 
-The Hub block's **Analyze** tab can be used to run timing and resource analysis on the design, post Vivado synthesis and/or implementation. This shows that the design closes timing at 570 MHz:
-
-![](images/pl_timing.png)
-
-This corresponds to an overall throughput of **9.12 GSPS** for SSR=16, and **18.24 GSPS** for SSR=32. 
-
-The SSR=16 design uses the following PL resources:
-
-![](images/pl_resources.png)
-
-### AI Engine
+#### AI Engine
 
 To do timing analysis on the AI Engine design, we need to run cycle-approximate AIE simulation from the **Analyze** tab of the Vitis Model Composer Hub block. The AIE simulation output matches the Simulink output for each channel.
 
@@ -89,25 +98,52 @@ The throughput of each AI Engine output channel can be viewed by clicking **View
 
 ![](images/aie_throughput.png)
 
-In order to accurately calculate the throughput, we need to add cursors around the output data burst. Once we do this, it shows that each AI Engine channel's throughput is 1140 MSPS. The AI Engine operates on 1 `cint16` sample per clock cycle, so this is well within the capabilities (clock rate of 1250 MHz) of the VCK190 evaluation board we are using. Keep in mind that 64 bits of data (2 `cint16` samples) are transferred to the PL on each PL clock cycle, so an AIE throughput of 1140 MSPS corresponds to a PL clock rate of 570 MHz. 
+In order to accurately calculate the throughput, we need to add cursors around the output data burst. Once we do this, it shows that the throughput is between 635-742 MSPS. 
 
 The AI Engine resource utilization can be found by clicking **Open Vitis Analyzer**.
 
-**SSR=16:**
-
 ![](images/aie_resources.png)
 
-The SSR=16 design uses 16 input PLIO channels, 16 output PLIO channels, and a total of 55 AI Engine tiles (16 for AI Engine kernels, 39 for buffers or interconnects).
+The SSR=16 design uses 16 input PLIO channels, 16 output PLIO channels, and 16 AIE compute tiles and some percentage of 48-16=32 for buffers.
 
-**SSR=32:**
+### Floating Point FFT Results (1K point row AIE FFTs x 32 point, SSR=32 PL FFT)
 
-![](images/aie_resources_32.png)
+#### PL
 
-The SSR=32 design uses 32 input PLIO channels, 32 output PLIO channels, and a total of 127 AI Engine tiles (95 for AI Engine kernels, 32 for buffers or interconnects).
+The PL clock frequency, stored in the variable `clk_freq`, is 570 MHz. This value is specified in the **HDL Clock Settings** panel of the Vitis Model Compoer Hub block:
 
-The reason AIE kernel usage did not scale linearly with SSR is that in the SSR=32 design, extra cascaded kernels were added to the row FFTs to achieve the desired throughput. The **Number of cascade stages** parameter in each AIE FFT block is set to 3:
+![](images/pl_freq.png)
 
-![](images/cascade_stages.png)
+It is also specified in each PLIO block of the AI Engine design. Note also that the PLIO is 64 bits wide:
+
+![](images/plio.png)
+
+The Hub block's **Analyze** tab can be used to run timing and resource analysis on the design, post Vivado synthesis and/or implementation. The PL based, cfloat, SSR=32, 32-point FFT and transpose closes timing at 570 MHz:
+
+![](images/pl_timing.png)
+
+and requires the following PL resources:
+
+![](images/pl_resources.png)
+
+#### AI Engine
+
+If the PL SSR FFT closes timing at 570MHz, this means the PL could process 32 samples (i.e.: 1 sample from each of 32 parallel AIE paths) at a 570MHz rate.  Therefore, each of the 32, AIE 1K-point FFT paths that feed the PL SSR FFT needs to process data at ~570Msps.  
+
+If we compile the AIE FFTs paths with cascade=1 this yields a 240 MSPS throughput per AIE path, with cascade=2 a ~398 MSPS throughput, or with cascade=3 a 564-568 MSPS throughput. You can view the 32 parallel path AIE sample rates by using the Simulation Data Inspector:
+
+![](images/results_aie_float.png)
+
+This corresponds to an overall 32K point FFT sample rate of ~564Msps*32 = **~18 GSPS**.
+
+Each AI Engine compute path should require 4 AI Engine compute tiles, 3 for the FFT (with a cascade length of 3) and 1 for the complex rotation. One compute path does not have a complex rotation, so we would estimate a total of 4*32-1 = 127 AIE compute tiles. This can be confirmed by opening Vitis Analyzer and looking at the `aiecompile_summary` report:
+
+![](images/results_aie_float2.png)
+
+Please note some percentage of 173-127=46 AIE buffer memories are also required:
+
+![](images/results_aie_float3.png)
+
 
 ------------
 
