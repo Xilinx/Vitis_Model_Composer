@@ -7,5 +7,9 @@ slprj/
 *.slx.autosave
 *.slx.r*
 .nfs*
-netlist/
+netlist*/
 Thumbs*
+code*/
+*.asv
+.crashReporter/
+work/
