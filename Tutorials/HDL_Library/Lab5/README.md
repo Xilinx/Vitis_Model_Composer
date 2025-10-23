@@ -69,7 +69,7 @@ In this step you create a Vivado project which you will use to create your hardw
 
 The design has been written in IP catalog format to the directory `./netlist.` You will now import this IP into the Vivado IP catalog and use the IP in an existing example project.
 
-6. Open the Vivado IDE using **Windows > AMD Design Tools > Vivado 2025.1.**
+6. Open the Vivado IDE using **Windows > AMD Design Tools > Vivado 2025.2.**
 
 7. Click **Create Project**.
 

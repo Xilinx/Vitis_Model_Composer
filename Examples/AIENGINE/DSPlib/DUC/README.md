@@ -4,7 +4,7 @@
 
 This example demonstrates a Digital Upconversion (DUC) algorithm implemented on AI Engine (AIE) devices.
 
-See also the [DUC implemented on Programmable Logic](https://github.com/Xilinx/Vitis_Model_Composer/tree/2025.1/Examples/HDL/Digital_Filtering/HDL_DUC/README.md).
+See also the [DUC implemented on Programmable Logic](https://github.com/Xilinx/Vitis_Model_Composer/tree/2025.2/Examples/HDL/Digital_Filtering/HDL_DUC/README.md).
 
 ## Algorithm
 

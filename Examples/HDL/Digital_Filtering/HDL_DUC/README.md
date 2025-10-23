@@ -4,7 +4,7 @@
 
 This example demonstrates a Digital Upconversion (DUC) algorithm implemented on Programmable Logic using AMD IP blocks.
 
-See also the [DUC implemented on AI Engine devices](https://github.com/Xilinx/Vitis_Model_Composer/tree/2025.1/Examples/AIENGINE/DSPlib/DUC/README.md).
+See also the [DUC implemented on AI Engine devices](https://github.com/Xilinx/Vitis_Model_Composer/tree/2025.2/Examples/AIENGINE/DSPlib/DUC/README.md).
 
 ## Algorithm
 

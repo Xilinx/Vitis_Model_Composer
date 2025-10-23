@@ -64,7 +64,7 @@ The Signal Dimensions and the Port Data Types are important aspects of your desi
 <img src="./images/signal_dimentions.png" width="700">
 
 ## 5. Variable Size Signals
-These signals are used for AI Engines and the HLS Kernel block. During simulation, the number of samples in these signals can range from zero to their maximum capacity. To learn more about variable size signals, please refer to [this](https://github.com/Xilinx/Vitis_Model_Composer/tree/2025.1/QuickGuides/Variable_Size_Signals/README.md) resource.
+These signals are used for AI Engines and the HLS Kernel block. During simulation, the number of samples in these signals can range from zero to their maximum capacity. To learn more about variable size signals, please refer to [this](https://github.com/Xilinx/Vitis_Model_Composer/tree/2025.2/QuickGuides/Variable_Size_Signals/README.md) resource.
 
 ## 6. Most commonly used source blocks
 

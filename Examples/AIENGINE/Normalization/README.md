@@ -31,7 +31,7 @@ For this example, the following specifications are chosen:
 
 ## Design
 
-The Vitis Model Composer model imports the normalization design as AI Engine Kernel blocks. For a detailed description of the example design and its kernel functions, refer to the [AIE-ML Performance Analysis Tutorial](https://github.com/Xilinx/Vitis-Tutorials/tree/2025.1/AI_Engine_Development/AIE-ML/Feature_Tutorials/13-aie-ml-performance-analysis). The Vitis Model Composer example uses Version 4 of the normalization design.
+The Vitis Model Composer model imports the normalization design as AI Engine Kernel blocks. For a detailed description of the example design and its kernel functions, refer to the [AIE-ML Performance Analysis Tutorial](https://github.com/Xilinx/Vitis-Tutorials/tree/2025.2/AI_Engine_Development/AIE-ML/Feature_Tutorials/13-aie-ml-performance-analysis). The Vitis Model Composer example uses Version 4 of the normalization design.
 
 ![](./Images/model.png) 
 
@@ -55,10 +55,10 @@ for i=0:5
 end
 ```
 
-This shared buffer has 3 write (input) ports and 5 read (output) ports. The tiling parameters are stored in 3x1 and 5x1, respectively, MATLAB structure arrays. For more information on the format of the MATLAB structure, refer to the [Shared Buffer](https://github.com/Xilinx/VMC_Help/tree/2025.1/AIE/Shared_Buffer/README.md) block help.
+This shared buffer has 3 write (input) ports and 5 read (output) ports. The tiling parameters are stored in 3x1 and 5x1, respectively, MATLAB structure arrays. For more information on the format of the MATLAB structure, refer to the [Shared Buffer](https://github.com/Xilinx/VMC_Help/tree/2025.2/AIE/Shared_Buffer/README.md) block help.
 
 * The AI Engine design inputs and outputs `bfloat16` floating-point data. The **Convert To Bfloat16** and **Convert From Bfloat16** blocks convert between the Simulink `single` data type and the `bfloat16` data type.
-* Because this design has a feedback loop within the AI Engine subsystem, an **Algebraic Loop Breaker** block is needed to compile and run the model. For more information, see the [Algebraic Loop Breaker](https://github.com/Xilinx/VMC_Help/tree/2025.1/UTIL/AlgebraicLoopBreaker/README.md) block help.
+* Because this design has a feedback loop within the AI Engine subsystem, an **Algebraic Loop Breaker** block is needed to compile and run the model. For more information, see the [Algebraic Loop Breaker](https://github.com/Xilinx/VMC_Help/tree/2025.2/UTIL/AlgebraicLoopBreaker/README.md) block help.
 
 ![](./Images/results.png)   
 

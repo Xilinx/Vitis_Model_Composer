@@ -31,7 +31,7 @@ a.href = commandURI;
 <blockquote>
 <p><strong>NOTE:</strong> The DMA Source and DMA Sink blocks in the PL, shown in the diagram above, will be provided as part of the platform and not the Vitis Subsystem in this tutorial.</p>
 </blockquote>
-<p>For more details on the design, refer to the <a href="matlab:XmcExampleApi.getExample('IFFT64K_2D')">Vitis Model Composer example</a> and the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2025.1/AI_Engine_Development/AIE/Design_Tutorials/12-IFFT64K-2D">Design Example from Vitis-Tutorials</a>.</p>
+<p>For more details on the design, refer to the <a href="matlab:XmcExampleApi.getExample('IFFT64K_2D')">Vitis Model Composer example</a> and the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2025.2/AI_Engine_Development/AIE/Design_Tutorials/12-IFFT64K-2D">Design Example from Vitis-Tutorials</a>.</p>
 <p>Open the model <code>IFFT64K_2D.slx</code> and examine the <code>DUT</code> subsystem, which contains an HLS Kernel and an AI Engine subsystem.</p>
 <p><img src="Images/model2.png" alt="figure" /></p>
 <p>The signals entering and exiting the AI Engine are of <code>cint32</code> data type (64 bits wide). The PLIO blocks inside the AI Engine subsystem configure the PLIO width to 64 bits. This means that in hardware, one <code>cint32</code> sample will be transferred across each stream on every PL clock cycle. You could potentially increase the PLIO width to 128 bits, so that 2 samples are transferred on each PL clock cycle.</p>
