@@ -12,6 +12,7 @@ In Vitis Model Composer, you can simulate a design containing both AI Engine blo
 ## Examples
 - [Design with HDL and AI Engine blocks](AIE_HDL_cosim/README.md)
 - [Design with imported RTL and AI Engine blocks](AIE_HDL_cosim_rtl_blackbox/README.md)
+- [Versal FFT](VersalFFT/README.md)
 - [2D FFT design with both AI Engine and HDL blocks](FFT2D/README.md)
 - [AIE-PL Multirate Design](AIE_HDL_multirate/README.md)
 - [Multirate Filter Chain with both AI Engine and HDL blocks](multirate_filter_chain/README.md)
