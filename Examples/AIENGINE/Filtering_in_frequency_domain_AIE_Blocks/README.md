@@ -2,22 +2,24 @@
 
 In the frequency domain, the filtering operation involves the multiplication of the Fourier transform of the input and the Fourier transform of the 
 impulse response followed by an inverse Fourier transform.
-As the length of the impulse response increases, the frequency-domain filtering technique becomes more efficient compared to time-domain filtering. 
-This example explains how to boost throughput in AIE using FFT/IFFT blocks and also demonstrates throughput scaling using: cascade length, PLIO width, and number of frames.
+As the length of the impulse response increases, the frequency-domain filtering technique becomes more efficient compared to time-domain filtering.
+ 
+This example implements a frequency domain filter using the Vitis DSP Library FFT & IFFT functions. It also demonstrates how to boost throughput by varying thee cascade length, PLIO width, and number of frames.
 
-## The Algorithm
+
+## Algorithm
 
 This example uses the Overlap-Save method. The diagram below depicts this algorithm at a high level:
 
 <img src="./Images/high_level.png" width="600">
 
-The input stream is divided into overlapping segments of size FFT_SIZE, where each segment has an overlap of TAP_NUM samples (see image in the design section). FFT_SIZE represents the length of the FFT, while TAP_NUM is the length of the FIR filter. To process each segment, the FFT of the segment is multiplied by the FFT of the FIR numerator, both of length FFT_SIZE. The resulting product undergoes an inverse fast Fourier transform (IFFT), and the last FFT_SIZE – TAP_NUM samples are directed to the output. Any remaining samples are discarded.
+The input stream is divided into overlapping segments of size FFT\_SIZE, where each segment has an overlap of TAP\_NUM samples (see image in the design section). FFT\_SIZE represents the length of the FFT, while TAP\_NUM is the length of the FIR filter. To process each segment, the FFT of the segment is multiplied by the FFT of the FIR numerator, both of length FFT\_SIZE. The resulting product undergoes an inverse fast Fourier transform (IFFT), and the last FFT\_SIZE – TAP\_NUM samples are directed to the output. Any remaining samples are discarded.
 
-For this specific implementation, FFT_SIZE is 128, and the TAP_NUM is 32. The input is provided in 96-sample frames, where the sum of the input frame size and the filter size equals the FFT length.
+For this specific implementation, FFT\_SIZE is 128, and the TAP\_NUM is 32. The input is provided in 96-sample frames, where the sum of the input frame size and the filter size equals the FFT length.
 
 To obtain the coefficients for the time domain and filter domain for this implementation, we use a MATLAB script called `test_tap32_fft128.m`.
 
-## The Design
+## Design
 
 
 ![](./Images/design.png)
@@ -51,7 +53,7 @@ void __attribute__ ((noinline)) overlap_save(adf::input_buffer<cint16,adf::exten
 }
 ```
 
-The kernel uses an input buffer of size WIN_SIZE = 96, as specified in the block mask, along with a margin of TAP_NUM = 32 samples. The template parameter, NUM_OF_FRAMES, defaults to one, and the purpose for requiring it will be explained later when discussing design throughput. The margin is utilized in situations where an algorithm requires a certain number of samples from the previous frame. In this scenario, every 128-sample output block comprises a 96-sample input frame and 32 samples from the previous input frame. The process by which the Overlap-save algorithm produces output blocks of 128 samples is depicted in the following image:
+The kernel uses an input buffer of size WIN\_SIZE = 96, as specified in the block mask, along with a margin of TAP\_NUM = 32 samples. The template parameter, NUM\_OF\_FRAMES, defaults to one, and the purpose for requiring it will be explained later when discussing design throughput. The margin is utilized in situations where an algorithm requires a certain number of samples from the previous frame. In this scenario, every 128-sample output block comprises a 96-sample input frame and 32 samples from the previous input frame. The process by which the Overlap-save algorithm produces output blocks of 128 samples is depicted in the following image:
 
 <img src="./Images/overlap_save.png" width="600">
 
@@ -120,7 +122,9 @@ The table below illustrates the impact on throughput as we increase the number o
 
 By employing the mentioned techniques to boost the throughput, we have achieved a 1GSPS throughput. However, this comes at the cost of higher resource usage due to the increased cascade length and increased design latency resulting from the higher number of frames. 
 
+------------
 
+Copyright (c) 2025 Advanced Micro Devices, Inc.
 
 
 
