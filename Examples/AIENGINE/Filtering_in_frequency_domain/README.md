@@ -2,6 +2,8 @@
 
 This example implements a 129-tap, >2.0 GSPS filter on AI Engines, using a frequency domain filtering approach.
 
+In this example, the FFT & IFFT are implemented using the AI Engine API. To see the FFT & IFFT implemented using the Vitis DSP Library, and techniques for increasing throughput, refer to [this example](../Filtering_in_frequency_domain_AIE_Blocks).
+
 ## Algorithm
 
 Time domain filtering involves convolution (i.e.: multiply and add operations).  In the time domain if the signal and the filter length are both of length *N*, we can say the arithmetic complexity is of order N<sup>2</sup>.  

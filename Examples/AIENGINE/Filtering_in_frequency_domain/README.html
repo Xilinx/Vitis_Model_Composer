@@ -20,6 +20,7 @@ commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 a.href = commandURI;
 </script>
 <p>This example implements a 129-tap, &gt;2.0 GSPS filter on AI Engines, using a frequency domain filtering approach.</p>
+<p>In this example, the FFT &amp; IFFT are implemented using the AI Engine API. To see the FFT &amp; IFFT implemented using the Vitis DSP Library, and techniques for increasing throughput, refer to <a href="matlab:XmcExampleApi.getExample('Filtering_in_frequency_domain_AIE_Blocks')">this example</a>.</p>
 <h2 id="algorithm">Algorithm</h2>
 <p>Time domain filtering involves convolution (i.e.: multiply and add operations).  In the time domain if the signal and the filter length are both of length <em>N</em>, we can say the arithmetic complexity is of order N<sup>2</sup>.  </p>
 <p>Convolution in the time domain is equivalent to multiplication in the frequency domain implying that FFTs can be used to perform filtering.  <strong>Frequency domain filtering is used to improve filtering efficiency as N becomes larger.</strong>  Typically, the critical threshold for efficiency improvements based on the filter order N is somewhere between 32 and 64 taps.   Below the threshold, time domain convolution is more efficient while above the threshold frequency domain filtering is more efficient</p>

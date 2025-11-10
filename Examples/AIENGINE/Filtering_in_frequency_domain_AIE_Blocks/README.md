@@ -4,7 +4,7 @@ In the frequency domain, the filtering operation involves the multiplication of 
 impulse response followed by an inverse Fourier transform.
 As the length of the impulse response increases, the frequency-domain filtering technique becomes more efficient compared to time-domain filtering.
  
-This example implements a frequency domain filter using the Vitis DSP Library FFT & IFFT functions. It also demonstrates how to boost throughput by varying thee cascade length, PLIO width, and number of frames.
+This example implements a frequency domain filter using the Vitis DSP Library FFT & IFFT functions. It also demonstrates how to boost throughput by varying thee cascade length, PLIO width, and number of frames. See also [this example](../Filtering_in_frequency_domain) that implements the FFT & IFFT using the AI Engine API.
 
 
 ## Algorithm

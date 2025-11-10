@@ -22,7 +22,7 @@ a.href = commandURI;
 <p>In the frequency domain, the filtering operation involves the multiplication of the Fourier transform of the input and the Fourier transform of the <br />
 impulse response followed by an inverse Fourier transform.<br />
 As the length of the impulse response increases, the frequency-domain filtering technique becomes more efficient compared to time-domain filtering.</p>
-<p>This example implements a frequency domain filter using the Vitis DSP Library FFT &amp; IFFT functions. It also demonstrates how to boost throughput by varying thee cascade length, PLIO width, and number of frames.</p>
+<p>This example implements a frequency domain filter using the Vitis DSP Library FFT &amp; IFFT functions. It also demonstrates how to boost throughput by varying thee cascade length, PLIO width, and number of frames. See also <a href="matlab:XmcExampleApi.getExample('Filtering_in_frequency_domain')">this example</a> that implements the FFT &amp; IFFT using the AI Engine API.</p>
 <h2 id="algorithm">Algorithm</h2>
 <p>This example uses the Overlap-Save method. The diagram below depicts this algorithm at a high level:</p>
 <p><img src="./Images/high_level.png" width="600"></p>
