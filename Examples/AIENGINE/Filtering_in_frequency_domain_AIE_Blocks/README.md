@@ -71,7 +71,7 @@ The output of the spectrum analyzer is shown below. As you can see, the spectra 
 
 ## Throughput
 
-It is easy to estimate the throughput of this design in Vitis Model Composer. You need to generate code and run the cycle-approximate AI Engine simulation from the Hub block. The Hub block configuration is shown below:
+It is easy to estimate the throughput of this design in Vitis Model Composer. First you need to generate code by clicking on *Analyze* and then click on *View AIE Simulation output and throughput*. The Hub block configuration is shown below:
 
 <img src="./Images/hub.png" width="500">
 
