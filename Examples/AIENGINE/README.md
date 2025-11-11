@@ -133,6 +133,13 @@ Using DSPLib AI Engine SSR FIR block to achieve 4 Gsps throughput.
 </tr> 
 
 <tr>
+ <td align="left">
+ <a href="./Filtering_in_frequency_domain_AIE_Blocks/README.md">Filtering in frequency domain (DSP Library Blocks)</a>
+ </td>
+ <td> This design showcases filtering in frequency domain using the Vitis DSP Library blocks for FFT & IFFT. It also shows how to increase the throughput using different techniques.</td>
+ </tr>
+
+<tr>
 <td>
 <a href="./DSPlib/DUC/README.md">Digital Upconversion (DUC)</a> <img src="../../Images/new.PNG" width="50">
 </td>
@@ -179,7 +186,7 @@ Using FIR Interpolator blocks to implement a Digital Upconverter (DUC).
  <td align="left">
  <a href="./Filtering_in_frequency_domain/README.md">Filtering in frequency domain </a>
  </td>
- <td> This design showcases filtering in frequency domain and also shows how to increase the throughput using different techniques.</td>
+ <td> This design showcases filtering in frequency domain using the AIE API to implement the FFT & IFFT.</td>
  </tr> 
 
    <tr>
