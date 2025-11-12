@@ -62,6 +62,40 @@ This will reduce the overhead of calling the block many times and will increase 
 For example if you feed the kernel with 16 samples, you would want to set the output signal size to 16 to both have a full variable-size signal 
 (in case you want to view the signal on a scope) and avoid memory overflows.
 
+# Example 3
+
+## Buffer Overflow in FIR Block with RTP Coefficients
+
+We can observe the following simulation error while using an FIR block with reloadable coefficients (RTP input):
+
+`ERROR-XMC-9003: Imminent buffer overflow on input coeff[0].
+ Tried to write 688 bytes but succeeded in writing only 432 bytes.`
+
+### Scenario
+
+- FIR input frame size = 768 samples
+
+- Feed the block 1 sample per frame at 300 MHz
+
+- Each frame update also provided a new set of coefficients (same values repeated)
+
+- Because the kernel processes data in 768-sample frames, the block was invoked 768 times before it could accumulate enough samples to run the kernel once. Each invocation added another coefficient frame into the RTP buffer. Eventually, the buffer filled up, causing a buffer overflow.
+
+#### How to Fix It
+
+**Match the Frame Configuration:**
+
+- Feed the FIR with 768 samples per frame (its input frame size).
+
+- Set the sample time to (1 / sample_rate) × frame_size.
+
+**Use an RTP Source Block:**
+
+- Provide the coefficients once at sample time zero, and send empty frames thereafter.
+
+- Since the RTP port is asynchronous, the FIR continues to use the initial coefficients, avoiding repeated writes and buffer accumulation.
+
+
 # Conclusions
 :bulb: Inspect the AI Engine kernel code to decide on the size of the "Signal Size" property.
 
