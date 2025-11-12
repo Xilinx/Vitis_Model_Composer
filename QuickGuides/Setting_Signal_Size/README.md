@@ -66,6 +66,8 @@ For example if you feed the kernel with 16 samples, you would want to set the ou
 
 ## Buffer Overflow in FIR Block with RTP Coefficients
 
+![](images/BufferOverflow.png)
+
 We can observe the following simulation error while using an FIR block with reloadable coefficients (RTP input):
 
 `ERROR-XMC-9003: Imminent buffer overflow on input coeff[0].
@@ -75,25 +77,31 @@ We can observe the following simulation error while using an FIR block with relo
 
 - FIR input frame size = 768 samples
 
-- Feed the block 1 sample per frame at 300 MHz
+- Feed the block 1 sample per frame at 50 MHz
 
 - Each frame update also provided a new set of coefficients (same values repeated)
 
-- Because the kernel processes data in 768-sample frames, the block was invoked 768 times before it could accumulate enough samples to run the kernel once. Each invocation added another coefficient frame into the RTP buffer. Eventually, the buffer filled up, causing a buffer overflow.
+Because the kernel processes data in 768-sample frames, the block was invoked 768 times before it could accumulate enough samples to run the kernel once. Each invocation added another coefficient frame into the RTP buffer. Eventually, the buffer filled up, causing a buffer overflow.
 
-#### How to Fix It
+#### How to Fix Buffer Overflow issue ?
 
-**Match the Frame Configuration:**
+You can use either of the following methods to avoid the buffer overflow issue:
 
-- Feed the FIR with 768 samples per frame (its input frame size).
+**Method 1: Use an RTP Source Block:**
 
-- Set the sample time to (1 / sample_rate) × frame_size.
-
-**Use an RTP Source Block:**
+![](images/RTPSource.png)
 
 - Provide the coefficients once at sample time zero, and send empty frames thereafter.
 
 - Since the RTP port is asynchronous, the FIR continues to use the initial coefficients, avoiding repeated writes and buffer accumulation.
+
+**Method 2: Match the Frame Configuration:**
+
+![](images/RTPSource.png)
+
+- Feed the FIR with 768 samples per frame (its input frame size).
+
+- Set the sample time to `(1 / sample_rate) × frame_size`.
 
 
 # Conclusions
