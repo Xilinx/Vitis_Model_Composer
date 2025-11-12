@@ -83,28 +83,28 @@ We can observe the following simulation error while using an FIR block with relo
 
 Because the kernel processes data in 768-sample frames, the block was invoked 768 times before it could accumulate enough samples to run the kernel once. Each invocation added another coefficient frame into the RTP buffer. Eventually, the buffer filled up, causing a buffer overflow.
 
-#### How to Fix Buffer Overflow issue ?
+#### How to Fix Buffer Overflow issue?
 
 You can use either of the following methods to avoid the buffer overflow issue:
 
 **Method 1: Use an RTP Source Block:**
 
-![](images/RTPSource.png)
-
 - Provide the coefficients once at sample time zero, and send empty frames thereafter.
 
 - Since the RTP port is asynchronous, the FIR continues to use the initial coefficients, avoiding repeated writes and buffer accumulation.
 
-**Method 2: Match the Frame Configuration:**
-
 ![](images/RTPSource.png)
+
+**Method 2: Match the Frame Configuration:**
 
 - Feed the FIR with 768 samples per frame (its input frame size).
 
 - Set the sample time to `(1 / sample_rate) × frame_size`.
 
+![](images/Input.png)
 
 # Conclusions
+
 :bulb: Inspect the AI Engine kernel code to decide on the size of the "Signal Size" property.
 
 :bulb: If possible avoid having a variable-size signal that is not full.
