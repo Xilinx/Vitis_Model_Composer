@@ -6,15 +6,15 @@
       </head>
       <body>
         <div id='content'>
-    <h1 id="how-to-properly-set-the-signal-size-property-on-ai-engine-kernel-blocks-with-stream-or-cascade-output">How to properly set the Signal Size property on AI Engine kernel blocks with stream or cascade output?</h1>
-<p>This short tutorial goes over how to optimally set the signal size for AI Engine kernels with stream input and output. </p>
-<h1 id="what-is-signal-size">What is "Signal Size"?</h1>
+    <h1 id="how-to-properly-set-the-signal-size-property-on-ai-engine-blocks-with-stream-or-cascade-output">How to properly set the Signal Size property on AI Engine blocks with stream or cascade output?</h1>
+<p>This short tutorial goes over how to optimally set the signal size for AI Engine blocks. These include kernels with stream input and output, as well as Run-Time Parameter (RTP) ports.</p>
+<h2 id="what-is-signal-size">What is "Signal Size"?</h2>
 <p>Signal Size is a block mask property associated with each stream or cascade output of an imported AI Engine block. This property is used only in Simulink simulation and is not reflected in the generated code. This value is always set as samples and not bytes. Here is an example of the block mask for a kernel with a stream output.</p>
 <p><img src="images/mask.png" alt="" /></p>
 <p>In the example above, the stream output of this block will be a <a href="matlab:XmcExampleApi.getExample('Variable_Size_Signals')">variable-size signal</a> with a maximum size of 4 samples as shown below:</p>
 <p><img src="images/block_with_output_stream.png" alt="" /></p>
-<h1 id="how-to-set-signal-size">How to set "Signal Size"?</h1>
-<h1 id="example-1">Example 1</h1>
+<h2 id="how-to-set-signal-size">How to set "Signal Size"?</h2>
+<h3 id="example-1---stream-inputs-and-outputs">Example 1 - Stream Inputs and Outputs</h3>
 <p>Here is an example of a kernel function we are importing into Vitis Model Composer:</p>
 <p><img src="images/myKernel.png"  width=400px; height=auto></p>
 <p>And below is a screenshot of a design including this kernel:</p>
@@ -25,28 +25,40 @@
 <p>Once the internal buffer for the output port fills up, the kernel can no longer write to it and will block at one of the <em>writeincr</em> function calls. However, input samples will continue arriving to the kernel. Since the kernel is stalled, eventually its internal buffer for the input port will also fill up and the simulation will stop with an error indicating the input buffer is full.</p>
 <p>The animation below demonstrates how buffer overflow occurs when the signal size is set to a value smaller than the number of samples that the kernel produces.</p>
 <p><img src="images/Buffer_over_flow2.gif"  width=500px; height=auto></p>
-<h1 id="example-2">Example 2</h1>
-<p>Let's look at the following kernel function we are importing:</p>
-<p><img src="images/kernel.png" alt="" /></p>
-<p>In each iteration of the for loop, this kernel consumes 16 samples (each readincr<em>v4 reads four samples) and produces 16 samples (each writeincr</em>v4 writes four samples). Assume NSamples is equal to 16 for now.</p>
-<h2 id="feeding-four-samples-at-a-time-to-the-block">Feeding four samples at a time to the block</h2>
-<h3 id="setting-the-signal-size-property-to-4">Setting the "Signal Size" property to 4</h3>
-<p>If in Simulnk you feed a signal of size four to this block, upon invocation of the block, the block produces four samples and the AI Engine kernel stalls on the second "readincr<em>v4" until the block gets invoked with another four samples. In this case, you would normally set the output sample size to 4 so that upon execution of the first writeincr</em>v4, the block produces a variable-size signal of maximum size four that will carry four samples at all times. In this case the variable-size signal is full.</p>
-<h3 id="setting-the-signal-size-property-to-larger-than-4">Setting the "Signal Size" property to larger than 4</h3>
-<p>If you set the signal size to a value larger than 4, for example 8, the output will be a variable size signal with maximum size of 8 samples that carries only 4 samples. While numerically these values will be the same as when you set the signal size to 4, displaying the signal say on a scope will not be ideal as the scope will plot the four samples and leave empty spaces for the other void samples. </p>
-<h3 id="setting-the-signal-size-property-to-smaller-than-4">Setting the "Signal Size" property to smaller than 4</h3>
-<p>If you set the signal size to a number smaller than 4, say 2, upon execution of the first writeincr_v4, the kernel will still produce 4 samples. <br />
-However, two will be saved in an internal buffer to the block and only two will be presented in the output signal. <br />
-In this case, if the simulation runs for long enough time, eventually the internal buffer will fill up and the simulation will stop.</p>
-<h2 id="feeding-more-than-4-samples-at-a-time-to-the-block">Feeding more than 4 samples at a time to the block</h2>
-<p>While you can feed four samples and produce four samples for the example above, it is best if you feed the block with at least 16 samples or multiples of 16 samples. <br />
-This will reduce the overhead of calling the block many times and will increase the simulation speed. <br />
-For example if you feed the kernel with 16 samples, you would want to set the output signal size to 16 to both have a full variable-size signal <br />
-(in case you want to view the signal on a scope) and avoid memory overflows.</p>
+<p>To avoid buffer overflows, ensure that you set the Signal Size property to a value equal to or greater than the number of the samples produced by the kernel on each invocation. If Signal Size is set to a larger value, the output will contain empty samples.</p>
+<h3 id="example-2---run-time-parameters">Example 2 - Run-Time Parameters</h3>
+<p>Consider the following model with a FIR block with reloadable coefficients (RTP input):</p>
+<p><img src="images/BufferOverflow.png" alt="" /></p>
+<p>We can observe the following simulation error: </p>
+<p><code>ERROR-XMC-9003: Imminent buffer overflow on input coeff[0].
+ Tried to write 688 bytes but succeeded in writing only 432 bytes.</code></p>
+<h4 id="scenario">Scenario</h4>
+<ul>
+<li><p>FIR input frame size = 768 samples</p></li>
+<li><p>Feed the block 1 sample per frame at 50 MHz</p></li>
+<li><p>Each frame update also provided a new set of coefficients (same values repeated)</p></li>
+</ul>
+<p>Because the kernel processes data in 768-sample frames, the block was invoked 768 times before it could accumulate enough samples to run the kernel once. Each invocation added another coefficient frame into the RTP buffer. Eventually, the buffer filled up, causing a buffer overflow.</p>
+<h4 id="how-to-fix-buffer-overflow-issue">How to Fix Buffer Overflow issue?</h4>
+<p>You can use either of the following methods to avoid the buffer overflow issue:</p>
+<p><strong>Method 1: Use an RTP Source Block:</strong></p>
+<ul>
+<li><p>Provide the coefficients once at sample time zero, and send empty frames thereafter.</p></li>
+<li><p>Since the RTP port is asynchronous, the FIR continues to use the initial coefficients, avoiding repeated writes and buffer accumulation.</p></li>
+</ul>
+<p><img src="images/RTPSource.png" alt="" /></p>
+<p><strong>Method 2: Match the Frame Configuration:</strong></p>
+<ul>
+<li><p>Feed the FIR with 768 samples per frame (its input frame size).</p></li>
+<li><p>Set the sample time to <code>(1 / sample_rate) × frame_size</code>.</p></li>
+</ul>
+<p><img src="images/Input.png" alt="" /></p>
 <h1 id="conclusions">Conclusions</h1>
 <p><img width="18" height="18" src="../Images/bulb.png"> Inspect the AI Engine kernel code to decide on the size of the "Signal Size" property.</p>
 <p><img width="18" height="18" src="../Images/bulb.png"> If possible avoid having a variable-size signal that is not full.</p>
 <p><img width="18" height="18" src="../Images/bulb.png"> If you set the "Signal Size" parameter to smaller than what it should be, you may encounter buffer overflow. </p>
+<hr />
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
 
         </div>
         <style type='text/css'>body {
