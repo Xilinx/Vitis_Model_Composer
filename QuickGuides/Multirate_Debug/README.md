@@ -22,6 +22,7 @@ Selecting Sample Frequencies (MHz) in the Hub block helps visualize the availabl
 The animation below demonstrates how to display sampling frequencies in the design:
 
 **Input Sampling Frequency:** 20 MHz
+
 **Output Sampling Frequency:** 100 MHz
 
 <img src="images/MultirateSampling.gif"  width=500px; height=auto>
