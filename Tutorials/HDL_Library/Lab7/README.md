@@ -310,7 +310,7 @@ gcd(Input Sample Period, Output Sample Period) = gcd(20,16) = 4.
 
 **Simulink System Period** in the Hub block: (4e-9) or 1/250e6.
 
-14. Click **Apply** and **OK**.
+14. Set **FPGA clock period (ns)** to 4 and click **Apply** and **OK**.
 
 15. Run the design to observe the FIR Compiler output signals.
 
@@ -320,6 +320,7 @@ gcd(Input Sample Period, Output Sample Period) = gcd(20,16) = 4.
 
 ![](Images/step3_6.png) 
 
+**Note:** Ensure that the FPGA clock period in the Hub block matches the Simulink system period.
 
 ### Updating the design to configure FIR Compiler as a Decimator:
 
@@ -341,7 +342,7 @@ This design has an input with 50MHz sample rate. The expected output sample rate
 
 22. Set **Simulink System Period** to `1/200e6` or `5e-9` (`gcd(20,25) = 5`) in the Hub block.
 
-23. Click **Apply** and **OK**.
+23. Set **FPGA clock period (ns)** to 5 and click **Apply** and **OK**.
 
 24. Double click on **FDATool**, set **Fs** to 200, click on **Design Filter** and close it.
 
