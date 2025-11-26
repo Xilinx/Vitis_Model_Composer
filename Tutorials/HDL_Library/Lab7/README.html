@@ -291,7 +291,7 @@ Sample Period = (10ns/10ns)/(1) = 1.
 </code></pre>
 <p><strong>Simulink System Period</strong> in the Hub block: (4e-9) or 1/250e6.</p>
 <ol start="14">
-<li><p>Click <strong>Apply</strong> and <strong>OK</strong>.</p></li>
+<li><p>Set <strong>FPGA clock period (ns)</strong> to 4 and click <strong>Apply</strong> and <strong>OK</strong>.</p></li>
 <li><p>Run the design to observe the FIR Compiler output signals.</p></li>
 </ol>
 <p><img src="Images/step3_5.png" alt="" /> </p>
@@ -299,6 +299,7 @@ Sample Period = (10ns/10ns)/(1) = 1.
 <li>Observe the output sample rate in the <strong>Spectrum Analyzer</strong>; it should be 62.5 MHz.</li>
 </ol>
 <p><img src="Images/step3_6.png" alt="" /> </p>
+<p><strong>Note:</strong> Ensure that the FPGA clock period in the Hub block matches the Simulink system period.</p>
 <h3 id="updating-the-design-to-configure-fir-compiler-as-a-decimator">Updating the design to configure FIR Compiler as a Decimator:</h3>
 <ol start="17">
 <li><p>Open <strong>HDL_DUT</strong>, double click on <strong>FIR Compiler 7.2</strong> block and change the <strong>Filter Type</strong> to Decimator.</p></li>
@@ -314,7 +315,7 @@ Sample Period = (10ns/10ns)/(1) = 1.
 <ol>
 <li><p>Go one level up and double click on <strong>Vitis Model Composer Hub</strong> block. Select <strong>HDL_DUT</strong>.</p></li>
 <li><p>Set <strong>Simulink System Period</strong> to <code>1/200e6</code> or <code>5e-9</code> (<code>gcd(20,25) = 5</code>) in the Hub block.</p></li>
-<li><p>Click <strong>Apply</strong> and <strong>OK</strong>.</p></li>
+<li><p>Set <strong>FPGA clock period (ns)</strong> to 5 and click <strong>Apply</strong> and <strong>OK</strong>.</p></li>
 <li><p>Double click on <strong>FDATool</strong>, set <strong>Fs</strong> to 200, click on <strong>Design Filter</strong> and close it.</p></li>
 <li><p>Run the design to observe the FIR Compiler output signals.</p></li>
 </ol>
