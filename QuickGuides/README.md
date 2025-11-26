@@ -5,6 +5,14 @@
  <td width="35%" align="center"><b>Topic</b>
  <td width="65%" align="center"><b>Description</b>
  </tr>
+<tr>
+ <td align="left">
+   <a href="./Multirate_Debug/README.md">Debugging Multirate HDL Designs</a>
+ </td>
+ <td>Read this Quick Guide to see how to configure Vitis Model Composer to accurately model timing in multirate HDL designs. You will also see how to view sampling frequencies of signals in the design for debugging purposes.
+ </td>
+ </tr>
+ 
  <tr>
  <td align="left">
    <a href="./Variable_Size_Signals/README.md">What are Variable-Size Signals?</a>

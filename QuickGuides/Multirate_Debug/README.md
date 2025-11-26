@@ -1,62 +1,66 @@
-# Debugging Multirate designs
+# Debugging Multirate HDL Designs
 
-Selecting Sample Frequencies (MHz) in the Hub block helps visualize the available sampling frequencies for input and output ports in your multi-rate design. This is useful for debugging and validating timing.
+Read this Quick Guide to see how to configure Vitis Model Composer to accurately model timing in multirate HDL designs. You will also see how to view sampling frequencies of signals in the design for debugging purposes.
 
-# How to Debug Sampling Frequencies in the design ?
+## Configure Simulink System Period and FPGA Clock Period
 
-1. Open the design that contains multiple sample rates using one of the following:
+We'll use a simple example of a FIR filter that interpolates a signal's sample rate from 20 MSPS to 100 MSPS.
 
-    - At the MATLAB command prompt, type `interpolator.slx`
-    - Double-click **interpolator.slx** in the Current Folder browser.
+1. To open the design, double-click **Interpolator.slx** in the Current Folder browser.
 
-2. After opening the design, locate and open the Vitis Model Composer Hub block.
+2. Locate and open the **Vitis Model Composer Hub** block.
 
-3. Double-click the Hub block and navigate to the Analyze tab.
+3. Select the Settings tab to view the **Simulink System Period** and **FPGA Clock Period** settings for this model.
 
-4. In the Block Icon Display dropdown, choose `Sample Frequencies (MHz)`.
+The Simulink System Period value should be the greatest common divisor (`gcd`) of all the sample periods that appear in the model.
 
-5. Click `Update the model` to apply the changes.
+### Simulink System Period
 
-6. Input and output ports will now display their respective sampling frequencies in MHz.
-
-The animation below demonstrates how to display sampling frequencies in the design:
-
-<img src="images/MultirateSampling.gif"  width=500px; height=auto>
-
-7. The design used in the above animation is an interpolator with an integer rate change value of 5. We can observe that the input and output ports have been updated to display 20 and 100, respectively.
-
-**Input Sampling Frequency:** 20 MHz
-
-**Output Sampling Frequency:** 100 MHz
-
-8. Make sure **FPGA Clock Period(ns)** is set to `10`, and **Simulink System Period** is set to `1/100e6` or `10e-9` in the Hub block.
-
-# How to Compute Simulink System Period and FPGA Clock Period
-
-The **Simulink System Period** value should be the greatest common divisor(gcd) of all the sample periods that appear in the model.
-
-**Simulink System Period** Computation is explained below:
+Simulink System Period Computation is explained below:
 
 * **Input Sample Rate**: 20MHz (Input Sample Period: 1/20MHz = 50ns)
 
-* **Expected Output Sample Rate**: (Input Sample Rate) * (Rate change value) = 20MHz * 5 = 100 MHz
+* **Expected Output Sample Rate**: (Input Sample Rate) * (FIR interpolation factor) = 20MHz * 5 = 100 MHz
 
 * **Output Sample Period**: 1/100MHz = 10ns
 
 `gcd(Input Sample Period, Output Sample Period) = gcd(50,10) = 10`
 
-**Simulink System Period(sec)** in the Hub block: 10e-9 
+Therefore, the Simulink System Period setting in the Hub block is 10e-9.
 
-**FPGA Clock Period(ns)**: (Simulink System Period) * 10e9 = 10
+### FPGA Clock Period
 
-**Note:** Ensure that the FPGA clock period in the Hub block matches the Simulink system period. Otherwise, the displayed sample frequencies across the design may not be accurate.
- 
-For more details on setting Simulink System Period and FPGA Clock Period, please click [here](https://github.com/Xilinx/Vitis_Model_Composer/tree/2025.2/Tutorials/HDL_Library/Lab7)
+The FPGA Clock Period should be set based on the expected rate of the FPGA's clock when the design is running in hardware. Vitis Model Composer will generate the HDL code accordingly.
 
+When the FPGA Clock Period and Simulink System Period are equivalent, the displayed sample frequencies in Vitis Model Composer and sample periods in Simulink will match those of the design running on hardware. That is the case for this example model:
 
-# Conclusions
+**FPGA Clock Period(ns)**: (Simulink System Period) * 1e9 = 10
 
-:bulb: This feature provides a quick visual check of input and output sampling rates, making it easier to debug multi-rate designs and ensure correct timing.
+For more details on setting Simulink System Period and FPGA Clock Period, please click [here](https://github.com/Xilinx/Vitis_Model_Composer/tree/2025.2/Tutorials/HDL_Library/Lab7).
+
+## Display Sampling Frequencies in the Design
+
+Selecting Sample Frequencies (MHz) in the Hub block helps visualize the available sampling frequencies for input and output ports in your multi-rate design. This is useful for debugging and validating timing.
+
+3. In the **Vits Model Composer Hub** block, navigate to the Analyze tab.
+
+4. In the Block Icon Display dropdown, choose `Sample Frequencies (MHz)`.
+
+5. Click `Update the model` to apply the changes.
+
+Input and output ports will now display their respective sampling frequencies in MHz.
+
+The animation below demonstrates how to display sampling frequencies in the design:
+
+<img src="images/MultirateSampling.gif"  width=500px; height=auto>
+
+Note the interpolation of the FIR filter (20 MHz to 100 MHz) depicted on the input and output ports.
+
+## Conclusions
+
+:bulb: Setting the Simulink System Period and FPGA Clock Period is crucial to accurately modeling multirate systems.
+
+:bulb: Displaying sample frequencies provides a quick visual check of input and output sampling rates, making it easier to debug multi-rate designs and ensure correct timing.
 
 
 --------------
