@@ -1,0 +1,253 @@
+
+    <html>
+      <head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+      <body>
+        <div id='content'>
+    <h1 id="debugging-multirate-hdl-designs">Debugging Multirate HDL Designs</h1>
+<p>Read this Quick Guide to see how to configure Vitis Model Composer to accurately model timing in multirate HDL designs. You will also see how to view sampling frequencies of signals in the design for debugging purposes.</p>
+<h2 id="configure-simulink-system-period-and-fpga-clock-period">Configure Simulink System Period and FPGA Clock Period</h2>
+<p>We'll use a simple example of a FIR filter that interpolates a signal's sample rate from 20 MSPS to 100 MSPS.</p>
+<ol>
+<li><p>To open the design, double-click <strong>Interpolator.slx</strong> in the Current Folder browser.</p></li>
+<li><p>Locate and open the <strong>Vitis Model Composer Hub</strong> block.</p></li>
+<li><p>Select the Settings tab to view the <strong>Simulink System Period</strong> and <strong>FPGA Clock Period</strong> settings for this model.</p></li>
+</ol>
+<p>The Simulink System Period value should be the greatest common divisor (<code>gcd</code>) of all the sample periods that appear in the model.</p>
+<h3 id="simulink-system-period">Simulink System Period</h3>
+<p>Simulink System Period Computation is explained below:</p>
+<ul>
+<li><p><strong>Input Sample Rate</strong>: 20MHz (Input Sample Period: 1/20MHz = 50ns)</p></li>
+<li><p><strong>Expected Output Sample Rate</strong>: (Input Sample Rate) * (FIR interpolation factor) = 20MHz * 5 = 100 MHz</p></li>
+<li><p><strong>Output Sample Period</strong>: 1/100MHz = 10ns</p></li>
+</ul>
+<p><code>gcd(Input Sample Period, Output Sample Period) = gcd(50,10) = 10</code></p>
+<p>Therefore, the Simulink System Period setting in the Hub block is 10e-9.</p>
+<h3 id="fpga-clock-period">FPGA Clock Period</h3>
+<p>The FPGA Clock Period should be set based on the expected rate of the FPGA's clock when the design is running in hardware. Vitis Model Composer will generate the HDL code accordingly.</p>
+<p>When the FPGA Clock Period and Simulink System Period are equivalent, the displayed sample frequencies in Vitis Model Composer and sample periods in Simulink will match those of the design running on hardware. That is the case for this example model:</p>
+<p><strong>FPGA Clock Period(ns)</strong>: (Simulink System Period) * 1e9 = 10</p>
+<p>For more details on setting Simulink System Period and FPGA Clock Period, please click <a href="https://github.com/Xilinx/Vitis_Model_Composer/tree/2025.2/Tutorials/HDL_Library/Lab7">here</a>.</p>
+<h2 id="display-sampling-frequencies-in-the-design">Display Sampling Frequencies in the Design</h2>
+<p>Selecting Sample Frequencies (MHz) in the Hub block helps visualize the available sampling frequencies for input and output ports in your multi-rate design. This is useful for debugging and validating timing.</p>
+<ol start="3">
+<li><p>In the <strong>Vits Model Composer Hub</strong> block, navigate to the Analyze tab.</p></li>
+<li><p>In the Block Icon Display dropdown, choose <code>Sample Frequencies (MHz)</code>.</p></li>
+<li><p>Click <code>Update the model</code> to apply the changes.</p></li>
+</ol>
+<p>Input and output ports will now display their respective sampling frequencies in MHz.</p>
+<p>The animation below demonstrates how to display sampling frequencies in the design:</p>
+<p><img src="images/MultirateSampling.gif"  width=500px; height=auto></p>
+<p>Note the interpolation of the FIR filter (20 MHz to 100 MHz) depicted on the input and output ports.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p><img width="18" height="18" src="../Images/bulb.png"> Setting the Simulink System Period and FPGA Clock Period is crucial to accurately modeling multirate systems.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> Displaying sample frequencies provides a quick visual check of input and output sampling rates, making it easier to debug multi-rate designs and ensure correct timing.</p>
+<hr />
+<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+
+        </div>
+        <style type='text/css'>body {
+  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #111;
+  background-color: #fdfdfd;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 5px;
+  }
+
+  body > #content {
+    padding: 0px 20px 20px 20px !important;
+  }
+}
+
+body > #content {
+  margin: 0px;
+  max-width: 900px;
+  border: 1px solid #e1e4e8;
+  padding: 10px 40px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr {
+  color: #bbb;
+  background-color: #bbb;
+  height: 1px;
+  flex: 0 1 auto;
+  margin: 1em 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+ * Links
+ */
+a {
+  color: #0366d6;
+  text-decoration: none; }
+  a:visited {
+    color: #0366d6; }
+  a:hover {
+    color: #0366d6;
+    text-decoration: underline; }
+
+pre {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+/**
+  * Code blocks
+  */
+
+code {
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  word-wrap: break-word;
+  padding: .2em .4em;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+  background-color: transparent;
+  border: 0;
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  word-wrap: normal;
+  font-size: 100%;
+}
+
+
+/**
+ * Blockquotes
+ */
+blockquote {
+  margin-left: 30px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  border-left-width: 3px;
+  padding: 0 1em;
+  color: #828282;
+  border-left: 3px solid #e8e8e8;
+  padding-left: 15px;
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+blockquote * {
+  font-style: normal !important;
+  letter-spacing: 0;
+  color: #6a737d !important;
+}
+
+/**
+ * Tables
+ */
+table {
+  border-spacing: 2px;
+  display: block;
+  font-size: 14px;
+  overflow: auto;
+  width: 100%;
+  margin-bottom: 16px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+th {
+  font-weight: 600;
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+/**
+ * Others
+ */
+
+img {
+  max-width: 100%;
+}
+
+p {
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #24292e; }
+
+ul {
+  margin-top: 0; }
+
+li {
+  color: #24292e;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5; }
+
+li + li {
+  margin-top: 0.25em; }
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #24292e; }
+
+a:visited {
+  color: #0366d6; }
+
+h2, h3 {
+  border-bottom: 1px solid #eaecef;
+  color: #111;
+  /* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+      </body>
+    </html>
