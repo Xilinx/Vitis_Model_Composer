@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<h1 id="using-dsplib-ai-engine-ssr-fir-block-to-achieve-4-gsps-throughput">Using DSPLib AI Engine SSR FIR block to achieve 4 Gsps throughput</h1>
+<h1 id="using-dsplib-ai-engine-ssr-fir">Using DSPLib AI Engine SSR FIR</h1>
 <a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 
 <script>
@@ -19,20 +19,35 @@ commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
 a.href = commandURI;
 </script>
-<p>This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block with a Super Sample Rate (SSR) of 4 in Vitis Model Composer to achieve a high throughput. We also compare the results to the Simulink FIR block for functional correctness.</p>
-<p>Each stream input to the AI Engine FIR block has a throughput of close to 1 GSPS for a total of 4 GSPS. To achieve this throughput the following factors are in play:</p>
-<ul>
-<li>64 bit wide PLIO blocks on all the inputs and outputs, with a PL frequency of 500 MHz. This means two 16-bit complex inputs (64 bits total) can be transferred between AIE and PL through each PLIO during each clock cycle, for a total throughput of 1 GSPS per stream.</li>
-<li>A high value for the parameter "Input frame size" on the filter block, in this case 8192. Note this parameter is the sum of the signal sizes of all the four inputs. A larger value means at each invocation of the filter more samples will be processed, which reduces the total overhead we incur when we invoke the kernel, and hence a higher throughput. However, a higher value here will also translate to a higher latency. </li>
-</ul>
-<p><img height="200" src="./Images/fir.png"></p>
-<p><img height="300" src="./Images/throughput.png"></p>
-<h2 id="knowledge-nuggets">Knowledge nuggets</h2>
-<p><img width="18" height="18" src="../Images/bulb.png"> To see the estimated throughput, we are setting the Vitis Model Composer Hub block as below before pushing the <em>Generate</em> button:</p>
-<p><img height="300" src="./Images/hub.png"></p>
-<p><img width="18" height="18" src="../Images/bulb.png"> The input data is split over four ports, where each successive sample is sent to a different input port in a round-robin fashion.</p>
-<p><img width="18" height="18" src="../Images/bulb.png"> The number of AI Engines used is equal to SSR^2 * CASC_LEN (in this case 4^2*1=16)</p>
-<p><img src="Images/screen_shot.png" alt="" /></p>
+<p>This example demonstrates using the AI Engine <strong>FIR Asymmetric Stream</strong> block to achieve a FIR filter with a throughput of 4 GSPS. </p>
+<p><img src="Images/model.png" alt="" /></p>
+<p>Each stream input to the filter has a throughput of close to 1 GSPS, so at least 4 streams are required to achieve a throughput of 4 GSPS.</p>
+<blockquote>
+<p><strong>Why does each stream have a throughput of 1 GSPS?</strong> </p>
+<p>According to the <a href="https://docs.amd.com/r/en-US/Vitis_Libraries/dsp/user_guide/L2/func-fir-filtersAIE.html_6_2">Vitis DSP Library documentation</a>, a single-kernel 16-tap single-rate asymmetric FIR implemented on AIE device (<code>cint16</code> data and <code>int16</code> coefficients) offers a throughput of 998 MSa/s. We can add a second kernel (increase the cascade length to 2) to double the FIR length to 32.</p>
+<p>To accurately model this throughput in VMC, we set the <strong>PLIO</strong> blocks' width to 64 bits and the PL frequency to 500 MHz. 2 <code>cint16</code> samples are transferred on each PL clock cycle for a maximum total throughput of 1 GSPS on each stream.</p>
+</blockquote>
+<p>Two approaches are shown:</p>
+<ol>
+<li><strong>FIR Asymmetric Stream block with <code>SSR=4</code>:</strong> In this case the filtering operation is parallelized 4 times across multiple AI Engine tiles.</li>
+</ol>
+<p><img src="Images/fir_ssr.png" alt="" /></p>
+<blockquote>
+<p>The SSR value inside the FIR block is set to <strong>Inherit from number of input columns</strong>. The FIR input is a matrix with 4 columns, so the SSR value will be 4.</p>
+<p>To experiment with different SSR values, change the <code>SSR</code> variable in the MATLAB workspace and Update Diagram (Ctrl+D).</p>
+</blockquote>
+<ol start="2">
+<li><strong>FIR Asymmetric Stream block with <code>SSR=2</code> and dual stream input/outputs:</strong> This approach takes advantage of dual stream inputs/outputs on AI Engine tiles (for the AIE architecture) to use fewer tiles for the same number of streams.</li>
+</ol>
+<p><img src="Images/fir_dualstream.png" alt="" /></p>
+<p>To study each implementation, open the <strong>Vitis Model Composer Hub</strong> block, select either the <code>FIR_SSR</code> or <code>FIR_DualStream</code> subsystem, and run <strong>Analyze</strong> from the Analyze tab.</p>
+<p>To view each implementations throughput after AIE simulation concludes, click <strong>View AIE simulation output and throughtput</strong>. Both approaches achieve the expected throughput on each stream:</p>
+<p><img src="Images/throughput.png" alt="" /></p>
+<p>However, the dual stream approach uses fewer AI Engine tiles. To view the resource utilization, select <strong>Open Vitis Analyzer</strong> from the Vitis Model Composer Hub block. When the Vitis Analyzer opens, select <strong>Array</strong> from the Analysis menu.</p>
+<p>The dual stream approach uses 9 tiles: </p>
+<p><img src="Images/tiles_dualstream.png" alt="" /></p>
+<p>compared to the <code>SSR=4</code> approach which uses 32 tiles:</p>
+<p><img src="Images/tiles_ssr.png" alt="" /></p>
 <h2 id="related-examples">Related Examples</h2>
 <ul>
 <li><p><a href="matlab:XmcExampleApi.getExample('SingleStreamSSR_FIR')">This</a> is another example of a high throughput filter built from scratch instead of using the block from the AMD AI Engine DSP library.</p></li>

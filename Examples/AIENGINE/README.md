@@ -80,7 +80,7 @@ This example showcases a design that includes an AI Engine kernel with a asynchr
 
 <tr>
 <td>
-<a href="./DSPlib/fft/README.md">Using the AI Engine FFT block from the library browser</a>
+<a href="./DSPlib/fft/README.md">Using the AI Engine FFT Block</a>
 </td>
 <td>
 This example showcases a design that uses an AI Engine FFT block from the library browser.
@@ -89,7 +89,7 @@ This example showcases a design that uses an AI Engine FFT block from the librar
  
 <tr>
 <td>
-<a href="./DSPlib/fir/README.md">Using the AI Engine FIR block from the library browser</a>
+<a href="./DSPlib/fir/README.md">Using the AI Engine FIR Block</a>
 </td>
 <td>
 This example showcases a design that uses an AI Engine FIR block from the library browser.
@@ -98,12 +98,21 @@ This example showcases a design that uses an AI Engine FIR block from the librar
 
 <tr>
 <td>
-<a href="./DSPlib/stream_fft/README.md">Using the AI Engine FFT Stream block from the library browser</a>
+<a href="./DSPlib/stream_fft/README.md">Using the AI Engine FFT Stream Block</a>
 </td>
 <td>
 This example showcases a design that uses an AI Engine Stream FFT block with SSR of 2 from the library browser.
 </td>
 </tr> 
+
+<tr>
+<td>
+<a href="./DSPlib/fir_ssr/README.md">Using the AI Engine FIR Stream Block</a>
+</td>
+<td>
+This example showcases a design that uses an AI Engine Stream FIR block with SSR of 4 from the library browser.
+</td>
+</tr>
  
 <tr>
 <td>
@@ -123,15 +132,6 @@ This example showcases the use of the AI Engine Dynamic Point FFT block.
 </td>
 </tr> 
   
-<tr>
-<td>
-<a href="./DSPlib/fir_ssr/README.md">Using DSPLib AI Engine SSR FIR</a>
-</td>
-<td>
-Using DSPLib AI Engine SSR FIR block to achieve 4 Gsps throughput. 
-</td>
-</tr> 
-   
 <tr>
  <td align="left">
  <a href="./Filtering_in_frequency_domain_AIE_Blocks/README.md">Filtering in frequency domain (DSP Library Blocks)</a>
