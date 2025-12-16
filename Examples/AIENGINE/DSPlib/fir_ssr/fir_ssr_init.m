@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Copyright 2020 Xilinx
+% Copyright 2025 Advanced Micro Devices, Inc.
 %
 % Licensed under the Apache License, Version 2.0 (the "License");
 % you may not use this file except in compliance with the License.
@@ -14,17 +14,15 @@
 % limitations under the License.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function SaveTaps(Taps,filename)
+%% fir_ssr initialization
 
-fp = fopen(filename,'w');
+% Design parameters
+N = 8192; % Frame size
+SSR = 4; 
+SHIFT_ACC = 15; % Shift FIR output by 2^-15
+PLIO_FREQ = 500; % Transfer 2 cint16 samples per cycle = 1 GSPS throughput
 
-for i=1:length(Taps)
-    fprintf(fp,'{ %5d , %5d }',real(Taps(i)),imag(Taps(i)));
-    if(i<length(Taps))
-        fprintf(fp,' , ');
-    end
-    if(rem(i,4)==0)
-        fprintf(fp,'\n');
-    end
-end
+% Generate filter coefficients
+UTaps = CreateFilter(32);
+Taps = NormalizeCoef(UTaps,32768); % Normalize the taps to fit in int16 data type
 

@@ -1,29 +1,46 @@
-# Using DSPLib AI Engine SSR FIR block to achieve 4 Gsps throughput
+# Using DSPLib AI Engine SSR FIR 
 
-This example demonstrates using the AI Engine 'FIR Asymmetric Filter' block with a Super Sample Rate (SSR) of 4 in Vitis Model Composer to achieve a high throughput. We also compare the results to the Simulink FIR block for functional correctness.
+This example demonstrates using the AI Engine **FIR Asymmetric Stream** block to achieve a FIR filter with a throughput of 4 GSPS. 
 
-Each stream input to the AI Engine FIR block has a throughput of close to 1 GSPS for a total of 4 GSPS. To achieve this throughput the following factors are in play:
+![](Images/model.png)
 
-* 64 bit wide PLIO blocks on all the inputs and outputs, with a PL frequency of 500 MHz. This means two 16-bit complex inputs (64 bits total) can be transferred between AIE and PL through each PLIO during each clock cycle, for a total throughput of 1 GSPS per stream.
-* A high value for the parameter "Input frame size" on the filter block, in this case 8192. Note this parameter is the sum of the signal sizes of all the four inputs. A larger value means at each invocation of the filter more samples will be processed, which reduces the total overhead we incur when we invoke the kernel, and hence a higher throughput. However, a higher value here will also translate to a higher latency. 
+Each stream input to the filter has a throughput of close to 1 GSPS, so at least 4 streams are required to achieve a throughput of 4 GSPS.
 
-<img height="200" src="./Images/fir.png">
+>**Why does each stream have a throughput of 1 GSPS?** 
+>
+>According to the [Vitis DSP Library documentation](https://docs.amd.com/r/en-US/Vitis_Libraries/dsp/user_guide/L2/func-fir-filtersAIE.html_6_2), a single-kernel 16-tap single-rate asymmetric FIR implemented on AIE device (`cint16` data and `int16` coefficients) offers a throughput of 998 MSa/s. We can add a second kernel (increase the cascade length to 2) to double the FIR length to 32.
+>
+>To accurately model this throughput in VMC, we set the **PLIO** blocks' width to 64 bits and the PL frequency to 500 MHz. 2 `cint16` samples are transferred on each PL clock cycle for a maximum total throughput of 1 GSPS on each stream.
 
-<img height="300" src="./Images/throughput.png">
+Two approaches are shown:
 
+1. **FIR Asymmetric Stream block with `SSR=4`:** In this case the filtering operation is parallelized 4 times across multiple AI Engine tiles.
 
-## Knowledge nuggets
-:bulb: To see the estimated throughput, we are setting the Vitis Model Composer Hub block as below before pushing the _Generate_ button:
+![](Images/fir_ssr.png)
 
-<img height="300" src="./Images/hub.png">
+>The SSR value inside the FIR block is set to **Inherit from number of input columns**. The FIR input is a matrix with 4 columns, so the SSR value will be 4.
+>
+>To experiment with different SSR values, change the `SSR` variable in the MATLAB workspace and Update Diagram (Ctrl+D).
 
-:bulb: The input data is split over four ports, where each successive sample is sent to a different input port in a round-robin fashion.
+2. **FIR Asymmetric Stream block with `SSR=2` and dual stream input/outputs:** This approach takes advantage of dual stream inputs/outputs on AI Engine tiles (for the AIE architecture) to use fewer tiles for the same number of streams.
 
-:bulb: The number of AI Engines used is equal to SSR^2 * CASC_LEN (in this case 4^2*1=16)
+![](Images/fir_dualstream.png)
 
+To study each implementation, open the **Vitis Model Composer Hub** block, select either the `FIR_SSR` or `FIR_DualStream` subsystem, and run **Analyze** from the Analyze tab.
 
-![](Images/screen_shot.png)
+To view each implementations throughput after AIE simulation concludes, click **View AIE simulation output and throughtput**. Both approaches achieve the expected throughput on each stream:
 
+![](Images/throughput.png)
+
+However, the dual stream approach uses fewer AI Engine tiles. To view the resource utilization, select **Open Vitis Analyzer** from the Vitis Model Composer Hub block. When the Vitis Analyzer opens, select **Array** from the Analysis menu.
+
+The dual stream approach uses 9 tiles: 
+
+![](Images/tiles_dualstream.png)
+
+compared to the `SSR=4` approach which uses 32 tiles:
+
+![](Images/tiles_ssr.png)
 
 ## Related Examples
 
