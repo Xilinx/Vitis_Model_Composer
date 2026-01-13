@@ -49,7 +49,7 @@ This example demonstrates a 2D architecture to implement large point transforms 
 <a href="./AIE_HLS/AIE_HLS_with_interface/README.md">AI Engines and HLS Kernel with interface blocks</a>
 </td>
 <td>
-A design with both AI Engine and HLS Kernel blocks connected through interface blocks.
+A design with both AI Engine and HLS Kernel blocks connected through interface blocks, demonstrating multirate operation between AI Engine and HLS domains.
 </td>
 </tr> 
  

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<h1 id="cosimulation-of-ai-engine-and-programmable-logic-hls">Cosimulation of AI Engine and Programmable Logic (HLS)</h1>
+<h1 id="cosimulation-of-ai-engine-and-programmable-logic-hls-with-multirate-support">Cosimulation of AI Engine and Programmable Logic (HLS) with Multirate Support</h1>
 <a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 
 <script>
@@ -19,11 +19,12 @@ commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
 a.href = commandURI;
 </script>
-<p>This example showcases a design containing both AI Engine blocks and Programmable Logic (HLS). We are using the <em>HLS Kernel</em> block to import an HLS kernel into Vitis Model Composer as a block. To connect the AI Engine blocks to the HLS kernel block, we use the <em>AIE to HLS</em> and <em>HLS to AIE</em> interface blocks if there is a data type mismatch, otherwise, we can connect the blocks directly (Refer to the example <a href="../AIE_HLS_without_interface/README.html">AIE HLS without interface</a>). </p>
+<p>This example showcases a design containing both AI Engine blocks and Programmable Logic (HLS) with multirate data processing. We are using the <em>HLS Kernel</em> block to import an HLS kernel into Vitis Model Composer as a block. To connect the AI Engine blocks to the HLS kernel block, we use the <em>AIE to HLS</em> and <em>HLS to AIE</em> interface blocks. These bridge blocks support multirate operation, allowing different sample rates between the AI Engine and HLS domains.</p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>
 <p><img width="18" height="18" src="../Images/bulb.png"> In Vitis Model Composer, you can cosimulate HLS kernels and AI Engine blocks.</p>
 <p><img width="18" height="18" src="../Images/bulb.png"> The argument type for the HLS kernel should be hls::stream. The arguments can also be scalar or vector to model run-time parameter interfaces. </p>
 <p><img width="18" height="18" src="../Images/bulb.png"> To import an HLS kernel, you need a <a href="./src/hls_kernels.h">header file</a> to declare the function.</p>
+<p><img width="18" height="18" src="../Images/bulb.png"> The <em>AIE to HLS</em> and <em>HLS to AIE</em> bridge blocks support multirate operation. Enable the <strong>AllowMultiRate</strong> parameter to allow different sample rates between AI Engine and HLS domains, enabling efficient data rate conversion in mixed-domain designs.</p>
 <p><img src="images/screen_shot.png" alt="" /></p>
 <hr />
 <p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
