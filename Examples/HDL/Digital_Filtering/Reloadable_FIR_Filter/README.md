@@ -53,7 +53,7 @@ This set of coefficients is pre-loaded in the core.
             In the Scope block, the *reload_tdata_data* signal appears as *coef_din*, and the *reload _tvalid* signal 
             appears as *coef_we*.
 
-      :bulb: Note that the signedness of the coefficients selected in the FIR Compiler GUI and the signedness of the coefficients provided through the Reload Port must match. Any mismatch will cause incorrect coefficient interpretation inside the FIR RTL and will lead to XSIM (RTL) and hybrid‑sim (C‑model) producing different results. This requirement applies to both single‑path and multi‑path (e.g., 2‑path/SSR) FIR designs.
+:bulb: Note that the signedness of the coefficients selected in the FIR Compiler GUI and the signedness of the coefficients provided through the Reload Port must match. Any mismatch will cause incorrect coefficient interpretation inside the FIR RTL and will lead to XSIM (RTL) and hybrid‑sim (C‑model) producing different results. This requirement applies to both single‑path and multi‑path (e.g., 2‑path/SSR) FIR designs.
 
       
     * *reload_tlast*: This signal must be high on the last coefficient data to indicate that the last data has been
