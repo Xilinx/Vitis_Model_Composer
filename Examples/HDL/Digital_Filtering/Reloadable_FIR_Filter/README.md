@@ -7,7 +7,7 @@ source. The first set of coefficients specifies a symmetric filter, [1 2 3 2 1].
 
 <img src="images/infer.png" width="400">
 
-The reloadable filter must be of the same specification and size of the initial filter loaded by the core. In this example, the reloadable filter should also be symmetric. Here we have chosen [-1 2 -3 2 -1] as the reloadable filter. However, we need to process this filter by the **xlGetReOrderedCoeff** function and provide the output of this function to the *reload_tdata_data* input signal of the core. 
+The reloadable filter must be of the same specification and size of the initial filter loaded by the core. In this example, the reloadable filter should also be symetric. Here we have chosen [-1 2 -3 2 -1] as the relodable filter. However, we need to process this filter by the **xlGetReOrderedCoeff** function and provide the output of this function to the *reload_tdata_data* input signal of the core. 
 
 outCoeff = **xlGetReOrderedCoeff**(new_coeff_set, returnType, block_handle)
 
@@ -38,7 +38,7 @@ Example :
 		     -3
 
 
-To understand the use of the FIR Compiler 7.2 design for a reloadable filter, 
+To understand the use the FIR Compiler 7.2 design for a reloadable filter, 
 observe the following:
 
 * Double-click the FIR Compiler block and you can see the set of coefficients [1 2 3 2 1] was specified.
@@ -48,9 +48,9 @@ This set of coefficients is pre-loaded in the core.
       reload_tdata_data) perform the following on the FIR Compiler 7.2 block:
     * *reload_tdata_data* and *reload_tvalid*: After the initial set of coefficients specified  by the core [1 2 3 2 1]
             is compiled, the new set of coefficients ([-1 2 -3], output of **xlGetReOrderedCoeff** function) is loaded via the *reload_tdata_data* input port.
-            The *reload_tvalid* control signal must be high during this reload period. In this case *reload_tvalid* must
+            The *reload _tvalid* control signal must be high during this reload period. In this case *reload _tvalid* must
             be high for 3 clock cycles.
-            In the Scope block, the *reload_tdata_data* signal appears as *coef_din*, and the *reload_tvalid* signal 
+            In the Scope block, the *reload_tdata_data* signal appears as *coef_din*, and the *reload _tvalid* signal 
             appears as *coef_we*.
     * *reload_tlast*: This signal must be high on the last coefficient data to indicate that the last data has been
             loaded. In the Scope block, the *reload_tlast* signal appears as *coef_ld*.
@@ -63,11 +63,11 @@ This set of coefficients is pre-loaded in the core.
 		period to indicate the last coefficient data.   
     * Similarly, *reload_tdata_data* has input as [zeros(1,20) -1 2 -3]  (see below for more details).
 
-* Once the coefficients are loaded, to use the new coefficients, the *config_tvalid* input should be set to one for one cycle.
+* Once the coefficients are lodaed, to use the new coefficinets, the *config_tvalid* input should be set to one for one cycle.
 
 * Now, Double-click the Scope block and observe the following:
 
-    * The *reload_tvalid* control signal goes high during the reload period, 
+    * The *reload _tvalid* control signal goes high during the reload period, 
 		when the new set of coefficients is loaded via the *reload_tdata_data* input port.		
           
     * *reload_tlast*  goes high at the 20th simulation time for 1 sample period, 
