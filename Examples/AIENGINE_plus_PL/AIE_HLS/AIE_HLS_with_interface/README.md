@@ -1,5 +1,5 @@
-# Cosimulation of AI Engine and Programmable Logic (HLS)
-This example showcases a design containing both AI Engine blocks and Programmable Logic (HLS). We are using the *HLS Kernel* block to import an HLS kernel into Vitis Model Composer as a block. To connect the AI Engine blocks to the HLS kernel block, we use the *AIE to HLS* and *HLS to AIE* interface blocks if there is a data type mismatch, otherwise, we can connect the blocks directly (Refer to the example [AIE HLS without interface](../AIE_HLS_without_interface/README.html)). 
+# Cosimulation of AI Engine and Programmable Logic (HLS) with Multirate Support
+This example showcases a design containing both AI Engine blocks and Programmable Logic (HLS) with multirate data processing. We are using the *HLS Kernel* block to import an HLS kernel into Vitis Model Composer as a block. To connect the AI Engine blocks to the HLS kernel block, we use the *AIE to HLS* and *HLS to AIE* interface blocks. These bridge blocks support multirate operation, allowing different sample rates between the AI Engine and HLS domains.
 
 
 ## Knowledge nuggets
@@ -8,6 +8,8 @@ This example showcases a design containing both AI Engine blocks and Programmabl
 :bulb: The argument type for the HLS kernel should be hls::stream. The arguments can also be scalar or vector to model run-time parameter interfaces. 
 
 :bulb: To import an HLS kernel, you need a [header file](./src/hls_kernels.h) to declare the function.
+
+:bulb: The *AIE to HLS* and *HLS to AIE* bridge blocks support multirate operation. Enable the **AllowMultiRate** parameter to allow different sample rates between AI Engine and HLS domains, enabling efficient data rate conversion in mixed-domain designs.
 
 ![](images/screen_shot.png)
 
