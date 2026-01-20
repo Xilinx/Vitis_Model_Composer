@@ -21,9 +21,9 @@ a.href = commandURI;
 </script>
 <p>This design example shows how the FIR Compiler block can be configured as a reloadable coefficient FIR filter. <br />
 In this example, the first set of coefficients is specified and loaded by the core, and the second set is loaded from an external<br />
-source. The first set of coefficients specifies a symmetric filter, [1 2 3 2 1]. Note the filter structure is <em>inferred</em> from the coefficients provided to the block per the setting depicted in the image below.</p>
+source. The first set of coefficients specifies a symmetric filter, [-1 2 3 2 -1]. Note the filter structure is <em>inferred</em> from the coefficients provided to the block per the setting depicted in the image below.</p>
 <p><img src="images/infer.png" width="400"></p>
-<p>The reloadable filter must be of the same specification and size of the initial filter loaded by the core. In this example, the reloadable filter should also be symetric. Here we have chosen [-1 2 -3 2 -1] as the relodable filter. However, we need to process this filter by the <strong>xlGetReOrderedCoeff</strong> function and provide the output of this function to the <em>reload<em>tdata</em>data</em> input signal of the core. </p>
+<p>The reloadable filter must be of the same specification and size of the initial filter loaded by the core. In this example, the reloadable filter should also be symmetric. Here we have chosen [-1 -5 10 -5 -1] as the reloadable filter. However, we need to process this filter by the <strong>xlGetReOrderedCoeff</strong> function and provide the output of this function to the <em>reload<em>tdata</em>data</em> input signal of the core. </p>
 <p>outCoeff = <strong>xlGetReOrderedCoeff</strong>(new<em>coeff</em>set, returnType, block_handle)</p>
 <p>to get the reordered coefficients based on the settings and coefficients specified in the core.</p>
 <ul>
@@ -35,43 +35,47 @@ source. The first set of coefficients specifies a symmetric filter, [1 2 3 2 1].
 <ol>
 <li><p>In the Simulink model, select the FIR Compiler 7.2 block.</p></li>
 <li><p>In the MATLAB Command Window, enter the following commands: </p>
-<pre><code>&gt;new_coeff = [-1 2 -3 2 -1] 
+<pre><code>&gt;new_coeff = [-1 -5 10 -5 -1] 
 
-new_coeff =<pre><code> -1 2 -3 2 -1
+new_coeff =<pre><code> -1 -5 10 -5 -1
 </code></pre>&gt;xlGetReOrderedCoeff(new_coeff,'coeff',gcbh)
 
 ans =<pre><code> -1
-2
--3
+-5
+10
 </code></pre></code></pre></li>
 </ol>
-<p>To understand the use the FIR Compiler 7.2 design for a reloadable filter, <br />
+<p>To understand the use of the FIR Compiler 7.2 design for a reloadable filter, <br />
 observe the following:</p>
 <ul>
-<li><p>Double-click the FIR Compiler block and you can see the set of coefficients [1 2 3 2 1] was specified.<br />
+<li><p>Double-click the FIR Compiler block and you can see the set of coefficients [-1 2 3 2 -1] was specified.<br />
 This set of coefficients is pre-loaded in the core.</p></li>
 <li><p>The set of inputs connected to the FIR Compiler block (reload<em>tvalid, reload</em>tlast, and <br />
 reload<em>tdata</em>data) perform the following on the FIR Compiler 7.2 block:</p>
 <ul>
-<li><em>reload<em>tdata</em>data</em> and <em>reload<em>tvalid</em>: After the initial set of coefficients specified  by the core [1 2 3 2 1]<br />
-is compiled, the new set of coefficients ([-1 2 -3], output of <strong>xlGetReOrderedCoeff</strong> function) is loaded via the <em>reload</em>tdata_data</em> input port.<br />
-The <em>reload _tvalid</em> control signal must be high during this reload period. In this case <em>reload <em>tvalid</em> must<br />
+<li><em>reload<em>tdata</em>data</em> and <em>reload<em>tvalid</em>: After the initial set of coefficients specified  by the core [-1 2 3 2 -1]<br />
+is compiled, the new set of coefficients ([-1 -5 10], output of <strong>xlGetReOrderedCoeff</strong> function) is loaded via the <em>reload</em>tdata<em>data</em> input port.<br />
+The <em>reload</em>tvalid</em> control signal must be high during this reload period. In this case <em>reload<em>tvalid</em> must<br />
 be high for 3 clock cycles.<br />
-In the Scope block, the <em>reload</em>tdata<em>data</em> signal appears as <em>coef</em>din</em>, and the <em>reload <em>tvalid</em> signal <br />
-appears as <em>coef</em>we</em>.</li>
-<li><em>reload<em>tlast</em>: This signal must be high on the last coefficient data to indicate that the last data has been<br />
-loaded. In the Scope block, the <em>reload</em>tlast</em> signal appears as <em>coef_ld</em>.</li></ul></li>
+In the Scope block, the <em>reload</em>tdata<em>data</em> signal appears as <em>coef</em>din</em>, and the <em>reload<em>tvalid</em> signal <br />
+appears as <em>coef</em>we</em>.</li></ul></li>
+</ul>
+<p><img width="18" height="18" src="../Images/bulb.png"> Note that the signedness of the coefficients selected in the FIR Compiler GUI and the signedness of the coefficients provided through the Reload Port must match. Any mismatch will cause incorrect coefficient interpretation inside the FIR RTL and will lead to XSIM (RTL) and hybrid‑sim (C‑model) producing different results. This requirement applies to both single‑path and multi‑path (e.g., 2‑path/SSR) FIR designs.</p>
+<pre><code>* *reload_tlast*: This signal must be high on the last coefficient data to indicate that the last data has been
+loaded. In the Scope block, the *reload_tlast* signal appears as *coef_ld*.
+</code></pre>
+<ul>
 <li><p>The inputs that are connected to the three <em>reload_</em>* signals are vectors in this format:</p>
 <ul>
 <li><em>reload_tvalid</em> has input [zeros(1,20) 1 1 1]. <br />
 The format zeros(1,N) returns 1-by-N vectors of zeros.</li>
 <li><em>reload<em>tlast</em> has input [zeros(1,20) 0 0 1]. <em>reload</em>tlast</em> goes high at the 23rd simulation time for 1 sample <br />
 period to indicate the last coefficient data.   </li>
-<li>Similarly, <em>reload<em>tdata</em>data</em> has input as [zeros(1,20) -1 2 -3]  (see below for more details).</li></ul></li>
-<li><p>Once the coefficients are lodaed, to use the new coefficinets, the <em>config_tvalid</em> input should be set to one for one cycle.</p></li>
+<li>Similarly, <em>reload<em>tdata</em>data</em> has input as [zeros(1,20) -1 -5 10]  (see below for more details).</li></ul></li>
+<li><p>Once the coefficients are loaded, to use the new coefficients, the <em>config_tvalid</em> input should be set to one for one cycle.</p></li>
 <li><p>Now, Double-click the Scope block and observe the following:</p>
 <ul>
-<li><p>The <em>reload <em>tvalid</em> control signal goes high during the reload period, <br />
+<li><p>The <em>reload<em>tvalid</em> control signal goes high during the reload period, <br />
 when the new set of coefficients is loaded via the <em>reload</em>tdata_data</em> input port.      </p></li>
 <li><p><em>reload_tlast</em>  goes high at the 20th simulation time for 1 sample period, <br />
 to indicate the last coefficient data.</p></li>
