@@ -146,7 +146,16 @@ This example showcases the use of the AI Engine Dynamic Point FFT block.
 <td>
 Using FIR Interpolator blocks to implement a Digital Upconverter (DUC).
 </td>
-</tr> 
+</tr>
+
+<tr>
+<td>
+<a href="./DSPlib/Channelizer_AIE/README.md">Polyphase Channelizer</a> <img src="../../Images/new.PNG" width="50">
+</td>
+<td>
+Using the FIR TDM and IDFT blocks to implement a polyphase channelizer at 1.4 GSPS.
+</td>
+</tr>  
   
 </table>
 <br/>

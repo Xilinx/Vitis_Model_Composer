@@ -16,9 +16,9 @@ a block diagram environment for multidomain simulation and model-based design.
 
 
 # What's new in 2025.2?
-* Export AI Engine and PL subsystems as a [Vitis Subsystem (VSS)](./Tutorials/Hardware/Export_to_Vitis).
-* The [Filtering in Frequency Domain](./Examples/AIENGINE/Filtering_in_frequency_domain) example shows how to increase AI Engine throughput using different techniques.
-* Working with both AI Engines and PL? See the [tutorials](./Tutorials/AIE-PL/README.md) showing how to connect the block libraries in Vitis Model Composer.
+* See new examples implementing a high-throughput polyphase channelizer on [AI Engine](./Examples/AIENGINE/DSPlib/Channelizer_AIE) and [Programmable Logic](./Examples/HDL/High_Performance/Channelizer_PL).
+* Super Sample Rate (SSR) FFT implementations with a systolic architecture for PL, both [floating point](./Examples/HDL/High_Performance/SSR_FFT_Float) and [fixed point](./Examples/HDL/High_Performance/SSR_FFT).
+* The [Versal FFT design](./Examples/AIENGINE_plus_PL/AIE_HDL/VersalFFT) shows a Cooley-Tukey algorithm to implement a high performance (low latency, high sample rate) FFT that takes advantage of both the AI Engine and Programmmable Logic (PL) of Versal devices.
 
 # Tutorials
 <p align="center">

@@ -1,0 +1,293 @@
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h1 id="polyphase-channelizer-–-programmable-logic-pl-implementation">Polyphase Channelizer – Programmable Logic (PL) Implementation</h1>
+<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+
+<script>
+var a = document.getElementById('openlink');
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+
+a.href = commandURI;
+</script>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#general-channelizer-overview">General Channelizer Overview</a></li>
+<li><a href="#pl-implementation-details">PL Implementation Details</a></li>
+</ol>
+<h2 id="introduction">Introduction</h2>
+<p>This document summarizes the Programmable Logic (PL) implementation of a Polyphase Channelizer that achieves an overall throughput of greater than 1.4 GSPS.</p>
+<h2 id="channelizer-overview">Channelizer Overview</h2>
+<p>The channelizer applies a polyphase filter bank approach to perform digital down conversion (DDC) across many frequency-domain multiplexed (FDM) channels simultaneously. Compared to per-channel mixers and multirate decimators, the polyphase structure shares computation, reducing resource cost.</p>
+<h3 id="digital-down-converter">Digital Down Converter</h3>
+<ul>
+<li>Per-channel operations in an FDM receiver: translate to baseband, spectrally shape, and decimate to the channel bandwidth.</li>
+</ul>
+<p><img src="images/slide02-img1.png" alt="slide02-img1" /></p>
+<p><img src="images/slide02-img2.png" alt="slide02-img2" /></p>
+<ul>
+<li>Traditional approach is resource-expensive: a complex mixer (sin/cos and complex multiply) <strong>and</strong> a full multirate decimation chain per channel.</li>
+</ul>
+<p><img src="images/slide02-img3.png" alt="slide02-img3" /></p>
+<ul>
+<li>A polyphase channelizer can reduce cost by factoring the filter and using a DFT stage to separate channels.</li>
+</ul>
+<h3 id="polyphase-filterbank">Polyphase Filterbank</h3>
+<ul>
+<li>Output is a phase-coherent sum of M polyphase paths; this coherent sum is a DFT of the M path outputs (analogous to beamforming across phases).</li>
+<li>Prototype low-pass filter coefficients are split column-major across M phases, reducing compute.</li>
+<li>Commutator loads phases starting from M−1 down to 0.</li>
+</ul>
+<p><img src="images/slide03-img1.png" alt="slide03-img1" /></p>
+<h2 id="test-bench">Test Bench</h2>
+<ul>
+<li>Two reference models are created for design debug, verification and validation: <ol>
+<li>Simulink single-precision floating-point <em>golden</em> model </li>
+<li>Simulink <em>fine-grain</em> fixed-point detailed model with coefficient quantization per channel. This enables direct comparison to implementation for debug and validation.</li></ol></li>
+</ul>
+<p><img src="images/model_aie.png" alt="" /></p>
+<ul>
+<li>The input consists of 32 channels sampled at 41 MSPS per channel, for a total input sample rate of 1.312 GSPS.</li>
+<li>Three inputs are used with distinct frequencies to make it easy to verify channel-bin placement: <ol>
+<li>DC </li>
+<li>1 MHz FM swept up to channel 31 </li>
+<li>3 MHz FM swept up to channel 3.</li></ol></li>
+</ul>
+<p><img src="images/model_inputs.png" alt="" /></p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>DC input should only appear in ch0 — if it appears elsewhere, the design has an issue.</li>
+<li>A 6-tap FIR implies some leakage between channels; this is acceptable given the short FIR length.</li>
+<li>Channel locations can be stepped (walking-ones) to verify all channels.</li>
+</ul>
+<h2 id="pl-implementation-details">PL Implementation Details</h2>
+<p>To process the 1.312 GSPS input stream, we split the design into 2 streams operating at an achievable PL clock rate of 656 MHz. The channelizer's 32 channels are partitioned into 2, 16-channel TDM FIRs.</p>
+<p>The design then consists of:</p>
+<ul>
+<li><strong>FIR TDM</strong> (implemented using the <em>FIR Compiler</em> block)</li>
+<li><strong>LIFO buffers</strong> to reverse the vector sample order (implemented using <em>Dual Port RAM</em>, see <a href="#vector-flip-implementation-example">Vector Flip Implementation Example</a> below)</li>
+<li><strong>IDFT</strong> (implemented using the <em>Vector IFFT</em> block)</li>
+</ul>
+<p><img src="images/flow_pl.png" alt="" /></p>
+<p>The design closes timing at 656 MHz:</p>
+<p><img src="images/resources_pl.png" alt="" /></p>
+<h3 id="vector-flip-implementation-example">Vector Flip Implementation Example</h3>
+<p>In addition to reversing order (LIFO), <strong>manual row swapping</strong> is required on LIFO output for SSR designs prior to the IDFT. Below shows how the combination of LIFO kernels and swapping the channels (for SSR=4) affects the input to the IDFT.</p>
+<p><img src="images/vector_flip.png" alt="" /></p>
+<hr />
+<p>Copyright (c) 2026 Advanced Micro Devices, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+
+</div>
+<style type='text/css'>body {
+font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+color: #111;
+background-color: #fdfdfd;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: "kern" 1;
+-moz-font-feature-settings: "kern" 1;
+-o-font-feature-settings: "kern" 1;
+font-feature-settings: "kern" 1;
+font-kerning: normal;
+padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+body {
+padding: 5px;
+}
+
+body > #content {
+padding: 0px 20px 20px 20px !important;
+}
+}
+
+body > #content {
+margin: 0px;
+max-width: 900px;
+border: 1px solid #e1e4e8;
+padding: 10px 40px;
+padding-bottom: 20px;
+border-radius: 2px;
+margin-left: auto;
+margin-right: auto;
+}
+
+hr {
+color: #bbb;
+background-color: #bbb;
+height: 1px;
+flex: 0 1 auto;
+margin: 1em 0;
+padding: 0;
+border: none;
+}
+
+/**
+* Links
+*/
+a {
+color: #0366d6;
+text-decoration: none; }
+a:visited {
+color: #0366d6; }
+a:hover {
+color: #0366d6;
+text-decoration: underline; }
+
+pre {
+background-color: #f6f8fa;
+border-radius: 3px;
+font-size: 85%;
+line-height: 1.45;
+overflow: auto;
+padding: 16px;
+}
+
+/**
+* Code blocks
+*/
+
+code {
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
+font-size: 85%;
+margin: 0;
+word-wrap: break-word;
+padding: .2em .4em;
+font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+background-color: transparent;
+border: 0;
+display: inline;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+padding: 0;
+word-wrap: normal;
+font-size: 100%;
+}
+
+
+/**
+* Blockquotes
+*/
+blockquote {
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 16px;
+border-left-width: 3px;
+padding: 0 1em;
+color: #828282;
+border-left: 3px solid #e8e8e8;
+padding-left: 15px;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+}
+blockquote * {
+font-style: normal !important;
+letter-spacing: 0;
+color: #6a737d !important;
+}
+
+/**
+* Tables
+*/
+table {
+border-spacing: 2px;
+display: block;
+font-size: 14px;
+overflow: auto;
+width: 100%;
+margin-bottom: 16px;
+border-spacing: 0;
+border-collapse: collapse;
+}
+
+td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+th {
+font-weight: 600;
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+
+tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+
+/**
+* Others
+*/
+
+img {
+max-width: 100%;
+}
+
+p {
+line-height: 24px;
+font-weight: 400;
+font-size: 16px;
+color: #24292e; }
+
+ul {
+margin-top: 0; }
+
+li {
+color: #24292e;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; }
+
+li + li {
+margin-top: 0.25em; }
+
+* {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+color: #24292e; }
+
+a:visited {
+color: #0366d6; }
+
+h2, h3 {
+border-bottom: 1px solid #eaecef;
+color: #111;
+/* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+</body>
+</html>

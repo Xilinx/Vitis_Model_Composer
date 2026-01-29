@@ -22,6 +22,7 @@ Here you see examples for FIR,FFT and Matrix Multiply functions.
 - [Importing Matrix Multiply from DSPLib as a block](matrix_multiply/README.md)
 - [AI Engine Dynamic Point FFT](Dynamic_FFT/README.md)
 - [Digital Upconversion (DUC)](DUC/README.md) using FIR interpolator blocks
+- [Polyphase Channelizer](Channelizer_AIE/README.md) using FIR TDM and IDFT blocks
 
 --------------
 Copyright (c) 2025 Advanced Micro Devices, Inc.

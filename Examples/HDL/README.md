@@ -15,6 +15,13 @@
  <td>This example offers a Vitis Model Composer testbench for a Super Sample Rate (SSR) FFT with a systolic architecture to process multiple input samples every clock cycle.
  </td>
  </tr>
+<tr>
+ <td align="left">
+   <a href="./High_Performance/Channelizer_PL/README.md">Polyphase Channelizer</a> <br>
+ </td>
+ <td>This example implements a 32-channel polyphase channelizer at 1.312 GSPS.
+ </td>
+ </tr>
  </table>
 
 ### AXI IP Examples
