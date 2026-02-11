@@ -239,19 +239,29 @@ Select the target that was created and built above.
 ![](Images/Step2/program_device_app.png)
 ![](Images/Step2/programmed_device_.png)
 
-25. Click **Vitis > Program Flash**
+25. Click **Create Boot Image** and specify a file path to save BOOT.BIN file. 
+![](Images/Step2/BootImage.png)
 
-26. Switch to the terminal tab and confirm that `Hello World` was received.
+26. Click **Vitis > Program Flash** and include BOOT.BIN file during flash.
+![](Images/Step2/ProgramFlash.png)
+![](Images/Step2/Flash.png)
 
-27. Expand the container `Des_Test` and then expand the container `src`.
+28. Click **Run** after program flash is successful. Switch to the terminal tab and confirm that `Hello World` was received.
 
-28. Double-click the **helloworld.c** file.
+29. Expand the container `Des_Test` and then expand the container `src`.
 
-29. Replace the contents of this file with the contents of the file `hello_world_final.c` from the `lab6` directory.
+30. Double-click the **helloworld.c** file.
 
-30. Save the `helloworld.c` source code.
+31. Replace the contents of this file with the contents of the file `hello_world_final.c` from the `lab6` directory.
 
-31. Build the application. Once the build is successful then click on program device and program flash.
+32. Save the `helloworld.c` source code.
+
+33. Build the application. Once the build is successful then click on program device.
+
+34. Generate BOOT.BIN file and program flash.
+
+35. Click **Run** after program flash is successful and review the results in the terminal (shown in the following figure).
+![](Images/Step2/final_output.png)
 
 ### Summary 
 
