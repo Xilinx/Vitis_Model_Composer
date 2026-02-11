@@ -249,19 +249,21 @@ Select the target that was created and built above.
 
 28. Click **Run** after program flash is successful. Switch to the terminal tab and confirm that `Hello World` was received.
 
-29. Expand the container `Des_Test` and then expand the container `src`.
+![](Images/Step2/HelloWorld_Program.png)
 
-30. Double-click the **helloworld.c** file.
+30. Expand the container `Des_Test` and then expand the container `src`.
 
-31. Replace the contents of this file with the contents of the file `hello_world_final.c` from the `lab6` directory.
+31. Double-click the **helloworld.c** file.
 
-32. Save the `helloworld.c` source code.
+32. Replace the contents of this file with the contents of the file `hello_world_final.c` from the `lab6` directory.
 
-33. Build the application. Once the build is successful then click on program device.
+33. Save the `helloworld.c` source code.
 
-34. Generate BOOT.BIN file and program flash.
+34. Build the application. Once the build is successful then click on program device.
 
-35. Click **Run** after program flash is successful and review the results in the terminal (shown in the following figure).
+35. Generate BOOT.BIN file and program flash.
+
+36. Click **Run** after program flash is successful and review the results in the terminal (shown in the following figure).
 ![](Images/Step2/final_output.png)
 
 ### Summary 
