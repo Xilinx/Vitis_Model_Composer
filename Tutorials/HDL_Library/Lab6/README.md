@@ -57,9 +57,86 @@ The driver files for the AXI4-Lite interface are automatically created by Vitis 
 
 ![](Images/Step1/Step11.png)
 
-12. Open file `hdl_dut.c` to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown in the following figure.
+12. Open file `hdl_dut.c` to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown below.
 
-![](Images/Step1/Step12.png)
+```
+#include "hdl_dut.h"
+#ifndef __linux__
+int hdl_dut_CfgInitialize(hdl_dut *InstancePtr, hdl_dut_Config *ConfigPtr) {
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(ConfigPtr != NULL);
+
+    InstancePtr->hdl_dut_BaseAddress = ConfigPtr->hdl_dut_BaseAddress;
+
+    InstancePtr->IsReady = 1;
+    return XST_SUCCESS;
+}
+#endif
+void hdl_dut_reset_write(hdl_dut *InstancePtr, u32 Data) {
+
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    hdl_dut_WriteReg(InstancePtr->hdl_dut_BaseAddress, 0, Data);
+}
+u32 hdl_dut_reset_read(hdl_dut *InstancePtr) {
+
+    u32 Data;
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    Data = hdl_dut_ReadReg(InstancePtr->hdl_dut_BaseAddress, 0);
+    return Data;
+}
+void hdl_dut_decrypt_write(hdl_dut *InstancePtr, u32 Data) {
+
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    hdl_dut_WriteReg(InstancePtr->hdl_dut_BaseAddress, 4, Data);
+}
+u32 hdl_dut_decrypt_read(hdl_dut *InstancePtr) {
+
+    u32 Data;
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    Data = hdl_dut_ReadReg(InstancePtr->hdl_dut_BaseAddress, 4);
+    return Data;
+}
+void hdl_dut_key_63_32_write(hdl_dut *InstancePtr, u32 Data) {
+
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    hdl_dut_WriteReg(InstancePtr->hdl_dut_BaseAddress, 8, Data);
+}
+u32 hdl_dut_key_63_32_read(hdl_dut *InstancePtr) {
+
+    u32 Data;
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    Data = hdl_dut_ReadReg(InstancePtr->hdl_dut_BaseAddress, 8);
+    return Data;
+}
+void hdl_dut_key_31_0_write(hdl_dut *InstancePtr, u32 Data) {
+
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    hdl_dut_WriteReg(InstancePtr->hdl_dut_BaseAddress, 12, Data);
+}
+u32 hdl_dut_key_31_0_read(hdl_dut *InstancePtr) {
+
+    u32 Data;
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    Data = hdl_dut_ReadReg(InstancePtr->hdl_dut_BaseAddress, 12);
+    return Data;
+}
+u32 hdl_dut_parity_err_read(hdl_dut *InstancePtr) {
+
+    u32 Data;
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    Data = hdl_dut_ReadReg(InstancePtr->hdl_dut_BaseAddress, 16);
+    return Data;
+}
+```
 
 The driver files are automatically included when the Vitis Model Composer design is added to the IP Catalog. The procedure for adding a Vitis Model Composer design to the IP Catalog is detailed in Lab 5: Using AXI Interfaces and IP Integrator. In the next step, you will implement the design.
 
@@ -75,7 +152,7 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 
 > 📝 Note: If you have copied the tutorials to a different directory or changed the file names, you should update the Tcl file accordingly.
 
-![](Images/Step2/Step2.jfif)
+![](Images/Step2/Step2.png)
 
 3. Click **Open Implemented Design** in the Flow Navigator pane.
 
