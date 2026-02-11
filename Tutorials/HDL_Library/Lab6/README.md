@@ -239,10 +239,11 @@ Select the target that was created and built above.
 ![](Images/Step2/program_device_app.png)
 ![](Images/Step2/programmed_device_.png)
 
-25. Click **Create Boot Image** and specify a file path to save BOOT.BIN file. 
+25. Click **Create Boot Image** and specify a file path to save BOOT.BIN file.
+    
 ![](Images/Step2/BootImage.png)
 
-26. Click **Vitis > Program Flash** and include BOOT.BIN file during flash.
+27. Click **Vitis > Program Flash** and include BOOT.BIN file during flash.
 ![](Images/Step2/ProgramFlash.png)
 ![](Images/Step2/Flash.png)
 
