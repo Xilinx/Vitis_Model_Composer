@@ -266,7 +266,7 @@ Select the target that was created and built above.
 36. Click **Run** after program flash is successful and review the results in the terminal (shown in the following figure).
     
 ![](Images/Step2/final_output.png)
-![](Images/Step2/ProgramFlash_helloworld_Final.png)
+![](Images/Step2/Hello_World_Final_Flash.png)
 
 ### Summary 
 
