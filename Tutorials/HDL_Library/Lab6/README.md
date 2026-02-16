@@ -264,7 +264,9 @@ Select the target that was created and built above.
 35. Generate BOOT.bin file and program flash.
 
 36. Click **Run** after program flash is successful and review the results in the terminal (shown in the following figure).
+    
 ![](Images/Step2/final_output.png)
+![](Images/Step2/ProgramFlash_helloworld_Final.png)
 
 ### Summary 
 
