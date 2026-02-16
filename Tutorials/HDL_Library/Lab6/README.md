@@ -239,11 +239,11 @@ Select the target that was created and built above.
 ![](Images/Step2/program_device_app.png)
 ![](Images/Step2/programmed_device_.png)
 
-25. Click **Create Boot Image** and specify a file path to save BOOT.BIN file.
+25. Click **Create Boot Image** and specify a file path to save BOOT.bin file.
     
 ![](Images/Step2/BootImage.png)
 
-27. Click **Vitis > Program Flash** and include BOOT.BIN file during flash.
+27. Click **Vitis > Program Flash** and include BOOT.bin file during flash. Click **Program**.
 ![](Images/Step2/ProgramFlash.png)
 ![](Images/Step2/Flash.png)
 
@@ -261,7 +261,7 @@ Select the target that was created and built above.
 
 34. Build the application. Once the build is successful then click on program device.
 
-35. Generate BOOT.BIN file and program flash.
+35. Generate BOOT.bin file and program flash.
 
 36. Click **Run** after program flash is successful and review the results in the terminal (shown in the following figure).
 ![](Images/Step2/final_output.png)
