@@ -49,7 +49,7 @@ Details on simulating the design are provided in the canvas notes. For this exer
 
 9. Click **OK** to dismiss the Model Composer Hub.
 
-10. In the file system, navigate to the directory `./Lab6/netlist/ip/HDL_DUT/src/ip/drivers/HDL_DUT_v1_0/src` and view the driver files.
+10. In the file system, navigate to the directory `./netlist/ip/HDL_DUT/src/ip/drivers/HDL_DUT_v1_0/src` and view the driver files.
 
 The driver files for the AXI4-Lite interface are automatically created by Vitis Model Composer when it saves a design in IP Catalog format.
 
