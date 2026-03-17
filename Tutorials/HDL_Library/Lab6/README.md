@@ -200,6 +200,8 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 
 16. Click **Finish**.
 
+![](Images/Step2/Platform_Creation.PNG)
+
 17. Platform is created. Select the build icon in the flow view to build the platform.
 
 The platform will begin building in the background and we can move on to Create Application.
