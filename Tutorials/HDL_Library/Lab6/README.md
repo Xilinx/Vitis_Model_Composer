@@ -186,29 +186,21 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 
 11. From the Vitis IDE, select **Create Platform**.
 
-In the Vitis Classic flows, the platform was generated automatically when the XSA was input by the user. However, for Vitis Unified IDE, the user will need to manually create it.
-
-![](Images/Step2/welcome_screen.PNG)
-
-12. From the Welcome Screen, select the Create Platform Component under Embedded Development. Or from the File menu, under New Component, Platform.
-
-13. Enter the platform component name `Design1_Platform` in the Component name field.
+12. Enter the platform component name `Design1_Platform` in the Component name field.
 
 ![](Images/Step2/step16_.png)
 
-14. Click **Next**.
+13. Click **Next**.
 
-15. Confirm the operating system and the processor are selected according to the image below. Enable the **Generate boot artifacts** checkbox.
+14. Confirm the operating system and the processor are selected according to the image below. Enable the **Generate boot artifacts** checkbox.
 
 ![](Images/Step2/step17_.png)
 
-16. Click **Next**.
+15. Click **Next**.
 
-17. Click **Finish**.
+16. Click **Finish**.
 
-![](Images/Step2/step19_.png)
-
-18. Platform is created. Select the build icon in the flow view to build the platform.
+17. Platform is created. Select the build icon in the flow view to build the platform.
 
 The platform will begin building in the background and we can move on to Create Application.
 
@@ -216,13 +208,13 @@ The platform will begin building in the background and we can move on to Create 
 
 **Creating Application**
 
-19. The user can view the available application templates from the Top menu by selecting View and Examples.
+18. The user can view the available application templates from the Top menu by selecting View and Examples.
 
 This will show a list of available examples in the explorer view. We can select the Hello World example as shown below:
 
 ![](Images/Step2/Creating_Application.png)
 
-20. Give application name as 'Des_Test' and click next.
+19. Give application name as 'Des_Test' and click next.
 
 Select the target that was created and built above.
 
@@ -230,49 +222,49 @@ Select the target that was created and built above.
 
 ![](Images/Step2/Select_Platform_For_Application.png)
 
-21. Choose the existing domain that was created in the platform.
+20. Choose the existing domain that was created in the platform.
 
 ![](Images/Step2/Choose_Domain.png)
 
 **Build Application and Deploy on Target**
 
-22. Power up the ZC702 board to program the FPGA.
+21. Power up the ZC702 board to program the FPGA.
 
-23. We are now ready to build our application Des_Test. To do this, select the Build icon in the Flow view.
+22. We are now ready to build our application Des_Test. To do this, select the Build icon in the Flow view.
 
 ![](Images/Step2/application_build.png)
 
-24. Click **Vitis > Program Device** and from the resulting window, click **Program**.
+23. Click **Vitis > Program Device** and from the resulting window, click **Program**.
 
 ![](Images/Step2/program_device.png)
 ![](Images/Step2/program_device_app.png)
 ![](Images/Step2/programmed_device_.png)
 
-25. Click **Create Boot Image** and specify a file path to save BOOT.bin file.
+24. Click **Create Boot Image** and specify a file path to save BOOT.bin file.
     
 ![](Images/Step2/BootImage.png)
 
-27. Click **Vitis > Program Flash** and include BOOT.bin file during flash. Click **Program**.
+25. Click **Vitis > Program Flash** and include BOOT.bin file during flash. Click **Program**.
 ![](Images/Step2/ProgramFlash.png)
 ![](Images/Step2/Flash.png)
 
-28. Click **Run** after program flash is successful. Switch to the terminal tab and confirm that `Hello World` was received.
+26. Click **Run** after program flash is successful. Switch to the terminal tab and confirm that `Hello World` was received.
 
 ![](Images/Step2/HelloWorld_Program.png)
 
-30. Expand the container `Des_Test` and then expand the container `src`.
+27. Expand the container `Des_Test` and then expand the container `src`.
 
-31. Double-click the **helloworld.c** file.
+28. Double-click the **helloworld.c** file.
 
-32. Replace the contents of this file with the contents of the file `hello_world_final.c` from the `lab6` directory.
+29. Replace the contents of this file with the contents of the file `hello_world_final.c` from the `lab6` directory.
 
-33. Save the `helloworld.c` source code.
+30. Save the `helloworld.c` source code.
 
-34. Build the application. Once the build is successful then click on program device.
+31. Build the application. Once the build is successful then click on program device.
 
-35. Generate BOOT.bin file and program flash.
+32. Generate BOOT.bin file and program flash.
 
-36. Click **Run** after program flash is successful and review the results in the terminal (shown in the following figure).
+33. Click **Run** after program flash is successful and review the results in the terminal (shown in the following figure).
     
 ![](Images/Step2/final_output.png)
 ![](Images/Step2/Hello_World_Final_Flash.png)
