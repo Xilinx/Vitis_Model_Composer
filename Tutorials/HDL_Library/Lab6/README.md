@@ -61,71 +61,80 @@ The driver files for the AXI4-Lite interface are automatically created by Vitis 
 
 ```
 #include "hdl_dut.h"
+#include "xstatus.h"
+#include <assert.h>
+
 #ifndef __linux__
-int hdl_dut_CfgInitialize(hdl_dut *InstancePtr, hdl_dut_Config *ConfigPtr) {
-    Xil_AssertNonvoid(InstancePtr != NULL);
-    Xil_AssertNonvoid(ConfigPtr != NULL);
+int hdl_dut_CfgInitialize(hdl_dut * InstancePtr, hdl_dut_Config * Config,
+			UINTPTR EffectiveAddr)
+{
+	/* Assert arguments */
+	Xil_AssertNonvoid(InstancePtr != NULL);
 
-    InstancePtr->hdl_dut_BaseAddress = ConfigPtr->hdl_dut_BaseAddress;
+	/* Set some default values. */
+	InstancePtr->BaseAddress = EffectiveAddr;
 
-    InstancePtr->IsReady = 1;
-    return XST_SUCCESS;
+	/*
+	 * Indicate the instance is now ready to use, initialized without error
+	 */
+	InstancePtr->IsReady = XIL_COMPONENT_IS_READY;
+	return (XST_SUCCESS);
 }
 #endif
 void hdl_dut_reset_write(hdl_dut *InstancePtr, u32 Data) {
 
     Xil_AssertVoid(InstancePtr != NULL);
 
-    hdl_dut_WriteReg(InstancePtr->hdl_dut_BaseAddress, 0, Data);
+    hdl_dut_WriteReg(InstancePtr->BaseAddress, 0, Data);
 }
 u32 hdl_dut_reset_read(hdl_dut *InstancePtr) {
 
     u32 Data;
     Xil_AssertVoid(InstancePtr != NULL);
 
-    Data = hdl_dut_ReadReg(InstancePtr->hdl_dut_BaseAddress, 0);
+    Data = hdl_dut_ReadReg(InstancePtr->BaseAddress, 0);
     return Data;
 }
 void hdl_dut_decrypt_write(hdl_dut *InstancePtr, u32 Data) {
 
     Xil_AssertVoid(InstancePtr != NULL);
 
-    hdl_dut_WriteReg(InstancePtr->hdl_dut_BaseAddress, 4, Data);
+    hdl_dut_WriteReg(InstancePtr->BaseAddress, 4, Data);
 }
 u32 hdl_dut_decrypt_read(hdl_dut *InstancePtr) {
 
     u32 Data;
     Xil_AssertVoid(InstancePtr != NULL);
 
-    Data = hdl_dut_ReadReg(InstancePtr->hdl_dut_BaseAddress, 4);
+    Data = hdl_dut_ReadReg(InstancePtr->BaseAddress, 4);
     return Data;
 }
 void hdl_dut_key_63_32_write(hdl_dut *InstancePtr, u32 Data) {
 
     Xil_AssertVoid(InstancePtr != NULL);
 
-    hdl_dut_WriteReg(InstancePtr->hdl_dut_BaseAddress, 8, Data);
+    hdl_dut_WriteReg(InstancePtr->BaseAddress, 8, Data);
 }
 u32 hdl_dut_key_63_32_read(hdl_dut *InstancePtr) {
 
     u32 Data;
     Xil_AssertVoid(InstancePtr != NULL);
 
-    Data = hdl_dut_ReadReg(InstancePtr->hdl_dut_BaseAddress, 8);
+    Data = hdl_dut_ReadReg(InstancePtr->BaseAddress, 8);
     return Data;
 }
 void hdl_dut_key_31_0_write(hdl_dut *InstancePtr, u32 Data) {
 
     Xil_AssertVoid(InstancePtr != NULL);
 
-    hdl_dut_WriteReg(InstancePtr->hdl_dut_BaseAddress, 12, Data);
+    hdl_dut_WriteReg(InstancePtr->BaseAddress, 12, Data);
 }
 u32 hdl_dut_key_31_0_read(hdl_dut *InstancePtr) {
 
     u32 Data;
     Xil_AssertVoid(InstancePtr != NULL);
 
-    Data = hdl_dut_ReadReg(InstancePtr->hdl_dut_BaseAddress, 12);
+    Data = hdl_dut_ReadReg(InstancePtr->BaseAddress, 12);
     return Data;
 }
 u32 hdl_dut_parity_err_read(hdl_dut *InstancePtr) {
@@ -133,7 +142,7 @@ u32 hdl_dut_parity_err_read(hdl_dut *InstancePtr) {
     u32 Data;
     Xil_AssertVoid(InstancePtr != NULL);
 
-    Data = hdl_dut_ReadReg(InstancePtr->hdl_dut_BaseAddress, 16);
+    Data = hdl_dut_ReadReg(InstancePtr->BaseAddress, 16);
     return Data;
 }
 ```
