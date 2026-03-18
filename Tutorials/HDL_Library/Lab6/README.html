@@ -54,7 +54,7 @@ a.href = commandURI;
 <li><p>In the Model Composer Hub block, select <strong>Export</strong> from the Export tab to generate a design in IP Catalog format.</p></li>
 <li><p>Click <strong>OK</strong> to dismiss the Progress dialog box.</p></li>
 <li><p>Click <strong>OK</strong> to dismiss the Model Composer Hub.</p></li>
-<li><p>In the file system, navigate to the directory <code>./Lab6/netlist/ip/HDL_DUT/src/ip/drivers/HDL_DUT_v1_0/src</code> and view the driver files.</p></li>
+<li><p>In the file system, navigate to the directory <code>./netlist/ip/HDL_DUT/src/ip/drivers/HDL_DUT_v1_0/src</code> and view the driver files.</p></li>
 </ol>
 <p>The driver files for the AXI4-Lite interface are automatically created by Vitis Model Composer when it saves a design in IP Catalog format.</p>
 <ol start="11">
@@ -62,9 +62,94 @@ a.href = commandURI;
 </ol>
 <p><img src="Images/Step1/Step11.png" alt="" /></p>
 <ol start="12">
-<li>Open file <code>hdl_dut.c</code> to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown in the following figure.</li>
+<li>Open file <code>hdl_dut.c</code> to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown below.</li>
 </ol>
-<p><img src="Images/Step1/Step12.png" alt="" /></p>
+<pre><code>#include "hdl_dut.h"
+#include "xstatus.h"
+#include &lt;assert.h&gt;
+
+#ifndef __linux__
+int hdl_dut_CfgInitialize(hdl_dut * InstancePtr, hdl_dut_Config * Config,
+UINTPTR EffectiveAddr)
+{
+/* Assert arguments */
+Xil_AssertNonvoid(InstancePtr != NULL);
+
+/* Set some default values. */
+InstancePtr-&gt;BaseAddress = EffectiveAddr;
+
+/*
+* Indicate the instance is now ready to use, initialized without error
+*/
+InstancePtr-&gt;IsReady = XIL_COMPONENT_IS_READY;
+return (XST_SUCCESS);
+}
+#endif
+void hdl_dut_reset_write(hdl_dut *InstancePtr, u32 Data) {
+
+Xil_AssertVoid(InstancePtr != NULL);
+
+hdl_dut_WriteReg(InstancePtr-&gt;BaseAddress, 0, Data);
+}
+u32 hdl_dut_reset_read(hdl_dut *InstancePtr) {
+
+u32 Data;
+Xil_AssertVoid(InstancePtr != NULL);
+
+Data = hdl_dut_ReadReg(InstancePtr-&gt;BaseAddress, 0);
+return Data;
+}
+void hdl_dut_decrypt_write(hdl_dut *InstancePtr, u32 Data) {
+
+Xil_AssertVoid(InstancePtr != NULL);
+
+hdl_dut_WriteReg(InstancePtr-&gt;BaseAddress, 4, Data);
+}
+u32 hdl_dut_decrypt_read(hdl_dut *InstancePtr) {
+
+u32 Data;
+Xil_AssertVoid(InstancePtr != NULL);
+
+Data = hdl_dut_ReadReg(InstancePtr-&gt;BaseAddress, 4);
+return Data;
+}
+void hdl_dut_key_63_32_write(hdl_dut *InstancePtr, u32 Data) {
+
+Xil_AssertVoid(InstancePtr != NULL);
+
+hdl_dut_WriteReg(InstancePtr-&gt;BaseAddress, 8, Data);
+}
+u32 hdl_dut_key_63_32_read(hdl_dut *InstancePtr) {
+
+u32 Data;
+Xil_AssertVoid(InstancePtr != NULL);
+
+Data = hdl_dut_ReadReg(InstancePtr-&gt;BaseAddress, 8);
+return Data;
+}
+void hdl_dut_key_31_0_write(hdl_dut *InstancePtr, u32 Data) {
+
+Xil_AssertVoid(InstancePtr != NULL);
+
+hdl_dut_WriteReg(InstancePtr-&gt;BaseAddress, 12, Data);
+}
+u32 hdl_dut_key_31_0_read(hdl_dut *InstancePtr) {
+
+u32 Data;
+Xil_AssertVoid(InstancePtr != NULL);
+
+Data = hdl_dut_ReadReg(InstancePtr-&gt;BaseAddress, 12);
+return Data;
+}
+u32 hdl_dut_parity_err_read(hdl_dut *InstancePtr) {
+
+u32 Data;
+Xil_AssertVoid(InstancePtr != NULL);
+
+Data = hdl_dut_ReadReg(InstancePtr-&gt;BaseAddress, 16);
+return Data;
+}
+</code></pre>
 <p>The driver files are automatically included when the Vitis Model Composer design is added to the IP Catalog. The procedure for adding a Vitis Model Composer design to the IP Catalog is detailed in Lab 5: Using AXI Interfaces and IP Integrator. In the next step, you will implement the design.</p>
 <h2 id="step-2-developing-software-and-running-it-on-the-zynq-7000-system">Step 2: Developing Software and Running it on the Zynq-7000 System</h2>
 <ol>
@@ -76,12 +161,12 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 </ol>
 <ul>
 <li>Type <code>cd IPI_Project</code> to change to the project directory.</li>
-<li>Type source lab6_design.tcl to create the RTL design.</li>
+<li>Type <code>source lab6_design.tcl</code> to create the RTL design.</li>
 </ul>
 <blockquote>
 <p> Note: If you have copied the tutorials to a different directory or changed the file names, you should update the Tcl file accordingly.</p>
 </blockquote>
-<p><img src="Images/Step2/Step2.jfif" alt="" /></p>
+<p><img src="Images/Step2/Step2.png" alt="" /></p>
 <ol start="3">
 <li><p>Click <strong>Open Implemented Design</strong> in the Flow Navigator pane.</p></li>
 <li><p>From the Vivado IDE main menu select <strong>File > Export > Export Hardware</strong>.</p></li>
@@ -99,73 +184,87 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 <ul>
 <li>Click <strong>Windows > Vitis 2025.2.</strong></li></ul></li>
 <li><p>Select the workspace space directory to store preferences and click Launch.</p></li>
-<li><p>From the Vitis IDE, select <strong>Create Platform</strong>.</p></li>
-</ol>
-<p>In the Vitis Classic flows, the platform was generated automatically when the XSA was input by the user. However, for Vitis Unified IDE, the user will need to manually create it.</p>
-<p><img src="Images/Step2/welcome_screen.PNG" alt="" /></p>
-<ol start="12">
-<li><p>From the Welcome Screen, select the Create Platform Component under Embedded Development. Or from the File menu, under New Component, Platform.</p></li>
-<li><p>Enter the platform component name <code>Design1_Platform</code> in the Component name field.</p></li>
+<li><p>From the Vitis IDE Welcome screen (or <strong>File > New Component > Platform</strong>), select <strong>Create Platform Component</strong>.</p></li>
+<li><p>In the Create Platform Component dialog, enter the platform component name <code>Design1_Platform</code> in the Component name field.</p></li>
 </ol>
 <p><img src="Images/Step2/step16_.png" alt="" /></p>
-<ol start="14">
+<ol start="13">
+<li><p>Click <strong>Next</strong>.</p></li>
+<li><p>Select <strong>Hardware Design</strong> and click Browse to create a custom platform from the XSA.</p></li>
+<li><p>Navigate to the Lab6/IPI<em>Project/project</em>1 directory (the XSA file was exported to this location in step 8), select design<em>1</em>wrapper.xsa, and click <strong>Open</strong>.</p></li>
+</ol>
+<p><img src="Images/Step2/Platform_Flow.png" alt="" /></p>
+<ol start="16">
 <li><p>Click <strong>Next</strong>.</p></li>
 <li><p>Confirm the operating system and the processor are selected according to the image below. Enable the <strong>Generate boot artifacts</strong> checkbox.</p></li>
 </ol>
 <p><img src="Images/Step2/step17_.png" alt="" /></p>
-<ol start="16">
+<ol start="18">
 <li><p>Click <strong>Next</strong>.</p></li>
 <li><p>Click <strong>Finish</strong>.</p></li>
 </ol>
-<p><img src="Images/Step2/step19_.png" alt="" /></p>
-<ol start="18">
+<p><img src="Images/Step2/Platform_Creation.PNG" alt="" /></p>
+<ol start="20">
 <li>Platform is created. Select the build icon in the flow view to build the platform.</li>
 </ol>
 <p>The platform will begin building in the background and we can move on to Create Application.</p>
 <p><img src="Images/Step2/step20_.png" alt="" /></p>
 <p><strong>Creating Application</strong></p>
-<ol start="19">
+<ol start="21">
 <li>The user can view the available application templates from the Top menu by selecting View and Examples.</li>
 </ol>
 <p>This will show a list of available examples in the explorer view. We can select the Hello World example as shown below:</p>
 <p><img src="Images/Step2/Creating_Application.png" alt="" /></p>
-<ol start="20">
+<ol start="22">
 <li>Give application name as 'Des_Test' and click next.</li>
 </ol>
 <p>Select the target that was created and built above.</p>
 <p><img src="Images/Step2/add_application_name.png" alt="" /></p>
 <p><img src="Images/Step2/Select_Platform_For_Application.png" alt="" /></p>
-<ol start="21">
+<ol start="23">
 <li>Choose the existing domain that was created in the platform.</li>
 </ol>
 <p><img src="Images/Step2/Choose_Domain.png" alt="" /></p>
 <p><strong>Build Application and Deploy on Target</strong></p>
-<ol start="22">
+<ol start="24">
 <li><p>Power up the ZC702 board to program the FPGA.</p></li>
 <li><p>We are now ready to build our application Des_Test. To do this, select the Build icon in the Flow view.</p></li>
 </ol>
 <p><img src="Images/Step2/application_build.png" alt="" /></p>
-<ol start="24">
+<ol start="26">
 <li>Click <strong>Vitis > Program Device</strong> and from the resulting window, click <strong>Program</strong>.</li>
 </ol>
 <p><img src="Images/Step2/program_device.png" alt="" /><br />
 <img src="Images/Step2/program_device_app.png" alt="" /><br />
 <img src="Images/Step2/programmed_device_.png" alt="" /></p>
-<ol start="25">
-<li><p>Click <strong>Vitis > Program Flash</strong></p></li>
-<li><p>Switch to the terminal tab and confirm that <code>Hello World</code> was received.</p></li>
+<ol start="27">
+<li>Click <strong>Create Boot Image</strong> and specify a file path to save BOOT.bin file.</li>
+</ol>
+<p><img src="Images/Step2/BootImage.png" alt="" /></p>
+<ol start="28">
+<li><p>Click <strong>Vitis > Program Flash</strong> and include BOOT.bin file during flash. Click <strong>Program</strong>.<br />
+<img src="Images/Step2/ProgramFlash.png" alt="" /><br />
+<img src="Images/Step2/Flash.png" alt="" /></p></li>
+<li><p>Click <strong>Run</strong> after program flash is successful. Switch to the terminal tab and confirm that <code>Hello World</code> was received.</p></li>
+</ol>
+<p><img src="Images/Step2/HelloWorld_Program.png" alt="" /></p>
+<ol start="30">
 <li><p>Expand the container <code>Des_Test</code> and then expand the container <code>src</code>.</p></li>
 <li><p>Double-click the <strong>helloworld.c</strong> file.</p></li>
 <li><p>Replace the contents of this file with the contents of the file <code>hello_world_final.c</code> from the <code>lab6</code> directory.</p></li>
 <li><p>Save the <code>helloworld.c</code> source code.</p></li>
-<li><p>Build the application. Once the build is successful then click on program device and program flash.</p></li>
+<li><p>Build the application. Once the build is successful, click <strong>Vitis > Program Device</strong> and program the device (as in step 26).</p></li>
+<li><p>Create a new BOOT.bin file (as in step 27) and program the flash (as in step 28).</p></li>
+<li><p>Click <strong>Run</strong> after program flash is successful and review the results in the terminal (shown in the following figure).</p></li>
 </ol>
+<p><img src="Images/Step2/final_output.png" alt="" /><br />
+<img src="Images/Step2/Hello_World_Final_Flash.png" alt="" /></p>
 <h3 id="summary">Summary</h3>
 <p>In this lab, you learned how to export your Vivado IDE design containing Vitis Model Composer HDL IP to the Vitis software environment and to integrate the driver files automatically created by Vitis Model Composer to run the application on the ZC702 board. You then viewed the results of the acceleration.</p>
 <p>The following solutions directory contains the final Vitis Model Composer (<code>*.slx</code>) files for this lab. The solutions directory does not contain the IP output from Vitis Model Composer, the files and directories generated when the Vivado IDE is executed, or the Vitis workspace.</p>
 <p><code>\HDL_Library\Lab6\solution</code></p>
 <hr />
-<p>Copyright (c) 2025 Advanced Micro Devices, Inc.</p>
+<p>Copyright (c) 2026 Advanced Micro Devices, Inc.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
 You may obtain a copy of the License at</p>

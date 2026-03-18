@@ -157,7 +157,7 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 
 2. Using the Tcl console as shown in the following figure:
    - Type `cd IPI_Project` to change to the project directory.
-   - Type source lab6_design.tcl to create the RTL design.
+   - Type `source lab6_design.tcl` to create the RTL design.
 
 > 📝 Note: If you have copied the tutorials to a different directory or changed the file names, you should update the Tcl file accordingly.
 
@@ -184,9 +184,9 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 
 10. Select the workspace space directory to store preferences and click Launch.
 
-11. From the Vitis IDE, select **Create Platform**.
+11. From the Vitis IDE Welcome screen (or **File > New Component > Platform**), select **Create Platform Component**.
 
-12. Enter the platform component name `Design1_Platform` in the Component name field.
+12. In the Create Platform Component dialog, enter the platform component name `Design1_Platform` in the Component name field.
 
 ![](Images/Step2/step16_.png)
 
@@ -194,23 +194,23 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 
 14. Select **Hardware Design** and click Browse to create a custom platform from the XSA.
 
-15. Navigate to Lab6 > IPI_Project > project_1, select design_1_wrapper.xsa and click Open.
+15. Navigate to the Lab6/IPI_Project/project_1 directory (the XSA file was exported to this location in step 8), select design_1_wrapper.xsa, and click **Open**.
 
 ![](Images/Step2/Platform_Flow.png)
 
-17. Click **Next**.
-    
-18. Confirm the operating system and the processor are selected according to the image below. Enable the **Generate boot artifacts** checkbox.
+16. Click **Next**.
+
+17. Confirm the operating system and the processor are selected according to the image below. Enable the **Generate boot artifacts** checkbox.
 
 ![](Images/Step2/step17_.png)
 
-19. Click **Next**.
+18. Click **Next**.
 
-20. Click **Finish**.
+19. Click **Finish**.
 
 ![](Images/Step2/Platform_Creation.PNG)
 
-21. Platform is created. Select the build icon in the flow view to build the platform.
+20. Platform is created. Select the build icon in the flow view to build the platform.
 
 The platform will begin building in the background and we can move on to Create Application.
 
@@ -218,13 +218,13 @@ The platform will begin building in the background and we can move on to Create 
 
 **Creating Application**
 
-22. The user can view the available application templates from the Top menu by selecting View and Examples.
+21. The user can view the available application templates from the Top menu by selecting View and Examples.
 
 This will show a list of available examples in the explorer view. We can select the Hello World example as shown below:
 
 ![](Images/Step2/Creating_Application.png)
 
-23. Give application name as 'Des_Test' and click next.
+22. Give application name as 'Des_Test' and click next.
 
 Select the target that was created and built above.
 
@@ -232,49 +232,49 @@ Select the target that was created and built above.
 
 ![](Images/Step2/Select_Platform_For_Application.png)
 
-24. Choose the existing domain that was created in the platform.
+23. Choose the existing domain that was created in the platform.
 
 ![](Images/Step2/Choose_Domain.png)
 
 **Build Application and Deploy on Target**
 
-25. Power up the ZC702 board to program the FPGA.
+24. Power up the ZC702 board to program the FPGA.
 
-26. We are now ready to build our application Des_Test. To do this, select the Build icon in the Flow view.
+25. We are now ready to build our application Des_Test. To do this, select the Build icon in the Flow view.
 
 ![](Images/Step2/application_build.png)
 
-27. Click **Vitis > Program Device** and from the resulting window, click **Program**.
+26. Click **Vitis > Program Device** and from the resulting window, click **Program**.
 
 ![](Images/Step2/program_device.png)
 ![](Images/Step2/program_device_app.png)
 ![](Images/Step2/programmed_device_.png)
 
-28. Click **Create Boot Image** and specify a file path to save BOOT.bin file.
-    
+27. Click **Create Boot Image** and specify a file path to save BOOT.bin file.
+
 ![](Images/Step2/BootImage.png)
 
-29. Click **Vitis > Program Flash** and include BOOT.bin file during flash. Click **Program**.
+28. Click **Vitis > Program Flash** and include BOOT.bin file during flash. Click **Program**.
 ![](Images/Step2/ProgramFlash.png)
 ![](Images/Step2/Flash.png)
 
-30. Click **Run** after program flash is successful. Switch to the terminal tab and confirm that `Hello World` was received.
+29. Click **Run** after program flash is successful. Switch to the terminal tab and confirm that `Hello World` was received.
 
 ![](Images/Step2/HelloWorld_Program.png)
 
-31. Expand the container `Des_Test` and then expand the container `src`.
+30. Expand the container `Des_Test` and then expand the container `src`.
 
-32. Double-click the **helloworld.c** file.
+31. Double-click the **helloworld.c** file.
 
-33. Replace the contents of this file with the contents of the file `hello_world_final.c` from the `lab6` directory.
+32. Replace the contents of this file with the contents of the file `hello_world_final.c` from the `lab6` directory.
 
-34. Save the `helloworld.c` source code.
+33. Save the `helloworld.c` source code.
 
-35. Build the application. Once the build is successful then click on program device.
+34. Build the application. Once the build is successful, click **Vitis > Program Device** and program the device (as in step 26).
 
-36. Generate BOOT.bin file and program flash.
+35. Create a new BOOT.bin file (as in step 27) and program the flash (as in step 28).
 
-37. Click **Run** after program flash is successful and review the results in the terminal (shown in the following figure).
+36. Click **Run** after program flash is successful and review the results in the terminal (shown in the following figure).
     
 ![](Images/Step2/final_output.png)
 ![](Images/Step2/Hello_World_Final_Flash.png)
@@ -288,7 +288,7 @@ The following solutions directory contains the final Vitis Model Composer (`*.sl
 `\HDL_Library\Lab6\solution`
 
 --------------
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
