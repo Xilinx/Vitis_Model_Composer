@@ -192,17 +192,25 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 
 13. Click **Next**.
 
-14. Confirm the operating system and the processor are selected according to the image below. Enable the **Generate boot artifacts** checkbox.
+14. Select **Hardware Design** and click Browse to create a custom platform from the XSA.
+
+15. Navigate to Lab6 > IPI_Project > project_1, select design_1_wrapper.xsa and click Open.
+
+![](Images/Step2/Platform_Flow.png)
+
+17. Click **Next**.
+    
+18. Confirm the operating system and the processor are selected according to the image below. Enable the **Generate boot artifacts** checkbox.
 
 ![](Images/Step2/step17_.png)
 
-15. Click **Next**.
+19. Click **Next**.
 
-16. Click **Finish**.
+20. Click **Finish**.
 
 ![](Images/Step2/Platform_Creation.PNG)
 
-17. Platform is created. Select the build icon in the flow view to build the platform.
+21. Platform is created. Select the build icon in the flow view to build the platform.
 
 The platform will begin building in the background and we can move on to Create Application.
 
@@ -210,13 +218,13 @@ The platform will begin building in the background and we can move on to Create 
 
 **Creating Application**
 
-18. The user can view the available application templates from the Top menu by selecting View and Examples.
+22. The user can view the available application templates from the Top menu by selecting View and Examples.
 
 This will show a list of available examples in the explorer view. We can select the Hello World example as shown below:
 
 ![](Images/Step2/Creating_Application.png)
 
-19. Give application name as 'Des_Test' and click next.
+23. Give application name as 'Des_Test' and click next.
 
 Select the target that was created and built above.
 
@@ -224,49 +232,49 @@ Select the target that was created and built above.
 
 ![](Images/Step2/Select_Platform_For_Application.png)
 
-20. Choose the existing domain that was created in the platform.
+24. Choose the existing domain that was created in the platform.
 
 ![](Images/Step2/Choose_Domain.png)
 
 **Build Application and Deploy on Target**
 
-21. Power up the ZC702 board to program the FPGA.
+25. Power up the ZC702 board to program the FPGA.
 
-22. We are now ready to build our application Des_Test. To do this, select the Build icon in the Flow view.
+26. We are now ready to build our application Des_Test. To do this, select the Build icon in the Flow view.
 
 ![](Images/Step2/application_build.png)
 
-23. Click **Vitis > Program Device** and from the resulting window, click **Program**.
+27. Click **Vitis > Program Device** and from the resulting window, click **Program**.
 
 ![](Images/Step2/program_device.png)
 ![](Images/Step2/program_device_app.png)
 ![](Images/Step2/programmed_device_.png)
 
-24. Click **Create Boot Image** and specify a file path to save BOOT.bin file.
+28. Click **Create Boot Image** and specify a file path to save BOOT.bin file.
     
 ![](Images/Step2/BootImage.png)
 
-25. Click **Vitis > Program Flash** and include BOOT.bin file during flash. Click **Program**.
+29. Click **Vitis > Program Flash** and include BOOT.bin file during flash. Click **Program**.
 ![](Images/Step2/ProgramFlash.png)
 ![](Images/Step2/Flash.png)
 
-26. Click **Run** after program flash is successful. Switch to the terminal tab and confirm that `Hello World` was received.
+30. Click **Run** after program flash is successful. Switch to the terminal tab and confirm that `Hello World` was received.
 
 ![](Images/Step2/HelloWorld_Program.png)
 
-27. Expand the container `Des_Test` and then expand the container `src`.
+31. Expand the container `Des_Test` and then expand the container `src`.
 
-28. Double-click the **helloworld.c** file.
+32. Double-click the **helloworld.c** file.
 
-29. Replace the contents of this file with the contents of the file `hello_world_final.c` from the `lab6` directory.
+33. Replace the contents of this file with the contents of the file `hello_world_final.c` from the `lab6` directory.
 
-30. Save the `helloworld.c` source code.
+34. Save the `helloworld.c` source code.
 
-31. Build the application. Once the build is successful then click on program device.
+35. Build the application. Once the build is successful then click on program device.
 
-32. Generate BOOT.bin file and program flash.
+36. Generate BOOT.bin file and program flash.
 
-33. Click **Run** after program flash is successful and review the results in the terminal (shown in the following figure).
+37. Click **Run** after program flash is successful and review the results in the terminal (shown in the following figure).
     
 ![](Images/Step2/final_output.png)
 ![](Images/Step2/Hello_World_Final_Flash.png)
