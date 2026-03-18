@@ -45,7 +45,6 @@
  *   ps7_uart    115200 (configured by bootrom/bsp)
  */
 
-
 #include <stdio.h>
 #include "platform.h"
 
@@ -60,10 +59,6 @@ static char plain_text[256]  __attribute__ ((aligned (32))) = "This is a secret 
 static const size_t pt_len = 80;	// this must be a multiple of 4 bytes!
 static char cipher_text[256] __attribute__ ((aligned (32)));
 static char deciphered_text[256] __attribute__ ((aligned (32)));
-
-
-
-
 
 /* helper functions */
 
@@ -219,6 +214,7 @@ int main()
 	XAxiDma_Config *AxiDmaCfgPtr;
 	// b) DES Accelerator
 	hdl_dut DES_inst;
+    //hdl_dut_Config *CfgPtr;
 
 	int Status;
 	int i;
@@ -229,8 +225,13 @@ int main()
 	/*
 	 * initialize DES core
 	 */
-	Status = hdl_dut_CfgInitialize(&DES_inst, XPAR_LAB6_1_0_BASEADDR);
 
+hdl_dut_Config *CfgPtr;
+Status = hdl_dut_CfgInitialize(&DES_inst, CfgPtr, CfgPtr->BaseAddress);
+
+ // Status = hdl_dut_CfgInitialize(&DES_inst, XPAR_LAB6_1_0_BASEADDR);
+
+	 
 	if (Status == XST_FAILURE) {
 		print("DES core initialization FAILED\r\n");
 		return -1;
@@ -247,7 +248,7 @@ int main()
 		XAxiDma_IntrDisable(&PL_AXI_DMA_Device, XAXIDMA_IRQ_ALL_MASK, XAXIDMA_DMA_TO_DEVICE);
 
 		// execute test(s)
-		for (i = 0; i < 100; i++) {
+		for (i = 0; i < 10; i++) {
 			run_DES_test(&DES_inst, &PL_AXI_DMA_Device);
 		}
 
@@ -256,4 +257,5 @@ int main()
 	print("DES core - example all done\r\n");
     return 0;
 }
+
 
