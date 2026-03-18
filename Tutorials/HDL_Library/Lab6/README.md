@@ -49,7 +49,7 @@ Details on simulating the design are provided in the canvas notes. For this exer
 
 9. Click **OK** to dismiss the Model Composer Hub.
 
-10. In the file system, navigate to the directory `./Lab6/netlist/ip/HDL_DUT/src/ip/drivers/HDL_DUT_v1_0/src` and view the driver files.
+10. In the file system, navigate to the directory `./netlist/ip/HDL_DUT/src/ip/drivers/HDL_DUT_v1_0/src` and view the driver files.
 
 The driver files for the AXI4-Lite interface are automatically created by Vitis Model Composer when it saves a design in IP Catalog format.
 
@@ -57,9 +57,95 @@ The driver files for the AXI4-Lite interface are automatically created by Vitis 
 
 ![](Images/Step1/Step11.png)
 
-12. Open file `hdl_dut.c` to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown in the following figure.
+12. Open file `hdl_dut.c` to review the C code for the driver functions. These are used to read and write to the AXI4-Lite registers and can be incorporated into your C program running on the Zynq®-7000 CPU. The function to write to the decrypt register is shown below.
 
-![](Images/Step1/Step12.png)
+```
+#include "hdl_dut.h"
+#include "xstatus.h"
+#include <assert.h>
+
+#ifndef __linux__
+int hdl_dut_CfgInitialize(hdl_dut * InstancePtr, hdl_dut_Config * Config,
+			UINTPTR EffectiveAddr)
+{
+	/* Assert arguments */
+	Xil_AssertNonvoid(InstancePtr != NULL);
+
+	/* Set some default values. */
+	InstancePtr->BaseAddress = EffectiveAddr;
+
+	/*
+	 * Indicate the instance is now ready to use, initialized without error
+	 */
+	InstancePtr->IsReady = XIL_COMPONENT_IS_READY;
+	return (XST_SUCCESS);
+}
+#endif
+void hdl_dut_reset_write(hdl_dut *InstancePtr, u32 Data) {
+
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    hdl_dut_WriteReg(InstancePtr->BaseAddress, 0, Data);
+}
+u32 hdl_dut_reset_read(hdl_dut *InstancePtr) {
+
+    u32 Data;
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    Data = hdl_dut_ReadReg(InstancePtr->BaseAddress, 0);
+    return Data;
+}
+void hdl_dut_decrypt_write(hdl_dut *InstancePtr, u32 Data) {
+
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    hdl_dut_WriteReg(InstancePtr->BaseAddress, 4, Data);
+}
+u32 hdl_dut_decrypt_read(hdl_dut *InstancePtr) {
+
+    u32 Data;
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    Data = hdl_dut_ReadReg(InstancePtr->BaseAddress, 4);
+    return Data;
+}
+void hdl_dut_key_63_32_write(hdl_dut *InstancePtr, u32 Data) {
+
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    hdl_dut_WriteReg(InstancePtr->BaseAddress, 8, Data);
+}
+u32 hdl_dut_key_63_32_read(hdl_dut *InstancePtr) {
+
+    u32 Data;
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    Data = hdl_dut_ReadReg(InstancePtr->BaseAddress, 8);
+    return Data;
+}
+void hdl_dut_key_31_0_write(hdl_dut *InstancePtr, u32 Data) {
+
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    hdl_dut_WriteReg(InstancePtr->BaseAddress, 12, Data);
+}
+u32 hdl_dut_key_31_0_read(hdl_dut *InstancePtr) {
+
+    u32 Data;
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    Data = hdl_dut_ReadReg(InstancePtr->BaseAddress, 12);
+    return Data;
+}
+u32 hdl_dut_parity_err_read(hdl_dut *InstancePtr) {
+
+    u32 Data;
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    Data = hdl_dut_ReadReg(InstancePtr->BaseAddress, 16);
+    return Data;
+}
+```
 
 The driver files are automatically included when the Vitis Model Composer design is added to the IP Catalog. The procedure for adding a Vitis Model Composer design to the IP Catalog is detailed in Lab 5: Using AXI Interfaces and IP Integrator. In the next step, you will implement the design.
 
@@ -71,11 +157,11 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 
 2. Using the Tcl console as shown in the following figure:
    - Type `cd IPI_Project` to change to the project directory.
-   - Type source lab6_design.tcl to create the RTL design.
+   - Type `source lab6_design.tcl` to create the RTL design.
 
 > 📝 Note: If you have copied the tutorials to a different directory or changed the file names, you should update the Tcl file accordingly.
 
-![](Images/Step2/Step2.jfif)
+![](Images/Step2/Step2.png)
 
 3. Click **Open Implemented Design** in the Flow Navigator pane.
 
@@ -98,31 +184,33 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 
 10. Select the workspace space directory to store preferences and click Launch.
 
-11. From the Vitis IDE, select **Create Platform**.
+11. From the Vitis IDE Welcome screen (or **File > New Component > Platform**), select **Create Platform Component**.
 
-In the Vitis Classic flows, the platform was generated automatically when the XSA was input by the user. However, for Vitis Unified IDE, the user will need to manually create it.
-
-![](Images/Step2/welcome_screen.PNG)
-
-12. From the Welcome Screen, select the Create Platform Component under Embedded Development. Or from the File menu, under New Component, Platform.
-
-13. Enter the platform component name `Design1_Platform` in the Component name field.
+12. In the Create Platform Component dialog, enter the platform component name `Design1_Platform` in the Component name field.
 
 ![](Images/Step2/step16_.png)
 
-14. Click **Next**.
+13. Click **Next**.
 
-15. Confirm the operating system and the processor are selected according to the image below. Enable the **Generate boot artifacts** checkbox.
+14. Select **Hardware Design** and click Browse to create a custom platform from the XSA.
 
-![](Images/Step2/step17_.png)
+15. Navigate to the Lab6/IPI_Project/project_1 directory (the XSA file was exported to this location in step 8), select design_1_wrapper.xsa, and click **Open**.
+
+![](Images/Step2/Platform_Flow.png)
 
 16. Click **Next**.
 
-17. Click **Finish**.
+17. Confirm the operating system and the processor are selected according to the image below. Enable the **Generate boot artifacts** checkbox.
 
-![](Images/Step2/step19_.png)
+![](Images/Step2/step17_.png)
 
-18. Platform is created. Select the build icon in the flow view to build the platform.
+18. Click **Next**.
+
+19. Click **Finish**.
+
+![](Images/Step2/Platform_Creation.PNG)
+
+20. Platform is created. Select the build icon in the flow view to build the platform.
 
 The platform will begin building in the background and we can move on to Create Application.
 
@@ -130,13 +218,13 @@ The platform will begin building in the background and we can move on to Create 
 
 **Creating Application**
 
-19. The user can view the available application templates from the Top menu by selecting View and Examples.
+21. The user can view the available application templates from the Top menu by selecting View and Examples.
 
 This will show a list of available examples in the explorer view. We can select the Hello World example as shown below:
 
 ![](Images/Step2/Creating_Application.png)
 
-20. Give application name as 'Des_Test' and click next.
+22. Give application name as 'Des_Test' and click next.
 
 Select the target that was created and built above.
 
@@ -144,37 +232,52 @@ Select the target that was created and built above.
 
 ![](Images/Step2/Select_Platform_For_Application.png)
 
-21. Choose the existing domain that was created in the platform.
+23. Choose the existing domain that was created in the platform.
 
 ![](Images/Step2/Choose_Domain.png)
 
 **Build Application and Deploy on Target**
 
-22. Power up the ZC702 board to program the FPGA.
+24. Power up the ZC702 board to program the FPGA.
 
-23. We are now ready to build our application Des_Test. To do this, select the Build icon in the Flow view.
+25. We are now ready to build our application Des_Test. To do this, select the Build icon in the Flow view.
 
 ![](Images/Step2/application_build.png)
 
-24. Click **Vitis > Program Device** and from the resulting window, click **Program**.
+26. Click **Vitis > Program Device** and from the resulting window, click **Program**.
 
 ![](Images/Step2/program_device.png)
 ![](Images/Step2/program_device_app.png)
 ![](Images/Step2/programmed_device_.png)
 
-25. Click **Vitis > Program Flash**
+27. Click **Create Boot Image** and specify a file path to save BOOT.bin file.
 
-26. Switch to the terminal tab and confirm that `Hello World` was received.
+![](Images/Step2/BootImage.png)
 
-27. Expand the container `Des_Test` and then expand the container `src`.
+28. Click **Vitis > Program Flash** and include BOOT.bin file during flash. Click **Program**.
+![](Images/Step2/ProgramFlash.png)
+![](Images/Step2/Flash.png)
 
-28. Double-click the **helloworld.c** file.
+29. Click **Run** after program flash is successful. Switch to the terminal tab and confirm that `Hello World` was received.
 
-29. Replace the contents of this file with the contents of the file `hello_world_final.c` from the `lab6` directory.
+![](Images/Step2/HelloWorld_Program.png)
 
-30. Save the `helloworld.c` source code.
+30. Expand the container `Des_Test` and then expand the container `src`.
 
-31. Build the application. Once the build is successful then click on program device and program flash.
+31. Double-click the **helloworld.c** file.
+
+32. Replace the contents of this file with the contents of the file `hello_world_final.c` from the `lab6` directory.
+
+33. Save the `helloworld.c` source code.
+
+34. Build the application. Once the build is successful, click **Vitis > Program Device** and program the device (as in step 26).
+
+35. Create a new BOOT.bin file (as in step 27) and program the flash (as in step 28).
+
+36. Click **Run** after program flash is successful and review the results in the terminal (shown in the following figure).
+    
+![](Images/Step2/final_output.png)
+![](Images/Step2/Hello_World_Final_Flash.png)
 
 ### Summary 
 
@@ -185,7 +288,7 @@ The following solutions directory contains the final Vitis Model Composer (`*.sl
 `\HDL_Library\Lab6\solution`
 
 --------------
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
