@@ -2,7 +2,7 @@
 
 This example offers a Vitis Model Composer testbench for a Super Sample Rate (SSR) FFT with a systolic architecture to process multiple input samples every clock cycle.
 
-To download the SSR FFT example, click [here](https://account.amd.com/en/forms/downloads/amd-end-user-license-xef.html?filename=20260108_sfft_float_vmc.tar.gz).
+To download the SSR FFT example, click [here](https://account.amd.com/en/forms/downloads/amd-end-user-license-xef.html?filename=20260330_sfft_float_vmc.tar.gz).
 
 ![](Images/vmc_float.png)
 
