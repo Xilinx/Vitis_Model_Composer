@@ -147,4 +147,4 @@ Please note some percentage of 173-127=46 AIE buffer memories are also required:
 
 ------------
 
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.

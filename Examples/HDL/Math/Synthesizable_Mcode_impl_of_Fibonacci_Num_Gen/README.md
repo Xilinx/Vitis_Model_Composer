@@ -11,7 +11,7 @@ For correctness of the design in practice, all the I/O gateways should be double
 ![](images/screen_shot.PNG)
 ------------
 
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

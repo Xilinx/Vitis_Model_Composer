@@ -4,7 +4,7 @@
 
 This example demonstrates a Digital Upconversion (DUC) algorithm implemented on AI Engine (AIE) devices.
 
-See also the [DUC implemented on Programmable Logic](https://github.com/Xilinx/Vitis_Model_Composer/tree/2025.2/Examples/HDL/Digital_Filtering/HDL_DUC/README.md).
+See also the [DUC implemented on Programmable Logic](https://github.com/Xilinx/Vitis_Model_Composer/tree/2026.1/Examples/HDL/Digital_Filtering/HDL_DUC/README.md).
 
 ## Algorithm
 
@@ -141,4 +141,4 @@ This cascaded, streaming implementation of the DUC uses 13 AI Engine tiles. As m
 The AI Engine DSP Library, accessible in Vitis Model Composer, can be used to quickly experiment with different architectures for various signal processing algorithms, including Digital Upconversion (DUC).
 
 ------------
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.

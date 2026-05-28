@@ -30,7 +30,7 @@ This lab has four primary parts:
 In this step, you learn the basic operation of Vitis Model Composer and how to synthesize a Simulink design into an FPGA.
 
 1. Invoke Vitis Model Composer. 
-   - On Windows systems, select **Windows > AMD Design Tools > Vitis Model Composer 2025.2.**
+   - On Windows systems, select **Windows > AMD Design Tools > Vitis Model Composer 2026.1.**
    - On Linux systems, type `model_composer` at the command prompt.
 
 2. Navigate to the Lab1 folder: <samp> \HDL_Library\Lab1. </samp> 
@@ -537,7 +537,7 @@ The following solution directory contains the final Vitis Model Composer (`*.slx
 ```
 
 --------------
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

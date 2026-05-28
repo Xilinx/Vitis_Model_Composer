@@ -84,5 +84,5 @@ Output spectrum when input is complex sinusoidal signal:
 
 ------------
 
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.
 

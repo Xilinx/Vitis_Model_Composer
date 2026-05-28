@@ -19,7 +19,7 @@ This is an example of an AIE Kernel that is controlled by a syncronous RTP input
 
 ------------
 
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

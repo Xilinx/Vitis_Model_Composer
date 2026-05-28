@@ -89,4 +89,4 @@ You can use either of the following methods to avoid the buffer overflow issue:
 
 --------------
 
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.

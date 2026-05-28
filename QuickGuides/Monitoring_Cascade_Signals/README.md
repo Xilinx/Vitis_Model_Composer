@@ -32,7 +32,7 @@ Note that even though the kernel only processes 2 `cint32` samples (128 bits) pe
 In such a case, when monitoring the cascade signal, only some of the samples will be valid - for a design with `N` data lanes, the first `N` samples of the cascade signal will be valid. However, the consuming kernel should take in all the samples to produce an output.
 
 --------------
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -98,4 +98,4 @@ We can easily compare the AIE simulation results to a Simulink reference model, 
 
 ------------
 
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.

@@ -36,7 +36,7 @@ When the FPGA Clock Period and Simulink System Period are equivalent, the displa
 
 **FPGA Clock Period(ns)**: (Simulink System Period) * 1e9 = 10
 
-For more details on setting Simulink System Period and FPGA Clock Period, please click [here](https://github.com/Xilinx/Vitis_Model_Composer/tree/2025.2/Tutorials/HDL_Library/Lab7).
+For more details on setting Simulink System Period and FPGA Clock Period, please click [here](https://github.com/Xilinx/Vitis_Model_Composer/tree/2026.1/Tutorials/HDL_Library/Lab7).
 
 ## Display Sampling Frequencies in the Design
 
@@ -64,7 +64,7 @@ Note the interpolation of the FIR filter (20 MHz to 100 MHz) depicted on the inp
 
 
 --------------
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

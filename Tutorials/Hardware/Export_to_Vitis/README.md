@@ -20,7 +20,7 @@ The IFFT operation is performed by AI Engine kernels, 5 each for each data dimen
 
 >**NOTE:** The DMA Source and DMA Sink blocks in the PL, shown in the diagram above, will be provided as part of the platform and not the Vitis Subsystem in this tutorial.
 
-For more details on the design, refer to the [Vitis Model Composer example](https://github.com/Xilinx/Vitis_Model_Composer/tree/2025.2/Examples/AIENGINE_plus_PL/AIE_HLS/IFFT64K_2D/README.md) and the [Design Example from Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials/tree/2025.2/AI_Engine_Development/AIE/Design_Tutorials/12-IFFT64K-2D).
+For more details on the design, refer to the [Vitis Model Composer example](https://github.com/Xilinx/Vitis_Model_Composer/tree/2026.1/Examples/AIENGINE_plus_PL/AIE_HLS/IFFT64K_2D/README.md) and the [Design Example from Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials/tree/2026.1/AI_Engine_Development/AIE/Design_Tutorials/12-IFFT64K-2D).
 
 Open the model `IFFT64K_2D.slx` and examine the `DUT` subsystem, which contains an HLS Kernel and an AI Engine subsystem.
 
@@ -304,5 +304,5 @@ Max Error: 256
 
 ---
 
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.
 

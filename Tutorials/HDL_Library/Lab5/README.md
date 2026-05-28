@@ -69,7 +69,7 @@ In this step you create a Vivado project which you will use to create your hardw
 
 The design has been written in IP catalog format to the directory `./netlist.` You will now import this IP into the Vivado IP catalog and use the IP in an existing example project.
 
-6. Open the Vivado IDE using **Windows > AMD Design Tools > Vivado 2025.2.**
+6. Open the Vivado IDE using **Windows > AMD Design Tools > Vivado 2026.1.**
 
 7. Click **Create Project**.
 
@@ -219,7 +219,7 @@ The following `solution` directory contains the final Vitis Model Composer (`*.s
 ```
 
 --------------
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

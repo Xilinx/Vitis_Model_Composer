@@ -19,7 +19,7 @@ This lab has two primary parts:
 ## Step 1: Timing Analysis in Vitis Model Composer
 
 1. Invoke Vitis Model Composer.
-    - On Windows systems select **Windows > AMD Design Tools > Vitis Model Composer 2025.2.**
+    - On Windows systems select **Windows > AMD Design Tools > Vitis Model Composer 2026.1.**
     - On Linux systems, type `model_composer` at the command prompt.
 
 2. Navigate to the Lab3 folder: `\HDL_Library\Lab3.`
@@ -134,7 +134,7 @@ Cross probing is useful to identify blocks and subsystems that are implemented u
 In this lab you learned how to use timing and resource analysis inside Model Composer which, in turn, invokes Vivado synthesis to collect the information for the analysis. You also learned how to identify timing violated paths and to troubleshoot them for simple designs.
 
 --------------
-Copyright (c) 2025 Advanced Micro Devices, Inc.
+Copyright (c) 2026 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
