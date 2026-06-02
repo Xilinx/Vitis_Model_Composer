@@ -113,7 +113,7 @@ function ssr_transpose_top_config(this_block)
   % logic port data types like SIGNED,UNSIGNED,BOOLEAN etc.
 
 
-    this_block.addFile('ssr_transpose_all.vhd')
+    this_block.addFile('ssr_transpose_all.vhd', 'vhdl', 'ssr_transpose_lib')
     return;
 
 
