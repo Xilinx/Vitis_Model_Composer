@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<h1 id="high-speed-ssr-fir">High Speed SSR FIR</h1>
+<h1 id="high-speed-ssr-fir-—-direct-and-transpose-forms">High Speed SSR FIR — Direct and Transpose Forms</h1>
 <a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 
 <script>
@@ -19,23 +19,76 @@ commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
 
 a.href = commandURI;
 </script>
-<p>This reference design can be used as a starting design point when efficient implementations of very high data rate (over 1 Gsps) Single Rate FIRs are required. This PL based design can be used in any modern AMD device - 7-Series/UltraScale/UltraScale+/Versal. <br />
+<p>This reference design can be used as a starting design point when efficient implementations of very high data rate (over 1 Gsps) Single Rate FIRs are required. This PL based design can be used in any modern AMD device - 7-Series/UltraScale/UltraScale+/Versal.<br />
 <br/><br/></p>
 <p align="center">
 <img src="Images/SSR_FIR_screen_shot.PNG" align ="center" width = 90%>
 </p>
-<p><br/><br/><br />
-This Single Rate SSR FIR reference design illustrates a number of advanced Vitis Model Composer design techniques: </p>
+<p><br/><br/></p>
+<p>The model now contains <strong>two functionally-equivalent FIR architectures side by side</strong>, both driven by the same stimulus. The Direct form is checked sample-by-sample against a golden floating-point reference, and the Direct and Transpose outputs are overlaid in the <strong>Output</strong> spectrum analyzer to confirm the two architectures produce equivalent results (matching to within one LSB):</p>
 <ul>
-<li>This is a fully parameterizable design - you can control the filter order N, the number of clocks per sample SSR, the filter type (non/even/odd-symmetric), the input, output and coefficient fixed point quantization; you can set SSR and TAPS in Model Settings/Model Properties/Callbacks/InitFcnall the rest of the SSR FIR parameters can be set in the Model Composer block dialog</li>
-<li>If desired, you can floorplan the DSP blocks directly from Vitis Model Composer</li>
-<li>This is achieved through the use of Model Composer HDL Black Box flow, all these features are implemented in the underlying VHDL-2008 code; the reference design shows how to pass ports and parameters with generic sizes between Model Composer and VHDL code; the underlying VHDL-2008 code shows how to use arbitrary precision fixed point types, recursive component instantiations, how to instantiate DSP primitives independent of FPGA family (7-Series/UltraScale+/Versal) and floorplan them from VHDL code</li>
-<li>The Vitis Model Composer design includes a top level Simulink self-checking testbench, which compares the fixed point HDL Black Box based implementation to a golden reference floating point model</li>
-<li>This is a very high speed design, clock frequencies up to the maximum data sheet values of 741/891/1150 MHz in the fastest speed grade 7-Series/UltraScale+/Versal devices are possible</li>
-<li>The design also shows a technique to avoid the Versal 795/824/872 MHz fMAX limitation due to SRL16 minimum pulse width spec</li>
-<li>The VHDL code inside the Model Composer HDL Black Box can be instantiated stand alone in a Vivado RTL project. MATLAB and Vitis Model Composer are used here to illustrate the flow and make functional verification easier.</li>
+<li><strong><code>DUT</code> – Direct Form</strong> (<code>SSR_FIR.vhd</code>): partial products cascade from the first to the last tap through the DSP <code>PCOUT</code> chain. The cascade is <code>TAPS</code> deep.</li>
+<li><strong><code>DUT_T</code> – Transpose Form</strong> (<code>TRANSPOSE_SSR_FIR.vhd</code>): the input is broadcast to all DSPs and partial sums accumulate stage-by-stage through the DSP <code>PREG</code>/<code>PCOUT</code> registers. For SSR&gt;1 each of the SSR lanes implements a transposed sub-FIR, so the cascade is only <strong><code>TAPS/SSR</code> deep per lane</strong>.</li>
 </ul>
-<p>This design only works in Vivado 2022.1 or later.</p>
+<p>The two architectures are <strong>functionally equivalent, with outputs agreeing to within one output LSB (2^-16)</strong>. Each form is independently verified against the golden floating-point reference. The two forms have different pipeline latencies (direct = TAPS+2 clocks, transpose = 3×SSR+2 clocks), so the transpose output leads the direct output in time.</p>
+<p>To generate code for one architecture, point the <strong>Vitis Model Composer Hub</strong> block's subsystem selection at <code>DUT</code> (direct) or <code>DUT_T</code> (transpose).</p>
+<h2 id="why-two-forms">Why two forms?</h2>
+<p>The critical path of the direct form grows with <code>TAPS</code> (the <code>PCOUT</code> cascade), while the transpose form's critical path is one DSP multiply-accumulate that is <strong>independent of <code>TAPS</code></strong>. This lets the transpose form close timing at high <code>SSR</code> and large <code>TAPS</code> where the direct form's cascade does not.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th><strong>Direct Form</strong></th>
+<th><strong>Transpose Form</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SSR range</td>
+<td>1, 2, 4, 8, 16 (2^n)</td>
+<td>1, 2, 4, 8, 16 (2^n)</td>
+</tr>
+<tr>
+<td>Fmax, Versal (SSR≤4)</td>
+<td>~822 MHz (device ceiling)</td>
+<td>~834–841 MHz</td>
+</tr>
+<tr>
+<td>Fmax, SSR=8</td>
+<td>~670–740 MHz</td>
+<td>~834 MHz</td>
+</tr>
+<tr>
+<td>Latency (SSR&gt;1, NS)</td>
+<td>TAPS + 2</td>
+<td>3×SSR + 2</td>
+</tr>
+<tr>
+<td>PCOUT/PREG chain depth</td>
+<td>TAPS hops</td>
+<td><strong>TAPS/SSR hops per lane</strong></td>
+</tr>
+<tr>
+<td>DSP count, NS</td>
+<td>SSR × TAPS</td>
+<td>SSR × TAPS</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rule of thumb:</strong> use the <strong>direct form</strong> for SSR 2–4 with TAPS ≤ 64 (shorter latency, simplest dataflow); use the <strong>transpose form</strong> for SSR ≥ 8, or for TAPS &gt; 64 at SSR = 4, or whenever a TAPS-independent (short, fixed) latency is required.</p>
+<h2 id="model-configuration">Model configuration</h2>
+<p>The model is parameterized through <code>Model Settings → Model Properties → Callbacks → InitFcn</code>:</p>
+<pre><code class="matlab language-matlab">SSR  = 8;               % clocks per sample — MUST be a power of two (1,2,4,8,16,...)
+TAPS = 64;              % number of FIR coefficients
+Ts   = 1/SSR;           % input sample time; SSR*Ts must equal the Simulink system period (1)
+FCOEFF = fir1(TAPS-1,0.25);  % shared coefficient set (hardware + golden reference)
+</code></pre>
+<p>Notes:</p>
+<ul>
+<li><strong><code>SSR</code> must be a power of two.</strong> Both cores assert this; non-power-of-2 SSR is not supported by the SSR&gt;1 accumulation chain.</li>
+<li><strong><code>Ts = 1/SSR</code></strong> keeps the buffered input frame rate aligned with the Vitis Model Composer Hub's Simulink system period so the golden-vs-DUT comparison lines up. Changing <code>SSR</code> automatically rescales <code>Ts</code>.</li>
+<li>The remaining FIR parameters (input/output/coefficient fixed-point ranges, rounding, symmetry, optional DSP floorplanning) are set on the <code>SSRFIR</code> Model Composer block mask inside each DUT.</li>
+</ul>
 <hr />
 <p>Copyright (c) 2026 Advanced Micro Devices, Inc.</p>
 
