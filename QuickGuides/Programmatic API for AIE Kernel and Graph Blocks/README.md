@@ -1,7 +1,5 @@
 # Programmatic APIs for AIE Kernel and Graph Blocks
 
-## What This Guide Is For
-
 This guide shows how to **automatically configure AI Engine and HLS kernel blocks** in your Simulink model using MATLAB code, instead of manually clicking through dialog boxes. This is useful when you:
 - Need to set up many blocks quickly
 - Want to automate your design workflow
@@ -133,13 +131,11 @@ pa = "{ 'input', 'in', 'input_window_cint32 *', '32', '0', 'sync', ''; ...
 set_param(blk, 'PortAttrs', pa);
 ```
 
-**What happened:**
 - Lines 1-2: Added a new AIE Kernel block to the model
 - Lines 4-9: Told the tool where your kernel source code is located
 - Line 12: Imported the kernel — the tool read `kernels.h` to find the function signature
 - Line 15-18: Specified the input/output ports (32-sample windows, synchronized)
 
-**Key Tip:** Window kernels process data in fixed-size chunks (windows). Specify the window size in the 4th column of PortAttrs (shown as `'32'` above).
 
 **Port Attributes Breakdown:**
 ```
@@ -158,7 +154,7 @@ set_param(blk, 'PortAttrs', pa);
 
 ## AIE Class Kernel
 
-An **AIE Class Kernel** is a C++ class with a member function that runs on the AI Engine. Use this when your kernel is organized as a class (more structured than a simple function). Classes can also have **Runtime Tunable Parameters (RTPs)** — values you can change while the design is running.
+An **AIE Class Kernel** is a C++ class with a member function that runs on the AI Engine. Use this when your kernel is organized as a class (more structured than a simple function). Classes can also have **Runtime Parameters (RTPs)** — values you can change while the design is running.
 
 ### Required Parameters
 
@@ -187,7 +183,7 @@ An **AIE Class Kernel** is a C++ class with a member function that runs on the A
 This example shows a class kernel with:
 - An **input stream** (continuous data flow)
 - An **output stream** (continuous data flow)
-- An **RTP** (Runtime Tunable Parameter) — a value you can change without recompiling
+- An **RTP** (Runtime Parameter) — a value you can change without recompiling
 
 ```matlab
 blk = 'AIE_class_kernel_import/aie_class_kernel';
@@ -215,7 +211,6 @@ pa = "{ 'input', 'i1', 'input_stream_cint32 *', '', '0', '', ''; ...
 set_param(blk, 'PortAttrs', pa);
 ```
 
-**What happened:**
 - **Lines 1-2**: Added an AIE Class Kernel block
 - **Lines 4-9**: Specified the C++ class name, the member function, and the source files
 - **Line 12**: Imported — the tool read the class definition from `src/kernels.h`
@@ -293,7 +288,6 @@ status = vmcBuildSource(blk);
 assert(status.success, 'vmcBuildSource failed: %s', status.message);
 ```
 
-**What happened:**
 - **Lines 1-2**: Added an AIE Graph block
 - **Lines 4-8**: Pointed to the graph source files and class name
 - **Line 11**: Imported — the tool read `src/project.h` and discovered which kernels are in the graph
@@ -301,7 +295,7 @@ assert(status.success, 'vmcBuildSource failed: %s', status.message);
 
 **After vmcBuildSource(), the block's ports are automatically created based on the graph definition.**
 
-### Graph Class Example (What You Put In .h)
+### Graph Class Example (What You Put In .h file)
 
 In your `src/project.h`, you would have something like:
 
@@ -356,7 +350,7 @@ An **HLS Kernel** is a C/C++ function that runs on the Programmable Logic (PL) p
 4. Call `vmcBuildSource()` — **required** — runs HLS compiler to generate the hardware
 5. The block's ports are automatically created
 
-**Important:** HLS kernels MUST be built with `vmcBuildSource()` before simulation or hardware implementation.
+**Important:** HLS kernels must be built with `vmcBuildSource()` before simulation or hardware implementation.
 
 ### Example — HLS Kernel with Integer Ports and Stream Output
 
@@ -393,7 +387,6 @@ status = vmcBuildSource(blk);
 assert(status.success, 'vmcBuildSource failed: %s', status.message);
 ```
 
-**What happened:**
 - **Lines 1-2**: Added an HLS Kernel block
 - **Lines 4-9**: Pointed to the kernel source files
 - **Line 12**: Imported — the tool read `hls_kernels.h` to find the function signature
@@ -490,94 +483,27 @@ end
 
 ---
 
-## Quick Reference — Parameter Cheat Sheet
-
-### AIE Kernel
-```matlab
-blk = 'model/kernel_block';
-add_block('XilinxModelComposer/AI Engine/User-Defined Functions/AIE Kernel', blk);
-set_param(blk, ...
-    'KernelHeaderFile', 'file.h', ...
-    'KernelFunction', 'func_name', ...
-    'KernelSourceFile', 'file.cc', ...
-    'KernelSearchPaths', "{'./include'}", ...
-    'PreProcOptions', "{''-DFLAG''}");
-vmcImportSource(blk);
-set_param(blk, 'PortAttrs', "{ 'input', 'i1', 'input_window_int32 *', '32', '0', 'sync', ''; ...
-                               'output', 'o1', 'output_window_int32 *', '32', '', 'sync', '' }");
-```
-
-### AIE Class Kernel
-```matlab
-blk = 'model/kernel_block';
-add_block('XilinxModelComposer/AI Engine/User-Defined Functions/AIE Class Kernel', blk);
-set_param(blk, ...
-    'KernelHeaderFile', 'file.h', ...
-    'KernelClassName', 'MyClass', ...
-    'KernelFunction', 'member_func', ...
-    'KernelSourceFile', 'file.cpp', ...
-    'KernelSearchPaths', "{'.'}", ...
-    'PreProcOptions', '{}');
-vmcImportSource(blk);
-set_param(blk, 'PortAttrs', "{ 'input', 'i1', 'input_stream_int32 *', '', '0', '', ''; ...
-                               'output', 'o1', 'output_stream_int32 *', '', '', '', '1' }");
-```
-
-### AIE Graph
-```matlab
-blk = 'model/graph_block';
-add_block('XilinxModelComposer/AI Engine/User-Defined Functions/AIE Graph', blk);
-set_param(blk, ...
-    'GraphHeaderFile', 'project.h', ...
-    'GraphClassName', 'MyGraph', ...
-    'GraphSearchPaths', "{'./src'}", ...
-    'GraphPreProcOptions', '{}');
-vmcImportSource(blk);
-vmcBuildSource(blk);  % REQUIRED for graphs
-```
-
-### HLS Kernel
-```matlab
-blk = 'model/hls_block';
-add_block('XilinxModelComposer/HLS/User-Defined Functions/HLS Kernel', blk);
-set_param(blk, ...
-    'KernelHeaderFile', 'hls_func.h', ...
-    'KernelFunction', 'hls_func', ...
-    'KernelSourceFile', 'hls_func.cpp', ...
-    'KernelSearchPaths', "{'./include'}", ...
-    'PreProcOptions', '{}');
-vmcImportSource(blk);
-set_param(blk, 'PortDirectionTable', "{ 'in1', 'ap_int< 32 >', 'Input', 'Port'; ...
-                                        'out1', 'ap_int< 32 >', 'output', 'Port' }");
-vmcBuildSource(blk);  % REQUIRED for HLS
-```
-
----
-
-## Key Takeaways for Beginners
-
-1. **Always set file paths first** — Tell the tool where your source code is
-2. **Always call vmcImportSource** — This reads your code and discovers ports
-3. **Always call vmcBuildSource for HLS and Graphs** — This is required
-4. **Check status.success** — Use `assert()` to catch errors early
-5. **Port attributes matter** — The names, types, and sizes must match your C/C++ code
-6. **Use full paths if confused** — Relative paths can be confusing; absolute paths are clearer
-7. **Test incrementally** — Add one block at a time and verify it works before adding more
-
----
-
-## More Information
-
-For detailed reference on all parameters, see your Xilinx Model Composer documentation or run:
-```matlab
-help set_param
-help vmcImportSource
-help vmcBuildSource
-```
 
 For examples, check the reference directory:
 ```
-/proj/xhdhdstaff5/sdegala/Head1/HEAD/New_APIs/Import_kernel_graph_APIs/Import_kernel_graph_APIs/
+For AIE Kernel Function example, (please click [here].(https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Kernel_Function).
+
+For AIE Class Kernel example, (please click [here].(https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Class_Kernel_Function).
+
+For AIE Graph function example, (please click [here].(https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Graph_Function). 
 ```
 
-This folder contains working examples for each kernel type with complete scripts.
+--------------
+Copyright (c) 2026 Advanced Micro Devices, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
