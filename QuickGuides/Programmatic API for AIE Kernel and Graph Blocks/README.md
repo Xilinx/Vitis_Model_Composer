@@ -485,13 +485,13 @@ end
 
 
 For examples, check the reference directory:
-```
-For AIE Kernel Function example, (please click [here].(https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Kernel_Function).
 
-For AIE Class Kernel example, (please click [here].(https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Class_Kernel_Function).
+For AIE Kernel Function example, please click [here](https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Kernel_Function).
 
-For AIE Graph function example, (please click [here].(https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Graph_Function). 
-```
+For AIE Class Kernel example, please click [here](https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Class_Kernel_Function).
+
+For AIE Graph function example, please click [here](https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Graph_Function). 
+
 
 --------------
 Copyright (c) 2026 Advanced Micro Devices, Inc.
