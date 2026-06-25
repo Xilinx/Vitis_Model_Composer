@@ -63,7 +63,7 @@
 
 <tr>
  <td align="left">
-   <a href="./Programmatic_APIs_for_AIE_Kernel_Graph_Blocks_and_HLS_Kernel/README.md">Programmatic APIs for AIE Kernel, Graph Blocks, and HLS Kernel</a>
+   <a href="./Programmatic_APIs/README.md">Programmatic APIs for AIE Kernel, Graph Blocks, and HLS Kernel</a>
  </td>
  <td>Configure AI Engine and HLS kernel blocks from MATLAB code instead of the block dialogs, using vmcGetBlockInfo/vmcSetBlockInfo, vmcImportSource, and vmcBuildSource.
  </td>
