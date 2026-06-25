@@ -603,19 +603,6 @@ end
 3. **Relative path is wrong** — Your relative path doesn't match the folder structure
    - **Fix:** Use `pwd` to see where you are, and `ls` or `dir` to verify file locations
 
----
-
-
-For examples, check the reference directory:
-
-For AIE Kernel Function example, please click [here](https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Kernel_Function).
-
-For AIE Class Kernel example, please click [here](https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Class_Kernel_Function).
-
-For AIE Graph function example, please click [here](https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Graph_Function). 
-
-For HLS Kernel function example, please click [here](https://github.com/Xilinx/VMC_Help/tree/2026.1/HLS/HLS_Kernel_Function).
-
 --------------
 Copyright (c) 2026 Advanced Micro Devices, Inc.
 
