@@ -60,5 +60,13 @@
  <td>Follow these instructions to move the Validate on Hardware baremetal or SD card image into the hardware and run the application.
  </td>
  </tr>
+
+<tr>
+ <td align="left">
+   <a href="./Programmatic_APIs_for_AIE_Kernel_Graph_Blocks_and_HLS_Kernel/README.md">Programmatic APIs for AIE Kernel, Graph Blocks, and HLS Kernel</a>
+ </td>
+ <td>Configure AI Engine and HLS kernel blocks from MATLAB code instead of the block dialogs, using vmcGetBlockInfo/vmcSetBlockInfo, vmcImportSource, and vmcBuildSource.
+ </td>
+ </tr>
     
  </table>
