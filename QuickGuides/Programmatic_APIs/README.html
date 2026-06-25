@@ -1,0 +1,962 @@
+
+    <html>
+      <head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+      <body>
+        <div id='content'>
+    <h1 id="programmatic-apis-for-aie-kernel-graph-blocks-and-hls-kernel">Programmatic APIs for AIE Kernel, Graph Blocks, and HLS Kernel</h1>
+<p>This guide shows how to <strong>automatically configure AI Engine and HLS kernel blocks</strong> in your Simulink model using MATLAB code, instead of manually clicking through dialog boxes. This is useful when you:</p>
+<ul>
+<li>Need to set up many blocks quickly</li>
+<li>Want to automate your design workflow</li>
+<li>Are building scripts to generate models programmatically</li>
+<li>Need to apply the same configuration to multiple blocks</li>
+</ul>
+<p>This guide covers four types of blocks:</p>
+<ul>
+<li><strong>AIE Kernel</strong> — Simple AI Engine function</li>
+<li><strong>AIE Class Kernel</strong> — AI Engine function organized in a class</li>
+<li><strong>AIE Graph</strong> — Graph of connected AI Engine kernels</li>
+<li><strong>HLS Kernel</strong> — High-Level Synthesis kernel for Programmable Logic (PL)</li>
+</ul>
+<h2 id="key-concepts">Key Concepts</h2>
+<h3 id="what-is-vmcgetblockinfo--vmcsetblockinfo-recommended-approach">What is vmcGetBlockInfo / vmcSetBlockInfo? (Recommended Approach)</h3>
+<p><strong>vmcGetBlockInfo</strong> and <strong>vmcSetBlockInfo</strong> are the primary programmatic surface for configuring kernel blocks. The recommended workflow is:</p>
+<pre><code class="matlab language-matlab">% Get the current block configuration as a struct
+% 1) Get the current block configuration as a NESTED struct
+info = vmcGetBlockInfo(blk);
+
+% 2) General settings (file paths, function name) live under info.General
+info.General.KernelHeaderFile = 'mykernel.h';
+info.General.KernelFunction   = 'my_func';
+vmcSetBlockInfo(blk, info);
+
+% 3) Import to discover ports, then set port attributes via the info.Ports
+%    struct array (ports only exist after import). Set only editable fields.
+vmcImportSource(blk);
+info = vmcGetBlockInfo(blk);
+info.Ports(1).WindowSize = '32';
+vmcSetBlockInfo(blk, info);   % atomic commit of dependent parameters
+</code></pre>
+<p>The <code>info</code> struct is <strong>nested</strong>: general parameters are under <code>info.General.*</code>, port<br />
+attributes are the <code>info.Ports</code> struct array (<code>Direction, Name, Type, WindowSize,
+WindowMargin, Synchronicity, SignalSize</code>), template parameters are <code>info.TemplateParams</code><br />
+(<code>Name, Type, Value</code>), and HLS port directions are <code>info.PortDirectionTable</code><br />
+(<code>Name, Type, Direction, Interface</code>). Assigning flat fields such as <code>info.KernelHeaderFile</code><br />
+or <code>info.PortAttrs</code> is silently ignored, so always use the nested fields shown above.<br />
+This struct round-trip approach ensures all dependent parameters are updated consistently.</p>
+<p><strong>Note on set_param (Equivalent Shortcut):</strong>  <br />
+<code>set_param</code> is also supported and works identically. The difference is that <code>set_param</code> updates one parameter at a time. For dependent parameters, prefer vmcSetBlockInfo to ensure atomic updates.</p>
+<h3 id="what-is-set_param">What is set_param?</h3>
+<p><code>set_param</code> is a MATLAB function that sets properties on Simulink blocks. Instead of opening a dialog box and typing values, you pass them directly in code. For independent parameters this is fine; for dependent parameters, use vmcSetBlockInfo instead.</p>
+<h3 id="what-is-vmcimportsource">What is vmcImportSource?</h3>
+<p>This function reads your kernel source code (C/C++) and discovers what ports (inputs/outputs) and parameters your kernel has. <strong>You must run this after setting the file paths</strong> so the tool knows what to import.</p>
+<h3 id="what-is-vmcbuildsource">What is vmcBuildSource?</h3>
+<p>This function compiles your kernel code. For <strong>HLS and AIE Graph blocks</strong>, this is required. For simple <strong>AIE Kernels</strong>, it's optional.</p>
+<h2 id="important-syntax-notes">Important Syntax Notes</h2>
+<p><strong>Atomic Commits for Dependent Parameters:</strong>  <br />
+When setting dependent parameters (e.g., port attributes alongside file paths, or function template parameters), use <strong>vmcSetBlockInfo</strong> to commit changes atomically. Setting dependent parameters individually with <code>set_param</code> may leave the block in an inconsistent state. Always group related parameters in one vmcSetBlockInfo call.<br />
+<strong>MATLAB String Arrays:</strong>  <br />
+When specifying file paths or data structures, MATLAB requires special syntax:</p>
+<ul>
+<li>Single paths: <code>'filename.h'</code></li>
+<li>Multiple paths: <code>"{'./path1', './path2'}"</code> (curved braces inside quotes)</li>
+<li>Compiler options: <code>"{'-DOPTION1', '-DOPTION2'}"</code></li>
+<li>Port definitions: <code>"{ 'col1', 'col2'; 'col3', 'col4' }"</code> (semicolon separates rows)</li>
+</ul>
+<blockquote>
+  <p><strong>Note:</strong> Keep a table/cell string such as <code>PortAttrs</code> or <code>PortDirectionTable</code> on a <strong>single line</strong>. MATLAB does not allow <code>...</code> line continuation <em>inside</em> a double-quoted string literal, so splitting one of these strings across lines raises <code>String is not terminated properly</code>. (Alternatively, build the configuration with the <code>vmcGetBlockInfo</code>/<code>vmcSetBlockInfo</code> struct round-trip described above, which avoids long inline strings entirely.)</p>
+</blockquote>
+<p><strong>Example:</strong></p>
+<pre><code class="matlab language-matlab">% Single value
+'kernels.h'
+
+% List of paths
+"{'./kernels', './include'}"
+
+% 2x3 table (3 columns, 2 rows)
+"{ 'input', 'int32', 'port1'; 'output', 'int32', 'port2' }"
+</code></pre>
+<h2 id="common-workflow">Common Workflow</h2>
+<ol>
+<li><strong>Add a block</strong> to your model using <code>add_block()</code></li>
+<li><strong>Set file paths and options</strong> using <code>set_param()</code> (KernelHeaderFile, KernelSourceFile, etc.)</li>
+<li><strong>Import the source</strong> using <code>vmcImportSource()</code> — this reads your C/C++ code</li>
+<li><strong>Configure ports</strong> by setting port attributes using <code>set_param()</code> again</li>
+<li><strong>Build the kernel</strong> using <code>vmcBuildSource()</code> (required for HLS and AIE Graph, optional for AIE Kernel)</li>
+<li><strong>Check for errors</strong> using status values returned by import/build functions</li>
+</ol>
+<p><strong>Quick Reference:</strong></p>
+<pre><code class="matlab language-matlab">% Step 1: Add block
+blk = 'my_model/my_kernel';
+add_block('XilinxModelComposer/AI Engine/User-Defined Functions/AIE Kernel', blk);
+
+% Step 2: Set file paths
+set_param(blk, 'KernelHeaderFile', 'mykernel.h', 'KernelFunction', 'my_func');
+
+% Step 3: Import
+status = vmcImportSource(blk);
+if ~status.success
+    error('Import failed: %s', status.message);
+end
+
+% Step 4: Configure ports
+set_param(blk, 'PortAttrs', "{ 'input', 'i1', 'input_window_int32 *', '32', ... }");
+
+% Step 5: Build (if needed)
+status = vmcBuildSource(blk);
+</code></pre>
+<h2 id="aie-kernel">AIE Kernel</h2>
+<p>An <strong>AIE Kernel</strong> is a single C/C++ function that runs on the AI Engine. Use this when your computation is a simple function (not organized in a class).</p>
+<h3 id="required-parameters">Required Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>What It Is</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KernelHeaderFile</code></td>
+<td>C/C++ header file containing the function declaration</td>
+<td><code>'kernels.h'</code></td>
+</tr>
+<tr>
+<td><code>KernelFunction</code></td>
+<td>Name of the function to import</td>
+<td><code>'simple'</code></td>
+</tr>
+<tr>
+<td><code>KernelSourceFile</code></td>
+<td>C/C++ source file containing the function implementation</td>
+<td><code>'kernels/kernels.cc'</code></td>
+</tr>
+<tr>
+<td><code>KernelSearchPaths</code></td>
+<td>Folder paths where the compiler should look for include files</td>
+<td><code>"{'./kernels'}"</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="optional-parameters">Optional Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>What It Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KernelInitFunction</code></td>
+<td>A function that initializes your kernel (runs once at startup)</td>
+</tr>
+<tr>
+<td><code>PreProcOptions</code></td>
+<td>Compiler flags/options, like <code>-DBUFFER_DEPTH=1024</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="workflow">Workflow</h3>
+<ol>
+<li>Set the file paths using <code>set_param()</code></li>
+<li>Call <code>vmcImportSource()</code> — this reads your C/C++ code and discovers the function signature</li>
+<li>Set port attributes (input/output sizes)</li>
+</ol>
+<p><strong>Do I need vmcBuildSource?</strong> Usually not for AIE Kernel — the import step is usually enough.</p>
+<h3 id="example-—-window-kernel-with-compiler-options">Example — Window Kernel with Compiler Options</h3>
+<p>This example imports a kernel that processes data using a sliding window:</p>
+<pre><code class="matlab language-matlab">blk = 'AIE_kernel_import/aie_kernel';
+add_block('XilinxModelComposer/AI Engine/User-Defined Functions/AIE Kernel', blk);
+
+% Step 1: Get the current block configuration (struct-based approach - RECOMMENDED)
+info = vmcGetBlockInfo(blk);
+
+% Step 2: Set file paths and options under info.General
+info.General.KernelHeaderFile  = 'kernels.h';
+info.General.KernelFunction    = 'simple';
+info.General.KernelSourceFile  = 'kernels/kernels.cc';
+info.General.KernelSearchPaths = "{'./kernels'}";
+info.General.PreProcOptions    = '{''-DBUFFER_DEPTH=1024''}';
+
+% Step 3: Apply all changes atomically
+vmcSetBlockInfo(blk, info);
+
+% Step 4: Import to discover ports
+status = vmcImportSource(blk);
+assert(status.success, 'vmcImportSource failed: %s', status.message);
+
+% Step 5: Set port attributes via the info.Ports struct array.
+% Port names/types are read from the source; set only the editable fields
+% (here, the input/output window sizes).
+info = vmcGetBlockInfo(blk);
+info.Ports(1).WindowSize = '32';   % input 'in'
+info.Ports(2).WindowSize = '32';   % output 'out'
+vmcSetBlockInfo(blk, info);
+</code></pre>
+<p><strong>Alternative with set_param (shortcut):</strong>  <br />
+For independent parameters, you can also use <code>set_param</code>:</p>
+<pre><code class="matlab language-matlab">set_param(blk, 'KernelHeaderFile', 'kernels.h', 'KernelFunction', 'simple', ...);
+</code></pre>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li>Added a new AIE Kernel block to the model</li>
+<li>Retrieved the block configuration as a nested struct and set the file paths under <code>info.General</code></li>
+<li>Applied the path changes with <code>vmcSetBlockInfo</code></li>
+<li>Imported the kernel — the tool read <code>kernels.h</code> to find the function signature and populated <code>info.Ports</code></li>
+<li>Retrieved the struct again, set the editable port fields (<code>WindowSize</code>) on <code>info.Ports</code>, and committed atomically</li>
+</ul>
+<p><strong>Port Attributes Breakdown:</strong></p>
+<pre><code>{ 'Direction',  'Name',  'Type',                  'WindowSize', 'WindowMargin', 'Synchronicity', 'SignalSize' }
+  'input',      'in',    'input_window_cint32 *', '32',         '0',            'sync',          ''
+  'output',     'out',   'output_window_cint32 *','32',         '',             'sync',          ''
+</code></pre>
+<ul>
+<li><strong>Direction</strong>: <code>'input'</code> or <code>'output'</code></li>
+<li><strong>Name</strong>: Port name in your C code</li>
+<li><strong>Type</strong>: C++ type (window pointer for window kernels)</li>
+<li><strong>WindowSize</strong>: Window size in samples</li>
+<li><strong>WindowMargin</strong>: Initial margin (usually 0 for input)</li>
+<li><strong>Synchronicity</strong>: <code>'sync'</code> (synchronized) or <code>''</code> (asynchronous)</li>
+<li><strong>SignalSize</strong>: Signal size indicator (usually empty for windows)</li>
+</ul>
+<h2 id="aie-class-kernel">AIE Class Kernel</h2>
+<p>An <strong>AIE Class Kernel</strong> is a C++ class with a member function that runs on the AI Engine. Use this when your kernel is organized as a class (more structured than a simple function). Classes can also have <strong>Runtime Parameters (RTPs)</strong> — values you can change while the design is running.</p>
+<h3 id="required-parameters-1">Required Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>What It Is</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KernelHeaderFile</code></td>
+<td>C/C++ header file containing the class definition</td>
+<td><code>'src/kernels.h'</code></td>
+</tr>
+<tr>
+<td><code>KernelClassName</code></td>
+<td>Name of the class</td>
+<td><code>'MyKernel'</code></td>
+</tr>
+<tr>
+<td><code>KernelFunction</code></td>
+<td>Name of the member function to call</td>
+<td><code>'myFunc'</code></td>
+</tr>
+<tr>
+<td><code>KernelSourceFile</code></td>
+<td>C/C++ source file with the class implementation</td>
+<td><code>'src/kernels.cpp'</code></td>
+</tr>
+<tr>
+<td><code>KernelSearchPaths</code></td>
+<td>Folders where the compiler looks for includes</td>
+<td><code>"{'.','src'}"</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="optional-parameters-1">Optional Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>What It Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PreProcOptions</code></td>
+<td>Compiler flags, like <code>-DBUFFER_DEPTH=1024</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="workflow-1">Workflow</h3>
+<ol>
+<li>Set the class and file paths using <code>set_param()</code></li>
+<li>Call <code>vmcImportSource()</code> — reads your C++ code and discovers the class structure and member function</li>
+<li>Set port attributes, including any runtime parameters (RTPs)</li>
+</ol>
+<h3 id="example-—-stream-kernel-with-runtime-parameter">Example — Stream Kernel with Runtime Parameter</h3>
+<p>This example shows a class kernel with:</p>
+<ul>
+<li>An <strong>input stream</strong> (continuous data flow)</li>
+<li>An <strong>output stream</strong> (continuous data flow)</li>
+<li>An <strong>RTP</strong> (Runtime Parameter) — a value you can change without recompiling</li>
+</ul>
+<pre><code class="matlab language-matlab">blk = 'AIE_class_kernel_import/aie_class_kernel';
+add_block('XilinxModelComposer/AI Engine/User-Defined Functions/AIE Class Kernel', blk);
+
+% Step 1: Point to the class source code
+set_param(blk, ...
+    'KernelHeaderFile',   'src/kernels.h', ...
+    'KernelClassName',    'MyKernel', ...           % The C++ class name
+    'KernelFunction',     'myFunc', ...             % The member function name
+    'KernelSourceFile',   'src/kernels.cpp', ...
+    'KernelSearchPaths',  "{'.','src'}", ...
+    'PreProcOptions',     "{'-DBUFFER_DEPTH=1024'}");
+
+% Step 2: Import the class structure
+status = vmcImportSource(blk);
+assert(status.success, 'vmcImportSource failed: %s', status.message);
+
+% Step 3: Configure ports and RTP
+% Format: { Direction, Name, Type, WindowSize, WindowMargin, Synchronicity, SignalSize }
+% Note: Streams don't have a window size (4th column is empty '').
+% The table must be a single-line string -- MATLAB does not allow '...'
+% line continuation inside a double-quoted string literal.
+pa = "{ 'input', 'i1', 'input_stream_cint32 *', '', '0', '', ''; 'output', 'o1', 'output_stream_cint32 *', '', '', '', '1'; 'inout', 'rtp_out', 'cint32 &amp;', '', '0', 'async', '' }";
+set_param(blk, 'PortAttrs', pa);
+</code></pre>
+<ul>
+<li><strong>Lines 1-2</strong>: Added an AIE Class Kernel block</li>
+<li><strong>Lines 4-9</strong>: Specified the C++ class name, the member function, and the source files</li>
+<li><strong>Line 12</strong>: Imported — the tool read the class definition from <code>src/kernels.h</code></li>
+<li><strong>Lines 15-20</strong>: Defined:</li>
+<li><code>i1</code> — input stream (receives continuous data)</li>
+<li><code>o1</code> — output stream (sends continuous data)  </li>
+<li><code>rtp_out</code> — RTP parameter (can be changed at runtime)</li>
+</ul>
+<p><strong>Port Attributes Breakdown for Streams:</strong></p>
+<pre><code>{ 'Direction', 'Name',     'Type',                   'WindowSize', 'WindowMargin', 'Synchronicity', 'SignalSize' }
+  'input',     'i1',       'input_stream_cint32 *',  '',           '0',            '',              ''
+  'output',    'o1',       'output_stream_cint32 *', '',           '',             '',              '1'
+  'inout',     'rtp_out',  'cint32 &amp;',               '',           '0',            'async',         ''
+</code></pre>
+<ul>
+<li><strong>Direction</strong>: <code>'input'</code>, <code>'output'</code>, or <code>'inout'</code> (RTP uses inout)</li>
+<li><strong>Name</strong>: Port name in your C code</li>
+<li><strong>Type</strong>: C++ type (<code>input_stream_*</code> for inputs, <code>output_stream_*</code> for outputs)</li>
+<li><strong>WindowSize</strong>: Empty <code>''</code> for streams (no window size)</li>
+<li><strong>WindowMargin</strong>: Usually <code>'0'</code></li>
+<li><strong>Synchronicity</strong>: <code>''</code> for regular ports, <code>'async'</code> for async RTPs</li>
+<li><strong>SignalSize</strong>: signal size for stream ports; here <code>''</code> for the input and <code>'1'</code> for the output</li>
+</ul>
+<h2 id="aie-graph">AIE Graph</h2>
+<p>An <strong>AIE Graph</strong> is a collection of AI Engine kernels connected together in a specific topology (data flow graph). Use this when you have multiple kernels that need to communicate with each other. A graph is defined in an <code>.h</code> header file as a C++ class that builds the kernel connections.</p>
+<h3 id="required-parameters-2">Required Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>What It Is</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GraphHeaderFile</code></td>
+<td>C/C++ header file defining the graph class</td>
+<td><code>'src/project.h'</code></td>
+</tr>
+<tr>
+<td><code>GraphClassName</code></td>
+<td>Name of the graph class</td>
+<td><code>'simpleGraph'</code></td>
+</tr>
+<tr>
+<td><code>GraphSearchPaths</code></td>
+<td>Folders where the compiler looks for includes</td>
+<td><code>"{'./src/kernels', './src'}"</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="optional-parameters-2">Optional Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>What It Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GraphSourceFile</code></td>
+<td>Optional C/C++ source file with implementations</td>
+</tr>
+<tr>
+<td><code>GraphPreProcOptions</code></td>
+<td>Compiler flags/options</td>
+</tr>
+</tbody>
+</table>
+<h3 id="workflow-2">Workflow</h3>
+<ol>
+<li>Make sure the model has a <strong>Vitis Model Composer Hub</strong> configured with a Versal AIE device — the AIE Graph parser requires a target device part</li>
+<li>Set the graph file paths using <code>set_param()</code></li>
+<li>Call <code>vmcImportSource()</code> — reads the graph class and discovers kernels and connections</li>
+<li>Call <code>vmcBuildSource()</code> — <strong>required</strong> — compiles the graph to generate runtime interfaces</li>
+<li>The block's ports are automatically created based on the graph's input/output ports</li>
+</ol>
+<p><strong>Important:</strong> Always call both <code>vmcImportSource()</code> AND <code>vmcBuildSource()</code> for graphs.</p>
+<h3 id="example-—-simple-aie-graph">Example — Simple AIE Graph</h3>
+<p>This example imports and builds a graph connecting multiple kernels:</p>
+<pre><code class="matlab language-matlab">model = 'AIE_graph_import';
+
+% Step 0: An AIE Graph build needs a target device, so add a Hub and set a
+% Versal AIE device. (Skip if your model already has a configured Hub.)
+hub = [model '/Vitis Model Composer Hub'];
+add_block('XilinxModelComposer/AI Engine/Tools/Vitis Model Composer Hub', hub);
+vmchub_set_param(hub, model, 'SelectHardware', 'xcvc1902-vsva2197-2MP-e-S');
+
+blk = [model '/aie_graph'];
+add_block('XilinxModelComposer/AI Engine/User-Defined Functions/AIE Graph', blk);
+
+% Step 1: Point to the graph class definition
+set_param(blk, ...
+    'GraphHeaderFile',       'src/project.h', ...    % Where the graph is defined
+    'GraphClassName',        'simpleGraph', ...       % The C++ class name
+    'GraphSearchPaths',      "{'./src/kernels', './src'}", ...
+    'GraphPreProcOptions',   '{}');                  % No compiler flags
+
+% Step 2: Import the graph structure (discovers kernels inside)
+status = vmcImportSource(blk);
+assert(status.success, 'vmcImportSource failed: %s', status.message);
+
+% Step 3: Build the graph (compiles it)
+% This generates the actual input/output ports based on the graph topology
+status = vmcBuildSource(blk);
+assert(status.success, 'vmcBuildSource failed: %s', status.message);
+</code></pre>
+<ul>
+<li><strong>Lines 1-2</strong>: Added an AIE Graph block</li>
+<li><strong>Lines 4-8</strong>: Pointed to the graph source files and class name</li>
+<li><strong>Line 11</strong>: Imported — the tool read <code>src/project.h</code> and discovered which kernels are in the graph</li>
+<li><strong>Line 14-16</strong>: Built — the tool compiled the graph and generated ports</li>
+</ul>
+<p><strong>After vmcBuildSource(), the block's ports are automatically created based on the graph definition.</strong></p>
+<h3 id="graph-class-example-what-you-put-in-h-file">Graph Class Example (What You Put In .h file)</h3>
+<p>In your <code>src/project.h</code>, you would have something like:</p>
+<pre><code class="cpp language-cpp">class simpleGraph {
+public:
+    aie::kernel k1;      // Kernel 1
+    aie::kernel k2;      // Kernel 2
+
+    input_plio input;    // External input port
+    output_plio output;  // External output port
+
+    simpleGraph() {
+        // Connect k1 input to external input
+        connect(input, k1.in());
+        // Connect k1 output to k2 input
+        connect(k1.out(), k2.in());
+        // Connect k2 output to external output
+        connect(k2.out(), output);
+    }
+};
+</code></pre>
+<p>When you import this graph, the block will have two ports:</p>
+<ul>
+<li>An <strong>input</strong> port (connected to <code>input</code> plio)</li>
+<li>An <strong>output</strong> port (connected to <code>output</code> plio)</li>
+</ul>
+<h2 id="hls-kernel">HLS Kernel</h2>
+<p>An <strong>HLS Kernel</strong> is a C/C++ function that runs on the Programmable Logic (PL) part of the FPGA, not on the AI Engine. HLS stands for High-Level Synthesis — the tool converts C/C++ code to hardware automatically. Use this for algorithms you want to accelerate in PL.</p>
+<h3 id="required-parameters-3">Required Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>What It Is</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KernelHeaderFile</code></td>
+<td>C/C++ header file with the function declaration</td>
+<td><code>'kernels/inc/hls_kernels.h'</code></td>
+</tr>
+<tr>
+<td><code>KernelFunction</code></td>
+<td>Name of the function to synthesize</td>
+<td><code>'pl_func'</code></td>
+</tr>
+<tr>
+<td><code>KernelSourceFile</code></td>
+<td>C/C++ source file with the function code</td>
+<td><code>'kernels/src/pl_func.cpp'</code></td>
+</tr>
+<tr>
+<td><code>KernelSearchPaths</code></td>
+<td>Folders where the compiler finds includes</td>
+<td><code>"{'./kernels/inc', './kernels/src'}"</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="optional-parameters-3">Optional Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>What It Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PreProcOptions</code></td>
+<td>Compiler flags (rarely needed for HLS)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="workflow-3">Workflow</h3>
+<ol>
+<li>Set the file paths using <code>set_param()</code></li>
+<li>Call <code>vmcImportSource()</code> — reads your C/C++ code</li>
+<li>Set port attributes specifying the types (e.g., <code>ap_int</code>, <code>hls::stream</code>)</li>
+<li>Call <code>vmcBuildSource()</code> — <strong>required</strong> — runs HLS compiler to generate the hardware</li>
+<li>The block's ports are automatically created</li>
+</ol>
+<p><strong>Important:</strong> HLS kernels must be built with <code>vmcBuildSource()</code> before simulation or hardware implementation.</p>
+<h3 id="example-—-hls-kernel-with-integer-ports-and-stream-output">Example — HLS Kernel with Integer Ports and Stream Output</h3>
+<p>This example shows an HLS kernel with:</p>
+<ul>
+<li>An <strong>integer input</strong> (<code>ap_int&lt; 32 &gt;</code>)</li>
+<li>A <strong>stream output</strong> (<code>hls::stream</code>)</li>
+</ul>
+<pre><code class="matlab language-matlab">blk = 'HLS_kernel_import/hls_kernel';
+add_block('XilinxModelComposer/HLS/User-Defined Functions/HLS Kernel', blk);
+
+% --- Step 1: Set general parameters (file paths)
+set_param(blk, ...
+    'KernelHeaderFile',   'kernels/inc/hls_kernels.h', ...
+    'KernelFunction',     'pl_func', ...
+    'KernelSourceFile',   'kernels/src/pl_func.cpp', ...
+    'KernelSearchPaths',  "{'./kernels/inc', './kernels/src'}", ...
+    'PreProcOptions',     '{}');
+
+% --- Step 2: Import to discover the function signature
+status = vmcImportSource(blk);
+assert(status.success, 'vmcImportSource failed: %s', status.message);
+
+% --- Step 3: Resolve port directions via the nested struct.
+% The importer leaves directions it cannot infer (e.g. hls::stream &amp;) as
+% '&lt;Select&gt;'; you must resolve them. Port directions (and any template
+% values) are dependent, so commit them together with vmcSetBlockInfo.
+info = vmcGetBlockInfo(blk);
+info.PortDirectionTable(1).Direction = 'Input';    % in1
+info.PortDirectionTable(2).Direction = 'Output';   % out1
+vmcSetBlockInfo(blk, info);
+
+% --- Step 4: Build (run HLS compiler)
+% This generates the hardware from your C/C++ code
+status = vmcBuildSource(blk);
+assert(status.success, 'vmcBuildSource failed: %s', status.message);
+</code></pre>
+<ul>
+<li><strong>Lines 1-2</strong>: Added an HLS Kernel block</li>
+<li><strong>Lines 4-9</strong>: Pointed to the kernel source files</li>
+<li><strong>Line 12</strong>: Imported — the tool read <code>hls_kernels.h</code> to find the function signature</li>
+<li><strong>Lines 15-18</strong>: Defined ports:</li>
+<li><code>in1</code> — 32-bit integer input</li>
+<li><code>out1</code> — 32-bit stream output</li>
+<li><strong>Line 21-23</strong>: Built — the Vitis HLS tool compiled your C/C++ into hardware (VHDL/Verilog)</li>
+</ul>
+<h3 id="port-direction-table-explained">Port Direction Table Explained</h3>
+<pre><code>{ 'name',  'type',                              'direction', 'block_type' }
+  'in1',   'ap_int&lt; 32 &gt;',                      'Input',     'Port'
+  'out1',  'hls::stream&lt; ap_int&lt; 32 &gt;, 0 &gt; &amp;', 'Output',    'Port'
+</code></pre>
+<ul>
+<li><strong>name</strong>: Port name in your C function</li>
+<li><strong>type</strong>: HLS data type</li>
+<li><code>ap_int&lt; N &gt;</code> — Fixed-width integer (N bits)</li>
+<li><code>ap_uint&lt; N &gt;</code> — Unsigned integer</li>
+<li><code>hls::stream&lt; TYPE &gt;</code> — Streaming data</li>
+<li><strong>direction</strong>: <code>'Input'</code> or <code>'Output'</code> (must be consistent capitalization)</li>
+<li><strong>block_type</strong>: Usually <code>'Port'</code></li>
+</ul>
+<h3 id="hls-template-parameters-optional-advanced">HLS Template Parameters (Optional, Advanced)</h3>
+<p>Some HLS kernels may use C++ template parameters to configure synthesis-time behavior. When used, template parameters and port directions are dependent and should be committed together with <code>vmcSetBlockInfo</code>:</p>
+<pre><code class="matlab language-matlab">% After vmcImportSource, configure port directions (and any template values)
+% via the nested info struct, then commit atomically.
+info = vmcGetBlockInfo(blk);
+info.PortDirectionTable(1).Direction = 'Input';    % in1
+info.PortDirectionTable(2).Direction = 'Output';   % out1
+% If the kernel is templated, also set the resolved values, e.g.:
+%   info.TemplateParams(1).Value = 'int32';
+vmcSetBlockInfo(blk, info);   % atomic commit of dependent parameters
+</code></pre>
+<p>Refer to your HLS kernel documentation for supported template parameter formats.</p>
+<h3 id="aie-kernel-with-template-parameters-advanced">AIE Kernel with Template Parameters (Advanced)</h3>
+<p>Some AIE kernels use C++ template parameters for flexible type definitions. Example C++ signature:</p>
+<pre><code class="cpp language-cpp">template&lt; typename T, int N = 4 &gt;
+void func_stream(input_stream&lt; T &gt; *in, output_stream&lt; T &gt; *out, output_stream_int32 *out2);
+</code></pre>
+<p>To instantiate this kernel with template values, specify them via <code>FunctionTemplateParams</code>:</p>
+<pre><code class="matlab language-matlab">blk = 'AIE_template_kernel_import/aie_template_kernel';
+add_block('XilinxModelComposer/AI Engine/User-Defined Functions/AIE Kernel', blk);
+
+% Step 1: Set file paths under info.General
+info = vmcGetBlockInfo(blk);
+info.General.KernelHeaderFile  = 'src/kernels.h';
+info.General.KernelFunction    = 'func_stream';
+info.General.KernelSourceFile  = 'src/kernels.cpp';
+info.General.KernelSearchPaths = '{}';
+info.General.PreProcOptions    = '{''-DBUFFER_DEPTH=1024''}';
+vmcSetBlockInfo(blk, info);
+
+% Step 2: Import (discovers ports and template parameters from the source)
+status = vmcImportSource(blk);
+assert(status.success, 'vmcImportSource failed: %s', status.message);
+
+% Step 3: Set template values AND port attributes in ONE atomic commit.
+% Port names/types are read from the source signature (in, out, out2); set
+% only the editable fields. TemplateParams Name/Type come from the source too,
+% so you only supply the resolved Value.
+info = vmcGetBlockInfo(blk);
+info.TemplateParams(1).Value = 'int32';   % T
+info.TemplateParams(2).Value = '4';        % N
+info.Ports(2).SignalSize     = '1';        % out  (stream output)
+info.Ports(3).SignalSize     = '1';        % out2 (stream output)
+vmcSetBlockInfo(blk, info);   % atomic commit of dependent parameters
+</code></pre>
+<p><strong>Format for FunctionTemplateParams:</strong></p>
+<pre><code>{ 'paramName', 'paramType', 'paramValue'; 'paramName2', 'paramType2', 'paramValue2' }
+  'T',         'typename',  'int32'
+  'N',         'int',       '4'
+</code></pre>
+<ul>
+<li><strong>paramName</strong>: Name of the template parameter (e.g., <code>T</code>, <code>N</code>)</li>
+<li><strong>paramType</strong>: Type constraint (<code>'typename'</code> for types, <code>'int'</code> for integers, etc.)</li>
+<li><strong>paramValue</strong>: Instantiation value (e.g., <code>'int32'</code>, <code>'4'</code>)</li>
+</ul>
+<p><strong>Important:</strong> Template parameters and port attributes are dependent, so commit them together with a single <code>vmcSetBlockInfo</code> call to ensure atomic, consistent updates. Updating them separately can leave the block in an inconsistent state.</p>
+<h3 id="common-hls-data-types">Common HLS Data Types</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ap_int&lt; 32 &gt;</code></td>
+<td>32-bit signed integer</td>
+<td>Input/output value</td>
+</tr>
+<tr>
+<td><code>ap_uint&lt; 8 &gt;</code></td>
+<td>8-bit unsigned integer</td>
+<td>Byte data</td>
+</tr>
+<tr>
+<td><code>hls::stream&lt; ap_int&lt; 32 &gt; &gt;</code></td>
+<td>Stream of 32-bit integers</td>
+<td>Continuous data flow</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>IEEE 754 floating-point</td>
+<td>Decimal values</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="problem-vmcimportsource-failed">Problem: "vmcImportSource failed"</h3>
+<p><strong>Possible causes:</strong></p>
+<ol>
+<li><strong>File path is wrong</strong> — The tool can't find your C/C++ files</li>
+</ol>
+<ul>
+<li><strong>Fix:</strong> Check that the paths in <code>KernelHeaderFile</code>, <code>KernelSourceFile</code>, and <code>KernelSearchPaths</code> are correct</li>
+<li><strong>Tip:</strong> Use relative paths from your current working directory, or absolute paths</li>
+</ul>
+<ol>
+<li><strong>C/C++ syntax error in your code</strong> — The compiler found an error</li>
+</ol>
+<ul>
+<li><strong>Fix:</strong> Check the error message for which line has the problem. Fix your <code>.h</code> or <code>.cpp</code> file</li>
+<li><strong>Tip:</strong> Compile your code separately with <code>g++</code> to find errors faster</li>
+</ul>
+<ol>
+<li><strong>Missing include files</strong> — The compiler can't find a header file your code <code>#include</code>s</li>
+</ol>
+<ul>
+<li><strong>Fix:</strong> Make sure all folders containing includes are listed in <code>KernelSearchPaths</code></li>
+</ul>
+<p><strong>What to do:</strong></p>
+<pre><code class="matlab language-matlab">status = vmcImportSource(blk);
+if ~status.success
+    error_msg = status.message;
+    fprintf('Error: %s\n', error_msg);
+    % Look at error_msg to find the line number and issue
+end
+</code></pre>
+<h3 id="problem-vmcbuildsource-failed">Problem: "vmcBuildSource failed"</h3>
+<p><strong>Possible causes:</strong></p>
+<ol>
+<li><strong>You forgot to run <code>vmcImportSource</code> first</strong> — Import must come before build</li>
+</ol>
+<ul>
+<li><strong>Fix:</strong> Always run import before build</li>
+</ul>
+<ol>
+<li><strong>Port configuration is wrong</strong> — The ports you defined don't match the C/C++ function</li>
+</ol>
+<ul>
+<li><strong>Fix:</strong> Check your port attributes — names, types, and number of ports</li>
+</ul>
+<ol>
+<li><strong>HLS compiler errors</strong> — Your C/C++ code has constructs HLS can't handle</li>
+</ol>
+<ul>
+<li><strong>Fix:</strong> Make sure your code uses only HLS-compatible features (no dynamic memory, etc.)</li>
+</ul>
+<h3 id="problem-ports-are-not-showing-up-on-the-block">Problem: Ports are not showing up on the block</h3>
+<p><strong>Possible causes:</strong></p>
+<ol>
+<li><strong>You didn't run <code>vmcBuildSource</code></strong> — For HLS and Graph blocks, build is required</li>
+</ol>
+<ul>
+<li><strong>Fix:</strong> Always call <code>vmcBuildSource</code> after import</li>
+</ul>
+<ol>
+<li><strong>Port attributes are empty</strong> — You didn't set the PortAttrs parameter</li>
+</ol>
+<ul>
+<li><strong>Fix:</strong> Call <code>set_param(blk, 'PortAttrs', pa)</code> or <code>set_param(blk, 'PortDirectionTable', pdt)</code></li>
+</ul>
+<h3 id="problem-file-not-found-error">Problem: "File not found" error</h3>
+<p><strong>Possible causes:</strong></p>
+<ol>
+<li><strong>Working directory is wrong</strong> — MATLAB is looking in the wrong folder</li>
+</ol>
+<ul>
+<li><strong>Fix:</strong> Use <code>cd</code> to change to your project folder, or use absolute paths</li>
+</ul>
+<ol>
+<li><strong>Path has spaces</strong> — MATLAB path handling with spaces can be tricky</li>
+</ol>
+<ul>
+<li><strong>Fix:</strong> Use double quotes with forward slashes: <code>"./my folder/file.h"</code></li>
+</ul>
+<ol>
+<li><strong>Relative path is wrong</strong> — Your relative path doesn't match the folder structure</li>
+</ol>
+<ul>
+<li><strong>Fix:</strong> Use <code>pwd</code> to see where you are, and <code>ls</code> or <code>dir</code> to verify file locations</li>
+</ul>
+<hr />
+<p>For examples, check the reference directory:</p>
+<p>For AIE Kernel Function example, please click <a href="https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Kernel_Function">here</a>.</p>
+<p>For AIE Class Kernel example, please click <a href="https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Class_Kernel_Function">here</a>.</p>
+<p>For AIE Graph function example, please click <a href="https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Graph_Function">here</a>. </p>
+<p>For HLS Kernel function example, please click <a href="https://github.com/Xilinx/VMC_Help/tree/2026.1/HLS/HLS_Kernel_Function">here</a>.</p>
+<hr />
+<p>Copyright (c) 2026 Advanced Micro Devices, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");<br />
+you may not use this file except in compliance with the License.<br />
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software<br />
+distributed under the License is distributed on an "AS IS" BASIS,<br />
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+See the License for the specific language governing permissions and<br />
+limitations under the License.</p>
+
+        </div>
+        <style type='text/css'>body {
+  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #111;
+  background-color: #fdfdfd;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 5px;
+  }
+
+  body > #content {
+    padding: 0px 20px 20px 20px !important;
+  }
+}
+
+body > #content {
+  margin: 0px;
+  max-width: 900px;
+  border: 1px solid #e1e4e8;
+  padding: 10px 40px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr {
+  color: #bbb;
+  background-color: #bbb;
+  height: 1px;
+  flex: 0 1 auto;
+  margin: 1em 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+ * Links
+ */
+a {
+  color: #0366d6;
+  text-decoration: none; }
+  a:visited {
+    color: #0366d6; }
+  a:hover {
+    color: #0366d6;
+    text-decoration: underline; }
+
+pre {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+/**
+  * Code blocks
+  */
+
+code {
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  word-wrap: break-word;
+  padding: .2em .4em;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+  background-color: transparent;
+  border: 0;
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  word-wrap: normal;
+  font-size: 100%;
+}
+
+
+/**
+ * Blockquotes
+ */
+blockquote {
+  margin-left: 30px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  border-left-width: 3px;
+  padding: 0 1em;
+  color: #828282;
+  border-left: 3px solid #e8e8e8;
+  padding-left: 15px;
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+blockquote * {
+  font-style: normal !important;
+  letter-spacing: 0;
+  color: #6a737d !important;
+}
+
+/**
+ * Tables
+ */
+table {
+  border-spacing: 2px;
+  display: block;
+  font-size: 14px;
+  overflow: auto;
+  width: 100%;
+  margin-bottom: 16px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+th {
+  font-weight: 600;
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+/**
+ * Others
+ */
+
+img {
+  max-width: 100%;
+}
+
+p {
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #24292e; }
+
+ul {
+  margin-top: 0; }
+
+li {
+  color: #24292e;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5; }
+
+li + li {
+  margin-top: 0.25em; }
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #24292e; }
+
+a:visited {
+  color: #0366d6; }
+
+h2, h3 {
+  border-bottom: 1px solid #eaecef;
+  color: #111;
+  /* Darker */ }
+
+h1 {
+color: black;
+border-bottom: 1px solid #eaecef;
+}
+</style>
+      </body>
+    </html>
