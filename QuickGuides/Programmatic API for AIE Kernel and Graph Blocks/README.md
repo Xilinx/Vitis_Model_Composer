@@ -1,4 +1,4 @@
-# Programmatic APIs for AIE Kernel and Graph Blocks
+# Programmatic APIs for AIE Kernel, Graph Blocks, and HLS Kernel
 
 This guide shows how to **automatically configure AI Engine and HLS kernel blocks** in your Simulink model using MATLAB code, instead of manually clicking through dialog boxes. This is useful when you:
 - Need to set up many blocks quickly
@@ -14,8 +14,28 @@ This guide covers four types of blocks:
 
 ## Key Concepts
 
+### What is vmcGetBlockInfo / vmcSetBlockInfo? (Recommended Approach)
+**vmcGetBlockInfo** and **vmcSetBlockInfo** are the primary programmatic surface for configuring kernel blocks. The recommended workflow is:
+```matlab
+% Get the current block configuration as a struct
+info = vmcGetBlockInfo(blk);
+
+% Modify the struct fields
+info.KernelHeaderFile = 'mykernel.h';
+info.KernelFunction = 'my_func';
+info.PortAttrs = { 'input', 'i1', 'input_window_cint32 *', '32', '0', 'sync', ''; ...
+                   'output', 'o1', 'output_window_cint32 *', '32', '', 'sync', '' };
+
+% Apply all changes atomically via vmcSetBlockInfo
+vmcSetBlockInfo(blk, info);
+```
+This struct round-trip approach ensures all dependent parameters are updated consistently (especially important for port attributes and template parameters).
+
+**Note on set_param (Equivalent Shortcut):**  
+`set_param` is also supported and works identically. The difference is that `set_param` updates one parameter at a time. For dependent parameters, prefer vmcSetBlockInfo to ensure atomic updates.
+
 ### What is set_param?
-`set_param` is a MATLAB function that sets properties on Simulink blocks. Instead of opening a dialog box and typing values, you pass them directly in code.
+`set_param` is a MATLAB function that sets properties on Simulink blocks. Instead of opening a dialog box and typing values, you pass them directly in code. For independent parameters this is fine; for dependent parameters, use vmcSetBlockInfo instead.
 
 ### What is vmcImportSource?
 This function reads your kernel source code (C/C++) and discovers what ports (inputs/outputs) and parameters your kernel has. **You must run this after setting the file paths** so the tool knows what to import.
@@ -24,7 +44,8 @@ This function reads your kernel source code (C/C++) and discovers what ports (in
 This function compiles your kernel code. For **HLS and AIE Graph blocks**, this is required. For simple **AIE Kernels**, it's optional.
 
 ## Important Syntax Notes
-
+**Atomic Commits for Dependent Parameters:**  
+When setting dependent parameters (e.g., port attributes alongside file paths, or function template parameters), use **vmcSetBlockInfo** to commit changes atomically. Setting dependent parameters individually with `set_param` may leave the block in an inconsistent state. Always group related parameters in one vmcSetBlockInfo call.
 **MATLAB String Arrays:**  
 When specifying file paths or data structures, MATLAB requires special syntax:
 - Single paths: `'filename.h'`
@@ -111,45 +132,59 @@ This example imports a kernel that processes data using a sliding window:
 blk = 'AIE_kernel_import/aie_kernel';
 add_block('XilinxModelComposer/AI Engine/User-Defined Functions/AIE Kernel', blk);
 
-% Step 1: Tell the tool where your kernel code is
-set_param(blk, ...
-    'KernelHeaderFile',   'kernels.h', ...
-    'KernelFunction',     'simple', ...
-    'KernelSourceFile',   'kernels/kernels.cc', ...
-    'KernelSearchPaths',  "{'./kernels'}", ...
-    'PreProcOptions',     "{''-DBUFFER_DEPTH=1024''}");  % Compiler flag
+% Step 1: Get the current block configuration (struct-based approach - RECOMMENDED)
+info = vmcGetBlockInfo(blk);
 
-% Step 2: Read the kernel source and discover ports
+% Step 2: Set file paths and options
+info.KernelHeaderFile = 'kernels.h';
+info.KernelFunction = 'simple';
+info.KernelSourceFile = 'kernels/kernels.cc';
+info.KernelSearchPaths = {'./kernels'};
+info.PreProcOptions = {'-DBUFFER_DEPTH=1024'};
+
+% Step 3: Apply all changes atomically
+vmcSetBlockInfo(blk, info);
+
+% Step 4: Import to discover ports
 status = vmcImportSource(blk);
 assert(status.success, 'vmcImportSource failed: %s', status.message);
 
-% Step 3: Define the input and output ports
-% Format: { 'name', 'type', 'size', 'offset', 'margin', 'synchronization', 'lanes' }
-% This example: 1 input window (32 samples), 1 output window (32 samples)
-pa = "{ 'input', 'in', 'input_window_cint32 *', '32', '0', 'sync', ''; ...
-        'output', 'out', 'output_window_cint32 *', '32', '', 'sync', '' }";
-set_param(blk, 'PortAttrs', pa);
+% Step 5: Define the input and output ports (and apply atomically)
+% Format: { Direction, Name, Type, WindowSize, WindowMargin, Synchronicity, SignalSize }
+info = vmcGetBlockInfo(blk);
+info.PortAttrs = { 'input', 'in', 'input_window_cint32 *', '32', '0', 'sync', ''; ...
+                   'output', 'out', 'output_window_cint32 *', '32', '', 'sync', '' };
+vmcSetBlockInfo(blk, info);
 ```
 
+**Alternative with set_param (shortcut):**  
+For independent parameters, you can also use `set_param`:
+```matlab
+set_param(blk, 'KernelHeaderFile', 'kernels.h', 'KernelFunction', 'simple', ...);
+```
+
+**Explanation:**
 - Lines 1-2: Added a new AIE Kernel block to the model
-- Lines 4-9: Told the tool where your kernel source code is located
-- Line 12: Imported the kernel — the tool read `kernels.h` to find the function signature
-- Line 15-18: Specified the input/output ports (32-sample windows, synchronized)
+- Lines 4-6: Retrieved the block configuration as a struct
+- Lines 8-12: Set file paths and compiler options on the struct
+- Line 14: Applied all changes atomically via vmcSetBlockInfo
+- Line 17: Imported the kernel — the tool read `kernels.h` to find the function signature
+- Lines 20-25: Retrieved the struct again, defined ports, and applied them atomically
 
 
 **Port Attributes Breakdown:**
 ```
-{ 'role',    'name',  'type',                  'size', 'offset', 'sync',  'lanes' }
-  'input',   'in',    'input_window_cint32 *', '32',   '0',      'sync',  ''
-  'output',  'out',   'output_window_cint32 *','32',   '',       'sync',  ''
+{ 'Direction',  'Name',  'Type',                  'WindowSize', 'WindowMargin', 'Synchronicity', 'SignalSize' }
+  'input',      'in',    'input_window_cint32 *', '32',         '0',            'sync',          ''
+  'output',     'out',   'output_window_cint32 *','32',         '',             'sync',          ''
 ```
-- **role**: `'input'` or `'output'`
-- **name**: Port name in your C code
-- **type**: C++ type (window pointer for window kernels)
-- **size**: Window size in samples
-- **offset**: Initial offset (usually 0 for input)
-- **sync**: `'sync'` (synchronized) or `''` (asynchronous)
-- **lanes**: Number of data lanes (advanced)
+- **Direction**: `'input'` or `'output'`
+- **Name**: Port name in your C code
+- **Type**: C++ type (window pointer for window kernels)
+- **WindowSize**: Window size in samples
+- **WindowMargin**: Initial margin (usually 0 for input)
+- **Synchronicity**: `'sync'` (synchronized) or `''` (asynchronous)
+- **SignalSize**: Signal size indicator (usually empty for windows)
 
 
 ## AIE Class Kernel
@@ -203,7 +238,7 @@ status = vmcImportSource(blk);
 assert(status.success, 'vmcImportSource failed: %s', status.message);
 
 % Step 3: Configure ports and RTP
-% Format: { 'role', 'name', 'type', 'window_size', 'offset', 'async', 'depth' }
+% Format: { Direction, Name, Type, WindowSize, WindowMargin, Synchronicity, SignalSize }
 % Note: Streams don't have a window size (4th column is empty '')
 pa = "{ 'input', 'i1', 'input_stream_cint32 *', '', '0', '', ''; ...
         'output', 'o1', 'output_stream_cint32 *', '', '', '', '1'; ...
@@ -221,18 +256,18 @@ set_param(blk, 'PortAttrs', pa);
 
 **Port Attributes Breakdown for Streams:**
 ```
-{ 'role',    'name',      'type',                   'size', 'offset', 'async', 'depth' }
-  'input',   'i1',        'input_stream_cint32 *',  '',     '0',      '',      ''
-  'output',  'o1',        'output_stream_cint32 *', '',     '',       '',      '1'
-  'inout',   'rtp_out',   'cint32 &',              '',     '0',      'async', ''
+{ 'Direction', 'Name',     'Type',                   'WindowSize', 'WindowMargin', 'Synchronicity', 'SignalSize' }
+  'input',     'i1',       'input_stream_cint32 *',  '',           '0',            '',              ''
+  'output',    'o1',       'output_stream_cint32 *', '',           '',             '',              '1'
+  'inout',     'rtp_out',  'cint32 &',               '',           '0',            'async',         ''
 ```
-- **role**: `'input'`, `'output'`, or `'inout'` (RTP uses inout)
-- **name**: Port name in your C code
-- **type**: C++ type (`input_stream_*` for inputs, `output_stream_*` for outputs)
-- **size**: Empty `''` for streams (no window size)
-- **offset**: Usually `'0'`
-- **async**: `''` for regular ports, `'async'` for async RTPs
-- **depth**: `''` for input, `'1'` for output (buffering depth)
+- **Direction**: `'input'`, `'output'`, or `'inout'` (RTP uses inout)
+- **Name**: Port name in your C code
+- **Type**: C++ type (`input_stream_*` for inputs, `output_stream_*` for outputs)
+- **WindowSize**: Empty `''` for streams (no window size)
+- **WindowMargin**: Usually `'0'`
+- **Synchronicity**: `''` for regular ports, `'async'` for async RTPs
+- **SignalSize**: `''` for input, `'1'` for output (buffering depth)
 
 
 ## AIE Graph
@@ -377,8 +412,10 @@ assert(status.success, 'vmcImportSource failed: %s', status.message);
 % --- Step 3: Configure port attributes
 % Format: { 'name', 'type', 'direction', 'block_type' }
 % This example: int32 input, hls::stream output
+% Important: Dependent parameters like FunctionTemplateParams and PortDirectionTable
+% should be set atomically (together) for consistency
 pdt = "{'in1', 'ap_int< 32 >', 'Input', 'Port'; ...
-        'out1', 'hls::stream< ap_int< 32 >, 0 > &', 'output', 'Port'}";
+        'out1', 'hls::stream< ap_int< 32 >, 0 > &', 'Output', 'Port'}";
 set_param(blk, 'FunctionTemplateParams', '{}', 'PortDirectionTable', pdt);
 
 % --- Step 4: Build (run HLS compiler)
@@ -400,7 +437,7 @@ assert(status.success, 'vmcBuildSource failed: %s', status.message);
 ```
 { 'name',  'type',                              'direction', 'block_type' }
   'in1',   'ap_int< 32 >',                      'Input',     'Port'
-  'out1',  'hls::stream< ap_int< 32 >, 0 > &', 'output',    'Port'
+  'out1',  'hls::stream< ap_int< 32 >, 0 > &', 'Output',    'Port'
 ```
 
 - **name**: Port name in your C function
@@ -408,9 +445,70 @@ assert(status.success, 'vmcBuildSource failed: %s', status.message);
   - `ap_int< N >` — Fixed-width integer (N bits)
   - `ap_uint< N >` — Unsigned integer
   - `hls::stream< TYPE >` — Streaming data
-- **direction**: `'Input'` or `'output'`
+- **direction**: `'Input'` or `'Output'` (must be consistent capitalization)
 - **block_type**: Usually `'Port'`
 
+### HLS Template Parameters (Optional, Advanced)
+
+Some HLS kernels may use C++ template parameters to configure synthesis-time behavior. When used, template parameters and port definitions must be set atomically:
+```matlab
+ftp_set  = "{}";  % Empty set if no templates, or populate with template values
+pdt_set = "{'in1', 'ap_int< 32 >', 'Input', 'Port'; ...
+           'out1', 'hls::stream< ap_int< 32 >, 0 > &', 'Output', 'Port'}";
+
+% Set both together (atomic commit)
+set_param(blk, 'FunctionTemplateParams', ftp_set, 'PortDirectionTable', pdt_set);
+```
+
+Refer to your HLS kernel documentation for supported template parameter formats.
+### AIE Kernel with Template Parameters (Advanced)
+
+Some AIE kernels use C++ template parameters for flexible type definitions. Example C++ signature:
+```cpp
+template< typename T, int N = 4 >
+void func_stream(input_stream< T > *in, output_stream< T > *out, output_stream_int32 *out2);
+```
+
+To instantiate this kernel with template values, specify them via `FunctionTemplateParams`:
+```matlab
+blk = 'AIE_template_kernel_import/aie_template_kernel';
+add_block('XilinxModelComposer/AI Engine/User-Defined Functions/AIE Kernel', blk);
+
+% Step 1: Set file paths
+set_param(blk, ...
+    'KernelHeaderFile',   'src/kernels.h', ...
+    'KernelFunction',     'func_stream', ...
+    'KernelSourceFile',   'src/kernels.cpp', ...
+    'KernelSearchPaths',  "{}", ...
+    'PreProcOptions',     "{''-DBUFFER_DEPTH=1024''}" );
+
+% Step 2: Import
+status = vmcImportSource(blk);
+assert(status.success, 'vmcImportSource failed: %s', status.message);
+
+% Step 3: Set port attributes and template parameters TOGETHER (atomic)
+% Format for PortAttrs: { Direction, Name, Type, WindowSize, WindowMargin, Synchronicity, SignalSize }
+% Format for FunctionTemplateParams: { 'paramName', 'paramType', 'paramValue'; ... }
+pa_set = "{ 'input', 'i1', 'input_stream< T > *', '', '0', '', ''; ...
+           'output', 'o1', 'output_stream< T > *', '', '', '', '1'; ...
+           'output', 'o2', 'output_stream_int32 *', '', '', '', '1' }";
+ftp_set = "{ 'T', 'typename', 'int32'; 'N', 'int', '4' }";
+
+% CRITICAL: Set both parameters atomically to avoid errors
+set_param(blk, 'PortAttrs', pa_set, 'FunctionTemplateParams', ftp_set);
+```
+
+**Format for FunctionTemplateParams:**
+```
+{ 'paramName', 'paramType', 'paramValue'; 'paramName2', 'paramType2', 'paramValue2' }
+  'T',         'typename',  'int32'
+  'N',         'int',       '4'
+```
+- **paramName**: Name of the template parameter (e.g., `T`, `N`)
+- **paramType**: Type constraint (`'typename'` for types, `'int'` for integers, etc.)
+- **paramValue**: Instantiation value (e.g., `'int32'`, `'4'`)
+
+**Important:** Always set `PortAttrs` and `FunctionTemplateParams` together in one `set_param` call to ensure atomic, consistent updates. Updating them separately can leave the block in an inconsistent state.
 ### Common HLS Data Types
 
 | Type | Meaning | Example |
@@ -492,6 +590,7 @@ For AIE Class Kernel example, please click [here](https://github.com/Xilinx/VMC_
 
 For AIE Graph function example, please click [here](https://github.com/Xilinx/VMC_Help/tree/2026.1/AIE/AIE_Graph_Function). 
 
+For HLS Kernel function example, please click [here](https://github.com/Xilinx/VMC_Help/tree/2026.1/HLS/HLS_Kernel_Function).
 
 --------------
 Copyright (c) 2026 Advanced Micro Devices, Inc.
