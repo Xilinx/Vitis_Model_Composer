@@ -1,10 +1,21 @@
--- Copyright (C) 2024, Advanced Micro Devices, Inc.
+-- Copyright © Advanced Micro Devices, Inc., or its affiliates. All rights reserved.
+-- Portions of this content consists of AI generated content.
+-- You may not use this software and documentation (if any) (collectively, the "Materials")
+-- except in compliance with the terms and conditions of the Software License Agreement
+-- included with the Materials or otherwise as set forth in writing and signed by you and
+-- an authorized signatory of AMD. If you do not have a copy of the Software License
+-- Agreement, contact your AMD representative for a copy. You agree that you will not
+-- reverse engineer or decompile the Materials, in whole or in part, except as allowed by
+-- applicable law.
+-- THE MATERIALS ARE DISTRIBUTED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OR
+-- REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.ALL;
 
-use work.TYPES_PKG.all;
+use work.FIXED_PKG.all;
+use work.CFIXED_PKG.all;
 
 entity SDELAY is
   generic(SIZE:NATURAL:=1;           -- SIZE has a default value of 1 and cannot be negative, this would require traveling back in time
