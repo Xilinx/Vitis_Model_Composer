@@ -208,7 +208,7 @@ code generation they expand to 16 input PLIOs and 4 output PLIOs per half.</p>
 <ol>
 <li><code>m16_ssr8_permute_fb_i_array</code>: input circular buffer, 7 streams to 8.</li>
 <li><code>m16_ssr8_permute_fb_o_array</code>: filter-bank output permutation, 8 streams.</li>
-<li><code>m16_ssr8_cyclic_shift_idft_array</code>: cyclic shift and duplication into<br />
+<li><code>m16_ssr8_cshift_idft_array</code>: cyclic shift and duplication into<br />
 16 lanes for each IDFT half.</li>
 <li><code>idft_output_unpack_kernel</code>: consumes four rank streams from each half,<br />
 discards padded bins, and restores eight channel-hop streams.</li>

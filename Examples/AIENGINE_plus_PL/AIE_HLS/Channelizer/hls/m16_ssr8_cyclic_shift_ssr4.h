@@ -104,7 +104,7 @@ void m16_ssr8_cyclic_shift_wrapper( TT_DUT::TT_STREAM &sig0_i,
 void m16_ssr8_cyclic_shift_array(TT_DUT::TT_STREAM sig_i[TT_DUT::SSR_I],
                                          TT_DUT::TT_STREAM sig_o[TT_DUT::SSR_O]);
 
-void m16_ssr8_cyclic_shift_idft_array(
+void m16_ssr8_cshift_idft_array(
     TT_DUT::TT_STREAM sig_i[TT_DUT::SSR_I],
     TT_DUT::TT_STREAM half0[TT_DUT::IDFT_LANES],
     TT_DUT::TT_STREAM half1[TT_DUT::IDFT_LANES]);

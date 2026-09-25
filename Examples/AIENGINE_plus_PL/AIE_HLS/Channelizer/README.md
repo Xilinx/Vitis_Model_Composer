@@ -157,7 +157,7 @@ Four imported HLS kernels implement the PL portion:
 
 1. `m16_ssr8_permute_fb_i_array`: input circular buffer, 7 streams to 8.
 2. `m16_ssr8_permute_fb_o_array`: filter-bank output permutation, 8 streams.
-3. `m16_ssr8_cyclic_shift_idft_array`: cyclic shift and duplication into
+3. `m16_ssr8_cshift_idft_array`: cyclic shift and duplication into
    16 lanes for each IDFT half.
 4. `idft_output_unpack_kernel`: consumes four rank streams from each half,
    discards padded bins, and restores eight channel-hop streams.
