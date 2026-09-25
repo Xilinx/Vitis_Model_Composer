@@ -44,6 +44,25 @@ private:
   void write_streams( TT_DATA (&data_p_0)[M], TT_DATA (&data_p_1)[M], TT_STREAM sig_o[SSR_O] );
 
 public:
+  // Library IDFT with TP_SSR=4 and TP_CASC_LEN=4: sixteen lanes
+  // indexed as casc + rank*TP_CASC_LEN. Each lane is already
+  // cascade-split so Simulink does not need CascDemux.
+  static constexpr unsigned IDFT_SSR = 4;
+  static constexpr unsigned IDFT_CASC = 4;
+  static constexpr unsigned IDFT_LANES = IDFT_SSR * IDFT_CASC;
+  // Words emitted per lane per run_idft() call:
+  // 2 frames * (1 data word + 1 pad word). The library input window is
+  // 8 samples per frame per lane (TP_POINT_SIZE/TP_CASC_LEN padded to the
+  // cint16 vector granularity), independent of TP_SSR, so each lane needs
+  // 4 valid samples followed by 4 zeros.
+  static constexpr unsigned IDFT_WORDS_PER_CALL = 2 * 2;
+
+private:
+  void write_idft_streams( TT_DATA (&data_p_0)[M],
+                           TT_DATA (&data_p_1)[M],
+                           TT_STREAM sig_o[IDFT_LANES] );
+
+public:
   // Run:
   // Assume 250 MHz clock.
   // We have eight 32-bit I/O's @ 1000 MHz AIE clock or eight 128-bit I/O's @ 250 MHz
@@ -51,6 +70,11 @@ public:
   // This routine needs to be II=1
   void run( TT_STREAM sig_i[SSR_I],
            TT_STREAM sig_o[SSR_O] );
+
+  // Produce the padded, cascade-dealt, SSR-duplicated streams consumed
+  // directly by a 16-point IDFT with TP_CASC_LEN=4 and TP_SSR=4.
+  void run_idft( TT_STREAM sig_i[SSR_I],
+                 TT_STREAM sig_o[IDFT_LANES] );
   
 };
 
@@ -76,4 +100,13 @@ void m16_ssr8_cyclic_shift_wrapper( TT_DUT::TT_STREAM &sig0_i,
                                     TT_DUT::TT_STREAM &sig5_o,
                                     TT_DUT::TT_STREAM &sig6_o,
                                     TT_DUT::TT_STREAM &sig7_o );
+
+void m16_ssr8_cyclic_shift_array(TT_DUT::TT_STREAM sig_i[TT_DUT::SSR_I],
+                                         TT_DUT::TT_STREAM sig_o[TT_DUT::SSR_O]);
+
+void m16_ssr8_cyclic_shift_idft_array(
+    TT_DUT::TT_STREAM sig_i[TT_DUT::SSR_I],
+    TT_DUT::TT_STREAM half0[TT_DUT::IDFT_LANES],
+    TT_DUT::TT_STREAM half1[TT_DUT::IDFT_LANES]);
+
 
