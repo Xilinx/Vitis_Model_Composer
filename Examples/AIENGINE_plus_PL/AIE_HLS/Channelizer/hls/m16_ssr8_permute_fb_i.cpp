@@ -196,6 +196,11 @@ void m16_ssr8_permute_fb_i::run( TT_STREAM sig_i[SSR_I],
 
 using TT_DUT = m16_ssr8_permute_fb_i;
 
+// Must equal the number of 128-bit words Simulink delivers per stream port
+// per time step (see the array size in the generated tb_structs.h). It is the
+// same for every port, independent of how many streams a port carries.
+static constexpr unsigned FRAME = 256;
+
 // void m16_ssr8_permute_fb_i_wrapper( TT_DUT::TT_STREAM sig_i[TT_DUT::SSR_I],
 //                                     TT_DUT::TT_STREAM sig_o[TT_DUT::SSR_O] )
 // {
@@ -222,30 +227,54 @@ void m16_ssr8_permute_fb_i_wrapper( TT_DUT::TT_STREAM &sig0_i,
                                     TT_DUT::TT_STREAM &sig7_o )
 {
 #pragma HLS interface mode=ap_ctrl_none port=return
-#pragma HLS pipeline II=1
-  
-  TT_DUT::TT_STREAM sig_i[TT_DUT::SSR_I];
-  TT_DUT::TT_STREAM sig_o[TT_DUT::SSR_O];
-  
-  sig_i[0].write(sig0_i.read());
-  sig_i[1].write(sig1_i.read());
-  sig_i[2].write(sig2_i.read());
-  sig_i[3].write(sig3_i.read());
-  sig_i[4].write(sig4_i.read());
-  sig_i[5].write(sig5_i.read());
-  sig_i[6].write(sig6_i.read());
-  
+
   static m16_ssr8_permute_fb_i dut;
-  dut.run( sig_i, sig_o );
-  
-  sig0_o.write(sig_o[0].read());
-  sig1_o.write(sig_o[1].read());
-  sig2_o.write(sig_o[2].read());
-  sig3_o.write(sig_o[3].read());
-  sig4_o.write(sig_o[4].read());
-  sig5_o.write(sig_o[5].read());
-  sig6_o.write(sig_o[6].read());
-  sig7_o.write(sig_o[7].read());
+
+ FRAME_LOOP: for (unsigned it = 0; it < FRAME; it++) {
+#pragma HLS pipeline II=1
+
+    TT_DUT::TT_STREAM sig_i[TT_DUT::SSR_I];
+    TT_DUT::TT_STREAM sig_o[TT_DUT::SSR_O];
+
+    sig_i[0].write(sig0_i.read());
+    sig_i[1].write(sig1_i.read());
+    sig_i[2].write(sig2_i.read());
+    sig_i[3].write(sig3_i.read());
+    sig_i[4].write(sig4_i.read());
+    sig_i[5].write(sig5_i.read());
+    sig_i[6].write(sig6_i.read());
+
+    dut.run( sig_i, sig_o );
+
+    sig0_o.write(sig_o[0].read());
+    sig1_o.write(sig_o[1].read());
+    sig2_o.write(sig_o[2].read());
+    sig3_o.write(sig_o[3].read());
+    sig4_o.write(sig_o[4].read());
+    sig5_o.write(sig_o[5].read());
+    sig6_o.write(sig_o[6].read());
+    sig7_o.write(sig_o[7].read());
+  }
+}
+
+// ------------------------------------------------------------
+// Array-of-streams wrapper
+// ------------------------------------------------------------
+// The two ports carry a different number of streams (7 in, 8 out). Vitis HLS
+// expands each array formal into one AXI4-Stream per element independently, so
+// this synthesises to 7 input and 8 output AXI4-Stream RTL ports.
+
+void m16_ssr8_permute_fb_i_array( TT_DUT::TT_STREAM sig_i[TT_DUT::SSR_I],
+                                  TT_DUT::TT_STREAM sig_o[TT_DUT::SSR_O] )
+{
+#pragma HLS interface mode=ap_ctrl_none port=return
+
+  static m16_ssr8_permute_fb_i dut;
+
+ FRAME_LOOP: for (unsigned it = 0; it < FRAME; it++) {
+#pragma HLS pipeline II=1
+    dut.run( sig_i, sig_o );
+  }
 }
 
 

@@ -1,243 +1,236 @@
 # Polyphase Channelizer
 
-***Version: Vitis Model Composer 2026.1***
+***Version: Vitis Model Composer 2026.2***
 
 ## Table of Contents
 
 1. [Introduction](#introduction)
 2. [Channelizer Requirements](#channelizer-requirements)
-2. [Channelizer Implementation](#channelizer-implementation)
-3. [MATLAB Model](#matlab-model)
-4. [Simulink Model](#simulink-model)
-5. [Functional Verification](#functional-verification)
-6. [Conclusion](#conclusion)
+3. [Channelizer Implementation](#channelizer-implementation)
+4. [MATLAB Model](#matlab-model)
+5. [Simulink Model](#simulink-model)
+6. [Functional Verification](#functional-verification)
+7. [Estimating Throughput](#estimating-throughput)
+8. [Conclusion](#conclusion)
 
 [References](#references)
 
 ## Introduction
 
-The polyphase channelizer [[1]] down-converts simultaneously a set of frequency-division multiplexed (FDM) channels carried in a single data stream using an
-efficient approach based on digital signal processing. Channelizer use is ubiquitous in many wireless communications systems. Channelizer sampling rates increase 
-steadily as the capabilities of RF-DAC and RF-ADC technology advances, making them challenging to implement in high speed reconfigurable devices such as field programmable
-gate arrays (FPGAs). This example implements a high-speed channelizer design using a combination of AI Engine and Programmable Logic (PL) resources in Versal devices. 
+The polyphase channelizer down-converts a set of frequency-division multiplexed
+channels carried in one wideband stream. This example models a high-throughput
+implementation that combines AI Engine and programmable-logic (PL) processing
+on a Versal adaptive SoC.
 
-To aid in simulation and verification, the AI Engine and Programmable Logic parts of the design are brought into Vitis Model Composer, which enables functional simulation of the AI Engine and PL components together.
+The AI Engine filter bank remains an SSR=8 custom kernel. The 16-point inverse
+DFT is implemented with two Vitis Model Composer Buffer-IO **IDFT** library
+blocks. Each block processes one half of the input sequence with `TP_SSR=4`,
+so the complete design produces eight parallel rank streams. PL HLS kernels
+pack the IDFT input windows and unpack the rank outputs into channel samples.
 
 ## Channelizer Requirements
 
-The table below shows the system requirements for the polyphase channelizer. The input sampling rate is 8.75 Gsps. The design supports M=16 channels with each one supporting 8.75G / 16 = 546.8765 MHz of bandwidth. The channelizer employs a polyphase technique as outlined in [[1]] to achieve an oversampled output at a rate of P/Q = 8/7 times the channel bandwidth, or 546.8765 * 8/7 = 625 Msps. The prototype filter used by the channelizer uses K=8 taps per phase, leading to a total of 16 x 8 = 128 taps overall.
+| Parameter | Value | Units |
+|---|---:|---|
+| Input sampling rate (Fs) | 8.75 | Gsps |
+| Number of channels (M) | 16 | channels |
+| Interpolation factor (P) | 8 | n/a |
+| Decimation factor (Q) | 7 | n/a |
+| Channel bandwidth | 546.875 | MHz |
+| Output sampling rate | 625 | Msps |
+| Prototype-filter taps per phase (K) | 8 | taps |
 
-|Parameter|Value|Units|
-|---|---|---|
-| Input Sampling Rate (Fs) | 8.75 | Gsps |
-| # of Channels (M) | 16 | channels |
-| Interpolation Factor (P)| 8 | n/a |
-| Decimation Factor (Q) | 7 | n/a |
-| Channel Bandwidth | 546.8765 | MHz |
-| Output Sampling Rate | 625 | Msps |
-| # of taps per phase (K) | 8 | n/a |
-
-*Polyphase Channelizer System Requirements.*
+The P/Q = 8/7 oversampling ratio produces one 16-channel output hop at
+625 MHz. The 128-tap prototype filter contains 16 phases with 8 taps per phase.
 
 ## Channelizer Implementation
 
-The figure below shows a block diagram of the polyphase channelizer. The polyphase channelizer consists of the following functions:
-* The **Circular Buffer** converts the scalar input data stream into an M-vector output format for the downstream blocks, and introduces state to manage the P/Q output oversampling.   
-* The **Polyphase Filter** implements a parallel bank of M filters, each with K = 8 coefficients. The filter produces a single vector of M output samples.
-* The **Cyclic Shift Buffer** removes frequency-dependent phase shifts from the downstream Inverse Discrete Fourier Transform (IDFT) outputs using a memoryless and periodically time-varying circular shift of its inputs. 
-* The **Inverse Fast Fourier Transform (IFFT)** performs an IDFT operation on its input vector of M samples to produce a transformed vector of output samples. Each IDFT output represents a separate down-converted channel of bandwidth Fs / M sampled at a rate of Fs / M * P / Q samples per second.
+The channelizer contains four algorithmic stages:
 
-![figure1](images/channelizer-block-diagram.png)
-*Polyphase Channelizer Block Diagram.*
+* The **input circular buffer** converts the scalar input stream into the
+  parallel sequence required by the polyphase filter and manages the 8/7
+  oversampling state.
+* The **polyphase filter bank** implements 16 phases with 8 coefficients per
+  phase on the AI Engine.
+* The **output permute and cyclic shift** kernels restore the required sample
+  ordering and create the padded windows consumed by the library IDFT blocks.
+* The **IDFT and output unpack** path transforms each 16-sample hop and restores
+  the eight output streams used by the channel display.
 
-For a more detailed description of the implementation, refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2026.1/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in [Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials). 
+![Channelizer algorithm](images/channelizer-block-diagram.png)
 
-The remainder of this example will focus on how to bring the polyphase channelizer implementation into Vitis Model Composer and simulate it.
+The detailed implementation in this example differs from the hand-written DFT
+used in earlier releases. The library IDFT provides the transform, while HLS
+glue preserves the original channelizer stream ordering.
 
 ## MATLAB Model
 
-The figure below shows a system model of the polyphase channelizer built in MATLAB and encapsulated in a MATLAB app. This provides a comprehensive golden model of the channelizer algorithms and illustrates the relationships between the various system parameters. The model was built to support a different, broader range of parameter settings than the actual Versal design:
-* The model supports two different input sampling rates, Fs = 10.5 Gsps and Fs = 20.5 Gsps.
-* The number of channels M may be set to 16, 32, 64, or 128 using a dial.
-* The output oversampling ratio P/Q may be set to 1/1, 2/1, 4/3, or 8/7 using the appropriate button.
-* The number of active channels may be entered in the bottom left. This value must be less than the chosen value of M.
+The optional MATLAB app provides a configurable floating-point channelizer
+model with a wider range of channel counts, rates, and oversampling ratios than
+the fixed Versal implementation.
 
-![figure2](images/App.png)
-*Polyphase Channelizer system model implemented as a MATLAB app.*
+![MATLAB channelizer app](images/App.png)
 
-To run the MATLAB polyphase channelizer model:
+To run the app:
 
-1. Navigate to the **app** folder.
-
+1. Navigate to the `app` folder.
 2. Run `channelizer`.
-
-3. Specify the **Oversampling Ratio**, **Number of Channels**, **Sampling Frequency**, and **Number Active** according to the figure above.
-
+3. Select the oversampling ratio, channel count, sample frequency, and active
+   channels.
 4. Click **Go**.
-
-When this occurs, the model generates the desired number of active channels and positions them in randomly chosen carrier locations. Each signal is modeled as filtered Gaussian noise for simplicity. The model displays the impulse response of the prototype channelizer filter computed for the given system parameters in the top left plot. The bottom left plot shows this same filter in the frequency domain in red along with the actual signal to be extracted by the channelizer in blue. The top right plot shows the input spectrum to the channelizer along with the active carriers and their index labels. The bottom right plot shows the extracted channels at baseband in the time domain, where the blue signals are the channelizer inputs (delayed by the known group delay of the channelizer) and the red signals are the channelizer outputs.
 
 ## Simulink Model
 
-To aid in simulation and verification, the AI Engine graph code and HLS kernel code are brought into Vitis Model Composer, which enables functional simulation of the AI Engine and PL components together.
+1. Open `Channelizer.slx`.
+2. Press **Ctrl+D** to update the model and display signal dimensions and data
+   types.
 
-1. Open the Simulink model `Channelizer.slx`.
+![Top-level Channelizer model](images/Model.png)
 
-2. Press **Ctrl+D** to update the model and display signal dimensions and data types.
+The input and output samples are signed 16-bit complex values with 15
+fractional bits. The Simulink stimulus is scaled by 2^15 before entering the
+fixed-point channelizer, and the channel outputs are scaled by 2^-15 for
+display.
 
-![](images/Model.png)
+3. Open the `DUT_SSR` subsystem.
 
-The inputs and outputs of the channelizer are 16 bits wide with 15 bits of fractional precision. The floating-point channelizer inputs from the Simulink model are scaled by 2^15 and converted to an `int16` data type. The channelizer outputs are scaled by 2^-15 to convert back to floating-point precision before being plotted on the Simulink scopes.
+![SSR channelizer DUT](images/Channelizer.png)
 
-3. Double-click on the **DUT** subsystem.
+The processing sequence is:
 
-![](images/Channelizer.png)
-
-The model shows the partitioning of the design between the AI Engine and PL. The channelizer input enters the input permute HLS Kernel at the left, then proceeds into the AI Engine for polyphase filter processing. The polyphase filter output is routed back to the PL for the output permute and cyclic shift operations. The cyclic shift output is routed back to the AI Engine for the DFT operation, from which the output exits the channelizer.
-
-Note the use of **AIE to HLS** and **HLS to AIE** blocks before and after the HLS kernels. The HLS kernels' inputs and outputs are 128 bits wide, so these blocks convert between a 4-element `cint16` vector (recognized by the AI Engine) and a single `uint128` value.
+```
+input circular buffer (HLS)
+  -> SSR=8 polyphase filter bank (AI Engine)
+  -> output permute (HLS)
+  -> cyclic-shift and IDFT-window pack (HLS)
+  -> split IDFT halves (AI Engine)
+  -> IDFT output unpack (HLS)
+  -> channel outputs
+```
 
 ### AI Engine Implementation
 
-The polyphase filter and DFT are implemented as separate AI Engine subsystems. Inside each subsystem, each kernel has been brought in to Vitis Model Composer using the **AIE Class Kernel** block.
+The AI Engine portion contains two subsystems:
 
-4. Double-click on the **aie_dft** subsystem.
+* `AIE_FilterBank_SSR` imports the custom `polyphase_fir` class kernel with
+  SSR=8.
+* `AIE_DFT_SSR` contains two Buffer-IO library IDFT blocks.
 
-![](images/Subsystem_DFT.png)
+Open `AIE_DFT_SSR` to inspect the transform architecture.
 
-Each input and output stream has a 64-bit PLIO. This means that 2 `cint16` samples are transferred on each stream during each clock cycle. To achieve high throughput, the AI Engine design is implemented using a Super Sample Rate (SSR) parallel architecture. 
+![Two-half SSR=4 IDFT subsystem](images/Subsystem_DFT.png)
 
-Each **AIE Class Kernel** block represents a kernel that will execute on its own AI Engine tile. The design consists of a 4x4 array of tiles. Each tile performs two [1x2] x [2x4] operations over two cycles. Each row of tiles passes its computed outputs to the tile below in the same column using the cascade stream.
+Each half has the following parameters:
 
-Refer to [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2026.1/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer) in Vitis-Tutorials for further details on the parallel architecture.
+| IDFT parameter | Value |
+|---|---:|
+| Data and twiddle type | `cint16` |
+| `TP_POINT_SIZE` | 16 |
+| `TP_NUM_FRAMES` | 256 |
+| `TP_CASC_LEN` | 4 |
+| `TP_SSR` | 4 |
+| API | Buffer IO |
 
-5. Double-click on the **run_inputA** block.
-   
-![](images/AIE_Class_Kernel_Function.png)
+Each IDFT half therefore has 16 input windows (`TP_SSR * TP_CASC_LEN`)
+and 4 output rank windows. The splitter fans the packed half-window into the
+16 cascade/rank inputs; the merger collects the four rank outputs.
 
-The **Function Declaration** indicates that this block executes the `run_input` function, with two stream inputs and one cascade output. 
+The library input window is 2048 `cint16` samples per lane. The size follows
+the library's vector padding:
 
-The **Signal size** of the cascade output must be set by the user. Signal Size is a block mask property associated with each stream or cascade output of an imported AI Engine block. This property is used only in Simulink simulation and is not reflected in the generated code. This value is always set as samples and not bytes. For more information, see [Setting Signal Size](https://github.com/Xilinx/Vitis_Model_Composer/tree/2026.1/QuickGuides/Setting_Signal_Size/README.md).
+```
+padded frame = ceil(16, 8 * TP_CASC_LEN) = 32 samples
+lane window  = 256 frames * 32 / TP_CASC_LEN = 2048 samples
+```
 
-In this case, the **Signal size** parameter is set to 8 times the number of samples processed, reflecting the SSR=8 nature of the algorithm.
+Each frame therefore carries four valid samples followed by four zeros on each
+input lane. The output also contains four valid bins followed by four padded
+zeros per rank and frame; the output-unpack HLS kernel drains those padding
+words before processing the next frame.
 
-6. Click on the **Kernel Class** tab.
+The matrix PLIO blocks are configured for 64 bits at 625 MHz. During AI Engine
+code generation they expand to 16 input PLIOs and 4 output PLIOs per half.
 
-![](images/AIE_Class_Kernel_Kernel_Class.png)
+### Programmable Logic Implementation
 
-The kernel has template parameters for the input data type, coefficient data type, and the total number of samples of the DFT. The filter coefficients are passed as parameters to the kernel class constructor. The coefficient values are stored in the MATLAB workspace variables `twidA0` and `twidA1`.
+Four imported HLS kernels implement the PL portion:
 
-7. Click on the **General** tab.
+1. `m16_ssr8_permute_fb_i_array`: input circular buffer, 7 streams to 8.
+2. `m16_ssr8_permute_fb_o_array`: filter-bank output permutation, 8 streams.
+3. `m16_ssr8_cyclic_shift_idft_array`: cyclic shift and duplication into
+   16 lanes for each IDFT half.
+4. `idft_output_unpack_kernel`: consumes four rank streams from each half,
+   discards padded bins, and restores eight channel-hop streams.
 
-![](images/AIE_Class_Kernel_General.png)
-
-Here is where the kernel header and source code files, and the kernel function, are specified.
-
-Optionally, you can also double-click on the other kernels in the DFT to observe how they are configured. You can also double-click on the **aie_filterbank** subsystem to observe its structure.
-
-### Programmable Logic (PL) Implementation
-
-The PL portion of the polyphase channelizer design contains 3 IPs that perform the following functions:
-
-* Input Circular Buffer 
-* Output Permute
-* Cyclic Shift Buffer
-
-These functions are explained in greater detail in [Polyphase Channelizer](https://github.com/Xilinx/Vitis-Tutorials/tree/2026.1/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer).
-
-These blocks are implemented in PL using HLS @ 625 MHz. With 2 samples transferred in each PL clock cycle, the AI Engine is able to operate at a rate of 1250 MHz.
-
-Each function is imported into Vitis Model Composer using the **HLS Kernel** block.
-
-8. Return up to the **DUT** subsystem.
-
-9. Double-click on the **m16_ssr8_permute_fb_i_wrapper** block, which implements the Input Circular Buffer.
-
-![](images/HLS_Kernel_Function.png)
-
-Note that each output has a Signal size of N uint128 sample. As mentioned earlier, this corresponds to N*4 cint16 samples. 
-
-10. Click on the **General** tab.
-
-![](images/HLS_Kernel_General.png)
-
-This tab provides the path to the HLS source code for the input circular buffer kernel. Click the ![](images/Edit.png) icon next to the path to view the kernel source code.
-
-11. Click **Cancel** to close the window without making changes.
-
-Optionally, you can double-click on the two remaining HLS Kernel blocks to observe that they are configured similarly.
+`AIE to HLS` and `HLS to AIE` blocks convert between vectors of four `cint16`
+samples and one 128-bit HLS stream word. The IDFT input bridges produce 2048
+samples per lane, and the AIE-to-HLS output-size setting is 1024 per half.
 
 ## Functional Verification
 
-The functional correctness of the channelizer can be evaluated by running the Simulink model.
+1. Open the `Dashboard` subsystem in a separate window.
+2. Run the model with the default stop time of `1e-5`.
+3. Enable or disable channels, QAM modulation, or frequency sweeps.
+4. Select the channels displayed by the four spectrum analyzers.
 
-1. Right-click the **Dashboard** block and select **Open in New Window**.
-
-2. Arrange the model, dashboard, and scopes as desired.
-
-3. Click **Run** on the Simulink toolstrip.
-
-![](images/Model_Running.png)
-
-This model implements a 16-channel channelizer. The dashboard can be used to control the input signal to the channelizer. Each of the 16 channels can be configured in terms of:
-
-* Enabled/Disabled
-* Modulation (QAM) Enabled/Disabled
-* Frequency Sweep Enabled/Disabled
-* Rate of the Frequency Sweep
-
-The dashboard can also be used to select which channelizer outputs are displayed on each of the spectrum analyzers.
-
-You can interact with the dashboard while the model is running and see how the channelizer adjusts to the input signal changes.
+![Behavioral simulation results](images/Model_Running.png)
 
 ## Estimating Throughput
 
-Vitis Model Composer can call `aiesimulator` to simulate and plot the estimated throughput of the design.
+The model is preconfigured to analyze `DUT_SSR/AIE_DFT_SSR`.
 
-1. Set the Simulink simulation **Stop Time** to `1e-5`.
+1. Open the **Vitis Model Composer Hub**.
+2. Select `AIE_DFT_SSR`.
+3. On the **Analyze** tab, enable AI Engine simulation and profiling.
+4. Use the relative code directory `./analyze_ssr4`.
+5. Click **Analyze**.
 
-2. On the top level of the model, double-click the **Model Composer Hub** block.
+![Hub Analyze setup](images/VMCHub1.png)
 
-3. Select the **aie_combined** subsystem, then click on the **Analyze** tab. Ensure that the settings are as follows. 
+The design compiles to 32 active AI Engine cores. The cycle-approximate
+AI Engine simulation reports:
 
-![](images/VMCHub1.png)
+| Port group | Count | Per-port throughput | Aggregate |
+|---|---:|---:|---:|
+| IDFT inputs | 32 | 4995.50 MB/s | 159.86 GB/s |
+| IDFT outputs | 8 | 4982.41 MB/s | 39.86 GB/s |
 
-4. Click **Analyze**.
+![AI Engine simulation throughput](images/Throughput.png)
 
-After code generation, AIE simulation is performed. This is a cycle-approximate simulation that can be used to estimate throughput. 
-
-5. When AIE simulation is complete, click **View AIE Simulation output and throughput**.
-
-The results are displayed in the Simulation Data Inspector. Note that the throughput on each of the 8 output streams is approximately 1250 MSPS. It takes 2 clock cycles for the 8 output streams to produce a 16-point DFT output. Therefore, the DFT updates at a rate of 625 MHz, for which the channelizer was designed. 
-
-![](images/Throughput.png)
----
+All eight simulator output files match their Simulink reference
+files (the generated `.diff` files are empty).
 
 ## Conclusion
 
-This example showcased the following capabilities of Vitis Model Composer for Versal development:
+This example demonstrates:
 
-1. Import AI Engine and HLS source code into Vitis Model Composer.
-2. Model data exchange between AI Engine and PL in simulation.
-3. Simulate AI Engine and PL together in a single design.
-4. Compare a Versal hardware code implementation to a MATLAB golden reference.
+1. Combined AI Engine and PL/HLS simulation in Vitis Model Composer.
+2. An SSR=8 custom AI Engine polyphase filter bank.
+3. A two-half 16-point library IDFT using `TP_SSR=4` and
+   `TP_CASC_LEN=4` per half.
+4. Explicit padded-window packing and output-rank unpacking in HLS.
+5. Approximately 39.86 GB/s aggregate IDFT output throughput using eight
+   64-bit, 625 MHz PLIOs.
 
----
 ## References
 
-[1]: <https://ieeexplore.ieee.org/document/1193158> "Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications, F.J. Harris et. al."
+F. J. Harris et al., "[Digital Receivers and Transmitters Using Polyphase
+Filter Banks for Wireless Communications](https://ieeexplore.ieee.org/document/1193158)",
+*IEEE Transactions on Microwave Theory and Techniques*, Vol. 51, No. 4,
+April 2003.
 
-[[1]] F.J. Harris et. al., "[Digital Receivers and Transmitter Using Polyphase Filter Banks for Wireless Communications](https://ieeexplore.ieee.org/document/1193158)", IEEE Transactions on Microwave Theory and Techniques, Vol. 51, No. 4, April 2003.
+For the original hardware architecture, see the
+[Polyphase Channelizer tutorial](https://github.com/Xilinx/Vitis-Tutorials/tree/2026.2/AI_Engine_Development/AIE/Design_Tutorials/04-Polyphase-Channelizer).
 
+---
 
-------------
 Copyright (c) 2026 Advanced Micro Devices, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

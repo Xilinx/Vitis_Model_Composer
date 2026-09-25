@@ -1,22 +1,12 @@
 %% Basic parameters
-N = 1024; 
-NSAMP = 8192;
+N = 256;
+NSAMP = 2048;
 Ts = 16*(7/4)/8.75e9;
+filterbank_ssr = 8;
 ch_filt_coef = rcosdesign(0.22,4,28,'normal');
 ch_filt_coef = 28 * ch_filt_coef / sum(ch_filt_coef(:));
 randph = 2*pi*rand(16,1);
 nvar = 0.01;
-
-%% Twiddle factors
-load twid.mat
-twidA0 = int16(twidA0*2^15);
-twidA1 = int16(twidA1*2^15);
-twidB0 = int16(twidB0*2^15);
-twidB1 = int16(twidB1*2^15);
-twidC0 = int16(twidC0*2^15);
-twidC1 = int16(twidC1*2^15);
-twidD0 = int16(twidD0*2^15);
-twidD1 = int16(twidD1*2^15);
 
 %% Filter taps
 taps_init;
