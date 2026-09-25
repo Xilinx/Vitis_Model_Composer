@@ -1,11 +1,16 @@
 -- Copyright (C) 2026, Advanced Micro Devices, Inc.
 --
--- Vitis Model Composer HDL Black Box wrapper for the Direct-Form SSR FIR
--- (SSR_FIR.vhd).  This wrapper adapts the System Generator / Model Composer
--- STD_LOGIC_VECTOR black-box interface to the SFIXED_VECTOR interface of the
--- VHDL-2008 SSR_FIR core, builds the REAL_MATRIX coefficient set from the
--- string generic passed in by the config script, and ties the single
--- coefficient-set address CSA to 0.
+-- Vitis Model Composer HDL Black Box wrapper for the Transpose-Form SSR FIR
+-- (TRANSPOSE_SSR_FIR.vhd).  This wrapper adapts the System Generator / Model
+-- Composer STD_LOGIC_VECTOR black-box interface to the SFIXED_VECTOR interface
+-- of the VHDL-2008 TRANSPOSE_SSR_FIR core, builds the REAL_MATRIX coefficient
+-- set from the string generic passed in by the config script, and ties the
+-- single coefficient-set address CSA to 0.
+--
+-- The transpose form has the same external behaviour and latency as the direct
+-- form for a given filter, but its DSP PREG/PCOUT accumulation chain depth is
+-- TAPS/SSR per lane (vs TAPS in the direct form), so it closes timing at high
+-- SSR and large TAPS where the direct form's cascade does not.
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -21,7 +26,7 @@ use work.CFIXED_PKG.all;  -- SFIXED_VECTOR, REAL_VECTOR, REAL_MATRIX and helpers
 library UNISIM;
 use UNISIM.VComponents.all;
 
-entity WRAPPER_SSR_FIR is
+entity WRAPPER_TRANSPOSE_SSR_FIR is
   generic(OX,OY:INTEGER:=-1;           -- Coordinates of the lower left corner DSPx8, use -1 if you do not want floorplanning
           FAMILY:INTEGER:=3;           -- use 1 for 7-series, 2 for US/US+ and 3 for Versal
           DDR:BOOLEAN:=FALSE;          -- use DDR=TRUE implementation only for Versal clock rates over 795MHz/824MHz/872MHz in speed grades -1/-2/-3
@@ -42,9 +47,9 @@ entity WRAPPER_SSR_FIR is
        VI:in STD_LOGIC;
        O:out STD_LOGIC_VECTOR(SSR*(O_HIGH-O_LOW+1)-1 downto 0);
        VO:out STD_LOGIC);
-end WRAPPER_SSR_FIR;
+end WRAPPER_TRANSPOSE_SSR_FIR;
 
-architecture WRAPPER of WRAPPER_SSR_FIR is
+architecture WRAPPER of WRAPPER_TRANSPOSE_SSR_FIR is
   signal II:SFIXED_VECTOR(0 to SSR-1)(I_HIGH downto I_LOW);
   signal VII:BOOLEAN;
   signal OO:SFIXED_VECTOR(0 to SSR-1)(O_HIGH downto O_LOW);
@@ -169,23 +174,25 @@ begin
           end generate;
      end generate;
   VII<=VI='1';
-  u1:entity work.SSR_FIR generic map(OX=>OX,
-                                     OY=>OY,
-                                     FAMILY=>FAMILY,
-                                     DDR=>DDR,
-                                     COEFFICIENT=>COEFFICIENT,
-                                     C_HIGH=>C_HIGH,
-                                     C_LOW=>C_LOW,
-                                     ROUNDING=>ROUNDING,
-                                     ANTI=>FALSE,
-                                     SYMMETRY=>SYMMETRY)
-                         port map (CLK=>CLK1,
-                                   CLKH=>CLKH,
-                                   I=>II,
-                                   VI=>VII,
-                                   CSA=>"0",
-                                   O=>OO,
-                                   VO=>VOO);
+  u1:entity work.TRANSPOSE_SSR_FIR generic map(OX=>OX,
+                                               OY=>OY,
+                                               FAMILY=>FAMILY,
+                                               DDR=>DDR,
+                                               COEFFICIENT=>COEFFICIENT,
+                                               C_HIGH=>C_HIGH,
+                                               C_LOW=>C_LOW,
+                                               EXTRA_C_PIPELINING=>TRUE,
+                                               EXTRA_D_PIPELINING=>TRUE,
+                                               ROUNDING=>ROUNDING,
+                                               ANTI=>FALSE,
+                                               SYMMETRY=>SYMMETRY)
+                                   port map (CLK=>CLK1,
+                                             CLKH=>CLKH,
+                                             I=>II,
+                                             VI=>VII,
+                                             CSA=>"0",
+                                             O=>OO,
+                                             VO=>VOO);
   oj:for J in 0 to SSR-1 generate
        ok:for K in O_HIGH downto O_LOW generate
             O(J*(O_HIGH-O_LOW+1)+K-O_LOW)<=OO(J)(K);

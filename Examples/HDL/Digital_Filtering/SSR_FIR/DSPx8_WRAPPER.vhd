@@ -4,7 +4,10 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 
-use work.TYPES_PKG.all;
+--CB use work.TYPES_PKG.all;
+use work.fixed_pkg.all;  -- VHDL-2008 IEEE standard SFIXED type and functions
+use work.cfixed_pkg.all; -- user package, SFIXED_VECTOR, SFIXED_MATRIX and many other goodies
+--CB
 
 library unisims_ver;
 library UNISIM;
@@ -81,11 +84,11 @@ entity DSPx8_WRAPPER is
        INMODE:in STD_LOGIC_VECTOR(4 downto 0):=5x"00";               -- 5-bit input: INMODE control
        OPMODE:in STD_LOGIC_VECTOR(8 downto 0):=9x"035";              -- 9-bit input: Operation mode - default is P<=C+A*B
        -- Data inputs: Data Ports
-       A:in SFIXED;                   -- 30/34-bit input: A data
-       B:in SFIXED;                   -- 18/24-bit input: B data
-       C:in SFIXED;                  -- 48/58-bit input: C data
+       A:in SFIXED:="0";                   -- 30/34-bit input: A data
+       B:in SFIXED:="0";                   -- 18/24-bit input: B data
+       C:in SFIXED:="0";                  -- 48/58-bit input: C data
        CARRYIN:in STD_LOGIC:='0';                                    -- 1-bit input: Carry-in
-       D:in SFIXED;                   -- 25/27-bit input: D data
+       D:in SFIXED:="0";                   -- 25/27-bit input: D data
        -- Reset/Clock Enable inputs: Reset/Clock Enable Inputs
        CEA1:in STD_LOGIC:='1';                                       -- 1-bit input: Clock enable for 1st stage AREG
        CEA2:in STD_LOGIC:='1';                                       -- 1-bit input: Clock enable for 2nd stage AREG

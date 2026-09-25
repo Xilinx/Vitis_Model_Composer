@@ -4,7 +4,10 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
 
-use work.TYPES_PKG.all;
+--CB use work.TYPES_PKG.all;
+use work.fixed_pkg.all;  -- VHDL-2008 IEEE standard SFIXED type and functions
+use work.cfixed_pkg.all; -- user package, SFIXED_VECTOR, SFIXED_MATRIX and many other goodies
+--CB
 
 entity BDELAY is
   generic(SIZE:NATURAL:=1;           -- SIZE has a default value of 1 and cannot be negative, this would require traveling back in time
@@ -27,6 +30,7 @@ begin
 --  l2n:if (SIZE>=66 and SIZE<=65+33) or (SIZE>=130 and SIZE<=129+65+33) or (SIZE>=258 and SIZE<=257+129+65+33) or (SIZE>513) generate
   l2n:if DDR and (SIZE>3) generate
         signal ID:BOOLEAN:=FALSE;
+        signal OB:BOOLEAN:=FALSE;
         signal T,TD,SEL:STD_LOGIC:='0';
         type TBV is array(0 to SIZE/2-1) of BOOLEAN;
         signal OE,OO:TBV:=(others=>FALSE); -- delay line signal is SIZE/2 in length
@@ -38,7 +42,7 @@ begin
            end;
            else generate
              process(CLK)
-             begin
+            begin
                if rising_edge(CLK) then
                  ID<=I after 1 ps;
                end if;
@@ -71,12 +75,28 @@ begin
             TD<=T after 1 ps;
             SEL<=TD xor T after 1 ps;
             if SEL='0' then
-              O<=OE(OE'high);
+              OB<=OE(OE'high);
+              -- BF O<=OE(OE'high);
             else
-              O<=OO(OO'high);
+              OB<=OO(OO'high);
+              -- BF O<=OO(OO'high);
             end if;
           end if;
         end process;
+
+        --BF Added for DDR Even Filters
+        o0:if SIZE mod 2=1 generate
+             O<=OB;
+           end;
+           else generate
+             process(CLK)
+             begin
+               if rising_edge(CLK) then
+                 O<=OB after 1 ps;
+               end if;
+             end process;
+           end generate;
+
       end;
       elsif (SIZE>=66 and SIZE<=65+33) or (SIZE>=130 and SIZE<=129+65+33) or (SIZE>=258 and SIZE<=257+129+65+33) generate
         signal IO:BOOLEAN:=FALSE;
