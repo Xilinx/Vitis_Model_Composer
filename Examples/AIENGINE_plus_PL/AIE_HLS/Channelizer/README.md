@@ -92,7 +92,7 @@ fractional bits. The Simulink stimulus is scaled by 2^15 before entering the
 fixed-point channelizer, and the channel outputs are scaled by 2^-15 for
 display.
 
-3. Open the `DUT_SSR` subsystem.
+3. Open the `DUT` subsystem.
 
 ![SSR channelizer DUT](images/Channelizer.png)
 
@@ -143,10 +143,17 @@ padded frame = ceil(16, 8 * TP_CASC_LEN) = 32 samples
 lane window  = 256 frames * 32 / TP_CASC_LEN = 2048 samples
 ```
 
-Each frame therefore carries four valid samples followed by four zeros on each
-input lane. The output also contains four valid bins followed by four padded
-zeros per rank and frame; the output-unpack HLS kernel drains those padding
-words before processing the next frame.
+Each input frame therefore carries four valid samples followed by four zeros
+on each lane. Updating the diagram propagates that window as 2048-by-16 into
+the two IDFT halves. Each IDFT rank output is also 2048 samples, which is
+256 frames of eight samples: four valid bins followed by four zero-padded
+bins. The `AIE to HLS` blocks pack those rank windows into `ufix128` words
+(four `cint16` samples per word). Their output-size setting is 1024, and the
+compiled ports are 1024-by-4, one column for each of the four ranks. The
+output-unpack kernel reads one data word and one padding word per rank per
+hop, and its `hops` port is 256 samples wide on each of the eight channel
+streams (compiled size 256-by-8). Updating the diagram does not report an
+XMC-9187 window-size warning.
 
 The matrix PLIO blocks are configured for 64 bits at 625 MHz. During AI Engine
 code generation they expand to 16 input PLIOs and 4 output PLIOs per half.
@@ -162,9 +169,11 @@ Four imported HLS kernels implement the PL portion:
 4. `idft_output_unpack_kernel`: consumes four rank streams from each half,
    discards padded bins, and restores eight channel-hop streams.
 
-`AIE to HLS` and `HLS to AIE` blocks convert between vectors of four `cint16`
-samples and one 128-bit HLS stream word. The IDFT input bridges produce 2048
-samples per lane, and the AIE-to-HLS output-size setting is 1024 per half.
+`AIE to HLS` and `HLS to AIE` blocks convert between `cint16` vectors and
+128-bit HLS stream words. `HLS_to_AIE_IDFT_Half0` and
+`HLS_to_AIE_IDFT_Half1` are `cint16` with output size 2048.
+`AIE_to_HLS_IDFT_Out_0` and `AIE_to_HLS_IDFT_Out_1` are `ufix128` with
+output size 1024.
 
 ## Functional Verification
 
@@ -177,12 +186,21 @@ samples per lane, and the AIE-to-HLS output-size setting is 1024 per half.
 
 ## Estimating Throughput
 
-The model is preconfigured to analyze `DUT_SSR/AIE_DFT_SSR`.
+The Hub block is saved to analyze `DUT/AIE_DFT_SSR`.
+
+| Hub setting | Value |
+|---|---|
+| Selected subsystem | `DUT/AIE_DFT_SSR` |
+| Code directory | `./analyze_ssr4` |
+| Run AIE simulation | Enabled |
+| Collect profiling statistics | Enabled |
+| Stop time | `1e-5` s |
+| Target device | VCK190 (`xcvc1902-vsva2197-2MP-e-S`) |
 
 1. Open the **Vitis Model Composer Hub**.
-2. Select `AIE_DFT_SSR`.
-3. On the **Analyze** tab, enable AI Engine simulation and profiling.
-4. Use the relative code directory `./analyze_ssr4`.
+2. Confirm `AIE_DFT_SSR` is selected.
+3. On the **Analyze** tab, confirm AI Engine simulation and profiling are enabled.
+4. Confirm the code directory is `./analyze_ssr4`.
 5. Click **Analyze**.
 
 ![Hub Analyze setup](images/VMCHub1.png)

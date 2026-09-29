@@ -133,7 +133,7 @@ fractional bits. The Simulink stimulus is scaled by 2^15 before entering the<br 
 fixed-point channelizer, and the channel outputs are scaled by 2^-15 for<br />
 display.</p>
 <ol start="3">
-<li>Open the <code>DUT_SSR</code> subsystem.</li>
+<li>Open the <code>DUT</code> subsystem.</li>
 </ol>
 <p><img src="images/Channelizer.png" alt="SSR channelizer DUT" /></p>
 <p>The processing sequence is:</p>
@@ -197,10 +197,17 @@ the library's vector padding:</p>
 <pre><code>padded frame = ceil(16, 8 * TP_CASC_LEN) = 32 samples
 lane window  = 256 frames * 32 / TP_CASC_LEN = 2048 samples
 </code></pre>
-<p>Each frame therefore carries four valid samples followed by four zeros on each<br />
-input lane. The output also contains four valid bins followed by four padded<br />
-zeros per rank and frame; the output-unpack HLS kernel drains those padding<br />
-words before processing the next frame.</p>
+<p>Each input frame therefore carries four valid samples followed by four zeros<br />
+on each lane. Updating the diagram propagates that window as 2048-by-16 into<br />
+the two IDFT halves. Each IDFT rank output is also 2048 samples, which is<br />
+256 frames of eight samples: four valid bins followed by four zero-padded<br />
+bins. The <code>AIE to HLS</code> blocks pack those rank windows into <code>ufix128</code> words<br />
+(four <code>cint16</code> samples per word). Their output-size setting is 1024, and the<br />
+compiled ports are 1024-by-4, one column for each of the four ranks. The<br />
+output-unpack kernel reads one data word and one padding word per rank per<br />
+hop, and its <code>hops</code> port is 256 samples wide on each of the eight channel<br />
+streams (compiled size 256-by-8). Updating the diagram does not report an<br />
+XMC-9187 window-size warning.</p>
 <p>The matrix PLIO blocks are configured for 64 bits at 625 MHz. During AI Engine<br />
 code generation they expand to 16 input PLIOs and 4 output PLIOs per half.</p>
 <h3 id="programmable-logic-implementation">Programmable Logic Implementation</h3>
@@ -213,9 +220,11 @@ code generation they expand to 16 input PLIOs and 4 output PLIOs per half.</p>
 <li><code>idft_output_unpack_kernel</code>: consumes four rank streams from each half,<br />
 discards padded bins, and restores eight channel-hop streams.</li>
 </ol>
-<p><code>AIE to HLS</code> and <code>HLS to AIE</code> blocks convert between vectors of four <code>cint16</code><br />
-samples and one 128-bit HLS stream word. The IDFT input bridges produce 2048<br />
-samples per lane, and the AIE-to-HLS output-size setting is 1024 per half.</p>
+<p><code>AIE to HLS</code> and <code>HLS to AIE</code> blocks convert between <code>cint16</code> vectors and<br />
+128-bit HLS stream words. <code>HLS_to_AIE_IDFT_Half0</code> and<br />
+<code>HLS_to_AIE_IDFT_Half1</code> are <code>cint16</code> with output size 2048.<br />
+<code>AIE_to_HLS_IDFT_Out_0</code> and <code>AIE_to_HLS_IDFT_Out_1</code> are <code>ufix128</code> with<br />
+output size 1024.</p>
 <h2 id="functional-verification">Functional Verification</h2>
 <ol>
 <li>Open the <code>Dashboard</code> subsystem in a separate window.</li>
@@ -225,12 +234,46 @@ samples per lane, and the AIE-to-HLS output-size setting is 1024 per half.</p>
 </ol>
 <p><img src="images/Model_Running.png" alt="Behavioral simulation results" /></p>
 <h2 id="estimating-throughput">Estimating Throughput</h2>
-<p>The model is preconfigured to analyze <code>DUT_SSR/AIE_DFT_SSR</code>.</p>
+<p>The Hub block is saved to analyze <code>DUT/AIE_DFT_SSR</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Hub setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Selected subsystem</td>
+<td><code>DUT/AIE_DFT_SSR</code></td>
+</tr>
+<tr>
+<td>Code directory</td>
+<td><code>./analyze_ssr4</code></td>
+</tr>
+<tr>
+<td>Run AIE simulation</td>
+<td>Enabled</td>
+</tr>
+<tr>
+<td>Collect profiling statistics</td>
+<td>Enabled</td>
+</tr>
+<tr>
+<td>Stop time</td>
+<td><code>1e-5</code> s</td>
+</tr>
+<tr>
+<td>Target device</td>
+<td>VCK190 (<code>xcvc1902-vsva2197-2MP-e-S</code>)</td>
+</tr>
+</tbody>
+</table>
 <ol>
 <li>Open the <strong>Vitis Model Composer Hub</strong>.</li>
-<li>Select <code>AIE_DFT_SSR</code>.</li>
-<li>On the <strong>Analyze</strong> tab, enable AI Engine simulation and profiling.</li>
-<li>Use the relative code directory <code>./analyze_ssr4</code>.</li>
+<li>Confirm <code>AIE_DFT_SSR</code> is selected.</li>
+<li>On the <strong>Analyze</strong> tab, confirm AI Engine simulation and profiling are enabled.</li>
+<li>Confirm the code directory is <code>./analyze_ssr4</code>.</li>
 <li>Click <strong>Analyze</strong>.</li>
 </ol>
 <p><img src="images/VMCHub1.png" alt="Hub Analyze setup" /></p>
