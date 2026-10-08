@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="designs-with-ai-engine-and-hdl-blocks">Designs with AI Engine and HDL blocks</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
-
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.openExample('AIE_HDL_cosim');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 <p>In this example, we are connecting an AI Engine block to an <em>AXI FIFO</em> HDL block. Note that the output of the AI Engine <br />
 block is a vector of size 8 with and a period of 8 (i.e. one sample per second).</p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>

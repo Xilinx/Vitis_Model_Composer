@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="lab-3-debugging-imported-cc-code-using-gdb-debugger">Lab 3: Debugging Imported C/C++ Code Using GDB Debugger</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
-
-commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.changeDirectory('Lab3_HLS');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
 <p>Model Composer provides the ability to debug <code>C/C++</code> code that has been imported as a block using the <code>xmcImportFunction</code> command, while simulating the entire design in Simulink®.</p>
 <p>The debug flow in Vitis Model Composer is as follows:</p>
 <ol>

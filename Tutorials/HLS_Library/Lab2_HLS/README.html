@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="lab-2-importing-code-into-vitis-model-composer">Lab 2: Importing Code into Vitis Model Composer</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
-
-commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.changeDirectory('Lab2_HLS');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
 <p>Vitis Model Composer lets you import Vitis™ HLS library functions and user C/C++ code as custom blocks to use in your algorithm for both simulation and code generation.</p>
 <p>The Library Import feature is a MATLAB function, <code>xmcImportFunction</code>, which lets you specify the required source files and automatically creates an associated block that can be added into a model in Simulink® .</p>
 <p>This lab primarily has two parts:</p>

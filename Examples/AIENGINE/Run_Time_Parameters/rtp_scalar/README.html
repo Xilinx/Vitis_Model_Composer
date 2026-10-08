@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="scalar-run-time-parameter-rtp">Scalar Run Time Parameter (RTP)</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
-
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.openExample('rtp_scalar');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 <p>This is an example of an AIE Kernel that is controlled by a synchronous RTP input. Note that the kernel produces results only if there is an input RTP value. When there is no input RTP, i.e. the input variable size signal is empty, the kernel produces no output.</p>
 <p>It is best to run this model step by step in Simulink and observe the RTP input value and the output of the kernel on the scope. </p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>

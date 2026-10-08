@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="2nd-order-direct-form-ii-implementation">2nd-order Direct Form II implementation</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
-
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.openExample('2nd_order_Direct_Form_II');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 <p>This design example shows two distinct FPGA implementations of a 2nd order IIR filter in Direct Form II, and compares them to the double precision Simulink IIR filter block.</p>
 <p>IIR_Cmult is implemented using constant coefficient multipliers implemented in LUTs,</p>
 <p>IIR_mult is implemented using embedded multipliers.</p>
