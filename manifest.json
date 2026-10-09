@@ -1,7 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-09T13:52:39Z",
+  "generatedAt": "2026-10-09T14:21:55Z",
   "files": [
+    ".github/scripts/generate_manifest.py",
+    ".github/workflows/update-manifest.yml",
     ".gitignore",
     "Examples/AIENGINE/DSPlib/DUC/DUC.slx",
     "Examples/AIENGINE/DSPlib/DUC/Images/aie_model.png",
