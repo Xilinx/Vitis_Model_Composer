@@ -1,0 +1,42 @@
+name: Update repository manifest
+
+on:
+  push:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-manifest-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  update-manifest:
+    if: >-
+      github.actor != 'github-actions[bot]' ||
+      github.event.head_commit.message != 'Update repository manifest'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the pushed branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref_name }}
+
+      - name: Generate manifest.json
+        run: python3 .github/scripts/generate_manifest.py
+
+      - name: Commit updated manifest
+        shell: bash
+        run: |
+          if git diff --quiet -- manifest.json; then
+            echo "manifest.json is already current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add manifest.json
+          git commit -m "Update repository manifest"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
