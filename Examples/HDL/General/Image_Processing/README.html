@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="2d-dwt-filter">2D DWT filter</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
-
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.openExample('Image_Processing');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 <p>The test bench for this wavelet design consists of a processor and behavioral models for a pair of external, dual-port memories. The two memories are initialized with the pixel values of a grayscale image. The pixels from the initial image are interleaved into the two banks in a column first indexing strategy. If the image contained a checkerboard of black and white pixels, then all of the black pixels will end up in the one bank, and all of the white pixels in the other. The processor includes a memory controller that schedules the reads and writes to memory, and an image processing filter kernel that computes the 2D DWT decomposition of the image. The processor has been configured to compute two levels of decomposition on a 64 x 64 pixel image. The computation is done "in place" in the single image memory space, and the initial pixel ordering is preserved throughout.</p>
 <p>A full color version of the design would easily fit in the same part as only the DWT datapath would require replication (the memory control could remain unchanged).</p>
 <h2 id="imagesscreen_shotpng"><img src="images/screen_shot.PNG" alt="" /></h2>

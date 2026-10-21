@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="3x3-matrix-determinant">3x3 Matrix Determinant</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
-
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.openExample('3x3_Matrix_Determinant');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 <p>This design demonstrates the calculation of the determinant of a 3x3 matrix with real, single precision floating point elements. It showcases the Black Box block for bringing hand-coded VHDL or Verilog code into Model Composer. It also shows the DSPFP32 for performing floating-point operations on Versal devices.</p>
 <h2 id="design">Design</h2>
 <p><img src="images/screenshot.png" alt="" /></p>

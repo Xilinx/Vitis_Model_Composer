@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="lab-4-working-with-multi-rate-systems">Lab 4: Working with Multi-Rate Systems</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
-
-commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.changeDirectory('Lab4');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
 <p>In this lab exercise, you will learn how to efficiently implement designs with multiple data rates using multiple clock domains.</p>
 <h3 id="objectives">Objectives</h3>
 <p>After completing this lab, you will be able to:</p>

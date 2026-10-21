@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="two-dimensional-fft-using-corner-turning-technique-for-mri-sagittal-image-reconstruction">Two Dimensional FFT using Corner Turning Technique for MRI Sagittal Image Reconstruction</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
-
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.openExample('MRI_Image_Reconstruction_2DFFT');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 <h2 id="introduction">Introduction</h2>
 <p>Magnetic Resonance Imaging (MRI) is a medical diagnostic tool used to reveal anatomical details in greater detail than an X-ray. MRI image reconstruction is the process of reconstructing the image from MRI data. The MRI machine collects data in the spatial frequency domain (also referred to as K-space), and this data is then conditioned and processed to create the spatial image that can be meaningfully inspected. An important step of this image reconstruction is performing a two dimensional FFT on the input data. This demo focuses entirely on this particular step of the image reconstruction process.</p>
 <h2 id="mri-input-data-and-reconstructed-image-output">MRI Input Data and Reconstructed Image Output</h2>

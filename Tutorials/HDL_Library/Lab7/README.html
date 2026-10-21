@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="lab-7-implement-filters-using-fir-compiler-block">Lab 7: Implement Filters using FIR Compiler Block</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
-
-commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.changeDirectory('Lab7');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
 <p>In this lab, you will learn how to configure the FIR Compiler block in Vitis Model Composer. In particular, achieving the expected filter result requires you to set both the <strong>FIR block</strong> parameters and the Vitis Model Composer Simulink System Period settings in the <strong>Hub block</strong> correctly. This tutorial will show you how to do this.</p>
 <h3 id="objectives">Objectives</h3>
 <p>After completing this lab, you will be able to configure the <strong>FIR Compiler</strong> block as a:</p>

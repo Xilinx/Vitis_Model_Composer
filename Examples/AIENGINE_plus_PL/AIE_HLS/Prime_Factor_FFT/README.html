@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="prime-factor-fft-1008-on-aie-ml">Prime Factor FFT-1008 on AIE-ML</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
-
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.openExample('Prime_Factor_FFT');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 <p>This example demonstrates a Prime Factor FFT algorithm on AIE-ML devices. It demonstrates the <strong>Shared Buffer</strong> block to access Memory Tiles on the AIE-ML array.</p>
 <h2 id="introduction">Introduction</h2>
 <p>The Prime Factor Algorithm (PFA) [<a href="https://en.wikipedia.org/wiki/Prime-factor_FFT_algorithm" title="Prime Factor FFT Algorithm">1</a>] is a Fast Fourier Transform (FFT) algorithm [<a href="https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Signal_Processing_and_Modeling/Fast_Fourier_Transforms_(Burrus)" title="Fast Fourier Transforms">2</a>] discovered by Good &amp; Thomas before the more popular Cooley-Tukey algorithm with some interesting properties. The PFA is another "divide and conquer" approach for computing a Discrete Fourier Transform (DFT) of size <code>N = N1 * N2</code> as a two-dimensional DFT of size <code>N1 X N2</code> as long as <code>N1</code> and <code>N2</code> are relatively prime (ie. share no common divisors). The smaller transforms of size <code>N1</code> and <code>N2</code> may be computed by some other technique, for example using the Winograd FFT Algorithm, or the PFA technique may be applied recursively again to both <code>N1</code> and <code>N2</code>. It turns out Versal AI Engines compute DFT with small dimensions <code>N &lt; 32</code> very efficiently using direct vector/matrix multiplication. Consequently, the PFA approach using DFT on the individual prime factors provides an efficient approach to the FFT on Versal AI Engines.</p>

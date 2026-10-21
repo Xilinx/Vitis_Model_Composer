@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="importing-graph-as-a-block">Importing graph as a block</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
-
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.openExample('AIE_Graph');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 <p>In this example we import a simple graph as a block into Vitis Model Composer. When you import a graph into Vitis Model Composer using the AIE Graph <br />
 block, you need to create a .cpp file and instantiate the graph. You later have to specify this file in the block mask. </p>
 <h2 id="knowledge-nuggets">Knowledge nuggets</h2>

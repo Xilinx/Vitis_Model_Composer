@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="filtering-in-frequency-domain">Filtering in Frequency Domain</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
-
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.openExample('Filtering_in_frequency_domain');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 <p>This example implements a 129-tap, &gt;2.0 GSPS filter on AI Engines, using a frequency domain filtering approach.</p>
 <p>In this example, the FFT &amp; IFFT are implemented using the AI Engine API. To see the FFT &amp; IFFT implemented using the Vitis DSP Library, and techniques for increasing throughput, refer to <a href="matlab:XmcExampleApi.getExample('Filtering_in_frequency_domain_AIE_Blocks')">this example</a>.</p>
 <h2 id="algorithm">Algorithm</h2>

@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="export-design-from-vitis-model-composer-to-vitis">Export Design from Vitis Model Composer to Vitis</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1);  
-
-commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.changeDirectory('Export_to_Vitis');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
 <p>This tutorial will show how to export a heterogeneous design (AI Engine + PL) to Vitis as a Vitis Subsystem (VSS).</p>
 <h2 id="what-is-a-vitis-subsystem">What is a Vitis Subsystem?</h2>
 <p>A Vitis Subsystem (VSS) is a platform-independent reusable design unit, or <em>component</em>, with customizable AIE and PL content, that is integrated into a larger system through Vitis tools.</p>

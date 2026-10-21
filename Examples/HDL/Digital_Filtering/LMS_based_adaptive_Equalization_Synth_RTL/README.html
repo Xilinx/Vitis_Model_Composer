@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="lms-based-adaptive-equalization-synthesizable-rtl">LMS-based adaptive equalization (Synthesizable RTL)</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
-
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.openExample('LMS_based_adaptive_Equalization_Synth_RTL');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 <p>This design shows how to use the MCode block to create fully synthesizable register transfer level (RTL) designs in Model Composer. The design was derived directly from the sysgenFSE.mdl demonstration design, replacing non-RTL blocks by MCode block equivalents. RTL targets are particularly useful when single source must target different FPGA families. This design shows a T/2 adaptive Fractionally Spaced Equalizer (FSE) operating on a 16-QAM data source with noise and filtering introduced in the channel model. Virtex-II dedicated multipliers are used in the complex multipliers blocks in order to provide high speed and resource utilization of the FPGA device.</p>
 <p>The DHAT scope provides an X-Y plot of the I and Q filter outputs from within the FSE. As the simulation progresses, these symbols will converge as the error is reduced. The magnitude of the filter coefficients is shown in a vector scope as well. Increasing the simulation duration will allow better visualization of the adaptive FSE effects on the filter output.</p>
 <p><img src="images/screen_shot.PNG" alt="" /></p>

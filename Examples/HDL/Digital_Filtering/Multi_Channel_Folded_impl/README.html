@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="multi-channel-folded-implementation">Multi-channel, folded implementation</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
-
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.openExample('Multi_Channel_Folded_impl');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 <p>This design demonstrates how multiple IIR filters can be implemented using a single time-shared second-order section (biquad). Specifically, 15 distinct IIR filters, each consisting of four cascaded biquads, are realized in a "folded" architecture that uses a single hardware biquad. Hardware folding is a technique to time-multiplex many algorithm operations onto a single functional unit (e.g. adder, multiplier). For low sample rate applications like audio and control, the required silicon area can be much reduced by time-sharing the hardware resources.</p>
 <p>In this design, the several individual folding techniques are employed:</p>
 <p>the biquad is time-multiplexed among fifteen channels<br />

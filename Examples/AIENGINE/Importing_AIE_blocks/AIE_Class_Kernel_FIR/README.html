@@ -6,19 +6,7 @@
 </head>
 <body>
 <h1 id="importing-a-templatized-class-kernel-as-a-block">Importing a templatized class kernel as a block</h1>
-<a id="openlink" href="" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
-
-<script>
-var a = document.getElementById('openlink');
-
-var path = document.location.pathname;
-var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
-var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
-
-commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
-
-a.href = commandURI;
-</script>
+<a href="matlab:XmcExampleApi.openExample('AIE_Class_Kernel_FIR');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
 <p>In this example we import a Finite Impulse Response (FIR) Filter as a block into Vitis Model Composer. <br />
 This filter is expressed as a class. Furthermore, this is a templatized class. The template parameters specify the number of <br />
 samples per frame and a shift factor. The constructor for this class takes in the filter taps.</p>
