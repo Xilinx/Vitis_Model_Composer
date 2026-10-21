@@ -63,3 +63,6 @@ void m16_ssr8_permute_fb_o_wrapper( TT_DUT::TT_STREAM &sig0_i,
                                     TT_DUT::TT_STREAM &sig5_o,
                                     TT_DUT::TT_STREAM &sig6_o,
                                     TT_DUT::TT_STREAM &sig7_o );
+
+void m16_ssr8_permute_fb_o_array(TT_DUT::TT_STREAM sig_i[TT_DUT::SSR],
+                                         TT_DUT::TT_STREAM sig_o[TT_DUT::SSR]);
