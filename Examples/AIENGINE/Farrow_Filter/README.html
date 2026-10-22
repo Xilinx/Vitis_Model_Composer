@@ -6,7 +6,24 @@
 </head>
 <body>
 <h1 id="fractional-delay-farrow-filter">Fractional Delay Farrow Filter</h1>
-<a href="matlab:XmcExampleApi.openExample('Farrow_Filter');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Example</a>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.openExample('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Design</button>  
+              
+</html>
 <p>This example demonstrates a Vitis Model Composer testbench for a fractional delay Farrow filter, implemented on AI Engines.</p>
 <h2 id="introduction">Introduction</h2>
 <p>A fractional delay filter is a common digital signal processing (DSP) algorithm found in many applications including digital receivers in modems and is required for timing synchronization.<br />
@@ -17,7 +34,7 @@ This introduces the need for a fractional delay filter so samples can be produce
 <p>We implement the 3rd order Farrow filter depicted in the following figure.</p>
 <p><img src="Images/farrow_3rd_order.png" alt="figure1" /></p>
 <p><em>Figure 1 - Farrow Filter with Polynomial Order p = 3</em></p>
-<p>More details on the Farrow filter design for AI Engines can be found in the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2026.1/AI_Engine_Development/AIE/Design_Tutorials/15-farrow_filter">Vitis-Tutorials</a> repository.</p>
+<p>More details on the Farrow filter design for AI Engines can be found in the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2026.2/AI_Engine_Development/AIE/Design_Tutorials/15-farrow_filter">Vitis-Tutorials</a> repository.</p>
 <p>The Farrow filter complies with the following requirements:</p>
 <table>
 <thead>

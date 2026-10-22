@@ -6,7 +6,24 @@
 </head>
 <body>
 <h1 id="lab-3-timing-and-resource-analysis">Lab 3: Timing and Resource Analysis</h1>
-<a href="matlab:XmcExampleApi.changeDirectory('Lab3');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
 <p>In this lab, you learn how to verify the functionality of your designs by simulating in Simulink® to ensure that your Vitis Model Composer design is correct when you implement the design in your target AMD device.</p>
 <h3 id="objectives">Objectives</h3>
 <p>After completing this lab, you will be able to:</p>
@@ -24,7 +41,7 @@
 <ol>
 <li><p>Invoke Vitis Model Composer.</p>
 <ul>
-<li>On Windows systems select <strong>Windows > AMD Design Tools > Vitis Model Composer 2026.1.</strong></li>
+<li>On Windows systems select <strong>Windows > AMD Design Tools > Vitis Model Composer 2026.2.</strong></li>
 <li>On Linux systems, type <code>model_composer</code> at the command prompt.</li></ul></li>
 <li><p>Navigate to the Lab3 folder: <code>\HDL_Library\Lab3.</code></p></li>
 </ol>
