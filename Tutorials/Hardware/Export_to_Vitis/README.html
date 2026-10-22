@@ -6,7 +6,24 @@
 </head>
 <body>
 <h1 id="export-design-from-vitis-model-composer-to-vitis">Export Design from Vitis Model Composer to Vitis</h1>
-<a href="matlab:XmcExampleApi.changeDirectory('Export_to_Vitis');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
 <p>This tutorial will show how to export a heterogeneous design (AI Engine + PL) to Vitis as a Vitis Subsystem (VSS).</p>
 <h2 id="what-is-a-vitis-subsystem">What is a Vitis Subsystem?</h2>
 <p>A Vitis Subsystem (VSS) is a platform-independent reusable design unit, or <em>component</em>, with customizable AIE and PL content, that is integrated into a larger system through Vitis tools.</p>
@@ -19,7 +36,7 @@
 <blockquote>
 <p><strong>NOTE:</strong> The DMA Source and DMA Sink blocks in the PL, shown in the diagram above, will be provided as part of the platform and not the Vitis Subsystem in this tutorial.</p>
 </blockquote>
-<p>For more details on the design, refer to the <a href="matlab:XmcExampleApi.getExample('IFFT64K_2D')">Vitis Model Composer example</a> and the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2026.1/AI_Engine_Development/AIE/Design_Tutorials/12-IFFT64K-2D">Design Example from Vitis-Tutorials</a>.</p>
+<p>For more details on the design, refer to the <a href="https://github.com/Xilinx/Vitis_Model_Composer/tree/2026.2/Examples/AIENGINE_plus_PL/AIE_HLS/IFFT64K_2D/README.md">Vitis Model Composer example</a> and the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2026.2/AI_Engine_Development/AIE/Design_Tutorials/12-IFFT64K-2D">Design Example from Vitis-Tutorials</a>.</p>
 <p>Open the model <code>IFFT64K_2D.slx</code> and examine the <code>DUT</code> subsystem, which contains an HLS Kernel and an AI Engine subsystem.</p>
 <p><img src="Images/model2.png" alt="figure" /></p>
 <p>The signals entering and exiting the AI Engine are of <code>cint32</code> data type (64 bits wide). The PLIO blocks inside the AI Engine subsystem configure the PLIO width to 64 bits. This means that in hardware, one <code>cint32</code> sample will be transferred across each stream on every PL clock cycle. You could potentially increase the PLIO width to 128 bits, so that 2 samples are transferred on each PL clock cycle.</p>
@@ -227,7 +244,7 @@ Max Error: 256
 <li>System Controller SD Card: may already be available with the board and plugged in.</li>
 <li>VCK190 SD card: may already be available with the board. This is the card, where you will write the sd_card.img file generated for your design.</li>
 <li>Connect uSD card to your laptop. If your laptop does not come with a uSD card reader slot, an USB-to-uSD card-reader may be used, assuming laptop has a USB port</li>
-<li>For board setup and establish a connection to a serial device by selecting “Serial”, please refer to <a href="matlab:XmcExampleApi.getExample('linux')">Running on Hardware</a>.</li>
+<li>For board setup and establish a connection to a serial device by selecting “Serial”, please refer to <a href="https://github.com/Xilinx/Vitis_Model_Composer/tree/2024.2/QuickGuides/Running_on_Hardware/linux/README.md">Running on Hardware</a>.</li>
 </ul>
 <ol start="4">
 <li><p>Turn on board power by switching SW13 on and observe the terminal emulator. If everything goes well, boot messages should be displayed.</p></li>

@@ -36,7 +36,7 @@ When the FPGA Clock Period and Simulink System Period are equivalent, the displa
 
 **FPGA Clock Period(ns)**: (Simulink System Period) * 1e9 = 10
 
-For more details on setting Simulink System Period and FPGA Clock Period, please click [here](https://github.com/Xilinx/Vitis_Model_Composer/tree/2026.1/Tutorials/HDL_Library/Lab7).
+For more details on setting Simulink System Period and FPGA Clock Period, please click [here](https://github.com/Xilinx/Vitis_Model_Composer/tree/2026.2/Tutorials/HDL_Library/Lab7).
 
 ## Display Sampling Frequencies in the Design
 

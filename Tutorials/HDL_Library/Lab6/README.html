@@ -6,7 +6,24 @@
 </head>
 <body>
 <h1 id="lab-6-using-a-vitis-model-composer-hdl-design-with-a-zynq-7000-soc">Lab 6: Using a Vitis Model Composer HDL Design with a Zynq-7000 SoC</h1>
-<a href="matlab:XmcExampleApi.changeDirectory('Lab6');" style="display:inline-block; padding:10px 20px; background-color:#007acc; color:white; text-decoration:none; border-radius:5px; font-weight:900">Open Lab Directory</a>
+<html>    
+<script>
+function myFunction() {
+
+var path = document.location.pathname;
+var directory1 = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+var directory = directory1.substring(directory1.lastIndexOf('/')+1); 
+
+commandURI="matlab:XmcExampleApi.changeDirectory('" + directory + "');"
+
+document.location=commandURI
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+       
+<button type="button" style="background-color:#d0d028; font-size: 20px;" onclick="myFunction()">Open Lab Directory</button>  
+              
+</html>
 <p>In this lab, you will learn how to export your Vivado® design with Vitis Model Composer HDL IP to a software environment and use driver files created by Vitis Model Composer to quickly implement your project on an AMD evaluation board, running hardware with software in the same design.</p>
 <h3 id="objectives">Objectives</h3>
 <p>After completing this lab, you will have learned:</p>
@@ -143,7 +160,7 @@ return Data;
 <ol>
 <li><p>Open the Vivado IDE:</p>
 <ul>
-<li>Click <strong>Windows > Vivado 2026.1.</strong><br />
+<li>Click <strong>Windows > Vivado 2026.2.</strong><br />
 In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP Integrator, but this time you will create the design using a Tcl file, rather than the interactive process.</li></ul></li>
 <li><p>Using the Tcl console as shown in the following figure:</p></li>
 </ol>
@@ -170,7 +187,7 @@ In this lab you will use the same design as Lab 5: Using AXI Interfaces and IP I
 <li><p>Click <strong>Finish</strong> to export the hardware.</p></li>
 <li><p>Open the Vitis Unified IDE:</p>
 <ul>
-<li>Click <strong>Windows > Vitis 2026.1.</strong></li></ul></li>
+<li>Click <strong>Windows > Vitis 2026.2.</strong></li></ul></li>
 <li><p>Select the workspace space directory to store preferences and click Launch.</p></li>
 <li><p>From the Vitis IDE Welcome screen (or <strong>File > New Component > Platform</strong>), select <strong>Create Platform Component</strong>.</p></li>
 <li><p>In the Create Platform Component dialog, enter the platform component name <code>Design1_Platform</code> in the Component name field.</p></li>
