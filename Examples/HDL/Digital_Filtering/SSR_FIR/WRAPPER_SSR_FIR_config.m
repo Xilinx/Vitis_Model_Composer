@@ -157,7 +157,8 @@ end  % if(inputTypesKnown)
   %  |    this_block.addFile('a.vhd');
   %  |-------------
 
-  this_block.addFile('TYPES_PKG.vhd');
+  this_block.addFile('fixed_pkg.vhd');
+  this_block.addFile('cfixed_pkg.vhd');
   this_block.addFile('BDELAY.vhd');
   this_block.addFile('SDELAY.vhd');
   this_block.addFile('DSPx8_WRAPPER.vhd');
