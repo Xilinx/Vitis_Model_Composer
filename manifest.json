@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T20:38:09Z",
+  "generatedAt": "2026-10-22T20:48:47Z",
   "files": [
     ".github/scripts/generate_manifest.py",
     ".github/workflows/update-manifest.yml",
@@ -553,7 +553,6 @@
     "Examples/AIENGINE_plus_PL/AIE_HLS/AIE_HLS_without_interface/sw/host.h",
     "Examples/AIENGINE_plus_PL/AIE_HLS/AIE_HLS_without_interface/sw/input.h",
     "Examples/AIENGINE_plus_PL/AIE_HLS/Channelizer/Channelizer.slx",
-    "Examples/AIENGINE_plus_PL/AIE_HLS/Channelizer/Channelizer_orig.slx",
     "Examples/AIENGINE_plus_PL/AIE_HLS/Channelizer/README.html",
     "Examples/AIENGINE_plus_PL/AIE_HLS/Channelizer/README.md",
     "Examples/AIENGINE_plus_PL/AIE_HLS/Channelizer/aie/polyphase_fir.cpp",
