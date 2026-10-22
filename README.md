@@ -15,10 +15,10 @@ a block diagram environment for multidomain simulation and model-based design.
 * Browse through many of the examples we have here. You can easily access these examples from within the tool. (**Note:** Many of the examples require the [DSP System Toolbox](https://www.mathworks.com/products/dsp-system.html).)
 
 
-# What's new in 2026.1?
-* Export AI Engine and PL subsystems as a [Vitis Subsystem (VSS)](./Tutorials/Hardware/Export_to_Vitis).
-* The [Filtering in Frequency Domain](./Examples/AIENGINE/Filtering_in_frequency_domain) example shows how to increase AI Engine throughput using different techniques.
-* Working with both AI Engines and PL? See the [tutorials](./Tutorials/AIE-PL/README.md) showing how to connect the block libraries in Vitis Model Composer.
+# What's new in 2026.2?
+* New AI Engine block examples cover stream GEMV, Convolution, and Correlation, plus the Cholesky, QRD, QRD Householder, and SVD solvers. Start with [GEMV Stream](./Examples/Block_Help/AIE/GEMV_Stream_Ex1), [Convolution Stream](./Examples/Block_Help/AIE/Convolution_Stream_Ex1), [Cholesky](./Examples/Block_Help/AIE/Cholesky_Ex1), and [SVD](./Examples/Block_Help/AIE/SVD_Ex1).
+* The [High Speed SSR FIR](./Examples/HDL/Digital_Filtering/SSR_FIR/README.md) example compares direct-form and transpose-form filters side by side.
+* The [Polyphase Channelizer](./Examples/AIENGINE_plus_PL/AIE_HLS/Channelizer/README.md) now uses the AI Engine DSP Library IDFT block with `SSR=4`.
 
 # Tutorials
 <p align="center">
