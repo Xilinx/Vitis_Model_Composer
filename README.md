@@ -30,7 +30,6 @@ a block diagram environment for multidomain simulation and model-based design.
 <p align="center">
   <a href="./Examples/AIENGINE_plus_PL/README.md"><img src="Images/hetero.jpg" width="350"></a>  
   <a href="./Examples/AIENGINE/README.md"> <img src="Images/aiengines.jpg" width="350"></a>
-  <a href="./Examples/HLS/README.md"><img src="Images/hls.jpg" width="350"></a>
   <a href="./Examples/HDL/README.md"><img src="Images/hdl.jpg" width="350"></a>
 </p>
     
