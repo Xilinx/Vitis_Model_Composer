@@ -6,11 +6,7 @@
 
 ECHO             := @echo
 
-PLATFORM            ?= ${PLATFORM_PATH}/${PLATFORM_NAME}/${PLATFORM_NAME}.xpfm
-SYSROOT             ?= ${COMMON_IMAGE_VERSAL}/sysroots/cortexa72-cortexa53-xilinx-linux
-KERNEL_IMAGE        ?= ${COMMON_IMAGE_VERSAL}/Image
-ROOTFS              ?= ${COMMON_IMAGE_VERSAL}/rootfs.ext4
-PREBUILT_LINUX_PATH ?= ${COMMON_IMAGE_VERSAL}
+SYSROOT             ?= ${YOCTO_ARTIFACTS}/amd-cortexa72-common_meta-edf-app-sdk/sdk/sysroots/cortexa72-cortexa53-amd-linux
 
 APP_NAME         := host
 APP_EXE          := ${APP_NAME}.exe

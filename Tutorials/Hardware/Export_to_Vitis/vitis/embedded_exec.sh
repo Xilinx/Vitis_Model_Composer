@@ -7,4 +7,8 @@
 
 export XILINX_XRT=/usr
 
+if [ -f emconfig.json ]; then
+    export XCL_EMULATION_MODE=hw_emu
+fi
+
 ./host.exe a.xclbin

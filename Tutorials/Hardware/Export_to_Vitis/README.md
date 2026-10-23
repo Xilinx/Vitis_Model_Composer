@@ -20,7 +20,7 @@ The IFFT operation is performed by AI Engine kernels, 5 each for each data dimen
 
 >**NOTE:** The DMA Source and DMA Sink blocks in the PL, shown in the diagram above, will be provided as part of the platform and not the Vitis Subsystem in this tutorial.
 
-For more details on the design, refer to the [Vitis Model Composer example](https://github.com/Xilinx/Vitis_Model_Composer/tree/2026.2/Examples/AIENGINE_plus_PL/AIE_HLS/IFFT64K_2D/README.md) and the [Design Example from Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials/tree/2026.2/AI_Engine_Development/AIE/Design_Tutorials/12-IFFT64K-2D).
+For more details on the design, refer to the [Vitis Model Composer example](https://github.com/Xilinx/Vitis_Model_Composer/tree/2026.2/Examples/AIENGINE_plus_PL/AIE_HLS/IFFT64K_2D/README.md) and the [Design Example from Vitis-Tutorials](https://github.com/Xilinx/Vitis-Tutorials/tree/2026.1/AI_Engine_Development/AIE/Design_Tutorials/12-IFFT64K-2D).
 
 Open the model `IFFT64K_2D.slx` and examine the `DUT` subsystem, which contains an HLS Kernel and an AI Engine subsystem.
 
@@ -44,7 +44,9 @@ To export the Vitis Model Composer IFFT design as a VSS:
 
 1. Double-click the **Vitis Model Composer Hub** block.
 
-2. Select the **DUT** subsystem and the **Export** tab.
+The model targets the `vck190_base` platform. If the **Hardware Selection** pane reports that the platform cannot be found, click the **...** button, select the **Platform** tab, select **vck190_base** in the Platform drop-down, and click **OK**.
+
+2. Select the **Code Generation** pane, the **DUT** subsystem, and the **Export** tab.
 
 3. Select an **Export Type** of **Vitis Subsystem**.
 
@@ -54,13 +56,35 @@ The default configuration is to use the entire AI Engine array for the generated
 
 4. Click **Export**.
 
-Vitis Model Composer generates the constituent parts of the VSS listed above, and it also invokes the Vitis linker (`v++`) to generate a Vitis Subsystem. This will take a few minutes.
+Vitis Model Composer generates the constituent parts of the VSS listed above, and it also invokes the Vitis linker (`v++`) to generate a Vitis Subsystem. This can take 20 minutes or more, because the AI Engine graph and the HLS kernel are compiled.
 
 ![figure1](Images/progress1.png)
 
 After code generation is complete, the products can be viewed in the `code` folder.
 
-![figure1](Images/folders1.png)
+```
+code
+├── ip
+│   ├── AIE
+│   ├── ifft_transpose
+│   └── Makefile
+├── vss
+│   ├── DUT
+│   │   ├── DUT
+│   │   ├── ip_repo
+│   │   ├── DUT.vss
+│   │   ├── ifft_transpose_wrapper.xo
+│   │   ├── libadf.a
+│   │   └── system.aieprj
+│   ├── DUT_params.cfg
+│   ├── getXOPaths.sh
+│   └── Makefile
+├── make.sh
+├── Makefile
+├── model_composer.log
+├── model_composer_aie_compilation.log
+└── setup.sh
+```
 
 * The `ip` folder contains subfolders for each subsystem (AI Engine or HLS Kernel) in the design.
     * `AIE` contains the generated code and libadf.a for the AI Engine subsystem.
@@ -168,19 +192,19 @@ Open the file `vitis/Makefile`. This file automates invoking the Vitis toolchain
 Find the `${BUILD_DIR}/${XSA}` target, which invokes the Vitis linker.
 
 ```
-${BUILD_DIR}/${XSA}: ${XO} ${SYSTEM_CFG}
+{BUILD_DIR}/{XSA}: {XO} {SYSTEM_CFG} | {BUILD_DIR}
 	cd ${BUILD_DIR} && \
 		v++ --link --debug --save-temps \
 			--target ${TARGET} \
 			--platform ${PLATFORM} \
 			$(addprefix --config ../, ${SYSTEM_CFG}) \
 			$(addprefix ../, ${XO}) \
-            		$(addprefix ../, ${VSS}) \
+			$(addprefix ../, ${VSS}) \
 			--output ${XSA} \
-			2>&1 | tee vpp_link.log
+			2>&1 | tee vpp_link.log; exit $${PIPESTATUS[0]}
 ```
 
-This target invokes `v++` using the `--link` option, and specifies a target (`hw` or `hw_emu`) and platform (`xilinx_vck190_base_202420_1` in this case). The linker takes the system configuration file, data mover PL kernels, and VSS as inputs to produce an XSA. The inputs to the linker are specified in the Makefile as follows:
+This target invokes `v++` using the `--link` option, and specifies a target (`hw` or `hw_emu`) and platform (`vck190_base` in this case). The linker takes the system configuration file, data mover PL kernels, and VSS as inputs to produce an XSA. The inputs to the linker are specified in the Makefile as follows:
 
 ```
 XO              := ../hls_src/ifft_dma_src/ifft_dma_src_wrapper.xo \
@@ -190,60 +214,63 @@ SYSTEM_CFG      := system.cfg
 ```
 Note that the VSS is pulled from the `code` folder you generated earlier from Vitis Model Composer.
 
-The `${SD_CARD}` target invokes the Vitis packager.
+The `package` target invokes the Vitis packager.
 
 ```
-${SD_CARD}: ${BUILD_DIR}/${XSA} ${PS_EXE} ${KERNEL_IMAGE} ${ROOTFS} ${STIMULUS_IO}
+package: {BUILD_DIR}/{XSA} {PS_EXE} {STIMULUS_IO}
+	rm -rf ${PACKAGE}
+	mkdir -p ${SD_CARD}
 	cd ${BUILD_DIR} && \
-		v++ --package --debug --save-temps \
+		v++ --package --save-temps \
 			--target ${TARGET} \
-			--platform ${PLATFORM} \
-			--package.out_dir ${SD_CARD} \
-			--package.boot_mode=sd \
-			--package.image_format=ext4 \
-			--package.kernel_image=${KERNEL_IMAGE} \
-			--package.rootfs=${ROOTFS}  \
+			--platform ${XSA} \
 			--package.defer_aie_run \
-            		${XSA} \
-            		$(addprefix ../, ${VSS}) \
-			$(addprefix --package.sd_file=../, ${PS_EXE}) \
-			$(addprefix --package.sd_file=../,${STIMULUS_IO}) \
-			$(addprefix --package.sd_file=../,embedded_exec.sh) \
-			2>&1 | tee vpp_pack.log
+			--package.out_dir ${SD_CARD} \
+			--output ${XCLBIN} \
+			$(addprefix ../, ${VSS}) \
+			2>&1 | tee vpp_pack.log; exit $${PIPESTATUS[0]}
+	cp {BUILD_DIR}/{XCLBIN} ${SD_CARD}/
+	cp {PS_EXE} {STIMULUS_IO} {EMBEDDED_EXEC} {SD_CARD}/
 ```
 
-This target creates an `sd_card.img` that can be loaded onto a board, in this case a VCK190. The packager takes as inputs the VSS and the XSA that was generated by the linker.
+The packager takes as inputs the VSS and the XSA that was generated by the linker. It produces an XCLBIN (`a.xclbin`) for the host application, and a boot image (`BOOT.bin`) that contains the programmable device image (PDI) for the design. The outputs are written to the `package/sd_card` folder, along with the host application, the data files, and `embedded_exec.sh`.
+
+The PS runs Linux from the AMD [Embedded Development Framework (EDF)](https://edf.docs.amd.com/en/latest/index.html) disk image. The `stage_hw_emu` and `stage_hw` targets add the design to that disk image: `BOOT.bin` replaces the boot image in the boot partition, and the files needed to run the design are copied to the root partition. For hardware emulation, the disk image comes from the EDF QEMU prebuilt for the VCK190. For hardware, it is a copy of the EDF disk image, `package/sd_card.img`, that you write to the SD card of the board.
 
 ## Building and Running the Project for Hardware Emulation
 
 The `Makefile` contained in this folder invokes other Makefiles in the project to build each component, then link and package the overall platform.
 
 >**NOTE:** To build the Vitis project, make sure you have completed the following steps:
-> 1. [Configure your environment](https://docs.amd.com/r/en-US/ug1393-vitis-application-acceleration/Setting-Up-the-Vitis-Environment) to run Vitis.
+> 1. [Configure your environment](https://docs.amd.com/r/en-US/ug1701-vitis-accelerated-embedded/Setting-Up-the-Vitis-Environment) to run Vitis.
 > 2. Set the `PLATFORM_REPO_PATHS` environment variable to point to the `base_platforms` folder inside the Vitis installation directory.
-> 3. Download and install the [Common Images for Embedded Vitis Platforms](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2024-2.html).
-> 4. Set the environment variable `COMMON_IMAGE_VERSAL` to the full path where you have downloaded the common images.
+> 3. From the [EDF Downloads and Release Notes](https://edf.docs.amd.com/en/latest/downloads-and-release-notes.html) page, download the EDF Yocto artifacts that match your Vitis version into one folder, each in a subfolder with its artifact name: the Cortex-A72 application SDK `amd-cortexa72-common_meta-edf-app-sdk` (run the SDK installer and install it into the `amd-cortexa72-common_meta-edf-app-sdk/sdk` subfolder), the VCK190 QEMU prebuilt `amd-cortexa72-common_vck190_qemu_prebuilt`, and the disk image `amd-cortexa72-common_edf-platform-disk-image`. For an example of this layout, see [Versal with EDF](https://github.com/Xilinx/Vitis-Tutorials/tree/2026.1/Getting_Started/Vitis/Versal_w_EDF/README.md) in the Vitis Tutorials.
+> 4. Set the environment variable `YOCTO_ARTIFACTS` to the full path of that folder.
 
 1. Run `make all TARGET=hw_emu` in this folder in a terminal window to build and package the project for hardware emulation.
 
-The build process will take some time. When complete, the outputs will appear in a new folder named `package`.
-
-![figure1](Images/folders2.png)
-
-In addition to the `sd_card.img`, a script `launch_hw_emu.sh` is created to automate launching of the hardware emulator.
-
-2. From within the `package` folder, launch hardware emulation as follows: `./launch_hw_emu.sh -run-app embedded_exec.sh`.
-
-The emulator will start, and the hardware image will boot into Linux. The contents of the SD card image are displayed, and the `vitis/embedded_exec.sh` script will automatically run to launch the host application.
+The build process will take some time. When complete, the outputs will appear in a new folder named `package`. The `package/sd_card` folder contains the outputs of the Vitis packager, the files needed to run the design, the EDF QEMU prebuilt with the design added to its disk image, and the script `launch_hw_emu.sh` that launches the hardware emulator.
 
 ```
-versal-rootfs-common-20242:/mnt# INFO:Running embedded_exec.sh
-Run app command sent to console
-ls
-BOOT.BIN          a.xclbin          embedded_exec.sh  sig_i.txt
-Image             boot.scr          host.exe          sig_o.txt
-versal-rootfs-common-20242:/mnt# ./embedded_exec.sh
+package
+└── sd_card
+    ├── BOOT.bin
+    ├── a.pdi
+    ├── a.xclbin
+    ├── combined.qemuboot.conf
+    ├── edf-platform-disk-image-amd-cortexa72-common.rootfs.wic.qemu-sd
+    ├── embedded_exec.sh
+    ├── emconfig.json
+    ├── host.exe
+    ├── launch_hw_emu.sh
+    ├── sig_i.txt
+    ├── sig_o.txt
+    └── ...
 ```
+
+2. Run `make run_emu` in this folder to launch hardware emulation.
+
+The emulator will start, and the hardware image will boot into the EDF Linux image. The emulator logs in as user `amd-edf`, mounts the root partition of the disk image at `/media`, and runs the `vitis/embedded_exec.sh` script to launch the host application.
 
 As the host application runs, status messages are printed to the display as the AI Engine graph and PL kernels start. Eventually the host application will wait while the kernels execute:
 
@@ -270,27 +297,46 @@ Max Error: 256
 1. Run `make all TARGET=hw` in a Vitis terminal window to build and package the project for the target.
 
 
-2. The build process will take some time. When complete, the outputs will appear in a new folder named `package`. An sd_card.img file is generated by Vitis for testing this design on the board.
+2. The build process will take some time. When complete, the outputs will appear in a new folder named `package`. The file `package/sd_card.img` is a copy of the EDF disk image with the design added to it, for testing this design on the board.
 
-![figure1](Images/hwtest2.png)
+```
+package
+├── sd_card
+│   ├── BOOT.bin
+│   ├── a.pdi
+│   ├── a.xclbin
+│   ├── embedded_exec.sh
+│   ├── host.exe
+│   ├── sig_i.txt
+│   ├── sig_o.txt
+│   └── ...
+└── sd_card.img
+```
 
 3. A new folder named `build_hw` will appear under `vitis` after completion of hardware build:
 
 ![figure1](Images/hwtest3.png)
 
 4. Prerequisites:
-* An sd_card.img file generated by Vitis
+* The `package/sd_card.img` file
 * VCK190 Evaluation board
   * System Controller SD Card: may already be available with the board and plugged in.
   * VCK190 SD card: may already be available with the board. This is the card, where you will write the sd_card.img file generated for your design.
   * Connect uSD card to your laptop. If your laptop does not come with a uSD card reader slot, an USB-to-uSD card-reader may be used, assuming laptop has a USB port
-  * For board setup and establish a connection to a serial device by selecting “Serial”, please refer to [Running on Hardware](https://github.com/Xilinx/Vitis_Model_Composer/tree/2024.2/QuickGuides/Running_on_Hardware/linux/README.md).
+  * Write `sd_card.img` to the VCK190 SD card with a tool such as balenaEtcher, insert the card in the board, and set the boot mode switches to SD boot.
+  * For board setup and establish a connection to a serial device by selecting “Serial”, please refer to [Running on Hardware](https://github.com/Xilinx/Vitis_Model_Composer/tree/2026.2/QuickGuides/Running_on_Hardware/linux/README.md).
 
 5. Turn on board power by switching SW13 on and observe the terminal emulator. If everything goes well, boot messages should be displayed.
 
-6. After Linux has booted, from TeraTerm terminal emulator window, type 'cd /run/media/mmcblk0p1' and hit Enter. Within this directory do an 'ls' to check the contents: it should have the BOOT.BIN, embedded_exec.sh, data directory containing the data files among others.
+6. After Linux has booted, log in as user `amd-edf`. You are prompted to set a new password on the first login; this is also the `sudo` password.
 
-7. Run the executable file from the list by using the command `./embedded_exec.sh`.
+7. Mount the root partition of the SD card and run the design:
+
+```
+sudo mount /dev/mmcblk0p2 /media
+cd /media
+sudo ./embedded_exec.sh
+```
 
 8. It should print the test result as shown in the below image:
 
