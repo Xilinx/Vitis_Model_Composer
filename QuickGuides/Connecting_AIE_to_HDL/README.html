@@ -37,7 +37,7 @@ manage the sampling times across the two domains. This Quick Guide explains how 
 <p>Set the <em>Ouptut Sample Time</em> to <em>Inherit: Same as tready</em> (this is equivalent of setting this to <strong>T</strong>). </p>
 <h2 id="signal-period-into-the-block">Signal Period into the block</h2>
 <p>If the input rate into the block is larger than the output rate, eventually the internal buffers of the block will overflow and the simulation will stop. As such, the input period <strong>P</strong> should meet the following equation:</p>
-<p><img src="https://render.githubusercontent.com/render/math?math=P \geq  \frac{S\times T\times ii \times \text{(DT bit width)}}{W}"></p>
+<p><strong>P</strong> &ge; (<strong>S</strong> &times; <strong>T</strong> &times; <strong>ii</strong> &times; (DT bit width)) / <strong>W</strong></p>
 <h2 id="step-3-set-parameters-of-the-gateway-in-axis-block">Step 3 Set parameters of the Gateway In, AXIS block</h2>
 <ul>
 <li>Set <em>Output data type</em> to <strong>W</strong>.</li>

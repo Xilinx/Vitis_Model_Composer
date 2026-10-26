@@ -72,8 +72,6 @@ Also note that the signal lines are all a single color, indicating a single samp
 ![](./Images/model3.png)
 
 >**TIP:** You can click the button labeled `1/P` in the Timing Legend to view timing information in terms of rate instead of period.
->
->![](./Images/model4.png)
 
 ## AIE Subsystem
 

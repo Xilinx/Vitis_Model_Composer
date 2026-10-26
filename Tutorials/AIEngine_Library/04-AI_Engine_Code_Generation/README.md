@@ -205,7 +205,7 @@ The artifacts include shell scripts and Makefiles for compiling, simulating, and
 * ``make.sh``: This script configures the shell environment before launching the Makefile described below.
 * ``Makefile``: This Makefile compiles and simulates the AI Engine kernel portion of the design.
 
-To reproduce Steps 1 & 2 of this lab outside of Vitis Model Composer, you can ``cd`` to the ``code`` folder and execute ``./make.sh`` from a bash shell. This script requires an environment variable named ``XILINX_VITIS`` to point to the Vitis installation location, such as ``/opt/Xilinx/Vitis/2022.2``.
+To reproduce Steps 1 & 2 of this lab outside of Vitis Model Composer, you can ``cd`` to the ``code`` folder and execute ``./make.sh`` from a bash shell. This script requires an environment variable named ``XILINX_VITIS`` to point to the Vitis installation location, such as ``/opt/Xilinx/Vitis/2026.2``.
 
 You can also study and modify the generated Makefiles to incorporate the generated AI Engine code as part of a larger Versal Adaptive SoC design.
 

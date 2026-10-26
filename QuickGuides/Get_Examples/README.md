@@ -18,7 +18,7 @@ This is the recommended way to get the latest examples and tutorials for Vitis M
 ## Clone this repository
 You can directly use git locally to clone this repository or use [MATALB git integration](https://www.mathworks.com/help/simulink/ug/clone-git-repository.html). After you clone this repository, switch the branch to the version of the Vitis Model Composer version you have. For example:
 ```
-git checkout 2021.2
+git checkout 2026.2
 ```
 
 ## Download a zipped version directly from GitHub
