@@ -28,9 +28,7 @@ Two approaches are shown:
 
 To study each implementation, open the **Vitis Model Composer Hub** block, select either the `FIR_SSR` or `FIR_DualStream` subsystem, and run **Analyze** from the Analyze tab.
 
-To view each implementations throughput after AIE simulation concludes, click **View AIE simulation output and throughtput**. Both approaches achieve the expected throughput on each stream:
-
-![](Images/throughput.png)
+To view each implementations throughput after AIE simulation concludes, click **View AIE simulation output and throughtput**. Both approaches achieve the expected throughput on each stream.
 
 However, the dual stream approach uses fewer AI Engine tiles. To view the resource utilization, select **Open Vitis Analyzer** from the Vitis Model Composer Hub block. When the Vitis Analyzer opens, select **Array** from the Analysis menu.
 

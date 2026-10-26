@@ -60,7 +60,7 @@ View AI Engine Designs in Vitis Analyzer
  * Cascade FIR filter algorithm across multiple AIE kernels
  * View detailed timing information in the Vitis Analyzer and calculate latency
 
-### [Lab 6](./06-Hardware_Validation/README.md)
+### [Lab 6](../Hardware/Hardware_Validation/README.md)
 
 Hardware Validation of Versal Adaptive SoC Design
  * Generate a hardware image to perform validation

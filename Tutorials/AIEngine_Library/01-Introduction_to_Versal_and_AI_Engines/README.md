@@ -113,9 +113,9 @@ To set up your environment to develop AI Engine applications, do the following:
 
 1. If you did not install the Vitis Software Platform when you installed Vitis Model Composer, follow the [installation instructions](https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/Installing-the-Vitis-Software-Platform) to do so.
 
-2. To run this tutorial, make sure you are using a supported version of MATLAB (R2021a, R2021b, R2022a Update 6) with DSP System Toolbox installed. 
+2. To run this tutorial, make sure you are using a supported version of MATLAB (R2026a) with DSP System Toolbox installed. 
 
-3. Invoke Vitis Model Composer while pointing to the correct versions of MATLAB and Vitis installed. For example: ```./model_composer -vitis /opt/Xilinx/Vitis/2022.2 -matlab /tools/gensys/matlab/R2021a``` 
+3. Invoke Vitis Model Composer while pointing to the correct versions of MATLAB and Vitis installed. For example: ```./model_composer -vitis /opt/Xilinx/Vitis/2026.2 -matlab /tools/gensys/matlab/R2026a``` 
 
 ## Step 3: Run an Example AI Engine Design
 

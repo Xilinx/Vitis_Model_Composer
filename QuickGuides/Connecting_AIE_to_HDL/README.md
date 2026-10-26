@@ -37,7 +37,7 @@ Set the _Ouptut Sample Time_ to *Inherit: Same as tready* (this is equivalent of
 ## Signal Period into the block
 If the input rate into the block is larger than the output rate, eventually the internal buffers of the block will overflow and the simulation will stop. As such, the input period **P** should meet the following equation:
 
-<img src="https://render.githubusercontent.com/render/math?math=P \geq  \frac{S\times T\times ii \times \text{(DT bit width)}}{W}">
+$$P \geq \frac{S\times T\times ii \times \text{(DT bit width)}}{W}$$
 
 ## Step 3 Set parameters of the Gateway In, AXIS block
 * Set *Output data type* to **W**.
