@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T21:24:53Z",
+  "generatedAt": "2026-10-26T14:52:02Z",
   "files": [
     ".github/scripts/generate_manifest.py",
     ".github/workflows/update-manifest.yml",
@@ -1543,11 +1543,8 @@
     "Tutorials/HDL_Library/Lab7/Solution/Lab7_3_part2_sol.slx",
     "Tutorials/HDL_Library/Lab7/Solution/Lab7_3_sol.slx",
     "Tutorials/Hardware/Export_to_Vitis/IFFT64K_2D.slx",
-    "Tutorials/Hardware/Export_to_Vitis/Images/folders1.png",
-    "Tutorials/Hardware/Export_to_Vitis/Images/folders2.png",
     "Tutorials/Hardware/Export_to_Vitis/Images/hub1.png",
     "Tutorials/Hardware/Export_to_Vitis/Images/hwtest1.png",
-    "Tutorials/Hardware/Export_to_Vitis/Images/hwtest2.png",
     "Tutorials/Hardware/Export_to_Vitis/Images/hwtest3.png",
     "Tutorials/Hardware/Export_to_Vitis/Images/hwtest9.png",
     "Tutorials/Hardware/Export_to_Vitis/Images/ifft64k-block-diagram.png",
@@ -1584,8 +1581,6 @@
     "Tutorials/Hardware/Export_to_Vitis/vitis/system.cfg",
     "Tutorials/Hardware/Hardware_Validation/Images/Image01.png",
     "Tutorials/Hardware/Hardware_Validation/Images/Image02.png",
-    "Tutorials/Hardware/Hardware_Validation/Images/Image03.png",
-    "Tutorials/Hardware/Hardware_Validation/Images/Image04.png",
     "Tutorials/Hardware/Hardware_Validation/Images/Image05.png",
     "Tutorials/Hardware/Hardware_Validation/Images/Image06.png",
     "Tutorials/Hardware/Hardware_Validation/Images/Image07.png",

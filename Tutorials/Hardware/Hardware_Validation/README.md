@@ -11,7 +11,7 @@
 
 This lab shows how to use Vitis Model Composer to perform validation of an AI Engine design running on Versal Adaptive SoC hardware.
 
-In Lab 5, we used cycle-approximate AI Engine simulation to simulate the behavior of the AIE kernels. This gave us confidence that the algorithm is functionally correct, but did not explore how the AI Engine interacts with the Programmable Logic (PL) and Processing System (PS). 
+In [Lab 5](../../AIEngine_Library/05-Vitis_Analyzer/README.md), we used cycle-approximate AI Engine simulation to simulate the behavior of the AIE kernels. This gave us confidence that the algorithm is functionally correct, but did not explore how the AI Engine interacts with the Programmable Logic (PL) and Processing System (PS). 
 
 Hardware validation is an important next step to test the Versal Adaptive SoC design. Vitis Model Composer can be used to create a hardware image for either a physical board or a hardware emulation flow that simulates the full behavior of the Versal Adaptive SoC including AI Engine, PL and PS. 
 
@@ -35,9 +35,21 @@ This lab has the following steps:
 
 :warning: Steps 1 and 2 of this lab can be completed without hardware. Step 3 requires a Versal board such as the [VCK190](https://www.xilinx.com/products/boards-and-kits/vck190.html).
 
+### Before You Begin: Download the EDF Yocto Artifacts
+
+The hardware validation flow builds the PS application and boot images with the AMD [Embedded Development Framework (EDF)](https://edf.docs.amd.com/en/latest/index.html), so it needs a folder of prebuilt EDF Yocto artifacts. You will enter this folder as the **Yocto Base Directory** in the Vitis Model Composer Hub block. This is required for both the Baremetal and the Linux flow, and for both `hw` and `hw_emu`.
+
+From the [EDF Downloads and Release Notes](https://edf.docs.amd.com/en/latest/downloads-and-release-notes.html) page, download the release that matches your Vitis version, and place the following artifacts for the VCK190 in one folder (for example, `<path>/yocto_artifacts`). Each artifact goes in a subfolder with its artifact name.
+
+* `amd-cortexa72-common_meta-edf-app-sdk`: The Cortex-A72 application SDK. Run the SDK installer and install it into `<path>/yocto_artifacts/amd-cortexa72-common_meta-edf-app-sdk/sdk`.
+* `versal-vck190-multidomain_edf-qspi`: The VCK190 boot images, used for baremetal hardware emulation.
+* `amd-cortexa72-common_vck190_qemu_prebuilt` and `amd-cortexa72-common_edf-platform-disk-image`: The QEMU prebuilt and the Linux disk image, used for the Linux flow.
+
+For an example of this folder layout, see [Versal with EDF](https://github.com/Xilinx/Vitis-Tutorials/tree/2026.1/Getting_Started/Vitis/Versal_w_EDF/README.md) in the Vitis Tutorials.
+
 ## Step 1: Configure Hardware Validation Flow
 
-1. Run the ***setupLab*** script to initialize a working directory.
+1. In MATLAB, change to this lab's folder and run the ***setupLab*** script. The script creates a `work` folder, copies the files needed for the lab into it, and changes to that folder.
 
 2. Open the model ``Part1_Start.slx``.
 
@@ -51,49 +63,45 @@ This lab has the following steps:
 
 6. Select the **Platform** tab.
 
-7. In the Platform drop-down, select **Specify Platform**.
+7. In the Platform drop-down, select **vck190_base**.
 
 ![missing image](Images/Image02.png)
 
-8. Click **Browse**.
+The Platform drop-down lists the [Versal base platforms](https://docs.amd.com/r/en-US/ug1701-vitis-accelerated-embedded/Platform-Based-Design-Flows) that are installed with Vitis. In this lab, we will use the `vck190_base` platform for the [VCK190](https://www.xilinx.com/products/boards-and-kits/vck190.html).
 
-This is where you will specify the path to a *.xpfm* file that defines your [platform](https://docs.xilinx.com/r/en-US/ug1273-versal-acap-design/Platform-Based-Design-Flows). In this lab, we will use a [Versal base platform](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html) for the [VCK190](https://www.xilinx.com/products/boards-and-kits/vck190.html) that has been provided with the Vitis installation.
+> Note: The hardware validation flow supports only the `vck190_base`, `vek280_base`, and `vrk160_base` platforms from the Vitis installation. Other platforms in the list, such as `vek385_base`, the DFX platforms, and the platforms with the `xilinx_` prefix, can be used for other flows, but not for hardware validation. Custom platforms selected with **Specify Platform** are not supported for hardware validation either. If you click **Validate** with an unsupported platform, Vitis Model Composer reports that the selected platform is not supported for hardware validation flow.
 
-9. Navigate to the folder where the Versal base platforms are installed. These are located within the Vitis tools installation, for example: **/opt/Xilinx/Vitis/2026.2/base_platforms**.
+8. Click **OK**.
 
-![missing image](Images/Image03.png)
-
-10. Double-click on the **xilinx_vck190_base_...** folder, and then click the **xilinx_vck190_base_....xpfm** file.
-
-![missing image](Images/Image04.png)
-
-11. Click **Open**, then **OK**.
-
-The Hardware Selection tab populates with information about the selected platform.
+The Hardware Selection pane populates with information about the selected platform.
 
 ![missing image](Images/Image05.png)
 
-12. Select the **Code Generation** tab, the **FIRchain** subsystem.
+9. Select the **Code Generation** pane, and then the **FIRchain** subsystem.
 
-13. And then select **Validate On Hardware**.
+10. Select the **Validate On Hardware** tab.
 
 ![missing image](Images/Image06.png)
 
 The **HW System Type** provides two options: __Baremetal__ or __Linux__ flow.
 
 * With a _baremetal_ environment, the PS application is compiled to run directly on the processor. The application must integrate and manage the AI Engine graph and PL kernels directly without the support of any operating system. AMD provides a standalone board support package (BSP), drivers, and libraries for applications to use to reduce development effort.
-* With _Linux_, the PS application is compiled to run on a Linux operating system. AMD provides an ADF API to control control the AI Engine graph and the Xilinx Runtime (XRT) API to control PL kernels.
+* With _Linux_, the PS application is compiled with the EDF Yocto SDK to run on the EDF Linux image. AMD provides an ADF API to control the AI Engine graph and the Xilinx Runtime (XRT) API to control PL kernels.
 
 For more details, refer to the [AI Engine Tools and Flows User Guide (UG1076)](https://docs.xilinx.com/r/en-US/ug1076-ai-engine-environment/Programming-the-PS-Host-Application). In either scenario, Vitis Model Composer automatically generates all required source code for the host application to execute the testbench and interact with the Adaptive SoC device. **We will use Baremetal flow for this lab.**
 
-**Target** has two options: __hw__ or __hw emu__.
+**Target** has two options: __hw__ or __hw_emu__.
 
-* _hw_ generates a binary image (for baremetal) or an SD card image (for Linux) with which to program the hardware.
-* _hw emu_ generates simulation artifacts to perform Vitis hardware emulation. SystemC is used to simulate the AI Engine and PL kernels, and QEMU is used to simulate the PS application. Hardware emulation lets you obtain high-fidelity profiling data about the design as it would run on hardware, without having access to a physical board.
+* _hw_ generates a programmable device image (PDI) with which to program the hardware. For Linux, Vitis Model Composer also generates the files to run the design on the EDF Linux image.
+* _hw_emu_ generates simulation artifacts to perform Vitis hardware emulation. SystemC is used to simulate the AI Engine and PL kernels, and QEMU is used to simulate the PS application. Hardware emulation lets you obtain high-fidelity profiling data about the design as it would run on hardware, without having access to a physical board.
 
 For more information, see [Simulating an AI Engine Graph Application](https://docs.xilinx.com/r/en-US/ug1076-ai-engine-environment/Simulating-an-AI-Engine-Graph-Application).
 
-**If you do not have access to a board and/or would like to perform hardware emulation, select _hw emu_ as the Target and proceed to Step 2.**
+**Yocto Base Directory** is the folder of EDF Yocto artifacts that you downloaded in [Before You Begin](#before-you-begin-download-the-edf-yocto-artifacts).
+
+11. Click the **...** button next to **Yocto Base Directory** and select your `yocto_artifacts` folder, or type its full path.
+
+**If you do not have access to a board and/or would like to perform hardware emulation, select _hw_emu_ as the Target and proceed to Step 2.**
 
 **If you have access to a VCK190 evaluation board (or another Versal Adaptive SoC board), select _hw_ as the Target and proceed to Step 3.**
 
@@ -101,39 +109,41 @@ For more information, see [Simulating an AI Engine Graph Application](https://do
 
 In this step, you will use Vitis hardware emulation to validate the design. As stated above, this simulates the AI Engine kernels, PL kernels, and PS application side-by-side. This allows you to gain confidence that the design will run on the actual hardware without requiring access to a board. However, running hardware emulation is slower than running the design on the board itself.
 
-1. On the Validate On Hardware tab of the Vitis Model Composer Hub block, select target as **hw_emu** and then select **Run hardware emulation after code generation**.
-
-2. Click **Validate**. 
+1. On the Validate On Hardware tab of the Vitis Model Composer Hub block, select target as **hw_emu**, make sure the **Yocto Base Directory** is set, and then select **Run hardware emulation after code generation**.
 
 ![missing image](Images/Image07.png)
 
+2. Click **Validate**.
+
+> Note: Because you selected a new platform, a NOTE might report that some parameters of the AI Engine library blocks (for example, 'Rounding mode') may have been updated because the AI Engine type has changed. Click **OK** to continue.
+
 This will take a substantial amount of time as the entire design (AI Engine, PL, and PS) is compiled and synthesized. Alternatively, you can leave the **Run hardware emulation after code generation** option unchecked and Vitis Model Composer will only generate the AIE, PL, and host source code along with a script and makefile to perform hardware emulation outside of Vitis Model Composer.
 
-> Note: To perform hardware emulation outside of Vitis Model Composer after the hardware validation code has been generated, run the script `./code_hw_emu/run_hw/src_ps/launch_hw_emu.sh`.
+> Note: To perform hardware emulation outside of Vitis Model Composer after the hardware validation code has been generated, open a terminal in the `code` folder and run `./make.sh all`. The script sets up the Vitis and EDF Yocto environment, using the Yocto Base Directory that you entered in the Hub block, and runs the generated makefiles. To work with the makefiles directly, run `source setup.sh` in the `code` folder, and then run `make help` in any of its subfolders to list the available targets.
 
-After hardware validation is complete, the result is displayed in the Progress window. The testbench indicates that all outputs match between the Simulink simulation and the hardware emulation.
+After hardware validation is complete, the result is displayed in the Progress window. Expand **Ran Hardware Emulation for FIRchain** to see the log. The testbench indicates that all outputs match between the Simulink simulation and the hardware emulation.
 
 ![missing image](Images/Image08.png)
 
 ## Step 3: Validation on Hardware
 
-In this step, you will generate a BOOT.BIN binary hardware image, load it on the board, and perform hardware validation.
+In this step, you will generate a programmable device image (PDI), load it on the board, and perform hardware validation.
 
-1. On the Validate On Hardware tab of the Vitis Model Composer Hub block, select **Generate BOOT.BIN after code generation**.
+1. On the Validate On Hardware tab of the Vitis Model Composer Hub block, select target as **hw**, make sure the **Yocto Base Directory** is set, and then select **Generate PDI after code generation**.
 
 ![missing image](Images/Image09.png)
 
 2. Click **Validate**. 
 
-This will take a substantial amount of time as the entire design (AI Engine, PL, and PS) is compiled and synthesized. Alternatively, you can leave the **Generate BOOT.BIN after code generation** option unchecked and Vitis Model Composer will only generate the AIE, PL, and host source code along with a script and makefile to build the boot image outside of Vitis Model Composer.
+This will take a substantial amount of time as the entire design (AI Engine, PL, and PS) is compiled and synthesized. Alternatively, you can leave the **Generate PDI after code generation** option unchecked and Vitis Model Composer will only generate the AIE, PL, and host source code along with a script and makefiles to build the PDI outside of Vitis Model Composer. To build it, open a terminal in the `code` folder and run `./make.sh all`.
 
-After the binary image is generated, it is stored in the folder `./code_hw/run_hw/src_ps/BOOT.BIN`.
+After the PDI is generated, it is stored in the file `./code/hw/a.pdi`. Expand **Generated Hardware Image for FIRchain** in the Progress window to see the log. For the baremetal flow, program the board with `a.pdi` as described below, even though the log ends with a message to run BOOT.BIN on the board.
 
 ![missing image](Images/Image10.png)
 
 We will now prepare the board and download the hardware image to it. This lab provides instructions specific to the VCK190.
 
-> Note: Here we are assuming the board is physically connected to a Windows machine and the BOOT.BIN is generated using Vitis Model Composer on a Linux machine. The Windows machine and Linux machine are networked together, and the [AMD Hardware Server](https://docs.xilinx.com/r/en-US/ug908-vivado-programming-debugging/Connecting-to-a-Hardware-Target-Using-hw_server) is run on the Windows machine to route data between the board and the Linux machine.
+> Note: Here we are assuming the board is physically connected to a Windows machine and the PDI is generated using Vitis Model Composer on a Linux machine. The Windows machine and Linux machine are networked together, and the [AMD Hardware Server](https://docs.xilinx.com/r/en-US/ug908-vivado-programming-debugging/Connecting-to-a-Hardware-Target-Using-hw_server) is run on the Windows machine to route data between the board and the Linux machine.
 
 3. Connect the power cable to the board.
 
@@ -183,13 +193,13 @@ Once your board is set up, program the device as follows:
     c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. 
     
       ```
-       cd <lab work directory>/code_hw/run_hw/src_ps
+       cd <lab work directory>/code/hw
       ```       
 11. Program the device and run:
     
     a. From the XSDB prompt, run the following command:
       ```
-      device program BOOT.BIN
+      device program a.pdi
       ```
       You will see following message in the XSDB prompt if the device program is successful.
     
@@ -207,7 +217,7 @@ Once your board is set up, program the device as follows:
     
     ```
         rst -system
-        device program BOOT.BIN
+        device program a.pdi
     ```
 
 ## Conclusion

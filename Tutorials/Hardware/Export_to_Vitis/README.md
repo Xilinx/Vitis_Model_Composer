@@ -52,7 +52,7 @@ The model targets the `vck190_base` platform. If the **Hardware Selection** pane
 
 ![figure1](Images/hub1.png)
 
-The default configuration is to use the entire AI Engine array for the generated design. You can also specify **Enable array partition** to target the generated design to specific columns in the AIE array. This is useful if the generated AIE graph is to be combined with other graphs later on. For more information see [Compile AI Engine Graph for Independent Partitions](https://docs.amd.com/r/en-US/ug1076-ai-engine-environment/Compile-AI-Engine-Graph-for-Independent-Partitions) in the *AI Engine Tools and Flows User Guide (UG1076)*.
+By default, **AIE array configuration** is set to **Use entire AIE array**, so the generated design uses the entire AI Engine array. You can also select **Enable array partition** and set the **Start Column** and **Number of Columns** to target the generated design to specific columns in the AIE array. This is useful if the generated AIE graph is to be combined with other graphs later on. For more information see [Compile AI Engine Graph for Independent Partitions](https://docs.amd.com/r/en-US/ug1076-ai-engine-environment/Compile-AI-Engine-Graph-for-Independent-Partitions) in the *AI Engine Tools and Flows User Guide (UG1076)*.
 
 4. Click **Export**.
 
@@ -291,6 +291,8 @@ Max Error: 256
 --- PASSED ---
 
 ```
+
+After the result is printed, XRT reports `[XRT] ERROR: xrt::run destructed while command is still in progress` and the host application exits with an abort. This happens because the `dma_src` data mover is still waiting to send data when the host application exits, and it does not affect the test result. The emulator then returns to the Linux prompt. To stop the emulator, press **Ctrl+C** in the terminal where you ran `make run_emu`.
 
 ## Building and Running the Project for Hardware
 

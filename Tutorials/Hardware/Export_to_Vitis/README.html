@@ -59,7 +59,7 @@ document.location=commandURI
 <li><p>Select an <strong>Export Type</strong> of <strong>Vitis Subsystem</strong>.</p></li>
 </ol>
 <p><img src="Images/hub1.png" alt="figure1" /></p>
-<p>The default configuration is to use the entire AI Engine array for the generated design. You can also specify <strong>Enable array partition</strong> to target the generated design to specific columns in the AIE array. This is useful if the generated AIE graph is to be combined with other graphs later on. For more information see <a href="https://docs.amd.com/r/en-US/ug1076-ai-engine-environment/Compile-AI-Engine-Graph-for-Independent-Partitions">Compile AI Engine Graph for Independent Partitions</a> in the <em>AI Engine Tools and Flows User Guide (UG1076)</em>.</p>
+<p>By default, <strong>AIE array configuration</strong> is set to <strong>Use entire AIE array</strong>, so the generated design uses the entire AI Engine array. You can also select <strong>Enable array partition</strong> and set the <strong>Start Column</strong> and <strong>Number of Columns</strong> to target the generated design to specific columns in the AIE array. This is useful if the generated AIE graph is to be combined with other graphs later on. For more information see <a href="https://docs.amd.com/r/en-US/ug1076-ai-engine-environment/Compile-AI-Engine-Graph-for-Independent-Partitions">Compile AI Engine Graph for Independent Partitions</a> in the <em>AI Engine Tools and Flows User Guide (UG1076)</em>.</p>
 <ol start="4">
 <li>Click <strong>Export</strong>.</li>
 </ol>
@@ -253,6 +253,7 @@ Max Error: 256
 
 --- PASSED ---
 </code></pre>
+<p>After the result is printed, XRT reports <code>[XRT] ERROR: xrt::run destructed while command is still in progress</code> and the host application exits with an abort. This happens because the <code>dma_src</code> data mover is still waiting to send data when the host application exits, and it does not affect the test result. The emulator then returns to the Linux prompt. To stop the emulator, press <strong>Ctrl+C</strong> in the terminal where you ran <code>make run_emu</code>.</p>
 <h2 id="building-and-running-the-project-for-hardware">Building and Running the Project for Hardware</h2>
 <ol>
 <li><p>Run <code>make all TARGET=hw</code> in a Vitis terminal window to build and package the project for the target.</p></li>
