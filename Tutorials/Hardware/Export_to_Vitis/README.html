@@ -36,7 +36,7 @@ document.location=commandURI
 <blockquote>
 <p><strong>NOTE:</strong> The DMA Source and DMA Sink blocks in the PL, shown in the diagram above, will be provided as part of the platform and not the Vitis Subsystem in this tutorial.</p>
 </blockquote>
-<p>For more details on the design, refer to the <a href="https://github.com/Xilinx/Vitis_Model_Composer/tree/2026.2/Examples/AIENGINE_plus_PL/AIE_HLS/IFFT64K_2D/README.md">Vitis Model Composer example</a> and the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2026.2/AI_Engine_Development/AIE/Design_Tutorials/12-IFFT64K-2D">Design Example from Vitis-Tutorials</a>.</p>
+<p>For more details on the design, refer to the <a href="https://github.com/Xilinx/Vitis_Model_Composer/tree/2026.2/Examples/AIENGINE_plus_PL/AIE_HLS/IFFT64K_2D/README.md">Vitis Model Composer example</a> and the <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2026.1/AI_Engine_Development/AIE/Design_Tutorials/12-IFFT64K-2D">Design Example from Vitis-Tutorials</a>.</p>
 <p>Open the model <code>IFFT64K_2D.slx</code> and examine the <code>DUT</code> subsystem, which contains an HLS Kernel and an AI Engine subsystem.</p>
 <p><img src="Images/model2.png" alt="figure" /></p>
 <p>The signals entering and exiting the AI Engine are of <code>cint32</code> data type (64 bits wide). The PLIO blocks inside the AI Engine subsystem configure the PLIO width to 64 bits. This means that in hardware, one <code>cint32</code> sample will be transferred across each stream on every PL clock cycle. You could potentially increase the PLIO width to 128 bits, so that 2 samples are transferred on each PL clock cycle.</p>
@@ -51,19 +51,43 @@ document.location=commandURI
 </ul>
 <p>To export the Vitis Model Composer IFFT design as a VSS:</p>
 <ol>
-<li><p>Double-click the <strong>Vitis Model Composer Hub</strong> block.</p></li>
-<li><p>Select the <strong>DUT</strong> subsystem and the <strong>Export</strong> tab.</p></li>
+<li>Double-click the <strong>Vitis Model Composer Hub</strong> block.</li>
+</ol>
+<p>The Hardware Selection pane starts empty. Click the <strong>…</strong> button, select the <strong>Platform</strong> tab, select <strong>vck190_base</strong> in the Platform drop-down, and click <strong>OK</strong>.</p>
+<ol start="2">
+<li><p>Select the <strong>Code Generation</strong> pane, the <strong>DUT</strong> subsystem, and the <strong>Export</strong> tab.</p></li>
 <li><p>Select an <strong>Export Type</strong> of <strong>Vitis Subsystem</strong>.</p></li>
 </ol>
 <p><img src="Images/hub1.png" alt="figure1" /></p>
-<p>The default configuration is to use the entire AI Engine array for the generated design. You can also specify <strong>Enable array partition</strong> to target the generated design to specific columns in the AIE array. This is useful if the generated AIE graph is to be combined with other graphs later on. For more information see <a href="https://docs.amd.com/r/en-US/ug1076-ai-engine-environment/Compile-AI-Engine-Graph-for-Independent-Partitions">Compile AI Engine Graph for Independent Partitions</a> in the <em>AI Engine Tools and Flows User Guide (UG1076)</em>.</p>
+<p>By default, <strong>AIE array configuration</strong> is set to <strong>Use entire AIE array</strong>, so the generated design uses the entire AI Engine array. You can also select <strong>Enable array partition</strong> and set the <strong>Start Column</strong> and <strong>Number of Columns</strong> to target the generated design to specific columns in the AIE array. This is useful if the generated AIE graph is to be combined with other graphs later on. For more information see <a href="https://docs.amd.com/r/en-US/ug1076-ai-engine-environment/Compile-AI-Engine-Graph-for-Independent-Partitions">Compile AI Engine Graph for Independent Partitions</a> in the <em>AI Engine Tools and Flows User Guide (UG1076)</em>.</p>
 <ol start="4">
 <li>Click <strong>Export</strong>.</li>
 </ol>
-<p>Vitis Model Composer generates the constituent parts of the VSS listed above, and it also invokes the Vitis linker (<code>v++</code>) to generate a Vitis Subsystem. This will take a few minutes.</p>
+<p>Vitis Model Composer generates the constituent parts of the VSS listed above, and it also invokes the Vitis linker (<code>v++</code>) to generate a Vitis Subsystem. This can take 20 minutes or more, because the AI Engine graph and the HLS kernel are compiled.</p>
 <p><img src="Images/progress1.png" alt="figure1" /></p>
 <p>After code generation is complete, the products can be viewed in the <code>code</code> folder.</p>
-<p><img src="Images/folders1.png" alt="figure1" /></p>
+<pre><code>code
+├── ip
+│   ├── AIE
+│   ├── ifft_transpose
+│   └── Makefile
+├── vss
+│   ├── DUT
+│   │   ├── DUT
+│   │   ├── ip_repo
+│   │   ├── DUT.vss
+│   │   ├── ifft_transpose_wrapper.xo
+│   │   ├── libadf.a
+│   │   └── system.aieprj
+│   ├── DUT_params.cfg
+│   ├── getXOPaths.sh
+│   └── Makefile
+├── make.sh
+├── Makefile
+├── model_composer.log
+├── model_composer_aie_compilation.log
+└── setup.sh
+</code></pre>
 <ul>
 <li>The <code>ip</code> folder contains subfolders for each subsystem (AI Engine or HLS Kernel) in the design.<ul>
 <li><code>AIE</code> contains the generated code and libadf.a for the AI Engine subsystem.</li>
@@ -146,7 +170,7 @@ sp=dma_snk.mem:LPDDR
 <h3 id="linking-and-packaging">Linking and Packaging</h3>
 <p>Open the file <code>vitis/Makefile</code>. This file automates invoking the Vitis toolchain (<code>v++</code>) to link and package the platform.</p>
 <p>Find the <code>${BUILD_DIR}/${XSA}</code> target, which invokes the Vitis linker.</p>
-<pre><code>${BUILD_DIR}/${XSA}: ${XO} ${SYSTEM_CFG}
+<pre><code>${BUILD_DIR}/${XSA}: ${XO} ${SYSTEM_CFG} | ${BUILD_DIR}
 cd ${BUILD_DIR} &amp;&amp; \
 v++ --link --debug --save-temps \
 --target ${TARGET} \
@@ -155,63 +179,67 @@ $(addprefix --config ../, ${SYSTEM_CFG}) \
 $(addprefix ../, ${XO}) \
 $(addprefix ../, ${VSS}) \
 --output ${XSA} \
-2&gt;&amp;1 | tee vpp_link.log
+2&gt;&amp;1 | tee vpp_link.log; exit $${PIPESTATUS[0]}
 </code></pre>
-<p>This target invokes <code>v++</code> using the <code>--link</code> option, and specifies a target (<code>hw</code> or <code>hw_emu</code>) and platform (<code>xilinx_vck190_base_202420_1</code> in this case). The linker takes the system configuration file, data mover PL kernels, and VSS as inputs to produce an XSA. The inputs to the linker are specified in the Makefile as follows:</p>
+<p>This target invokes <code>v++</code> using the <code>--link</code> option, and specifies a target (<code>hw</code> or <code>hw_emu</code>) and platform (<code>vck190_base</code> in this case). The linker takes the system configuration file, data mover PL kernels, and VSS as inputs to produce an XSA. The inputs to the linker are specified in the Makefile as follows:</p>
 <pre><code>XO              := ../hls_src/ifft_dma_src/ifft_dma_src_wrapper.xo \
 ../hls_src/ifft_dma_snk/ifft_dma_snk_wrapper.xo
 VSS        := ../code/vss/DUT/DUT.vss
 SYSTEM_CFG      := system.cfg
 </code></pre>
 <p>Note that the VSS is pulled from the <code>code</code> folder you generated earlier from Vitis Model Composer.</p>
-<p>The <code>${SD_CARD}</code> target invokes the Vitis packager.</p>
-<pre><code>${SD_CARD}: ${BUILD_DIR}/${XSA} ${PS_EXE} ${KERNEL_IMAGE} ${ROOTFS} ${STIMULUS_IO}
+<p>The <code>package</code> target invokes the Vitis packager.</p>
+<pre><code>package: ${BUILD_DIR}/${XSA} ${PS_EXE} ${STIMULUS_IO}
+rm -rf ${PACKAGE}
+mkdir -p ${SD_CARD}
 cd ${BUILD_DIR} &amp;&amp; \
-v++ --package --debug --save-temps \
+v++ --package --save-temps \
 --target ${TARGET} \
---platform ${PLATFORM} \
---package.out_dir ${SD_CARD} \
---package.boot_mode=sd \
---package.image_format=ext4 \
---package.kernel_image=${KERNEL_IMAGE} \
---package.rootfs=${ROOTFS}  \
+--platform ${XSA} \
 --package.defer_aie_run \
-${XSA} \
+--package.out_dir ${SD_CARD} \
+--output ${XCLBIN} \
 $(addprefix ../, ${VSS}) \
-$(addprefix --package.sd_file=../, ${PS_EXE}) \
-$(addprefix --package.sd_file=../,${STIMULUS_IO}) \
-$(addprefix --package.sd_file=../,embedded_exec.sh) \
-2&gt;&amp;1 | tee vpp_pack.log
+2&gt;&amp;1 | tee vpp_pack.log; exit $${PIPESTATUS[0]}
+cp ${BUILD_DIR}/${XCLBIN} ${SD_CARD}/
+cp ${PS_EXE} ${STIMULUS_IO} ${EMBEDDED_EXEC} ${SD_CARD}/
 </code></pre>
-<p>This target creates an <code>sd_card.img</code> that can be loaded onto a board, in this case a VCK190. The packager takes as inputs the VSS and the XSA that was generated by the linker.</p>
+<p>The packager takes as inputs the VSS and the XSA that was generated by the linker. It produces an XCLBIN (<code>a.xclbin</code>) for the host application, and a boot image (<code>BOOT.bin</code>) that contains the programmable device image (PDI) for the design. The outputs are written to the <code>package/sd_card</code> folder, along with the host application, the data files, and <code>embedded_exec.sh</code>.</p>
+<p>The PS runs Linux from the AMD <a href="https://edf.docs.amd.com/en/latest/index.html">Embedded Development Framework (EDF)</a> disk image. The <code>stage_hw_emu</code> and <code>stage_hw</code> targets add the design to that disk image: <code>BOOT.bin</code> replaces the boot image in the boot partition, and the files needed to run the design are copied to the root partition. For hardware emulation, the disk image comes from the EDF QEMU prebuilt for the VCK190. For hardware, it is a copy of the EDF disk image, <code>package/sd_card.img</code>, that you write to the SD card of the board.</p>
 <h2 id="building-and-running-the-project-for-hardware-emulation">Building and Running the Project for Hardware Emulation</h2>
 <p>The <code>Makefile</code> contained in this folder invokes other Makefiles in the project to build each component, then link and package the overall platform.</p>
 <blockquote>
 <p><strong>NOTE:</strong> To build the Vitis project, make sure you have completed the following steps:</p>
 <ol>
-<li><a href="https://docs.amd.com/r/en-US/ug1393-vitis-application-acceleration/Setting-Up-the-Vitis-Environment">Configure your environment</a> to run Vitis.</li>
+<li><a href="https://docs.amd.com/r/en-US/ug1701-vitis-accelerated-embedded/Setting-Up-the-Vitis-Environment">Configure your environment</a> to run Vitis.</li>
 <li>Set the <code>PLATFORM_REPO_PATHS</code> environment variable to point to the <code>base_platforms</code> folder inside the Vitis installation directory.</li>
-<li>Download and install the <a href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2024-2.html">Common Images for Embedded Vitis Platforms</a>.</li>
-<li>Set the environment variable <code>COMMON_IMAGE_VERSAL</code> to the full path where you have downloaded the common images.</li>
+<li>From the <a href="https://edf.docs.amd.com/en/latest/downloads-and-release-notes.html">EDF Downloads and Release Notes</a> page, download the EDF Yocto artifacts that match your Vitis version into one folder, each in a subfolder with its artifact name: the Cortex-A72 application SDK <code>amd-cortexa72-common_meta-edf-app-sdk</code> (run the SDK installer and install it into the <code>amd-cortexa72-common_meta-edf-app-sdk/sdk</code> subfolder), the VCK190 QEMU prebuilt <code>amd-cortexa72-common_vck190_qemu_prebuilt</code>, and the disk image <code>amd-cortexa72-common_edf-platform-disk-image</code>. For an example of this layout, see <a href="https://github.com/Xilinx/Vitis-Tutorials/tree/2026.1/Getting_Started/Vitis/Versal_w_EDF/README.md">Versal with EDF</a> in the Vitis Tutorials.</li>
+<li>Set the environment variable <code>YOCTO_ARTIFACTS</code> to the full path of that folder.</li>
 </ol>
 </blockquote>
 <ol>
 <li>Run <code>make all TARGET=hw_emu</code> in this folder in a terminal window to build and package the project for hardware emulation.</li>
 </ol>
-<p>The build process will take some time. When complete, the outputs will appear in a new folder named <code>package</code>.</p>
-<p><img src="Images/folders2.png" alt="figure1" /></p>
-<p>In addition to the <code>sd_card.img</code>, a script <code>launch_hw_emu.sh</code> is created to automate launching of the hardware emulator.</p>
-<ol start="2">
-<li>From within the <code>package</code> folder, launch hardware emulation as follows: <code>./launch_hw_emu.sh -run-app embedded_exec.sh</code>.</li>
-</ol>
-<p>The emulator will start, and the hardware image will boot into Linux. The contents of the SD card image are displayed, and the <code>vitis/embedded_exec.sh</code> script will automatically run to launch the host application.</p>
-<pre><code>versal-rootfs-common-20242:/mnt# INFO:Running embedded_exec.sh
-Run app command sent to console
-ls
-BOOT.BIN          a.xclbin          embedded_exec.sh  sig_i.txt
-Image             boot.scr          host.exe          sig_o.txt
-versal-rootfs-common-20242:/mnt# ./embedded_exec.sh
+<p>The build process will take some time. When complete, the outputs will appear in a new folder named <code>package</code>. The <code>package/sd_card</code> folder contains the outputs of the Vitis packager, the files needed to run the design, the EDF QEMU prebuilt with the design added to its disk image, and the script <code>launch_hw_emu.sh</code> that launches the hardware emulator.</p>
+<pre><code>package
+└── sd_card
+    ├── BOOT.bin
+    ├── a.pdi
+    ├── a.xclbin
+    ├── combined.qemuboot.conf
+    ├── edf-platform-disk-image-amd-cortexa72-common.rootfs.wic.qemu-sd
+    ├── embedded_exec.sh
+    ├── emconfig.json
+    ├── host.exe
+    ├── launch_hw_emu.sh
+    ├── sig_i.txt
+    ├── sig_o.txt
+    └── ...
 </code></pre>
+<ol start="2">
+<li>Run <code>make run_emu</code> in this folder to launch hardware emulation.</li>
+</ol>
+<p>The emulator will start, and the hardware image will boot into the EDF Linux image. The emulator logs in as user <code>amd-edf</code>, mounts the root partition of the disk image at <code>/media</code>, and runs the <code>vitis/embedded_exec.sh</code> script to launch the host application.</p>
 <p>As the host application runs, status messages are printed to the display as the AI Engine graph and PL kernels start. Eventually the host application will wait while the kernels execute:</p>
 <pre><code>INFO:    Waiting for kernels to end...
 </code></pre>
@@ -225,32 +253,57 @@ Max Error: 256
 
 --- PASSED ---
 </code></pre>
+<p>After the result is printed, XRT reports <code>[XRT] ERROR: xrt::run destructed while command is still in progress</code> and the host application exits with an abort. This happens because the <code>dma_src</code> data mover is still waiting to send data when the host application exits, and it does not affect the test result. The emulator then returns to the Linux prompt. To stop the emulator, press <strong>Ctrl+C</strong> in the terminal where you ran <code>make run_emu</code>.</p>
 <h2 id="building-and-running-the-project-for-hardware">Building and Running the Project for Hardware</h2>
 <ol>
 <li><p>Run <code>make all TARGET=hw</code> in a Vitis terminal window to build and package the project for the target.</p></li>
-<li><p>The build process will take some time. When complete, the outputs will appear in a new folder named <code>package</code>. An sd_card.img file is generated by Vitis for testing this design on the board.</p></li>
+<li><p>The build process will take some time. When complete, the outputs will appear in a new folder named <code>package</code>. The file <code>package/sd_card.img</code> is a copy of the EDF disk image with the design added to it, for testing this design on the board.</p></li>
 </ol>
-<p><img src="Images/hwtest2.png" alt="figure1" /></p>
+<pre><code>package
+├── sd_card
+│   ├── BOOT.bin
+│   ├── a.pdi
+│   ├── a.xclbin
+│   ├── embedded_exec.sh
+│   ├── host.exe
+│   ├── sig_i.txt
+│   ├── sig_o.txt
+│   └── ...
+└── sd_card.img
+</code></pre>
 <ol start="3">
-<li>A new folder named <code>build_hw</code> will appear under <code>vitis</code> after completion of hardware build:</li>
+<li>A new folder named <code>build_hw</code> will appear under <code>vitis</code> after completion of the hardware build. It holds the linked platform and the packaged XCLBIN:</li>
 </ol>
-<p><img src="Images/hwtest3.png" alt="figure1" /></p>
+<pre><code>vitis
+└── build_hw
+    ├── a.xclbin
+    ├── my.xsa
+    ├── vpp_link.log
+    └── vpp_pack.log
+</code></pre>
 <ol start="4">
 <li>Prerequisites:</li>
 </ol>
 <ul>
-<li>An sd_card.img file generated by Vitis</li>
+<li>The <code>package/sd_card.img</code> file</li>
 <li>VCK190 Evaluation board</li>
 <li>System Controller SD Card: may already be available with the board and plugged in.</li>
 <li>VCK190 SD card: may already be available with the board. This is the card, where you will write the sd_card.img file generated for your design.</li>
 <li>Connect uSD card to your laptop. If your laptop does not come with a uSD card reader slot, an USB-to-uSD card-reader may be used, assuming laptop has a USB port</li>
-<li>For board setup and establish a connection to a serial device by selecting “Serial”, please refer to <a href="https://github.com/Xilinx/Vitis_Model_Composer/tree/2024.2/QuickGuides/Running_on_Hardware/linux/README.md">Running on Hardware</a>.</li>
+<li>Write <code>sd_card.img</code> to the VCK190 SD card with a tool such as balenaEtcher, insert the card in the board, and set the boot mode switches to SD boot.</li>
+<li>For board setup and establish a connection to a serial device by selecting “Serial”, please refer to <a href="https://github.com/Xilinx/Vitis_Model_Composer/tree/2026.2/QuickGuides/Running_on_Hardware/linux/README.md">Running on Hardware</a>.</li>
 </ul>
 <ol start="4">
 <li><p>Turn on board power by switching SW13 on and observe the terminal emulator. If everything goes well, boot messages should be displayed.</p></li>
-<li><p>After Linux has booted, from TeraTerm terminal emulator window, type 'cd /run/media/mmcblk0p1' and hit Enter. Within this directory do an 'ls' to check the contents: it should have the BOOT.BIN, embedded_exec.sh, data directory containing the data files among others.</p></li>
-<li><p>Run the executable file from the list by using the command <code>./embedded_exec.sh</code>.</p></li>
-<li><p>It should print the test result as shown in the below image:</p></li>
+<li><p>After Linux has booted, log in as user <code>amd-edf</code>. You are prompted to set a new password on the first login; this is also the <code>sudo</code> password.</p></li>
+<li><p>Mount the root partition of the SD card and run the design:</p></li>
+</ol>
+<pre><code>sudo mount /dev/mmcblk0p2 /media
+cd /media
+sudo ./embedded_exec.sh
+</code></pre>
+<ol start="8">
+<li>It should print the test result as shown in the below image:</li>
 </ol>
 <p><img src="Images/hwtest9.png" alt="figure1" /></p>
 <h2 id="conclusion">Conclusion</h2>

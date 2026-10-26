@@ -1,10 +1,12 @@
-# How to run BOOT.BIN on Hardware
-Hardware validation flow in Vitis Model Composer provides a methodology to verify AI Engine based applications on Hardware. It also provides the option to generate a hardware image (BOOT.BIN), targeting a
+# How to run a.pdi on Hardware
+Hardware validation flow in Vitis Model Composer provides a methodology to verify AI Engine based applications on Hardware. It also provides the option to generate a hardware image (`a.pdi`), targeting a
 specific platform. This hardware image can then be run on a board to verify whether the results from hardware match with the simulation outputs.
 
-This quick guide explains how to manage the board settings, make cable connections, connect the board through your system, and program the BOOT.BIN on a VCK190 Versal board.
+Set **Yocto Base Directory** in the Vitis Model Composer Hub before you generate the image. The artifacts that folder must contain are listed in [Before You Begin: Download the EDF Yocto Artifacts](../../../Tutorials/Hardware/Hardware_Validation/README.md) in the Hardware Validation tutorial.
 
-> Note: Here we are assuming the board is physically connected to a Windows machine and the BOOT.BIN is generated using Vitis Model Composer on a Linux machine.
+This quick guide explains how to manage the board settings, make cable connections, connect the board through your system, and program `a.pdi` on a VCK190 Versal board.
+
+> Note: Here we are assuming the board is physically connected to a Windows machine and `a.pdi` is generated using Vitis Model Composer on a Linux machine.
 
 1. Connect the power cable to the board.
 2. Connect a USB Micro cable between the host machine and USB JTAG connector on the target board. This cable is used for USB to serial transfer.
@@ -48,20 +50,18 @@ Once your board is set up, program the device as follows:
       ```
       Note : You should use the hostname and port number as highlighted in step-7. Do not prepend the hostname with 'TCP:'.
        
-    c. From within the XSDB prompt, navigate to the directory where hardware device image has been generated. In general, it is at ```<code-generation-directory>/run_hw/src_ps/BOOT.BIN ```.
+    c. From within the XSDB prompt, navigate to the directory where the hardware device image has been generated. The image is `<code-generation-directory>/hw/a.pdi`. When **Target Directory** is `./code`, that directory is `./code/hw`.
     
       ```
-       cd <code-generation-directory>/run_hw/src_ps
+       cd <code-generation-directory>/hw
       ```       
 9. Program the device and run:
 
    a. From the XSDB prompt, run the following command:
       ```
-      device program BOOT.BIN
+      device program a.pdi
       ```
-      You will see following message in the XSDB prompt if the device program is successful.
-    
-      ![](images/xsdb_prompt.png)
+      A successful program prints `100%` and returns to the `xsdb` prompt.
 
     b. This will run the design on the board. We can observe the results in putty serial terminal.
 
@@ -71,7 +71,7 @@ Once your board is set up, program the device as follows:
     
     ```
         rst -system
-        device program BOOT.BIN
+        device program a.pdi
     ```
     
 # How to Install Hardware Server

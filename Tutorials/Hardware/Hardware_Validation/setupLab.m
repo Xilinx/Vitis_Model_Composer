@@ -19,7 +19,7 @@ clear;
 
 %% Identify lab file folders
 labRoot = pwd;
-commonRoot = [labRoot '/../common'];
+commonRoot = [labRoot '/../../AIEngine_Library/common'];
 workDir = [labRoot '/work'];
 
 %% Add common folders (Simulink models, MATLAB code, AI Engine code) to path
@@ -32,7 +32,7 @@ if exist(workDir, 'dir')
     rmdir(workDir,'s');
 end
 mkdir(workDir);
-copyfile('Lab6_Part1_Start.slx', workDir);
+copyfile('Part1_Start.slx', workDir);
 copyfile([commonRoot '/ReferenceChain.slx'], workDir);
 copyfile([commonRoot '/matlab/CreateFilter.m'], workDir);
 copyfile([commonRoot '/src/FreqShift.cpp'], workDir);
