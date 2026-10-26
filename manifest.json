@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T21:24:53Z",
+  "generatedAt": "2026-10-26T17:26:26Z",
   "files": [
     ".github/scripts/generate_manifest.py",
     ".github/workflows/update-manifest.yml",
