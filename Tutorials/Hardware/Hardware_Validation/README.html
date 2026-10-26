@@ -76,9 +76,9 @@ information is communicated between Vitis Model Composer and the hardware.</p>
 <li><p>In the Platform drop-down, select <strong>vck190_base</strong>.</p></li>
 </ol>
 <p><img src="Images/Image02.png" alt="missing image" /></p>
-<p>The Platform drop-down lists the <a href="https://docs.amd.com/r/en-US/ug1701-vitis-accelerated-embedded/Platform-Based-Design-Flows">Versal base platforms</a> that are installed with Vitis. In this lab, we will use the <code>vck190_base</code> platform for the <a href="https://www.xilinx.com/products/boards-and-kits/vck190.html">VCK190</a>.</p>
+<p>The Platform drop-down lists the licensed <a href="https://docs.amd.com/r/en-US/ug1701-vitis-accelerated-embedded/Platform-Based-Design-Flows">Versal base platforms</a> that Vitis returns. It does not list every platform file installed under <code>base_platforms</code>. In this lab, we will use the <code>vck190_base</code> platform for the <a href="https://www.xilinx.com/products/boards-and-kits/vck190.html">VCK190</a>.</p>
 <blockquote>
-<p>Note: The hardware validation flow supports only the <code>vck190_base</code>, <code>vek280_base</code>, and <code>vrk160_base</code> platforms from the Vitis installation. Other platforms in the list, such as <code>vek385_base</code>, the DFX platforms, and the platforms with the <code>xilinx_</code> prefix, can be used for other flows, but not for hardware validation. Custom platforms selected with <strong>Specify Platform</strong> are not supported for hardware validation either. If you click <strong>Validate</strong> with an unsupported platform, Vitis Model Composer reports that the selected platform is not supported for hardware validation flow.</p>
+<p>Note: Hardware validation accepts <code>vck190_base</code>, <code>vek280_base</code>, and <code>vrk160_base</code>. <code>vrk160_base</code> appears in the drop-down only when Vitis reports it as a licensed platform. Platforms that are listed but rejected include <code>kv260_base</code>, <code>vek385_base</code>, the DFX platforms, names with the <code>xilinx_</code> prefix, and a custom platform chosen with <strong>Specify Platform</strong>. If you click <strong>Validate</strong> with one of those, Vitis Model Composer reports that the selected platform is not supported for hardware validation flow.</p>
 </blockquote>
 <ol start="8">
 <li>Click <strong>OK</strong>.</li>
@@ -96,18 +96,18 @@ information is communicated between Vitis Model Composer and the hardware.</p>
 <li>With <em>Linux</em>, the PS application is compiled with the EDF Yocto SDK to run on the EDF Linux image. AMD provides an ADF API to control the AI Engine graph and the Xilinx Runtime (XRT) API to control PL kernels.</li>
 </ul>
 <p>For more details, refer to the <a href="https://docs.xilinx.com/r/en-US/ug1076-ai-engine-environment/Programming-the-PS-Host-Application">AI Engine Tools and Flows User Guide (UG1076)</a>. In either scenario, Vitis Model Composer automatically generates all required source code for the host application to execute the testbench and interact with the Adaptive SoC device. <strong>We will use Baremetal flow for this lab.</strong></p>
-<p><strong>Target</strong> has two options: <strong>hw</strong> or <strong>hw_emu</strong>.</p>
+<p><strong>Target</strong> has two options: <code>hw</code> or <code>hw_emu</code>.</p>
 <ul>
-<li><em>hw</em> generates a programmable device image (PDI) with which to program the hardware. For Linux, Vitis Model Composer also generates the files to run the design on the EDF Linux image.</li>
-<li><em>hw</em>emu_ generates simulation artifacts to perform Vitis hardware emulation. SystemC is used to simulate the AI Engine and PL kernels, and QEMU is used to simulate the PS application. Hardware emulation lets you obtain high-fidelity profiling data about the design as it would run on hardware, without having access to a physical board.</li>
+<li><code>hw</code> generates a programmable device image (PDI) with which to program the hardware. For Linux, Vitis Model Composer also generates the files to run the design on the EDF Linux image.</li>
+<li><code>hw_emu</code> generates simulation artifacts to perform Vitis hardware emulation. SystemC is used to simulate the AI Engine and PL kernels, and QEMU is used to simulate the PS application. Hardware emulation lets you obtain high-fidelity profiling data about the design as it would run on hardware, without having access to a physical board.</li>
 </ul>
 <p>For more information, see <a href="https://docs.xilinx.com/r/en-US/ug1076-ai-engine-environment/Simulating-an-AI-Engine-Graph-Application">Simulating an AI Engine Graph Application</a>.</p>
 <p><strong>Yocto Base Directory</strong> is the folder of EDF Yocto artifacts that you downloaded in <a href="#before-you-begin-download-the-edf-yocto-artifacts">Before You Begin</a>.</p>
 <ol start="11">
 <li>Click the <strong>…</strong> button next to <strong>Yocto Base Directory</strong> and select your <code>yocto_artifacts</code> folder, or type its full path.</li>
 </ol>
-<p><strong>If you do not have access to a board and/or would like to perform hardware emulation, select <em>hw</em>emu_ as the Target and proceed to Step 2.</strong></p>
-<p><strong>If you have access to a VCK190 evaluation board (or another Versal Adaptive SoC board), select <em>hw</em> as the Target and proceed to Step 3.</strong></p>
+<p><strong>If you do not have access to a board and/or would like to perform hardware emulation, select <code>hw_emu</code> as the Target and proceed to Step 2.</strong></p>
+<p><strong>If you have access to a VCK190 evaluation board (or another Versal Adaptive SoC board), select <code>hw</code> as the Target and proceed to Step 3.</strong></p>
 <h2 id="step-2-validation-using-hardware-emulation">Step 2: Validation using Hardware Emulation</h2>
 <p>In this step, you will use Vitis hardware emulation to validate the design. As stated above, this simulates the AI Engine kernels, PL kernels, and PS application side-by-side. This allows you to gain confidence that the design will run on the actual hardware without requiring access to a board. However, running hardware emulation is slower than running the design on the board itself.</p>
 <ol>
@@ -186,11 +186,10 @@ ta 1
 <p>a. From the XSDB prompt, run the following command:</p>
 <pre><code>  device program a.pdi
 </code></pre>
-<p>You will see following message in the XSDB prompt if the device program is successful.</p>
-<p><img src="Images/xsdb_prompt.png" alt="" /></p>
-<p>b. This will run the design on the board. In the Terminal application, you should see the log similar to the following. Here, the hardware results are compared with the golden results.</p>
+<p>A successful program prints <code>100%</code> and returns to the <code>xsdb</code> prompt.</p>
+<p>b. This will run the design on the board. In the Terminal application, you should see the log similar to the following. Here, the hardware results are compared with the golden results. This is the same result hardware emulation prints. This lab was not re-run on a board.</p>
 <pre><code>   ******************************** Test Results ********************************
-****** Model Composer and Hardware outputs match for all 40944 samples for output signal Out1 *******
+****** Model Composer and Hardware outputs match for all 768 samples for output signal Out1 *******
 ****** Test passed ********
 </code></pre>
 <p>c. To re-run the results, run the following commands:</p>
