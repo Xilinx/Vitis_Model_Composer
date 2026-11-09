@@ -1,14 +1,10 @@
--- Copyright © Advanced Micro Devices, Inc., or its affiliates. All rights reserved.
+--
+-- Copyright © Advanced Micro Devices, Inc., or its affiliates.
+--
+-- SPDX-License-Identifier: MIT
+--
 -- Portions of this content consists of AI generated content.
--- You may not use this software and documentation (if any) (collectively, the "Materials")
--- except in compliance with the terms and conditions of the Software License Agreement
--- included with the Materials or otherwise as set forth in writing and signed by you and
--- an authorized signatory of AMD. If you do not have a copy of the Software License
--- Agreement, contact your AMD representative for a copy. You agree that you will not
--- reverse engineer or decompile the Materials, in whole or in part, except as allowed by
--- applicable law.
--- THE MATERIALS ARE DISTRIBUTED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OR
--- REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+--
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
@@ -21,14 +17,12 @@ package cfixed_pkg is
                            -- this gives us UFIXED, SFIXED, operators and conversion functions
  
   constant PI:REAL:=3.1415926535897932;
---  type BOOLEAN_VECTOR is array(NATURAL range <>) of BOOLEAN;
   type INTEGER_VECTOR is array(INTEGER range <>) of INTEGER;
   type REAL_VECTOR is array(INTEGER range <>) of REAL;
   type COMPLEX_VECTOR is array(INTEGER range <>) of COMPLEX;
   type UNSIGNED_VECTOR is array(INTEGER range <>) of UNSIGNED;
 
 -- SFIXED is now the standard VHDL-2008 type defined in fixed_generic_pkg, we do not need a user defined type anymore but this is what SFIXED really is
---  type SFIXED is array(INTEGER range <>) of STD_LOGIC; -- arbitrary precision fixed point signed number, like SIGNED but lower bound can be negative
   type SFIXED_VECTOR is array(INTEGER range <>) of SFIXED; -- unconstrained array of SFIXED
   type SFIXED_MATRIX is array(INTEGER range <>) of SFIXED_VECTOR; -- unconstrained 2-D array of SFIXED
   type CFIXED is record RE,IM:SFIXED; end record; -- arbitrary precision fixed point complex signed number
@@ -44,7 +38,6 @@ package cfixed_pkg is
   function MAX(A,B,C:INTEGER) return INTEGER;
   function MAX(A,B,C,D:INTEGER) return INTEGER;
   function MED(A,B,C:INTEGER) return INTEGER;
---  function TO_INTEGER(B:BOOLEAN) return INTEGER;
 
   function "*"(X:SFIXED;Y:STD_LOGIC) return SFIXED; -- multiply by 0 or 1 with SFIXED(X'high downto X'low) result
   function TO_SFIXED(I:SIGNED;H,L:INTEGER;SHIFT:INTEGER:=0) return SFIXED; -- convert SIGNED to SFIXED(H downto L) and resize
@@ -133,15 +126,6 @@ package body cfixed_pkg is
     return MAX(MIN(MAX(A,B),C),MIN(A,B));
   end;
   
---  function TO_INTEGER(B:BOOLEAN) return INTEGER is
---  begin
---    if B then
---      return 1;
---    else
---      return 0;
---    end if;
---  end;
-
   function "*"(X:SFIXED;Y:STD_LOGIC) return SFIXED is
   begin
     if Y='1' then

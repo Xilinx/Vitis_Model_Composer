@@ -1,14 +1,10 @@
--- Copyright © Advanced Micro Devices, Inc., or its affiliates. All rights reserved.
+--
+-- Copyright © Advanced Micro Devices, Inc., or its affiliates.
+--
+-- SPDX-License-Identifier: MIT
+--
 -- Portions of this content consists of AI generated content.
--- You may not use this software and documentation (if any) (collectively, the "Materials")
--- except in compliance with the terms and conditions of the Software License Agreement
--- included with the Materials or otherwise as set forth in writing and signed by you and
--- an authorized signatory of AMD. If you do not have a copy of the Software License
--- Agreement, contact your AMD representative for a copy. You agree that you will not
--- reverse engineer or decompile the Materials, in whole or in part, except as allowed by
--- applicable law.
--- THE MATERIALS ARE DISTRIBUTED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OR
--- REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+--
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -308,6 +304,14 @@ architecture TEST of TRANSPOSE_SSR_FIR is
 begin
   assert I'length=O'length report "Inconsistent I and O port lengths!" severity warning;
   assert CSA'length=MAX(LOG2(COEFFICIENT'length(1)),1) report "Inconsistent CSA length!" severity warning;
+  -- SSR must be 1 or a power of 2: the triangular input delay and inter-column
+  -- accumulation chain both assume SSR is a power of 2.  Non-power-of-2 SSR
+  -- silently misaligns the delay diagonal and produces wrong output.
+  assert I'length=1 or 2**LOG2(I'length)=I'length
+    report "TRANSPOSE_SSR_FIR: SSR="&INTEGER'image(I'length)
+          &" is not a power of 2. SSR must be 1 or 2^N (1,2,4,8,16,...). "
+          &"Non-power-of-2 SSR causes diagonal delay misalignment and wrong output."
+    severity FAILURE;
   -- DSP port truncation guards -------------------------------------------
   -- Coefficient maps to DSP A port (AMULTSEL="A", PREADDINSEL="B").
   -- Exceeding A_PORT_W silently truncates coefficient MSBs -> wrong MAC results.
@@ -323,15 +327,20 @@ begin
     report "TRANSPOSE_SSR_FIR: data width "&INTEGER'image(I_WIDTH)
           &"b exceeds DSP D port (27b, all families) - reduce I_HIGH-I_LOW"
     severity FAILURE;
-  -- Reverse data maps to DSP B port (ES/OS only; B is forced to 0 for NS so no risk).
-  -- B port is narrower than D: 24b Versal, 18b US+.  Exceeding it truncates the
-  -- reverse pre-adder operand -> wrong ES/OS symmetric filter output.
-  assert SYMMETRY="NS" or I_WIDTH<=B_PORT_W
+  -- Reverse data maps to DSP B port (ES/OS only; B is forced to 0 for NS).
+  -- The ES/OS pre-adder sums forward + reverse operands (D+B).  The result
+  -- needs I_WIDTH+1 bits, but the B-port datapath holds exactly B_PORT_W bits
+  -- (24b Versal, 18b US+).  The limit is therefore B_PORT_W-1, NOT B_PORT_W:
+  -- one guard bit is consumed by the pre-adder sum before the multiply.
+  -- Verified: i_high=15 (I_WIDTH=24=B_PORT_W) overflows on Versal (SNR=-3 dB);
+  --           i_high=14 (I_WIDTH=23=B_PORT_W-1) is the maximum safe data width.
+  assert SYMMETRY="NS" or I_WIDTH<=B_PORT_W-1
     report "TRANSPOSE_SSR_FIR: data width "&INTEGER'image(I_WIDTH)
-          &"b exceeds DSP B port ("&INTEGER'image(B_PORT_W)
-          &"b on FAMILY="&INTEGER'image(FAMILY)&") for "&SYMMETRY
-          &" reverse path - reduce I_HIGH-I_LOW"
-          &" or switch to FAMILY=3 (Versal, B=24b vs US+ B=18b)"
+          &"b exceeds ES/OS pre-adder B-port limit ("&INTEGER'image(B_PORT_W-1)
+          &"b = B_PORT_W-1 on FAMILY="&INTEGER'image(FAMILY)&"). "
+          &"The pre-adder sum (forward+reverse) needs I_WIDTH+1 bits; "
+          &"reduce I_HIGH-I_LOW to "&INTEGER'image(B_PORT_W-1)&"b max, "
+          &"or use FAMILY=3 (Versal B=24b, limit 23b) vs US+ (B=18b, limit 17b)."
     severity FAILURE;
   -- -----------------------------------------------------------------------
 
