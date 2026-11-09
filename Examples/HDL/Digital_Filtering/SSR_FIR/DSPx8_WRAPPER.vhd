@@ -1,13 +1,15 @@
 -- DSP48E1/DSP48E2/DSP58 Wrapper for SysGen use
--- Copyright (C) 2024, Advanced Micro Devices, Inc.
+--
+-- Copyright © Advanced Micro Devices, Inc., or its affiliates.
+--
+-- SPDX-License-Identifier: MIT
+--
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 
---CB use work.TYPES_PKG.all;
 use work.fixed_pkg.all;  -- VHDL-2008 IEEE standard SFIXED type and functions
 use work.cfixed_pkg.all; -- user package, SFIXED_VECTOR, SFIXED_MATRIX and many other goodies
---CB
 
 library unisims_ver;
 library UNISIM;
@@ -129,8 +131,6 @@ entity DSPx8_WRAPPER is
        CARRYOUT:out STD_LOGIC_VECTOR(3 downto 0);                    -- 4-bit output: Carry
        P:out SFIXED;              -- 48/58-bit output: Primary data
        XOROUT:out STD_LOGIC_VECTOR(7 downto 0));                     -- 8-bit output: XOR data
-  attribute secure_config:STRING;
-  attribute secure_config of DSPx8_WRAPPER:entity is "PROTECT";
 end entity;
 
 architecture WRAPPER of DSPx8_WRAPPER is
@@ -145,7 +145,6 @@ architecture WRAPPER of DSPx8_WRAPPER is
     for K in O'range loop
       if K<I'low-lo then
         O(K):='0';
---      elsif K<I'length then
       elsif K<I'high-lo then
         O(K):=I(K+lo);
       else

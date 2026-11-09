@@ -1,61 +1,11 @@
------------------------------------------------------------------------------------------------
--- © Copyright (C) 2024, Advanced Micro Devices, Inc. All rights reserved.
--- This file contains confidential and proprietary information of AMD, Inc. and is
--- protected under U.S. and international copyright and other intellectual property laws.
------------------------------------------------------------------------------------------------
 --
--- Disclaimer:
---         This disclaimer is not a license and does not grant any rights to the materials
---         distributed herewith. Except as otherwise provided in a valid license issued to you
---         by Xilinx, and to the maximum extent permitted by applicable law: (1) THESE MATERIALS
---         ARE MADE AVAILABLE "AS IS" AND WITH ALL FAULTS, AND AMD HEREBY DISCLAIMS ALL
---         WARRANTIES AND CONDITIONS, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING BUT NOT LIMITED
---         TO WARRANTIES OF MERCHANTABILITY, NON-INFRINGEMENT, OR FITNESS FOR ANY PARTICULAR
---         PURPOSE; and (2) AMD shall not be liable (whether in contract or tort, including
---         negligence, or under any other theory of liability) for any loss or damage of any
---         kind or nature related to, arising under or in connection with these materials,
---         including for any direct, or any indirect, special, incidental, or consequential
---         loss or damage (including loss of data, profits, goodwill, or any type of loss or
---         damage suffered as a result of any action brought by a third party) even if such
---         damage or loss was reasonably foreseeable or Xilinx had been advised of the
---         possibility of the same.
+-- Copyright © Advanced Micro Devices, Inc., or its affiliates.
 --
--- CRITICAL APPLICATIONS
---         AMD products are not designed or intended to be fail-safe, or for use in any
---         application requiring fail-safe performance, such as life-support or safety devices
---         or systems, Class III medical devices, nuclear facilities, applications related to
---         the deployment of airbags, or any other applications that could lead to death,
---         personal injury, or severe property or environmental damage (individually and
---         collectively, "Critical Applications"). Customer assumes the sole risk and
---         liability of any use of AMD products in Critical Applications, subject only to
---         applicable laws and regulations governing limitations on product liability.
+-- SPDX-License-Identifier: MIT
 --
--- THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS PART OF THIS FILE AT ALL TIMES. 
+-- Portions of this content consists of AI generated content.
 --
---         Contact:    e-mail  ben.fell@amd.com - this design is not supported by AMD
---                     Worldwide Technical Support (WTS), for support please contact the author
---   ____  ____
---  /   /\/   /
--- /___/  \  /             Vendor:               AMD Inc.
--- \   \   \/              Version:              1.1
---  \   \                  Filename:             SSR_FIR.vhd
---  /   /                  Date Last Modified:   23 Oct 2024
--- /___/   /\              Date Created:         
--- \   \  /  \
---  \___\/\___\
--- 
--- Device:          Any 7-Series, UltraScale or Versal AMD FPGA
--- Author:          Catalin Baetoniu
--- Entity Name:     SSR_FFT
--- Purpose:         Generic SSR Single Rate FIR, any SSR, any number of taps, non/even/odd/anti symmetric
---
--- Revision History: 
--- Revision 1.1    2024-Oct-23  Full VHDL-2008 version
--------------------------------------------------------------------------------- 
---
--- Module Description: 
---
--------------------------------------------------------------------------------- 
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
@@ -160,12 +110,18 @@ begin
   -- ES rule: 2*SSR <= NUM_TAPS  =>  SSR <= COEFFICIENT'length
   -- OS rule: 2*SSR <  NUM_TAPS  =>  SSR <  COEFFICIENT'length
   assert SYMMETRY="NS" or SSR<=TAPS-BOOLEAN'pos(SYMMETRY="OS") report "For ES: SSR must be <= NUM_TAPS/2. For OS: SSR must be < (NUM_TAPS+1)/2. Increase TAPS or use NS." severity failure;
-  -- For ES/OS, the DSP pre-adder computes D+A. D and A are both data_width bits wide,
-  -- so D+A = data_width+1 bits must fit the multiplier AD port.
-  -- FAMILY=3 (DSPx8): AD port = 27 bits → D+A ≤ 27 → data_width ≤ 26.
-  -- FAMILY=1,2 (DSP48/DSP58): AD port = 30 bits → D+A ≤ 30 → data_width ≤ 29.
-  assert SYMMETRY="NS" or I(I'low)'length <= FAMILY/3*26+(1-FAMILY/3)*29
-    report "For ES/OS: data width (I_HIGH-I_LOW+1=" & INTEGER'image(I(I'low)'length) & ") exceeds the DSP pre-adder AD port limit (" & INTEGER'image(FAMILY/3*26+(1-FAMILY/3)*29) & " bits for FAMILY=" & INTEGER'image(FAMILY) & "). Reduce I_HIGH-I_LOW to fit within the limit, or use SYMMETRY=""NS""."
+  -- For ES/OS, the pre-adder computes D+A. Both D and A carry data_width-bit samples.
+  -- Their sum requires data_width+1 bits; this must fit the DSP pre-adder AD output.
+  -- Documented D-port (= AD output) widths per generation (sources below):
+  --   FAMILY=1 (DSP48E1, UG479): D port = 25 bits → AD = 25 → data_width ≤ 24.
+  --   FAMILY=2 (DSP48E2, UG579): D port = 27 bits → AD = 27 → data_width ≤ 26.
+  --   FAMILY=3 (DSPx8,  AM004 ): D port = 27 bits → AD = 27 → data_width ≤ 26.
+  -- Formula: AD_width = FAMILY/2*2+25 (25 for FAM=1, 27 for FAM=2/3).
+  --          safe data_width = AD_width - 1 = FAMILY/2*2+24.
+  -- Gap-8 boundary test (2026-06-15) confirmed FAM=1 at 29 bits and FAM=2 at 29 bits fail;
+  -- the prior assertion (FAMILY/3*26+(1-FAMILY/3)*29) was wrong for FAM=1 and FAM=2.
+  assert SYMMETRY="NS" or I(I'low)'length <= FAMILY/2*2+24
+    report "For ES/OS: data width (I_HIGH-I_LOW+1=" & INTEGER'image(I(I'low)'length) & ") exceeds the DSP pre-adder limit (" & INTEGER'image(FAMILY/2*2+24) & " bits for FAMILY=" & INTEGER'image(FAMILY) & "). Reduce I_HIGH-I_LOW, or use SYMMETRY=""NS""."
     severity failure;
   -- For SSR>1, the DI delay buffer has depth LDI=TAPS-1. TAPS=1 gives LDI=0
   -- (null range), which is not supported by xsim or synthesis.
