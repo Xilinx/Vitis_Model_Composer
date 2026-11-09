@@ -1,13 +1,15 @@
--- Copyright (C) 2024, Advanced Micro Devices, Inc.
+--
+-- Copyright © Advanced Micro Devices, Inc., or its affiliates.
+--
+-- SPDX-License-Identifier: MIT
+--
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
 
---CB use work.TYPES_PKG.all;
 use work.fixed_pkg.all;  -- VHDL-2008 IEEE standard SFIXED type and functions
 use work.cfixed_pkg.all; -- user package, SFIXED_VECTOR, SFIXED_MATRIX and many other goodies
---CB
 
 entity BDELAY is
   generic(SIZE:NATURAL:=1;           -- SIZE has a default value of 1 and cannot be negative, this would require traveling back in time
@@ -18,8 +20,6 @@ entity BDELAY is
        CE:in STD_LOGIC:='1';         -- clock enable, if not used can be left unconnected
        I:in BOOLEAN;
        O:out BOOLEAN:=FALSE);
-  attribute secure_config:STRING;
-  attribute secure_config of BDELAY:entity is "PROTECT";
 end BDELAY;
 
 architecture TEST of BDELAY is
@@ -27,7 +27,6 @@ architecture TEST of BDELAY is
   attribute syn_hier of all:architecture is "hard";
   attribute srl_style:STRING;
 begin
---  l2n:if (SIZE>=66 and SIZE<=65+33) or (SIZE>=130 and SIZE<=129+65+33) or (SIZE>=258 and SIZE<=257+129+65+33) or (SIZE>513) generate
   l2n:if DDR and (SIZE>3) generate
         signal ID:BOOLEAN:=FALSE;
         signal OB:BOOLEAN:=FALSE;
@@ -76,15 +75,13 @@ begin
             SEL<=TD xor T after 1 ps;
             if SEL='0' then
               OB<=OE(OE'high);
-              -- BF O<=OE(OE'high);
             else
               OB<=OO(OO'high);
-              -- BF O<=OO(OO'high);
             end if;
           end if;
         end process;
 
-        --BF Added for DDR Even Filters
+        -- Added for DDR Even Filters
         o0:if SIZE mod 2=1 generate
              O<=OB;
            end;

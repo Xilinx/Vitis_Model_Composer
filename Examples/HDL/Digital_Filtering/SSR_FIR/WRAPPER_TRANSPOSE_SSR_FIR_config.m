@@ -1,4 +1,12 @@
 
+%
+% Copyright © Advanced Micro Devices, Inc., or its affiliates.
+%
+% SPDX-License-Identifier: MIT
+%
+% Portions of this content consists of AI generated content.
+%
+
 function WRAPPER_TRANSPOSE_SSR_FIR_config(this_block)
 
   % Vitis Model Composer HDL Black Box configuration script for the
@@ -24,9 +32,6 @@ for i=1:length(maskParamNameValuePairs)
     if (strcmpi(maskParamNameValuePairs(i).Name, 'OY'))
         OY = maskParamNameValuePairs(i).Value;
     end
-%    if (strcmpi(maskParamNameValuePairs(i).Name, 'FAMILY'))
-%        FAMILY = maskParamNameValuePairs(i).Value;
-%    end
      if (strcmpi(maskParamNameValuePairs(i).Name, 'DDR'))
         DDR = maskParamNameValuePairs(i).Value;
     end
@@ -74,9 +79,6 @@ else
     FAMILY = 2; % use 2 for selecting DSP48E2
 end
 
-% System Generator has to assume that your entity  has a combinational feed through; 
-  %   if not, then comment out the following line:
-  %this_block.tagAsCombinational;
 
   this_block.addSimulinkInport('I');
   this_block.addSimulinkInport('VI');
@@ -93,7 +95,6 @@ end
     % do input type checking, dynamic output type and generic setup in this code block.
 
     % (!) Port 'I' appeared to have dynamic type in the HDL -- please add type checking as appropriate;
-  %  inp_width = this_block.port('I').width; % this should be SSR*(I_HIGH-I_LOW+1)
     this_block.port('I').useHDLVector(true);
 
     if (this_block.port('VI').width ~= 1);
